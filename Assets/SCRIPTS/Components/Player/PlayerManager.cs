@@ -19,5 +19,7 @@ namespace GGG.Components.Player
         private int _seaweeds;
         
         public int GetSeaweedsCount() { return _seaweeds; }
+
+        public void AddSeaweeds(int count) { _seaweeds += count; }
     }
 }
