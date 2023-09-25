@@ -1,31 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Serialization;
+using System.IO;
 using TMPro;
 using UnityEngine;
-using System.IO;
 
 public class LogInManager : MonoBehaviour
 {
-
     private class User
     {
         // Unity to JSON method requires atributes to be public :)
         public string userName;
+
         public string sex;
         public int age = 10;
 
-        public void SetUserName(string userName) { this.userName = userName; }
-        public void SetSex(string sex) { this.sex = sex; }
-        public void SetAge(int age) { this.age = age; }
+        public void SetUserName(string userName)
+        { this.userName = userName; }
 
-        public int GetAge() { return age; }
-        public string GetSex() { return sex; }
-        public string GetUserName() { return userName; }
+        public void SetSex(string sex)
+        { this.sex = sex; }
 
+        public void SetAge(int age)
+        { this.age = age; }
 
-        public void PlusOneAge() { age++; }
-        public void MinusOneAge() { age--; }
+        public int GetAge()
+        { return age; }
+
+        public string GetSex()
+        { return sex; }
+
+        public string GetUserName()
+        { return userName; }
+
+        public void PlusOneAge()
+        { age++; }
+
+        public void MinusOneAge()
+        { age--; }
     }
 
     [SerializeField]
@@ -74,38 +83,44 @@ public class LogInManager : MonoBehaviour
     }
 
     public void SetUserName(string userName)
-    { 
+    {
         user.SetUserName(userName);
     }
 
     public void SerializeJSON()
     {
-        // Path to the file, persistentData path is required since we dont have admission to write everywhere
-        string filePath = Path.Combine(Application.persistentDataPath, "userData.json");
-        string userToJson = JsonUtility.ToJson(user);
-        File.WriteAllText(filePath, userToJson);
+        try
+        {
+            // Path to the file, persistentData path is required since we dont have admission to write everywhere
+            string filePath = Path.Combine(Application.persistentDataPath, "userData.json");
+            string userToJson = JsonUtility.ToJson(user);
+            File.WriteAllText(filePath, userToJson);
 
-        Debug.Log($"JSON guardado en {filePath}");
+            Debug.Log($"JSON guardado en {filePath}");
+        }
+        catch { }
     }
 
     public void DeserializeJSON()
     {
         // Path to the file, persistentData path is required since we dont have admission to write everywhere
-        string filePath = Path.Combine(Application.persistentDataPath, "userData.json");
-
-        if (File.Exists(filePath))
+        try
         {
-            string json = File.ReadAllText(filePath);
-            user = JsonUtility.FromJson<User>(json);
+            string filePath = Path.Combine(Application.persistentDataPath, "userData.json");
 
-            // Acceder a los datos del usuario
-            Debug.Log($"Nombre: {user.userName}, Sexo: {user.sex}, Edad: {user.age}");
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                user = JsonUtility.FromJson<User>(json);
+
+                // Acceder a los datos del usuario
+                Debug.Log($"Nombre: {user.userName}, Sexo: {user.sex}, Edad: {user.age}");
+            }
+            else
+            {
+                Debug.LogWarning("El archivo JSON no existe.");
+            }
         }
-        else
-        {
-            Debug.LogWarning("El archivo JSON no existe.");
-        }
+        catch { }
     }
 }
-
-
