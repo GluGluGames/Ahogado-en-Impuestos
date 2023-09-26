@@ -20,7 +20,7 @@ namespace GGG.Classes.Buildings
         public string GetName() { return Name; }
         public string GetDescription() { return Description; }
         public Sprite GetIcon() { return Icon; }
-        public void Spawn(Vector3 position) { Instantiate(Prefab, position, Quaternion.identity); }
+        public GameObject Spawn(Vector3 position) { return Instantiate(Prefab, position, Quaternion.identity); }
 
         public bool NeedInteraction() { return NeededInteraction; }
 

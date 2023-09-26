@@ -1,7 +1,7 @@
 using GGG.Classes.Buildings;
 using UnityEngine;
 
-namespace GGG {
+namespace GGG.Components.Buildings {
     public class BuildingComponent : MonoBehaviour {
         [SerializeField] private Building Build;
 
