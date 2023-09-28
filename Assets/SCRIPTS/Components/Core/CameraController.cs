@@ -42,7 +42,7 @@ namespace GGG.Components.Core
         }
 
         private void Update() {
-            // HandleMouseInput();
+            HandleMouseInput();
         }
 
         private void LateUpdate() {
@@ -93,16 +93,24 @@ namespace GGG.Components.Core
         }
 
         private void HandleMouseInput() {
-            if (!_input.IsTouching()) return;
+            if (_input.IsTouching()) {
 
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-            Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+                Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
 
-            if (plane.Raycast(ray, out float distance)) {
-                if (_input.IsHolding())
+                if (plane.Raycast(ray, out float distance)) {
                     _dragStartPosition = ray.GetPoint(distance);
-                else
-                    _newPosition += _dragStartPosition - ray.GetPoint(distance);
+                }
+            }
+
+            if (_input.IsHolding()) {
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+                Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
+
+                if (plane.Raycast(ray, out float distance)) {
+                    _dragCurrentPosition = ray.GetPoint(distance);
+                    _newPosition = _transform.position + (_dragStartPosition - _dragCurrentPosition);
+                }
             }
         }
     }

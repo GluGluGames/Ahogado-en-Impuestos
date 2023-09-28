@@ -55,22 +55,40 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Touch"",
+                    ""name"": ""PrimaryTouch"",
+                    ""type"": ""Value"",
+                    ""id"": ""8633da72-7c4b-4e55-bd04-f38b3b94b32e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SecondaryTouch"",
+                    ""type"": ""Value"",
+                    ""id"": ""8276be31-d317-4ad3-84ae-357452f36b93"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PrimaryTouchContact"",
                     ""type"": ""Button"",
-                    ""id"": ""6c6b8445-4c6a-41cb-9143-34485de6c4f7"",
+                    ""id"": ""6b73ab07-17a3-4730-846a-e28d77382730"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""TouchPosition"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""98dab092-e644-48bc-aa18-3ebe6d46351a"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""SecondaryTouchContact"",
+                    ""type"": ""Button"",
+                    ""id"": ""a89aa249-e74e-47de-94fd-ba894361f71a"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -230,45 +248,67 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""851c5974-a701-45a0-91cb-e6bc25bb0a2a"",
+                    ""id"": ""ea4831a1-23ab-4a8b-acd4-13e72bbe564c"",
+                    ""path"": ""<Touchscreen>/touch0/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrimaryTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39b58710-bce7-4a1a-be6a-a339605f366f"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrimaryTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f65a1e75-c93d-402d-a6fb-cc2ab1d53fb1"",
+                    ""path"": ""<Touchscreen>/touch1/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14cbc622-2891-42ea-bfed-6b955c199f9f"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Touch"",
+                    ""action"": ""PrimaryTouchContact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fecc9265-7b11-4c6c-b761-0ab725bfaa91"",
-                    ""path"": ""<Touchscreen>/Press"",
+                    ""id"": ""86e0b34b-4277-43e4-8d4b-5ab17bbd4af6"",
+                    ""path"": ""<Touchscreen>/touch0/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Touch"",
+                    ""action"": ""PrimaryTouchContact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""65b8f6d0-7c8b-4369-a1c5-5f6f24e94d46"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""id"": ""43ad7243-4f94-4c98-ae36-55c2591fce0b"",
+                    ""path"": ""<Touchscreen>/touch1/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TouchPosition"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5ee3d471-e9be-48df-adcc-ad44fb21ff50"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TouchPosition"",
+                    ""action"": ""SecondaryTouchContact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -282,8 +322,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_a_Camera_CameraMovement = m_a_Camera.FindAction("CameraMovement", throwIfNotFound: true);
         m_a_Camera_CameraRotation = m_a_Camera.FindAction("CameraRotation", throwIfNotFound: true);
         m_a_Camera_CameraZoom = m_a_Camera.FindAction("CameraZoom", throwIfNotFound: true);
-        m_a_Camera_Touch = m_a_Camera.FindAction("Touch", throwIfNotFound: true);
-        m_a_Camera_TouchPosition = m_a_Camera.FindAction("TouchPosition", throwIfNotFound: true);
+        m_a_Camera_PrimaryTouch = m_a_Camera.FindAction("PrimaryTouch", throwIfNotFound: true);
+        m_a_Camera_SecondaryTouch = m_a_Camera.FindAction("SecondaryTouch", throwIfNotFound: true);
+        m_a_Camera_PrimaryTouchContact = m_a_Camera.FindAction("PrimaryTouchContact", throwIfNotFound: true);
+        m_a_Camera_SecondaryTouchContact = m_a_Camera.FindAction("SecondaryTouchContact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -348,8 +390,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_a_Camera_CameraMovement;
     private readonly InputAction m_a_Camera_CameraRotation;
     private readonly InputAction m_a_Camera_CameraZoom;
-    private readonly InputAction m_a_Camera_Touch;
-    private readonly InputAction m_a_Camera_TouchPosition;
+    private readonly InputAction m_a_Camera_PrimaryTouch;
+    private readonly InputAction m_a_Camera_SecondaryTouch;
+    private readonly InputAction m_a_Camera_PrimaryTouchContact;
+    private readonly InputAction m_a_Camera_SecondaryTouchContact;
     public struct A_CameraActions
     {
         private @Controls m_Wrapper;
@@ -357,8 +401,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @CameraMovement => m_Wrapper.m_a_Camera_CameraMovement;
         public InputAction @CameraRotation => m_Wrapper.m_a_Camera_CameraRotation;
         public InputAction @CameraZoom => m_Wrapper.m_a_Camera_CameraZoom;
-        public InputAction @Touch => m_Wrapper.m_a_Camera_Touch;
-        public InputAction @TouchPosition => m_Wrapper.m_a_Camera_TouchPosition;
+        public InputAction @PrimaryTouch => m_Wrapper.m_a_Camera_PrimaryTouch;
+        public InputAction @SecondaryTouch => m_Wrapper.m_a_Camera_SecondaryTouch;
+        public InputAction @PrimaryTouchContact => m_Wrapper.m_a_Camera_PrimaryTouchContact;
+        public InputAction @SecondaryTouchContact => m_Wrapper.m_a_Camera_SecondaryTouchContact;
         public InputActionMap Get() { return m_Wrapper.m_a_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -377,12 +423,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @CameraZoom.started += instance.OnCameraZoom;
             @CameraZoom.performed += instance.OnCameraZoom;
             @CameraZoom.canceled += instance.OnCameraZoom;
-            @Touch.started += instance.OnTouch;
-            @Touch.performed += instance.OnTouch;
-            @Touch.canceled += instance.OnTouch;
-            @TouchPosition.started += instance.OnTouchPosition;
-            @TouchPosition.performed += instance.OnTouchPosition;
-            @TouchPosition.canceled += instance.OnTouchPosition;
+            @PrimaryTouch.started += instance.OnPrimaryTouch;
+            @PrimaryTouch.performed += instance.OnPrimaryTouch;
+            @PrimaryTouch.canceled += instance.OnPrimaryTouch;
+            @SecondaryTouch.started += instance.OnSecondaryTouch;
+            @SecondaryTouch.performed += instance.OnSecondaryTouch;
+            @SecondaryTouch.canceled += instance.OnSecondaryTouch;
+            @PrimaryTouchContact.started += instance.OnPrimaryTouchContact;
+            @PrimaryTouchContact.performed += instance.OnPrimaryTouchContact;
+            @PrimaryTouchContact.canceled += instance.OnPrimaryTouchContact;
+            @SecondaryTouchContact.started += instance.OnSecondaryTouchContact;
+            @SecondaryTouchContact.performed += instance.OnSecondaryTouchContact;
+            @SecondaryTouchContact.canceled += instance.OnSecondaryTouchContact;
         }
 
         private void UnregisterCallbacks(IA_CameraActions instance)
@@ -396,12 +448,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @CameraZoom.started -= instance.OnCameraZoom;
             @CameraZoom.performed -= instance.OnCameraZoom;
             @CameraZoom.canceled -= instance.OnCameraZoom;
-            @Touch.started -= instance.OnTouch;
-            @Touch.performed -= instance.OnTouch;
-            @Touch.canceled -= instance.OnTouch;
-            @TouchPosition.started -= instance.OnTouchPosition;
-            @TouchPosition.performed -= instance.OnTouchPosition;
-            @TouchPosition.canceled -= instance.OnTouchPosition;
+            @PrimaryTouch.started -= instance.OnPrimaryTouch;
+            @PrimaryTouch.performed -= instance.OnPrimaryTouch;
+            @PrimaryTouch.canceled -= instance.OnPrimaryTouch;
+            @SecondaryTouch.started -= instance.OnSecondaryTouch;
+            @SecondaryTouch.performed -= instance.OnSecondaryTouch;
+            @SecondaryTouch.canceled -= instance.OnSecondaryTouch;
+            @PrimaryTouchContact.started -= instance.OnPrimaryTouchContact;
+            @PrimaryTouchContact.performed -= instance.OnPrimaryTouchContact;
+            @PrimaryTouchContact.canceled -= instance.OnPrimaryTouchContact;
+            @SecondaryTouchContact.started -= instance.OnSecondaryTouchContact;
+            @SecondaryTouchContact.performed -= instance.OnSecondaryTouchContact;
+            @SecondaryTouchContact.canceled -= instance.OnSecondaryTouchContact;
         }
 
         public void RemoveCallbacks(IA_CameraActions instance)
@@ -424,7 +482,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnCameraMovement(InputAction.CallbackContext context);
         void OnCameraRotation(InputAction.CallbackContext context);
         void OnCameraZoom(InputAction.CallbackContext context);
-        void OnTouch(InputAction.CallbackContext context);
-        void OnTouchPosition(InputAction.CallbackContext context);
+        void OnPrimaryTouch(InputAction.CallbackContext context);
+        void OnSecondaryTouch(InputAction.CallbackContext context);
+        void OnPrimaryTouchContact(InputAction.CallbackContext context);
+        void OnSecondaryTouchContact(InputAction.CallbackContext context);
     }
 }

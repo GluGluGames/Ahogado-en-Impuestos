@@ -6,7 +6,6 @@ namespace GGG.Input {
         public static InputManager Instance;
 
         private Controls _input;
-        private Vector2 _cameraMovement;
 
         #region Unity Events
 
@@ -16,10 +15,6 @@ namespace GGG.Input {
             }
 
             _input = new Controls();
-        }
-
-        private void Update() {
-            _cameraMovement = _input.a_Camera.CameraMovement.ReadValue<Vector2>();
         }
 
         private void OnEnable() {
@@ -34,13 +29,12 @@ namespace GGG.Input {
 
         #region Getters & Setters
 
-        public Vector2 CameraMovement() { return _cameraMovement; }
+        public Vector2 CameraMovement() { return _input.a_Camera.CameraMovement.ReadValue<Vector2>(); }
         public float CameraRotation() { return _input.a_Camera.CameraRotation.ReadValue<float>(); }
         public float CameraZoom() { return _input.a_Camera.CameraZoom.ReadValue<float>(); }
-
-        public bool IsTouching() { return Mouse.current.rightButton.isPressed; }
-        public bool IsHolding() { return Mouse.current.rightButton.wasPressedThisFrame; }
-        public Vector2 TouchPosition() { return Mouse.current.position.ReadValue(); }
+        public bool IsTouching() { return _input.a_Camera.PrimaryTouchContact.WasPressedThisFrame(); }
+        public Vector2 TouchPosition() { return _input.a_Camera.PrimaryTouch.ReadValue<Vector2>(); }
+        public bool IsHolding() { return _input.a_Camera.PrimaryTouchContact.IsPressed(); }
 
         #endregion
     }
