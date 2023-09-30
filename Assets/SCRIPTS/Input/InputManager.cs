@@ -35,6 +35,8 @@ namespace GGG.Input {
         public bool IsTouching() { return _input.a_Camera.PrimaryTouchContact.WasPressedThisFrame(); }
         public Vector2 TouchPosition() { return _input.a_Camera.PrimaryTouch.ReadValue<Vector2>(); }
         public bool IsHolding() { return _input.a_Camera.PrimaryTouchContact.IsPressed(); }
+        
+        public bool MouseClick() { return _input.a_Dialogue.Continue.WasPerformedThisFrame(); }
 
         #endregion
     }
