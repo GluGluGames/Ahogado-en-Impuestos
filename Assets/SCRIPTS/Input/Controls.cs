@@ -109,7 +109,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -120,7 +120,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -131,7 +131,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -142,7 +142,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -164,7 +164,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -175,7 +175,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -186,7 +186,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -197,7 +197,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -219,7 +219,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CameraRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -230,7 +230,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CameraRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -241,7 +241,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse"",
                     ""action"": ""CameraZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -252,7 +252,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Touchscreen>/touch0/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Touchscreen"",
                     ""action"": ""PrimaryTouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -263,7 +263,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse"",
                     ""action"": ""PrimaryTouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -274,7 +274,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Touchscreen>/touch1/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Touchscreen"",
                     ""action"": ""SecondaryTouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -285,7 +285,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse"",
                     ""action"": ""PrimaryTouchContact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -296,7 +296,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Touchscreen>/touch0/press"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Touchscreen"",
                     ""action"": ""PrimaryTouchContact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -307,15 +307,88 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Touchscreen>/touch1/press"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Touchscreen"",
                     ""action"": ""SecondaryTouchContact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""a_Dialogue"",
+            ""id"": ""b532230f-0a76-4456-8a0f-e5bd32d5e8d4"",
+            ""actions"": [
+                {
+                    ""name"": ""Continue"",
+                    ""type"": ""Button"",
+                    ""id"": ""df3fcdcb-98e3-48b1-986d-e25ec2857d79"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b3bf50de-bfd2-49f8-9fac-a4bb639e0fca"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca02adcd-6a81-4679-9088-c09647b9ac19"",
+                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touchscreen"",
+                    ""action"": ""Continue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Mouse"",
+            ""bindingGroup"": ""Mouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Touchscreen"",
+            ""bindingGroup"": ""Touchscreen"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Touchscreen>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // a_Camera
         m_a_Camera = asset.FindActionMap("a_Camera", throwIfNotFound: true);
@@ -326,6 +399,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_a_Camera_SecondaryTouch = m_a_Camera.FindAction("SecondaryTouch", throwIfNotFound: true);
         m_a_Camera_PrimaryTouchContact = m_a_Camera.FindAction("PrimaryTouchContact", throwIfNotFound: true);
         m_a_Camera_SecondaryTouchContact = m_a_Camera.FindAction("SecondaryTouchContact", throwIfNotFound: true);
+        // a_Dialogue
+        m_a_Dialogue = asset.FindActionMap("a_Dialogue", throwIfNotFound: true);
+        m_a_Dialogue_Continue = m_a_Dialogue.FindAction("Continue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -477,6 +553,79 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public A_CameraActions @a_Camera => new A_CameraActions(this);
+
+    // a_Dialogue
+    private readonly InputActionMap m_a_Dialogue;
+    private List<IA_DialogueActions> m_A_DialogueActionsCallbackInterfaces = new List<IA_DialogueActions>();
+    private readonly InputAction m_a_Dialogue_Continue;
+    public struct A_DialogueActions
+    {
+        private @Controls m_Wrapper;
+        public A_DialogueActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Continue => m_Wrapper.m_a_Dialogue_Continue;
+        public InputActionMap Get() { return m_Wrapper.m_a_Dialogue; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(A_DialogueActions set) { return set.Get(); }
+        public void AddCallbacks(IA_DialogueActions instance)
+        {
+            if (instance == null || m_Wrapper.m_A_DialogueActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_A_DialogueActionsCallbackInterfaces.Add(instance);
+            @Continue.started += instance.OnContinue;
+            @Continue.performed += instance.OnContinue;
+            @Continue.canceled += instance.OnContinue;
+        }
+
+        private void UnregisterCallbacks(IA_DialogueActions instance)
+        {
+            @Continue.started -= instance.OnContinue;
+            @Continue.performed -= instance.OnContinue;
+            @Continue.canceled -= instance.OnContinue;
+        }
+
+        public void RemoveCallbacks(IA_DialogueActions instance)
+        {
+            if (m_Wrapper.m_A_DialogueActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IA_DialogueActions instance)
+        {
+            foreach (var item in m_Wrapper.m_A_DialogueActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_A_DialogueActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public A_DialogueActions @a_Dialogue => new A_DialogueActions(this);
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_MouseSchemeIndex = -1;
+    public InputControlScheme MouseScheme
+    {
+        get
+        {
+            if (m_MouseSchemeIndex == -1) m_MouseSchemeIndex = asset.FindControlSchemeIndex("Mouse");
+            return asset.controlSchemes[m_MouseSchemeIndex];
+        }
+    }
+    private int m_TouchscreenSchemeIndex = -1;
+    public InputControlScheme TouchscreenScheme
+    {
+        get
+        {
+            if (m_TouchscreenSchemeIndex == -1) m_TouchscreenSchemeIndex = asset.FindControlSchemeIndex("Touchscreen");
+            return asset.controlSchemes[m_TouchscreenSchemeIndex];
+        }
+    }
     public interface IA_CameraActions
     {
         void OnCameraMovement(InputAction.CallbackContext context);
@@ -486,5 +635,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnSecondaryTouch(InputAction.CallbackContext context);
         void OnPrimaryTouchContact(InputAction.CallbackContext context);
         void OnSecondaryTouchContact(InputAction.CallbackContext context);
+    }
+    public interface IA_DialogueActions
+    {
+        void OnContinue(InputAction.CallbackContext context);
     }
 }
