@@ -1,30 +1,26 @@
-using Codice.CM.WorkspaceServer;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="TileGen/GenerationSettings")]
 public class HexTileGenerationSettings : ScriptableObject
 {
-
-    public enum tileType
+    public enum TileType
     { 
         Standard, 
         Water,
         Cliff
     }
 
-    public GameObject standar;
-    public GameObject water;
-    public GameObject cliff;
+    [SerializeField] private GameObject Standar;
+    [SerializeField] private GameObject Water;
+    [SerializeField] private GameObject Cliff;
 
-    public GameObject GetTile(tileType tileType)
+    public GameObject GetTile(TileType tileType)
     {
         switch (tileType)
         {
-            case tileType.Standard: return standar;
-            case tileType.Water: return water;
-            case tileType.Cliff: return cliff;
+            case TileType.Standard: return Standar;
+            case TileType.Water: return Water;
+            case TileType.Cliff: return Cliff;
         }
         return null;
     }

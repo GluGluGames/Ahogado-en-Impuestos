@@ -6,7 +6,7 @@ using UnityEngine;
 public class HexTile : MonoBehaviour
 {
     public HexTileGenerationSettings settings;
-    public HexTileGenerationSettings.tileType tileType;
+    public HexTileGenerationSettings.TileType tileType;
 
     public GameObject tilePrefab;
     public GameObject fow;
@@ -19,7 +19,7 @@ public class HexTile : MonoBehaviour
     //  Generate random type of tile
     public void RollTileType()
     {
-        tileType = (HexTileGenerationSettings.tileType)Random.Range(0,3);
+        tileType = (HexTileGenerationSettings.TileType)Random.Range(0,3);
     }
 
     public void AddTile()

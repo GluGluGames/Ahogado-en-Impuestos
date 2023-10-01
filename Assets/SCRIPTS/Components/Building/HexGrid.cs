@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Serialization;
 
 
 [CustomEditor(typeof(HexGrid))]
@@ -21,13 +22,13 @@ public class customInspectorGUI : Editor
 }
 public class HexGrid : MonoBehaviour
 {
-
+    
     [Header("Grid Settings")]
-    public Vector2Int gridSize;
-    public float radius = 1f;
-    public bool isFlatTopped;
+    [SerializeField] private Vector2Int GridSize;
+    [SerializeField] private float Radius = 1f;
+    [SerializeField] private bool IsFlatTopped;
 
-    public HexTileGenerationSettings settings;
+    [SerializeField] private HexTileGenerationSettings Settings;
 
     public void Clear()
     {
@@ -49,16 +50,16 @@ public class HexGrid : MonoBehaviour
     public void LayoutGrid()
     {
         Clear();
-        for (int y = 0; y < gridSize.y; y++)
+        for (int y = 0; y < GridSize.y; y++)
         {
-            for(int x = 0; x < gridSize.x; x++)
+            for(int x = 0; x < GridSize.x; x++)
             {
                 GameObject tile = new GameObject($"Hex C{x},R{y}");
                 tile.transform.SetParent(transform, true);
                 
                 HexTile hexTile = tile.AddComponent<HexTile>();
-                hexTile.transform.position = HexUtilities.GetPositionForHexFromCoordinate(new Vector2Int(x, y), radius, isFlatTopped);
-                hexTile.settings = settings;
+                hexTile.transform.position = HexUtilities.GetPositionForHexFromCoordinate(new Vector2Int(x, y), Radius, IsFlatTopped);
+                hexTile.settings = Settings;
                 hexTile.RollTileType();
                 hexTile.AddTile();
                 
