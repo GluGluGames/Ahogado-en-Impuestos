@@ -81,10 +81,10 @@ namespace GGG.Components.Dialogue
                 }
 
                 StartCoroutine(TypeText(DialogueLines[_lineIdx++]));
-                if(_avatarIdx < AvatarList.Count)
-                    Avatar.sprite = AvatarList[_avatarIdx++];
-                if(_characterIdx < CharacterNames.Count)
-                    NameText.SetText(CharacterNames[_characterIdx++]);
+                if(_avatarIdx + 1 < AvatarList.Count)
+                    Avatar.sprite = AvatarList[++_avatarIdx];
+                if(_characterIdx + 1 < CharacterNames.Count)
+                    NameText.SetText(CharacterNames[++_characterIdx]);
             }
             else {
                 if (!_currentTextFinished) {
