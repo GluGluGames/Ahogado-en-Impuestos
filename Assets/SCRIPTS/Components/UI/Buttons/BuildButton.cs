@@ -18,10 +18,10 @@ namespace GGG.Components.UI {
             Cell[] cells = FindObjectsOfType<Cell>();
 
             foreach (Cell cell in cells)
-                cell.OnCellClick += () => {
+                cell.OnCellClick += (building) => {
                     _selectedCell = cell;
 
-                    if (!_selectedCell.IsEmpty()) _auxBuild = cell.GetCurrentBuilding();
+                    if (!_selectedCell.IsEmpty()) _auxBuild = building;
                 };
              
             BuildNameText.SetText(BuildingInfo.GetName());

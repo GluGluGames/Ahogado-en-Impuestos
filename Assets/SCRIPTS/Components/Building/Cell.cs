@@ -14,7 +14,8 @@ namespace GGG.Components.Buildings {
         private BuildingComponent _currentBuilding;
         private bool _empty;
 
-        public Action OnCellClick;
+        public Action<BuildingComponent> OnCellClick;
+        public Action OnCellBuild;
 
         private void Start()
         {
@@ -30,6 +31,7 @@ namespace GGG.Components.Buildings {
         public void SetBuilding(BuildingComponent building) {
             _currentBuilding = building;
             _empty = building == null;
+            if(building != null) OnCellBuild?.Invoke();
         }
 
         #endregion
@@ -37,7 +39,7 @@ namespace GGG.Components.Buildings {
         #region Event Systems Methods
 
         public void OnPointerDown(PointerEventData eventData) {
-            OnCellClick?.Invoke();
+            OnCellClick?.Invoke(_currentBuilding);
         }
 
         public void OnPointerEnter(PointerEventData eventData) {
