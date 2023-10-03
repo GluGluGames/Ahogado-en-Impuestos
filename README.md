@@ -99,32 +99,32 @@ ________________________________________________________________________________
 
 ## **6. DIAGRAMA DE FLUJO – Laura**
 
-      -1.**MENÚ PRINCIPAL**: 	el menú principal servirá de pantalla de presentación del juego. Desde aquí se podrá acceder a los ajustes, a los créditos y a la pantalla de juego. 
+      -1.MENÚ PRINCIPAL: 	el menú principal servirá de pantalla de presentación del juego. Desde aquí se podrá acceder a los ajustes, a los créditos y a la pantalla de juego. 
     
-      -2.**CRÉDITOS**: en esta pantalla se podrá ver todas las personas involucradas en el juego y sus roles. 
+      -2.CRÉDITOS: en esta pantalla se podrá ver todas las personas involucradas en el juego y sus roles. 
     
-      -3.**AJUSTES**: se podrán cambiar cosas del juego como el sonido. Desde aquí se puede volver a la pantalla desde donde has accedido, y ver los créditos. 
+      -3.AJUSTE: se podrán cambiar cosas del juego como el sonido. Desde aquí se puede volver a la pantalla desde donde has accedido, y ver los créditos. 
     
-      -4.**PANTALLA DE JUEGO**:	pantalla principal del juego, donde se gestionará la ciudad y los recursos. Puedes acceder tanto a los ajustes como a la expedición. 
+      -4.PANTALLA DE JUEGO:	pantalla principal del juego, donde se gestionará la ciudad y los recursos. Puedes acceder tanto a los ajustes como a la expedición. 
     
-      -5.**EXPEDICIÓN**: minijuego para recolectar recursos. También puedes acceder a los ajustes, y a la pantalla de derrota si fallas el minijuego. 
+      -5.EXPEDICIÓN: minijuego para recolectar recursos. También puedes acceder a los ajustes, y a la pantalla de derrota si fallas el minijuego. 
     
-      -6.**DERROTA**: si fallas en la expedición accedes a la pantalla de derrota. Desde aquí puedes volver a la pantalla de juego. 
+      -6.DERROTA: si fallas en la expedición accedes a la pantalla de derrota. Desde aquí puedes volver a la pantalla de juego. 
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 ## **7. INTERFACES – Laura** 
-    **1. MENÚ PRINCIPAL:**
-    **2. CRÉDITOS:** 
-    **3. AJUSTES:**
-    **4. PANTALLA DE JUEGO:** 
-        *1. DIALOGOS:*
-        *2. TIENDA DE EDIFICIOS*
-        *3. MUSEO*
-        *4. MEJORAS DE BUCEO*
-        *5. TIENDA DE RECURSOS*
-    **5. EXPEDICIÓN:**
-    **6. DERROTA:**
+        1. MENÚ PRINCIPAL:
+        2. CRÉDITOS: 
+        3. AJUSTES:
+        4. PANTALLA DE JUEGO:
+            4.1. DIALOGOS:-
+            4.2. TIENDA DE EDIFICIOS-
+            4.3. MUSEO-
+            4.4. MEJORAS DE BUCEO-
+            4.5. TIENDA DE RECURSOS-
+        5. EXPEDICIÓN:
+        6. DERROTA:
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 ## **8. NARRATIVA – Adri C.** 
@@ -149,7 +149,7 @@ ________________________________________________________________________________
   ### **2.CAJA DE HERRAMIENTAS:**
 
   ### **3.CANVAS:**
-      **Segmento de Mercado:** 
+      #### Segmento de Mercado:
 
       Nuestro juego tiene un enfoque diversificado para atraer a diferentes públicos: 
 
