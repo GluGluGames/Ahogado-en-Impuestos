@@ -19,7 +19,7 @@ public class HexTile : MonoBehaviour
     //  Generate random type of tile
     public void RollTileType()
     {
-        tileType = (HexTileGenerationSettings.TileType)Random.Range(0,3);
+        tileType = (HexTileGenerationSettings.TileType)Random.Range(0, 3);
     }
 
     public void AddTile()
@@ -28,25 +28,24 @@ public class HexTile : MonoBehaviour
         tilePrefab.transform.SetParent(transform, false);
         
 
-        if(gameObject.GetComponent<MeshCollider>() == null )
+        if (gameObject.GetComponent<MeshCollider>() == null)
         {
-            // !BUG: Collider appears aligned with y axis instead of z (vertical instead of horizontal)
-            //MeshCollider collider = gameObject.AddComponent<MeshCollider>();
-            //collider.sharedMesh = GetComponentInChildren<MeshFilter>().sharedMesh;
+            MeshCollider collider = gameObject.AddComponent<MeshCollider>();
+            collider.sharedMesh = GetComponentInChildren<MeshFilter>().sharedMesh;
         }
 
-        Debug.Log(tilePrefab.transform.position);
+        transform.rotation = Quaternion.Euler(-90f, 0f ,0f);
     }
 
     private void OnValidate()
     {
-        if(tilePrefab == null) { return; }
+        if (tilePrefab == null) { return; }
         isDirty = true;
     }
 
     private void Update()
     {
-        if(isDirty)
+        if (isDirty)
         {
 
             if (Application.isPlaying)
@@ -63,4 +62,29 @@ public class HexTile : MonoBehaviour
             isDirty = false;
         }
     }
+
+    public void OnDrawGizmosSelected()
+    {
+        foreach (HexTile neighbour in neighbours)
+        {
+            Gizmos.color = Color.black;
+            Gizmos.DrawSphere(transform.position, 0.2f);
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(transform.position, neighbour.transform.position);
+        }
+    }
+
+    public void OnHighlightTile()
+    {
+        Debug.Log(TileManager.instance);
+        TileManager.instance.OnHighlightTile(this);
+    }
+
+    public void OnSelectTile()
+    {
+        TileManager.instance.OnSelectTile(this);
+
+    }
 }
+
+

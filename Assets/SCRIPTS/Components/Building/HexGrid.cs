@@ -22,7 +22,7 @@ public class customInspectorGUI : Editor
 }
 public class HexGrid : MonoBehaviour
 {
-    
+
     [Header("Grid Settings")]
     [SerializeField] private Vector2Int GridSize;
     [SerializeField] private float Radius = 1f;
@@ -40,7 +40,7 @@ public class HexGrid : MonoBehaviour
             children.Add(child);
         }
 
-        foreach(GameObject child in children)
+        foreach (GameObject child in children)
         {
             DestroyImmediate(child, true);
         }
@@ -52,17 +52,17 @@ public class HexGrid : MonoBehaviour
         Clear();
         for (int y = 0; y < GridSize.y; y++)
         {
-            for(int x = 0; x < GridSize.x; x++)
+            for (int x = 0; x < GridSize.x; x++)
             {
                 GameObject tile = new GameObject($"Hex C{x},R{y}");
                 tile.transform.SetParent(transform, true);
-                
+
                 HexTile hexTile = tile.AddComponent<HexTile>();
                 hexTile.transform.position = HexUtilities.GetPositionForHexFromCoordinate(new Vector2Int(x, y), Radius, IsFlatTopped);
                 hexTile.settings = Settings;
                 hexTile.RollTileType();
                 hexTile.AddTile();
-                
+
                 // Assign its offset coordinates for human parsing (Column, Row)
                 hexTile.offsetCoordinate = new Vector2Int(x, y);
 
@@ -76,3 +76,5 @@ public class HexGrid : MonoBehaviour
         }
     }
 }
+
+

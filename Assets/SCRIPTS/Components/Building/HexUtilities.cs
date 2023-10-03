@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class HexUtilities : MonoBehaviour
 {
     public static Vector3Int OffsetToCube(Vector2Int offset)
@@ -9,7 +10,7 @@ public class HexUtilities : MonoBehaviour
         var q = offset.x - (offset.y + (offset.y % 2)) / 2;
         var r = offset.y;
 
-        return new Vector3Int(q, r, -q-r);
+        return new Vector3Int(q, r, -q - r);
     }
 
     public static Vector3 GetPositionForHexFromCoordinate(Vector2Int coord, float size, bool isFlatTopped)
@@ -59,3 +60,5 @@ public class HexUtilities : MonoBehaviour
         return new Vector3(xPosition, 0, -yPosition);
     }
 }
+
+
