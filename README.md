@@ -97,18 +97,19 @@ ________________________________________________________________________________
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-##**6. DIAGRAMA DE FLUJO – Laura** 
-  1.**MENÚ PRINCIPAL**: 	el menú principal servirá de pantalla de presentación del juego. Desde aquí se podrá acceder a los ajustes, a los créditos y a la pantalla de juego. 
+##**6. DIAGRAMA DE FLUJO – Laura**
 
-  2.**CRÉDITOS**: en esta pantalla se podrá ver todas las personas involucradas en el juego y sus roles. 
-
-  3.**AJUSTES**: se podrán cambiar cosas del juego como el sonido. Desde aquí se puede volver a la pantalla desde donde has accedido, y ver los créditos. 
-
-  4.**PANTALLA DE JUEGO**:	pantalla principal del juego, donde se gestionará la ciudad y los recursos. Puedes acceder tanto a los ajustes como a la expedición. 
-
-  5.**EXPEDICIÓN**: minijuego para recolectar recursos. También puedes acceder a los ajustes, y a la pantalla de derrota si fallas el minijuego. 
-
-  6.**DERROTA**: si fallas en la expedición accedes a la pantalla de derrota. Desde aquí puedes volver a la pantalla de juego. 
+      -1.**MENÚ PRINCIPAL**: 	el menú principal servirá de pantalla de presentación del juego. Desde aquí se podrá acceder a los ajustes, a los créditos y a la pantalla de juego. 
+    
+      -2.**CRÉDITOS**: en esta pantalla se podrá ver todas las personas involucradas en el juego y sus roles. 
+    
+      -3.**AJUSTES**: se podrán cambiar cosas del juego como el sonido. Desde aquí se puede volver a la pantalla desde donde has accedido, y ver los créditos. 
+    
+      -4.**PANTALLA DE JUEGO**:	pantalla principal del juego, donde se gestionará la ciudad y los recursos. Puedes acceder tanto a los ajustes como a la expedición. 
+    
+      -5.**EXPEDICIÓN**: minijuego para recolectar recursos. También puedes acceder a los ajustes, y a la pantalla de derrota si fallas el minijuego. 
+    
+      -6.**DERROTA**: si fallas en la expedición accedes a la pantalla de derrota. Desde aquí puedes volver a la pantalla de juego. 
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -165,37 +166,3 @@ ________________________________________________________________________________
       -Instituciones Educativas y Gobiernos: Continuaremos explorando oportunidades para colaborar con colegios y gobiernos en aspectos educativos del juego. Esto podría incluir programas educativos o iniciativas de             apoyo a la enseñanza del pensamiento computacional. 
       
       Este enfoque diversificado en nuestros segmentos de mercado nos permitirá alcanzar una audiencia amplia y satisfacer las necesidades y expectativas de cada grupo de manera efectiva, garantizando el éxito de nuestro       juego de gestión de recursos con elementos educativos y de entretenimiento.
-
-      ###Propuesta de Valor
-
-Nuestra empresa se dedica a proporcionar productos que tienen como objetivo principal incentivar el aprendizaje y el entretenimiento para estudiantes de 6 a 12 años, sin dejar de lado la satisfacción de adolescentes y adultos. Nuestra propuesta de valor se basa en los siguientes pilares fundamentales:
-
-#### Diversión Educativa para Todas las Edades
-
-Ofrecemos videojuegos que combinan el entretenimiento y la educación, diseñados para estudiantes jóvenes, adolescentes y adultos. Los juegos son amigables para toda la familia, lo que garantiza que puedan ser disfrutados por personas de todas las edades sin sacrificar la diversión.
-
-#### Mecánicas de Juego Desafiantes
-
-Nuestros juegos presentan mecánicas de nivel intermedio que requieren que los jugadores piensen estratégicamente y tomen decisiones significativas en cada paso. Esto fomenta el desarrollo del pensamiento crítico y el aprendizaje activo mientras se divierten.
-
-#### Narrativa Inmersiva
-
-Cada uno de nuestros juegos se sumerge a los jugadores en una narrativa cautivadora. Los jugadores se encuentran inmersos en una historia intrigante que les permite comprender el contexto y las situaciones dentro del juego, lo que aumenta la inmersión y el compromiso.
-
-#### Pasión por la Experiencia del Jugador
-
-Nuestra empresa está impulsada por la pasión de crear experiencias excepcionales para los jugadores. Nos esforzamos por ofrecer juegos que emocionen y motiven a nuestros usuarios, proporcionando momentos memorables en cada partida.
-
-#### Honestidad y Respeto
-
-Valoramos la honestidad tanto dentro como fuera de la empresa. Mantenemos una relación transparente con nuestros clientes y respetamos sus opiniones y sugerencias. La confianza y la integridad son fundamentales para nosotros.
-
-#### Colaboración y Compromiso
-
-Fomentamos la cooperación y el trabajo en equipo entre los miembros de nuestra empresa, lo que se refleja en la calidad de nuestros productos. Estamos comprometidos con la mejora constante y el crecimiento tanto a nivel interno como en la satisfacción de nuestros clientes.
-
-#### Compromiso con la Innovación
-
-Nos comprometemos a seguir innovando y ofreciendo productos que se adapten a las necesidades cambiantes de nuestros jugadores y al mundo educativo en constante evolución.
-
-Nuestra propuesta de valor es crear experiencias de juego inolvidables que equilibren el entretenimiento, el aprendizaje y la diversión para jugadores de todas las edades, respaldados por valores de empresa centrados en la pasión, la honestidad, el respeto y la colaboración. Nuestro compromiso con la innovación nos impulsa a seguir evolucionando y superando las expectativas de nuestros clientes.
