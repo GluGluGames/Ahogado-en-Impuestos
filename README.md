@@ -1,16 +1,16 @@
 # Ahogado-en-Impuestos
 
-##1. MÉCANICAS – Adri/Deivid 
+## 1. MÉCANICAS – Adri/Deivid 
 
 A lo largo de este apartado se a definir las mecánicas del videojuego.  
 
-###**Mecánica principal**: 
+### **Mecánica principal**: 
 
 Construcción de edificios para el aumento de la producción, y minijuegos ocasionales para la obtención de recursos más raros y la apertura de nuevas estructuras/mecánicas.  
 
 El juego se divide en dos grandes apartados. El primero de ellos es el **escenario principal**, y el segundo será un o varios **minijuegos**. Adelante entramos más en detalle en estos apartados. 
 
-###**Escenario principal**
+### **Escenario principal**
 
 Este escenario consiste en un mapa dividido en terrenos hexagonales. Estos terrenos serán generados de forma procedural en el editor del juego, pero podrán y serán modificados por los artistas para hacer que este mundo sea artísticamente agradable y produzca cierto atractivo. Algunos ejemplos de una estructura “grid hexagonal” como esta se encuentran en juegos como “Before we Leave” o “Civilization”. En estos juegos las casillas aportan más o menos recursos dependiendo de su posición o recursos naturales. En nuestro caso no haremos esto, sino que lo simplificaremos, los recursos otorgados solo dependen de los edificios cercanos a esta casilla. 
 
@@ -22,27 +22,27 @@ Estas casillas al principio se encuentran asilvestradas, pero pagando una suma d
 
 Cuando comiences el juego las casillas lejanas van a estar cubiertas por una “niebla de guerra”, donde no se podrá construir. Se eliminará la niebla y se desbloqueará la posibilidad de construir en estas casillas cuando se construya un edificio cercano a la niebla de guerra. Por ejemplo, los edificios otorgan una o dos casillas de visibilidad a su alrededor. Se encuentra bajo discusión si hacemos que los edificios otorguen más visión dependiendo de su nivel y/o tipo de estructura. 
 
-###**Minijuegos** 
+### **Minijuegos** 
 
  
 
-##**1.1 MECÁNICAS: Plataforma hexagonal**
+## **1.1 MECÁNICAS: Plataforma hexagonal**
 
  
 
-##**1.2 MECÁNICAS: Niebla de guerra**
+## **1.2 MECÁNICAS: Niebla de guerra**
 
   
 
-##**1. 3. MECÁNICAS: recursos** 
+## **1. 3. MECÁNICAS: recursos** 
 
   
 
-##**1.4. MECÁNICAS: edificios** 
+## **1.4. MECÁNICAS: edificios** 
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-##**2. CONTROLES – Deivid**
+## **2. CONTROLES – Deivid**
 
 Los controles del juego están basados en los clásicos controles de los juegos de estrategia. Principalmente, son usados para mover y controlar la cámara, permitiendo así al jugador una mayor inmersión dentro del juego. 
 
@@ -80,24 +80,24 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
          -Zoom: El jugador mantendrá dos dedos en la pantalla y juntará o separará estos. El zoom se incrementará o disminuirá en función de si se acercan o alejan, respectivamente. 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-##**3. ARTE 2D** 
+## **3. ARTE 2D** 
 
-##**3.1. ARTE 2D: Moodboard – Laura** 
+## **3.1. ARTE 2D: Moodboard – Laura** 
 
-##**3.2. ARTE 2D: Concepts – Marco/Laura**
-
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
-
-##**4. DISEÑO 3D – Adri C.**
-
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
-##**5. GAME DESIGN** 
-
-##**5.1. GAME DESIGN: Diseño de nivel – Adri/Luming**
+## **3.2. ARTE 2D: Concepts – Marco/Laura**
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-##**6. DIAGRAMA DE FLUJO – Laura**
+## **4. DISEÑO 3D – Adri C.**
+
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+## **5. GAME DESIGN** 
+
+## **5.1. GAME DESIGN: Diseño de nivel – Adri/Luming**
+
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+## **6. DIAGRAMA DE FLUJO – Laura**
 
       -1.**MENÚ PRINCIPAL**: 	el menú principal servirá de pantalla de presentación del juego. Desde aquí se podrá acceder a los ajustes, a los créditos y a la pantalla de juego. 
     
@@ -113,7 +113,7 @@ ________________________________________________________________________________
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-##**7. INTERFACES – Laura** 
+## **7. INTERFACES – Laura** 
     **1. MENÚ PRINCIPAL:**
     **2. CRÉDITOS:** 
     **3. AJUSTES:**
@@ -127,28 +127,28 @@ ________________________________________________________________________________
     **6. DERROTA:**
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-##**8. NARRATIVA – Adri C.** 
+## **8. NARRATIVA – Adri C.** 
 
-##**8.1. NARRATIVA: Personajes – Adri C.**
+## **8.1. NARRATIVA: Personajes – Adri C.**
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-##**9. MÚSICA Y SONIDO – Deivid** 
+## **9. MÚSICA Y SONIDO – Deivid** 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-##**10. PENSAMIENTO COMPUTACIONAL – Todos**  
+## **10. PENSAMIENTO COMPUTACIONAL – Todos**  
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-##**11. MODELO DE NEGOCIO** 
+## **11. MODELO DE NEGOCIO** 
 
   **Colectivos**: grandes centros de trabajo que comparten infraestructuras. 
 
   **B2P (Buy to Play)**: el juego debe ser adquirido para poder jugarse. Suele combinarse con otros tipos de monetización.
   ###**1.MAPA DE EMPATÍA DEL USUARIO:**
   
-  ###**2.CAJA DE HERRAMIENTAS:**
+  ### **2.CAJA DE HERRAMIENTAS:**
 
-  ###**3.CANVAS:**
+  ### **3.CANVAS:**
       **Segmento de Mercado:** 
 
       Nuestro juego tiene un enfoque diversificado para atraer a diferentes públicos: 
