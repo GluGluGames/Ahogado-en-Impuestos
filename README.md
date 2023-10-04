@@ -103,15 +103,15 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 ## **7. INTERFACES – Laura** 
-1. MENÚ PRINCIPAL:
+1. MENÚ PRINCIPAL: 
 2. CRÉDITOS: 
 3. AJUSTES:
 4. PANTALLA DE JUEGO:
-  1. DIALOGOS:
-  2. TIENDA DE EDIFICIOS:
-  3. MUSEO:
-  4. MEJORAS DE BUCEO:
-  5. TIENDA DE RECURSOS:
+  - DIALOGOS:
+  - TIENDA DE EDIFICIOS:
+  - MUSEO:
+  - MEJORAS DE BUCEO:
+  - TIENDA DE RECURSOS:
 5. EXPEDICIÓN:
 6. DERROTA:
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
@@ -140,7 +140,7 @@ ________________________________________________________________________________
   ### **3.CANVAS:**
   #### Segmento de Mercado:
 
-  Nuestro juego tiene un enfoque diversificado para atraer a diferentes públicos: 
+    Nuestro juego tiene un enfoque diversificado para atraer a diferentes públicos: 
 
   - Niños de 6 a 12 años: Continuamos orientando el juego hacia este grupo de edad con un fuerte componente educativo que fomente el pensamiento computacional y el aprendizaje lúdico. 
 
