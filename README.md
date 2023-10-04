@@ -52,7 +52,7 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 Movimiento de la cámara: 
 
-  -W , flecha arriba: Movimiento vertical hacia arriba. 
+  - W, flecha arriba: Movimiento vertical hacia arriba. 
   - S, flecha abajo: Movimiento vertical hacia abajo. 
   - A, flecha izquierda: Movimiento horizontal hacia la izquierda. 
   - D, flecha derecha: Movimiento horizontal hacia la derecha. 
