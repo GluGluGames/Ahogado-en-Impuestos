@@ -12,7 +12,7 @@ El juego se divide en dos grandes apartados. El primero de ellos es el **escenar
 
 ### **Escenario principal**
 
-      Este escenario consiste en un mapa dividido en terrenos hexagonales. Estos terrenos serán generados de forma procedural en el editor del juego, pero podrán y serán modificados por los artistas para hacer que este mundo sea artísticamente agradable y produzca cierto atractivo. Algunos ejemplos de una estructura “grid hexagonal” como esta se encuentran en juegos como “Before we Leave” o “Civilization”. En estos juegos las casillas aportan más o menos recursos dependiendo de su posición o recursos naturales. En nuestro caso no haremos esto, sino que lo simplificaremos, los recursos otorgados solo dependen de los edificios cercanos a esta casilla. 
+Este escenario consiste en un mapa dividido en terrenos hexagonales. Estos terrenos serán generados de forma procedural en el editor del juego, pero podrán y serán modificados por los artistas para hacer que este mundo sea artísticamente agradable y produzca cierto atractivo. Algunos ejemplos de una estructura “grid hexagonal” como esta se encuentran en juegos como “Before we Leave” o “Civilization”. En estos juegos las casillas aportan más o menos recursos dependiendo de su posición o recursos naturales. En nuestro caso no haremos esto, sino que lo simplificaremos, los recursos otorgados solo dependen de los edificios cercanos a esta casilla. 
 
 En el juego de Civilization los mapas son procedurales, pero en el nuestro serán creados a mano por el equipo. 
 
@@ -140,7 +140,7 @@ ________________________________________________________________________________
   ### **3.CANVAS:**
   #### Segmento de Mercado:
 
-    Nuestro juego tiene un enfoque diversificado para atraer a diferentes públicos: 
+Nuestro juego tiene un enfoque diversificado para atraer a diferentes públicos: 
 
   - Niños de 6 a 12 años: Continuamos orientando el juego hacia este grupo de edad con un fuerte componente educativo que fomente el pensamiento computacional y el aprendizaje lúdico. 
 
