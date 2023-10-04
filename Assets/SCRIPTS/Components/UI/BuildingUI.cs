@@ -11,11 +11,12 @@ namespace GGG.Components.UI {
     
         private void Start() {
             CloseButton.onClick.AddListener(Close);
-            
-            Cell[] cells = FindObjectsOfType<Cell>();
 
-            foreach (Cell cell in cells) {
-                cell.OnCellClick += Open;
+            //Cell[] cells = FindObjectsOfType<Cell>();
+            HexTile[] tiles = FindObjectsOfType<HexTile>();
+
+            foreach (HexTile tile in tiles) {
+                tile.OnHexSelect += Open;
             }
 
             _open = false;
