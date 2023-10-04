@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using GGG.Shared;
+using UnityEngine.Localization.Settings;
 
 namespace GGG.Components.Core
 {
@@ -10,16 +12,20 @@ namespace GGG.Components.Core
 
         public static GameManager Instance;
 
+        private Language _language;
+
         private void Awake() {
             if (Instance == null) Instance = this;
             
             if(!DebugMode) StartCoroutine(InitializeGame());
+            StartCoroutine(initializeLanguage());
         }
 
         #endregion
 
         [SerializeField] private bool DebugMode;
 
+        #region Functions
         private IEnumerator InitializeGame() {
             yield return null;
             const int SCENE_IDX = 1;
@@ -29,5 +35,24 @@ namespace GGG.Components.Core
             AsyncOperation async = SceneManager.LoadSceneAsync(SCENE_IDX, LoadSceneMode.Additive);
             while (!async.isDone) yield return null;
         }
+        private IEnumerator initializeLanguage()
+        {
+            yield return LocalizationSettings.InitializationOperation;
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[
+                PlayerPrefs.HasKey("LocalKey") ? PlayerPrefs.GetInt("LocalKey") : 0];
+            _language = PlayerPrefs.HasKey("LocalKey") ? (Language)PlayerPrefs.GetInt("LocalKey") : Language.Spanish;
+        }
+        #endregion
+
+        #region Getters & Setters
+        public Language GetCurrentLanguage()
+        {
+            return _language;
+        }
+        public void SetLanguage(Language language)
+        {
+            _language = language;
+        }
+        #endregion
     }
 }

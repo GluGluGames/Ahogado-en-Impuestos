@@ -219,9 +219,23 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: "INGL\xC9S"
       m_Image: {fileID: 0}
+    - m_Text: CHINO
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1753831516}
+        m_TargetAssemblyTypeName: GGG.Components.Menus.Settings, Menus
+        m_MethodName: DropdownLanguage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &14459119
 MonoBehaviour:
@@ -1223,54 +1237,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153738207}
   m_CullTransparentMesh: 1
---- !u!1 &201103288
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 201103290}
-  - component: {fileID: 201103289}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &201103289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201103288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e15c054dd270140993db4bf7c3ee38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GeneralMixerGroup: {fileID: 24300002, guid: 1a1b6f937486c874daad9bf427880555, type: 2}
-  MusicMixerGroup: {fileID: 9008902751201532172, guid: 1a1b6f937486c874daad9bf427880555, type: 2}
-  SoundEffectsMixerGroup: {fileID: -1082304055561850417, guid: 1a1b6f937486c874daad9bf427880555, type: 2}
-  Sounds: []
---- !u!4 &201103290
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201103288}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 908.60706, y: 550.9331, z: 4.9951954}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &201462151
 GameObject:
   m_ObjectHideFlags: 0
@@ -2000,9 +1966,23 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: ALTA
       m_Image: {fileID: 0}
+    - m_Text: MUY ALTA
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1753831516}
+        m_TargetAssemblyTypeName: GGG.Components.Menus.Settings, Menus
+        m_MethodName: DropdownGraphics
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &421047534
 MonoBehaviour:

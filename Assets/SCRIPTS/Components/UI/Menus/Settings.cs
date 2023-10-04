@@ -3,6 +3,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using GGG.Components.Core;
+using GGG.Shared;
+using System.Collections;
+using UnityEngine.Localization.Settings;
 
 namespace GGG.Components.Menus
 {
@@ -41,10 +45,13 @@ namespace GGG.Components.Menus
         [Tooltip("Dropdown of the graphics")]
         [SerializeField] private TMP_Dropdown GraphicsDropdown;
 
+        private bool _languageActive = false;
+
         #region Unity Methods
         private void Start()
         {
             StartSounds();
+            LanguageDropdown.value = GameManager.Instance.GetCurrentLanguage() == Language.Spanish ? 0 : 1;
         }
 
         #endregion
@@ -84,13 +91,28 @@ namespace GGG.Components.Menus
             SoundEffectsText.text = Mathf.FloorToInt(GetRange(EffectsSlider.maxValue, EffectsSlider.minValue, EffectsSlider.value)).ToString();
         }
 
-        public void DropdownLanguage(Int32 option)
+        public void DropdownLanguage(int option)
         {
-
+            StartCoroutine(SetLocale(option));
         }
 
-        public void DropdownGraphics(Int32 option)
+        public void DropdownGraphics(int option)
         {
+            switch (option)
+            {
+                case 0:
+                    QualitySettings.SetQualityLevel(1);
+                    break;
+                case 1:
+                    QualitySettings.SetQualityLevel(2);
+                    break;
+                case 2:
+                    QualitySettings.SetQualityLevel(3);
+                    break;
+                case 3:
+                    QualitySettings.SetQualityLevel(4);
+                    break;
+            }
 
         }
 
@@ -126,6 +148,19 @@ namespace GGG.Components.Menus
             AudioMixer.SetFloat("SoundEffects", volume);
             PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
             UpdateText();
+        }
+
+        private IEnumerator SetLocale(int localeId)
+        {
+            _languageActive = true;
+            yield return LocalizationSettings.InitializationOperation;
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
+            PlayerPrefs.SetInt("LocalKey", localeId);
+
+            GameManager.Instance.SetLanguage((Language) localeId);
+
+            _languageActive = false;
+
         }
 
         #endregion
