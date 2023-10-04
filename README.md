@@ -48,36 +48,30 @@ Los controles del juego están basados en los clásicos controles de los juegos 
 
 Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla táctil (Dispositivos móviles), o si se usa el teclado y ratón. 
 
-  Teclado y ratón: 
+### Teclado y ratón: 
 
-    Movimiento de la cámara: 
+Movimiento de la cámara: 
 
-        -W, flecha arriba: Movimiento vertical hacia arriba. 
+  -W , flecha arriba: Movimiento vertical hacia arriba. 
+  - S, flecha abajo: Movimiento vertical hacia abajo. 
+  - A, flecha izquierda: Movimiento horizontal hacia la izquierda. 
+  - D, flecha derecha: Movimiento horizontal hacia la derecha. 
+  - Click izquierdo: Al hacer click y arrastrar el ratón por la pantalla, la cámara se moverá al sentido contrario del arrastrado. 
 
-        -S, flecha abajo: Movimiento vertical hacia abajo. 
+Rotación de la cámara: 
 
-        -A, flecha izquierda: Movimiento horizontal hacia la izquierda. 
+  - E: Rotación en sentido horario. 
+  - Q: Rotación en sentido antihorario. 
 
-        -D, flecha derecha: Movimiento horizontal hacia la derecha. 
+Zoom: 
 
-        -Click izquierdo: Al hacer click y arrastrar el ratón por la pantalla, la cámara se moverá al sentido contrario del arrastrado. 
+  - Rueda del ratón. Dependiendo de la dirección, la cámara se acercará o se alejará. 
 
-    Rotación de la cámara: 
+Pantalla táctil: 
 
-        -E: Rotación en sentido horario. 
-
-        -Q: Rotación en sentido antihorario. 
-
-    Zoom: 
-        -Rueda del ratón. Dependiendo de la dirección, la cámara se acercará o se alejará. 
-
-    Pantalla táctil: 
-
-         -Movimiento de la cámara: El jugador mantendrá su dedo en la pantalla y arrastrará. La cámara se moverá al sentido contrario del arrastre. 
-
-         -Rotación de la cámara: El jugador mantendrá dos dedos y arrastrará de manera horizontal. La cámara se moverá en el sentido de arrastre. 
-
-         -Zoom: El jugador mantendrá dos dedos en la pantalla y juntará o separará estos. El zoom se incrementará o disminuirá en función de si se acercan o alejan, respectivamente. 
+  - Movimiento de la cámara: El jugador mantendrá su dedo en la pantalla y arrastrará. La cámara se moverá al sentido contrario del arrastre. 
+  - Rotación de la cámara: El jugador mantendrá dos dedos y arrastrará de manera horizontal. La cámara se moverá en el sentido de arrastre. 
+  - Zoom: El jugador mantendrá dos dedos en la pantalla y juntará o separará estos. El zoom se incrementará o disminuirá en función de si se acercan o alejan, respectivamente. 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 ## **3. ARTE 2D** 
@@ -99,32 +93,27 @@ ________________________________________________________________________________
 
 ## **6. DIAGRAMA DE FLUJO – Laura**
 
-      -1.MENÚ PRINCIPAL: 	el menú principal servirá de pantalla de presentación del juego. Desde aquí se podrá acceder a los ajustes, a los créditos y a la pantalla de juego. 
-    
-      -2.CRÉDITOS: en esta pantalla se podrá ver todas las personas involucradas en el juego y sus roles. 
-    
-      -3.AJUSTE: se podrán cambiar cosas del juego como el sonido. Desde aquí se puede volver a la pantalla desde donde has accedido, y ver los créditos. 
-    
-      -4.PANTALLA DE JUEGO:	pantalla principal del juego, donde se gestionará la ciudad y los recursos. Puedes acceder tanto a los ajustes como a la expedición. 
-    
-      -5.EXPEDICIÓN: minijuego para recolectar recursos. También puedes acceder a los ajustes, y a la pantalla de derrota si fallas el minijuego. 
-    
-      -6.DERROTA: si fallas en la expedición accedes a la pantalla de derrota. Desde aquí puedes volver a la pantalla de juego. 
+1. MENÚ PRINCIPAL: 	el menú principal servirá de pantalla de presentación del juego. Desde aquí se podrá acceder a los ajustes, a los créditos y a la pantalla de juego. 
+2. CRÉDITOS: en esta pantalla se podrá ver todas las personas involucradas en el juego y sus roles. 
+3. AJUSTE: se podrán cambiar cosas del juego como el sonido. Desde aquí se puede volver a la pantalla desde donde has accedido, y ver los créditos. 
+4. PANTALLA DE JUEGO:	pantalla principal del juego, donde se gestionará la ciudad y los recursos. Puedes acceder tanto a los ajustes como a la expedición. 
+5. EXPEDICIÓN: minijuego para recolectar recursos. También puedes acceder a los ajustes, y a la pantalla de derrota si fallas el minijuego. 
+6. DERROTA: si fallas en la expedición accedes a la pantalla de derrota. Desde aquí puedes volver a la pantalla de juego. 
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 ## **7. INTERFACES – Laura** 
-        1. MENÚ PRINCIPAL:
-        2. CRÉDITOS: 
-        3. AJUSTES:
-        4. PANTALLA DE JUEGO:
-            4.1. DIALOGOS:-
-            4.2. TIENDA DE EDIFICIOS-
-            4.3. MUSEO-
-            4.4. MEJORAS DE BUCEO-
-            4.5. TIENDA DE RECURSOS-
-        5. EXPEDICIÓN:
-        6. DERROTA:
+1. MENÚ PRINCIPAL:
+2. CRÉDITOS: 
+3. AJUSTES:
+4. PANTALLA DE JUEGO:
+  4.1. DIALOGOS:
+  4.2. TIENDA DE EDIFICIOS:
+  4.3. MUSEO:
+  4.4. MEJORAS DE BUCEO:
+  4.5. TIENDA DE RECURSOS:
+5. EXPEDICIÓN:
+6. DERROTA:
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 ## **8. NARRATIVA – Adri C.** 
@@ -149,20 +138,20 @@ ________________________________________________________________________________
   ### **2.CAJA DE HERRAMIENTAS:**
 
   ### **3.CANVAS:**
-      #### Segmento de Mercado:
+  #### Segmento de Mercado:
 
-      Nuestro juego tiene un enfoque diversificado para atraer a diferentes públicos: 
+  Nuestro juego tiene un enfoque diversificado para atraer a diferentes públicos: 
 
-      -Niños de 6 a 12 años: Continuamos orientando el juego hacia este grupo de edad con un fuerte componente educativo que fomente el pensamiento computacional y el aprendizaje lúdico. 
+  - Niños de 6 a 12 años: Continuamos orientando el juego hacia este grupo de edad con un fuerte componente educativo que fomente el pensamiento computacional y el aprendizaje lúdico. 
 
-      -Padres y Tutores: Seguimos considerando a los padres y tutores como un segmento importante, ya que son quienes comprarán el juego para sus hijos. Además, pueden disfrutar del juego junto con sus hijos, creando una        experiencia de juego en familia. 
-      
-      -Adultos Nuevos en el Género: Queremos atraer a adultos que sean nuevos en juegos de gestión de recursos y construcción de ciudades. Ofrecemos una curva de aprendizaje suave y una experiencia de juego accesible            para que se familiaricen con el género. 
-      
-      -Jugadores Experimentados en el Género: También nos dirigimos a jugadores que ya son hábiles en juegos de gestión de recursos y construcción de ciudades. Ofrecemos desafíos y mecánicas avanzadas para mantener su           interés y proporcionar una experiencia enriquecida. 
-      
-      -Entusiastas de los Minijuegos: Atraeremos a aquellos que disfrutan de minijuegos emocionantes como las expediciones para obtener recursos. Estos minijuegos ofrecen entretenimiento adicional y recompensas en el            contexto de la gestión de recursos. 
-      
-      -Instituciones Educativas y Gobiernos: Continuaremos explorando oportunidades para colaborar con colegios y gobiernos en aspectos educativos del juego. Esto podría incluir programas educativos o iniciativas de             apoyo a la enseñanza del pensamiento computacional. 
-      
-      Este enfoque diversificado en nuestros segmentos de mercado nos permitirá alcanzar una audiencia amplia y satisfacer las necesidades y expectativas de cada grupo de manera efectiva, garantizando el éxito de nuestro       juego de gestión de recursos con elementos educativos y de entretenimiento.
+  - Padres y Tutores: Seguimos considerando a los padres y tutores como un segmento importante, ya que son quienes comprarán el juego para sus hijos. Además, pueden disfrutar del juego junto con sus hijos, creando una        experiencia de juego en familia. 
+  
+  - Adultos Nuevos en el Género: Queremos atraer a adultos que sean nuevos en juegos de gestión de recursos y construcción de ciudades. Ofrecemos una curva de aprendizaje suave y una experiencia de juego accesible            para que se familiaricen con el género. 
+  
+  - Jugadores Experimentados en el Género: También nos dirigimos a jugadores que ya son hábiles en juegos de gestión de recursos y construcción de ciudades. Ofrecemos desafíos y mecánicas avanzadas para mantener su           interés y proporcionar una experiencia enriquecida. 
+  
+  - Entusiastas de los Minijuegos: Atraeremos a aquellos que disfrutan de minijuegos emocionantes como las expediciones para obtener recursos. Estos minijuegos ofrecen entretenimiento adicional y recompensas en el            contexto de la gestión de recursos. 
+  
+  - Instituciones Educativas y Gobiernos: Continuaremos explorando oportunidades para colaborar con colegios y gobiernos en aspectos educativos del juego. Esto podría incluir programas educativos o iniciativas de             apoyo a la enseñanza del pensamiento computacional. 
+  
+  Este enfoque diversificado en nuestros segmentos de mercado nos permitirá alcanzar una audiencia amplia y satisfacer las necesidades y expectativas de cada grupo de manera efectiva, garantizando el éxito de nuestro       juego de gestión de recursos con elementos educativos y de entretenimiento.
