@@ -8,7 +8,7 @@ namespace GGG.Components.Buildings {
         public GameObject selectorPrefab;
         public GameObject highlightPrefab;
         private Dictionary<Vector3Int, HexTile> _tilesDic;
-
+        private HexTile _selectedTile;
 
         private void Awake() {
             instance = this;
@@ -59,5 +59,8 @@ namespace GGG.Components.Buildings {
             }
             return neighbours;
         }
+        
+        public void SelectTile(HexTile tile) { _selectedTile = tile; }
+        public HexTile GetSelectedTile() { return _selectedTile; }
     }
 }

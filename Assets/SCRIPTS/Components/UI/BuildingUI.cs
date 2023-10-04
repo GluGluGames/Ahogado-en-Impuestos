@@ -2,12 +2,15 @@ using UnityEngine;
 using DG.Tweening;
 using GGG.Components.Buildings;
 using UnityEngine.UI;
+using System;
 
 namespace GGG.Components.UI {
     public class BuildingUI : MonoBehaviour {
         [SerializeField] private Button CloseButton;
 
         private bool _open;
+
+        public Action OnMenuClose;
     
         private void Start() {
             CloseButton.onClick.AddListener(Close);
@@ -17,6 +20,7 @@ namespace GGG.Components.UI {
 
             foreach (HexTile tile in tiles) {
                 tile.OnHexSelect += Open;
+                OnMenuClose += tile.DeselectTile;
             }
 
             _open = false;
@@ -35,6 +39,7 @@ namespace GGG.Components.UI {
             
             transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine);
             _open = false;
+            OnMenuClose?.Invoke();
         }
     }
 }

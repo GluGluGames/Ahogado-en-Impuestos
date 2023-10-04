@@ -21,6 +21,7 @@ namespace GGG.Components.Buildings {
 
         private bool _isDirty = false;
         private bool _isEmpty;
+        private bool _selected = false;
 
         public Action OnHexHighlight;
         public Action OnHexSelect;
@@ -85,24 +86,56 @@ namespace GGG.Components.Buildings {
             }
         }
 
-        #endregion
+        private void SelectTile() {
+            if (_manager.GetSelectedTile()) {
+                _manager.GetSelectedTile()._selected = false;
+                _manager.GetSelectedTile().DeactivateHighlight();
+            }
 
-        #region Event System Methods
-        public void OnPointerEnter(PointerEventData eventData) {
-            tilePrefab.SetActive(false);
-            _highlightPrefab.SetActive(true);
-            OnHexHighlight?.Invoke();
+            _selected = true;
+            _manager.SelectTile(this);
         }
 
-        public void OnPointerExit(PointerEventData eventData) {
+        public void DeselectTile() {
+            if(!_selected) return;
+
+            _manager.SelectTile(null);
+            _selected = false;
+            DeactivateHighlight();
+        }
+
+        private void ActivateHighlight() {
+            tilePrefab.SetActive(false);
+            _highlightPrefab.SetActive(true);
+        }
+        
+        private void DeactivateHighlight() {
             tilePrefab.SetActive(true);
             _highlightPrefab.SetActive(false);
         }
 
-        public void OnPointerDown(PointerEventData eventData) {
-            OnHexSelect?.Invoke();
+        #endregion
 
+        #region Event System Methods
+        public void OnPointerEnter(PointerEventData eventData) {
+            ActivateHighlight();
+            OnHexHighlight?.Invoke();
         }
+
+        public void OnPointerExit(PointerEventData eventData) {
+            if(_selected) return;
+
+            DeactivateHighlight();
+        }
+
+        public void OnPointerDown(PointerEventData eventData) {
+            ActivateHighlight();
+
+
+            SelectTile();
+            OnHexSelect?.Invoke();
+        }
+
         #endregion
         
         /*
