@@ -1,66 +1,168 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
-[ExecuteInEditMode]
-public class HexTile : MonoBehaviour
-{
-    public HexTileGenerationSettings settings;
-    public HexTileGenerationSettings.TileType tileType;
+namespace GGG.Components.Buildings {
+    public class HexTile : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerExitHandler {
+        public HexTileGenerationSettings settings;
+        public HexTileGenerationSettings.TileType tileType;
 
-    public GameObject tilePrefab;
-    public GameObject fow;
-    public Vector2Int offsetCoordinate;
-    public Vector3Int cubeCoordinate;
-    public List<HexTile> neighbours;
-    private bool isDirty = false;
+        public GameObject tilePrefab;
+        public GameObject fow;
+        public Vector2Int offsetCoordinate;
+        public Vector3Int cubeCoordinate;
+        public List<HexTile> neighbours;
 
-    // summary:
-    //  Generate random type of tile
-    public void RollTileType()
-    {
-        tileType = (HexTileGenerationSettings.TileType)Random.Range(0,3);
-    }
+        private TileManager _manager;
+        private GameObject _highlightPrefab;
+        private BuildingComponent _currentBuilding;
 
-    public void AddTile()
-    {
-        tilePrefab = Instantiate(settings.GetTile(tileType));
-        tilePrefab.transform.SetParent(transform, false);
+        private bool _isDirty = false;
+        private bool _isEmpty;
+        private bool _selected = false;
+
+        public Action OnHexHighlight;
+        public Action OnHexSelect;
+
+        #region Unity Events
+
+        private void OnValidate() {
+            if (tilePrefab == null) { return; }
+            _isDirty = true;
+        }
+
+        private void Start() {
+            _manager = TileManager.instance;
+            _isEmpty = _currentBuilding == null;
+        }
+
+        private void Update() {
+            if (_isDirty) {
+
+                if (Application.isPlaying) {
+                    GameObject.Destroy(tilePrefab);
+                } else {
+                    GameObject.DestroyImmediate(tilePrefab);
+                }
+                tilePrefab = null;
+
+                AddTile();
+                _isDirty = false;
+            }
+        }
+
+        #endregion
+
+        #region Getters&Setters
+
+        public bool TileEmpty() { return _isEmpty; }
+        public BuildingComponent GetCurrentBuilding() { return _currentBuilding; }
+        public Vector3 SpawnPosition() { return transform.position + new Vector3(0, 0.5f); }
+        public void SetBuilding(BuildingComponent building) {
+            _currentBuilding = building;
+            _isEmpty = building == null;
+        }
+
+        #endregion
+
+        #region Methods
+
+        // summary:
+        //  Generate random type of tile
+        public void RollTileType() {
+            tileType = (HexTileGenerationSettings.TileType)Random.Range(0, 3);
+        }
+
+        public void AddTile() {
+            tilePrefab = Instantiate(settings.GetTile(tileType), transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
+            _highlightPrefab = Instantiate(_manager.highlightPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
+            _highlightPrefab.SetActive(false);
+
+            if (gameObject.GetComponent<MeshCollider>() == null) {
+                MeshCollider collider = gameObject.AddComponent<MeshCollider>();
+                collider.sharedMesh = GetComponentInChildren<MeshFilter>().sharedMesh;
+            }
+        }
+
+        private void SelectTile() {
+            if (_manager.GetSelectedTile()) {
+                _manager.GetSelectedTile()._selected = false;
+                _manager.GetSelectedTile().DeactivateHighlight();
+            }
+
+            _selected = true;
+            _manager.SelectTile(this);
+        }
+
+        public void DeselectTile() {
+            if(!_selected) return;
+
+            _manager.SelectTile(null);
+            _selected = false;
+            DeactivateHighlight();
+        }
+
+        private void ActivateHighlight() {
+            tilePrefab.SetActive(false);
+            _highlightPrefab.SetActive(true);
+        }
         
-
-        if(gameObject.GetComponent<MeshCollider>() == null )
-        {
-            // !BUG: Collider appears aligned with y axis instead of z (vertical instead of horizontal)
-            //MeshCollider collider = gameObject.AddComponent<MeshCollider>();
-            //collider.sharedMesh = GetComponentInChildren<MeshFilter>().sharedMesh;
+        private void DeactivateHighlight() {
+            tilePrefab.SetActive(true);
+            _highlightPrefab.SetActive(false);
         }
 
-        Debug.Log(tilePrefab.transform.position);
-    }
+        #endregion
 
-    private void OnValidate()
-    {
-        if(tilePrefab == null) { return; }
-        isDirty = true;
-    }
-
-    private void Update()
-    {
-        if(isDirty)
-        {
-
-            if (Application.isPlaying)
-            {
-                GameObject.Destroy(tilePrefab);
-            }
-            else
-            {
-                GameObject.DestroyImmediate(tilePrefab);
-            }
-            tilePrefab = null;
-
-            AddTile();
-            isDirty = false;
+        #region Event System Methods
+        public void OnPointerEnter(PointerEventData eventData) {
+            ActivateHighlight();
+            OnHexHighlight?.Invoke();
         }
+
+        public void OnPointerExit(PointerEventData eventData) {
+            if(_selected) return;
+
+            DeactivateHighlight();
+        }
+
+        public void OnPointerDown(PointerEventData eventData) {
+            ActivateHighlight();
+
+
+            SelectTile();
+            OnHexSelect?.Invoke();
+        }
+
+        #endregion
+        
+        /*
+        public void OnDrawGizmosSelected() {
+            foreach (HexTile neighbour in neighbours) {
+                Gizmos.color = Color.black;
+                Gizmos.DrawSphere(transform.position, 0.2f);
+                Gizmos.color = Color.white;
+                Gizmos.DrawLine(transform.position, neighbour.transform.position);
+            }
+        }
+        */
+
+        /*
+        public void OnHighlightTile()
+        {
+            Debug.Log(TileManager.instance);
+            TileManager.instance.OnHighlightTile(this);
+        }
+
+        public void OnSelectTile()
+        {
+            TileManager.instance.OnSelectTile(this);
+
+        }
+        */
     }
 }
+
+

@@ -1,11 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="TileGen/GenerationSettings")]
+
+[CreateAssetMenu(menuName = "TileGen/GenerationSettings")]
 public class HexTileGenerationSettings : ScriptableObject
 {
     public enum TileType
-    { 
-        Standard, 
+    {
+        Standard,
         Water,
         Cliff
     }
@@ -25,3 +26,6 @@ public class HexTileGenerationSettings : ScriptableObject
         return null;
     }
 }
+
+
+
