@@ -28,11 +28,16 @@ namespace GGG.Components.Core
         #region Functions
         private IEnumerator InitializeGame() {
             yield return null;
-            const int SCENE_IDX = 1;
-            
-            // TODO - Load Main Menu
-            // TEMP:
-            AsyncOperation async = SceneManager.LoadSceneAsync(SCENE_IDX, LoadSceneMode.Additive);
+
+            for(int i = 0; i < SceneManager.sceneCountInBuildSettings; i++) {
+                Scene scene = SceneManager.GetSceneByBuildIndex(i);
+                if (scene == SceneManager.GetSceneByBuildIndex((int) SceneIndexes.SHARED) || !scene.isLoaded) continue;
+
+                AsyncOperation a = SceneManager.UnloadSceneAsync(i);
+                while(!a.isDone) yield return null;
+            }
+
+            AsyncOperation async = SceneManager.LoadSceneAsync((int) SceneIndexes.MAIN_MENU, LoadSceneMode.Additive);
             while (!async.isDone) yield return null;
         }
         private IEnumerator initializeLanguage()

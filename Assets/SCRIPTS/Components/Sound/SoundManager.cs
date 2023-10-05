@@ -45,9 +45,6 @@ namespace GGG
                 return;
             }
 
-            DontDestroyOnLoad(gameObject);
-
-
             foreach (Classes.Sound.Sound s in Sounds)
             {
                 s.Source = gameObject.AddComponent<AudioSource>();
