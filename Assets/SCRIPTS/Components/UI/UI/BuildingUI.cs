@@ -27,8 +27,8 @@ namespace GGG.Components.UI {
             transform.position = new Vector3(0, -400f, 0);
         }
 
-        private void Open(BuildingComponent building) {
-            if (_open || building) return;
+        private void Open() {
+            if (_open) return;
             
             transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
             _open = true;
