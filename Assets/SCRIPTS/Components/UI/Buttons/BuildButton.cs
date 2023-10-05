@@ -11,25 +11,25 @@ namespace GGG.Components.UI {
         [SerializeField] private Building BuildingInfo;
         [SerializeField] private TextMeshProUGUI BuildNameText;
 
-        private Cell _selectedCell;
+        private HexTile _selectedHexTile;
         private BuildingComponent _auxBuild;
 
         private void Start() {
-            Cell[] cells = FindObjectsOfType<Cell>();
+            HexTile[] tiles = FindObjectsOfType<HexTile>();
 
-            foreach (Cell cell in cells)
-                cell.OnCellClick += (building) => {
-                    _selectedCell = cell;
+            foreach (HexTile tile in tiles)
+                tile.OnHexSelect += () => {
+                    _selectedHexTile = tile;
 
-                    if (!_selectedCell.IsEmpty()) _auxBuild = building;
+                    if (!_selectedHexTile.TileEmpty()) _auxBuild = tile.GetCurrentBuilding();
                 };
              
             BuildNameText.SetText(BuildingInfo.GetName());
         }
 
         private void BuildStructure() {
-            GameObject auxGo = BuildingInfo.Spawn(_selectedCell.SpawnPosition());
-            _selectedCell.SetBuilding(auxGo.GetComponent<BuildingComponent>());
+            GameObject auxGo = BuildingInfo.Spawn(_selectedHexTile.SpawnPosition());
+            _selectedHexTile.SetBuilding(auxGo.GetComponent<BuildingComponent>());
             
             print("Structure built");
         }
@@ -45,13 +45,14 @@ namespace GGG.Components.UI {
             transform.DOScale(new Vector3(1, 1, 1), 0.5f);
         }
 
-        #endregion
-
         public void OnPointerDown(PointerEventData eventData) {
-            if (!_selectedCell.IsEmpty()) return;
+            if (!_selectedHexTile.TileEmpty()) return;
             
             BuildStructure();
         }
+
+        #endregion
+
     }
     
 }
