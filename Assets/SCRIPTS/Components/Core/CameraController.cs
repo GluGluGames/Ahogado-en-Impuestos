@@ -1,6 +1,11 @@
 using GGG.Input;
+using GGG.Shared;
 
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace GGG.Components.Core
 {
@@ -25,11 +30,16 @@ namespace GGG.Components.Core
         [Header("Other")]
         [Tooltip("Amount of movement over time")]
         [SerializeField] private float MovementTime;
+        [SerializeField] private Canvas MainCanvas;
 
         private InputManager _input;
         private Transform _transform;
         private Camera _mainCamera;
         private Transform _cameraTransform;
+
+        private GraphicRaycaster _graphicRaycaster;
+        private PointerEventData _pointerEventData = new PointerEventData(EventSystem.current);
+        private List<RaycastResult> _results = new();
 
         private Vector3 _newPosition;
         private Quaternion _newRotation;
@@ -43,6 +53,7 @@ namespace GGG.Components.Core
             _input = InputManager.Instance;
             _transform = transform;
             _mainCamera = Camera.main;
+            _graphicRaycaster = MainCanvas.GetComponent<GraphicRaycaster>();
 
             _cameraTransform = _mainCamera.transform;
             _newPosition = _transform.position;
@@ -51,7 +62,7 @@ namespace GGG.Components.Core
         }
 
         private void Update() {
-            HandleMouseInput();
+            StartCoroutine(HandleMouseInput());
         }
 
         private void LateUpdate() {
@@ -117,9 +128,8 @@ namespace GGG.Components.Core
         /// <summary>
         /// Handles the movement with the mouse
         /// </summary>
-        private void HandleMouseInput() {
+        private IEnumerator HandleMouseInput() {
             if (_input.IsTouching()) {
-
                 Plane plane = new Plane(Vector3.up, Vector3.zero);
                 Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
 
@@ -128,15 +138,25 @@ namespace GGG.Components.Core
                 }
             }
 
-            if (_input.IsHolding()) {
-                Plane plane = new Plane(Vector3.up, Vector3.zero);
-                Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
+            yield return new WaitForSeconds(0.05f);
 
-                if (plane.Raycast(ray, out float distance)) {
-                    _dragCurrentPosition = ray.GetPoint(distance);
-                    _newPosition = _transform.position + (_dragStartPosition - _dragCurrentPosition);
+            if (_input.IsHolding()) {
+                _pointerEventData.position = _input.TouchPosition();
+                _graphicRaycaster.Raycast(_pointerEventData, _results);
+
+                if (_results.Count == 0) {
+                    Plane plane = new Plane(Vector3.up, Vector3.zero);
+                    Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
+
+                    if (plane.Raycast(ray, out float distance)) {
+                        _dragCurrentPosition = ray.GetPoint(distance);
+                        _newPosition = _transform.position + (_dragStartPosition - _dragCurrentPosition);
+                        Holding.IsHolding(true);
+                    }
                 }
-            }
+
+                _results.Clear();
+            } else Holding.IsHolding(false);
         }
     }
 }

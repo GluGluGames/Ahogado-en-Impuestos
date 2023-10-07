@@ -1,5 +1,8 @@
+using GGG.Shared;
+
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -114,6 +117,16 @@ namespace GGG.Components.Buildings {
             _highlightPrefab.SetActive(false);
         }
 
+        private IEnumerator TouchWait()
+        {
+            yield return new WaitForSeconds(0.1f);
+            if (!Holding.IsHolding()) {
+                ActivateHighlight();
+                SelectTile();
+                OnHexSelect?.Invoke();
+            }
+        }
+
         #endregion
 
         #region Event System Methods
@@ -129,11 +142,7 @@ namespace GGG.Components.Buildings {
         }
 
         public void OnPointerDown(PointerEventData eventData) {
-            ActivateHighlight();
-
-
-            SelectTile();
-            OnHexSelect?.Invoke();
+            StartCoroutine(TouchWait());
         }
 
         #endregion

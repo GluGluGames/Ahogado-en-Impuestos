@@ -32,9 +32,9 @@ namespace GGG.Input {
         public Vector2 CameraMovement() { return _input.a_Camera.CameraMovement.ReadValue<Vector2>(); }
         public float CameraRotation() { return _input.a_Camera.CameraRotation.ReadValue<float>(); }
         public float CameraZoom() { return _input.a_Camera.CameraZoom.ReadValue<float>(); }
-        public bool IsTouching() { return _input.a_Camera.PrimaryTouchContact.WasPressedThisFrame(); }
+        public bool IsTouching() { return _input.a_Camera.PrimaryTouchContact.WasPerformedThisFrame(); }
         public Vector2 TouchPosition() { return _input.a_Camera.PrimaryTouch.ReadValue<Vector2>(); }
-        public bool IsHolding() { return _input.a_Camera.PrimaryTouchContact.IsPressed(); }
+        public bool IsHolding() { return _input.a_Camera.PrimaryTouchContact.inProgress; }
         
         public bool MouseClick() { return _input.a_Dialogue.Continue.WasPerformedThisFrame(); }
 
