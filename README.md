@@ -1,139 +1,137 @@
 # Ahogado-en-Impuestos
 
-## 1. MÉCANICAS – Adri/Deivid 
+## 1 - MÉCANICAS 
 
-A lo largo de este apartado se a definir las mecánicas del videojuego.  
-
-### **Mecánica principal**: 
+### **1.1 - Mecánica principal**: 
 
 Construcción de edificios para el aumento de la producción, y minijuegos ocasionales para la obtención de recursos más raros y la apertura de nuevas estructuras/mecánicas.  
-
 El juego se divide en dos grandes apartados. El primero de ellos es el **escenario principal**, y el segundo será un o varios **minijuegos**. Adelante entramos más en detalle en estos apartados. 
 
-### **Escenario principal**
+### **1.2 - Escenario principal**
 
 Este escenario consiste en un mapa dividido en terrenos hexagonales. Estos terrenos serán generados de forma procedural en el editor del juego, pero podrán y serán modificados por los artistas para hacer que este mundo sea artísticamente agradable y produzca cierto atractivo. Algunos ejemplos de una estructura “grid hexagonal” como esta se encuentran en juegos como “Before we Leave” o “Civilization”. En estos juegos las casillas aportan más o menos recursos dependiendo de su posición o recursos naturales. En nuestro caso no haremos esto, sino que lo simplificaremos, los recursos otorgados solo dependen de los edificios cercanos a esta casilla. 
 
 En el juego de Civilization los mapas son procedurales, pero en el nuestro serán creados a mano por el equipo. 
 
-  
-
 Estas casillas al principio se encuentran asilvestradas, pero pagando una suma de recursos pasas a poder construir el edificio que se desee.  
 
 Cuando comiences el juego las casillas lejanas van a estar cubiertas por una “niebla de guerra”, donde no se podrá construir. Se eliminará la niebla y se desbloqueará la posibilidad de construir en estas casillas cuando se construya un edificio cercano a la niebla de guerra. Por ejemplo, los edificios otorgan una o dos casillas de visibilidad a su alrededor. Se encuentra bajo discusión si hacemos que los edificios otorguen más visión dependiendo de su nivel y/o tipo de estructura. 
 
-### **Minijuegos** 
+### **1.3 - Minijuegos** 
 
- 
+#### **1.3.1 - Plataforma hexagonal**
 
-## **1.1 MECÁNICAS: Plataforma hexagonal**
+#### **1.3.2 - Niebla de guerra**
 
- 
+### **1.4 - Recursos** 
 
-## **1.2 MECÁNICAS: Niebla de guerra**
+### **1.5 - Edificios** 
 
-  
-
-## **1. 3. MECÁNICAS: recursos** 
-
-  
-
-## **1.4. MECÁNICAS: edificios** 
-
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
-
-## **2. CONTROLES – Deivid**
+## **2 - CONTROLES**
 
 Los controles del juego están basados en los clásicos controles de los juegos de estrategia. Principalmente, son usados para mover y controlar la cámara, permitiendo así al jugador una mayor inmersión dentro del juego. 
 
 Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla táctil (Dispositivos móviles), o si se usa el teclado y ratón. 
 
-### Teclado y ratón: 
+### **2.1 - Teclado y ratón**: 
 
-Movimiento de la cámara: 
+#### **2.1.1 - Movimiento de la cámara**: 
 
-  - W, flecha arriba: Movimiento vertical hacia arriba. 
-  - S, flecha abajo: Movimiento vertical hacia abajo. 
-  - A, flecha izquierda: Movimiento horizontal hacia la izquierda. 
-  - D, flecha derecha: Movimiento horizontal hacia la derecha. 
-  - Click izquierdo: Al hacer click y arrastrar el ratón por la pantalla, la cámara se moverá al sentido contrario del arrastrado. 
+  - **W, flecha arriba**: Movimiento vertical hacia arriba. 
+  - **S, flecha abajo**: Movimiento vertical hacia abajo. 
+  - **A, flecha izquierda**: Movimiento horizontal hacia la izquierda. 
+  - **D, flecha derecha**: Movimiento horizontal hacia la derecha. 
+  - **Click izquierdo**: Al hacer click y arrastrar el ratón por la pantalla, la cámara se moverá al sentido contrario del arrastrado.
 
-Rotación de la cámara: 
+#### **2.1.2 - Rotación de la cámara: 
 
-  - E: Rotación en sentido horario. 
-  - Q: Rotación en sentido antihorario. 
+  - **E**: Rotación en sentido horario. 
+  - **Q**: Rotación en sentido antihorario. 
 
-Zoom: 
+#### **2.1.3 - Zoom**: 
 
-  - Rueda del ratón. Dependiendo de la dirección, la cámara se acercará o se alejará. 
+  - **Rueda del ratón**: Dependiendo de la dirección, la cámara se acercará o se alejará. 
 
-Pantalla táctil: 
+### 2.2 - Pantalla táctil: 
 
-  - Movimiento de la cámara: El jugador mantendrá su dedo en la pantalla y arrastrará. La cámara se moverá al sentido contrario del arrastre. 
-  - Rotación de la cámara: El jugador mantendrá dos dedos y arrastrará de manera horizontal. La cámara se moverá en el sentido de arrastre. 
-  - Zoom: El jugador mantendrá dos dedos en la pantalla y juntará o separará estos. El zoom se incrementará o disminuirá en función de si se acercan o alejan, respectivamente. 
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+  - **Movimiento de la cámara**: El jugador mantendrá su dedo en la pantalla y arrastrará. La cámara se moverá al sentido contrario del arrastre. 
+  - **Rotación de la cámara**: El jugador mantendrá dos dedos y arrastrará de manera horizontal. La cámara se moverá en el sentido de arrastre. 
+  - **Zoom**: El jugador mantendrá dos dedos en la pantalla y juntará o separará estos. El zoom se incrementará o disminuirá en función de si se acercan o alejan, respectivamente. 
 
-## **3. ARTE 2D** 
+## **3 - ARTE 2D** 
 
-## **3.1. ARTE 2D: Moodboard – Laura** 
+### **3.1 - Moodboard – Laura** 
 
-## **3.2. ARTE 2D: Concepts – Marco/Laura**
-  - Laboratorio :
+### **3.2 - Concepts – Marco/Laura**
+
+#### **3.2.1 - Laboratorio**
     
-    ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/e18ae0cf-61f9-48d1-9ecb-844aa4c26f6d)
+![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/e18ae0cf-61f9-48d1-9ecb-844aa4c26f6d)
 
-  - Alamacén de peces (nivel 1):
+#### **3.2.2 - Alamacén de peces (nivel 1)**
 
-    ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/6c6302cd-5aab-4e76-9176-b5fcd0399685)
+![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/6c6302cd-5aab-4e76-9176-b5fcd0399685)
 
-  - Alamacén de peces (nivel 2):
+#### **3.2.3 - Alamacén de peces (nivel 2)**
 
-    ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/5c8e9690-8699-4400-8fd2-bb0d4be62d4a)
+![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/5c8e9690-8699-4400-8fd2-bb0d4be62d4a)
 
-  - Poseidón :
+#### **3.2.4 - Poseidón**
 
-    ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)
+![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)
 
+## **4 - DISEÑO 3D – Adri C.**
 
+## **5 - GAME DESIGN  – Adri/Luming** 
 
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+### **5.1 - Diseño de nivel**
 
-## **4. DISEÑO 3D – Adri C.**
+## **6 - DIAGRAMA DE FLUJO**
 
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
-## **5. GAME DESIGN** 
+![Glu_Glu_clases](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/6aed32c4-675d-47bf-9173-935b61adb73f)
 
-## **5.1. GAME DESIGN: Diseño de nivel – Adri/Luming**
+- **MENÚ PRINCIPAL**: el menú principal servirá de pantalla de presentación del juego. Desde aquí se podrá acceder a los ajustes, a los créditos y a la pantalla de juego.
+  
+- **CRÉDITOS**: en esta pantalla se podrá ver todas las personas involucradas en el juego y sus roles.
+  
+- **AJUSTES**: se podrán cambiar cosas del juego como el sonido. Desde aquí se puede volver a la pantalla desde donde has accedido, y ver los créditos.
+  
+- **PANTALLA DE JUEGO**: pantalla principal del juego, donde se gestionará la ciudad y los recursos. Puedes acceder tanto a los ajustes como a la expedición.
+  
+- **EXPEDICIÓN**: minijuego para recolectar recursos. También puedes acceder a los ajustes, y a la pantalla de derrota si fallas el minijuego.
+  
+- **DERROTA**: si fallas en la expedición accedes a la pantalla de derrota. Desde aquí puedes volver a la pantalla de juego. 
 
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+## **7 - INTERFACES – Laura** 
 
-## **6. DIAGRAMA DE FLUJO – Laura**
+### **7.1 - MENÚ PRINCIPAL**
 
-1. MENÚ PRINCIPAL: 	el menú principal servirá de pantalla de presentación del juego. Desde aquí se podrá acceder a los ajustes, a los créditos y a la pantalla de juego. 
-2. CRÉDITOS: en esta pantalla se podrá ver todas las personas involucradas en el juego y sus roles. 
-3. AJUSTE: se podrán cambiar cosas del juego como el sonido. Desde aquí se puede volver a la pantalla desde donde has accedido, y ver los créditos. 
-4. PANTALLA DE JUEGO:	pantalla principal del juego, donde se gestionará la ciudad y los recursos. Puedes acceder tanto a los ajustes como a la expedición. 
-5. EXPEDICIÓN: minijuego para recolectar recursos. También puedes acceder a los ajustes, y a la pantalla de derrota si fallas el minijuego. 
-6. DERROTA: si fallas en la expedición accedes a la pantalla de derrota. Desde aquí puedes volver a la pantalla de juego. 
+![Interfaz - Menú principal](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/8b0d2886-a2f7-400f-8fec-e18cc7c84f21)
 
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+### **7.2 - CRÉDITOS**
 
-## **7. INTERFACES – Laura** 
-1. MENÚ PRINCIPAL: 
-2. CRÉDITOS: 
-3. AJUSTES:
-4. PANTALLA DE JUEGO:
-  - DIALOGOS:
-  - TIENDA DE EDIFICIOS:
-  - MUSEO:
-  - MEJORAS DE BUCEO:
-  - TIENDA DE RECURSOS:
-5. EXPEDICIÓN:
-6. DERROTA:
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+### **7.3 - AJUSTES**
 
-## **8. NARRATIVA – Adri C.** 
+![Interfaz - Ajustes (cerrado)](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/26dc9f6c-f873-4580-b351-dd8baa0c7c3a)
+
+![Interfaz - Ajustes](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/dcf4bed8-23a3-47d7-a736-a85da7ad6bc2)
+
+### **7.4 - PANTALLA DE JUEGO**
+#### **7.4.1 - DIALOGOS**
+
+![Interfaz - Diálogos](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/a3bd4aaf-fd3f-4d66-aaf3-511728958735)
+
+#### **7.4.2 - TIENDA DE EDIFICIOS**
+
+![Interfaz - Tienda de edificios](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/79f5c2b7-cd87-419c-a716-8e22c429ddc5)
+
+#### **7.4.3 - MUSEO**
+#### **7.4.4 - MEJORAS DE BUCEO**
+#### **7.4.5 - TIENDA DE RECURSOS**
+#### **7.4.6 - EXPEDICIÓN**
+#### **7.4.7 - DERROTA**
+
+## **8 - NARRATIVA** 
 
 Hace siglos, fui un habitante de la legendaria ciudad perdida de Atlantis, un lugar misterioso y enigmático que se ocultaba en las profundidades del océano. Sin embargo, mi existencia en ese antiguo reino se mantuvo en un sueño profundo, sepultado bajo las corrientes marinas, hasta que un día, el mismísimo Poseidón, el dios del mar, me despertó de mi largo letargo.
 
@@ -148,40 +146,168 @@ Mi jornada comenzó con la exploración de los vastos jardines de algas que rode
 A medida que pasarían los años, Atlantis resurgiría de su letargo, con nuevas estructuras y tecnologías olvidadas que una vez más se pondrían en funcionamiento.
 
 Nuestra misión era clara: cuidar de las aguas que tanto amaba Poseidón y, al hacerlo, mantener viva la leyenda de la ciudad perdida de Atlantis.
-## **8.1. NARRATIVA: Personajes – Adri C.**
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-## **9. MÚSICA Y SONIDO – Deivid** 
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+### **8.1 - Personajes – Adri C.**
 
-## **10. PENSAMIENTO COMPUTACIONAL – Todos**  
+## **9 - MÚSICA Y SONIDO – David** 
 
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+## **10 - PENSAMIENTO COMPUTACIONAL – Todos**  
 
-## **11. MODELO DE NEGOCIO** 
-
-  **Colectivos**: grandes centros de trabajo que comparten infraestructuras. 
-
-  **B2P (Buy to Play)**: el juego debe ser adquirido para poder jugarse. Suele combinarse con otros tipos de monetización.
-  ###**1.MAPA DE EMPATÍA DEL USUARIO:**
+## **11 - MODELO DE NEGOCIO** 
+- **B2P (Buy to Play)**: El usuario deberá pagar cierta cantidad de dinero para poder utilizar el producto.
   
-  ### **2.CAJA DE HERRAMIENTAS:**
+### **11.1 - MAPA DE EMPATÍA DEL USUARIO:**
 
-  ### **3.CANVAS:**
-  #### Segmento de Mercado:
+#### **11.1.1 - ENFOCADO EN NIÑOS**
 
-Nuestro juego tiene un enfoque diversificado para atraer a diferentes públicos: 
+  ![Mapa de empatía - niños](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/2c8842c8-9df5-4b82-b25c-fd792a60b1dc)
 
-  - Niños de 6 a 12 años: Continuamos orientando el juego hacia este grupo de edad con un fuerte componente educativo que fomente el pensamiento computacional y el aprendizaje lúdico. 
+#### **11.1.2 - ENFOCADO A GENTE ENTRE 20 y 40 AÑOS**
 
-  - Padres y Tutores: Seguimos considerando a los padres y tutores como un segmento importante, ya que son quienes comprarán el juego para sus hijos. Además, pueden disfrutar del juego junto con sus hijos, creando una        experiencia de juego en familia. 
+  ![MapaDeEmpatiaAdultos](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/4fa62dcb-7776-4e1e-8f05-a0987c05aa2d)
+
+### **11.2 - CAJA DE HERRAMIENTAS**
   
-  - Adultos Nuevos en el Género: Queremos atraer a adultos que sean nuevos en juegos de gestión de recursos y construcción de ciudades. Ofrecemos una curva de aprendizaje suave y una experiencia de juego accesible            para que se familiaricen con el género. 
+  ![Caja de herramientas](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/afddf48e-8e3c-4307-b3d7-fa677d3fe607)
+
+La caja de herramientas determina las relaciones que existen entre unos determinados bloques (en este caso, las filas y las columnas) entre unos y otros. Siguiendo la tabla, siendo los bloques que hay en cada una de las filas los que dan a los bloques de cada una de las columnas, las relaciones son las siguientes:
+
+#### **11.2.1 - PROPIA EMPRESA**
+- **Otras empresas**: Mayoritariamente los anunciantes, mediante los anuncios que introduzcan en los juegos, se les daría tanto expocisión como visibilidad de sus productos.
+- **Proovedores**: Principalmente la plataforma Steam, que es donde se publicarían los juegos que sean creados. Al tener unas ciertas tasas de entrada, así como unos impuestos para los productos que están publicados en su plataforma, se les daría principalmente dinero y los algunos de los derechos del producto.
+- **Consumidor final**: Siendo estos aquellas personas que jueguen al juego. A estos se les proporcionaría el producto final, es decir, el juego acabado, así como información sobre este, para que estén al tanto de lo que están adquiriendo.
+- **Gobierno**: La empresa, en busca de ayudas, proporciona al gobierno el juego, además como su servicio a la hora de llevarlo a centros educativos.
+- **Organizaciones sin ánimo de lucro**: Principalmente a los colegios, se les proporcionaría el producto para que lo utilicen, así como el servicio de atención personal por si ocurre algún tipo de incidencia.
+#### **11.2.2 - OTRAS EMPRESAS**
+- **Propia empresa**: Los anunciantes proporcionarían una cantidad reducida de dinero que pagarían para que se introdujera su producto como publicidad al juego.
+#### **11.2.3 - PROVEEDORES**
+- **Propia empresa**: Proveen el servicio de publicar el juego en su plataforma, en este caso sería Steam publicando el juego para que el público pueda comprarlo.
+- **Consumidor final**: Proporcionan una manera sencilla de hacerles llegar el producto final.
+#### **11.2.4 - CONSUMIDOR FINAL**
+- **Propia empresa**: Pagan el precio del producto, proporcionando a la empresa una fuente de ingresos. Por otro lado, si el producto se vuelve popular, estos proporcionan visibilidad gracias a las críticas o publicaciones que puedan hacer sobre el juego, así como el intercambio boca a boca. Por último, gracias a las métricas que se incluyen en el juego, el consumidor proporciona información.
+- **Otras empresas**: Los anunciantes recibirían dinero de los consumidores si es que a estos les llega a interesar su producto y deciden comprarlo o consumirlo.
+- **Proveedores**: Una parte del dinero que se ha usado para comprar el juego se la quedará el proveedor.
+#### **11.2.5 - GOBIERNO**
+- **Propia empresa**: Proporciona ayudas financieras para el desarrollo del producto, así como exposición en sus diferentes páginas dedicadas al videojuego.
+- **Consumidor final**: Los consumidores, principalmente los niños, están amparados por el gobierno, que les proporciona unos derechos y la posibilidad de ganar experiencia gracias al videojuego de la empresa.
+- **Organización sin ánimo de lucro**: El gobierno ayudará a los centros educativos dándoles dinero y contribuyendo a que estas sean visibles.
+#### **11.2.6 - ORGANIZACIÓN SIN ÁNIMO DE LUCRO**
+- **Propia empresa**: Los centros educativos que decidan utilizar el producto deberán pagar cierto precio para ello.
+- **Consumidor final**: Al distribuir el producto entre los alumnos, este les permite ganar experienca en la inteligencia computacional.
+- **Gobierno**: Proporcionan métricas al gobierno.
+
+### **11.3 - CANVAS:**
+
+  ![Canvas](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/f3f7f811-f339-4568-8246-7fa616475d7e)
+
+#### **11.3.1 - Segmento de Mercado**
+
+El juego adopta un enfoque versátil diseñado para atraer a dos segmentos de clientes:
+
+- **Niños de 6 a 12 años**: el enfoque principal se dirige hacia este grupo de edad, incorporando un componente educativo sólido que fomenta el desarrollo del pensamiento computacional y la adquisición de conocimientos de manera lúdica. Este segmento puede acceder a nuestro juego a través de dos canales:
+  - **Padres y tutores**: son los responsables de adquirir el juego para sus hijos en un ámbito privado. Además, se les brinda la oportunidad de compartir la experiencia de juego con  sus hijos, generando así una experiencia de juego enriquecida en el ámbito familiar.
+  - **Instituciones educativas y gobiernos**: se buscarán oportunidades de colaboración con escuelas y entidades gubernamentales en lo que respecta a los aspectos educativos del juego.  Esto podría incluir la implementación de programas educativos o iniciativas de apoyo a la enseñanza del pensamiento computacional.
+- **Adultos de 20 a 40 años, que incluyen**:
+	- **Adultos que se adentran en el género**: se busca atraer a adultos que se están introduciendo en el mundo de los juegos de gestión de recursos y construcción de ciudades. Se les  ofrece una curva de aprendizaje gradual y casual, con una experiencia de juego accesible para que puedan familiarizarse con este género de manera efectiva.
+	- **Jugadores experimentados en el género**: el juego también se orienta a aquellos jugadores que ya dominan los juegos de gestión de recursos y construcción de ciudades. Se les plantean desafíos y mecánicas avanzadas para mantener su interés y proporcionar una experiencia profundamente enriquecedora.
+   
+Este enfoque diversificado en nuestros segmentos de mercado nos capacita para llegar a un público amplio y cumplir de manera efectiva con las necesidades y expectativas de cada grupo. Esto, a su vez, asegura el éxito de nuestro juego de gestión de recursos con elementos educativos y de entretenimiento.
+
+#### **11.3.2 - Relación con el cliente**
+
+La empresa se destaca por su compromiso de establecer una relación cercana y completamente transparente con sus clientes, donde se otorga un valor inmenso a sus opiniones y observaciones. El objetivo principal es brindar una experiencia de usuario excepcional. A continuación, se detallan los pilares fundamentales de la interacción con los clientes:
+
+- **Transparencia y Escucha Activa**: la comunicación abierta y transparente es abrazada con fervor hacia los clientes. Se presta atención minuciosa a todas las voces y retroalimentaciones compartidas a través de plataformas de redes sociales como Twitter e Instagram. Cada comentario y sugerencia se considera de un valor incalculable, ya que contribuye en gran medida a la mejora continua de los productos.
+
+- **Comunicación Directa**: la empresa se encuentra disponible en diversas plataformas para facilitar que los clientes se conecten directamente. Ya sea a través de correo electrónico, redes sociales o foros de discusión, se hace un esfuerzo constante por mantenerse accesibles y receptivos a las preguntas, inquietudes y sugerencias de la distinguida clientela.
+
+La empresa se enorgullece de mantener una relación dinámica y en constante evolución con su apreciada clientela. El objetivo es crear un ambiente en el cual los comentarios y las conexiones desempeñen un papel fundamental en el desarrollo de futuros juegos y en la mejora de las experiencias de juego. La comunicación abierta y la flexibilidad son los pilares fundamentales de la relación con los valiosos clientes.
   
-  - Jugadores Experimentados en el Género: También nos dirigimos a jugadores que ya son hábiles en juegos de gestión de recursos y construcción de ciudades. Ofrecemos desafíos y mecánicas avanzadas para mantener su           interés y proporcionar una experiencia enriquecida. 
+#### **11.3.3 - Canales de distribución**
+
+La estrategia de canales de la empresa está meticulosamente diseñada para maximizar su presencia y accesibilidad en el mercado de videojuegos, al mismo tiempo que establece colaboraciones significativas en el ámbito educativo.
+
+- **Plataformas de Venta de Videojuegos**:  se hará uso de plataformas de renombre, como Steam, Epic Games Store, Google Play Store, Apple App Store, itch.io, Humble Bundle y otras relevantes, para la distribución y comercialización de los juegos.
+- **Instituciones educativas**: para forjar relaciones sólidas con instituciones educativas, se implementarán las siguientes estrategias:
+  - Identificación y contacto directo con escuelas interesadas en incorporar nuestros juegos en programas educativos.
+  - Participación activa en conferencias y eventos educativos con el fin de establecer relaciones con educadores.
+  - La creación de material promocional específico para el sector educativo en nuestro sitio web.
+
+- **Canales de comunicación y promoción**:
+  - **Sitio Web Oficial**: el sitio web oficial servirá como el epicentro de información detallada acerca de los juegos, noticias, actualizaciones y soporte técnico.
+	- **Redes sociales**: mantendremos una presencia activa en diversas redes sociales, incluyendo Facebook, Twitter e Instagram, con el propósito de informar y promocionar nuestros productos, así como interactuar de manera cercana con nuestra comunidad de jugadores.
+	- **Comunidad en Discord**: se establecerá y gestionará una comunidad en Discord donde los jugadores podrán interactuar, debatir sobre nuestros juegos y ofrecer sus valiosos comentarios.
+
+La estrategia de canales se enfoca en alcanzar de manera eficiente a clientes y colaboradores clave, promoviendo nuestros juegos de forma efectiva y sentando las bases sólidas para el éxito continuo de la empresa de videojuegos.
+
+#### **11.3.4 - Propuestas de valor**
+
+La empresa se dedica a ofrecer productos destinados a fomentar el aprendizaje y el entretenimiento, dirigidos principalmente a estudiantes de 6 a 12 años, sin olvidar la satisfacción de adolescentes y adultos. La propuesta de valor se sustenta en los siguientes pilares esenciales:
+
+- **Diversión educativa para todas las edades**: la oferta de videojuegos combina a la perfección el entretenimiento y la educación, diseñados para abarcar a estudiantes jóvenes, adolescentes y adultos. La accesibilidad de estos juegos para toda la familia asegura que puedan ser disfrutados por personas de diversas edades sin sacrificar la diversión.
+
+- **Narrativa Inmersiva**: cada título envuelve a los jugadores en una narrativa cautivadora. Los jugadores se ven inmersos en una trama intrigante que les permite comprender el contexto y las situaciones dentro del juego, incrementando así la inmersión y el compromiso.
+
+- **Pasión por la experiencia del jugador**: la empresa se impulsa por la pasión de crear experiencias excepcionales para los jugadores. La meta es ofrecer juegos que emocionen y motiven a los usuarios, proporcionando momentos memorables en cada partida, así como ayudándoles a desarrollar su inteligencia computacional.
+
+La propuesta de valor consiste en crear experiencias de juego inolvidables que equilibren el entretenimiento, el aprendizaje y la diversión para jugadores de todas las edades. Esto se respalda con valores empresariales enfocados en la pasión, la honestidad, el respeto y la colaboración. El compromiso constante con la innovación impulsa a la empresa a evolucionar y superar constantemente las expectativas de sus clientes.
+
+#### **11.3.5 - Actividades clave**
+
+La empresa de videojuegos se dedica a actividades fundamentales que aseguran la calidad de sus productos y la satisfacción de su clientela, manteniendo un equilibrio preciso entre la excelencia del juego y una promoción adecuada.
+
+- **Desarrollo de productos de entretenimiento de calidad**: la creación de videojuegos se posiciona como el núcleo de nuestras operaciones. Se invierten recursos sustanciales en la concepción, diseño y desarrollo de juegos que proporcionan experiencias inmersivas y educativas de primera categoría, que permitan el desarrollo de la inteligencia computacional en aquellos que los consuman.
+
+- **Campañas de marketing estratégicas**: a pesar de mantener nuestras actividades de marketing en un nivel óptimo, se ejecutan campañas estratégicas con el fin de promocionar nuestros juegos de manera eficaz. Se busca un equilibrio para garantizar que la calidad del juego siempre ocupe el lugar central.
+
+Las actividades esenciales se orientan hacia la excelencia en el desarrollo de juegos, la interacción constante con los clientes y una estrategia de marketing equilibrada que respalda nuestra misión de proporcionar entretenimiento de alta calidad y experiencias educativas de gran valor.
   
-  - Entusiastas de los Minijuegos: Atraeremos a aquellos que disfrutan de minijuegos emocionantes como las expediciones para obtener recursos. Estos minijuegos ofrecen entretenimiento adicional y recompensas en el            contexto de la gestión de recursos. 
+#### **11.3.6 - Recursos clave**
   
-  - Instituciones Educativas y Gobiernos: Continuaremos explorando oportunidades para colaborar con colegios y gobiernos en aspectos educativos del juego. Esto podría incluir programas educativos o iniciativas de             apoyo a la enseñanza del pensamiento computacional. 
-  
-  Este enfoque diversificado en nuestros segmentos de mercado nos permitirá alcanzar una audiencia amplia y satisfacer las necesidades y expectativas de cada grupo de manera efectiva, garantizando el éxito de nuestro       juego de gestión de recursos con elementos educativos y de entretenimiento.
+La empresa se respalda en una serie de recursos esenciales que resultan fundamentales tanto en el desarrollo como en la gestión de productos de entretenimiento de primera calidad:
+
+- **Equipo de desarrollo especializado**: El equipo de desarrollo se revela como un activo crítico, integrado por profesionales altamente cualificados en diversas disciplinas, entre las que se incluyen el diseño de juegos, la creación artística en 2D y 3D, la gestión de proyectos y la programación entre otras. La sinergia que se crea entre estos individuos es fundamental para la concepción y creación de experiencias de juego.
+
+- **Herramientas de desarrollo**: Se cuenta con una amplia gama de herramientas de desarrollo, que incluyen aplicaciones especializadas como Unity, Visual Studio, 3ds Max y Blender, que desempeñan un papel fundamental en la creación y optimización de nuestros productos. Estas herramientas se revelan como recursos indispensables en todo el proceso de producción.
+
+- **Recursos financieros**: los recursos financieros ostentan un carácter crucial para financiar el desarrollo de los juegos, ya sea para cubrir los costos operativos, como para llevar a cabo campañas de marketing estratégicas. Esta categoría engloba tanto las inversiones iniciales como una gestión precisa de los ingresos generados por las ventas y otras fuentes financieras.
+
+La confluencia de estos recursos clave nos habilita para reunir el talento, las herramientas y los fondos necesarios para llevar a cabo la producción y promoción de los juegos, que no solo cumplan con las expectativas de nuestra clientela, sino que también se adapten a las cambiantes demandas de nuestro mercado.
+
+#### **11.3.7 - Socios claves**
+
+La estrategia de asociaciones se enfoca en la colaboración estratégica, que permite expandir la presencia y optimizar la eficacia en el desarrollo y promoción de los productos.
+
+- **Asociaciones con Publishers y Distribuidoras**: establecer alianzas sólidas con publishers y distribuidoras reviste una importancia fundamental para aumentar la visibilidad y la distribución de los juegos. Se colaborará activamente con estos socios para alcanzar una audiencia más amplia y aprovechar su pericia en las áreas de comercialización y distribución.
+
+- **Colaboración con Organizaciones Educativas (Públicas y Privadas)**: se buscará establecer relaciones estratégicas con organizaciones educativas, tanto de carácter público como privado, con el fin de cooperar en la incorporación de los juegos en entornos educativos. Esto abarca la firma de acuerdos para integrar los productos en programas escolares y promover soluciones educativas innovadoras.
+
+Estas asociaciones estratégicas desempeñarán un papel fundamental en la expansión del alcance en el mercado, la mejora de la eficiencia en el desarrollo y la promoción, y la entrega de soluciones más efectivas tanto en el ámbito de la distribución como en el educativo.
+
+#### **11.3.8 - Estructuras de coste**
+
+La estructura de costos refleja los gastos críticos asociados con la operación de la empresa de videojuegos, que abarca el desarrollo, la promoción y la distribución de los productos:
+
+- **Costo de empleados**: los sueldos y salarios del equipo de desarrollo, que incluye game designers, artistas 2D y 3D, programadores, gestores de proyectos y otros profesionales especializados, constituyen una parte significativa de los costos. La garantía de un equipo talentoso y comprometido se erige como un elemento esencial en la creación de juegos de alta calidad.
+
+- **Costo de hardware**: se efectúan inversiones en hardware de alto rendimiento y estaciones de trabajo para los equipos de desarrollo. Esto comprende la adquisición de computadoras, servidores y equipos de prueba necesarios para el diseño y prueba de los juegos.
+
+- **Costo de marketing**: la promoción de los juegos a través de campañas de marketing estratégicas implica gastos relacionados, que abarcan la publicidad en línea, relaciones públicas, materiales promocionales y la participación en eventos de la industria. Aunque se mantiene un enfoque equilibrado en esta área, se reconoce como un componente esencial para lograr la visibilidad de los productos.
+
+- **Costo de publishers**: la colaboración con publishers y distribuidoras conlleva costos asociados a acuerdos de distribución y marketing compartido. Estos costos forman parte de nuestra estrategia para alcanzar una audiencia más amplia y aumentar las ventas de los juegos.
+
+La administración eficiente de nuestra estructura de costos garantiza una asignación adecuada de recursos a las actividades clave, manteniendo un equilibrio entre la inversión en desarrollo y la promoción de los juegos.
+
+#### **11.3.9 - Fuentes de ingresos**
+
+  La estrategia de ingresos está meticulosamente diseñada para diversificarse y capitalizar una variedad de oportunidades con el objetivo de generar beneficios, teniendo en cuenta la amplia audiencia objetivo y el enfoque tanto en el aprendizaje como en el entretenimiento.
+
+- **Editorial educativa para alumnos**: se implementará una opción de compra colectiva de licencias educativas de los juegos dirigida a instituciones educativas, lo que permitirá a los alumnos acceder a contenido educativo de alta calidad a un precio reducido por unidad. Esta iniciativa estimulará la adopción de nuestros juegos en entornos escolares y colegios.
+
+- **Subvenciones Educativas**: se llevará a cabo una búsqueda activa de subvenciones y colaboraciones con gobiernos y organizaciones educativas para mejorar y ampliar la experiencia educativa ofrecida por nuestros juegos. Esto posibilitará que los estudiantes y educadores accedan a nuestros productos de forma gratuita o a precios reducidos.
+
+- **Anuncios**: se implantarán anuncios no intrusivos en la página web de la empresa con el fin de financiar su mantenimiento y el futuro desarrollo de más videojuegos.
+
+- **Paga lo que puedas**: se introducirá una opción de "Paga lo que Puedas" que otorgará a los jugadores la libertad de determinar cuánto desean pagar por los juegos. Esto promoverá la accesibilidad y permitirá a los usuarios contribuir según sus capacidades financieras.
+
+La estrategia de ingresos se fundamenta en la diversificación y la adaptabilidad, lo que nos capacita para generar beneficios mientras mantenemos un firme compromiso con la oferta de aprendizaje y entretenimiento accesible para una amplia audiencia.
