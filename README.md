@@ -135,6 +135,19 @@ ________________________________________________________________________________
 
 ## **8. NARRATIVA – Adri C.** 
 
+Hace siglos, fui un habitante de la legendaria ciudad perdida de Atlantis, un lugar misterioso y enigmático que se ocultaba en las profundidades del océano. Sin embargo, mi existencia en ese antiguo reino se mantuvo en un sueño profundo, sepultado bajo las corrientes marinas, hasta que un día, el mismísimo Poseidón, el dios del mar, me despertó de mi largo letargo.
+
+Poseidón me recordó el verdadero propósito de Atlantis, una ciudad concebida como una fábrica de algas. El océano, con el paso de los siglos, se había vuelto cada vez más turbio y tóxico, poniendo en peligro su delicado equilibrio. Poseidón, en su sabiduría, comprendió que era esencial purificar sus aguas para proteger su reino acuático y la vida que lo habitaba.
+
+Con una tarea importante encomendada por el dios del mar, mi misión era clara: reunir una cantidad creciente de algas cada semana. La responsabilidad aumentaría con el tiempo a medida que Atlantis se desarrollara y prosperara. Aunque en el pasado habíamos sido numerosos habitantes, ahora me encontraba solo, es por ello que debía ayudarme de la flora y fauna y valerme de valor y emprender aventuras para cumplir mi propósito.
+
+Las anguilas, criaturas resplandecientes que habían evolucionado para producir electricidad, eran nuestros aliados en esta tarea monumental. Sus destellos luminosos iluminaban los oscuros rincones de la ciudad y proporcionaban la energía necesaria para mantener Atlantis en funcionamiento.
+
+Mi jornada comenzó con la exploración de los vastos jardines de algas que rodeaban la ciudad. Cada semana, debía recolectar más y más algas para satisfacer las crecientes demandas de Poseidón. Estas algas eran el pilar de nuestra civilización submarina, proporcionando alimento y, lo más importante, un sistema de purificación de aguas naturales que mantenía vivas las aguas cristalinas que Poseidón amaba.
+
+A medida que pasarían los años, Atlantis resurgiría de su letargo, con nuevas estructuras y tecnologías olvidadas que una vez más se pondrían en funcionamiento.
+
+Nuestra misión era clara: cuidar de las aguas que tanto amaba Poseidón y, al hacerlo, mantener viva la leyenda de la ciudad perdida de Atlantis.
 ## **8.1. NARRATIVA: Personajes – Adri C.**
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
