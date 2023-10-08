@@ -1,11 +1,14 @@
 using GGG.Components.Player;
+using GGG.Shared;
+
 using UnityEngine;
 using System;
 
 namespace GGG.Classes.Buildings
 {
-    [CreateAssetMenu(menuName = "Game/SeaweedFarm", fileName = "SeaweedFarm")]
-    public class SeaweedsFarm : Building {
+    [CreateAssetMenu(menuName = "Game/SeaweedFarm", fileName = "Farm")]
+    public class Farm : Building {
+        [SerializeField] private Resource Resource;
         [SerializeField] private int InitialGeneration;
         [SerializeField] private int InitialCooldown;
 
@@ -18,7 +21,7 @@ namespace GGG.Classes.Buildings
                 return;
             }
             
-            PlayerManager.Instance.AddSeaweeds(InitialGeneration);
+            PlayerManager.Instance.AddResource(Resource.GetResource().ToString(), InitialGeneration);
             _cooldownDelta = InitialCooldown;
         }
     }
