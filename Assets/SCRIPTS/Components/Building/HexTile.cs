@@ -80,8 +80,10 @@ namespace GGG.Components.Buildings {
 
         public void AddTile() {
             tilePrefab = Instantiate(settings.GetTile(tileType), transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
-            _highlightPrefab = Instantiate(_manager.highlightPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
-            _highlightPrefab.SetActive(false);
+            if (_manager) {
+                _highlightPrefab = Instantiate(_manager.highlightPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
+                _highlightPrefab.SetActive(false);
+            }
 
             if (gameObject.GetComponent<MeshCollider>() == null) {
                 MeshCollider collider = gameObject.AddComponent<MeshCollider>();
