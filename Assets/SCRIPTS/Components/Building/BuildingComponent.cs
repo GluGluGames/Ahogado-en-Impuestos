@@ -10,5 +10,7 @@ namespace GGG.Components.Buildings {
             
             Build.Interact();
         }
+
+        public void Interact() { Build.Interact(); }
     }
 }

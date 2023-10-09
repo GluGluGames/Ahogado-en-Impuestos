@@ -62,7 +62,7 @@ namespace GGG.Components.Buildings {
 
         public bool TileEmpty() { return _isEmpty; }
         public BuildingComponent GetCurrentBuilding() { return _currentBuilding; }
-        public Vector3 SpawnPosition() { return transform.position + new Vector3(0, 0.5f); }
+        public Vector3 SpawnPosition() { return transform.position + new Vector3(0, 1f); }
         public void SetBuilding(BuildingComponent building) {
             _currentBuilding = building;
             _isEmpty = building == null;
@@ -122,11 +122,17 @@ namespace GGG.Components.Buildings {
         private IEnumerator TouchWait()
         {
             yield return new WaitForSeconds(0.1f);
-            if (!Holding.IsHolding()) {
-                ActivateHighlight();
-                SelectTile();
-                OnHexSelect?.Invoke();
+            if (Holding.IsHolding()) yield break;
+
+            if (_currentBuilding) {
+                _currentBuilding.Interact();
+                yield break;
             }
+
+            ActivateHighlight();
+            SelectTile();
+            OnHexSelect?.Invoke();
+            
         }
 
         #endregion

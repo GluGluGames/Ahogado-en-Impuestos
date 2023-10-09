@@ -6,7 +6,7 @@ using System;
 
 namespace GGG.Classes.Buildings
 {
-    [CreateAssetMenu(menuName = "Game/SeaweedFarm", fileName = "Farm")]
+    [CreateAssetMenu(menuName = "Game/Buildings/Farm", fileName = "Farm")]
     public class Farm : Building {
         [SerializeField] private Resource Resource;
         [SerializeField] private int InitialGeneration;
