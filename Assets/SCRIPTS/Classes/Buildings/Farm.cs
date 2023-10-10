@@ -8,7 +8,7 @@ namespace GGG.Classes.Buildings
 {
     [CreateAssetMenu(menuName = "Game/Buildings/Farm", fileName = "Farm")]
     public class Farm : Building {
-        [SerializeField] private Resource Resource;
+        [SerializeField] private BasicResource Resource;
         [SerializeField] private int InitialGeneration;
         [SerializeField] private int InitialCooldown;
 
