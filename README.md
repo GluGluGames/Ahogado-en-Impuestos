@@ -190,8 +190,10 @@ Nuestra misión era clara: cuidar de las aguas que tanto amaba Poseidón y, al h
 
 ## **9 - MÚSICA Y SONIDO – David** 
 
-## **10 - PENSAMIENTO COMPUTACIONAL – Todos**  
-
+## **10 - PENSAMIENTO COMPUTACIONAL – Todos**
+La destreza principal que se entrena será la evaluación, debido a que en nuestro juego habrá que gestionar los recursos de manera continua,aparte, es importante la planificación tanto para la construccion de la ciudad como para la expedición, detección de error a través de analizar la velocidad de morir en la expedición, los números de edificios que destruya el jugador. 
+Las mecánicas cruciales de la construcción de la ciudad son los costes de los edificios a la hora de construirlos, planificación de recursos para mejorarlos o construir edificios nuevos, invertir recursos en investigación para desbloquear nuevo contenido. La construcción de ciertos edifcios cercanos generan efectos especiales, y hay que evitar la destrucción masiva de los edificios por parte del jugador y la ira de poseidon.
+De expedición hay que tener en cuenta la buena gestión de recursos que posee, priorizando los objetivos, debido a que no se permite la permanencia dentro de la expedición. Lo siguiente será el evitar morir rápido, se otorgará una herramienta para poder observar cómo se finaliza la expedición.
 ## **11 - MODELO DE NEGOCIO** 
 - **B2P (Buy to Play)**: El usuario deberá pagar cierta cantidad de dinero para poder utilizar el producto.
   
