@@ -9816,7 +9816,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 561836437}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959793106}
+        m_TargetAssemblyTypeName: GGG.Components.Shop.ShopUI, Project.Components.Shop
+        m_MethodName: Exchange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &574617277
 GameObject:
   m_ObjectHideFlags: 0
@@ -13780,7 +13792,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 813389856}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959793106}
+        m_TargetAssemblyTypeName: GGG.Components.Shop.ShopUI, Project.Components.Shop
+        m_MethodName: IncreaseExchange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &813389856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14247,7 +14271,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 832399396}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959793106}
+        m_TargetAssemblyTypeName: GGG.Components.Shop.ShopUI, Project.Components.Shop
+        m_MethodName: Exchange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &836829518
 GameObject:
   m_ObjectHideFlags: 0
@@ -17208,7 +17244,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 990805502}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959793106}
+        m_TargetAssemblyTypeName: GGG.Components.Shop.ShopUI, Project.Components.Shop
+        m_MethodName: DecreaseExchange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &990805502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25631,7 +25679,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1409936404}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959793106}
+        m_TargetAssemblyTypeName: GGG.Components.Shop.ShopUI, Project.Components.Shop
+        m_MethodName: DecreaseExchange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1409936404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27240,7 +27300,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1507392806}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959793106}
+        m_TargetAssemblyTypeName: GGG.Components.Shop.ShopUI, Project.Components.Shop
+        m_MethodName: IncreaseExchange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1507392806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33003,7 +33075,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1770440395}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959793106}
+        m_TargetAssemblyTypeName: GGG.Components.Shop.ShopUI, Project.Components.Shop
+        m_MethodName: DecreaseExchange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1770440395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33772,7 +33856,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1786918842}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959793106}
+        m_TargetAssemblyTypeName: GGG.Components.Shop.ShopUI, Project.Components.Shop
+        m_MethodName: IncreaseExchange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1786918842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37890,18 +37986,6 @@ MonoBehaviour:
   - {fileID: 1880776202}
   - {fileID: 1857390362}
   - {fileID: 73698361}
-  MoreButtons:
-  - {fileID: 1507392805}
-  - {fileID: 813389855}
-  - {fileID: 1786918841}
-  LessButtons:
-  - {fileID: 1770440394}
-  - {fileID: 1409936403}
-  - {fileID: 990805501}
-  ExchangeButtons:
-  - {fileID: 2117116059}
-  - {fileID: 832399398}
-  - {fileID: 561836439}
   CloseButton: {fileID: 1523181379}
 --- !u!222 &1959793108
 CanvasRenderer:
@@ -40977,7 +41061,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2117116057}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959793106}
+        m_TargetAssemblyTypeName: GGG.Components.Shop.ShopUI, Project.Components.Shop
+        m_MethodName: Exchange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2117877918
 GameObject:
   m_ObjectHideFlags: 0

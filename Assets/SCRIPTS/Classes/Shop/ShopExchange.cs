@@ -17,5 +17,8 @@ namespace GGG.Classes.Shop
         public AdvanceResource GetAdvanceResource() { return ReceiveResource; }
         public int GetGivenAmount() { return GivenAmount; }
         public int GetReceiveAmount() { return ReceiveAmount; }
+
+        public void SetGivenAmount(int amount) { GivenAmount = amount; }
+        public void SetReceiveAmount(int amount) { ReceiveAmount = amount; }
     }
 }

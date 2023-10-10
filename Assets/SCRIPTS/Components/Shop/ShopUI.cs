@@ -24,12 +24,10 @@ namespace GGG.Components.Shop
         [SerializeField] private List<TMP_Text> ReceiveAmountText;
         [Space(5)]
         [Header("Buttons Fields")]
-        [SerializeField] private List<Button> MoreButtons;
-        [SerializeField] private List<Button> LessButtons;
-        [SerializeField] private List<Button> ExchangeButtons;
         [SerializeField] private Button CloseButton;
 
         private const float _INITIAL_POSITION = -1600f;
+        private const int _MAGNIFICATION_FACTOR = 2;
 
         private PlayerManager _player;
 
@@ -42,18 +40,13 @@ namespace GGG.Components.Shop
 
             _player = PlayerManager.Instance;
 
-            foreach (Button button in MoreButtons)
-                button.onClick.AddListener(IncreaseExchange);
-            foreach (Button button in LessButtons)
-                button.onClick.AddListener(DecreaseExchange);
-
             CloseButton.onClick.AddListener(CloseShop);
 
             // TODO - See if the game has already started and have generated exchanges
-            InitializeTrades();
+            UpdateTrades();
         }
 
-        private void InitializeTrades()
+        private void UpdateTrades()
         {
             for(int i = 0; i < Exchanges.Count; i++) {
                 GiveItemImage[i].sprite = Exchanges[i].GetBasicResource().GetSprite();
@@ -64,25 +57,31 @@ namespace GGG.Components.Shop
             }
         }
 
-        private void IncreaseExchange()
+        public void IncreaseExchange(int i)
         {
-
+            // TODO - Limit increase
+            Exchanges[i].SetGivenAmount(Exchanges[i].GetGivenAmount() * _MAGNIFICATION_FACTOR);
+            Exchanges[i].SetReceiveAmount(Exchanges[i].GetReceiveAmount() * _MAGNIFICATION_FACTOR);
+            UpdateTrades();
         }
 
-        private void DecreaseExchange()
+        public void DecreaseExchange(int i)
         {
-
+            // TODO - Limit decrease
+            Exchanges[i].SetGivenAmount(Exchanges[i].GetGivenAmount() / _MAGNIFICATION_FACTOR);
+            Exchanges[i].SetReceiveAmount(Exchanges[i].GetReceiveAmount() / _MAGNIFICATION_FACTOR);
+            UpdateTrades();
         }
 
-        private void Exchange(ShopExchange exchange)
+        public void Exchange(int i)
         {
-            if(_player.GetResourceCount(exchange.GetBasicResource().GetResource()) < exchange.GetGivenAmount()) {
+            if(_player.GetResourceCount(Exchanges[i].GetBasicResource().GetResource()) < Exchanges[i].GetGivenAmount()) {
                 // TODO - Denegate exchange
                 return;
             }
 
-            _player.AddResource(exchange.GetBasicResource().GetResource(), -exchange.GetGivenAmount());
-            _player.AddResource(exchange.GetAdvanceResource().GetResource(), exchange.GetReceiveAmount());
+            _player.AddResource(Exchanges[i].GetBasicResource().GetResource(), -Exchanges[i].GetGivenAmount());
+            _player.AddResource(Exchanges[i].GetAdvanceResource().GetResource(), Exchanges[i].GetReceiveAmount());
         }
 
         public void OpenShop()
