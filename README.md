@@ -31,11 +31,23 @@ No obstante, para añadir un emocionante desafío a tu aventura, cuatro recursos
 
 ### **1.5 - Edificios** 
 #### **1.5.1 - Granja de algas**
+La granja de algas generara un número de algas por unidad de tiempo. 
 
-#### **1.5.2 - Tiendas**
-La tienda, un establecimiento de importancia desde los albores del juego, ofrece una fascinante gama de opciones destinadas a impulsar tanto el desarrollo de la ciudad como el éxito de las expediciones. En su interior, los jugadores pueden encontrar una selección de boost, cada uno diseñado para servir a propósitos específicos. Para la ciudad, estos boost se manifiestan en forma de multiplicadores y mejoras de eficiencia, destinados a optimizar el rendimiento de las casillas productivas. Estos elementos elevan el potencial económico de la ciudad, permitiendo un crecimiento más rápido y eficiente. Por otro lado, los boost para las expediciones adoptan la forma de bendiciones divinas, otorgando habilidades especiales que facilitan tareas clave en las exploraciones. Desde el poderoso rayo de Zeus que potencia los ataques hasta el influjo de Afrodita que atrae a los peces, estas bendiciones divinas brindan una ventaja estratégica invaluable. Además, la tienda ofrece la posibilidad de refrescar su inventario de productos, lo que permite a los jugadores adaptarse a las necesidades cambiantes y mantener su estrategia en constante evolución. Así, la tienda se convierte en un recurso esencial y dinámico en la búsqueda del éxito en este emocionante mundo submarino.
+Al subirla de nivel: el número de algas generadas aumentará.
+
+#### **1.5.2 - Tienda de objetos**
+La tienda de objetos servirá al jugador para intercambiar un número de materiales por otros. 
+  - Se actualizará cada cierto tiempo ofreciendo nuevos intercambios.
+  - Cada intercambio se podrá realizar un número límitado de veces.
+
+Al subirla de nivel: se ofrecerá un mayor número de intercambios al día y de recursos más valiosos.
 
 #### **1.5.3 - Generador de electricidad**
+El generador de electricidad requerirá de anguilas eléctricas para construirse. Su principal función es generar cargas que pueden usarse para:
+  - Boostear un edificio seleccionado por el jugador.
+  - Recargar el paratridentes para poder usarlo de nuevo.
+
+ Al subirlo de nivel: en el nivel II habrá dos cargas disponibles y en el nivel III, tres cargas disponibles. El uso de estas cargas es asignado por el jugador.
 
 #### **1.5.4 - Paratridente**
 El impresionante Paratridente, cuya construcción conlleva un coste significativo, posee una característica única y vital: su capacidad para proteger una zona designada durante una única ráfaga de furia. Para mantener su eficacia, este artefacto debe ser cargado con la energía eléctrica de las anguilas eléctricas, lo que añade un elemento de recolección estratégica a la ecuación. Cada Paratridente está equipado con tres cargas, lo que se traduce en tres oportunidades de activación. Cada vez que la furia de Poseidón desciende sobre una casilla protegida por el Paratridente, este responde de manera inmediata, anulando el peligro y consumiendo una de sus preciadas cargas. Sin embargo, tras cada intervención, el Paratridente requiere un período de tiempo para recargar su cúpula defensiva, que puede realizarse hasta en tres ocasiones. En el caso desafortunado de que la furia de Poseidón impacte en un edificio revelado, el resultado es un ataque devastador que deja la casilla afectada en un estado crítico. Esta casilla quedará inoperativa hasta que sea reparada, lo que añade un elemento de urgencia y gestión de recursos a la estrategia del jugador.
@@ -45,6 +57,14 @@ Después de llevar a cabo un impresionante total de diez expediciones, en las cu
 
 #### **1.5.6 - Edificio de investigacion** 
 Un majestuoso edificio de investigación, cuidadosamente desvelado con la adquisición de una enigmática tablilla, y erigido con una preciosa cantidad de corales. Una vez completada su construcción, se convierte en el epicentro del conocimiento y la innovación, permitiendo la realización de exhaustivas investigaciones que abarcan tanto mejoras edilicias como la exploración de los mapas hallados en nuestras expediciones. A lo largo del transcurso del juego, el costo de este edificio se incrementará gradualmente, poniendo a prueba la habilidad estratégica del jugador. Además, el tiempo de espera se convertirá en una variable crucial, si bien la implementación de edificios aceleradores y la aplicación de impulsos dentro de la ciudad pueden desempeñar un papel crucial para optimizar y agilizar estos procesos.
+
+#### **1.5.7 - Museo**
+Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubierto, además se darán recompensas por desbloquear un número de recursos de las tres categorías:
+  - Materiales del mar: como algas y corales.
+  - Materiales de construcción: recogidos en naufragios durante las expecidiones, como madera y hierro.
+  - Peces: como anguilas eléctricas.
+
+Al mejorar: no tiene mejora.
 
 ## **2 - CONTROLES**
 
