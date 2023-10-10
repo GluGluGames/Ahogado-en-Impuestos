@@ -1,5 +1,6 @@
-using System;
 using GGG.Components.Player;
+using GGG.Shared;
+
 using TMPro;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace GGG.Components.UI
         }
 
         private void Update() {
-            SeaweedsText.text = $"Seaweeds: {_player.GetSeaweedsCount()}";
+            SeaweedsText.text = $"Seaweeds: {_player.GetResourceCount(BasicResources.SEAWEED)}";
         }
     }
 }

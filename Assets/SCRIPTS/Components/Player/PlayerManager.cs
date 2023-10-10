@@ -27,9 +27,12 @@ namespace GGG.Components.Player
 
         private void Start()
         {
-            foreach(string i in Enum.GetNames(typeof(BasicResources))) {
+            foreach (string i in Enum.GetNames(typeof(BasicResources)))
                 _resourcesCount.Add(i, 0);
-            }
+            
+
+            foreach (string i in Enum.GetNames(typeof(AdvanceResources)))
+                _resourcesCount.Add(i, 0);
         }
 
         private void OnValidate()
@@ -59,18 +62,26 @@ namespace GGG.Components.Player
             }
         }
 
-        public Resource GetResource(BasicResources resourceType)
+        public Resource GetResource<T>(T resourceType) where T : Enum
         {
             Resource resource = null;
-
             bool found = false;
             int i = 0;
 
-            while (!found && i < BasicResources.Count)
-            {
-                if (BasicResources[i].GetResource() == resourceType)
-                {
+            while (!found && i < BasicResources.Count) {
+                if (BasicResources[i].GetResource().Equals(resourceType)) {
                     resource = BasicResources[i];
+                    found = true;
+                }
+
+                i++;
+            }
+
+            if(found) return resource;
+
+            while (!found && i < AdvanceResources.Count) {
+                if (AdvanceResources[i].GetResource().Equals(resourceType)) {
+                    resource = AdvanceResources[i];
                     found = true;
                 }
 
@@ -83,38 +94,24 @@ namespace GGG.Components.Player
             return resource;
         }
 
-        public Resource GetResource(AdvanceResources resourceType)
+        public int GetResourceCount(BasicResources resourceType)
         {
-            Resource resource = null;
-
-            bool found = false;
-            int i = 0;
-
-            while (!found && i < BasicResources.Count)
-            {
-                if (AdvanceResources[i].GetResource() == resourceType)
-                {
-                    resource = BasicResources[i];
-                    found = true;
-                }
-
-                i++;
-            }
-
-            if (resource == null)
-                throw new Exception("No resource found");
-
-            return resource;
+            return _resourcesCount[resourceType.ToString()];
         }
 
-        public int GetSeaweedsCount() { return _resourcesCount[Shared.BasicResources.SEAWEED.ToString()]; }
+        public int GetResourceCount(AdvanceResources resourceType)
+        {
+            return _resourcesCount[resourceType.ToString()];
+        }
 
-        public void AddResource(string resource, int amount) {
-            if (!_resourcesCount.ContainsKey(resource))
+        public Resource GetResource(AdvanceResources resourcesType) { return _resources[resourcesType.ToString()]; }
+
+        public void AddResource<T>(T resourceType, int amount) where T : Enum {
+            if (!_resourcesCount.ContainsKey(resourceType.ToString()))
                 throw new KeyNotFoundException("No resource found");
             
 
-            _resourcesCount[resource] += amount;
+            _resourcesCount[resourceType.ToString()] += amount;
         }
     }
 }

@@ -1,3 +1,5 @@
+using GGG.Components.Shop;
+
 using UnityEngine;
 
 namespace GGG.Classes.Buildings
@@ -5,9 +7,13 @@ namespace GGG.Classes.Buildings
     [CreateAssetMenu(fileName = "Shop", menuName = "Game/Buildings/Shop")]
     public class Shop : Building
     {
+        private ShopUI _shop;
+
         public override void Interact()
         {
-            Debug.Log("Interaction with shop");
+            _shop = FindObjectOfType<ShopUI>();
+
+            _shop.OpenShop();
         }
     }
 }
