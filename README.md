@@ -20,12 +20,51 @@ Cuando comiences el juego las casillas lejanas van a estar cubiertas por una “
 ### **1.3 - Minijuegos** 
 
 #### **1.3.1 - Plataforma hexagonal**
+Se utilizara el grid de hexagonos para la expedicion, lo que se va a crear son los prompt que se generaran de forma procedural(aleatoria dentro del mapa) para una experiencia nueva hacia el jugador,aparte de ello, se va a introducir prompts de logro que existe una cantidad minima de encontrarlos.
 
 #### **1.3.2 - Niebla de guerra**
 
 ### **1.4 - Recursos** 
+En este intrigante y exótico mundo de construcción y mejora, se presentan dos recursos fundamentales que son el sustento de toda progresión y desarrollo: las resplandecientes algas marinas y los majestuosos corales. Estos tesoros submarinos son el cimiento sobre el cual se erigen todas las maravillas de tu imperio acuático.
+
+No obstante, para añadir un emocionante desafío a tu aventura, cuatro recursos especiales acechan en las profundidades, elevando la dificultad de tus decisiones y estrategias. Estos elementos extraordinarios, como perlas raras en un vasto océano, presentan un dilema fascinante mientras tratas de forjar un imperio submarino que perdure.
 
 ### **1.5 - Edificios** 
+#### **1.5.1 - Granja de algas**
+La granja de algas generara un número de algas por unidad de tiempo. 
+
+Al subirla de nivel: el número de algas generadas aumentará.
+
+#### **1.5.2 - Tienda de objetos**
+La tienda de objetos servirá al jugador para intercambiar un número de materiales por otros. 
+  - Se actualizará cada cierto tiempo ofreciendo nuevos intercambios.
+  - Cada intercambio se podrá realizar un número límitado de veces.
+
+Al subirla de nivel: se ofrecerá un mayor número de intercambios al día y de recursos más valiosos.
+
+#### **1.5.3 - Generador de electricidad**
+El generador de electricidad requerirá de anguilas eléctricas para construirse. Su principal función es generar cargas que pueden usarse para:
+  - Boostear un edificio seleccionado por el jugador.
+  - Recargar el paratridentes para poder usarlo de nuevo.
+
+ Al subirlo de nivel: en el nivel II habrá dos cargas disponibles y en el nivel III, tres cargas disponibles. El uso de estas cargas es asignado por el jugador.
+
+#### **1.5.4 - Paratridente**
+El impresionante Paratridente, cuya construcción conlleva un coste significativo, posee una característica única y vital: su capacidad para proteger una zona designada durante una única ráfaga de furia. Para mantener su eficacia, este artefacto debe ser cargado con la energía eléctrica de las anguilas eléctricas, lo que añade un elemento de recolección estratégica a la ecuación. Cada Paratridente está equipado con tres cargas, lo que se traduce en tres oportunidades de activación. Cada vez que la furia de Poseidón desciende sobre una casilla protegida por el Paratridente, este responde de manera inmediata, anulando el peligro y consumiendo una de sus preciadas cargas. Sin embargo, tras cada intervención, el Paratridente requiere un período de tiempo para recargar su cúpula defensiva, que puede realizarse hasta en tres ocasiones. En el caso desafortunado de que la furia de Poseidón impacte en un edificio revelado, el resultado es un ataque devastador que deja la casilla afectada en un estado crítico. Esta casilla quedará inoperativa hasta que sea reparada, lo que añade un elemento de urgencia y gestión de recursos a la estrategia del jugador.
+
+#### **1.5.5 - Mejoras de buceo**
+Después de llevar a cabo un impresionante total de diez expediciones, en las cuales el jugador ha demostrado una destreza y determinación sin igual, se descubre un misterioso casco mágico. Este asombroso hallazgo desencadena la apertura de un nuevo horizonte de posibilidades, en forma de un espléndido edificio dedicado exclusivamente a la mejora del buceo. Este majestuoso edificio de mejoras de buceo se convierte en un centro neurálgico de investigación submarina, donde los secretos de las profundidades marinas se desvelan lentamente. Sin embargo, la búsqueda del conocimiento tiene su precio, y el costo de investigación aumenta de forma exponencial, desafiando aún más la habilidad y el ingenio del jugador.
+
+#### **1.5.6 - Edificio de investigacion** 
+Un majestuoso edificio de investigación, cuidadosamente desvelado con la adquisición de una enigmática tablilla, y erigido con una preciosa cantidad de corales. Una vez completada su construcción, se convierte en el epicentro del conocimiento y la innovación, permitiendo la realización de exhaustivas investigaciones que abarcan tanto mejoras edilicias como la exploración de los mapas hallados en nuestras expediciones. A lo largo del transcurso del juego, el costo de este edificio se incrementará gradualmente, poniendo a prueba la habilidad estratégica del jugador. Además, el tiempo de espera se convertirá en una variable crucial, si bien la implementación de edificios aceleradores y la aplicación de impulsos dentro de la ciudad pueden desempeñar un papel crucial para optimizar y agilizar estos procesos.
+
+#### **1.5.7 - Museo**
+Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubierto, además se darán recompensas por desbloquear un número de recursos de las tres categorías:
+  - Materiales del mar: como algas y corales.
+  - Materiales de construcción: recogidos en naufragios durante las expecidiones, como madera y hierro.
+  - Peces: como anguilas eléctricas.
+
+Al mejorar: no tiene mejora.
 
 ## **2 - CONTROLES**
 
@@ -151,8 +190,10 @@ Nuestra misión era clara: cuidar de las aguas que tanto amaba Poseidón y, al h
 
 ## **9 - MÚSICA Y SONIDO – David** 
 
-## **10 - PENSAMIENTO COMPUTACIONAL – Todos**  
-
+## **10 - PENSAMIENTO COMPUTACIONAL – Todos**
+La destreza principal que se entrena será la evaluación, debido a que en nuestro juego habrá que gestionar los recursos de manera continua,aparte, es importante la planificación tanto para la construccion de la ciudad como para la expedición, detección de error a través de analizar la velocidad de morir en la expedición, los números de edificios que destruya el jugador. 
+Las mecánicas cruciales de la construcción de la ciudad son los costes de los edificios a la hora de construirlos, planificación de recursos para mejorarlos o construir edificios nuevos, invertir recursos en investigación para desbloquear nuevo contenido. La construcción de ciertos edifcios cercanos generan efectos especiales, y hay que evitar la destrucción masiva de los edificios por parte del jugador y la ira de poseidon.
+De expedición hay que tener en cuenta la buena gestión de recursos que posee, priorizando los objetivos, debido a que no se permite la permanencia dentro de la expedición. Lo siguiente será el evitar morir rápido, se otorgará una herramienta para poder observar cómo se finaliza la expedición.
 ## **11 - MODELO DE NEGOCIO** 
 - **B2P (Buy to Play)**: El usuario deberá pagar cierta cantidad de dinero para poder utilizar el producto.
   
