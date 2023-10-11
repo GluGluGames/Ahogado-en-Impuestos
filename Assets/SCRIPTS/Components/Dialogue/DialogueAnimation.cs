@@ -4,11 +4,13 @@ using UnityEngine.UI;
 
 namespace GGG.Components.Dialogue {
     public class DialogueAnimation : MonoBehaviour {
+        [SerializeField] private GameObject Viewport;
         [SerializeField] private Image Avatar;
         private DialogueBox _dialogue;
 
         private void Start() {
             _dialogue = GetComponentInChildren<DialogueBox>();
+            Viewport.SetActive(false);
 
             _dialogue.DialogueStart += DialogueOpen;
             _dialogue.DialogueEnd += DialogueClose;
@@ -18,13 +20,18 @@ namespace GGG.Components.Dialogue {
         }
 
         private void DialogueOpen() {
+            Viewport.SetActive(true);
             transform.DOMove(new Vector3(0f, 0f, 0f), 1f).SetEase(Ease.OutBounce);
             Avatar.DOFade(1f, 2f);
         }
 
         private void DialogueClose() {
-            transform.DOMove(new Vector3(0f, -400f, 0f), 0.5f).SetEase(Ease.OutFlash);
+
             Avatar.DOFade(0f, 0.5f);
+            transform.DOMove(new Vector3(0f, -400f, 0f), 0.5f).SetEase(Ease.OutFlash).onComplete += () => { 
+                Viewport.SetActive(false); 
+            };
+
         }
     }
 }

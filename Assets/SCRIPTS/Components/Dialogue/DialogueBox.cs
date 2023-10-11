@@ -25,7 +25,6 @@ namespace GGG.Components.Dialogue
 
         private InputManager _input;
         private TMP_Text _text;
-        private CanvasGroup _canvasGroup;
         
         private int _lineIdx;
         private int _avatarIdx;
@@ -41,13 +40,11 @@ namespace GGG.Components.Dialogue
         private void Start() {
             _input = InputManager.Instance;
             _text = GetComponent<TMP_Text>();
-            _canvasGroup = GetComponent<CanvasGroup>();
 
             _started = false;
             _finished = false;
             _currentTextFinished = false;
             
-            _canvasGroup.alpha = 0f;
             _lineIdx = 0;
             _avatarIdx = 0;
             _characterIdx = 0;
@@ -67,7 +64,6 @@ namespace GGG.Components.Dialogue
             
             StartCoroutine(TypeText(DialogueLines[_lineIdx++]));
             DialogueStart.Invoke();
-            _canvasGroup.alpha = 1f;
             _started = true;
         }
 
@@ -97,7 +93,6 @@ namespace GGG.Components.Dialogue
         }
 
         private void OnDialogueEnd() {
-            _canvasGroup.alpha = 0f;
             _finished = true;
             DialogueEnd?.Invoke();
         }
@@ -105,7 +100,7 @@ namespace GGG.Components.Dialogue
         private void OnValidate() {
             if (DialogueLines.Count <= 0) return;
 
-            if (_text == null) _text = GetComponent<TMP_Text>();
+            if (_text == null) _text = GetComponentInChildren<TMP_Text>();
             _text.SetText(DialogueLines[0]);
         }
 

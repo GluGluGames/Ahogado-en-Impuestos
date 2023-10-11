@@ -49,10 +49,10 @@ namespace GGG.Components.Shop
         private void UpdateTrades()
         {
             for(int i = 0; i < Exchanges.Count; i++) {
-                GiveItemImage[i].sprite = Exchanges[i].GetBasicResource().GetSprite();
+                GiveItemImage[i].sprite = Exchanges[i].GetGivenResource().GetSprite();
                 GiveAmountText[i].SetText(Exchanges[i].GetGivenAmount().ToString());
 
-                ReceiveItemImage[i].sprite = Exchanges[i].GetAdvanceResource().GetSprite();
+                ReceiveItemImage[i].sprite = Exchanges[i].GetReceiveResource().GetSprite();
                 ReceiveAmountText[i].SetText(Exchanges[i].GetReceiveAmount().ToString());
             }
         }
@@ -75,13 +75,13 @@ namespace GGG.Components.Shop
 
         public void Exchange(int i)
         {
-            if(_player.GetResourceCount(Exchanges[i].GetBasicResource().GetResource()) < Exchanges[i].GetGivenAmount()) {
+            if(_player.GetResourceCount(Exchanges[i].GetGivenResource().GetResource()) < Exchanges[i].GetGivenAmount()) {
                 // TODO - Denegate exchange
                 return;
             }
 
-            _player.AddResource(Exchanges[i].GetBasicResource().GetResource(), -Exchanges[i].GetGivenAmount());
-            _player.AddResource(Exchanges[i].GetAdvanceResource().GetResource(), Exchanges[i].GetReceiveAmount());
+            _player.AddResource(Exchanges[i].GetGivenResource().GetResource(), -Exchanges[i].GetGivenAmount());
+            _player.AddResource(Exchanges[i].GetReceiveResource().GetResource(), Exchanges[i].GetReceiveAmount());
         }
 
         public void OpenShop()

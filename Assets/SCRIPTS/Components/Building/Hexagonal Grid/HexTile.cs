@@ -154,31 +154,6 @@ namespace GGG.Components.Buildings {
         }
 
         #endregion
-        
-        /*
-        public void OnDrawGizmosSelected() {
-            foreach (HexTile neighbour in neighbours) {
-                Gizmos.color = Color.black;
-                Gizmos.DrawSphere(transform.position, 0.2f);
-                Gizmos.color = Color.white;
-                Gizmos.DrawLine(transform.position, neighbour.transform.position);
-            }
-        }
-        */
-
-        /*
-        public void OnHighlightTile()
-        {
-            Debug.Log(TileManager.instance);
-            TileManager.instance.OnHighlightTile(this);
-        }
-
-        public void OnSelectTile()
-        {
-            TileManager.instance.OnSelectTile(this);
-
-        }
-        */
     }
 }
 

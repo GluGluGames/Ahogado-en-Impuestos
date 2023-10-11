@@ -5,7 +5,6 @@ using UnityEngine;
 namespace GGG.Components.Buildings {
     public class TileManager : MonoBehaviour {
         public static TileManager instance;
-        public GameObject selectorPrefab;
         public GameObject highlightPrefab;
         private Dictionary<Vector3Int, HexTile> _tilesDic;
         private HexTile _selectedTile;
@@ -25,12 +24,6 @@ namespace GGG.Components.Buildings {
                 List<HexTile> neighbours = GetNeighbours(hexTile);
                 hexTile.neighbours = neighbours;
             }
-
-            // Instanciate prefabs for better UI / UX
-            /*
-            selectorPrefab = GameObject.Instantiate(selectorPrefab);
-            selectorPrefab.transform.position = new Vector3(100000, 100000, 100000);
-            */
         }
 
         public void RegisterTile(HexTile tile) {

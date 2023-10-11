@@ -1,13 +1,16 @@
-using UnityEngine;
-using DG.Tweening;
 using GGG.Components.Buildings;
+
+using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using System;
+using System.Collections.Generic;
 
 namespace GGG.Components.UI {
     public class BuildingUI : MonoBehaviour {
         [SerializeField] private Button CloseButton;
 
+        private BuildButton[] _buttons;
         private bool _open;
 
         public Action OnMenuClose;
@@ -15,13 +18,18 @@ namespace GGG.Components.UI {
         private void Start() {
             CloseButton.onClick.AddListener(Close);
 
-            //Cell[] cells = FindObjectsOfType<Cell>();
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
                 tile.OnHexSelect += Open;
                 OnMenuClose += tile.DeselectTile;
             }
+
+            _buttons = GetComponentsInChildren<BuildButton>();
+
+            foreach(BuildButton button in _buttons)
+                button.OnStructureBuild += Close;
+            
 
             _open = false;
             transform.position = new Vector3(0, -400f, 0);

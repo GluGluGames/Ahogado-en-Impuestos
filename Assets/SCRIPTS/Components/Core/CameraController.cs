@@ -30,12 +30,12 @@ namespace GGG.Components.Core
         [Header("Other")]
         [Tooltip("Amount of movement over time")]
         [SerializeField] private float MovementTime;
-        [SerializeField] private Canvas MainCanvas;
 
         private InputManager _input;
         private Transform _transform;
         private Camera _mainCamera;
         private Transform _cameraTransform;
+        private Canvas _mainCanvas;
 
         private GraphicRaycaster _graphicRaycaster;
         private PointerEventData _pointerEventData = new PointerEventData(EventSystem.current);
@@ -53,7 +53,8 @@ namespace GGG.Components.Core
             _input = InputManager.Instance;
             _transform = transform;
             _mainCamera = Camera.main;
-            _graphicRaycaster = MainCanvas.GetComponent<GraphicRaycaster>();
+            _mainCanvas = GameObject.FindGameObjectWithTag("HUD").GetComponent<Canvas>();
+            _graphicRaycaster = _mainCanvas.GetComponent<GraphicRaycaster>();
 
             _cameraTransform = _mainCamera.transform;
             _newPosition = _transform.position;

@@ -5,6 +5,7 @@ using GGG.Components.Buildings;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 namespace GGG.Components.UI {
     public class BuildButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler {
@@ -13,6 +14,8 @@ namespace GGG.Components.UI {
 
         private HexTile _selectedHexTile;
         private BuildingComponent _auxBuild;
+
+        public Action OnStructureBuild;
 
         private void Start() {
             HexTile[] tiles = FindObjectsOfType<HexTile>();
@@ -30,8 +33,8 @@ namespace GGG.Components.UI {
         private void BuildStructure() {
             GameObject auxGo = BuildingInfo.Spawn(_selectedHexTile.SpawnPosition());
             _selectedHexTile.SetBuilding(auxGo.GetComponent<BuildingComponent>());
-            
-            print("Structure built");
+
+            OnStructureBuild?.Invoke();
         }
 
         #region Event Systems Method
