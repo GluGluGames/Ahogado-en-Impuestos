@@ -10,10 +10,12 @@ namespace GGG.Components.Buildings {
             return new Vector3Int(q, r, -q - r);
         }
 
-        public static Vector3 GetPositionForHexFromCoordinate(Vector2Int coord, float size, bool isFlatTopped) {
+        public static Vector3 GetPositionForHexFromCoordinate(Vector2Int initialOffset, Vector2Int coord, float size, bool isFlatTopped) {
             int column = coord.x;
             int row = coord.y;
 
+            int realCol = coord.x + initialOffset.x;
+            int realRow = coord.y + initialOffset.y;
             float width;
             float height;
             float xPosition;
@@ -34,11 +36,10 @@ namespace GGG.Components.Buildings {
 
                 offset = (shouldOffset) ? width / 2 : 0;
 
-                xPosition = (column * (horizontalDistance)) + offset;
-                yPosition = (row * verticalDistance);
+                xPosition = (realCol * (horizontalDistance)) + offset;
+                yPosition = (realRow * verticalDistance);
             } else {
                 shouldOffset = (column % 2) == 0;
-
                 width = 2f * radius;
                 height = Mathf.Sqrt(3) * radius;
 
