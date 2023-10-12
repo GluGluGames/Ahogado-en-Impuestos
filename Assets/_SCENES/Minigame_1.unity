@@ -14748,6 +14748,11 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!4 &824106200 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1064013823862561875, guid: 654100e992bc1364eaea96ad273137c3, type: 3}
+  m_PrefabInstance: {fileID: 7982897650226711559}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &825932703
 GameObject:
   m_ObjectHideFlags: 0
@@ -31256,6 +31261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightPrefab: {fileID: 2082100517571088346, guid: 03e5a2cea7f9b6b41ac2782f46fe8dd7, type: 3}
+  Player: {fileID: 824106200}
 --- !u!114 &1808264837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36843,7 +36849,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5720919794796153786, guid: 654100e992bc1364eaea96ad273137c3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

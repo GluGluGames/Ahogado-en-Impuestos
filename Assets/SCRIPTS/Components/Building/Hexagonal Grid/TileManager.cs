@@ -14,8 +14,8 @@ namespace GGG.Components.Buildings
 
         #region playerInfo
 
+        [SerializeField] private Transform Player;
         private Vector3Int _playerPosCube;
-        private PlayerMovement _playerMovement;
         private List<HexTile> _path;
 
         #endregion playerInfo
@@ -47,17 +47,16 @@ namespace GGG.Components.Buildings
                 tile = GetRandomHex();
             }
 
-            _playerMovement = PlayerMovement.Instance;
             _playerPosCube = tile.cubeCoordinate;
-            _playerMovement.transform.position = tile.transform.position + new Vector3(0.0f, 1f, 0.0f);
-            _playerMovement.currentTile = tile;
+            Player.transform.position = tile.transform.position + new Vector3(0.0f, 1f, 0.0f);
+            PlayerPosition.CurrentTile = tile;
 
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tileAux in tiles)
                 tileAux.OnHexSelect += () =>
                 {
-                    _path = Pathfinder.FindPath(_playerMovement.currentTile, tileAux);
+                    _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
                 };
         }
 
