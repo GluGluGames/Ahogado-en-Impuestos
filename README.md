@@ -1,5 +1,7 @@
 # Ahogado-en-Impuestos
 
+![LogoGluGluGames2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/bb7bf48e-2b66-48a7-9d21-e7d79f0473aa)
+
 ## 1 - MÉCANICAS 
 
 ### **1.1 - Mecánica principal**: 
@@ -103,19 +105,47 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ### **3.2 - Concepts – Marco/Laura**
 
-#### **3.2.1 - Laboratorio**
+#### **3.2.1 - Ayuntamiento**
+
+![Ayuntamiento](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/e85bb4d2-01a7-4272-92c4-bc3a80777b2f)
+
+#### **3.2.2 - Granja de algas (nivel 1)**
+
+![Granja de algas N1](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/66bcc66d-caf3-4abf-a128-bc42f478474d)
+
+#### **3.2.3 - Granja de algas (nivel 2)**
+
+![Granja de algas N2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/321e8be9-97e8-4353-8852-199f433df3a9)
+
+#### **3.2.4 - Granja de algas (nivel 3)**
+
+![Granja de algas N3](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/ef8f499e-f761-4f33-bfec-da8d80f02f0c)
+
+#### **3.2.5 - Laboratorio**
     
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/e18ae0cf-61f9-48d1-9ecb-844aa4c26f6d)
 
-#### **3.2.2 - Alamacén de peces (nivel 1)**
+#### **3.2.6 - Museo**
+
+![Museo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/21d670df-64b4-4a0c-b701-cd8d8978d6ce)
+
+#### **3.2.7 - Tienda**
+
+![Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/ead2404d-31f6-4163-a839-bc48436c2f64)
+
+#### **3.2.8 - Generador eléctrico**
+
+![Generador eléctrico](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/16921824-70bc-4e13-9dbd-2a25c31585c9)
+
+#### **3.2.9 - Alamacén de peces (nivel 1)**
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/6c6302cd-5aab-4e76-9176-b5fcd0399685)
 
-#### **3.2.3 - Alamacén de peces (nivel 2)**
+#### **3.2.10 - Alamacén de peces (nivel 2)**
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/5c8e9690-8699-4400-8fd2-bb0d4be62d4a)
 
-#### **3.2.4 - Poseidón**
+#### **3.2.11 - Poseidón**
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)
 
@@ -149,6 +179,8 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ### **7.2 - CRÉDITOS**
 
+![Interfaz - Créditos](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/1aa09aad-d0fd-41e4-aaa2-fbcc238d050f)
+
 ### **7.3 - AJUSTES**
 
 ![Interfaz - Ajustes (cerrado)](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/26dc9f6c-f873-4580-b351-dd8baa0c7c3a)
@@ -156,19 +188,32 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 ![Interfaz - Ajustes](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/dcf4bed8-23a3-47d7-a736-a85da7ad6bc2)
 
 ### **7.4 - PANTALLA DE JUEGO**
-#### **7.4.1 - DIALOGOS**
+#### **7.4.1 - EDICIÓN DE EDIFICIOS**
+
+![Interfaz - Edición de edificios](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/975fe570-5a37-4071-b840-9faf713e04c0)
+
+#### **7.4.2 - DIALOGOS**
 
 ![Interfaz - Diálogos](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/a3bd4aaf-fd3f-4d66-aaf3-511728958735)
 
-#### **7.4.2 - TIENDA DE EDIFICIOS**
+#### **7.4.3 - TIENDA DE EDIFICIOS**
 
 ![Interfaz - Tienda de edificios](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/79f5c2b7-cd87-419c-a716-8e22c429ddc5)
 
-#### **7.4.3 - MUSEO**
-#### **7.4.4 - MEJORAS DE BUCEO**
-#### **7.4.5 - TIENDA DE RECURSOS**
-#### **7.4.6 - EXPEDICIÓN**
-#### **7.4.7 - DERROTA**
+#### **7.4.4 - MUSEO**
+
+![Interfaz - Museo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/24477786-f616-44aa-9dd9-9ea358bbb74e)
+
+#### **7.4.5 - MEJORAS DE BUCEO**
+
+![Interfaz - Mejoras de buceo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/0ccadc28-d681-43bf-98bf-116e64d41014)
+
+#### **7.4.6 - TIENDA DE RECURSOS**
+
+![Interfaz - Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/f3a10538-0711-4210-bdf6-cba0a10cb172)
+
+#### **7.4.7 - EXPEDICIÓN**
+#### **7.4.8 - DERROTA**
 
 ## **8 - NARRATIVA** 
 
