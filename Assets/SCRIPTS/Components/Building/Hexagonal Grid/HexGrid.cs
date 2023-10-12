@@ -50,7 +50,7 @@ namespace GGG.Components.Buildings {
 
                     HexTile hexTile = tile.AddComponent<HexTile>();
                     hexTile.transform.position = HexUtilities.GetPositionForHexFromCoordinate(
-                        new Vector2Int(x + GridInitialPosition.x, y + GridInitialPosition.y), Radius, IsFlatTopped);
+                        GridInitialPosition, new Vector2Int(x, y), Radius, IsFlatTopped);
                     hexTile.settings = Settings;
                     hexTile.RollTileType();
                     hexTile.AddTile();

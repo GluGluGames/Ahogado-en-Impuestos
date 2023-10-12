@@ -1,31 +1,36 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "TileGen/GenerationSettings")]
-public class HexTileGenerationSettings : ScriptableObject
+
+namespace GGG.Components.Buildings
 {
-    public enum TileType
+    [CreateAssetMenu(menuName = "TileGen/GenerationSettings")]
+    public class HexTileGenerationSettings : ScriptableObject
     {
-        Standard,
-        Water,
-        Cliff
-    }
-
-    [SerializeField] private GameObject Standar;
-    [SerializeField] private GameObject Water;
-    [SerializeField] private GameObject Cliff;
-
-    public GameObject GetTile(TileType tileType)
-    {
-        switch (tileType)
+        public enum TileType
         {
-            case TileType.Standard: return Standar;
-            case TileType.Water: return Water;
-            case TileType.Cliff: return Cliff;
+            Standard,
+            Water,
+            Cliff
         }
-        return null;
+
+        [SerializeField] private GameObject Standar;
+        [SerializeField] private GameObject Water;
+        [SerializeField] private GameObject Cliff;
+
+        public GameObject GetTile(TileType tileType)
+        {
+            switch (tileType)
+            {
+                case TileType.Standard: return Standar;
+                case TileType.Water: return Water;
+                case TileType.Cliff: return Cliff;
+            }
+            return null;
+        }
     }
 }
+
 
 
 
