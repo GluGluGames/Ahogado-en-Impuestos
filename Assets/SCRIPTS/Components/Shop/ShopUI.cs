@@ -30,6 +30,8 @@ namespace GGG.Components.Shop
         private const int _MAGNIFICATION_FACTOR = 2;
 
         private PlayerManager _player;
+        private List<int> _initialGivenAmounts = new();
+        private List<int> _initialReceiveAmounts = new();
 
         private bool _open;
 
@@ -39,6 +41,11 @@ namespace GGG.Components.Shop
             transform.position = new Vector3(_INITIAL_POSITION + 960, 540);
 
             _player = PlayerManager.Instance;
+
+            foreach(ShopExchange exchange in Exchanges) {
+                _initialGivenAmounts.Add(exchange.GetGivenAmount());
+                _initialReceiveAmounts.Add(exchange.GetReceiveAmount());
+            }
 
             CloseButton.onClick.AddListener(CloseShop);
 
@@ -59,7 +66,6 @@ namespace GGG.Components.Shop
 
         public void IncreaseExchange(int i)
         {
-            // TODO - Limit increase
             Exchanges[i].SetGivenAmount(Exchanges[i].GetGivenAmount() * _MAGNIFICATION_FACTOR);
             Exchanges[i].SetReceiveAmount(Exchanges[i].GetReceiveAmount() * _MAGNIFICATION_FACTOR);
             UpdateTrades();
@@ -67,9 +73,11 @@ namespace GGG.Components.Shop
 
         public void DecreaseExchange(int i)
         {
-            // TODO - Limit decrease
-            Exchanges[i].SetGivenAmount(Exchanges[i].GetGivenAmount() / _MAGNIFICATION_FACTOR);
-            Exchanges[i].SetReceiveAmount(Exchanges[i].GetReceiveAmount() / _MAGNIFICATION_FACTOR);
+            int givenDecreaseAmount = Exchanges[i].GetGivenAmount() / _MAGNIFICATION_FACTOR;
+            int receiveDecreaseAmount = Exchanges[i].GetReceiveAmount() / _MAGNIFICATION_FACTOR;
+
+            Exchanges[i].SetGivenAmount(givenDecreaseAmount < _initialGivenAmounts[i] ? _initialGivenAmounts[i] : givenDecreaseAmount);
+            Exchanges[i].SetReceiveAmount(receiveDecreaseAmount < _initialReceiveAmounts[i] ? _initialReceiveAmounts[i] : receiveDecreaseAmount);
             UpdateTrades();
         }
 
