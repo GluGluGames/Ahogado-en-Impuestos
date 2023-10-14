@@ -6,7 +6,7 @@ namespace GGG.Components.Buildings {
     public class BuildingComponent : MonoBehaviour {
         [SerializeField] private Building Build;
 
-        public Action<Action> OnBuildInteract;
+        public Action<Action, BuildingComponent> OnBuildInteract;
 
         private void Update() {
             if (Build.NeedInteraction()) return;
@@ -14,6 +14,8 @@ namespace GGG.Components.Buildings {
             Build.Interact();
         }
 
-        public void Interact() { OnBuildInteract?.Invoke(Build.Interact); }
+        public void Interact() { OnBuildInteract?.Invoke(Build.Interact, this); }
+
+        public bool NeedInteraction() { return Build.NeedInteraction(); }
     }
 }

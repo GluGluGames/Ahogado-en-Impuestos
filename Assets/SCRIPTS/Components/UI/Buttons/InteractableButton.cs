@@ -10,6 +10,7 @@ namespace GGG.Components.UI {
 
         public void OnPointerExit(PointerEventData eventData) {
             transform.DOKill();
+            transform.DOScale(Vector3.one, 1f);
         }
 
         public virtual void OnPointerDown(PointerEventData eventData) { print($"TODO - Implement button on {gameObject.name}"); }

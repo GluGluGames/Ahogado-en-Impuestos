@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace GGG.Components.UI {
-    public class SellButton : InteractableButton {
+    public class SellButton : MonoBehaviour {
 
         private HexTile _selectedHexTile;
         public Action onStructureSold;
