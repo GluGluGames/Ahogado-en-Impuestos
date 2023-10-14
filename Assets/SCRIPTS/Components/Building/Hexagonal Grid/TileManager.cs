@@ -47,17 +47,17 @@ namespace GGG.Components.Buildings
                 tile = GetRandomHex();
             }
 
-            _playerPosCube = tile.cubeCoordinate;
-            Player.transform.position = tile.transform.position + new Vector3(0.0f, 1f, 0.0f);
-            PlayerPosition.CurrentTile = tile;
+            if (Player) {
+                _playerPosCube = tile.cubeCoordinate;
+                Player.transform.position = tile.transform.position + new Vector3(0.0f, 1f, 0.0f);
+                PlayerPosition.CurrentTile = tile;
 
-            HexTile[] tiles = FindObjectsOfType<HexTile>();
-
-            foreach (HexTile tileAux in tiles)
+                foreach (HexTile tileAux in hexTiles)
                 tileAux.OnHexSelect += () =>
                 {
                     _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
                 };
+            }
         }
 
         public void RegisterTile(HexTile tile)
