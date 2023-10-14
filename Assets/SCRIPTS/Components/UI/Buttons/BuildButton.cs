@@ -15,7 +15,7 @@ namespace GGG.Components.UI {
         private HexTile _selectedHexTile;
         private BuildingComponent _auxBuild;
 
-        public Action OnStructureBuild;
+        public Action<BuildingComponent> OnStructureBuild;
 
         private void Start() {
             HexTile[] tiles = FindObjectsOfType<HexTile>();
@@ -32,9 +32,10 @@ namespace GGG.Components.UI {
 
         private void BuildStructure() {
             GameObject auxGo = BuildingInfo.Spawn(_selectedHexTile.SpawnPosition());
-            _selectedHexTile.SetBuilding(auxGo.GetComponent<BuildingComponent>());
+            _auxBuild = auxGo.GetComponent<BuildingComponent>();
 
-            OnStructureBuild?.Invoke();
+            _selectedHexTile.SetBuilding(_auxBuild);
+            OnStructureBuild?.Invoke(_auxBuild);
         }
 
         #region Event Systems Method

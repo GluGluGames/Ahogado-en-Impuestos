@@ -16,7 +16,7 @@ namespace GGG.Components.UI {
         public Action OnMenuClose;
     
         private void Start() {
-            CloseButton.onClick.AddListener(Close);
+            CloseButton.onClick.AddListener(() => { Close(null); });
 
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
@@ -42,7 +42,7 @@ namespace GGG.Components.UI {
             _open = true;
         }
 
-        private void Close() {
+        private void Close(BuildingComponent aux = null) {
             if (!_open) return;
             
             transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine);
