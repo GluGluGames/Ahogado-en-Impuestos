@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 namespace GGG.Components.Buildings {
     public class HexTile : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerExitHandler {
         public HexTileGenerationSettings settings;
-        public HexTileGenerationSettings.TileType tileType;
+        public TileType tileType;
 
         public GameObject tilePrefab;
         public GameObject fow;
@@ -27,7 +27,8 @@ namespace GGG.Components.Buildings {
         private bool _selected = false;
 
         public Action OnHexHighlight;
-        public Action OnHexSelect;
+        public Action<HexTile> OnHexSelect;
+        public Action OnHexDeselect;
 
         #region Unity Events
 
@@ -67,6 +68,14 @@ namespace GGG.Components.Buildings {
             _currentBuilding = building;
             _isEmpty = building == null;
         }
+        public TileType GetTileType() { return tileType; }
+
+        public void SetTileType(TileType type) { 
+            tileType = type;
+            for (int i = 0; i < transform.childCount; i++)
+                Destroy(transform.GetChild(i).gameObject);
+            AddTile();
+        }
 
         #endregion
 
@@ -75,7 +84,7 @@ namespace GGG.Components.Buildings {
         // summary:
         //  Generate random type of tile
         public void RollTileType() {
-            tileType = (HexTileGenerationSettings.TileType)Random.Range(0, 3);
+            tileType = (TileType)Random.Range(0, 3);
         }
 
         public void AddTile() {
@@ -92,18 +101,19 @@ namespace GGG.Components.Buildings {
         }
 
         private void SelectTile() {
-            if (_manager.GetSelectedTile()) {
-                _manager.GetSelectedTile()._selected = false;
-                _manager.GetSelectedTile().DeactivateHighlight();
-            }
+            if (_manager.GetSelectedTile())
+                _manager.GetSelectedTile().DeselectTile();
+            
 
             _selected = true;
             _manager.SelectTile(this);
+            OnHexSelect?.Invoke(this);
         }
 
         public void DeselectTile() {
             if(!_selected) return;
 
+            OnHexDeselect?.Invoke();
             _manager.SelectTile(null);
             _selected = false;
             DeactivateHighlight();
@@ -131,8 +141,6 @@ namespace GGG.Components.Buildings {
 
             ActivateHighlight();
             SelectTile();
-            OnHexSelect?.Invoke();
-            
         }
 
         #endregion

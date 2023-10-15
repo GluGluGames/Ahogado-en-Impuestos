@@ -21,11 +21,7 @@ namespace GGG.Components.UI {
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles)
-                tile.OnHexSelect += () => {
-                    _selectedHexTile = tile;
-
-                    if (!_selectedHexTile.TileEmpty()) _auxBuild = tile.GetCurrentBuilding();
-                };
+                tile.OnHexSelect += (x) => _selectedHexTile = tile;
              
             BuildNameText.SetText(BuildingInfo.GetName());
         }

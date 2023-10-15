@@ -23,6 +23,7 @@ namespace GGG.Components.UI {
             foreach (HexTile tile in tiles) {
                 tile.OnHexSelect += Open;
                 OnMenuClose += tile.DeselectTile;
+                tile.OnHexDeselect += () => Close();
             }
 
             _buttons = GetComponentsInChildren<BuildButton>();
@@ -35,8 +36,10 @@ namespace GGG.Components.UI {
             transform.position = new Vector3(0, -400f, 0);
         }
 
-        private void Open() {
-            if (_open) return;
+        private void Open(HexTile tile) {
+            if (_open || tile.GetTileType() != TileType.Standard) {
+                return; 
+            }
             
             transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
             _open = true;

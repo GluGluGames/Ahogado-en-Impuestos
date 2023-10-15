@@ -827,7 +827,6 @@ GameObject:
   - component: {fileID: 5375401954924297062}
   - component: {fileID: 6415018043133504767}
   - component: {fileID: 7264172453391498191}
-  - component: {fileID: 2926804039661415729}
   - component: {fileID: 1267878298949181167}
   m_Layer: 0
   m_Name: Sell_Button
@@ -939,18 +938,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2926804039661415729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3729030336063739963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 050d5122a7ba6ea43a76c67140940991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1267878298949181167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2323,7 +2310,6 @@ GameObject:
   - component: {fileID: 7152249840701089249}
   - component: {fileID: 7518774299831105496}
   - component: {fileID: 6612347723547609996}
-  - component: {fileID: 2409492695591052566}
   - component: {fileID: 8405298114688441449}
   m_Layer: 0
   m_Name: InteractButton
@@ -2435,18 +2421,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2409492695591052566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7745482685061799964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 050d5122a7ba6ea43a76c67140940991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8405298114688441449
 MonoBehaviour:
   m_ObjectHideFlags: 0

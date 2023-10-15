@@ -18,6 +18,8 @@ namespace GGG.Components.UI
         private BuildingComponent _auxBuilding;
         private Transform _transform;
 
+        private bool _open;
+
         public Action OnMenuClose;
 
         private void Start()
@@ -36,11 +38,7 @@ namespace GGG.Components.UI
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
-                tile.OnHexSelect += () => {
-                    if (tile.GetCurrentBuilding() != _auxBuilding) {
-                        Close();
-                    }
-                };
+                tile.OnHexDeselect += () => Close();
                 OnMenuClose += tile.DeselectTile;
             }
 
@@ -56,14 +54,20 @@ namespace GGG.Components.UI
 
         private void OnBuildInteract(Action action, BuildingComponent build) 
         {
-            _transform.DOMove(new Vector3(960, 540), 0.1f).SetEase(Ease.InCubic);
-            _auxBuilding = build;
+            if(_open) return;
+
             _panel.SetActive(true);
             CloseButton.gameObject.SetActive(true);
+            _transform.DOMove(new Vector3(960, 540), 0.1f).SetEase(Ease.InCubic);
+
+            _auxBuilding = build;
+            _open = true;
+
             InteractButton.onClick.AddListener(() => {
                 action.Invoke();
                 Close();
             });
+
             if(!build.NeedInteraction()) InteractButton.gameObject.SetActive(false);
             else InteractButton.gameObject.SetActive(true);
         }
@@ -80,6 +84,8 @@ namespace GGG.Components.UI
 
         private void Close()
         {
+            if(!_open) return;
+
             _transform.DOMove(new Vector3(960, -360), 0.1f).SetEase(Ease.InCubic).onComplete += () => 
             {
                 _panel.SetActive(false);
@@ -87,6 +93,7 @@ namespace GGG.Components.UI
             };
             
             _auxBuilding = null;
+            _open = false;
             OnMenuClose?.Invoke();
         }
     }

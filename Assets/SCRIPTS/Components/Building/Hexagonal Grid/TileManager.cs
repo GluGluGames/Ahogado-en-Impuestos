@@ -42,7 +42,7 @@ namespace GGG.Components.Buildings
             // Put the player somewhere
 
             HexTile tile = GetRandomHex();
-            while (tile.tileType != HexTileGenerationSettings.TileType.Cliff)
+            while (tile.tileType != TileType.Cliff)
             {
                 tile = GetRandomHex();
             }
@@ -53,7 +53,7 @@ namespace GGG.Components.Buildings
                 PlayerPosition.CurrentTile = tile;
 
                 foreach (HexTile tileAux in hexTiles)
-                tileAux.OnHexSelect += () =>
+                tileAux.OnHexSelect += (x) =>
                 {
                     _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
                 };
