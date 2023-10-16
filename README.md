@@ -189,6 +189,12 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)
 
+### **3.3 - Personajes**
+
+#### **3.3.1 - Estilo visual personajes**
+
+- Los personajes dentro de los diálogos tendrán una estética diferente a la del juego, al estilo Hades. Cuando los personajes hablen tendrán una imagen suya a modo de splash art. Se ha tomado esta deicisón porque creemos que favorecerá a la narrativa y a la satisfacción visual del jugador, es decir, que será atractiva para los usuarios.
+
 ## **4 - DISEÑO 3D – Adri C.**
 
 ## **5 - GAME DESIGN  – Adri/Luming** 
