@@ -13,6 +13,7 @@ namespace GGG.Components.Buildings
         public GameObject highlightPrefab;
         private Dictionary<Vector3Int, HexTile> _tilesDic;
         private HexTile _selectedTile;
+        [SerializeField] private GameObject _FOWPrefab;
 
         #region playerInfo
 
@@ -33,6 +34,7 @@ namespace GGG.Components.Buildings
             foreach (HexTile hexTile in hexTiles)
             {
                 RegisterTile(hexTile);
+                AddFogOfWarTile(hexTile);
             }
 
             foreach (HexTile hexTile in hexTiles)
@@ -106,6 +108,13 @@ namespace GGG.Components.Buildings
             int rand = Random.Range(0, _tilesDic.Count);
             return _tilesDic.ElementAt(rand).Value;
         }
-        
+     
+        private void AddFogOfWarTile(HexTile tile)
+        {
+            GameObject fow = Instantiate(_FOWPrefab, transform);
+            fow.name = $"FOW C{tile.offsetCoordinate.x}, R{tile.offsetCoordinate.y}";
+            fow.transform.position = tile.transform.position;
+            tile.fow = fow;
+        }
     }
 }
