@@ -138,7 +138,6 @@ namespace GGG.Components.Buildings {
 
             if (_currentBuilding) {
                 _currentBuilding.Interact();
-                yield break;
             }
 
             ActivateHighlight();

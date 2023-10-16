@@ -32,7 +32,7 @@ namespace GGG.Components.UI {
             _buttons = GetComponentsInChildren<BuildButton>(true);
 
             foreach(BuildButton button in _buttons)
-                button.OnStructureBuild += (x) => Close();
+                button.OnStructureBuild += (x, y) => Close();
             
 
             _open = false;
@@ -42,7 +42,7 @@ namespace GGG.Components.UI {
         public bool IsOpen() { return _open; }
 
         private void Open(HexTile tile) {
-            if (_open || tile.GetTileType() != TileType.Standard) {
+            if (_open || tile.GetTileType() != TileType.Standard || !tile.TileEmpty()) {
                 return; 
             }
             
