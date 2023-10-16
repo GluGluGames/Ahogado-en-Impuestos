@@ -1,3 +1,5 @@
+using Codice.Client.Common;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -56,6 +58,8 @@ namespace GGG.Components.Buildings
                 tileAux.OnHexSelect += () =>
                 {
                     _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
+                    _path.Reverse();
+                    PlayerPosition.CurrentPath = _path;
                 };
             }
         }
@@ -102,16 +106,6 @@ namespace GGG.Components.Buildings
             int rand = Random.Range(0, _tilesDic.Count);
             return _tilesDic.ElementAt(rand).Value;
         }
-
-        public void OnDrawGizmos()
-        {
-            if (_path != null)
-            {
-                foreach (HexTile tile in _path)
-                {
-                    Gizmos.DrawCube(tile.transform.position + new Vector3(0f, 1f, 0f), new Vector3(0.5f, 0.5f, 0.5f));
-                }
-            }
-        }
+        
     }
 }
