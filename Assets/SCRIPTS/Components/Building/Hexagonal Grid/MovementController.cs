@@ -47,7 +47,6 @@ namespace GGG.Components.Buildings
         /// </summary>
         public void HandleMovement()
         {
-            Debug.Log("Handleo movimiento");    
             if (PlayerPosition.CurrentPath == null || PlayerPosition.CurrentPath.Count <= 1)
             {
                 PlayerPosition.NextTile = null;
