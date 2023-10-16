@@ -76,11 +76,11 @@ Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubier
 
 Al mejorar: no tiene mejora.
 
-#### **1.6 - Flujo de juego**
-##### **Introducción y Configuración del Juego:**
+### **1.6 - Flujo de juego**
+#### **Introducción y Configuración del Juego:**
 El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
 
-##### **Tutoriales:**
+#### **Tutoriales:**
 -El jugador se somete a un tutorial inicial que le enseña cómo funciona la gestión de recursos dentro de la ciudad. Aprende cómo construir edificios, qué recursos existen y cuáles son sus funcionalidades.
 Durante el tutorial, se notifica al jugador que Poseidón recaudará una cantidad de algas como impuesto. Si no se cumple este impuesto, Poseidón procederá a destruir aleatoriamente edificios en la ciudad.
 Expediciones:
@@ -90,7 +90,7 @@ Tutorial de Expediciones:
 
 -El jugador recibe un segundo tutorial que lo familiariza con las mecánicas de expedición. Aprende sobre los iconos de cada casilla en el mapa, la presencia de depredadores, peces cazables y la existencia de tormellinos, que permiten salir del mapa sin perder recursos. Se destaca la importancia del tiempo como un factor que requiere que el jugador tome decisiones.
 
-##### **Progresión del Juego:**
+#### **Progresión del Juego:**
 La obtención de recursos y nuevas mecánicas depende del número de expediciones y los objetos clave encontrados.
 
 -Primera Expedición: El jugador puede encontrar perlas, recursos versátiles pero difíciles de conseguir. También puede cazar peces para mantenerlos en una pecera para uso en el museo o en el generador de electricidad.
@@ -103,8 +103,32 @@ La obtención de recursos y nuevas mecánicas depende del número de expedicione
 
 -Séptima Expedición: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
 
-##### **Colección y Museo:**
+#### **Colección y Museo:**
 -Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
+
+### 1.7 Animales 
+#### Animales Depredadores
+|  Nombre   |  Damage  | Descripciones |
+| --------- | -------- | ------------- |
+| Tiburon   |    2     | Criatura agrevisa distribuida por todas las profundidades, varian el tamaño según la profundidad. Atacan al jugador en caso de desecubrirle |
+| Pez Vampiro | 1      | Su principal característica son los colmillos que sobresalen de su mandíbula inferior.Se ocultan en las aguas profundas y lanzan ataques a sus presas tipo emboscada.|
+| Pez Leon |     1     | Habita en aguas cálidas y es muy venenoso. Es carnívoro y se alimenta de crustáceos, camarones y otros peces.|
+| Medusa | 0.5/segundos| Criatura no ofensiva pero toxica, por lo que si se acerca demasiado puede ser intoxicado por su piel y perder vida de manera continua.
+| Trucha arcoiris | 0.5 | Critatura de tamaño medio, ofensiva pero ataque poco efectivo, distribuido en niveles medio profundo.|
+
+#### Animales Inocentes
+|  Nombre   |  Size  | Descripciones |
+| --------- | -------- | ------------- |
+| molly velífera | Small | Pez de tamaño pequeño que se descubre en profundidad baja, recurso necesario para mantener el generador de electricidad. Distribuido en zonas iniciales.|
+| Peces cebra | Small | Pez de tamaño pequeño que se descubre en profundidad baja, recurso necesario para mantener el generador de electricidad. Distribuido en zonas iniciales e medios.|
+| Pez neon | Medium | Recurso distribuido en profundidad medio de cada mapa, posee una gran cantidad de carne por lo que puede ser consumido por varias anguilas, de forma que es mas rentable para el generador.|
+| Pez dorado | Small | Critatura pacifica que escapa si descubre al jugador, se puede coleecionar para el uso del generador, o para el libro de museo.|
+| Boga | Medium| Criatura de tamaño medio no ofensiva, sirve para dar más energía al generador y para el libro de colecciones.|
+| Lubina | Medium| Criatura mediano que se puede consumir por el jugador dentro de la expedición para coger energía(Alargar el tiempo de expedicion) .|
+| Dorada | Medium| Criatura media que propone un efecto de velocidad durante un tiempo determinado.|
+
+
+
 
 
 
