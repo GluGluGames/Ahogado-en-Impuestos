@@ -18,8 +18,8 @@ namespace GGG.Components.UI
         private HexTile _selectedTile;
 
         private bool _open;
-
-        private Action OnMenuClose;
+        
+        public Action OnMenuOpen;
 
         private void Start()
         {
@@ -37,9 +37,10 @@ namespace GGG.Components.UI
 
             foreach (HexTile tile in tiles) {
                 tile.OnHexSelect += Open;
-                OnMenuClose += tile.DeselectTile;
             }
         }
+        
+        public bool IsOpen() { return _open; }
 
         private void CleanTile()
         {
@@ -56,11 +57,12 @@ namespace GGG.Components.UI
             _selectedTile = tile;
             _open = true;
             CloseButton.gameObject.SetActive(true);
+            OnMenuOpen?.Invoke();
 
             _transform.DOMove(new Vector3(960, 540), 0.1f).SetEase(Ease.InCubic);
         }
 
-        private void Close()
+        public void Close()
         {
             if (!_open) return;
 
@@ -69,9 +71,9 @@ namespace GGG.Components.UI
                 CloseButton.gameObject.SetActive(false);
             };
 
+            _selectedTile.DeselectTile();
             _selectedTile = null;
             _open = false;
-            OnMenuClose?.Invoke();
         }
     }
 }

@@ -15,12 +15,11 @@ namespace GGG.Components.UI
 
         private GameObject _panel;
         private BuildButton[] _buttons;
-        private BuildingComponent _auxBuilding;
         private Transform _transform;
 
         private bool _open;
-
-        public Action OnMenuClose;
+        
+        public Action OnMenuOpen;
 
         private void Start()
         {
@@ -38,14 +37,15 @@ namespace GGG.Components.UI
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
-                tile.OnHexDeselect += () => Close();
-                OnMenuClose += tile.DeselectTile;
+                tile.OnHexDeselect += Close;
             }
 
             SellButton.onClick.AddListener(OnSellButton);
             UpgradeButton.onClick.AddListener(OnUpgradeButton);
             CloseButton.onClick.AddListener(Close);
         }
+        
+        public bool IsOpen() { return _open; }
 
         private void UpdateBuildings(BuildingComponent building)
         {
@@ -59,10 +59,9 @@ namespace GGG.Components.UI
             _panel.SetActive(true);
             CloseButton.gameObject.SetActive(true);
             _transform.DOMove(new Vector3(960, 540), 0.1f).SetEase(Ease.InCubic);
-
-            _auxBuilding = build;
+            
             _open = true;
-
+            
             InteractButton.onClick.AddListener(() => {
                 action.Invoke();
                 Close();
@@ -70,6 +69,8 @@ namespace GGG.Components.UI
 
             if(!build.NeedInteraction()) InteractButton.gameObject.SetActive(false);
             else InteractButton.gameObject.SetActive(true);
+            
+            OnMenuOpen?.Invoke();
         }
 
         private void OnSellButton()
@@ -82,7 +83,7 @@ namespace GGG.Components.UI
             // TODO - Implement upgrade button
         }
 
-        private void Close()
+        public void Close()
         {
             if(!_open) return;
 
@@ -92,9 +93,7 @@ namespace GGG.Components.UI
                 CloseButton.gameObject.SetActive(false);
             };
             
-            _auxBuilding = null;
             _open = false;
-            OnMenuClose?.Invoke();
         }
     }
 }

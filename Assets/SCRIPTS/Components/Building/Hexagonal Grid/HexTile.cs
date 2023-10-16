@@ -101,12 +101,13 @@ namespace GGG.Components.Buildings {
         }
 
         private void SelectTile() {
-            if (_manager.GetSelectedTile())
+            if (_manager.GetSelectedTile() && _manager.GetSelectedTile() != this)
                 _manager.GetSelectedTile().DeselectTile();
             
 
             _selected = true;
             _manager.SelectTile(this);
+            print($"Selected {gameObject.name}");
             OnHexSelect?.Invoke(this);
         }
 
@@ -116,6 +117,7 @@ namespace GGG.Components.Buildings {
             OnHexDeselect?.Invoke();
             _manager.SelectTile(null);
             _selected = false;
+            print($"Deselected {gameObject.name}");
             DeactivateHighlight();
         }
 
