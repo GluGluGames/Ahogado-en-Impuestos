@@ -1,13 +1,15 @@
 # Ahogado-en-Impuestos
 
 ![LogoGluGluGames2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/bb7bf48e-2b66-48a7-9d21-e7d79f0473aa)
+## 0-Revisiones
+16/10/2023 - Se ha actualizado la descripcion de los recursos y se ha metido el flujo de juego.
 
 ## 1 - MÉCANICAS 
 
 ### **1.1 - Mecánica principal**: 
 
 Construcción de edificios para el aumento de la producción, y minijuegos ocasionales para la obtención de recursos más raros y la apertura de nuevas estructuras/mecánicas.  
-El juego se divide en dos grandes apartados. El primero de ellos es el **escenario principal**, y el segundo será un o varios **minijuegos**. Adelante entramos más en detalle en estos apartados. 
+El juego se divide en dos grandes apartados. El primero de ellos es el **escenario principal**, y el segundo será un o varios **minijuegos**. Adelante entramos más en detalle en estos apartados.
 
 ### **1.2 - Escenario principal**
 
@@ -27,9 +29,15 @@ Se utilizara el grid de hexagonos para la expedicion, lo que se va a crear son l
 #### **1.3.2 - Niebla de guerra**
 
 ### **1.4 - Recursos** 
-En este intrigante y exótico mundo de construcción y mejora, se presentan dos recursos fundamentales que son el sustento de toda progresión y desarrollo: las resplandecientes algas marinas y los majestuosos corales. Estos tesoros submarinos son el cimiento sobre el cual se erigen todas las maravillas de tu imperio acuático.
+**Recursos generales del Juego:**
 
-No obstante, para añadir un emocionante desafío a tu aventura, cuatro recursos especiales acechan en las profundidades, elevando la dificultad de tus decisiones y estrategias. Estos elementos extraordinarios, como perlas raras en un vasto océano, presentan un dilema fascinante mientras tratas de forjar un imperio submarino que perdure.
+-Algas Verdes: Se utilizan tanto para el costo de construcción como para el costo de mejoras en la ciudad. Estos son recursos esenciales para la expansión y mejora de la ciudad.
+
+-Algas Rojas: Se utilizan para comprar objetos de aumento (boosts) dentro de la tienda del juego. Estos objetos pueden proporcionar ventajas temporales a los jugadores y pueden ser útiles en situaciones específicas.
+
+-Perlas: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
+
+-Madera, Corales e Hierro: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
 
 ### **1.5 - Edificios** 
 #### **1.5.1 - Granja de algas**
@@ -67,6 +75,38 @@ Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubier
   - Peces: como anguilas eléctricas.
 
 Al mejorar: no tiene mejora.
+
+#### **1.6 - Flujo de juego**
+##### **Introducción y Configuración del Juego:**
+El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
+
+##### **Tutoriales:**
+-El jugador se somete a un tutorial inicial que le enseña cómo funciona la gestión de recursos dentro de la ciudad. Aprende cómo construir edificios, qué recursos existen y cuáles son sus funcionalidades.
+Durante el tutorial, se notifica al jugador que Poseidón recaudará una cantidad de algas como impuesto. Si no se cumple este impuesto, Poseidón procederá a destruir aleatoriamente edificios en la ciudad.
+Expediciones:
+
+-Tras completar los tutoriales iniciales, el jugador tiene la opción de embarcarse en expediciones. Cada expedición lleva al jugador a un nuevo mapa.
+Tutorial de Expediciones:
+
+-El jugador recibe un segundo tutorial que lo familiariza con las mecánicas de expedición. Aprende sobre los iconos de cada casilla en el mapa, la presencia de depredadores, peces cazables y la existencia de tormellinos, que permiten salir del mapa sin perder recursos. Se destaca la importancia del tiempo como un factor que requiere que el jugador tome decisiones.
+
+##### **Progresión del Juego:**
+La obtención de recursos y nuevas mecánicas depende del número de expediciones y los objetos clave encontrados.
+
+-Primera Expedición: El jugador puede encontrar perlas, recursos versátiles pero difíciles de conseguir. También puede cazar peces para mantenerlos en una pecera para uso en el museo o en el generador de electricidad.
+
+-Tercera Expedición: Si el jugador encuentra un mapa, se desbloquea la mecánica de encontrar mapas. Posteriormente, Poseidón exige un impuesto imposible de pagar, lo que resulta en la destrucción de un edificio. El jugador descubre la madera, un recurso necesario para reparar edificios.
+
+-Quinta Expedición: El jugador puede encontrar una tablilla y un suministro de hierro. Esto demuestra la posibilidad de mejorar los edificios a través de la investigación. Los edificios se mejoran utilizando el hierro.
+
+-Sexta Expedición: El jugador encuentra un casco dorado en el mapa, lo que desbloquea mejoras relacionadas con el buceo.
+
+-Séptima Expedición: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
+
+##### **Colección y Museo:**
+-Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
+
+
 
 ## **2 - CONTROLES**
 
