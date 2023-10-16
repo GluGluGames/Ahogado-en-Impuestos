@@ -23,15 +23,7 @@ namespace GGG.Components.Ticks
         /// <returns></returns>
         private IEnumerator Tick()
         {
-            try
-            {
-                OnTick.Invoke();
-            }
-            catch (Exception e)
-            {
-                print(e);
-            }
-
+            OnTick?.Invoke();
             yield return new WaitForSeconds(1f);
             StartCoroutine(Tick());
         }

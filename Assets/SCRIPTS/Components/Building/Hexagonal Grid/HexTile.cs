@@ -18,6 +18,8 @@ namespace GGG.Components.Buildings {
         public Vector3Int cubeCoordinate;
         public List<HexTile> neighbours;
 
+        [SerializeField] private int ClearCost;
+
         private TileManager _manager;
         private GameObject _highlightPrefab;
         private BuildingComponent _currentBuilding;
@@ -40,6 +42,9 @@ namespace GGG.Components.Buildings {
         private void Start() {
             _manager = TileManager.instance;
             _isEmpty = _currentBuilding == null;
+
+            // TODO - Apply the cost manually
+            ClearCost = 50;
         }
 
         private void Update() {
@@ -76,6 +81,8 @@ namespace GGG.Components.Buildings {
                 Destroy(transform.GetChild(i).gameObject);
             AddTile();
         }
+
+        public int GetClearCost() { return ClearCost; }
 
         #endregion
 

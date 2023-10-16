@@ -1,5 +1,3 @@
-using Codice.Client.Common;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -55,12 +53,12 @@ namespace GGG.Components.Buildings
                 PlayerPosition.CurrentTile = tile;
 
                 foreach (HexTile tileAux in hexTiles)
-                tileAux.OnHexSelect += (x) =>
-                {
-                    _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
-                    _path.Reverse();
-                    PlayerPosition.CurrentPath = _path;
-                };
+                    tileAux.OnHexSelect += (x) =>
+                    {
+                        _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
+                        _path.Reverse();
+                        PlayerPosition.CurrentPath = _path;
+                    };
             }
         }
 

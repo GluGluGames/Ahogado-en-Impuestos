@@ -1,6 +1,8 @@
 using DG.Tweening;
 using GGG.Components.Buildings;
 using System;
+using GGG.Components.Player;
+using GGG.Shared;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +15,7 @@ namespace GGG.Components.UI
         [SerializeField] private Button CloseButton;
         [SerializeField] private TMP_Text CostAmountText;
 
+        private PlayerManager _player;
         private Transform _transform;
         private GameObject _viewport;
         private HexTile _selectedTile;
@@ -23,6 +26,8 @@ namespace GGG.Components.UI
 
         private void Start()
         {
+            _player = PlayerManager.Instance;
+            
             CleanButton.onClick.AddListener(CleanTile);
             CloseButton.onClick.AddListener(Close);
             CloseButton.gameObject.SetActive(false);
@@ -44,6 +49,12 @@ namespace GGG.Components.UI
 
         private void CleanTile()
         {
+            if (_player.GetResourceCount(BasicResources.SEAWEED) < _selectedTile.GetClearCost())
+            {
+                // TODO - Can't clear tile warning
+                return;
+            }
+            
             _selectedTile.SetTileType(TileType.Standard);
             Close();
         }
@@ -55,6 +66,7 @@ namespace GGG.Components.UI
 
             _viewport.SetActive(true);
             _selectedTile = tile;
+            CostAmountText.SetText(_selectedTile.GetClearCost().ToString());
             _open = true;
             CloseButton.gameObject.SetActive(true);
             OnMenuOpen?.Invoke();
