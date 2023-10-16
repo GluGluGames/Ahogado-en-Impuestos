@@ -2,7 +2,7 @@
 
 ![LogoGluGluGames2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/bb7bf48e-2b66-48a7-9d21-e7d79f0473aa)
 ## 0-Revisiones
-16/10/2023 - Se ha actualizado la descripcion de los recursos y se ha metido el flujo de juego.
+16/10/2023 - Se ha actualizado la descripcion de los recursos y se ha metido el flujo de juego,los animales,la descripcion de la niebla de guerra, y de la persecucion de los depredadores.
 
 ## 1 - MÉCANICAS 
 
@@ -27,6 +27,20 @@ Cuando comiences el juego las casillas lejanas van a estar cubiertas por una “
 Se utilizara el grid de hexagonos para la expedicion, lo que se va a crear son los prompt que se generaran de forma procedural(aleatoria dentro del mapa) para una experiencia nueva hacia el jugador,aparte de ello, se va a introducir prompts de logro que existe una cantidad minima de encontrarlos.
 
 #### **1.3.2 - Niebla de guerra**
+En el mágico mundo submarino de nuestro juego, la niebla de guerra es una característica crucial que añade un toque de misterio a cada aventura. A medida que los jugadores se adentran en las profundidades del océano, la visibilidad se ve afectada por la profundidad de la zona y el nivel de su casco submarino. Esta limitación en la visión invita a los jugadores a explorar lo desconocido, estimulando su curiosidad y el deseo de desvelar los secretos que aguardan en las profundidades.
+
+Conforme los jugadores exploran el mapa, las zonas previamente descubiertas permanecen visibles, garantizando un sentido de seguridad y orientación en su entorno. Sin embargo, en las áreas desconocidas, existe la posibilidad de que depredadores detecten al jugador. En tales situaciones, se activará un icono de alerta para notificar al jugador, creando un nivel adicional de tensión y emoción.
+
+Esta combinación de elementos asegura que la exploración sea una experiencia inmersiva y emocionante, donde cada nueva área presenta desafíos y oportunidades, invitando a los jugadores a sumergirse en las profundidades en busca de tesoros y descubrimientos asombrosos.
+
+#### **1.3.3 - Persucion de los depredadores**
+Dentro del entorno de exploración, la presencia de depredadores añade una capa adicional de emoción y desafío al juego. Los jugadores deben mantenerse alerta y vigilar las casillas circundantes en busca de signos de depredadores cercanos. El rango de visión de estos depredadores está inversamente relacionado con el daño que pueden infligir, lo que significa que los jugadores no deben preocuparse por depredadores gigantes y rápidos que sean difíciles de evitar.
+
+Cuando un depredador detecta al jugador, iniciará un movimiento hacia él con la intención de atacar. En esta situación, el jugador debe tomar medidas para escapar y cansar al depredador lo antes posible. La eficacia de esta estrategia dependerá de la rapidez con la que el jugador pueda evadir al depredador.
+
+Es fundamental comprender que las diferentes profundidades en el juego albergan distintos tipos de depredadores. Esto requiere que los jugadores planifiquen sus estrategias de huida con cuidado, ya que intentar escapar de un depredador puede llevarlos directamente hacia la amenaza de otro, potencialmente más peligroso.
+
+Esta mecánica añade un elemento táctico al juego, donde los jugadores deben sopesar cuidadosamente sus opciones y decidir si enfrentarán a un depredador, huirán o buscarán rutas de escape inteligentes para evitar situaciones peligrosas. La gestión adecuada de los encuentros con depredadores es esencial para una exitosa exploración del mundo submarino.
 
 ### **1.4 - Recursos** 
 **Recursos generales del Juego:**
