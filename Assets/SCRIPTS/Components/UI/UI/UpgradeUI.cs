@@ -15,10 +15,12 @@ namespace GGG.Components.UI
 
         private GameObject _panel;
         private BuildButton[] _buttons;
-        private BuildingComponent _auxBuilding;
         private Transform _transform;
+        private HexTile _selectedTile;
 
-        public Action OnMenuClose;
+        private bool _open;
+        
+        public Action OnMenuOpen;
 
         private void Start()
         {
@@ -36,34 +38,31 @@ namespace GGG.Components.UI
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
-                tile.OnHexSelect += () => {
-                    if (tile.GetCurrentBuilding() != _auxBuilding) {
-                        Close();
-                    }
-                };
-                OnMenuClose += tile.DeselectTile;
+                // tile.OnHexDeselect += Close;
             }
 
             SellButton.onClick.AddListener(OnSellButton);
             UpgradeButton.onClick.AddListener(OnUpgradeButton);
             CloseButton.onClick.AddListener(Close);
         }
+        
+        public bool IsOpen() { return _open; }
 
-        private void UpdateBuildings(BuildingComponent building)
+        private void UpdateBuildings(BuildingComponent building, HexTile buildingTile)
         {
-            building.OnBuildInteract += OnBuildInteract;
+            building.OnBuildInteract += (x, y) => {
+                OnBuildInteract(x, y);
+                Open(buildingTile);
+            };
         }
 
         private void OnBuildInteract(Action action, BuildingComponent build) 
         {
-            _transform.DOMove(new Vector3(960, 540), 0.1f).SetEase(Ease.InCubic);
-            _auxBuilding = build;
-            _panel.SetActive(true);
-            CloseButton.gameObject.SetActive(true);
             InteractButton.onClick.AddListener(() => {
                 action.Invoke();
                 Close();
             });
+
             if(!build.NeedInteraction()) InteractButton.gameObject.SetActive(false);
             else InteractButton.gameObject.SetActive(true);
         }
@@ -78,16 +77,30 @@ namespace GGG.Components.UI
             // TODO - Implement upgrade button
         }
 
-        private void Close()
+        private void Open(HexTile tile) {
+            if(_open) return;
+
+            _open = true;
+            _selectedTile = tile;
+            _panel.SetActive(true);
+            CloseButton.gameObject.SetActive(true);
+            _transform.DOMove(new Vector3(960, 540), 0.1f).SetEase(Ease.InCubic);
+            OnMenuOpen?.Invoke();
+        }
+
+        public void Close()
         {
+            if(!_open) return;
+
             _transform.DOMove(new Vector3(960, -360), 0.1f).SetEase(Ease.InCubic).onComplete += () => 
             {
                 _panel.SetActive(false);
                 CloseButton.gameObject.SetActive(false);
             };
             
-            _auxBuilding = null;
-            OnMenuClose?.Invoke();
+            _selectedTile.DeselectTile();
+            _selectedTile = null;
+            _open = false;
         }
     }
 }

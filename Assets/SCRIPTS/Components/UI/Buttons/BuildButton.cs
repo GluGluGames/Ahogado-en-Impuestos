@@ -15,18 +15,15 @@ namespace GGG.Components.UI {
         private HexTile _selectedHexTile;
         private BuildingComponent _auxBuild;
 
-        public Action<BuildingComponent> OnStructureBuild;
+        public Action<BuildingComponent, HexTile> OnStructureBuild;
 
         private void Start() {
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
-            foreach (HexTile tile in tiles)
-                tile.OnHexSelect += () => {
-                    _selectedHexTile = tile;
+            foreach (HexTile tile in tiles) {
+                tile.OnHexSelect += (x) => _selectedHexTile = tile;
+            }
 
-                    if (!_selectedHexTile.TileEmpty()) _auxBuild = tile.GetCurrentBuilding();
-                };
-             
             BuildNameText.SetText(BuildingInfo.GetName());
         }
 
@@ -35,7 +32,8 @@ namespace GGG.Components.UI {
             _auxBuild = auxGo.GetComponent<BuildingComponent>();
 
             _selectedHexTile.SetBuilding(_auxBuild);
-            OnStructureBuild?.Invoke(_auxBuild);
+            OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
+            _selectedHexTile = null;
         }
 
         #region Event Systems Method
