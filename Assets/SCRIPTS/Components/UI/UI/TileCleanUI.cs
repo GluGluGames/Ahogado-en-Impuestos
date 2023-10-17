@@ -33,7 +33,7 @@ namespace GGG.Components.UI
             CloseButton.gameObject.SetActive(false);
 
             _transform = transform;
-            _transform.position = new Vector3(960, -360);
+            _transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360);
 
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
@@ -71,14 +71,14 @@ namespace GGG.Components.UI
             CloseButton.gameObject.SetActive(true);
             OnMenuOpen?.Invoke();
 
-            _transform.DOMove(new Vector3(960, 540), 0.1f).SetEase(Ease.InCubic);
+            _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
         }
 
         public void Close()
         {
             if (!_open) return;
 
-            _transform.DOMove(new Vector3(960, -360), 0.1f).SetEase(Ease.InCubic).onComplete += () => {
+            _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360), 0.1f).SetEase(Ease.InCubic).onComplete += () => {
                 _viewport.SetActive(false);
                 CloseButton.gameObject.SetActive(false);
             };

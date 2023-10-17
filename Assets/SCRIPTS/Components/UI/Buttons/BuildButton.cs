@@ -23,7 +23,7 @@ namespace GGG.Components.UI {
 
         public Action<BuildingComponent, HexTile> OnStructureBuild;
 
-        private void Start()
+        public void Initialize()
         {
             _player = PlayerManager.Instance;
             HexTile[] tiles = FindObjectsOfType<HexTile>();

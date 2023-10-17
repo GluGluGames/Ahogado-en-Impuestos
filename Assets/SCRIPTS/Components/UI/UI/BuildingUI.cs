@@ -31,9 +31,11 @@ namespace GGG.Components.UI {
 
             _buttons = GetComponentsInChildren<BuildButton>(true);
 
-            foreach(BuildButton button in _buttons)
+            foreach (BuildButton button in _buttons) {
+                button.Initialize();
                 button.OnStructureBuild += (x, y) => Close();
-            
+            }
+
 
             _open = false;
             transform.position = new Vector3(0, -400f, 0);

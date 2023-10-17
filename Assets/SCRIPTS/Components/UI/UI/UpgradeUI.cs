@@ -28,7 +28,7 @@ namespace GGG.Components.UI
             _panel.SetActive(false);
             CloseButton.gameObject.SetActive(false);
             _transform = transform;
-            _transform.position = new Vector3(960, -360);
+            _transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360);
 
             _buttons = FindObjectsOfType<BuildButton>(true);
 
@@ -84,7 +84,7 @@ namespace GGG.Components.UI
             _selectedTile = tile;
             _panel.SetActive(true);
             CloseButton.gameObject.SetActive(true);
-            _transform.DOMove(new Vector3(960, 540), 0.1f).SetEase(Ease.InCubic);
+            _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
             OnMenuOpen?.Invoke();
         }
 
@@ -92,7 +92,7 @@ namespace GGG.Components.UI
         {
             if(!_open) return;
 
-            _transform.DOMove(new Vector3(960, -360), 0.1f).SetEase(Ease.InCubic).onComplete += () => 
+            _transform.DOMove(new Vector3(Screen.width * 0.5f, -360), 0.1f).SetEase(Ease.InCubic).onComplete += () => 
             {
                 _panel.SetActive(false);
                 CloseButton.gameObject.SetActive(false);
