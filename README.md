@@ -3,7 +3,7 @@
 ![LogoGluGluGames2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/bb7bf48e-2b66-48a7-9d21-e7d79f0473aa)
 ## 0-Revisiones
 16/10/2023 - Se ha actualizado la descripcion de los recursos y se ha metido el flujo de juego,los animales,la descripcion de la niebla de guerra, y de la persecucion de los depredadores.
-
+17/10/2023 - Se han corregido ciertas faltas ortográficas.
 ## 1 - MÉCANICAS 
 
 ### **1.1 - Mecánica principal**: 
@@ -33,7 +33,7 @@ Conforme los jugadores exploran el mapa, las zonas previamente descubiertas perm
 
 Esta combinación de elementos asegura que la exploración sea una experiencia inmersiva y emocionante, donde cada nueva área presenta desafíos y oportunidades, invitando a los jugadores a sumergirse en las profundidades en busca de tesoros y descubrimientos asombrosos.
 
-#### **1.3.3 - Persucion de los depredadores**
+#### **1.3.3 - Persecucion de los depredadores**
 Dentro del entorno de exploración, la presencia de depredadores añade una capa adicional de emoción y desafío al juego. Los jugadores deben mantenerse alerta y vigilar las casillas circundantes en busca de signos de depredadores cercanos. El rango de visión de estos depredadores está inversamente relacionado con el daño que pueden infligir, lo que significa que los jugadores no deben preocuparse por depredadores gigantes y rápidos que sean difíciles de evitar.
 
 Cuando un depredador detecta al jugador, iniciará un movimiento hacia él con la intención de atacar. En esta situación, el jugador debe tomar medidas para escapar y cansar al depredador lo antes posible. La eficacia de esta estrategia dependerá de la rapidez con la que el jugador pueda evadir al depredador.
@@ -45,13 +45,13 @@ Esta mecánica añade un elemento táctico al juego, donde los jugadores deben s
 ### **1.4 - Recursos** 
 **Recursos generales del Juego:**
 
--Algas Verdes: Se utilizan tanto para el costo de construcción como para el costo de mejoras en la ciudad. Estos son recursos esenciales para la expansión y mejora de la ciudad.
+- Algas Verdes: Se utilizan tanto para el costo de construcción como para el costo de mejoras en la ciudad. Estos son recursos esenciales para la expansión y mejora de la ciudad.
 
--Algas Rojas: Se utilizan para comprar objetos de aumento (boosts) dentro de la tienda del juego. Estos objetos pueden proporcionar ventajas temporales a los jugadores y pueden ser útiles en situaciones específicas.
+- Algas Rojas: Se utilizan para comprar objetos de aumento (boosts) dentro de la tienda del juego. Estos objetos pueden proporcionar ventajas temporales a los jugadores y pueden ser útiles en situaciones específicas.
 
--Perlas: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
+- Perlas: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
 
--Madera, Corales e Hierro: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
+- Madera, Corales y Hierro: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
 
 ### **1.5 - Edificios** 
 #### **1.5.1 - Granja de algas**
@@ -95,30 +95,30 @@ Al mejorar: no tiene mejora.
 El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
 
 #### **Tutoriales:**
--El jugador se somete a un tutorial inicial que le enseña cómo funciona la gestión de recursos dentro de la ciudad. Aprende cómo construir edificios, qué recursos existen y cuáles son sus funcionalidades.
+- El jugador se somete a un tutorial inicial que le enseña cómo funciona la gestión de recursos dentro de la ciudad. Aprende cómo construir edificios, qué recursos existen y cuáles son sus funcionalidades.
 Durante el tutorial, se notifica al jugador que Poseidón recaudará una cantidad de algas como impuesto. Si no se cumple este impuesto, Poseidón procederá a destruir aleatoriamente edificios en la ciudad.
 Expediciones:
 
--Tras completar los tutoriales iniciales, el jugador tiene la opción de embarcarse en expediciones. Cada expedición lleva al jugador a un nuevo mapa.
+- Tras completar los tutoriales iniciales, el jugador tiene la opción de embarcarse en expediciones. Cada expedición lleva al jugador a un nuevo mapa.
 Tutorial de Expediciones:
 
--El jugador recibe un segundo tutorial que lo familiariza con las mecánicas de expedición. Aprende sobre los iconos de cada casilla en el mapa, la presencia de depredadores, peces cazables y la existencia de tormellinos, que permiten salir del mapa sin perder recursos. Se destaca la importancia del tiempo como un factor que requiere que el jugador tome decisiones.
+- El jugador recibe un segundo tutorial que lo familiariza con las mecánicas de expedición. Aprende sobre los iconos de cada casilla en el mapa, la presencia de depredadores, peces cazables y la existencia de tormellinos, que permiten salir del mapa sin perder recursos. Se destaca la importancia del tiempo como un factor que requiere que el jugador tome decisiones.
 
 #### **Progresión del Juego:**
 La obtención de recursos y nuevas mecánicas depende del número de expediciones y los objetos clave encontrados.
 
--Primera Expedición: El jugador puede encontrar perlas, recursos versátiles pero difíciles de conseguir. También puede cazar peces para mantenerlos en una pecera para uso en el museo o en el generador de electricidad.
+- Primera Expedición: El jugador puede encontrar perlas, recursos versátiles pero difíciles de conseguir. También puede cazar peces para mantenerlos en una pecera para uso en el museo o en el generador de electricidad.
 
--Tercera Expedición: Si el jugador encuentra un mapa, se desbloquea la mecánica de encontrar mapas. Posteriormente, Poseidón exige un impuesto imposible de pagar, lo que resulta en la destrucción de un edificio. El jugador descubre la madera, un recurso necesario para reparar edificios.
+- Tercera Expedición: Si el jugador encuentra un mapa, se desbloquea la mecánica de encontrar mapas. Posteriormente, Poseidón exige un impuesto imposible de pagar, lo que resulta en la destrucción de un edificio. El jugador descubre la madera, un recurso necesario para reparar edificios.
 
--Quinta Expedición: El jugador puede encontrar una tablilla y un suministro de hierro. Esto demuestra la posibilidad de mejorar los edificios a través de la investigación. Los edificios se mejoran utilizando el hierro.
+- Quinta Expedición: El jugador puede encontrar una tablilla y un suministro de hierro. Esto demuestra la posibilidad de mejorar los edificios a través de la investigación. Los edificios se mejoran utilizando el hierro.
 
--Sexta Expedición: El jugador encuentra un casco dorado en el mapa, lo que desbloquea mejoras relacionadas con el buceo.
+- Sexta Expedición: El jugador encuentra un casco dorado en el mapa, lo que desbloquea mejoras relacionadas con el buceo.
 
--Séptima Expedición: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
+- Séptima Expedición: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
 
 #### **Colección y Museo:**
--Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
+- Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
 
 ### 1.7 Animales 
 #### Animales Depredadores
@@ -162,7 +162,7 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
   - **D, flecha derecha**: Movimiento horizontal hacia la derecha. 
   - **Click izquierdo**: Al hacer click y arrastrar el ratón por la pantalla, la cámara se moverá al sentido contrario del arrastrado.
 
-#### **2.1.2 - Rotación de la cámara: 
+#### **2.1.2 - Rotación de la cámara**: 
 
   - **E**: Rotación en sentido horario. 
   - **Q**: Rotación en sentido antihorario. 
