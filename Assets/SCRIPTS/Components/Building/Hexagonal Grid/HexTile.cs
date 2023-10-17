@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 namespace GGG.Components.Buildings {
+
+    [ExecuteAlways]
     public class HexTile : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerExitHandler {
         public HexTileGenerationSettings settings;
         public HexTileGenerationSettings.TileType tileType;

@@ -19,8 +19,6 @@ namespace GGG.Components.UI {
                 tile.OnHexSelect += () => {
                     _selectedHexTile = tile;
 
-                    print(_selectedHexTile.name);
-                    print(_selectedHexTile.TileEmpty());
                     if (!_selectedHexTile.TileEmpty())
                     {
                         print(tile.name);
