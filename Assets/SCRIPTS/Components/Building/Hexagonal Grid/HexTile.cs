@@ -60,6 +60,8 @@ namespace GGG.Components.Buildings {
                 AddTile();
                 _isDirty = false;
             }
+
+            _isEmpty = !_currentBuilding;
         }
 
         #endregion
@@ -149,6 +151,11 @@ namespace GGG.Components.Buildings {
 
             ActivateHighlight();
             SelectTile();
+        }
+
+        public void DestroyBuilding() {
+            Destroy(_currentBuilding.gameObject);
+            _currentBuilding = null;
         }
 
         #endregion

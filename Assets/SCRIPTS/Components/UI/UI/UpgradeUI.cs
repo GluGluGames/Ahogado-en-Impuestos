@@ -1,8 +1,11 @@
-using DG.Tweening;
 using GGG.Components.Buildings;
-using System;
+using GGG.Components.Player;
+
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using GGG.Shared;
 
 namespace GGG.Components.UI
 {
@@ -13,10 +16,12 @@ namespace GGG.Components.UI
         [SerializeField] private Button UpgradeButton;
         [SerializeField] private Button InteractButton;
 
+        private PlayerManager _player;
         private GameObject _panel;
         private BuildButton[] _buttons;
         private Transform _transform;
         private HexTile _selectedTile;
+        private BuildingComponent _selectedBuilding;
 
         private bool _open;
         
@@ -24,6 +29,8 @@ namespace GGG.Components.UI
 
         private void Start()
         {
+            _player = PlayerManager.Instance;
+
             _panel = transform.GetChild(0).gameObject;
             _panel.SetActive(false);
             CloseButton.gameObject.SetActive(false);
@@ -52,6 +59,7 @@ namespace GGG.Components.UI
         {
             building.OnBuildInteract += (x, y) => {
                 OnBuildInteract(x, y);
+                _selectedBuilding = building;
                 Open(buildingTile);
             };
         }
@@ -70,6 +78,11 @@ namespace GGG.Components.UI
         private void OnSellButton()
         {
             // TODO - Implement sell button
+            _player.AddResource(BasicResources.SEAWEED, Mathf.RoundToInt(_selectedBuilding.GetBuildCost() * 0.5f));
+            _selectedTile.DestroyBuilding();
+            
+            _selectedBuilding = null;
+            Close();
         }
 
         private void OnUpgradeButton()
