@@ -313,6 +313,26 @@ Mi jornada comenzó con la exploración de los vastos jardines de algas que rode
 
 A medida que pasarían los años, Atlantis resurgiría de su letargo, con nuevas estructuras y tecnologías olvidadas que una vez más se pondrían en funcionamiento. Nuestra misión era clara: cuidar de las aguas que tanto amaba Poseidón y, al hacerlo, mantener viva la leyenda de la ciudad perdida de Atlantis.
 
+**Mundo:** En el mundo de Atlantis, abundan diversas formas de vida marina, algunas únicas y adaptadas a las profundidades del océano. Las criaturas más importantes son:
+
+Los leviatanes dorados: enormes criaturas acuáticas de piel escamosa que Poseidón ha designado como protectores de las fronteras de Atlantis. Estos seres majestuosos nadan a lo largo de los límites del reino, manteniendo a raya a los depredadores y evitando invitados no deseados.
+
+Las medusas cantaoras: delicadas y hermosas medusas bioluminiscentes que llenan los océanos con su melodioso canto. Estas criaturas, a pesar de su belleza, pueden ser peligrosas para aquellos que se aventuran demasiado cerca sin la protección adecuada.
+
+Los delfines de esmeralda: delfines especialmente inteligentes y dotados de una habilidad excepcional para la navegación. Son conocidos por guiar a los viajeros perdidos de regreso a Atlantis y por su antiguo vínculo con los habitantes de la ciudad.
+
+Los tiburones sombríos: feroces depredadores marinos, ágiles y letales, que acechan en las profundidades en busca de presas desprevenidas. Son conocidos por su destreza y astucia en la caza, representando una amenaza constante para aquellos que se aventuran fuera de los límites de la ciudad.
+
+Los peces vampiro: criaturas oscuras y siniestras que se alimentan de la energía vital de otras formas de vida marina. Estos peces poseen una capacidad innata para el sigilo.
+
+Los peces león: depredadores agresivos y territoriales, con una melena de espinas venenosas que los hace formidables en la lucha. Los peces león protegen sus territorios ferozmente, las leyendas cuentan que protegen objetos de gran valor.
+
+Los rapes abisales: depredadores de aguas profundas que tiene la capacidad de generar una luz bioluminiscente para atraer a presas más pequeñas hacia él. Aunque no es particularmente hábil en la lucha directa, su capacidad para atraer a otros depredadores hacia su ubicación lo convierte en una amenaza indirecta para aquellos que se aventuran más allá de los límites seguros de la ciudad.
+
+Los depredadores están bajo el control de Poseidón, además de mantener el equilibrio en el océano, también sirven como ejecutores de su voluntad en el mundo submarino. Poseidón los ha dotado de inteligencia y fuerza sobrenatural para asegurarse de que su reino permanezca intacto y a salvo.
+
+La desaparición de Atlantis fue el resultado de un cataclismo natural, un gran terremoto submarino que desencadenó una serie de tsunamis devastadores. Aunque los habitantes de Atlantis habían desarrollado una tecnología avanzada para protegerse de muchos peligros, esta catástrofe resultó ser demasiado. A pesar de sus esfuerzos por contener y controlar los efectos, la ciudad no pudo resistir al colapso masivo de su estructura principal, sumergiéndola en lo más profundo de las aguas, donde permaneció oculta durante siglos, hasta que Poseidón decidió despertarla una vez más.
+
 ### **8.1 - Personajes – Adri C.**
 
 ## **9 - MÚSICA Y SONIDO – David** 
