@@ -38,7 +38,7 @@ namespace GGG.Components.Shop
         private void Start()
         {
             Viewport.SetActive(false);
-            transform.position = new Vector3(_INITIAL_POSITION + 960, 540);
+            transform.position = new Vector3(Screen.width * 0.5f + _INITIAL_POSITION, Screen.height * 0.5f);
 
             _player = PlayerManager.Instance;
 
@@ -97,7 +97,7 @@ namespace GGG.Components.Shop
             if(_open) return;
 
             Viewport.SetActive(true);
-            transform.DOMoveX(960, 2f, true).SetEase(Ease.InOutExpo);
+            transform.DOMoveX(Screen.width * 0.5f + _INITIAL_POSITION, 2f, true).SetEase(Ease.InOutExpo);
             _open = true;
         }
 
@@ -105,7 +105,7 @@ namespace GGG.Components.Shop
         {
             if(!_open) return;
 
-            transform.DOMoveX(_INITIAL_POSITION + 960, 2f, true).SetEase(Ease.InOutExpo).onComplete += () => { 
+            transform.DOMoveX(Screen.width * 0.5f + _INITIAL_POSITION, 2f, true).SetEase(Ease.InOutExpo).onComplete += () => { 
                 Viewport.SetActive(false);
                 _open = false;
             };

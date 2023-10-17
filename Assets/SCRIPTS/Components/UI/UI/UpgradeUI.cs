@@ -1,8 +1,11 @@
-using DG.Tweening;
 using GGG.Components.Buildings;
-using System;
+using GGG.Components.Player;
+
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using GGG.Shared;
 
 namespace GGG.Components.UI
 {
@@ -13,20 +16,26 @@ namespace GGG.Components.UI
         [SerializeField] private Button UpgradeButton;
         [SerializeField] private Button InteractButton;
 
+        private PlayerManager _player;
         private GameObject _panel;
         private BuildButton[] _buttons;
-        private BuildingComponent _auxBuilding;
         private Transform _transform;
+        private HexTile _selectedTile;
+        private BuildingComponent _selectedBuilding;
 
-        public Action OnMenuClose;
+        private bool _open;
+        
+        public Action OnMenuOpen;
 
         private void Start()
         {
+            _player = PlayerManager.Instance;
+
             _panel = transform.GetChild(0).gameObject;
             _panel.SetActive(false);
             CloseButton.gameObject.SetActive(false);
             _transform = transform;
-            _transform.position = new Vector3(960, -360);
+            _transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360);
 
             _buttons = FindObjectsOfType<BuildButton>(true);
 
@@ -36,34 +45,32 @@ namespace GGG.Components.UI
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
-                tile.OnHexSelect += () => {
-                    if (tile.GetCurrentBuilding() != _auxBuilding) {
-                        Close();
-                    }
-                };
-                OnMenuClose += tile.DeselectTile;
+                // tile.OnHexDeselect += Close;
             }
 
             SellButton.onClick.AddListener(OnSellButton);
             UpgradeButton.onClick.AddListener(OnUpgradeButton);
             CloseButton.onClick.AddListener(Close);
         }
+        
+        public bool IsOpen() { return _open; }
 
-        private void UpdateBuildings(BuildingComponent building)
+        private void UpdateBuildings(BuildingComponent building, HexTile buildingTile)
         {
-            building.OnBuildInteract += OnBuildInteract;
+            building.OnBuildInteract += (x, y) => {
+                OnBuildInteract(x, y);
+                _selectedBuilding = building;
+                Open(buildingTile);
+            };
         }
 
         private void OnBuildInteract(Action action, BuildingComponent build) 
         {
-            _transform.DOMove(new Vector3(960, 540), 0.1f).SetEase(Ease.InCubic);
-            _auxBuilding = build;
-            _panel.SetActive(true);
-            CloseButton.gameObject.SetActive(true);
             InteractButton.onClick.AddListener(() => {
                 action.Invoke();
                 Close();
             });
+
             if(!build.NeedInteraction()) InteractButton.gameObject.SetActive(false);
             else InteractButton.gameObject.SetActive(true);
         }
@@ -71,6 +78,11 @@ namespace GGG.Components.UI
         private void OnSellButton()
         {
             // TODO - Implement sell button
+            _player.AddResource(BasicResources.SEAWEED, Mathf.RoundToInt(_selectedBuilding.GetBuildCost() * 0.5f));
+            _selectedTile.DestroyBuilding();
+            
+            _selectedBuilding = null;
+            Close();
         }
 
         private void OnUpgradeButton()
@@ -78,16 +90,30 @@ namespace GGG.Components.UI
             // TODO - Implement upgrade button
         }
 
-        private void Close()
+        private void Open(HexTile tile) {
+            if(_open) return;
+
+            _open = true;
+            _selectedTile = tile;
+            _panel.SetActive(true);
+            CloseButton.gameObject.SetActive(true);
+            _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
+            OnMenuOpen?.Invoke();
+        }
+
+        public void Close()
         {
-            _transform.DOMove(new Vector3(960, -360), 0.1f).SetEase(Ease.InCubic).onComplete += () => 
+            if(!_open) return;
+
+            _transform.DOMove(new Vector3(Screen.width * 0.5f, -360), 0.1f).SetEase(Ease.InCubic).onComplete += () => 
             {
                 _panel.SetActive(false);
                 CloseButton.gameObject.SetActive(false);
             };
             
-            _auxBuilding = null;
-            OnMenuClose?.Invoke();
+            _selectedTile.DeselectTile();
+            _selectedTile = null;
+            _open = false;
         }
     }
 }

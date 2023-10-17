@@ -15,6 +15,8 @@ namespace GGG.Classes.Buildings
         [SerializeField] private GameObject Prefab;
         [Space(10)]
         [Header("Building Fields")]
+        [Tooltip("The price to build the building")]
+        [SerializeField] private int InitialPrice;
         [Tooltip("Determines if the player needs to click the building to interact with it")]
         [SerializeField] private bool NeededInteraction;
         [Tooltip("Determines the height of the building")]
@@ -50,6 +52,12 @@ namespace GGG.Classes.Buildings
         /// <returns>The instance of the building</returns>
         public GameObject Spawn(Vector3 position) { return Instantiate(Prefab, new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0)); }
 
+        /// <summary>
+        /// Gets the price of the building
+        /// </summary>
+        /// <returns></returns>
+        public int GetPrice() { return InitialPrice; }
+        
         /// <summary>
         /// Determines if the building needs player interaction to work
         /// </summary>

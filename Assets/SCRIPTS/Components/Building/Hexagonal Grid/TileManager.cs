@@ -1,3 +1,4 @@
+
 using Codice.Client.Common;
 using GGG.Components.Ticks;
 using System.Collections;
@@ -48,8 +49,13 @@ namespace GGG.Components.Buildings
 
             // Put the player somewhere
 
+<<<<<<< HEAD
             HexTile playerSpawnTile = GetRandomHex();
             while (playerSpawnTile.tileType != HexTileGenerationSettings.TileType.Cliff)
+=======
+            HexTile tile = GetRandomHex();
+            while (tile.tileType != TileType.Cliff)
+>>>>>>> origin/main
             {
                 playerSpawnTile = GetRandomHex();
             }
@@ -60,6 +66,7 @@ namespace GGG.Components.Buildings
                 PlayerPosition.CurrentTile = playerSpawnTile;
 
                 foreach (HexTile tileAux in hexTiles)
+<<<<<<< HEAD
                 tileAux.OnHexSelect += () =>
                 {
                     _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
@@ -69,6 +76,14 @@ namespace GGG.Components.Buildings
 
                 //FOW
                 RevealTile(playerSpawnTile, 2);
+=======
+                    tileAux.OnHexSelect += (x) =>
+                    {
+                        _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
+                        _path.Reverse();
+                        PlayerPosition.CurrentPath = _path;
+                    };
+>>>>>>> origin/main
             }
         }
 

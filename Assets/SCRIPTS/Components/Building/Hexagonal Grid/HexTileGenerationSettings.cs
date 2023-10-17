@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace GGG.Components.Buildings
 {
+    public enum TileType
+    {
+        Standard,
+        Water,
+        Cliff
+    }
+
     [CreateAssetMenu(menuName = "TileGen/GenerationSettings")]
     public class HexTileGenerationSettings : ScriptableObject
     {
-        public enum TileType
-        {
-            Standard,
-            Water,
-            Cliff
-        }
-
         [SerializeField] private GameObject Standar;
         [SerializeField] private GameObject Water;
         [SerializeField] private GameObject Cliff;

@@ -9,7 +9,7 @@ namespace GGG.Components.Dialogue {
         private DialogueBox _dialogue;
 
         private void Start() {
-            _dialogue = GetComponentInChildren<DialogueBox>();
+            _dialogue = GetComponentInChildren<DialogueBox>(true);
             Viewport.SetActive(false);
 
             _dialogue.DialogueStart += DialogueOpen;

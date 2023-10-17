@@ -4,50 +4,68 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
-using System.Collections.Generic;
 
 namespace GGG.Components.UI {
     public class BuildingUI : MonoBehaviour {
         [SerializeField] private Button CloseButton;
 
+        private GameObject _viewport;
         private BuildButton[] _buttons;
         private bool _open;
-
-        public Action OnMenuClose;
+        private HexTile _selectedTile;
+        
+        public Action OnMenuOpen;
     
         private void Start() {
-            CloseButton.onClick.AddListener(() => { Close(null); });
+            _viewport = transform.GetChild(0).gameObject;
+            _viewport.SetActive(false);
+            
+            CloseButton.onClick.AddListener(Close);
+            CloseButton.gameObject.SetActive(false);
 
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
                 tile.OnHexSelect += Open;
-                OnMenuClose += tile.DeselectTile;
             }
 
-            _buttons = GetComponentsInChildren<BuildButton>();
+            _buttons = GetComponentsInChildren<BuildButton>(true);
 
-            foreach(BuildButton button in _buttons)
-                button.OnStructureBuild += Close;
-            
+            foreach (BuildButton button in _buttons) {
+                button.Initialize();
+                button.OnStructureBuild += (x, y) => Close();
+            }
+
 
             _open = false;
             transform.position = new Vector3(0, -400f, 0);
         }
+        
+        public bool IsOpen() { return _open; }
 
-        private void Open() {
-            if (_open) return;
+        private void Open(HexTile tile) {
+            if (_open || tile.GetTileType() != TileType.Standard || !tile.TileEmpty()) {
+                return; 
+            }
             
-            transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
+            _selectedTile = tile;
             _open = true;
+            _viewport.SetActive(true);
+            CloseButton.gameObject.SetActive(true);
+            transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
+            OnMenuOpen?.Invoke();
         }
 
-        private void Close(BuildingComponent aux = null) {
+        public void Close() {
             if (!_open) return;
             
-            transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine);
+            transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine).onComplete += () => {
+                _viewport.SetActive(false);
+                CloseButton.gameObject.SetActive(false);
+            };
+            _selectedTile.DeselectTile();
+            _selectedTile = null;
             _open = false;
-            OnMenuClose?.Invoke();
         }
     }
 }

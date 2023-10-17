@@ -1,13 +1,15 @@
 # Ahogado-en-Impuestos
 
 ![LogoGluGluGames2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/bb7bf48e-2b66-48a7-9d21-e7d79f0473aa)
-
+## 0-Revisiones
+- 16/10/2023 - Se ha actualizado la descripcion de los recursos y se ha metido el flujo de juego,los animales,la descripcion de la niebla de guerra, y de la persecucion de los depredadores.
+- 17/10/2023 - Se han corregido ciertas faltas ortográficas.
 ## 1 - MÉCANICAS 
 
 ### **1.1 - Mecánica principal**: 
 
 Construcción de edificios para el aumento de la producción, y minijuegos ocasionales para la obtención de recursos más raros y la apertura de nuevas estructuras/mecánicas.  
-El juego se divide en dos grandes apartados. El primero de ellos es el **escenario principal**, y el segundo será un o varios **minijuegos**. Adelante entramos más en detalle en estos apartados. 
+El juego se divide en dos grandes apartados. El primero de ellos es el **escenario principal**, y el segundo será un o varios **minijuegos**. Adelante entramos más en detalle en estos apartados.
 
 ### **1.2 - Escenario principal**
 
@@ -25,11 +27,31 @@ Cuando comiences el juego las casillas lejanas van a estar cubiertas por una “
 Se utilizara el grid de hexagonos para la expedicion, lo que se va a crear son los prompt que se generaran de forma procedural(aleatoria dentro del mapa) para una experiencia nueva hacia el jugador,aparte de ello, se va a introducir prompts de logro que existe una cantidad minima de encontrarlos.
 
 #### **1.3.2 - Niebla de guerra**
+En el mágico mundo submarino de nuestro juego, la niebla de guerra es una característica crucial que añade un toque de misterio a cada aventura. A medida que los jugadores se adentran en las profundidades del océano, la visibilidad se ve afectada por la profundidad de la zona y el nivel de su casco submarino. Esta limitación en la visión invita a los jugadores a explorar lo desconocido, estimulando su curiosidad y el deseo de desvelar los secretos que aguardan en las profundidades.
+
+Conforme los jugadores exploran el mapa, las zonas previamente descubiertas permanecen visibles, garantizando un sentido de seguridad y orientación en su entorno. Sin embargo, en las áreas desconocidas, existe la posibilidad de que depredadores detecten al jugador. En tales situaciones, se activará un icono de alerta para notificar al jugador, creando un nivel adicional de tensión y emoción.
+
+Esta combinación de elementos asegura que la exploración sea una experiencia inmersiva y emocionante, donde cada nueva área presenta desafíos y oportunidades, invitando a los jugadores a sumergirse en las profundidades en busca de tesoros y descubrimientos asombrosos.
+
+#### **1.3.3 - Persecucion de los depredadores**
+Dentro del entorno de exploración, la presencia de depredadores añade una capa adicional de emoción y desafío al juego. Los jugadores deben mantenerse alerta y vigilar las casillas circundantes en busca de signos de depredadores cercanos. El rango de visión de estos depredadores está inversamente relacionado con el daño que pueden infligir, lo que significa que los jugadores no deben preocuparse por depredadores gigantes y rápidos que sean difíciles de evitar.
+
+Cuando un depredador detecta al jugador, iniciará un movimiento hacia él con la intención de atacar. En esta situación, el jugador debe tomar medidas para escapar y cansar al depredador lo antes posible. La eficacia de esta estrategia dependerá de la rapidez con la que el jugador pueda evadir al depredador.
+
+Es fundamental comprender que las diferentes profundidades en el juego albergan distintos tipos de depredadores. Esto requiere que los jugadores planifiquen sus estrategias de huida con cuidado, ya que intentar escapar de un depredador puede llevarlos directamente hacia la amenaza de otro, potencialmente más peligroso.
+
+Esta mecánica añade un elemento táctico al juego, donde los jugadores deben sopesar cuidadosamente sus opciones y decidir si enfrentarán a un depredador, huirán o buscarán rutas de escape inteligentes para evitar situaciones peligrosas. La gestión adecuada de los encuentros con depredadores es esencial para una exitosa exploración del mundo submarino.
 
 ### **1.4 - Recursos** 
-En este intrigante y exótico mundo de construcción y mejora, se presentan dos recursos fundamentales que son el sustento de toda progresión y desarrollo: las resplandecientes algas marinas y los majestuosos corales. Estos tesoros submarinos son el cimiento sobre el cual se erigen todas las maravillas de tu imperio acuático.
+**Recursos generales del Juego:**
 
-No obstante, para añadir un emocionante desafío a tu aventura, cuatro recursos especiales acechan en las profundidades, elevando la dificultad de tus decisiones y estrategias. Estos elementos extraordinarios, como perlas raras en un vasto océano, presentan un dilema fascinante mientras tratas de forjar un imperio submarino que perdure.
+- Algas Verdes: Se utilizan tanto para el costo de construcción como para el costo de mejoras en la ciudad. Estos son recursos esenciales para la expansión y mejora de la ciudad.
+
+- Algas Rojas: Se utilizan para comprar objetos de aumento (boosts) dentro de la tienda del juego. Estos objetos pueden proporcionar ventajas temporales a los jugadores y pueden ser útiles en situaciones específicas.
+
+- Perlas: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
+
+- Madera, Corales y Hierro: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
 
 ### **1.5 - Edificios** 
 #### **1.5.1 - Granja de algas**
@@ -68,6 +90,62 @@ Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubier
 
 Al mejorar: no tiene mejora.
 
+### **1.6 - Flujo de juego**
+#### **Introducción y Configuración del Juego:**
+El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
+
+#### **Tutoriales:**
+- El jugador se somete a un tutorial inicial que le enseña cómo funciona la gestión de recursos dentro de la ciudad. Aprende cómo construir edificios, qué recursos existen y cuáles son sus funcionalidades.
+Durante el tutorial, se notifica al jugador que Poseidón recaudará una cantidad de algas como impuesto. Si no se cumple este impuesto, Poseidón procederá a destruir aleatoriamente edificios en la ciudad.
+Expediciones:
+
+- Tras completar los tutoriales iniciales, el jugador tiene la opción de embarcarse en expediciones. Cada expedición lleva al jugador a un nuevo mapa.
+Tutorial de Expediciones:
+
+- El jugador recibe un segundo tutorial que lo familiariza con las mecánicas de expedición. Aprende sobre los iconos de cada casilla en el mapa, la presencia de depredadores, peces cazables y la existencia de tormellinos, que permiten salir del mapa sin perder recursos. Se destaca la importancia del tiempo como un factor que requiere que el jugador tome decisiones.
+
+#### **Progresión del Juego:**
+La obtención de recursos y nuevas mecánicas depende del número de expediciones y los objetos clave encontrados.
+
+- Primera Expedición: El jugador puede encontrar perlas, recursos versátiles pero difíciles de conseguir. También puede cazar peces para mantenerlos en una pecera para uso en el museo o en el generador de electricidad.
+
+- Tercera Expedición: Si el jugador encuentra un mapa, se desbloquea la mecánica de encontrar mapas. Posteriormente, Poseidón exige un impuesto imposible de pagar, lo que resulta en la destrucción de un edificio. El jugador descubre la madera, un recurso necesario para reparar edificios.
+
+- Quinta Expedición: El jugador puede encontrar una tablilla y un suministro de hierro. Esto demuestra la posibilidad de mejorar los edificios a través de la investigación. Los edificios se mejoran utilizando el hierro.
+
+- Sexta Expedición: El jugador encuentra un casco dorado en el mapa, lo que desbloquea mejoras relacionadas con el buceo.
+
+- Séptima Expedición: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
+
+#### **Colección y Museo:**
+- Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
+
+### 1.7 Animales 
+#### Animales Depredadores
+|  Nombre   |  Damage  | Descripciones |
+| --------- | -------- | ------------- |
+| Tiburon   |    2     | Criatura agrevisa distribuida por todas las profundidades, varian el tamaño según la profundidad. Atacan al jugador en caso de desecubrirle |
+| Pez Vampiro | 1      | Su principal característica son los colmillos que sobresalen de su mandíbula inferior.Se ocultan en las aguas profundas y lanzan ataques a sus presas tipo emboscada.|
+| Pez Leon |     1     | Habita en aguas cálidas y es muy venenoso. Es carnívoro y se alimenta de crustáceos, camarones y otros peces.|
+| Medusa | 0.5/segundos| Criatura no ofensiva pero toxica, por lo que si se acerca demasiado puede ser intoxicado por su piel y perder vida de manera continua.
+| Trucha arcoiris | 0.5 | Critatura de tamaño medio, ofensiva pero ataque poco efectivo, distribuido en niveles medio profundo.|
+
+#### Animales Inocentes
+|  Nombre   |  Size  | Descripciones |
+| --------- | -------- | ------------- |
+| molly velífera | Small | Pez de tamaño pequeño que se descubre en profundidad baja, recurso necesario para mantener el generador de electricidad. Distribuido en zonas iniciales.|
+| Peces cebra | Small | Pez de tamaño pequeño que se descubre en profundidad baja, recurso necesario para mantener el generador de electricidad. Distribuido en zonas iniciales e medios.|
+| Pez neon | Medium | Recurso distribuido en profundidad medio de cada mapa, posee una gran cantidad de carne por lo que puede ser consumido por varias anguilas, de forma que es mas rentable para el generador.|
+| Pez dorado | Small | Critatura pacifica que escapa si descubre al jugador, se puede coleecionar para el uso del generador, o para el libro de museo.|
+| Boga | Medium| Criatura de tamaño medio no ofensiva, sirve para dar más energía al generador y para el libro de colecciones.|
+| Lubina | Medium| Criatura mediano que se puede consumir por el jugador dentro de la expedición para coger energía(Alargar el tiempo de expedicion) .|
+| Dorada | Medium| Criatura media que propone un efecto de velocidad durante un tiempo determinado.|
+
+
+
+
+
+
 ## **2 - CONTROLES**
 
 Los controles del juego están basados en los clásicos controles de los juegos de estrategia. Principalmente, son usados para mover y controlar la cámara, permitiendo así al jugador una mayor inmersión dentro del juego. 
@@ -84,7 +162,7 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
   - **D, flecha derecha**: Movimiento horizontal hacia la derecha. 
   - **Click izquierdo**: Al hacer click y arrastrar el ratón por la pantalla, la cámara se moverá al sentido contrario del arrastrado.
 
-#### **2.1.2 - Rotación de la cámara: 
+#### **2.1.2 - Rotación de la cámara**: 
 
   - **E**: Rotación en sentido horario. 
   - **Q**: Rotación en sentido antihorario. 
@@ -148,6 +226,12 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 #### **3.2.11 - Poseidón**
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)
+
+### **3.3 - Personajes**
+
+#### **3.3.1 - Estilo visual personajes**
+
+- Los personajes dentro de los diálogos tendrán una estética diferente a la del juego, al estilo Hades. Cuando los personajes hablen tendrán una imagen suya a modo de splash art. Se ha tomado esta deicisón porque creemos que favorecerá a la narrativa y a la satisfacción visual del jugador, es decir, que será atractiva para los usuarios.
 
 ## **4 - DISEÑO 3D – Adri C.**
 
@@ -217,7 +301,7 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ## **8 - NARRATIVA** 
 
-Hace siglos, fui un habitante de la legendaria ciudad perdida de Atlantis, un lugar misterioso y enigmático que se ocultaba en las profundidades del océano. Sin embargo, mi existencia en ese antiguo reino se mantuvo en un sueño profundo, sepultado bajo las corrientes marinas, hasta que un día, el mismísimo Poseidón, el dios del mar, me despertó de mi largo letargo.
+**Sinopsis:** Hace siglos, fui un habitante de la legendaria ciudad perdida de Atlantis, un lugar misterioso y enigmático que se ocultaba en las profundidades del océano. Sin embargo, mi existencia en ese antiguo reino se mantuvo en un sueño profundo, sepultado bajo las corrientes marinas, hasta que un día, el mismísimo Poseidón, el dios del mar, me despertó de mi largo letargo.
 
 Poseidón me recordó el verdadero propósito de Atlantis, una ciudad concebida como una fábrica de algas. El océano, con el paso de los siglos, se había vuelto cada vez más turbio y tóxico, poniendo en peligro su delicado equilibrio. Poseidón, en su sabiduría, comprendió que era esencial purificar sus aguas para proteger su reino acuático y la vida que lo habitaba.
 
@@ -227,9 +311,27 @@ Las anguilas, criaturas resplandecientes que habían evolucionado para producir 
 
 Mi jornada comenzó con la exploración de los vastos jardines de algas que rodeaban la ciudad. Cada semana, debía recolectar más y más algas para satisfacer las crecientes demandas de Poseidón. Estas algas eran el pilar de nuestra civilización submarina, proporcionando alimento y, lo más importante, un sistema de purificación de aguas naturales que mantenía vivas las aguas cristalinas que Poseidón amaba.
 
-A medida que pasarían los años, Atlantis resurgiría de su letargo, con nuevas estructuras y tecnologías olvidadas que una vez más se pondrían en funcionamiento.
+A medida que pasarían los años, Atlantis resurgiría de su letargo, con nuevas estructuras y tecnologías olvidadas que una vez más se pondrían en funcionamiento. Nuestra misión era clara: cuidar de las aguas que tanto amaba Poseidón y, al hacerlo, mantener viva la leyenda de la ciudad perdida de Atlantis.
 
-Nuestra misión era clara: cuidar de las aguas que tanto amaba Poseidón y, al hacerlo, mantener viva la leyenda de la ciudad perdida de Atlantis.
+**Mundo:** En el mundo de Atlantis, abundan diversas formas de vida marina, algunas únicas y adaptadas a las profundidades del océano. Las criaturas más importantes son:
+
+Los leviatanes dorados: enormes criaturas acuáticas de piel escamosa que Poseidón ha designado como protectores de las fronteras de Atlantis. Estos seres majestuosos nadan a lo largo de los límites del reino, manteniendo a raya a los depredadores y evitando invitados no deseados.
+
+Las medusas cantaoras: delicadas y hermosas medusas bioluminiscentes que llenan los océanos con su melodioso canto. Estas criaturas, a pesar de su belleza, pueden ser peligrosas para aquellos que se aventuran demasiado cerca sin la protección adecuada.
+
+Los delfines de esmeralda: delfines especialmente inteligentes y dotados de una habilidad excepcional para la navegación. Son conocidos por guiar a los viajeros perdidos de regreso a Atlantis y por su antiguo vínculo con los habitantes de la ciudad.
+
+Los tiburones sombríos: feroces depredadores marinos, ágiles y letales, que acechan en las profundidades en busca de presas desprevenidas. Son conocidos por su destreza y astucia en la caza, representando una amenaza constante para aquellos que se aventuran fuera de los límites de la ciudad.
+
+Los peces vampiro: criaturas oscuras y siniestras que se alimentan de la energía vital de otras formas de vida marina. Estos peces poseen una capacidad innata para el sigilo.
+
+Los peces león: depredadores agresivos y territoriales, con una melena de espinas venenosas que los hace formidables en la lucha. Los peces león protegen sus territorios ferozmente, las leyendas cuentan que protegen objetos de gran valor.
+
+Los rapes abisales: depredadores de aguas profundas que tiene la capacidad de generar una luz bioluminiscente para atraer a presas más pequeñas hacia él. Aunque no es particularmente hábil en la lucha directa, su capacidad para atraer a otros depredadores hacia su ubicación lo convierte en una amenaza indirecta para aquellos que se aventuran más allá de los límites seguros de la ciudad.
+
+Los depredadores están bajo el control de Poseidón, además de mantener el equilibrio en el océano, también sirven como ejecutores de su voluntad en el mundo submarino. Poseidón los ha dotado de inteligencia y fuerza sobrenatural para asegurarse de que su reino permanezca intacto y a salvo.
+
+La desaparición de Atlantis fue el resultado de un cataclismo natural, un gran terremoto submarino que desencadenó una serie de tsunamis devastadores. Aunque los habitantes de Atlantis habían desarrollado una tecnología avanzada para protegerse de muchos peligros, esta catástrofe resultó ser demasiado. A pesar de sus esfuerzos por contener y controlar los efectos, la ciudad no pudo resistir al colapso masivo de su estructura principal, sumergiéndola en lo más profundo de las aguas, donde permaneció oculta durante siglos, hasta que Poseidón decidió despertarla una vez más.
 
 ### **8.1 - Personajes – Adri C.**
 

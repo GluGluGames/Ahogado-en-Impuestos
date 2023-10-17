@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: SeaweedFarm
   Description: 
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: fe4b884b0ffb6cd499f947927fb165ec, type: 3}
   Prefab: {fileID: 8113010406866780128, guid: 8807a79897f001d4085fe45216d838dd, type: 3}
+  InitialPrice: 0
   NeededInteraction: 0
-  SpawnHeight: 0.5
+  SpawnHeight: 0.3
   Resource: {fileID: 11400000, guid: 409668b942bf168468a1802391fbfcf4, type: 2}
   InitialGeneration: 1
   InitialCooldown: 2

@@ -12,13 +12,15 @@ namespace GGG.Components.Buildings {
     [ExecuteAlways]
     public class HexTile : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerExitHandler {
         public HexTileGenerationSettings settings;
-        public HexTileGenerationSettings.TileType tileType;
+        public TileType tileType;
 
         public GameObject tilePrefab;
         public GameObject fow;
         public Vector2Int offsetCoordinate;
         public Vector3Int cubeCoordinate;
         public List<HexTile> neighbours;
+
+        [SerializeField] private int ClearCost;
 
         private TileManager _manager;
         private GameObject _highlightPrefab;
@@ -29,7 +31,8 @@ namespace GGG.Components.Buildings {
         private bool _selected = false;
 
         public Action OnHexHighlight;
-        public Action OnHexSelect;
+        public Action<HexTile> OnHexSelect;
+        public Action OnHexDeselect;
 
         #region Unity Events
 
@@ -47,6 +50,8 @@ namespace GGG.Components.Buildings {
                 _highlightPrefab = Instantiate(_manager.highlightPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
                 _highlightPrefab.SetActive(false);
             }
+            // TODO - Apply the cost manually
+            ClearCost = 50;
         }
 
         private void Update() {
@@ -62,6 +67,8 @@ namespace GGG.Components.Buildings {
                 AddTile();
                 _isDirty = false;
             }
+
+            _isEmpty = !_currentBuilding;
         }
 
         #endregion
@@ -75,6 +82,16 @@ namespace GGG.Components.Buildings {
             _currentBuilding = building;
             _isEmpty = building == null;
         }
+        public TileType GetTileType() { return tileType; }
+
+        public void SetTileType(TileType type) { 
+            tileType = type;
+            for (int i = 0; i < transform.childCount; i++)
+                Destroy(transform.GetChild(i).gameObject);
+            AddTile();
+        }
+
+        public int GetClearCost() { return ClearCost; }
 
         #endregion
 
@@ -83,7 +100,7 @@ namespace GGG.Components.Buildings {
         // summary:
         //  Generate random type of tile
         public void RollTileType() {
-            tileType = (HexTileGenerationSettings.TileType)Random.Range(0, 3);
+            tileType = (TileType)Random.Range(0, 3);
         }
 
         public void AddTile() {
@@ -96,20 +113,23 @@ namespace GGG.Components.Buildings {
         }
 
         private void SelectTile() {
-            if (_manager.GetSelectedTile()) {
-                _manager.GetSelectedTile()._selected = false;
-                _manager.GetSelectedTile().DeactivateHighlight();
-            }
+            if (_manager.GetSelectedTile() && _manager.GetSelectedTile() != this)
+                _manager.GetSelectedTile().DeselectTile();
+            
 
             _selected = true;
             _manager.SelectTile(this);
+            print($"Selected {gameObject.name}");
+            OnHexSelect?.Invoke(this);
         }
 
         public void DeselectTile() {
             if(!_selected) return;
 
+            OnHexDeselect?.Invoke();
             _manager.SelectTile(null);
             _selected = false;
+            print($"Deselected {gameObject.name}");
             DeactivateHighlight();
         }
 
@@ -130,13 +150,15 @@ namespace GGG.Components.Buildings {
 
             if (_currentBuilding) {
                 _currentBuilding.Interact();
-                yield break;
             }
 
             ActivateHighlight();
             SelectTile();
-            OnHexSelect?.Invoke();
-            
+        }
+
+        public void DestroyBuilding() {
+            Destroy(_currentBuilding.gameObject);
+            _currentBuilding = null;
         }
 
         #endregion
