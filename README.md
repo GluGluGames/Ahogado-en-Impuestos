@@ -4,6 +4,7 @@
 ## 0-Revisiones
 - 16/10/2023 - Se ha actualizado la descripcion de los recursos y se ha metido el flujo de juego,los animales,la descripcion de la niebla de guerra, y de la persecucion de los depredadores.
 - 17/10/2023 - Se han corregido ciertas faltas ortográficas.
+- 17/10/2023 - Luming - Aumento de detalles en tablas para los edificios
 ## 1 - MÉCANICAS 
 
 ### **1.1 - Mecánica principal**: 
@@ -58,6 +59,11 @@ Esta mecánica añade un elemento táctico al juego, donde los jugadores deben s
 La granja de algas generara un número de algas por unidad de tiempo. 
 
 Al subirla de nivel: el número de algas generadas aumentará.
+| Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Productividad | Justificacion|
+| :--: | :--: | :--: | :--: | :--: | ------------ |
+| 1 | 2000 algasverdes + 400 corales| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
+| 2 | x| 400 Hierro + 400 corales | 400 madera |  40 algas/3s | Nivel intermedio, corresponde con productividad medio bajo, incentivar al jugador acceder a expedicion para conseguir el mejor nivel de la construccion |
+| 3 | x| 600 Hierro + 400 corales | 800 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
 
 #### **1.5.2 - Tienda de objetos**
 La tienda de objetos servirá al jugador para intercambiar un número de materiales por otros. 
@@ -65,22 +71,81 @@ La tienda de objetos servirá al jugador para intercambiar un número de materia
   - Cada intercambio se podrá realizar un número límitado de veces.
 
 Al subirla de nivel: se ofrecerá un mayor número de intercambios al día y de recursos más valiosos.
+| Nivel | Coste de restauracion| Coste de mejora |Intercambios permitidos| Justificacion|
+| :--: | :--: | :--: | :--: |------------ |
+| 1 | 1000 algas verdes| x | 3 | La tienda se sirve como ayuda para el jugador, no queremos que el jugador se relegue solo en los intercambios de elementos
+| 2 | x| 200 hierro | 5 | En esta fase el jugador ya ha avanzado parte del juego, por lo tanto se le permite mas intercambios cada dia
+| 3 | x| 300 hierro  | 10 | Aqui el jugador ya habra avanzado bastante en la construccion de la ciudad por lo tanto se permiten hasta 10 ya que puede hacer falta los recursos en ocaciones, sin abusar del intercambio|
 
 #### **1.5.3 - Generador de electricidad**
 El generador de electricidad requerirá de anguilas eléctricas para construirse. Su principal función es generar cargas que pueden usarse para:
   - Boostear un edificio seleccionado por el jugador.
   - Recargar el paratridentes para poder usarlo de nuevo.
+    
+| Nivel | Coste de Construcción | Coste de Mejora | Cargas - Aceleración / Tiempo | Recurso necesario para activar | Justificación |
+| :---: | :-------------------: | :-------------: | :------------------: | :-----------------------------: | :-----------: |
+| 1| 2000 algas verdes + 5 anguilas electricas | x | +10% de la productividad actual / 5min| 10 pez | Nivel bajo y de tipo acelerador, se pide cantidad mediano de recurso para activar y aumenta poca cantidad de productividad|
+| 2| x | 200 hierro + 15 anguilas electricas | 2 slots +30% de la productividad actual/10min | 15 pez | Nivel medio, se aumenta la productivad pero tambien el coste por uso. |
+| 3| x | 400 hierro + 25 anguilas electricas | 3 Slots +90% de la productividad actual /15min| 50 pez | Version final de la construccion, mejora significativa pero consumo significativo tambien.|
 
  Al subirlo de nivel: en el nivel II habrá dos cargas disponibles y en el nivel III, tres cargas disponibles. El uso de estas cargas es asignado por el jugador.
 
 #### **1.5.4 - Paratridente**
 El impresionante Paratridente, cuya construcción conlleva un coste significativo, posee una característica única y vital: su capacidad para proteger una zona designada durante una única ráfaga de furia. Para mantener su eficacia, este artefacto debe ser cargado con la energía eléctrica de las anguilas eléctricas, lo que añade un elemento de recolección estratégica a la ecuación. Cada Paratridente está equipado con tres cargas, lo que se traduce en tres oportunidades de activación. Cada vez que la furia de Poseidón desciende sobre una casilla protegida por el Paratridente, este responde de manera inmediata, anulando el peligro y consumiendo una de sus preciadas cargas. Sin embargo, tras cada intervención, el Paratridente requiere un período de tiempo para recargar su cúpula defensiva, que puede realizarse hasta en tres ocasiones. En el caso desafortunado de que la furia de Poseidón impacte en un edificio revelado, el resultado es un ataque devastador que deja la casilla afectada en un estado crítico. Esta casilla quedará inoperativa hasta que sea reparada, lo que añade un elemento de urgencia y gestión de recursos a la estrategia del jugador.
+| Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Numero de protecciones | Tiempo de espera | Justificacion|
+| :--: | :--: | :--: | :--: | :--: |:--:| ------------ |
+| 1| 5000 algas verdes + 500 corales| x | 2500 algas verdes | 1 | 5min | Sirve como una proteccion basica para el jugador, pero puede ser mejorado en el futuro y aguanta mas iras de poseidon.|
+| 2| x| 500 hierro + 500 corales | 2500 algas verdes | 2 | 5min | Se aumenta a 2 veces el numero de protecciones, pero sera necesario cargado por el generador de electricidad.|
+| 3| x| 500 hierro + 500 corales | 2500 algas verdes | 3 | 3min | Monumento gigante que para 3 iras de poseidon, version mejorado de tiempo como recompensa para el jugador.|
+
+
 
 #### **1.5.5 - Mejoras de buceo**
 Después de llevar a cabo un impresionante total de diez expediciones, en las cuales el jugador ha demostrado una destreza y determinación sin igual, se descubre un misterioso casco mágico. Este asombroso hallazgo desencadena la apertura de un nuevo horizonte de posibilidades, en forma de un espléndido edificio dedicado exclusivamente a la mejora del buceo. Este majestuoso edificio de mejoras de buceo se convierte en un centro neurálgico de investigación submarina, donde los secretos de las profundidades marinas se desvelan lentamente. Sin embargo, la búsqueda del conocimiento tiene su precio, y el costo de investigación aumenta de forma exponencial, desafiando aún más la habilidad y el ingenio del jugador.
+| Nivel | Coste de construccion | Coste de mejora | Coste de reparacion| 
+| :--: | :--: | :--: | :--: |
+|  1 | 2500 algas verdes | x | 1000 algas |
+|  2 | x | 500 hierro | 1000 algas |
+|  3 | x | 750 hierro | 1000 algas |
+
+| Tipo | Nivel requerido de edificio| Nivel Mejora | Coste de mejora | Efecto| Justificacion| 
+| :---:| :--:|:---:|:---:|:---:|:---:|
+| Casco | 1 | 1->2 | 3000 algas verdes| 2 min -> 3 min | Alargar un poco el tiempo que puede permanecer el jugador dentro de la expedicion, dando lugar a mas posibilidades de recoger recursos|
+| Casco | 2 | 2->3 | 5000 algas verdes| 3 min -> 5 min | Extender 2 minutos por el mismo motivo, pero con un coste superior ya que el beneficio de alargar el tiempo de expedicion a 5 minutos puede dar lugar a muchos recursos recogidos|
+| Casco | 3 | 3->4 | 10000 algas verdes| 5 min -> 10 min| Extender a 10 minutos ya que en esta etapa el jugador habra cogido soltura el juego, entonces se le ofrece una mejora final del tiempo, asi para ser eficiente.|
+| Aletas(Pendiente) | 1 | 1->2 | 1000 algas verdes| +1 casilla de movimiento original| Dar un beneficio inicial y permitir mas movimientos por parte del jugador.|
+| Aletas(Pendiente) | 2 | 2->3 | 2000 algas verdes| +3 velocidad de movimiento original| Dar mas pasos al jugador para que pueda enfocarse en la planificacion de recolectar recursos.|
+| Aletas(Pendiente) | 3 | 3->4 | 3000 algas verdes| +5 velocidad de movimiento original| El jugador ya tiene experiencia en la expedicion y sabe a donde ir, solo le damos un herramiento de hacer cosas mas rapido.|
+| Mochila(Pendiente) | 1 | 1->2 | 1000 algas verdes| +10 casillas para criaturas | Aumentar la capacidad de la mochila a la hora de cazar peces o recolectar.|
+| Mochila(Pendiente)| 2 | 2->3 | 1000 algas verdes| +10 casillas para criaturas |  Aumentar la capacidad de la mochila a la hora de cazar peces o recolectar.|
+| Mochila(Pendiente) | 3 | 3->4 | 1000 algas verdes| +10 casillas para criaturas| Aumentar la capacidad de la mochila a la hora de cazar peces o recolectar.|
+
+
+
+
 
 #### **1.5.6 - Edificio de investigacion** 
 Un majestuoso edificio de investigación, cuidadosamente desvelado con la adquisición de una enigmática tablilla, y erigido con una preciosa cantidad de corales. Una vez completada su construcción, se convierte en el epicentro del conocimiento y la innovación, permitiendo la realización de exhaustivas investigaciones que abarcan tanto mejoras edilicias como la exploración de los mapas hallados en nuestras expediciones. A lo largo del transcurso del juego, el costo de este edificio se incrementará gradualmente, poniendo a prueba la habilidad estratégica del jugador. Además, el tiempo de espera se convertirá en una variable crucial, si bien la implementación de edificios aceleradores y la aplicación de impulsos dentro de la ciudad pueden desempeñar un papel crucial para optimizar y agilizar estos procesos.
+| Nivel | Coste de construccion | Coste de mejora | Coste de reparacion| 
+| :--: | :--: | :--: | :--: |
+|  1 | 2500 algas verdes | x | 1000 algas |
+|  2 | x | 500 hierro  | 1000 algas |
+|  3 | x | 750 hierro | 1000 algas |
+
+|Edificio| Nivel requerido del centro| Nivel mejora | Coste| Tiempo |Justificacion|
+| :--: | :--: | :--: | :--: | :--: | :--: |
+|Granja de algas| 1 | 1->2| 2500 algas verdes | 3 min | La mejora incial de la granja tarda 5 minutos debido a que sube poco la productividad.|
+|Granja de algas| 2 | 2->3| 3500 algas verdes | 10 min | Hay una mejora significativa en la productividad, por lo tanto se contraresta con el tiempo de investigacion.|
+|Generador de electricidad| 1 | 1->2 | 1000 algas verdes | 10 min| Es un edificio que acelera el progreso del juego por lo tanto se obliga al jugador esperar.|
+|Generador de electricidad| 2 | 2->3 | 3000 algas verdes | 10 min| Es un edificio que acelera el progreso del juego por lo tanto se obliga al jugador esperar.|
+|Paratridente| 1 | 1->2 | 1000 algas verdes | 10 min| Es un edificio que previene las destrucciones de poseidon, por lo tanto las mejoras deben llevar a cabo mas tiempo para que el jugador pueda experimentar destrucciones.|
+|Paratridente| 2 | 2->3 | 2000 algas verdes | 10 min|Es un edificio que previene las destrucciones de poseidon, por lo tanto las mejoras deben llevar a cabo mas tiempo para que el jugador pueda experimentar destrucciones.|
+|Mejora de buceo| 1 | 1->2 | 1000 algas verdes | 5 min| Se tarda poco debido a que hay mas coste de algas dentro del propio edificio.|
+|Mejora de buceo| 2 | 2->3 | 2000 algas verdes | 5 min| Se tarda poco debido a que hay mas coste de algas dentro del propio edificio.|
+
+
+
+
 
 #### **1.5.7 - Museo**
 Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubierto, además se darán recompensas por desbloquear un número de recursos de las tres categorías:
@@ -90,37 +155,7 @@ Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubier
 
 Al mejorar: no tiene mejora.
 
-### **1.6 - Flujo de juego**
-#### **Introducción y Configuración del Juego:**
-El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
-
-#### **Tutoriales:**
-- El jugador se somete a un tutorial inicial que le enseña cómo funciona la gestión de recursos dentro de la ciudad. Aprende cómo construir edificios, qué recursos existen y cuáles son sus funcionalidades.
-Durante el tutorial, se notifica al jugador que Poseidón recaudará una cantidad de algas como impuesto. Si no se cumple este impuesto, Poseidón procederá a destruir aleatoriamente edificios en la ciudad.
-Expediciones:
-
-- Tras completar los tutoriales iniciales, el jugador tiene la opción de embarcarse en expediciones. Cada expedición lleva al jugador a un nuevo mapa.
-Tutorial de Expediciones:
-
-- El jugador recibe un segundo tutorial que lo familiariza con las mecánicas de expedición. Aprende sobre los iconos de cada casilla en el mapa, la presencia de depredadores, peces cazables y la existencia de tormellinos, que permiten salir del mapa sin perder recursos. Se destaca la importancia del tiempo como un factor que requiere que el jugador tome decisiones.
-
-#### **Progresión del Juego:**
-La obtención de recursos y nuevas mecánicas depende del número de expediciones y los objetos clave encontrados.
-
-- Primera Expedición: El jugador puede encontrar perlas, recursos versátiles pero difíciles de conseguir. También puede cazar peces para mantenerlos en una pecera para uso en el museo o en el generador de electricidad.
-
-- Tercera Expedición: Si el jugador encuentra un mapa, se desbloquea la mecánica de encontrar mapas. Posteriormente, Poseidón exige un impuesto imposible de pagar, lo que resulta en la destrucción de un edificio. El jugador descubre la madera, un recurso necesario para reparar edificios.
-
-- Quinta Expedición: El jugador puede encontrar una tablilla y un suministro de hierro. Esto demuestra la posibilidad de mejorar los edificios a través de la investigación. Los edificios se mejoran utilizando el hierro.
-
-- Sexta Expedición: El jugador encuentra un casco dorado en el mapa, lo que desbloquea mejoras relacionadas con el buceo.
-
-- Séptima Expedición: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
-
-#### **Colección y Museo:**
-- Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
-
-### 1.7 Animales 
+### 1.6 Animales 
 #### Animales Depredadores
 |  Nombre   |  Damage  | Descripciones |
 | --------- | -------- | ------------- |
@@ -236,6 +271,35 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 ## **4 - DISEÑO 3D – Adri C.**
 
 ## **5 - GAME DESIGN  – Adri/Luming** 
+**- Flujo de juego**
+#### **Introducción y Configuración del Juego:**
+El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
+
+#### **Tutoriales:**
+- El jugador se somete a un tutorial inicial que le enseña cómo funciona la gestión de recursos dentro de la ciudad. Aprende cómo construir edificios, qué recursos existen y cuáles son sus funcionalidades.
+Durante el tutorial, se notifica al jugador que Poseidón recaudará una cantidad de algas como impuesto. Si no se cumple este impuesto, Poseidón procederá a destruir aleatoriamente edificios en la ciudad.
+Expediciones:
+
+- Tras completar los tutoriales iniciales, el jugador tiene la opción de embarcarse en expediciones. Cada expedición lleva al jugador a un nuevo mapa.
+Tutorial de Expediciones:
+
+- El jugador recibe un segundo tutorial que lo familiariza con las mecánicas de expedición. Aprende sobre los iconos de cada casilla en el mapa, la presencia de depredadores, peces cazables y la existencia de tormellinos, que permiten salir del mapa sin perder recursos. Se destaca la importancia del tiempo como un factor que requiere que el jugador tome decisiones.
+
+#### **Progresión del Juego:**
+La obtención de recursos y nuevas mecánicas depende del número de expediciones y los objetos clave encontrados.
+
+- Primera Expedición: El jugador puede encontrar perlas, recursos versátiles pero difíciles de conseguir. También puede cazar peces para mantenerlos en una pecera para uso en el museo o en el generador de electricidad.
+
+- Tercera Expedición: Si el jugador encuentra un mapa, se desbloquea la mecánica de encontrar mapas. Posteriormente, Poseidón exige un impuesto imposible de pagar, lo que resulta en la destrucción de un edificio. El jugador descubre la madera, un recurso necesario para reparar edificios.
+
+- Quinta Expedición: El jugador puede encontrar una tablilla y un suministro de hierro. Esto demuestra la posibilidad de mejorar los edificios a través de la investigación. Los edificios se mejoran utilizando el hierro.
+
+- Sexta Expedición: El jugador encuentra un casco dorado en el mapa, lo que desbloquea mejoras relacionadas con el buceo.
+
+- Séptima Expedición: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
+
+#### **Colección y Museo:**
+- Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
 
 ### **5.1 - Diseño de nivel**
 
@@ -312,26 +376,6 @@ Las anguilas, criaturas resplandecientes que habían evolucionado para producir 
 Mi jornada comenzó con la exploración de los vastos jardines de algas que rodeaban la ciudad. Cada semana, debía recolectar más y más algas para satisfacer las crecientes demandas de Poseidón. Estas algas eran el pilar de nuestra civilización submarina, proporcionando alimento y, lo más importante, un sistema de purificación de aguas naturales que mantenía vivas las aguas cristalinas que Poseidón amaba.
 
 A medida que pasarían los años, Atlantis resurgiría de su letargo, con nuevas estructuras y tecnologías olvidadas que una vez más se pondrían en funcionamiento. Nuestra misión era clara: cuidar de las aguas que tanto amaba Poseidón y, al hacerlo, mantener viva la leyenda de la ciudad perdida de Atlantis.
-
-**Mundo:** En el mundo de Atlantis, abundan diversas formas de vida marina, algunas únicas y adaptadas a las profundidades del océano. Las criaturas más importantes son:
-
-Los leviatanes dorados: enormes criaturas acuáticas de piel escamosa que Poseidón ha designado como protectores de las fronteras de Atlantis. Estos seres majestuosos nadan a lo largo de los límites del reino, manteniendo a raya a los depredadores y evitando invitados no deseados.
-
-Las medusas cantaoras: delicadas y hermosas medusas bioluminiscentes que llenan los océanos con su melodioso canto. Estas criaturas, a pesar de su belleza, pueden ser peligrosas para aquellos que se aventuran demasiado cerca sin la protección adecuada.
-
-Los delfines de esmeralda: delfines especialmente inteligentes y dotados de una habilidad excepcional para la navegación. Son conocidos por guiar a los viajeros perdidos de regreso a Atlantis y por su antiguo vínculo con los habitantes de la ciudad.
-
-Los tiburones sombríos: feroces depredadores marinos, ágiles y letales, que acechan en las profundidades en busca de presas desprevenidas. Son conocidos por su destreza y astucia en la caza, representando una amenaza constante para aquellos que se aventuran fuera de los límites de la ciudad.
-
-Los peces vampiro: criaturas oscuras y siniestras que se alimentan de la energía vital de otras formas de vida marina. Estos peces poseen una capacidad innata para el sigilo.
-
-Los peces león: depredadores agresivos y territoriales, con una melena de espinas venenosas que los hace formidables en la lucha. Los peces león protegen sus territorios ferozmente, las leyendas cuentan que protegen objetos de gran valor.
-
-Los rapes abisales: depredadores de aguas profundas que tiene la capacidad de generar una luz bioluminiscente para atraer a presas más pequeñas hacia él. Aunque no es particularmente hábil en la lucha directa, su capacidad para atraer a otros depredadores hacia su ubicación lo convierte en una amenaza indirecta para aquellos que se aventuran más allá de los límites seguros de la ciudad.
-
-Los depredadores están bajo el control de Poseidón, además de mantener el equilibrio en el océano, también sirven como ejecutores de su voluntad en el mundo submarino. Poseidón los ha dotado de inteligencia y fuerza sobrenatural para asegurarse de que su reino permanezca intacto y a salvo.
-
-La desaparición de Atlantis fue el resultado de un cataclismo natural, un gran terremoto submarino que desencadenó una serie de tsunamis devastadores. Aunque los habitantes de Atlantis habían desarrollado una tecnología avanzada para protegerse de muchos peligros, esta catástrofe resultó ser demasiado. A pesar de sus esfuerzos por contener y controlar los efectos, la ciudad no pudo resistir al colapso masivo de su estructura principal, sumergiéndola en lo más profundo de las aguas, donde permaneció oculta durante siglos, hasta que Poseidón decidió despertarla una vez más.
 
 ### **8.1 - Personajes – Adri C.**
 
