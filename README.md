@@ -4,7 +4,7 @@
 ## 0-Revisiones
 - 16/10/2023 - Se ha actualizado la descripcion de los recursos y se ha metido el flujo de juego,los animales,la descripcion de la niebla de guerra, y de la persecucion de los depredadores.
 - 17/10/2023 - Se han corregido ciertas faltas ortográficas.
-- 17/10/2023 - Luming - Aumento de detalles en tablas para los edificios
+- 17/10/2023 - Luming - Aumento de detalles en tablas para los edificios, poner tutorial y progresion en game design, adjuntando sus propias diagramas de flujo. Aparte, tambien se ha metido los graficos sobre la recaudacion y la curva de aprendizaje
 ## 1 - MÉCANICAS 
 
 ### **1.1 - Mecánica principal**: 
@@ -285,6 +285,8 @@ Tutorial de Expediciones:
 
 - El jugador recibe un segundo tutorial que lo familiariza con las mecánicas de expedición. Aprende sobre los iconos de cada casilla en el mapa, la presencia de depredadores, peces cazables y la existencia de tormellinos, que permiten salir del mapa sin perder recursos. Se destaca la importancia del tiempo como un factor que requiere que el jugador tome decisiones.
 
+![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Excel%20Game%20Design/DiagramaTutorial.png)
+
 #### **Progresión del Juego:**
 La obtención de recursos y nuevas mecánicas depende del número de expediciones y los objetos clave encontrados.
 
@@ -297,9 +299,20 @@ La obtención de recursos y nuevas mecánicas depende del número de expedicione
 - Sexta Expedición: El jugador encuentra un casco dorado en el mapa, lo que desbloquea mejoras relacionadas con el buceo.
 
 - Séptima Expedición: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
+![Progresion de expediciones](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Excel%20Game%20Design/Flujo%20de%20expedicion.png)
 
 #### **Colección y Museo:**
 - Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
+
+#### **Curva de aprendizaje:**
+Explicacion:
+
+![Cuerva de aprendizaje](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Excel%20Game%20Design/Curva%20de%20aprendizaje.png)
+#### **Intensidad de recaudacion:**
+Explicacion:
+
+![Intensidad de recaudacion ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Excel%20Game%20Design/Intensidad%20de%20recaudacion.png)
+
 
 ### **5.1 - Diseño de nivel**
 
