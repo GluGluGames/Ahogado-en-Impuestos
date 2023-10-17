@@ -161,6 +161,25 @@ namespace GGG.Components.Buildings {
             _currentBuilding = null;
         }
 
+
+        /// <summary>
+        /// Reveals tiles around itself, recursive function. Range is dependant on <paramref name="depth"/>
+        /// </summary>
+        /// <param name="depth"> Range of the tiles to clear </param> 
+        /// <param name="iter"> Internal stop variable, set it to 0 on base call </param>
+        public void Reveal(int depth, int iter)
+        {
+            if (iter > depth) return;
+            ++iter;
+            foreach (HexTile neighbour in neighbours)
+            {
+                neighbour.Reveal(depth, iter);
+            }
+            gameObject.layer = 0;
+            transform.GetChild(0).gameObject.layer = 0;
+            fow.SetActive(false);
+        }
+
         #endregion
 
         #region Event System Methods
@@ -177,24 +196,6 @@ namespace GGG.Components.Buildings {
 
         public void OnPointerDown(PointerEventData eventData) {
             StartCoroutine(TouchWait());
-        }
-
-        /// <summary>
-        /// Reveals tiles around itself, recursive function. Range is dependant on <paramref name="depth"/>
-        /// </summary>
-        /// <param name="depth"> Range of the tiles to clear </param> 
-        /// <param name="iter"> Internal stop variable, set it to 0 on base call </param>
-        public void Reveal(int depth, int iter)
-        {
-            if(iter > depth) return;
-            ++iter;
-            foreach(HexTile neighbour in neighbours)
-            {
-                neighbour.Reveal(depth, iter);
-            }
-            gameObject.layer = 0;
-            transform.GetChild(0).gameObject.layer = 0;
-            fow.SetActive(false);
         }
 
         #endregion

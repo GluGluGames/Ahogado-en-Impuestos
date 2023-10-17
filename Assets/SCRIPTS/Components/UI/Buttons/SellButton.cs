@@ -6,25 +6,25 @@ using UnityEngine.EventSystems;
 namespace GGG.Components.UI {
     public class SellButton : MonoBehaviour {
 
-        private HexTile _selectedHexTile;
-        public Action onStructureSold;
+        //private HexTile _selectedHexTile;
+        //public Action onStructureSold;
 
 
-        void Start()
-        {   
-            HexTile[] hexTiles = FindObjectsOfType<HexTile>();
+        //void Start()
+        //{   
+        //    HexTile[] hexTiles = FindObjectsOfType<HexTile>();
 
-            foreach (HexTile tile in hexTiles)
-            {
-                tile.OnHexSelect += () => {
-                    _selectedHexTile = tile;
+        //    foreach (HexTile tile in hexTiles)
+        //    {
+        //        tile.OnHexSelect += () => {
+        //            _selectedHexTile = tile;
 
-                    if (!_selectedHexTile.TileEmpty())
-                    {
-                        print(tile.name);
-                    }
-                };
-            }
-        }
+        //            if (!_selectedHexTile.TileEmpty())
+        //            {
+        //                print(tile.name);
+        //            }
+        //        };
+        //    }
+        //}
     }
 }

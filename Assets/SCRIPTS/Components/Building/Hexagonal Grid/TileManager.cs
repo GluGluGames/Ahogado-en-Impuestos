@@ -49,13 +49,9 @@ namespace GGG.Components.Buildings
 
             // Put the player somewhere
 
-<<<<<<< HEAD
+
             HexTile playerSpawnTile = GetRandomHex();
-            while (playerSpawnTile.tileType != HexTileGenerationSettings.TileType.Cliff)
-=======
-            HexTile tile = GetRandomHex();
-            while (tile.tileType != TileType.Cliff)
->>>>>>> origin/main
+            while (playerSpawnTile.tileType != TileType.Cliff)
             {
                 playerSpawnTile = GetRandomHex();
             }
@@ -66,8 +62,7 @@ namespace GGG.Components.Buildings
                 PlayerPosition.CurrentTile = playerSpawnTile;
 
                 foreach (HexTile tileAux in hexTiles)
-<<<<<<< HEAD
-                tileAux.OnHexSelect += () =>
+                tileAux.OnHexSelect += (tileAux) =>
                 {
                     _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
                     _path.Reverse();
@@ -76,14 +71,6 @@ namespace GGG.Components.Buildings
 
                 //FOW
                 RevealTile(playerSpawnTile, 2);
-=======
-                    tileAux.OnHexSelect += (x) =>
-                    {
-                        _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
-                        _path.Reverse();
-                        PlayerPosition.CurrentPath = _path;
-                    };
->>>>>>> origin/main
             }
         }
 
@@ -153,7 +140,10 @@ namespace GGG.Components.Buildings
         /// <param name="depth"></param>
         public void RevealTile(HexTile tile, int depth)
         {
-            tile.Reveal(depth, 0);
+            if(FOWActive)
+            {
+                tile.Reveal(depth, 0);
+            }
 
         }
     }
