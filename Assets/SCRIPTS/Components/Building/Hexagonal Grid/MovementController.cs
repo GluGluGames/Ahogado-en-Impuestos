@@ -90,6 +90,8 @@ namespace GGG.Components.Buildings
         {
             Quaternion angle = Quaternion.Euler(0, Vector3.Angle(targetPos, transform.forward), 0);
             _rigidbody.Move(targetPos, angle);
+
+            TileManager.instance.RevealTile(PlayerPosition.NextTile, 3);
         }
     }
 }

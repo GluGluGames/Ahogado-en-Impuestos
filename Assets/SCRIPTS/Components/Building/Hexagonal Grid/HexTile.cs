@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 namespace GGG.Components.Buildings {
+
+    [ExecuteAlways]
     public class HexTile : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerExitHandler {
         public HexTileGenerationSettings settings;
         public TileType tileType;
@@ -43,6 +45,11 @@ namespace GGG.Components.Buildings {
             _manager = TileManager.instance;
             _isEmpty = _currentBuilding == null;
 
+            if (_manager)
+            {
+                _highlightPrefab = Instantiate(_manager.highlightPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
+                _highlightPrefab.SetActive(false);
+            }
             // TODO - Apply the cost manually
             ClearCost = 50;
         }
@@ -98,10 +105,6 @@ namespace GGG.Components.Buildings {
 
         public void AddTile() {
             tilePrefab = Instantiate(settings.GetTile(tileType), transform.position, Quaternion.Euler(0f, 0f, 0f), transform);
-            if (_manager) {
-                _highlightPrefab = Instantiate(_manager.highlightPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
-                _highlightPrefab.SetActive(false);
-            }
 
             if (gameObject.GetComponent<MeshCollider>() == null) {
                 MeshCollider collider = gameObject.AddComponent<MeshCollider>();
@@ -174,6 +177,24 @@ namespace GGG.Components.Buildings {
 
         public void OnPointerDown(PointerEventData eventData) {
             StartCoroutine(TouchWait());
+        }
+
+        /// <summary>
+        /// Reveals tiles around itself, recursive function. Range is dependant on <paramref name="depth"/>
+        /// </summary>
+        /// <param name="depth"> Range of the tiles to clear </param> 
+        /// <param name="iter"> Internal stop variable, set it to 0 on base call </param>
+        public void Reveal(int depth, int iter)
+        {
+            if(iter > depth) return;
+            ++iter;
+            foreach(HexTile neighbour in neighbours)
+            {
+                neighbour.Reveal(depth, iter);
+            }
+            gameObject.layer = 0;
+            transform.GetChild(0).gameObject.layer = 0;
+            fow.SetActive(false);
         }
 
         #endregion
