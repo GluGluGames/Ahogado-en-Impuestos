@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 using GGG.Shared;
 using UnityEngine.Localization.Settings;
@@ -17,7 +16,6 @@ namespace GGG.Components.Core
         private void Awake() {
             if (Instance == null) Instance = this;
             
-            if(!DebugMode) StartCoroutine(InitializeGame());
             StartCoroutine(initializeLanguage());
         }
 
@@ -25,21 +23,29 @@ namespace GGG.Components.Core
 
         [SerializeField] private bool DebugMode;
 
-        #region Functions
-        private IEnumerator InitializeGame() {
-            yield return null;
+        private SceneManagement _sceneManagement;
+        private GameState _currentState;
 
-            for(int i = 0; i < SceneManager.sceneCountInBuildSettings; i++) {
-                Scene scene = SceneManager.GetSceneByBuildIndex(i);
-                if (scene == SceneManager.GetSceneByBuildIndex((int) SceneIndexes.SHARED) || !scene.isLoaded) continue;
+        #region Unity Events
 
-                AsyncOperation a = SceneManager.UnloadSceneAsync(i);
-                while(!a.isDone) yield return null;
-            }
+        private void Start()
+        {
+            _sceneManagement = SceneManagement.Instance;
 
-            AsyncOperation async = SceneManager.LoadSceneAsync((int) SceneIndexes.MAIN_MENU, LoadSceneMode.Additive);
-            while (!async.isDone) yield return null;
+            _currentState = DebugMode ? GameState.PLAYING : GameState.MENU;
+            if (!DebugMode) InitializeGame();
         }
+
+        #endregion
+
+        #region Functions
+        
+        private void InitializeGame() {
+            _sceneManagement.UnloadActiveScenes();
+            _sceneManagement.AddSceneToLoad(SceneIndexes.MAIN_MENU);
+            _sceneManagement.UpdateScenes();
+        }
+        
         private IEnumerator initializeLanguage()
         {
             yield return LocalizationSettings.InitializationOperation;
@@ -47,17 +53,16 @@ namespace GGG.Components.Core
                 PlayerPrefs.HasKey("LocalKey") ? PlayerPrefs.GetInt("LocalKey") : 0];
             _language = PlayerPrefs.HasKey("LocalKey") ? (Language)PlayerPrefs.GetInt("LocalKey") : Language.Spanish;
         }
+        
         #endregion
 
         #region Getters & Setters
-        public Language GetCurrentLanguage()
-        {
-            return _language;
-        }
-        public void SetLanguage(Language language)
-        {
-            _language = language;
-        }
+        public Language GetCurrentLanguage() => _language;
+        public void SetLanguage(Language language) => _language = language;
+        public GameState GetGameState() => _currentState;
+        public void SetGameState(GameState state) => _currentState = state;
+        public bool PlayingGame() => _currentState is GameState.PLAYING or GameState.MINIGAME;
+
         #endregion
     }
 }

@@ -1,28 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using GGG.Shared;
+using GGG.Components.Core;
 
-public class MainMenu : MonoBehaviour
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace GGG.Components.Menus
 {
-    private List<AsyncOperation> _sceneLoading = new();
-
-    public void OnStartButton()
+    public class MainMenu : MonoBehaviour
     {
-        _sceneLoading.Add(SceneManager.UnloadSceneAsync((int)SceneIndexes.MAIN_MENU));
-        _sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.GAME_SCENE, LoadSceneMode.Additive));
-        StartCoroutine(LoadSceneAsync());
-    }
+        [SerializeField] private Button PlayButton;
+        [SerializeField] private Button SettingsButton;
+        [SerializeField] private Button CreditsButton;
 
-    private IEnumerator LoadSceneAsync()
-    {
-        foreach(AsyncOperation a in _sceneLoading) {
-            while (!a.isDone) {
-                //TODO - Load screen
+        private SceneManagement _sceneManagement;
 
-                yield return null;
-            }
+        private void Start()
+        {
+            _sceneManagement = SceneManagement.Instance;
+            
+            PlayButton.onClick.AddListener(OnStartButton);
+            SettingsButton.onClick.AddListener(OnSettingsButton);
+            CreditsButton.onClick.AddListener(OnCreditsButton);
+        }
+
+        private void OnStartButton()
+        {
+            _sceneManagement.AddSceneToUnload(SceneIndexes.MAIN_MENU);
+            _sceneManagement.AddSceneToLoad(SceneIndexes.GAME_SCENE);
+            _sceneManagement.UpdateScenes();
+            
+            GameManager.Instance.SetGameState(GameState.PLAYING);
+        }
+
+        private void OnSettingsButton()
+        {
+            _sceneManagement.OpenSettings();
+        }
+
+        private void OnCreditsButton()
+        {
+            _sceneManagement.OpenCredits();
         }
     }
 }

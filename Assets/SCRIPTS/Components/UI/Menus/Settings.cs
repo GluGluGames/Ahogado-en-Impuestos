@@ -45,6 +45,13 @@ namespace GGG.Components.Menus
         [Tooltip("Dropdown of the graphics")]
         [SerializeField] private TMP_Dropdown GraphicsDropdown;
 
+        [Space(5)] 
+        [Header("Buttons")] 
+        [Tooltip("Close Button")] 
+        [SerializeField] private Button CloseButton;
+        [Tooltip("Credits Button")] 
+        [SerializeField] private Button CreditsButton;
+
         private bool _languageActive = false;
 
         #region Unity Methods
@@ -52,6 +59,9 @@ namespace GGG.Components.Menus
         {
             StartSounds();
             LanguageDropdown.value = GameManager.Instance.GetCurrentLanguage() == Language.Spanish ? 0 : 1;
+            
+            CloseButton.onClick.AddListener(OnCloseButton);
+            CreditsButton.onClick.AddListener(OnCreditsButton);
         }
 
         #endregion
@@ -114,6 +124,16 @@ namespace GGG.Components.Menus
                     break;
             }
 
+        }
+
+        private void OnCloseButton()
+        {
+            SceneManagement.Instance.CloseSettings();
+        }
+
+        private void OnCreditsButton()
+        {
+            SceneManagement.Instance.OpenCredits();
         }
 
         #endregion
