@@ -2,8 +2,8 @@
 
 ![LogoGluGluGames2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/bb7bf48e-2b66-48a7-9d21-e7d79f0473aa)
 ## 0-Revisiones
-16/10/2023 - Se ha actualizado la descripcion de los recursos y se ha metido el flujo de juego,los animales,la descripcion de la niebla de guerra, y de la persecucion de los depredadores.
-17/10/2023 - Se han corregido ciertas faltas ortográficas.
+- 16/10/2023 - Se ha actualizado la descripcion de los recursos y se ha metido el flujo de juego,los animales,la descripcion de la niebla de guerra, y de la persecucion de los depredadores.
+- 17/10/2023 - Se han corregido ciertas faltas ortográficas.
 ## 1 - MÉCANICAS 
 
 ### **1.1 - Mecánica principal**: 
