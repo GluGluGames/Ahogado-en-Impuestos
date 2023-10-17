@@ -31546,6 +31546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlightPrefab: {fileID: 2082100517571088346, guid: 03e5a2cea7f9b6b41ac2782f46fe8dd7, type: 3}
   _FOWPrefab: {fileID: 4247352008104741573, guid: 3fa7f1dbaf21f4f49b3b34538d129572, type: 3}
+  FOWActive: 1
   Player: {fileID: 161958129}
 --- !u!114 &1808264837
 MonoBehaviour:
@@ -37191,6 +37192,10 @@ PrefabInstance:
     - target: {fileID: 2320281019385162878, guid: fce6d07689c472d46a37c017efabf759, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5171943371470811850, guid: fce6d07689c472d46a37c017efabf759, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 6919211136089341334, guid: fce6d07689c472d46a37c017efabf759, type: 3}
       propertyPath: m_Name

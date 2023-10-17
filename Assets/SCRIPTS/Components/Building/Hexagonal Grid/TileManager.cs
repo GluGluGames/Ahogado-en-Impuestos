@@ -1,4 +1,5 @@
 using Codice.Client.Common;
+using GGG.Components.Ticks;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace GGG.Components.Buildings
         private Dictionary<Vector3Int, HexTile> _tilesDic;
         private HexTile _selectedTile;
         [SerializeField] private GameObject _FOWPrefab;
+        [SerializeField] private bool FOWActive = false;
 
         #region playerInfo
 
@@ -30,11 +32,12 @@ namespace GGG.Components.Buildings
 
             HexTile[] hexTiles = gameObject.GetComponentsInChildren<HexTile>();
 
-            // Register every hex tile
+            // Register every hex playerSpawnTile
             foreach (HexTile hexTile in hexTiles)
             {
                 RegisterTile(hexTile);
-                AddFogOfWarTile(hexTile);
+                if(FOWActive) { AddFogOfWarTile(hexTile); }
+
             }
 
             foreach (HexTile hexTile in hexTiles)
@@ -45,16 +48,16 @@ namespace GGG.Components.Buildings
 
             // Put the player somewhere
 
-            HexTile tile = GetRandomHex();
-            while (tile.tileType != HexTileGenerationSettings.TileType.Cliff)
+            HexTile playerSpawnTile = GetRandomHex();
+            while (playerSpawnTile.tileType != HexTileGenerationSettings.TileType.Cliff)
             {
-                tile = GetRandomHex();
+                playerSpawnTile = GetRandomHex();
             }
 
             if (Player) {
-                _playerPosCube = tile.cubeCoordinate;
-                Player.transform.position = tile.transform.position + new Vector3(0.0f, 1f, 0.0f);
-                PlayerPosition.CurrentTile = tile;
+                _playerPosCube = playerSpawnTile.cubeCoordinate;
+                Player.transform.position = playerSpawnTile.transform.position + new Vector3(0.0f, 1f, 0.0f);
+                PlayerPosition.CurrentTile = playerSpawnTile;
 
                 foreach (HexTile tileAux in hexTiles)
                 tileAux.OnHexSelect += () =>
@@ -63,6 +66,9 @@ namespace GGG.Components.Buildings
                     _path.Reverse();
                     PlayerPosition.CurrentPath = _path;
                 };
+
+                //FOW
+                RevealTile(playerSpawnTile, 2);
             }
         }
 
@@ -108,13 +114,32 @@ namespace GGG.Components.Buildings
             int rand = Random.Range(0, _tilesDic.Count);
             return _tilesDic.ElementAt(rand).Value;
         }
-     
+        
+        /// <summary>
+        ///  Add prefab which acts as FOW. Also we make the basic hex invisible by changing its layer. We modify this when we eliminate the FOW.
+        /// </summary>
+        /// <param name="tile"></param>
         private void AddFogOfWarTile(HexTile tile)
         {
             GameObject fow = Instantiate(_FOWPrefab, transform);
             fow.name = $"FOW C{tile.offsetCoordinate.x}, R{tile.offsetCoordinate.y}";
             fow.transform.position = tile.transform.position;
             tile.fow = fow;
+            tile.gameObject.layer = 7; // Layer is "Hidden"
+
+            tile.transform.GetChild(0).gameObject.layer = 7;
+
+        }
+
+        /// <summary>
+        /// Reveals certain number of tiles on a circle. Range is defined by <paramref name="depth"/>
+        /// </summary>
+        /// <param name="tile"></param>
+        /// <param name="depth"></param>
+        public void RevealTile(HexTile tile, int depth)
+        {
+            tile.Reveal(depth, 0);
+
         }
     }
 }
