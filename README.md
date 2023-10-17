@@ -301,7 +301,7 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ## **8 - NARRATIVA** 
 
-Hace siglos, fui un habitante de la legendaria ciudad perdida de Atlantis, un lugar misterioso y enigmático que se ocultaba en las profundidades del océano. Sin embargo, mi existencia en ese antiguo reino se mantuvo en un sueño profundo, sepultado bajo las corrientes marinas, hasta que un día, el mismísimo Poseidón, el dios del mar, me despertó de mi largo letargo.
+**Sinopsis:** Hace siglos, fui un habitante de la legendaria ciudad perdida de Atlantis, un lugar misterioso y enigmático que se ocultaba en las profundidades del océano. Sin embargo, mi existencia en ese antiguo reino se mantuvo en un sueño profundo, sepultado bajo las corrientes marinas, hasta que un día, el mismísimo Poseidón, el dios del mar, me despertó de mi largo letargo.
 
 Poseidón me recordó el verdadero propósito de Atlantis, una ciudad concebida como una fábrica de algas. El océano, con el paso de los siglos, se había vuelto cada vez más turbio y tóxico, poniendo en peligro su delicado equilibrio. Poseidón, en su sabiduría, comprendió que era esencial purificar sus aguas para proteger su reino acuático y la vida que lo habitaba.
 
