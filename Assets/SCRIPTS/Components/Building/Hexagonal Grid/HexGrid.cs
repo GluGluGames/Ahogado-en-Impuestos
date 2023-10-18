@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine.Serialization;
 
 namespace GGG.Components.Buildings {
+    #if UNITY_EDITOR
     [CustomEditor(typeof(HexGrid))]
     public class customInspectorGUI : Editor {
         public override void OnInspectorGUI() {
@@ -17,6 +18,7 @@ namespace GGG.Components.Buildings {
             }
         }
     }
+    #endif
     public class HexGrid : MonoBehaviour {
 
         [Header("Grid Settings")]

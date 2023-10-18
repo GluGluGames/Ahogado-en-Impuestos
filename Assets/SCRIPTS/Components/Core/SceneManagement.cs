@@ -31,7 +31,7 @@ namespace GGG.Components.Core
             
             // Credits Screen
             CreditsViewport.SetActive(false);
-            CreditsPanel.transform.position = new Vector3(CreditsPanel.transform.position.x, -1080);
+            CreditsPanel.transform.position = new Vector3(CreditsPanel.transform.position.x, CREDITS_INITIAL_POSITION);
             ExitButton.onClick.AddListener(CloseCredits);
         }
         
@@ -47,6 +47,8 @@ namespace GGG.Components.Core
         [SerializeField] private GameObject CreditsPanel;
         [SerializeField] private Button ExitButton;
         [SerializeField] private float CreditsDuration = 60f;
+
+        private const int CREDITS_INITIAL_POSITION = -550;
         
         private readonly List<AsyncOperation> _sceneAsyncOperation = new();
         private GraphicRaycaster _raycaster;
@@ -131,7 +133,7 @@ namespace GGG.Components.Core
         public void OpenCredits()
         {
             CreditsViewport.SetActive(true);
-            CreditsPanel.transform.DOMoveY(5500, CreditsDuration).SetEase(Ease.Linear);
+            CreditsPanel.transform.DOMoveY(5500, CreditsDuration).SetEase(Ease.Linear).onComplete += CloseCredits;
             _raycaster.enabled = true;
         }
 
@@ -139,7 +141,7 @@ namespace GGG.Components.Core
         {
             CreditsViewport.SetActive(false);
             CreditsPanel.transform.DOKill();
-            CreditsPanel.transform.position = new Vector3(CreditsPanel.transform.position.x, -1080);
+            CreditsPanel.transform.position = new Vector3(CreditsPanel.transform.position.x, CREDITS_INITIAL_POSITION);
             _raycaster.enabled = false;
         }
 
