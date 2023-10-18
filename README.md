@@ -297,7 +297,7 @@ Tutorial de Expediciones:
 
 - El jugador recibe un segundo tutorial que lo familiariza con las mecánicas de expedición. Aprende sobre los iconos de cada casilla en el mapa, la presencia de depredadores, peces cazables y la existencia de tormellinos, que permiten salir del mapa sin perder recursos. Se destaca la importancia del tiempo como un factor que requiere que el jugador tome decisiones.
 
-![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Excel%20Game%20Design/DiagramaTutorial.png)
+![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/DiagramaTutorial.png)
 
 #### **Progresión del Juego:**
 La obtención de recursos y nuevas mecánicas depende del número de expediciones y los objetos clave encontrados.
@@ -312,7 +312,7 @@ Todo el progreso de juego se tomara en un mismo mapa, y apartir de la septima se
 - Sexta Expedición: El jugador encuentra un casco dorado en el mapa, lo que desbloquea mejoras relacionadas con el buceo.
 
 - Séptima Expedición: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
-![Progresion de expediciones](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Excel%20Game%20Design/Flujo%20de%20expedicion.png)
+![Progresion de expediciones](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Flujo%20de%20expedicion.png)
 
 #### **Colección y Museo:**
 - Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
@@ -327,13 +327,13 @@ La única manera de que el jugador adquiera nuevas habilidades es a través de e
 
 El contenido de cada casilla varía en cada expedición, lo que significa que si el jugador ha adquirido suficiente experiencia de expediciones fallidas, estará mejor preparado para enfrentar los desafíos que se presenten en el mapa, como los depredadores. Además, cada casilla está asociada con uno de los tres niveles de profundidad. El jugador debe considerar cuidadosamente su ruta para evitar perder tiempo transitando áreas no permitidas, a menos que disponga de objetos o elementos que le permitan acceder a esas zonas. En caso contrario, la expedición se verá afectada por una pérdida de tiempo de expedicion.
 
-![Curva de aprendizaje](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Excel%20Game%20Design/Curva%20de%20aprendizaje.png)
+![Curva de aprendizaje](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Curva%20de%20aprendizaje.png)
 #### **Intensidad de recaudacion:**
 Explicacion:
 Esta mecánica se ha diseñado para evitar que los jugadores aceleren demasiado el progreso del juego, centrándose en la productividad de las algas que el jugador genera por segundo. Esta elección se ha realizado con el objetivo de garantizar que, a medida que los jugadores avanzan en el juego, no alcancen un nivel de productividad excesivamente alto que pudiera llevar al desinterés y, en última instancia, al abandono del juego.
 
 Para prevenir este escenario, se ha implementado una probabilidad de recolección de recursos en función de la productividad de las algas por segundo. De esta manera, se permite una variedad de estrategias para abordar este ajuste de probabilidad. Por ejemplo, los jugadores pueden optar por sacrificar edificios para mantener su productividad, dado que el costo de reparación no es elevado, o pueden arriesgarse a depender de la probabilidad de no sufrir una recolección, o incluso buscar un equilibrio entre ganar mucho y gastar mucho. Esta mecánica ofrece a los jugadores una serie de decisiones estratégicas que influyen en su progreso en el juego.
-![Intensidad de recaudacion ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Excel%20Game%20Design/Intensidad%20de%20recaudacion.png)
+![Intensidad de recaudacion ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Intensidad%20de%20recaudacion.png)
 
 
 ## **6 - DIAGRAMA DE FLUJO**
