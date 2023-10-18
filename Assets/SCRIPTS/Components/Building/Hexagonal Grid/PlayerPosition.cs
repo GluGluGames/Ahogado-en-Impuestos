@@ -12,6 +12,6 @@ namespace GGG.Components.Buildings
         public static Vector3 TargetPosition;
         public static HexTile CurrentTile;
         public static HexTile NextTile;
-        public static List<HexTile> CurrentPath = new List<HexTile>();
+        public static List<HexTile> currentPath = new List<HexTile>();
     }
 }

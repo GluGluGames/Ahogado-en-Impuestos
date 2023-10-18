@@ -68,7 +68,7 @@ namespace GGG.Components.Buildings
                     {
                         _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
                         _path.Reverse();
-                        PlayerPosition.CurrentPath = _path;
+                        PlayerPosition.currentPath = _path;
                     };
 
                 //FOW

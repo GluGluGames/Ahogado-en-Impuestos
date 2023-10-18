@@ -19,12 +19,12 @@ namespace GGG.Components.Buildings
 
         private void Update()
         {
-            // Update line renderer based on current PlayerPosition.CurrentPath
-            //UpdateLineRenderer(PlayerPosition.CurrentPath);
+            // Update line renderer based on current PlayerPosition.currentPath
+            //UpdateLineRenderer(PlayerPosition.currentPath);
         }
 
         /// <summary>
-        /// Update line following the player PlayerPosition.CurrentPath
+        /// Update line following the player PlayerPosition.currentPath
         /// </summary>
         /// <param name="path"></param>
         protected void UpdateLineRenderer(List<HexTile> path)
@@ -46,13 +46,13 @@ namespace GGG.Components.Buildings
         /// </summary>
         public void HandleMovement()
         {
-            if (PlayerPosition.CurrentPath == null || PlayerPosition.CurrentPath.Count <= 1)
+            if (PlayerPosition.currentPath == null || PlayerPosition.currentPath.Count <= 1)
             {
                 PlayerPosition.NextTile = null;
 
-                if (PlayerPosition.CurrentPath != null && PlayerPosition.CurrentPath.Count > 0)
+                if (PlayerPosition.currentPath != null && PlayerPosition.currentPath.Count > 0)
                 {
-                    PlayerPosition.CurrentTile = PlayerPosition.CurrentPath[0];
+                    PlayerPosition.CurrentTile = PlayerPosition.currentPath[0];
                     PlayerPosition.NextTile = PlayerPosition.CurrentTile;
                 }
 
@@ -61,14 +61,14 @@ namespace GGG.Components.Buildings
             }
             else
             {
-                PlayerPosition.CurrentTile = PlayerPosition.CurrentPath[0];
+                PlayerPosition.CurrentTile = PlayerPosition.currentPath[0];
 
-                PlayerPosition.NextTile = PlayerPosition.CurrentPath[1];
+                PlayerPosition.NextTile = PlayerPosition.currentPath[1];
 
                 // if the next tile is not traversable, stop moving;
                 /*if (PlayerPosition.NextTile.tileType != HexTileGenerationSettings.TileType.Standard)
                 {
-                    PlayerPosition.CurrentPath.Clear();
+                    PlayerPosition.currentPath.Clear();
                     HandleMovement();
                     return;
                 }*/
@@ -76,9 +76,9 @@ namespace GGG.Components.Buildings
                 PlayerPosition.TargetPosition = PlayerPosition.NextTile.transform.position + new Vector3(0, 1f, 0);
                 MoveTo(PlayerPosition.TargetPosition);
                 gotPath = true;
-                PlayerPosition.CurrentPath.RemoveAt(0);
+                PlayerPosition.currentPath.RemoveAt(0);
                 PlayerPosition.PlayerPos = PlayerPosition.NextTile.cubeCoordinate;
-                UpdateLineRenderer(PlayerPosition.CurrentPath);
+                UpdateLineRenderer(PlayerPosition.currentPath);
             }
         }
 
