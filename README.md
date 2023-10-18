@@ -205,13 +205,23 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 #### **2.1.3 - Zoom**: 
 
-  - **Rueda del ratón**: Dependiendo de la dirección, la cámara se acercará o se alejará. 
+  - **Rueda del ratón**: Dependiendo de la dirección, la cámara se acercará o se alejará.
+
+
+🎮🎮  
+**Morado: Movimiento de camara**  
+**Rojo: Rotacion de camara**  
+**Amarillo: Zoom de camara**  
+![Keyboard layout](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Mapeo%20de%20controles.jpg)
 
 ### 2.2 - Pantalla táctil: 
 
   - **Movimiento de la cámara**: El jugador mantendrá su dedo en la pantalla y arrastrará. La cámara se moverá al sentido contrario del arrastre. 
   - **Rotación de la cámara**: El jugador mantendrá dos dedos y arrastrará de manera horizontal. La cámara se moverá en el sentido de arrastre. 
-  - **Zoom**: El jugador mantendrá dos dedos en la pantalla y juntará o separará estos. El zoom se incrementará o disminuirá en función de si se acercan o alejan, respectivamente. 
+  - **Zoom**: El jugador mantendrá dos dedos en la pantalla y juntará o separará estos. El zoom se incrementará o disminuirá en función de si se acercan o alejan, respectivamente.
+
+**Zoom:**   
+ ![Zoom](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/zoom-fingers.gif)
 
 ## **3 - ARTE 2D** 
 
