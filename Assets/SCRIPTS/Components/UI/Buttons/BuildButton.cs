@@ -50,6 +50,11 @@ namespace GGG.Components.UI {
 
             _selectedHexTile.SetBuilding(_auxBuild);
             OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
+           
+
+            //FOW
+            _selectedHexTile.Reveal(_auxBuild.visionRange, 0);
+
             _selectedHexTile = null;
         }
 

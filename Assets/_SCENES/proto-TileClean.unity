@@ -779,6 +779,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 6}
   cubeCoordinate: {x: -2, y: 6, z: -4}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &12937090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,6 +1113,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 7}
   cubeCoordinate: {x: 5, y: 7, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &14683308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,6 +1863,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 6}
   cubeCoordinate: {x: 7, y: 6, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &24497187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1936,6 +1939,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 8}
   cubeCoordinate: {x: 0, y: 8, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &25363474
 GameObject:
   m_ObjectHideFlags: 0
@@ -3021,6 +3025,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 6}
   cubeCoordinate: {x: 1, y: 6, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &48670171
 GameObject:
   m_ObjectHideFlags: 0
@@ -4267,6 +4272,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 4}
   cubeCoordinate: {x: 7, y: 4, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &78741318
 GameObject:
   m_ObjectHideFlags: 0
@@ -4923,6 +4929,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 3}
   cubeCoordinate: {x: 11, y: 3, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &91659089
 GameObject:
   m_ObjectHideFlags: 0
@@ -5344,6 +5351,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 8}
   cubeCoordinate: {x: -1, y: 8, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &101906514
 GameObject:
   m_ObjectHideFlags: 0
@@ -5590,6 +5598,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 12}
   cubeCoordinate: {x: 5, y: 12, z: -17}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &106350141
 GameObject:
   m_ObjectHideFlags: 0
@@ -6116,6 +6125,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 9}
   cubeCoordinate: {x: -5, y: 9, z: -4}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &117391180
 GameObject:
   m_ObjectHideFlags: 0
@@ -6357,6 +6367,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 13}
   cubeCoordinate: {x: 0, y: 13, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &121344282
 GameObject:
   m_ObjectHideFlags: 0
@@ -6686,6 +6697,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 6}
   cubeCoordinate: {x: 6, y: 6, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &126896798
 GameObject:
   m_ObjectHideFlags: 0
@@ -8431,6 +8443,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 11}
   cubeCoordinate: {x: -2, y: 11, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &158369649
 GameObject:
   m_ObjectHideFlags: 0
@@ -8672,6 +8685,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 10}
   cubeCoordinate: {x: 7, y: 10, z: -17}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &164198800
 GameObject:
   m_ObjectHideFlags: 0
@@ -9162,6 +9176,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 13}
   cubeCoordinate: {x: 4, y: 13, z: -17}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &170482468
 GameObject:
   m_ObjectHideFlags: 0
@@ -9320,6 +9335,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 14}
   cubeCoordinate: {x: 5, y: 14, z: -19}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &174218518
 GameObject:
   m_ObjectHideFlags: 0
@@ -9976,6 +9992,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 7}
   cubeCoordinate: {x: -4, y: 7, z: -3}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &190164736
 GameObject:
   m_ObjectHideFlags: 0
@@ -10051,6 +10068,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 7}
   cubeCoordinate: {x: -3, y: 7, z: -4}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &192220890
 GameObject:
   m_ObjectHideFlags: 0
@@ -10707,6 +10725,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 12}
   cubeCoordinate: {x: -4, y: 12, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &207869512
 GameObject:
   m_ObjectHideFlags: 0
@@ -11953,6 +11972,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 8}
   cubeCoordinate: {x: -4, y: 8, z: -4}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &231243417
 GameObject:
   m_ObjectHideFlags: 0
@@ -12360,6 +12380,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 5}
   cubeCoordinate: {x: 10, y: 5, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &243912545
 GameObject:
   m_ObjectHideFlags: 0
@@ -12606,6 +12627,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 9}
   cubeCoordinate: {x: 1, y: 9, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &246590057
 GameObject:
   m_ObjectHideFlags: 0
@@ -12764,6 +12786,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 3}
   cubeCoordinate: {x: 6, y: 3, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &255215990
 GameObject:
   m_ObjectHideFlags: 0
@@ -13088,6 +13111,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 4}
   cubeCoordinate: {x: -2, y: 4, z: -2}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &263794519
 GameObject:
   m_ObjectHideFlags: 0
@@ -14335,6 +14359,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 2}
   cubeCoordinate: {x: 12, y: 2, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &296115344
 GameObject:
   m_ObjectHideFlags: 0
@@ -14410,6 +14435,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 13}
   cubeCoordinate: {x: 6, y: 13, z: -19}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &299096894
 GameObject:
   m_ObjectHideFlags: 0
@@ -15582,6 +15608,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 8}
   cubeCoordinate: {x: 8, y: 8, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &320879943
 GameObject:
   m_ObjectHideFlags: 0
@@ -16404,6 +16431,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 3}
   cubeCoordinate: {x: 0, y: 3, z: -3}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &334482753
 GameObject:
   m_ObjectHideFlags: 0
@@ -16645,6 +16673,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 10}
   cubeCoordinate: {x: -1, y: 10, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &337344011
 GameObject:
   m_ObjectHideFlags: 0
@@ -17827,6 +17856,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 2}
   cubeCoordinate: {x: 13, y: 2, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &364821594
 GameObject:
   m_ObjectHideFlags: 0
@@ -18151,6 +18181,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 14}
   cubeCoordinate: {x: 0, y: 14, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &370976679
 GameObject:
   m_ObjectHideFlags: 0
@@ -18475,6 +18506,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 0}
   cubeCoordinate: {x: 3, y: 0, z: -3}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &373908449
 GameObject:
   m_ObjectHideFlags: 0
@@ -19892,6 +19924,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 4}
   cubeCoordinate: {x: 11, y: 4, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &417782914
 GameObject:
   m_ObjectHideFlags: 0
@@ -20968,6 +21001,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 9}
   cubeCoordinate: {x: 7, y: 9, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &440786625
 GameObject:
   m_ObjectHideFlags: 0
@@ -21043,6 +21077,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 2}
   cubeCoordinate: {x: 4, y: 2, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &442489180
 GameObject:
   m_ObjectHideFlags: 0
@@ -21367,6 +21402,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 9}
   cubeCoordinate: {x: -3, y: 9, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &448441440
 GameObject:
   m_ObjectHideFlags: 0
@@ -21442,6 +21478,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 3}
   cubeCoordinate: {x: 1, y: 3, z: -4}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &450055606
 GameObject:
   m_ObjectHideFlags: 0
@@ -21600,6 +21637,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 13}
   cubeCoordinate: {x: -1, y: 13, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &455408740
 GameObject:
   m_ObjectHideFlags: 0
@@ -22090,6 +22128,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 7}
   cubeCoordinate: {x: 6, y: 7, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &459285607
 GameObject:
   m_ObjectHideFlags: 0
@@ -23341,6 +23380,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 1}
   cubeCoordinate: {x: 3, y: 1, z: -4}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &492362234
 GameObject:
   m_ObjectHideFlags: 0
@@ -23499,6 +23539,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 4}
   cubeCoordinate: {x: 10, y: 4, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &494845785
 GameObject:
   m_ObjectHideFlags: 0
@@ -24506,6 +24547,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 1}
   cubeCoordinate: {x: 6, y: 1, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &515849750
 GameObject:
   m_ObjectHideFlags: 0
@@ -24581,6 +24623,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 5}
   cubeCoordinate: {x: 8, y: 5, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &517608099
 GameObject:
   m_ObjectHideFlags: 0
@@ -24831,6 +24874,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 5}
   cubeCoordinate: {x: -1, y: 5, z: -4}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &525069069
 GameObject:
   m_ObjectHideFlags: 0
@@ -25164,6 +25208,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 11}
   cubeCoordinate: {x: -5, y: 11, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &533682416
 GameObject:
   m_ObjectHideFlags: 0
@@ -25571,6 +25616,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 11}
   cubeCoordinate: {x: -6, y: 11, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &538386894
 GameObject:
   m_ObjectHideFlags: 0
@@ -26494,6 +26540,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 14}
   cubeCoordinate: {x: -7, y: 14, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &557932223
 GameObject:
   m_ObjectHideFlags: 0
@@ -26984,6 +27031,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 9}
   cubeCoordinate: {x: -4, y: 9, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &568639920
 GameObject:
   m_ObjectHideFlags: 0
@@ -27977,6 +28025,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 4}
   cubeCoordinate: {x: 3, y: 4, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &586356845
 GameObject:
   m_ObjectHideFlags: 0
@@ -28052,6 +28101,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 10}
   cubeCoordinate: {x: 0, y: 10, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &587374853
 GameObject:
   m_ObjectHideFlags: 0
@@ -28708,6 +28758,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 1}
   cubeCoordinate: {x: 9, y: 1, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &598983643
 GameObject:
   m_ObjectHideFlags: 0
@@ -28866,6 +28917,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 0}
   cubeCoordinate: {x: 1, y: 0, z: -1}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &606086760
 GameObject:
   m_ObjectHideFlags: 0
@@ -28941,6 +28993,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 10}
   cubeCoordinate: {x: -2, y: 10, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &607569195
 GameObject:
   m_ObjectHideFlags: 0
@@ -29187,6 +29240,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 0}
   cubeCoordinate: {x: 2, y: 0, z: -2}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &616794550
 GameObject:
   m_ObjectHideFlags: 0
@@ -29433,6 +29487,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 3}
   cubeCoordinate: {x: 9, y: 3, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &619676870
 GameObject:
   m_ObjectHideFlags: 0
@@ -29674,6 +29729,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 5}
   cubeCoordinate: {x: -2, y: 5, z: -3}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &622641320
 GameObject:
   m_ObjectHideFlags: 0
@@ -29749,6 +29805,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 12}
   cubeCoordinate: {x: -6, y: 12, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &623520165
 GameObject:
   m_ObjectHideFlags: 0
@@ -30073,6 +30130,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 3}
   cubeCoordinate: {x: 5, y: 3, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &632284020
 GameObject:
   m_ObjectHideFlags: 0
@@ -30231,6 +30289,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 11}
   cubeCoordinate: {x: 6, y: 11, z: -17}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &634428823
 GameObject:
   m_ObjectHideFlags: 0
@@ -30389,6 +30448,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 2}
   cubeCoordinate: {x: 11, y: 2, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &635807177
 GameObject:
   m_ObjectHideFlags: 0
@@ -30552,6 +30612,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 4}
   cubeCoordinate: {x: 12, y: 4, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &636070185
 GameObject:
   m_ObjectHideFlags: 0
@@ -30715,6 +30776,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 7}
   cubeCoordinate: {x: 1, y: 7, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!4 &636204234 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2320281019385162878, guid: fce6d07689c472d46a37c017efabf759, type: 3}
@@ -31127,6 +31189,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 12}
   cubeCoordinate: {x: -3, y: 12, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &644955089
 GameObject:
   m_ObjectHideFlags: 0
@@ -31700,6 +31763,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 3}
   cubeCoordinate: {x: 2, y: 3, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &657559148
 GameObject:
   m_ObjectHideFlags: 0
@@ -31775,6 +31839,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 1}
   cubeCoordinate: {x: 4, y: 1, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &657927656
 GameObject:
   m_ObjectHideFlags: 0
@@ -31933,6 +31998,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 4}
   cubeCoordinate: {x: 6, y: 4, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &661121823
 GameObject:
   m_ObjectHideFlags: 0
@@ -32091,6 +32157,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 5}
   cubeCoordinate: {x: 1, y: 5, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &665589483
 GameObject:
   m_ObjectHideFlags: 0
@@ -32166,6 +32233,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 9}
   cubeCoordinate: {x: 4, y: 9, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &672034786
 GameObject:
   m_ObjectHideFlags: 0
@@ -32407,6 +32475,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 6}
   cubeCoordinate: {x: 11, y: 6, z: -17}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &676257398
 GameObject:
   m_ObjectHideFlags: 0
@@ -33068,6 +33137,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 1}
   cubeCoordinate: {x: 8, y: 1, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &695637495
 GameObject:
   m_ObjectHideFlags: 0
@@ -33641,6 +33711,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 7}
   cubeCoordinate: {x: 9, y: 7, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &699550113
 GameObject:
   m_ObjectHideFlags: 0
@@ -34332,6 +34403,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 1}
   cubeCoordinate: {x: 11, y: 1, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &710556907
 GameObject:
   m_ObjectHideFlags: 0
@@ -35593,6 +35665,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 5}
   cubeCoordinate: {x: 7, y: 5, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &729420546
 GameObject:
   m_ObjectHideFlags: 0
@@ -36332,6 +36405,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 13}
   cubeCoordinate: {x: -7, y: 13, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &737375867
 GameObject:
   m_ObjectHideFlags: 0
@@ -36757,6 +36831,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 12}
   cubeCoordinate: {x: -5, y: 12, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &744178147
 GameObject:
   m_ObjectHideFlags: 0
@@ -37081,6 +37156,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 5}
   cubeCoordinate: {x: 3, y: 5, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &752967010
 GameObject:
   m_ObjectHideFlags: 0
@@ -37156,6 +37232,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 12}
   cubeCoordinate: {x: -2, y: 12, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &753324030
 GameObject:
   m_ObjectHideFlags: 0
@@ -37231,6 +37308,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 2}
   cubeCoordinate: {x: 10, y: 2, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &758174047
 GameObject:
   m_ObjectHideFlags: 0
@@ -37389,6 +37467,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 9}
   cubeCoordinate: {x: -1, y: 9, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &766568817
 GameObject:
   m_ObjectHideFlags: 0
@@ -38050,6 +38129,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 7}
   cubeCoordinate: {x: 0, y: 7, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &782227441
 GameObject:
   m_ObjectHideFlags: 0
@@ -38808,6 +38888,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 8}
   cubeCoordinate: {x: 10, y: 8, z: -18}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &810225005
 GameObject:
   m_ObjectHideFlags: 0
@@ -40054,6 +40135,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 8}
   cubeCoordinate: {x: -2, y: 8, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &834830967
 GameObject:
   m_ObjectHideFlags: 0
@@ -40645,6 +40727,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 10}
   cubeCoordinate: {x: -5, y: 10, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &846629863
 GameObject:
   m_ObjectHideFlags: 0
@@ -41052,6 +41135,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 11}
   cubeCoordinate: {x: 4, y: 11, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &848346447
 GameObject:
   m_ObjectHideFlags: 0
@@ -41302,6 +41386,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 13}
   cubeCoordinate: {x: -3, y: 13, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &849407743
 GameObject:
   m_ObjectHideFlags: 0
@@ -42378,6 +42463,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 6}
   cubeCoordinate: {x: 2, y: 6, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &883894027
 GameObject:
   m_ObjectHideFlags: 0
@@ -42536,6 +42622,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 7}
   cubeCoordinate: {x: 7, y: 7, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &892301242
 GameObject:
   m_ObjectHideFlags: 0
@@ -42694,6 +42781,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 9}
   cubeCoordinate: {x: 8, y: 9, z: -17}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &893785804
 GameObject:
   m_ObjectHideFlags: 0
@@ -43101,6 +43189,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 4}
   cubeCoordinate: {x: 4, y: 4, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &903951055
 GameObject:
   m_ObjectHideFlags: 0
@@ -43176,6 +43265,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 9}
   cubeCoordinate: {x: 3, y: 9, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &905142364
 GameObject:
   m_ObjectHideFlags: 0
@@ -43251,6 +43341,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 1}
   cubeCoordinate: {x: 2, y: 1, z: -3}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &907215168
 GameObject:
   m_ObjectHideFlags: 0
@@ -43492,6 +43583,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 4}
   cubeCoordinate: {x: 9, y: 4, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &911837018
 GameObject:
   m_ObjectHideFlags: 0
@@ -43899,6 +43991,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 5}
   cubeCoordinate: {x: 0, y: 5, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &925865372
 GameObject:
   m_ObjectHideFlags: 0
@@ -45745,6 +45838,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 6}
   cubeCoordinate: {x: 3, y: 6, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &957882124
 GameObject:
   m_ObjectHideFlags: 0
@@ -46318,6 +46412,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 0}
   cubeCoordinate: {x: 10, y: 0, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &965789300
 GameObject:
   m_ObjectHideFlags: 0
@@ -46559,6 +46654,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 4}
   cubeCoordinate: {x: 2, y: 4, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &968181685
 GameObject:
   m_ObjectHideFlags: 0
@@ -46634,6 +46730,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 13}
   cubeCoordinate: {x: -2, y: 13, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &968906912
 GameObject:
   m_ObjectHideFlags: 0
@@ -47890,6 +47987,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 6}
   cubeCoordinate: {x: -3, y: 6, z: -3}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &994370912
 GameObject:
   m_ObjectHideFlags: 0
@@ -48555,6 +48653,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 12}
   cubeCoordinate: {x: 3, y: 12, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1005330750
 GameObject:
   m_ObjectHideFlags: 0
@@ -49387,6 +49486,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 10}
   cubeCoordinate: {x: 9, y: 10, z: -19}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1016534550
 GameObject:
   m_ObjectHideFlags: 0
@@ -49545,6 +49645,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 1}
   cubeCoordinate: {x: 13, y: 1, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1017138424
 GameObject:
   m_ObjectHideFlags: 0
@@ -49620,6 +49721,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 0}
   cubeCoordinate: {x: 12, y: 0, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1018599680
 GameObject:
   m_ObjectHideFlags: 0
@@ -49870,6 +49972,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 6}
   cubeCoordinate: {x: 9, y: 6, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1019559645
 GameObject:
   m_ObjectHideFlags: 0
@@ -49945,6 +50048,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 10}
   cubeCoordinate: {x: 1, y: 10, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1020976899
 GameObject:
   m_ObjectHideFlags: 0
@@ -50518,6 +50622,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 2}
   cubeCoordinate: {x: 6, y: 2, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1032876063
 GameObject:
   m_ObjectHideFlags: 0
@@ -51266,6 +51371,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 12}
   cubeCoordinate: {x: 2, y: 12, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1047823622
 GameObject:
   m_ObjectHideFlags: 0
@@ -52347,6 +52453,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 1}
   cubeCoordinate: {x: 1, y: 1, z: -2}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1074698725
 GameObject:
   m_ObjectHideFlags: 0
@@ -54027,6 +54134,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 5}
   cubeCoordinate: {x: 2, y: 5, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1121680124
 GameObject:
   m_ObjectHideFlags: 0
@@ -54102,6 +54210,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 13}
   cubeCoordinate: {x: -4, y: 13, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1125167756
 GameObject:
   m_ObjectHideFlags: 0
@@ -54177,6 +54286,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 11}
   cubeCoordinate: {x: 5, y: 11, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1127748039
 GameObject:
   m_ObjectHideFlags: 0
@@ -54676,6 +54786,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 5}
   cubeCoordinate: {x: -3, y: 5, z: -2}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1134326859
 GameObject:
   m_ObjectHideFlags: 0
@@ -55581,6 +55692,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 13}
   cubeCoordinate: {x: 1, y: 13, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1146334330
 GameObject:
   m_ObjectHideFlags: 0
@@ -55822,6 +55934,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 14}
   cubeCoordinate: {x: -1, y: 14, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1151281949
 GameObject:
   m_ObjectHideFlags: 0
@@ -55980,6 +56093,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 1}
   cubeCoordinate: {x: 0, y: 1, z: -1}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1152947096
 GameObject:
   m_ObjectHideFlags: 0
@@ -56226,6 +56340,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 4}
   cubeCoordinate: {x: 1, y: 4, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1159908694
 GameObject:
   m_ObjectHideFlags: 0
@@ -56804,6 +56919,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 3}
   cubeCoordinate: {x: 8, y: 3, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1171792808
 GameObject:
   m_ObjectHideFlags: 0
@@ -57229,6 +57345,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 2}
   cubeCoordinate: {x: 2, y: 2, z: -4}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1177915362
 GameObject:
   m_ObjectHideFlags: 0
@@ -57719,6 +57836,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 0}
   cubeCoordinate: {x: 4, y: 0, z: -4}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1186832851
 GameObject:
   m_ObjectHideFlags: 0
@@ -57877,6 +57995,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 12}
   cubeCoordinate: {x: 0, y: 12, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1195151810
 GameObject:
   m_ObjectHideFlags: 0
@@ -58201,6 +58320,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 3}
   cubeCoordinate: {x: 4, y: 3, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1200664427
 GameObject:
   m_ObjectHideFlags: 0
@@ -58613,6 +58733,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 11}
   cubeCoordinate: {x: -3, y: 11, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1206541238
 GameObject:
   m_ObjectHideFlags: 0
@@ -58771,6 +58892,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 4}
   cubeCoordinate: {x: -1, y: 4, z: -3}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1209295828
 GameObject:
   m_ObjectHideFlags: 0
@@ -58846,6 +58968,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 8}
   cubeCoordinate: {x: 4, y: 8, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1210732961
 GameObject:
   m_ObjectHideFlags: 0
@@ -59433,6 +59556,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 5}
   cubeCoordinate: {x: 5, y: 5, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1228986303
 GameObject:
   m_ObjectHideFlags: 0
@@ -59508,6 +59632,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 0}
   cubeCoordinate: {x: 0, y: 0, z: 0}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1229097033
 GameObject:
   m_ObjectHideFlags: 0
@@ -60344,6 +60469,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 2}
   cubeCoordinate: {x: 3, y: 2, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1247106958
 GameObject:
   m_ObjectHideFlags: 0
@@ -60419,6 +60545,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 8}
   cubeCoordinate: {x: 5, y: 8, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1252578855
 GameObject:
   m_ObjectHideFlags: 0
@@ -60660,6 +60787,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 10}
   cubeCoordinate: {x: 3, y: 10, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1258655812
 GameObject:
   m_ObjectHideFlags: 0
@@ -61408,6 +61536,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 5}
   cubeCoordinate: {x: 11, y: 5, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1273536376
 GameObject:
   m_ObjectHideFlags: 0
@@ -61737,6 +61866,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 9}
   cubeCoordinate: {x: 2, y: 9, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1282010804
 GameObject:
   m_ObjectHideFlags: 0
@@ -61895,6 +62025,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 10}
   cubeCoordinate: {x: 4, y: 10, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1285304664
 GameObject:
   m_ObjectHideFlags: 0
@@ -62053,6 +62184,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 11}
   cubeCoordinate: {x: 0, y: 11, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1286648289
 GameObject:
   m_ObjectHideFlags: 0
@@ -62128,6 +62260,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 2}
   cubeCoordinate: {x: -1, y: 2, z: -1}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1288426768
 GameObject:
   m_ObjectHideFlags: 0
@@ -62203,6 +62336,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 0}
   cubeCoordinate: {x: 8, y: 0, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1288448195
 GameObject:
   m_ObjectHideFlags: 0
@@ -62908,6 +63042,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 3}
   cubeCoordinate: {x: -2, y: 3, z: -1}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1300042295
 GameObject:
   m_ObjectHideFlags: 0
@@ -63315,6 +63450,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 13}
   cubeCoordinate: {x: 5, y: 13, z: -18}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1305367588
 GameObject:
   m_ObjectHideFlags: 0
@@ -64317,6 +64453,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 3}
   cubeCoordinate: {x: 10, y: 3, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1330146964
 GameObject:
   m_ObjectHideFlags: 0
@@ -64392,6 +64529,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 2}
   cubeCoordinate: {x: 8, y: 2, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1335251063
 GameObject:
   m_ObjectHideFlags: 0
@@ -64550,6 +64688,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 8}
   cubeCoordinate: {x: 1, y: 8, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1340322788
 GameObject:
   m_ObjectHideFlags: 0
@@ -64874,6 +65013,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 3}
   cubeCoordinate: {x: -1, y: 3, z: -2}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1345623108
 GameObject:
   m_ObjectHideFlags: 0
@@ -65032,6 +65172,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 8}
   cubeCoordinate: {x: 9, y: 8, z: -17}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1348413614
 GameObject:
   m_ObjectHideFlags: 0
@@ -65190,6 +65331,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 8}
   cubeCoordinate: {x: 7, y: 8, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1353398514
 GameObject:
   m_ObjectHideFlags: 0
@@ -65265,6 +65407,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 13}
   cubeCoordinate: {x: 7, y: 13, z: -20}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1356088701
 GameObject:
   m_ObjectHideFlags: 0
@@ -65340,6 +65483,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 14}
   cubeCoordinate: {x: -2, y: 14, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1359890158
 GameObject:
   m_ObjectHideFlags: 0
@@ -65590,6 +65734,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 8}
   cubeCoordinate: {x: 6, y: 8, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1362648366
 GameObject:
   m_ObjectHideFlags: 0
@@ -67256,6 +67401,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 0}
   cubeCoordinate: {x: 5, y: 0, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1397814790
 GameObject:
   m_ObjectHideFlags: 0
@@ -68175,6 +68321,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 11}
   cubeCoordinate: {x: -1, y: 11, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1413088747
 GameObject:
   m_ObjectHideFlags: 0
@@ -68333,6 +68480,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 4}
   cubeCoordinate: {x: 8, y: 4, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1417013631
 GameObject:
   m_ObjectHideFlags: 0
@@ -68915,6 +69063,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 7}
   cubeCoordinate: {x: 3, y: 7, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1423813598
 GameObject:
   m_ObjectHideFlags: 0
@@ -69073,6 +69222,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 7}
   cubeCoordinate: {x: 10, y: 7, z: -17}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1433134637
 GameObject:
   m_ObjectHideFlags: 0
@@ -70069,6 +70219,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 0, y: 1}
   cubeCoordinate: {x: -1, y: 1, z: 0}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1438520554
 GameObject:
   m_ObjectHideFlags: 0
@@ -70642,6 +70793,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 7}
   cubeCoordinate: {x: -2, y: 7, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1449104788
 GameObject:
   m_ObjectHideFlags: 0
@@ -70717,6 +70869,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 8}
   cubeCoordinate: {x: 2, y: 8, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1449950953
 GameObject:
   m_ObjectHideFlags: 0
@@ -71216,6 +71369,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 7}
   cubeCoordinate: {x: 4, y: 7, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1455619655
 GameObject:
   m_ObjectHideFlags: 0
@@ -72804,6 +72958,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 14}
   cubeCoordinate: {x: 6, y: 14, z: -20}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1486341849
 GameObject:
   m_ObjectHideFlags: 0
@@ -73294,6 +73449,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 11}
   cubeCoordinate: {x: 1, y: 11, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1493127035
 GameObject:
   m_ObjectHideFlags: 0
@@ -73452,6 +73608,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 3}
   cubeCoordinate: {x: 12, y: 3, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1496462033
 GameObject:
   m_ObjectHideFlags: 0
@@ -73776,6 +73933,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 14}
   cubeCoordinate: {x: 1, y: 14, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1500142201
 GameObject:
   m_ObjectHideFlags: 0
@@ -74271,6 +74429,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 12}
   cubeCoordinate: {x: 7, y: 12, z: -19}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1511324617
 GameObject:
   m_ObjectHideFlags: 0
@@ -74678,6 +74837,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 14}
   cubeCoordinate: {x: -4, y: 14, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1519454611
 GameObject:
   m_ObjectHideFlags: 0
@@ -75505,6 +75665,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 7}
   cubeCoordinate: {x: 2, y: 7, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1531936673
 GameObject:
   m_ObjectHideFlags: 0
@@ -75663,6 +75824,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 9}
   cubeCoordinate: {x: 5, y: 9, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1534534724
 GameObject:
   m_ObjectHideFlags: 0
@@ -75738,6 +75900,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 6}
   cubeCoordinate: {x: 0, y: 6, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1534721993
 GameObject:
   m_ObjectHideFlags: 0
@@ -75896,6 +76059,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 2}
   cubeCoordinate: {x: 1, y: 2, z: -3}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1537958083
 GameObject:
   m_ObjectHideFlags: 0
@@ -77060,6 +77224,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 4}
   cubeCoordinate: {x: 5, y: 4, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1555882582
 GameObject:
   m_ObjectHideFlags: 0
@@ -77135,6 +77300,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 2}
   cubeCoordinate: {x: 0, y: 2, z: -2}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1556739486
 GameObject:
   m_ObjectHideFlags: 0
@@ -78737,6 +78903,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 14}
   cubeCoordinate: {x: 7, y: 14, z: -21}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1582829704
 GameObject:
   m_ObjectHideFlags: 0
@@ -79066,6 +79233,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 12}
   cubeCoordinate: {x: 4, y: 12, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1584544253
 GameObject:
   m_ObjectHideFlags: 0
@@ -81416,6 +81584,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 8}
   cubeCoordinate: {x: -3, y: 8, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1641116369
 GameObject:
   m_ObjectHideFlags: 0
@@ -81911,6 +82080,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 13}
   cubeCoordinate: {x: -5, y: 13, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1647099910
 GameObject:
   m_ObjectHideFlags: 0
@@ -82581,6 +82751,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 1}
   cubeCoordinate: {x: 10, y: 1, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1657359292
 GameObject:
   m_ObjectHideFlags: 0
@@ -82656,6 +82827,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 0}
   cubeCoordinate: {x: 11, y: 0, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1657656652
 GameObject:
   m_ObjectHideFlags: 0
@@ -83063,6 +83235,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 13}
   cubeCoordinate: {x: -6, y: 13, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1665014205
 GameObject:
   m_ObjectHideFlags: 0
@@ -83387,6 +83560,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 10}
   cubeCoordinate: {x: -3, y: 10, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1666291407
 GameObject:
   m_ObjectHideFlags: 0
@@ -84467,6 +84641,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 2}
   cubeCoordinate: {x: 7, y: 2, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1689237845
 GameObject:
   m_ObjectHideFlags: 0
@@ -85478,6 +85653,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 9}
   cubeCoordinate: {x: 6, y: 9, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1703138909
 GameObject:
   m_ObjectHideFlags: 0
@@ -85636,6 +85812,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 4, y: 14}
   cubeCoordinate: {x: -3, y: 14, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1704452764
 GameObject:
   m_ObjectHideFlags: 0
@@ -86048,6 +86225,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 12}
   cubeCoordinate: {x: 6, y: 12, z: -18}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1711298550
 GameObject:
   m_ObjectHideFlags: 0
@@ -87461,6 +87639,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 1}
   cubeCoordinate: {x: 5, y: 1, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1735498012
 GameObject:
   m_ObjectHideFlags: 0
@@ -87873,6 +88052,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 0}
   cubeCoordinate: {x: 13, y: 0, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1746607833
 GameObject:
   m_ObjectHideFlags: 0
@@ -88031,6 +88211,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 6}
   cubeCoordinate: {x: 4, y: 6, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1748814765
 GameObject:
   m_ObjectHideFlags: 0
@@ -88189,6 +88370,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 4}
   cubeCoordinate: {x: 0, y: 4, z: -4}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1754250082
 GameObject:
   m_ObjectHideFlags: 0
@@ -88347,6 +88529,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 10}
   cubeCoordinate: {x: 2, y: 10, z: -12}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1758850936
 GameObject:
   m_ObjectHideFlags: 0
@@ -88593,6 +88776,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 12}
   cubeCoordinate: {x: 8, y: 12, z: -20}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1762115814
 GameObject:
   m_ObjectHideFlags: 0
@@ -88922,6 +89106,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 10}
   cubeCoordinate: {x: 5, y: 10, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1772826606
 GameObject:
   m_ObjectHideFlags: 0
@@ -88997,6 +89182,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 5}
   cubeCoordinate: {x: 6, y: 5, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1775999656
 GameObject:
   m_ObjectHideFlags: 0
@@ -89072,6 +89258,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 5}
   cubeCoordinate: {x: 4, y: 5, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1781308024
 GameObject:
   m_ObjectHideFlags: 0
@@ -89654,6 +89841,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 0}
   cubeCoordinate: {x: 9, y: 0, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1792133248
 GameObject:
   m_ObjectHideFlags: 0
@@ -90486,6 +90674,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 1}
   cubeCoordinate: {x: 12, y: 1, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1808264835
 GameObject:
   m_ObjectHideFlags: 0
@@ -90517,6 +90706,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightPrefab: {fileID: 2082100517571088346, guid: 03e5a2cea7f9b6b41ac2782f46fe8dd7, type: 3}
+  _FOWPrefab: {fileID: 0}
+  FOWActive: 1
   Player: {fileID: 0}
 --- !u!114 &1808264837
 MonoBehaviour:
@@ -90850,6 +91041,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 13}
   cubeCoordinate: {x: 3, y: 13, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1811484994
 GameObject:
   m_ObjectHideFlags: 0
@@ -91179,6 +91371,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 9}
   cubeCoordinate: {x: -2, y: 9, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1815084435
 GameObject:
   m_ObjectHideFlags: 0
@@ -91337,6 +91530,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 2}
   cubeCoordinate: {x: 5, y: 2, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1815889551
 GameObject:
   m_ObjectHideFlags: 0
@@ -92550,6 +92744,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 10}
   cubeCoordinate: {x: 6, y: 10, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1832547822
 GameObject:
   m_ObjectHideFlags: 0
@@ -92625,6 +92820,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 14}
   cubeCoordinate: {x: 4, y: 14, z: -18}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1832690604
 GameObject:
   m_ObjectHideFlags: 0
@@ -93706,6 +93902,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 0}
   cubeCoordinate: {x: 14, y: 0, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1855201441
 GameObject:
   m_ObjectHideFlags: 0
@@ -94371,6 +94568,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 10}
   cubeCoordinate: {x: -4, y: 10, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1870438274
 GameObject:
   m_ObjectHideFlags: 0
@@ -94612,6 +94810,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 3}
   cubeCoordinate: {x: 7, y: 3, z: -10}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1879607802
 GameObject:
   m_ObjectHideFlags: 0
@@ -94687,6 +94886,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 6, y: 0}
   cubeCoordinate: {x: 6, y: 0, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1882149663
 GameObject:
   m_ObjectHideFlags: 0
@@ -94762,6 +94962,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 8}
   cubeCoordinate: {x: 3, y: 8, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1882828141
 GameObject:
   m_ObjectHideFlags: 0
@@ -95086,6 +95287,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 11}
   cubeCoordinate: {x: 2, y: 11, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1897192522
 GameObject:
   m_ObjectHideFlags: 0
@@ -95659,6 +95861,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 11}
   cubeCoordinate: {x: 8, y: 11, z: -19}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1907901762
 GameObject:
   m_ObjectHideFlags: 0
@@ -97320,6 +97523,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 11}
   cubeCoordinate: {x: -4, y: 11, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1950947967
 GameObject:
   m_ObjectHideFlags: 0
@@ -97395,6 +97599,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 6}
   cubeCoordinate: {x: 5, y: 6, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1952887734
 GameObject:
   m_ObjectHideFlags: 0
@@ -97553,6 +97758,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 0}
   cubeCoordinate: {x: 7, y: 0, z: -7}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1953674428
 GameObject:
   m_ObjectHideFlags: 0
@@ -97711,6 +97917,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 3}
   cubeCoordinate: {x: 3, y: 3, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1957344454
 GameObject:
   m_ObjectHideFlags: 0
@@ -97786,6 +97993,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 14, y: 9}
   cubeCoordinate: {x: 9, y: 9, z: -18}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1962278978
 GameObject:
   m_ObjectHideFlags: 0
@@ -99125,6 +99333,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 10}
   cubeCoordinate: {x: 8, y: 10, z: -18}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1986979989
 GameObject:
   m_ObjectHideFlags: 0
@@ -99200,6 +99409,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 9}
   cubeCoordinate: {x: 0, y: 9, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1987879079
 GameObject:
   m_ObjectHideFlags: 0
@@ -99275,6 +99485,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 2}
   cubeCoordinate: {x: 9, y: 2, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1988283428
 GameObject:
   m_ObjectHideFlags: 0
@@ -99516,6 +99727,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 11, y: 6}
   cubeCoordinate: {x: 8, y: 6, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &1995929801
 GameObject:
   m_ObjectHideFlags: 0
@@ -100089,6 +100301,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 6}
   cubeCoordinate: {x: 10, y: 6, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2007966133
 GameObject:
   m_ObjectHideFlags: 0
@@ -101003,6 +101216,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 5}
   cubeCoordinate: {x: 9, y: 5, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2022778470
 GameObject:
   m_ObjectHideFlags: 0
@@ -101161,6 +101375,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 14}
   cubeCoordinate: {x: -5, y: 14, z: -9}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2023682479
 GameObject:
   m_ObjectHideFlags: 0
@@ -101407,6 +101622,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 1, y: 14}
   cubeCoordinate: {x: -6, y: 14, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2026768761
 GameObject:
   m_ObjectHideFlags: 0
@@ -102741,6 +102957,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 14}
   cubeCoordinate: {x: 2, y: 14, z: -16}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2051695726
 GameObject:
   m_ObjectHideFlags: 0
@@ -103236,6 +103453,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 3, y: 7}
   cubeCoordinate: {x: -1, y: 7, z: -6}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2070065752
 GameObject:
   m_ObjectHideFlags: 0
@@ -103394,6 +103612,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 5, y: 12}
   cubeCoordinate: {x: -1, y: 12, z: -11}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2076387785
 GameObject:
   m_ObjectHideFlags: 0
@@ -104488,6 +104707,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 12, y: 7}
   cubeCoordinate: {x: 8, y: 7, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2087715884
 GameObject:
   m_ObjectHideFlags: 0
@@ -104563,6 +104783,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 13, y: 11}
   cubeCoordinate: {x: 7, y: 11, z: -18}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2087773897
 GameObject:
   m_ObjectHideFlags: 0
@@ -104804,6 +105025,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 13}
   cubeCoordinate: {x: 2, y: 13, z: -15}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2093055495
 GameObject:
   m_ObjectHideFlags: 0
@@ -104879,6 +105101,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 9, y: 11}
   cubeCoordinate: {x: 3, y: 11, z: -14}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2093831978
 GameObject:
   m_ObjectHideFlags: 0
@@ -105212,6 +105435,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 7, y: 12}
   cubeCoordinate: {x: 1, y: 12, z: -13}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2100779774
 GameObject:
   m_ObjectHideFlags: 0
@@ -105702,6 +105926,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 8, y: 1}
   cubeCoordinate: {x: 7, y: 1, z: -8}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2115034697
 GameObject:
   m_ObjectHideFlags: 0
@@ -106275,6 +106500,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 10, y: 14}
   cubeCoordinate: {x: 3, y: 14, z: -17}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2131220873
 GameObject:
   m_ObjectHideFlags: 0
@@ -106853,6 +107079,7 @@ MonoBehaviour:
   offsetCoordinate: {x: 2, y: 6}
   cubeCoordinate: {x: -1, y: 6, z: -5}
   neighbours: []
+  ClearCost: 50
 --- !u!1 &2145388835
 GameObject:
   m_ObjectHideFlags: 0

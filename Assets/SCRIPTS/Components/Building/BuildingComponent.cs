@@ -7,6 +7,7 @@ namespace GGG.Components.Buildings {
         [SerializeField] private Building Build;
 
         public Action<Action, BuildingComponent> OnBuildInteract;
+        public int visionRange;
 
         private void Update() {
             if (Build.NeedInteraction()) return;

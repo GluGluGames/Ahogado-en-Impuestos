@@ -4,7 +4,9 @@ using GGG.Components.Ticks;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace GGG.Components.Buildings
@@ -37,7 +39,7 @@ namespace GGG.Components.Buildings
             foreach (HexTile hexTile in hexTiles)
             {
                 RegisterTile(hexTile);
-                if(FOWActive) { AddFogOfWarTile(hexTile); }
+                if (FOWActive) { AddFogOfWarTile(hexTile); }
 
             }
 
@@ -62,15 +64,19 @@ namespace GGG.Components.Buildings
                 PlayerPosition.CurrentTile = playerSpawnTile;
 
                 foreach (HexTile tileAux in hexTiles)
-                tileAux.OnHexSelect += (tileAux) =>
-                {
-                    _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
-                    _path.Reverse();
-                    PlayerPosition.CurrentPath = _path;
-                };
+                    tileAux.OnHexSelect += (tileAux) =>
+                    {
+                        _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
+                        _path.Reverse();
+                        PlayerPosition.CurrentPath = _path;
+                    };
 
                 //FOW
                 RevealTile(playerSpawnTile, 2);
+            }
+            else // ONLY do on main scene. Where there is no player...
+            {
+                RevealTile(hexTiles[hexTiles.Length / 2], 3);
             }
         }
 

@@ -37,7 +37,7 @@ namespace GGG.Components.Buildings {
         #region Unity Events
 
         private void OnValidate() {
-            if (tilePrefab == null) { return; }
+            if (tilePrefab == null || Application.isPlaying) { return; }
             _isDirty = true;
         }
 
@@ -50,16 +50,22 @@ namespace GGG.Components.Buildings {
                 _highlightPrefab = Instantiate(_manager.highlightPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
                 _highlightPrefab.SetActive(false);
             }
+
             // TODO - Apply the cost manually
             ClearCost = 50;
+
         }
 
         private void Update() {
-            if (_isDirty) {
+            if (_isDirty && Application.isEditor)
+            {
 
-                if (Application.isPlaying) {
+                if (Application.isPlaying)
+                {
                     GameObject.Destroy(tilePrefab);
-                } else {
+                }
+                else
+                {
                     GameObject.DestroyImmediate(tilePrefab);
                 }
                 tilePrefab = null;
@@ -110,6 +116,12 @@ namespace GGG.Components.Buildings {
                 MeshCollider collider = gameObject.AddComponent<MeshCollider>();
                 collider.sharedMesh = GetComponentInChildren<MeshFilter>().sharedMesh;
             }
+
+            if (_manager)
+            {
+                _highlightPrefab = Instantiate(_manager.highlightPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
+                _highlightPrefab.SetActive(false);
+            }
         }
 
         private void SelectTile() {
@@ -129,7 +141,6 @@ namespace GGG.Components.Buildings {
             OnHexDeselect?.Invoke();
             _manager.SelectTile(null);
             _selected = false;
-            print($"Deselected {gameObject.name}");
             DeactivateHighlight();
         }
 
