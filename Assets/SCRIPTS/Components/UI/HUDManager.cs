@@ -20,6 +20,7 @@ namespace GGG.Components.UI
         #endregion
 
         [SerializeField] private TextMeshProUGUI SeaweedsText;
+        [SerializeField] private bool OnMinigame;
         
         private PlayerManager _player;
         private BuildingUI _buildingUI;
@@ -40,7 +41,10 @@ namespace GGG.Components.UI
             SeaweedsText.text = $"Seaweeds: {_player.GetResourceCount(BasicResources.SEAWEED)}";
         }
 
-        private void MenusHandle() {
+        private void MenusHandle()
+        {
+            if (OnMinigame) return;
+            
             _buildingUI.OnMenuOpen += () => {
                 _tileCleanUI.Close();
                 _upgradeUI.Close();
