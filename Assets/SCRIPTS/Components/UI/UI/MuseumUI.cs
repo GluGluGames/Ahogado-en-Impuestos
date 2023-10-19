@@ -3,6 +3,8 @@ using GGG.Shared;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
 
 public class MuseumUI : MonoBehaviour
 {
@@ -31,6 +33,8 @@ public class MuseumUI : MonoBehaviour
     [SerializeField] private GameObject ExpeditionBackground;
     [SerializeField] private GameObject FishBackground;
 
+    [SerializeField] private float ButtonScale = 1;
+
     #endregion
 
     #region Private variables
@@ -50,6 +54,8 @@ public class MuseumUI : MonoBehaviour
     private int active = 0;
     private int[] activeResource = new int[] { 0, 0, 0 };
 
+    public LocalizedString _lockedString;
+
     #endregion
 
     #region Unity functions
@@ -63,7 +69,9 @@ public class MuseumUI : MonoBehaviour
 
     private void Start()
     {
-        if(SeaResources.Length > 0) { FillSeaResources(); }
+        //_lockedString = new LocalizedString(LocalizationKey, EntryReference);
+
+        if (SeaResources.Length > 0) { FillSeaResources(); }
         if(ExpeditionResources.Length > 0) { FillExpeditionResources(); }
         if(FishResources.Length > 0) { FillFishResources(); }
 
@@ -75,14 +83,20 @@ public class MuseumUI : MonoBehaviour
         initArray(ExpeditionActive, ExpeditionButtons);
         initArray(FishActive, FishButtons);
 
-        unlockResource(SeaActive, SeaButtons, 0);
+        for(int i=0; i<SeaResources.Length; i++)
+        {
+            unlockResource(SeaActive, SeaButtons, i);
+        }
         unlockResource(ExpeditionActive, ExpeditionButtons, 0);
         unlockResource(FishActive, FishButtons, 0);
 
         SeaButton.onClick.AddListener(() => HandleSeaToggle());
         ExpeditionButton.onClick.AddListener(() => HandleExpeditionToggle());
         FishButton.onClick.AddListener(() => HandleFishToggle());
+
         SeaButton.image.sprite = SeaButton.spriteState.selectedSprite;
+        FishButton.image.sprite = FishButton.spriteState.disabledSprite;
+        ExpeditionButton.image.sprite = ExpeditionButton.spriteState.disabledSprite;
     }
 
     #endregion
@@ -100,10 +114,14 @@ public class MuseumUI : MonoBehaviour
             }
             else
             {
+                SeaButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                 SeaButtons[i].image.sprite = SeaResources[i].GetSprite();
+                SpriteState aux = new SpriteState();
+                aux.selectedSprite = SeaResources[i].GetSelectedSprite();
+                aux.disabledSprite = SeaResources[i].GetSprite();
+                SeaButtons[i].spriteState = aux;
                 int index = i;
-                SeaButtons[i].onClick.AddListener(() => AddListener(SeaResources, SeaButtons, 0, index));
-   
+                SeaButtons[i].onClick.AddListener(() => AddListener(SeaResources, SeaButtons, SeaActive, 0, index));
             }
         }
     }
@@ -118,9 +136,14 @@ public class MuseumUI : MonoBehaviour
             }
             else
             {
+                ExpeditionButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                 ExpeditionButtons[i].image.sprite = ExpeditionResources[i].GetSprite();
+                SpriteState aux = new SpriteState();
+                aux.selectedSprite = ExpeditionResources[i].GetSelectedSprite();
+                aux.disabledSprite = ExpeditionResources[i].GetSprite();
+                ExpeditionButtons[i].spriteState = aux;
                 int index = i;
-                ExpeditionButtons[i].onClick.AddListener(() => AddListener(ExpeditionResources, ExpeditionButtons, 1, index));
+                ExpeditionButtons[i].onClick.AddListener(() => AddListener(ExpeditionResources, ExpeditionButtons, ExpeditionActive, 1, index));
             }
         }
     }
@@ -136,16 +159,21 @@ public class MuseumUI : MonoBehaviour
             }
             else
             {
+                FishButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                 FishButtons[i].image.sprite = FishResources[i].GetSprite();
+                SpriteState aux = new SpriteState();
+                aux.disabledSprite = FishResources[i].GetSprite();
+                aux.selectedSprite = FishResources[i].GetSelectedSprite();
+                FishButtons[i].spriteState = aux;
                 int index = i;
-                FishButtons[i].onClick.AddListener(() => AddListener(FishResources, FishButtons, 2, index));
+                FishButtons[i].onClick.AddListener(() => AddListener(FishResources, FishButtons, FishActive, 2, index));
             }
         }
     }
 
-    private void AddListener(BasicResource[] resources, Button[] buttons, int type, int i)
+    private void AddListener(BasicResource[] resources, Button[] buttons, bool[] active, int type, int i)
     {
-        SelectResource(resources, buttons, type, i);
+        SelectResource(resources, buttons, active, type, i);
     }
 
     public void HandleSeaToggle() {
@@ -158,7 +186,7 @@ public class MuseumUI : MonoBehaviour
         FishBackground.active = false;
         ExpeditionBackground.active = false;
 
-        SelectResource(SeaResources, SeaButtons, 0, 0);
+        SelectResource(SeaResources, SeaButtons, SeaActive, 0, 0);
 
         active = 0;
     }
@@ -174,7 +202,7 @@ public class MuseumUI : MonoBehaviour
         FishBackground.active = false;
         ExpeditionBackground.active = true;
 
-        SelectResource(ExpeditionResources, ExpeditionButtons, 1, 0);
+        SelectResource(ExpeditionResources, ExpeditionButtons, ExpeditionActive, 1, 0);
 
         active = 1;
     }
@@ -192,7 +220,7 @@ public class MuseumUI : MonoBehaviour
         ExpeditionBackground.active = false;
 
 
-        SelectResource(FishResources, FishButtons, 2, 0);
+        SelectResource(FishResources, FishButtons, FishActive, 2, 0);
 
         active = 2;
     }
@@ -212,14 +240,22 @@ public class MuseumUI : MonoBehaviour
         buttons[i].image.color = Color.white;
     }
 
-    private void SelectResource(BasicResource[] resources, Button[] buttons, int type, int i)
+    private void SelectResource(BasicResource[] resources, Button[] buttons, bool[] active, int type, int i)
     {
         int activeRes = activeResource[type];
         if (activeRes == i && activeRes!=0) return;
-        buttons[activeRes].image.sprite = buttons[i].spriteState.disabledSprite;
+        buttons[activeRes].image.sprite = buttons[activeRes].spriteState.disabledSprite;
 
-        Name.text = resources[i].GetName().GetLocalizedString();
-        Description.text = resources[i].GetDescription().GetLocalizedString();
+        if (active[i] == true)
+        {
+            Name.text = resources[i].GetName().GetLocalizedString();
+            Description.text = resources[i].GetDescription().GetLocalizedString();
+        }
+        else
+        {
+            Name.text = _lockedString.GetLocalizedString();
+            Description.text = _lockedString.GetLocalizedString();
+        }
         buttons[i].image.sprite = buttons[i].spriteState.selectedSprite;
         activeResource[type] = i;
     }
