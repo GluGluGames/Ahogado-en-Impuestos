@@ -97,7 +97,7 @@ namespace GGG.Components.Shop
             if(_open) return;
 
             Viewport.SetActive(true);
-            transform.DOMoveX(Screen.width * 0.5f + _INITIAL_POSITION, 2f, true).SetEase(Ease.InOutExpo);
+            transform.DOMoveX(Screen.width * 0.5f, 2f, true).SetEase(Ease.InOutExpo);
             _open = true;
         }
 

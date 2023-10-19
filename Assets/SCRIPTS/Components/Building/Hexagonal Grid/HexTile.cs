@@ -188,7 +188,7 @@ namespace GGG.Components.Buildings {
             }
             gameObject.layer = 0;
             transform.GetChild(0).gameObject.layer = 0;
-            fow.SetActive(false);
+            if(fow) fow.SetActive(false);
         }
 
         #endregion

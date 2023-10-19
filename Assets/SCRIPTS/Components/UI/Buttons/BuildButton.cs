@@ -50,6 +50,7 @@ namespace GGG.Components.UI {
 
             _selectedHexTile.SetBuilding(_auxBuild);
             OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
+            _player.AddResource(BasicResources.SEAWEED, -_cost);
            
 
             //FOW
