@@ -56,7 +56,7 @@ namespace GGG.Components.UI
             }
             
             _selectedTile.SetTileType(TileType.Standard);
-            _player.AddResource(BasicResources.SEAWEED, _selectedTile.GetClearCost());
+            _player.AddResource(BasicResources.SEAWEED, -_selectedTile.GetClearCost());
             Close();
         }
 
