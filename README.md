@@ -268,16 +268,15 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
     
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/e18ae0cf-61f9-48d1-9ecb-844aa4c26f6d)
 
+  El laboratorio está basado en un observatorio, ya que se ha decidido que es lo más icónico y representativo para un edificio cuyo fin es investigar y descubrir cosas dentro del juego. Está basado en edificios con el mismo fin de otros juegos del estilo, como el 
+  laboratorio de Clash of Clans.
+
 #### **3.2.6 - Museo**
 
 ![Museo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/21d670df-64b4-4a0c-b701-cd8d8978d6ce)
 
 #### **3.2.7 - Tienda**
-**Caracteristica:**
-- Pilares griegos
-- Ventanillas colocados por los lados par vender
-- Decoracion de una tienda, cartel, pizarra, productos, luz especial.
-**Justificacion:**
+
   En el diseño de tiendas dentro del juego, hemos optado por incorporar principalmente características de tiendas contemporáneas. Esta elección se basa en la proximidad de estas características al público objetivo, lo que facilita a los jugadores la localización y el 
   acceso rápido a las tiendas cuando sea necesario.
 ![Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/ead2404d-31f6-4163-a839-bc48436c2f64)
@@ -290,6 +289,8 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/6c6302cd-5aab-4e76-9176-b5fcd0399685)
 
+  El almacén de peces está basado en un templo griego fusionado con una pecera, para cumplir con la estética de la Atlantis y además dar la impresión de que está relacionado con el mundo submarino.
+
 #### **3.2.10 - Alamacén de peces (nivel 2)**
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/5c8e9690-8699-4400-8fd2-bb0d4be62d4a)
@@ -298,11 +299,10 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)
 
-### **3.3 - Personajes**
+  Este es el enemigo principal del juego, Poseidón. Su diseño está basado en juegos que esten basados en el mundo de la mitología griega, como God of War o Hades. Se ha elegido un aspecto serio, con el pelo y barba larga porque es el aspecto que suelen tener los 
+  dioses en sus representaciones, ya sean en juegos o en la ficción. También se le quiere dar la impresióin de poderoso, para que tenga sentido que sea el que tenga amenazados a los jugadores durante el gameplay. Tampoco se le quería dar un aspecto muy oscuro porque 
+  no es malvado, simplemente está enfadado.
 
-#### **3.3.1 - Estilo visual personajes**
-
-- Los personajes dentro de los diálogos tendrán una estética diferente a la del juego, al estilo Hades. Cuando los personajes hablen tendrán una imagen suya a modo de splash art. Se ha tomado esta deicisón porque creemos que favorecerá a la narrativa y a la satisfacción visual del jugador, es decir, que será atractiva para los usuarios.
 
 ## **4 - DISEÑO 3D – Adri C.**
 
