@@ -3,6 +3,7 @@ using GGG.Shared;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 namespace GGG.Components.Player
 {
@@ -23,43 +24,22 @@ namespace GGG.Components.Player
         [SerializeField] private List<AdvanceResource> AdvanceResources;
 
         private Dictionary<string, int> _resourcesCount = new();
-        private Dictionary<string, Resource> _resources = new();
+        private Dictionary<string, BasicResource> _resources = new();
 
         private void Start()
         {
-            foreach (string i in Enum.GetNames(typeof(BasicResources)))
-                _resourcesCount.Add(i, 0);
+            foreach (BasicResource i in BasicResources)
+                _resources.Add(i.GetName().GetLocalizedString(), i);
             
-
-            foreach (string i in Enum.GetNames(typeof(AdvanceResources)))
+            foreach (string i in _resources.Keys)
                 _resourcesCount.Add(i, 0);
         }
 
         private void OnValidate()
         {
-            if (BasicResources.Count < Enum.GetNames(typeof(BasicResources)).Length) { 
-                Debug.LogWarning("There are resources basic missing inside the list");
-                while (BasicResources.Count < Enum.GetNames(typeof(BasicResources)).Length)
-                    BasicResources.Add(null);
-            }
-            else if (BasicResources.Count > Enum.GetNames(typeof(BasicResources)).Length) { 
-                Debug.LogWarning("There are too many basic resources inside the list");
-                while(BasicResources.Count > Enum.GetNames(typeof(BasicResources)).Length)
-                    BasicResources.RemoveAt(BasicResources.Count - 1);
-            }
-
-            if (AdvanceResources.Count < Enum.GetNames(typeof(AdvanceResources)).Length)
-            {
-                Debug.LogWarning("There are advance resources missing inside the list");
-                while (AdvanceResources.Count < Enum.GetNames(typeof(AdvanceResources)).Length)
-                    AdvanceResources.Add(null);
-            }
-            else if (AdvanceResources.Count > Enum.GetNames(typeof(AdvanceResources)).Length)
-            {
-                Debug.LogWarning("There are too many advance resources inside the list");
-                while (AdvanceResources.Count > Enum.GetNames(typeof(AdvanceResources)).Length)
-                    AdvanceResources.RemoveAt(AdvanceResources.Count - 1);
-            }
+            BasicResources = Resources.LoadAll<BasicResource>("SeaResources").
+                Concat(Resources.LoadAll<BasicResource>("ExpeditionResources")).
+                Concat(Resources.LoadAll<BasicResource>("FishResources")).ToList();
         }
 
         public Resource GetResource<T>(T resourceType) where T : Enum
@@ -94,24 +74,21 @@ namespace GGG.Components.Player
             return resource;
         }
 
-        public int GetResourceCount(BasicResources resourceType)
+        public int GetResourceCount(string key)
         {
-            return _resourcesCount[resourceType.ToString()];
-        }
-
-        public int GetResourceCount(AdvanceResources resourceType)
-        {
-            return _resourcesCount[resourceType.ToString()];
+            return _resourcesCount[key];
         }
 
         public Resource GetResource(AdvanceResources resourcesType) { return _resources[resourcesType.ToString()]; }
 
-        public void AddResource<T>(T resourceType, int amount) where T : Enum {
-            if (!_resourcesCount.ContainsKey(resourceType.ToString()))
+        public void AddResource(string resourceKey, int amount) {
+            if (!_resourcesCount.ContainsKey(resourceKey))
                 throw new KeyNotFoundException("No resource found");
             
 
-            _resourcesCount[resourceType.ToString()] += amount;
+            _resourcesCount[resourceKey] += amount;
         }
+
+        public int GetResourceNumber() => _resources.Count;
     }
 }

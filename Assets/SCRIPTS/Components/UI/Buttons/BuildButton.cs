@@ -15,6 +15,7 @@ namespace GGG.Components.UI {
         [SerializeField] private Building BuildingInfo;
         [SerializeField] private TextMeshProUGUI BuildNameText;
         [SerializeField] private TMP_Text PriceText;
+        [SerializeField] private BasicResource BuildResource;
 
         private HexTile _selectedHexTile;
         private BuildingComponent _auxBuild;
@@ -39,7 +40,7 @@ namespace GGG.Components.UI {
         }
 
         private void BuildStructure() {
-            if (_player.GetResourceCount(BasicResources.SEAWEED) < _cost)
+            if (_player.GetResourceCount(BuildResource.GetName().GetLocalizedString()) < _cost)
             {
                 // TODO - Can't buy warning
                 return;
@@ -50,7 +51,7 @@ namespace GGG.Components.UI {
 
             _selectedHexTile.SetBuilding(_auxBuild);
             OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
-            _player.AddResource(BasicResources.SEAWEED, -_cost);
+            _player.AddResource(BuildResource.GetName().GetLocalizedString(), -_cost);
            
 
             //FOW

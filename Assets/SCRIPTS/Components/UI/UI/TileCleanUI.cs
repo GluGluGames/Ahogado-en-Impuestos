@@ -14,6 +14,7 @@ namespace GGG.Components.UI
         [SerializeField] private Button CleanButton;
         [SerializeField] private Button CloseButton;
         [SerializeField] private TMP_Text CostAmountText;
+        [SerializeField] private BasicResource CleanResource;
 
         private PlayerManager _player;
         private Transform _transform;
@@ -49,14 +50,14 @@ namespace GGG.Components.UI
 
         private void CleanTile()
         {
-            if (_player.GetResourceCount(BasicResources.SEAWEED) < _selectedTile.GetClearCost())
+            if (_player.GetResourceCount(CleanResource.GetName().GetLocalizedString()) < _selectedTile.GetClearCost())
             {
                 // TODO - Can't clear tile warning
                 return;
             }
             
             _selectedTile.SetTileType(TileType.Standard);
-            _player.AddResource(BasicResources.SEAWEED, -_selectedTile.GetClearCost());
+            _player.AddResource(CleanResource.GetName().GetLocalizedString(), -_selectedTile.GetClearCost());
             Close();
         }
 
