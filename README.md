@@ -6,7 +6,7 @@
 - 17/10/2023 - Se han corregido ciertas faltas ortográficas.
 - 17/10/2023 - Luming - Aumento de detalles en tablas para los edificios, poner tutorial y progresion en game design, adjuntando sus propias diagramas de flujo. Aparte, tambien se ha metido los graficos sobre la recaudacion y la curva de aprendizaje
 - 18/10/2023 - Luming - Aumento de explicaciones sobre la probabilidad de recaudacion y la curva de aprendizaje, y aclaracion de game design
-- 20/10/2023 - Luming - Corregido el game design, Intensidad de recaudacion -> Variedad de recaudacion segun la productividad, meter recursos de tipo de especial,
+- 20/10/2023 - Luming - Corregido el game design, Intensidad de recaudacion -> Variedad de recaudacion segun la productividad, meter recursos de tipo de especial,arreglar las columnas de reparacion
 - 20/10/2023 - Adrián S - Añadido de los personajes protagonistas de la historia
 - 
 ## 1 - MÉCANICAS 
@@ -114,9 +114,9 @@ El generador de electricidad requerirá de anguilas eléctricas para construirse
 El impresionante Paratridente, cuya construcción conlleva un coste significativo, posee una característica única y vital: su capacidad para proteger una zona designada durante una única ráfaga de furia. Para mantener su eficacia, este artefacto debe ser cargado con la energía eléctrica de las anguilas eléctricas, lo que añade un elemento de recolección estratégica a la ecuación. Cada Paratridente está equipado con tres cargas, lo que se traduce en tres oportunidades de activación. Cada vez que la furia de Poseidón desciende sobre una casilla protegida por el Paratridente, este responde de manera inmediata, anulando el peligro y consumiendo una de sus preciadas cargas. Sin embargo, tras cada intervención, el Paratridente requiere un período de tiempo para recargar su cúpula defensiva, que puede realizarse hasta en tres ocasiones. En el caso desafortunado de que la furia de Poseidón impacte en un edificio revelado, el resultado es un ataque devastador que deja la casilla afectada en un estado crítico. Esta casilla quedará inoperativa hasta que sea reparada, lo que añade un elemento de urgencia y gestión de recursos a la estrategia del jugador.
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Numero de protecciones | Tiempo de espera | Justificacion|
 | :--: | :--: | :--: | :--: | :--: |:--:| ------------ |
-| 1| 5000 algas verdes + 500 corales| x | 2500 algas verdes | 1 | 5min | Sirve como una proteccion basica para el jugador, pero puede ser mejorado en el futuro y aguanta mas iras de poseidon.|
-| 2| x| 500 hierro + 500 corales | 2500 algas verdes | 2 | 5min | Se aumenta a 2 veces el numero de protecciones, pero sera necesario cargado por el generador de electricidad.|
-| 3| x| 500 hierro + 500 corales | 2500 algas verdes | 3 | 3min | Monumento gigante que para 3 iras de poseidon, version mejorado de tiempo como recompensa para el jugador.|
+| 1| 5000 algas verdes + 500 corales| x | 250 madera | 1 | 5min | Sirve como una proteccion basica para el jugador, pero puede ser mejorado en el futuro y aguanta mas iras de poseidon.|
+| 2| x| 500 hierro + 500 corales | 250 madera | 2 | 5min | Se aumenta a 2 veces el numero de protecciones, pero sera necesario cargado por el generador de electricidad.|
+| 3| x| 500 hierro + 500 corales | 250 madera | 3 | 3min | Monumento gigante que para 3 iras de poseidon, version mejorado de tiempo como recompensa para el jugador.|
 
 
 
@@ -124,9 +124,9 @@ El impresionante Paratridente, cuya construcción conlleva un coste significativ
 Después de llevar a cabo un impresionante total de diez expediciones, en las cuales el jugador ha demostrado una destreza y determinación sin igual, se descubre un misterioso casco mágico. Este asombroso hallazgo desencadena la apertura de un nuevo horizonte de posibilidades, en forma de un espléndido edificio dedicado exclusivamente a la mejora del buceo. Este majestuoso edificio de mejoras de buceo se convierte en un centro neurálgico de investigación submarina, donde los secretos de las profundidades marinas se desvelan lentamente. Sin embargo, la búsqueda del conocimiento tiene su precio, y el costo de investigación aumenta de forma exponencial, desafiando aún más la habilidad y el ingenio del jugador.
 | Nivel | Coste de construccion | Coste de mejora | Coste de reparacion| 
 | :--: | :--: | :--: | :--: |
-|  1 | 2500 algas verdes | x | 1000 algas |
-|  2 | x | 500 hierro | 1000 algas |
-|  3 | x | 750 hierro | 1000 algas |
+|  1 | 2500 algas verdes | x | 100 madera |
+|  2 | x | 500 hierro | 100 madera |
+|  3 | x | 750 hierro | 100 madera |
 
 | Tipo | Nivel requerido de edificio| Nivel Mejora | Coste de mejora | Efecto| Justificacion| 
 | :---:| :--:|:---:|:---:|:---:|:---:|
@@ -148,9 +148,9 @@ Después de llevar a cabo un impresionante total de diez expediciones, en las cu
 Un majestuoso edificio de investigación, cuidadosamente desvelado con la adquisición de una enigmática tablilla, y erigido con una preciosa cantidad de corales. Una vez completada su construcción, se convierte en el epicentro del conocimiento y la innovación, permitiendo la realización de exhaustivas investigaciones que abarcan tanto mejoras edilicias como la exploración de los mapas hallados en nuestras expediciones. A lo largo del transcurso del juego, el costo de este edificio se incrementará gradualmente, poniendo a prueba la habilidad estratégica del jugador. Además, el tiempo de espera se convertirá en una variable crucial, si bien la implementación de edificios aceleradores y la aplicación de impulsos dentro de la ciudad pueden desempeñar un papel crucial para optimizar y agilizar estos procesos.
 | Nivel | Coste de construccion | Coste de mejora | Coste de reparacion| 
 | :--: | :--: | :--: | :--: |
-|  1 | 2500 algas verdes | x | 1000 algas |
-|  2 | x | 500 hierro  | 1000 algas |
-|  3 | x | 750 hierro | 1000 algas |
+|  1 | 2500 algas verdes | x | 100 madera |
+|  2 | x | 500 hierro  | 100 madera |
+|  3 | x | 750 hierro | 100 madera |
 
 |Edificio| Nivel requerido del centro| Nivel mejora | Coste| Tiempo |Justificacion|
 | :--: | :--: | :--: | :--: | :--: | :--: |
