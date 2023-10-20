@@ -42,9 +42,15 @@ namespace GGG.Components.Shop
 
             _player = PlayerManager.Instance;
 
+            int i = 0;
             foreach(ShopExchange exchange in Exchanges) {
                 _initialGivenAmounts.Add(exchange.GetGivenAmount());
                 _initialReceiveAmounts.Add(exchange.GetReceiveAmount());
+
+                GiveItemImage[i].sprite = exchange.GetGivenResource().GetSprite();
+                ReceiveItemImage[i].sprite = exchange.GetReceiveResource().GetSprite();
+
+                i++;
             }
 
             CloseButton.onClick.AddListener(CloseShop);
