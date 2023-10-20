@@ -252,17 +252,25 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ![Ayuntamiento](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/e85bb4d2-01a7-4272-92c4-bc3a80777b2f)
 
+El edificio principal de la ciudad, es necesario que su diseño sea el que más destaque de entre las estructuras del gameplay. Por ese motivo es el edificio más alto de entre todos, además de el más complejo. Tiene una inspiración en el mundo subacuatico de la atlantis, con detalles de algas a lo largo de toda la estructura y patrones griegos y tridentes por su superficie. Por último posee un templo griego en la parte superior para seguir la estética griega que sigue el juego.
+
 #### **3.2.2 - Granja de algas (nivel 1)**
 
 ![Granja de algas N1](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/66bcc66d-caf3-4abf-a128-bc42f478474d)
 
+  La Granja de Algas esta inspirado en un invernadero al que se le ha intentado dar un aire griego con los detalles inscritos en la base de la estructura. Al ser el primer nivel su diseño es más simple que el de los siguientes niveles.
+  
 #### **3.2.3 - Granja de algas (nivel 2)**
 
 ![Granja de algas N2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/321e8be9-97e8-4353-8852-199f433df3a9)
 
+  Al siguiente nivel de la Granja de Algas se le ha dado una base cuadrada en vez de circular para darle un distintivo entre niveles, además de añadirle unas algas brillantes para que de el aspecto de mejoría respecto al anterior nivel.
+  
 #### **3.2.4 - Granja de algas (nivel 3)**
 
 ![Granja de algas N3](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/ef8f499e-f761-4f33-bfec-da8d80f02f0c)
+
+  El último nivel de la Granja de Algas tiene una base hexagonal, como manera de diferenciar el nivel máximo de esta estructura, además de tener un techo más desarrollado.
 
 #### **3.2.5 - Laboratorio**
     
@@ -275,27 +283,41 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ![Museo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/21d670df-64b4-4a0c-b701-cd8d8978d6ce)
 
+  Para el diseño del Museo se ha seguido la línea de ambientación griega de las demás estructuras. Como es un edificio más relevante dentro de la ciudad del jugador se le ha querido dar un aspecto más imponente, además de que sea más complejo que el edificio promedio 
+  para que destaque en el gameplay.
+
 #### **3.2.7 - Tienda**
+
+![Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/ead2404d-31f6-4163-a839-bc48436c2f64)
 
   En el diseño de tiendas dentro del juego, hemos optado por incorporar principalmente características de tiendas contemporáneas. Esta elección se basa en la proximidad de estas características al público objetivo, lo que facilita a los jugadores la localización y el 
   acceso rápido a las tiendas cuando sea necesario.
-![Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/ead2404d-31f6-4163-a839-bc48436c2f64)
 
 #### **3.2.8 - Generador eléctrico**
 
 ![Generador eléctrico](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/16921824-70bc-4e13-9dbd-2a25c31585c9)
 
+  El diseño del Generador Eléctrico gira en torno de la Anguila eléctrica, un recurso necesario del juego. A lo largo de la estructura hay túneles por donde se pueden ver anguilas que aportan energia al edificio y a la ciudad del jugador en general. 
+
 #### **3.2.9 - Alamacén de peces (nivel 1)**
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/6c6302cd-5aab-4e76-9176-b5fcd0399685)
 
-  El almacén de peces está basado en un templo griego fusionado con una pecera, para cumplir con la estética de la Atlantis y además dar la impresión de que está relacionado con el mundo submarino.
+  El Almacén de peces está basado en un templo griego fusionado con una pecera, para cumplir con la estética de la Atlantis y además dar la impresión de que está relacionado con el mundo submarino.
 
 #### **3.2.10 - Alamacén de peces (nivel 2)**
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/5c8e9690-8699-4400-8fd2-bb0d4be62d4a)
 
-#### **3.2.11 - Poseidón**
+  El nivel 2 del Almacén de peces cambia la forma de la pecera, en vez de ser una esfera pasa a ser un ortoedro, alargando así la estructura y añadiendo 1 par de columnas a lo largo.
+
+#### **3.2.11 - Alamacén de peces (nivel 3)**
+
+![peceraLVL3](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/4df4507b-03e7-4150-b774-cf6c87cbd6b0)
+
+El último nivel del Almacén de peces tiene una base hexagonal, al ser el nivel final su diseño es un poco más complejo y el acuario de su interior pasa a ser un prisma hexagonal, además de tener una columna por cada arista vertical del acuario interior.
+
+#### **3.2.12 - Poseidón**
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)
 
