@@ -62,10 +62,10 @@ namespace GGG.Components.Buildings
                     {
                         _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
                         _path.Reverse();
-                        PlayerPosition.CurrentPath = _path;
+                        PlayerPosition.currentPath = _path;
                     };
 
-                //FOW
+                // FOW
                 RevealTile(playerSpawnTile, 2);
             }
             else // ONLY do on main scene. Where there is no player...
@@ -111,7 +111,7 @@ namespace GGG.Components.Buildings
         public HexTile GetSelectedTile()
         { return _selectedTile; }
 
-        private HexTile GetRandomHex()
+        public HexTile GetRandomHex()
         {
             int rand = Random.Range(0, _tilesDic.Count);
             return _tilesDic.ElementAt(rand).Value;
