@@ -15,9 +15,9 @@ namespace GGG.Components.UI
         [SerializeField] private Button SellButton;
         [SerializeField] private Button UpgradeButton;
         [SerializeField] private Button InteractButton;
-        [SerializeField] private BasicResource SellResource;
 
         private PlayerManager _player;
+        private Resource _sellResource;
         private GameObject _panel;
         private BuildButton[] _buttons;
         private Transform _transform;
@@ -31,6 +31,7 @@ namespace GGG.Components.UI
         private void Start()
         {
             _player = PlayerManager.Instance;
+            _sellResource = _player.GetMainResource();
 
             _panel = transform.GetChild(0).gameObject;
             _panel.SetActive(false);
@@ -79,7 +80,7 @@ namespace GGG.Components.UI
         private void OnSellButton()
         {
             // TODO - Implement sell button
-            _player.AddResource(SellResource.GetName().GetLocalizedString(), Mathf.RoundToInt(_selectedBuilding.GetBuildCost() * 0.5f));
+            _player.AddResource(_sellResource.GetName(), Mathf.RoundToInt(_selectedBuilding.GetBuildCost() * 0.5f));
             _selectedTile.DestroyBuilding();
             
             _selectedBuilding = null;

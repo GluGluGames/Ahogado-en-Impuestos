@@ -83,13 +83,13 @@ namespace GGG.Components.Shop
 
         public void Exchange(int i)
         {
-            if(_player.GetResourceCount(Exchanges[i].GetGivenResource().GetName().GetLocalizedString()) < Exchanges[i].GetGivenAmount()) {
+            if(_player.GetResourceCount(Exchanges[i].GetGivenResource().GetName()) < Exchanges[i].GetGivenAmount()) {
                 // TODO - Denegate exchange
                 return;
             }
 
-            _player.AddResource(Exchanges[i].GetGivenResource().GetName().GetLocalizedString(), -Exchanges[i].GetGivenAmount());
-            _player.AddResource(Exchanges[i].GetReceiveResource().GetName().GetLocalizedString(), Exchanges[i].GetReceiveAmount());
+            _player.AddResource(Exchanges[i].GetGivenResource().GetName(), -Exchanges[i].GetGivenAmount());
+            _player.AddResource(Exchanges[i].GetReceiveResource().GetName(), Exchanges[i].GetReceiveAmount());
         }
 
         public void OpenShop()

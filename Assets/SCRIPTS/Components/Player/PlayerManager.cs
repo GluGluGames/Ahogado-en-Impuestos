@@ -2,7 +2,6 @@ using GGG.Shared;
 
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using System.Linq;
 
 namespace GGG.Components.Player
@@ -20,16 +19,16 @@ namespace GGG.Components.Player
 
         #endregion
 
-        [SerializeField] private List<BasicResource> BasicResources;
-        [SerializeField] private List<AdvanceResource> AdvanceResources;
+        [SerializeField] private List<Resource> Resources;
+        [SerializeField] private Resource TempMainResource;
 
         private Dictionary<string, int> _resourcesCount = new();
-        private Dictionary<string, BasicResource> _resources = new();
+        private Dictionary<string, Resource> _resources = new();
 
         private void Start()
         {
-            foreach (BasicResource i in BasicResources)
-                _resources.Add(i.GetName().GetLocalizedString(), i);
+            foreach (Resource i in Resources)
+                _resources.Add(i.GetName(), i);
             
             foreach (string i in _resources.Keys)
                 _resourcesCount.Add(i, 0);
@@ -37,41 +36,9 @@ namespace GGG.Components.Player
 
         private void OnValidate()
         {
-            BasicResources = Resources.LoadAll<BasicResource>("SeaResources").
-                Concat(Resources.LoadAll<BasicResource>("ExpeditionResources")).
-                Concat(Resources.LoadAll<BasicResource>("FishResources")).ToList();
-        }
-
-        public Resource GetResource<T>(T resourceType) where T : Enum
-        {
-            Resource resource = null;
-            bool found = false;
-            int i = 0;
-
-            while (!found && i < BasicResources.Count) {
-                if (BasicResources[i].GetResource().Equals(resourceType)) {
-                    resource = BasicResources[i];
-                    found = true;
-                }
-
-                i++;
-            }
-
-            if(found) return resource;
-
-            while (!found && i < AdvanceResources.Count) {
-                if (AdvanceResources[i].GetResource().Equals(resourceType)) {
-                    resource = AdvanceResources[i];
-                    found = true;
-                }
-
-                i++;
-            }
-
-            if (resource == null)
-                throw new Exception("No resource found");
-
-            return resource;
+            Resources = UnityEngine.Resources.LoadAll<Resource>("SeaResources").
+                Concat(UnityEngine.Resources.LoadAll<Resource>("ExpeditionResources")).
+                Concat(UnityEngine.Resources.LoadAll<Resource>("FishResources")).ToList();
         }
 
         public int GetResourceCount(string key)
@@ -79,7 +46,7 @@ namespace GGG.Components.Player
             return _resourcesCount[key];
         }
 
-        public Resource GetResource(AdvanceResources resourcesType) { return _resources[resourcesType.ToString()]; }
+        public Resource GetResource(string resourceKey) => _resources[resourceKey];
 
         public void AddResource(string resourceKey, int amount) {
             if (!_resourcesCount.ContainsKey(resourceKey))
@@ -90,5 +57,7 @@ namespace GGG.Components.Player
         }
 
         public int GetResourceNumber() => _resources.Count;
+
+        public Resource GetMainResource() => TempMainResource;
     }
 }

@@ -29,9 +29,9 @@ namespace GGG.Components.UI
 
         #region Private variables
 
-        private BasicResource[] SeaResources;
-        private BasicResource[] ExpeditionResources;
-        private BasicResource[] FishResources;
+        private Resource[] SeaResources;
+        private Resource[] ExpeditionResources;
+        private Resource[] FishResources;
 
         private Button[] SeaButtons;
         private Button[] ExpeditionButtons;
@@ -52,9 +52,9 @@ namespace GGG.Components.UI
 
         void Awake()
         {
-            SeaResources = Resources.LoadAll<BasicResource>("RESOURCES/SeaResources");
-            ExpeditionResources = Resources.LoadAll<BasicResource>("RESOURCES/ExpeditionResources");
-            FishResources = Resources.LoadAll<BasicResource>("RESOURCES/FishResources");
+            SeaResources = Resources.LoadAll<Resource>("RESOURCES/SeaResources");
+            ExpeditionResources = Resources.LoadAll<Resource>("RESOURCES/ExpeditionResources");
+            FishResources = Resources.LoadAll<Resource>("RESOURCES/FishResources");
             
             CloseButton.onClick.AddListener(CloseInventory);
         }
@@ -129,7 +129,7 @@ namespace GGG.Components.UI
                     int index = i;
                     SeaButtons[i].onClick.AddListener(() => AddListener(SeaResources, SeaButtons, 0, index));
 
-                    ResourcesCountText[SeaResources[i].GetName().GetLocalizedString()] =
+                    ResourcesCountText[SeaResources[i].GetName()] =
                         SeaButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
                 }
             }
@@ -156,7 +156,7 @@ namespace GGG.Components.UI
                     ExpeditionButtons[i].onClick
                         .AddListener(() => AddListener(ExpeditionResources, ExpeditionButtons, 1, index));
 
-                    ResourcesCountText[ExpeditionResources[i].GetName().GetLocalizedString()] =
+                    ResourcesCountText[ExpeditionResources[i].GetName()] =
                         ExpeditionButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
                 }
             }
@@ -182,13 +182,13 @@ namespace GGG.Components.UI
                     int index = i;
                     FishButtons[i].onClick.AddListener(() => AddListener(FishResources, FishButtons, 2, index));
 
-                    ResourcesCountText[FishResources[i].GetName().GetLocalizedString()] =
+                    ResourcesCountText[FishResources[i].GetName()] =
                         FishButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
                 }
             }
         }
 
-        private void AddListener(BasicResource[] resources, Button[] buttons, int type, int i)
+        private void AddListener(Resource[] resources, Button[] buttons, int type, int i)
         {
             //
         }
