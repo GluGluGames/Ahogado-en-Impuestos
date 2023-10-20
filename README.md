@@ -37,6 +37,9 @@ Conforme los jugadores exploran el mapa, las zonas previamente descubiertas perm
 
 Esta combinación de elementos asegura que la exploración sea una experiencia inmersiva y emocionante, donde cada nueva área presenta desafíos y oportunidades, invitando a los jugadores a sumergirse en las profundidades en busca de tesoros y descubrimientos asombrosos.
 
+Concept sencillo:
+![Niebla de guerra](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Niebla%20de%20guerra.jpg)
+
 #### **1.3.3 - Persecucion de los depredadores**
 Dentro del entorno de exploración, la presencia de depredadores añade una capa adicional de emoción y desafío al juego. Los jugadores deben mantenerse alerta y vigilar las casillas circundantes en busca de signos de depredadores cercanos. El rango de visión de estos depredadores está inversamente relacionado con el daño que pueden infligir, lo que significa que los jugadores no deben preocuparse por depredadores gigantes y rápidos que sean difíciles de evitar.
 
@@ -45,6 +48,12 @@ Cuando un depredador detecta al jugador, iniciará un movimiento hacia él con l
 Es fundamental comprender que las diferentes profundidades en el juego albergan distintos tipos de depredadores. Esto requiere que los jugadores planifiquen sus estrategias de huida con cuidado, ya que intentar escapar de un depredador puede llevarlos directamente hacia la amenaza de otro, potencialmente más peligroso.
 
 Esta mecánica añade un elemento táctico al juego, donde los jugadores deben sopesar cuidadosamente sus opciones y decidir si enfrentarán a un depredador, huirán o buscarán rutas de escape inteligentes para evitar situaciones peligrosas. La gestión adecuada de los encuentros con depredadores es esencial para una exitosa exploración del mundo submarino.
+
+Diagrama de enemigos:
+![Enemy Flow chart](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Enemy%20Flow.png)
+
+FSM Enemigo:
+![Enemy FSM](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
 
 ### **1.4 - Recursos** 
 **Recursos generales del Juego:**
