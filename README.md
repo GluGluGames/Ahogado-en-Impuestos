@@ -1,7 +1,8 @@
 # Ahogado-en-Impuestos
 
 ![LogoGluGluGames2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/bb7bf48e-2b66-48a7-9d21-e7d79f0473aa)
-## 0-Revisiones
+
+## 0 - REVISIONES
 - 16/10/2023 - Se ha actualizado la descripcion de los recursos y se ha metido el flujo de juego,los animales,la descripcion de la niebla de guerra, y de la persecucion de los depredadores.
 - 17/10/2023 - Se han corregido ciertas faltas ortográficas.
 - 17/10/2023 - Luming - Aumento de detalles en tablas para los edificios, poner tutorial y progresion en game design, adjuntando sus propias diagramas de flujo. Aparte, tambien se ha metido los graficos sobre la recaudacion y la curva de aprendizaje
@@ -9,6 +10,7 @@
 - 20/10/2023 - Luming - Corregido el game design, Intensidad de recaudacion -> Variedad de recaudacion segun la productividad, meter recursos de tipo de especial,arreglar las columnas de reparacion
 - 20/10/2023 - Adrián S - Añadido de los personajes protagonistas de la historia
 - 21/10/2023 - Laura - Explicación de concepts e interfaces, y formato
+- 21/10/2023 - David - Música y sonido y mejoras en el estilo.
   
 ## 1 - MÉCANICAS 
 
@@ -39,10 +41,11 @@ Conforme los jugadores exploran el mapa, las zonas previamente descubiertas perm
 
 Esta combinación de elementos asegura que la exploración sea una experiencia inmersiva y emocionante, donde cada nueva área presenta desafíos y oportunidades, invitando a los jugadores a sumergirse en las profundidades en busca de tesoros y descubrimientos asombrosos.
 
-Concept sencillo:
+**Concept sencillo**
+
 ![Niebla de guerra](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Niebla%20de%20guerra.jpg)
 
-#### **1.3.3 - Persecucion de los depredadores**
+#### **1.3.3 - Persecución de los depredadores**
 Dentro del entorno de exploración, la presencia de depredadores añade una capa adicional de emoción y desafío al juego. Los jugadores deben mantenerse alerta y vigilar las casillas circundantes en busca de signos de depredadores cercanos. El rango de visión de estos depredadores está inversamente relacionado con el daño que pueden infligir, lo que significa que los jugadores no deben preocuparse por depredadores gigantes y rápidos que sean difíciles de evitar.
 
 Cuando un depredador detecta al jugador, iniciará un movimiento hacia él con la intención de atacar. En esta situación, el jugador debe tomar medidas para escapar y cansar al depredador lo antes posible. La eficacia de esta estrategia dependerá de la rapidez con la que el jugador pueda evadir al depredador.
@@ -51,35 +54,40 @@ Es fundamental comprender que las diferentes profundidades en el juego albergan 
 
 Esta mecánica añade un elemento táctico al juego, donde los jugadores deben sopesar cuidadosamente sus opciones y decidir si enfrentarán a un depredador, huirán o buscarán rutas de escape inteligentes para evitar situaciones peligrosas. La gestión adecuada de los encuentros con depredadores es esencial para una exitosa exploración del mundo submarino.
 
-Diagrama de enemigos:
+**Diagrama de enemigos**
+
 ![Enemy Flow chart](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Enemy%20Flow.png)
 
-FSM Enemigo:
+**FSM Enemigo**
+
 ![Enemy FSM](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
 
 ### **1.4 - Recursos** 
-**Recursos generales del Juego:**
 
-- Algas Verdes: Se utilizan tanto para el costo de construcción como para el costo de mejoras en la ciudad. Estos son recursos esenciales para la expansión y mejora de la ciudad.
+#### **1.4.1 - Recursos generales**
 
-- Algas Rojas: Se utilizan para comprar objetos de aumento (boosts) dentro de la tienda del juego. Estos objetos pueden proporcionar ventajas temporales a los jugadores y pueden ser útiles en situaciones específicas.
+- **Algas Verdes**: Se utilizan tanto para el costo de construcción como para el costo de mejoras en la ciudad. Estos son recursos esenciales para la expansión y mejora de la ciudad.
 
-- Perlas: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
+- **Algas Rojas**: Se utilizan para comprar objetos de aumento (boosts) dentro de la tienda del juego. Estos objetos pueden proporcionar ventajas temporales a los jugadores y pueden ser útiles en situaciones específicas.
 
-- Madera, Corales y Hierro: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
+- **Perlas**: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
 
-**Recursos espciales del Juego:**
-- Tablilla: Las tablillas desempeñarán un papel fundamental en el juego, ya que servirán para desbloquear edificios especiales. En este caso, se han diseñado cuatro tablillas diferentes para desbloquear cuatro edificios distintos. Estos edificios incluyen un generador de electricidad, un paratrápido, un laboratorio y mejoras en las capacidades de buceo.
+- **Madera, Corales y Hierro**: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
+
+#### **1.4.2 - Recursos especiales**
+
+- **Tablilla**: Las tablillas desempeñarán un papel fundamental en el juego, ya que servirán para desbloquear edificios especiales. En este caso, se han diseñado cuatro tablillas diferentes para desbloquear cuatro edificios distintos. Estos edificios incluyen un generador de electricidad, un paratrápido, un laboratorio y mejoras en las capacidades de buceo.
 Estas tablillas ofrecen a los jugadores la oportunidad de acceder a nuevas construcciones y mejoras que enriquecen su experiencia de juego y les brindan herramientas adicionales para la reconstrucción de la ciudad perdida de Atlantis.
 
-- Mapa: Los mapas desempeñan un papel crucial en el juego, ya que permiten a los jugadores desbloquear zonas diferentes, cada una con recursos únicos. Estos recursos pueden variar en cantidad y rareza, lo que fomenta la exploración activa y añade un elemento divertido y desafiante al juego. En total, se han diseñado cinco zonas distintas, cada una con su propio conjunto de tesoros por descubrir.
+- **Mapa**: Los mapas desempeñan un papel crucial en el juego, ya que permiten a los jugadores desbloquear zonas diferentes, cada una con recursos únicos. Estos recursos pueden variar en cantidad y rareza, lo que fomenta la exploración activa y añade un elemento divertido y desafiante al juego. En total, se han diseñado cinco zonas distintas, cada una con su propio conjunto de tesoros por descubrir.
 Estas zonas desbloqueables brindan a los jugadores la oportunidad de diversificar su experiencia y recompensan su curiosidad a medida que se aventuran en lo desconocido en busca de tesoros submarinos. 
 
 ### **1.5 - Edificios** 
-#### **1.5.1 - Granja de algas**
-La granja de algas generara un número de algas por unidad de tiempo. 
 
-Al subirla de nivel: el número de algas generadas aumentará.
+#### **1.5.1 - Granja de algas**
+
+La granja de algas generara un número de algas por unidad de tiempo. Al subirla de nivel, el número de algas generadas aumentará.
+
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Productividad | Justificacion|
 | :--: | :--: | :--: | :--: | :--: | ------------ |
 | 1 | 2000 algasverdes + 400 corales| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
@@ -87,6 +95,7 @@ Al subirla de nivel: el número de algas generadas aumentará.
 | 3 | x| 600 Hierro + 400 corales | 800 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
 
 #### **1.5.2 - Tienda de objetos**
+
 La tienda de objetos servirá al jugador para intercambiar un número de materiales por otros. 
   - Se actualizará cada cierto tiempo ofreciendo nuevos intercambios.
   - Cada intercambio se podrá realizar un número límitado de veces.
@@ -99,6 +108,7 @@ Al subirla de nivel: se ofrecerá un mayor número de intercambios al día y de 
 | 3 | x| 300 hierro  | 10 | Aqui el jugador ya habra avanzado bastante en la construccion de la ciudad por lo tanto se permiten hasta 10 ya que puede hacer falta los recursos en ocaciones, sin abusar del intercambio|
 
 #### **1.5.3 - Generador de electricidad**
+
 El generador de electricidad requerirá de anguilas eléctricas para construirse. Su principal función es generar cargas que pueden usarse para:
   - Boostear un edificio seleccionado por el jugador.
   - Recargar el paratridentes para poder usarlo de nuevo.
@@ -112,17 +122,25 @@ El generador de electricidad requerirá de anguilas eléctricas para construirse
  Al subirlo de nivel: en el nivel II habrá dos cargas disponibles y en el nivel III, tres cargas disponibles. El uso de estas cargas es asignado por el jugador.
 
 #### **1.5.4 - Paratridente**
-El impresionante Paratridente, cuya construcción conlleva un coste significativo, posee una característica única y vital: su capacidad para proteger una zona designada durante una única ráfaga de furia. Para mantener su eficacia, este artefacto debe ser cargado con la energía eléctrica de las anguilas eléctricas, lo que añade un elemento de recolección estratégica a la ecuación. Cada Paratridente está equipado con tres cargas, lo que se traduce en tres oportunidades de activación. Cada vez que la furia de Poseidón desciende sobre una casilla protegida por el Paratridente, este responde de manera inmediata, anulando el peligro y consumiendo una de sus preciadas cargas. Sin embargo, tras cada intervención, el Paratridente requiere un período de tiempo para recargar su cúpula defensiva, que puede realizarse hasta en tres ocasiones. En el caso desafortunado de que la furia de Poseidón impacte en un edificio revelado, el resultado es un ataque devastador que deja la casilla afectada en un estado crítico. Esta casilla quedará inoperativa hasta que sea reparada, lo que añade un elemento de urgencia y gestión de recursos a la estrategia del jugador.
+
+El impresionante Paratridente, cuya construcción conlleva un coste significativo, posee una característica única y vital: su capacidad para proteger una zona designada durante una única ráfaga de furia. Para mantener su eficacia, este artefacto debe ser cargado con la energía eléctrica de las anguilas eléctricas, lo que añade un elemento de recolección estratégica a la ecuación. Cada Paratridente está equipado con tres cargas, lo que se traduce en tres oportunidades de activación. 
+
+Cada vez que la furia de Poseidón desciende sobre una casilla protegida por el Paratridente, este responde de manera inmediata, anulando el peligro y consumiendo una de sus preciadas cargas. Sin embargo, tras cada intervención, el Paratridente requiere un período de tiempo para recargar su cúpula defensiva, que puede realizarse hasta en tres ocasiones. 
+
+En el caso desafortunado de que la furia de Poseidón impacte en un edificio revelado, el resultado es un ataque devastador que deja la casilla afectada en un estado crítico. Esta casilla quedará inoperativa hasta que sea reparada, lo que añade un elemento de urgencia y gestión de recursos a la estrategia del jugador.
+
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Numero de protecciones | Tiempo de espera | Justificacion|
 | :--: | :--: | :--: | :--: | :--: |:--:| ------------ |
 | 1| 5000 algas verdes + 500 corales| x | 250 madera | 1 | 5min | Sirve como una proteccion basica para el jugador, pero puede ser mejorado en el futuro y aguanta mas iras de poseidon.|
 | 2| x| 500 hierro + 500 corales | 250 madera | 2 | 5min | Se aumenta a 2 veces el numero de protecciones, pero sera necesario cargado por el generador de electricidad.|
 | 3| x| 500 hierro + 500 corales | 250 madera | 3 | 3min | Monumento gigante que para 3 iras de poseidon, version mejorado de tiempo como recompensa para el jugador.|
 
-
-
 #### **1.5.5 - Mejoras de buceo**
-Después de llevar a cabo un impresionante total de diez expediciones, en las cuales el jugador ha demostrado una destreza y determinación sin igual, se descubre un misterioso casco mágico. Este asombroso hallazgo desencadena la apertura de un nuevo horizonte de posibilidades, en forma de un espléndido edificio dedicado exclusivamente a la mejora del buceo. Este majestuoso edificio de mejoras de buceo se convierte en un centro neurálgico de investigación submarina, donde los secretos de las profundidades marinas se desvelan lentamente. Sin embargo, la búsqueda del conocimiento tiene su precio, y el costo de investigación aumenta de forma exponencial, desafiando aún más la habilidad y el ingenio del jugador.
+
+Después de llevar a cabo un impresionante total de diez expediciones, en las cuales el jugador ha demostrado una destreza y determinación sin igual, se descubre un misterioso casco mágico. Este asombroso hallazgo desencadena la apertura de un nuevo horizonte de posibilidades, en forma de un espléndido edificio dedicado exclusivamente a la mejora del buceo. 
+
+Este majestuoso edificio de mejoras de buceo se convierte en un centro neurálgico de investigación submarina, donde los secretos de las profundidades marinas se desvelan lentamente. Sin embargo, la búsqueda del conocimiento tiene su precio, y el costo de investigación aumenta de forma exponencial, desafiando aún más la habilidad y el ingenio del jugador.
+
 | Nivel | Coste de construccion | Coste de mejora | Coste de reparacion| 
 | :--: | :--: | :--: | :--: |
 |  1 | 2500 algas verdes | x | 100 madera |
@@ -141,12 +159,10 @@ Después de llevar a cabo un impresionante total de diez expediciones, en las cu
 | Mochila(Pendiente)| 2 | 2->3 | 1000 algas verdes| +10 casillas para criaturas |  Aumentar la capacidad de la mochila a la hora de cazar peces o recolectar.|
 | Mochila(Pendiente) | 3 | 3->4 | 1000 algas verdes| +10 casillas para criaturas| Aumentar la capacidad de la mochila a la hora de cazar peces o recolectar.|
 
-
-
-
-
 #### **1.5.6 - Edificio de investigacion** 
+
 Un majestuoso edificio de investigación, cuidadosamente desvelado con la adquisición de una enigmática tablilla, y erigido con una preciosa cantidad de corales. Una vez completada su construcción, se convierte en el epicentro del conocimiento y la innovación, permitiendo la realización de exhaustivas investigaciones que abarcan tanto mejoras edilicias como la exploración de los mapas hallados en nuestras expediciones. A lo largo del transcurso del juego, el costo de este edificio se incrementará gradualmente, poniendo a prueba la habilidad estratégica del jugador. Además, el tiempo de espera se convertirá en una variable crucial, si bien la implementación de edificios aceleradores y la aplicación de impulsos dentro de la ciudad pueden desempeñar un papel crucial para optimizar y agilizar estos procesos.
+
 | Nivel | Coste de construccion | Coste de mejora | Coste de reparacion| 
 | :--: | :--: | :--: | :--: |
 |  1 | 2500 algas verdes | x | 100 madera |
@@ -164,17 +180,12 @@ Un majestuoso edificio de investigación, cuidadosamente desvelado con la adquis
 |Mejora de buceo| 1 | 1->2 | 1000 algas verdes | 5 min| Se tarda poco debido a que hay mas coste de algas dentro del propio edificio.|
 |Mejora de buceo| 2 | 2->3 | 2000 algas verdes | 5 min| Se tarda poco debido a que hay mas coste de algas dentro del propio edificio.|
 
-
-
-
-
 #### **1.5.7 - Museo**
-Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubierto, además se darán recompensas por desbloquear un número de recursos de las tres categorías:
-  - Materiales del mar: como algas y corales.
-  - Materiales de construcción: recogidos en naufragios durante las expecidiones, como madera y hierro.
-  - Peces: como anguilas eléctricas.
 
-Al mejorar: no tiene mejora.
+Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubierto, además se darán recompensas por desbloquear un número de recursos de las tres categorías:
+  - **Materiales del mar**: como algas y corales.
+  - **Materiales de construcción**: recogidos en naufragios durante las expecidiones, como madera y hierro.
+  - **Peces**: como anguilas eléctricas.
 
 ### 1.6 Animales 
 #### Animales Depredadores
@@ -196,11 +207,6 @@ Al mejorar: no tiene mejora.
 | Boga | Medium| Criatura de tamaño medio no ofensiva, sirve para dar más energía al generador y para el libro de colecciones.|
 | Lubina | Medium| Criatura mediano que se puede consumir por el jugador dentro de la expedición para coger energía(Alargar el tiempo de expedicion) .|
 | Dorada | Medium| Criatura media que propone un efecto de velocidad durante un tiempo determinado.|
-
-
-
-
-
 
 ## **2 - CONTROLES**
 
@@ -227,27 +233,25 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
   - **Rueda del ratón**: Dependiendo de la dirección, la cámara se acercará o se alejará.
 
-
-🎮🎮  
-**Morado: Movimiento de camara**  
-**Rojo: Rotacion de camara**  
-**Amarillo: Zoom de camara**  
+- **Morado**: Movimiento de cámara
+- **Rojo**: Rotación de cámara
+- **Amarillo**: Zoom de cámara
+  
 ![Keyboard layout](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Mapeo%20de%20controles.jpg)
 
 ### 2.2 - Pantalla táctil: 
 
-  - **Movimiento de la cámara**: El jugador mantendrá su dedo en la pantalla y arrastrará. La cámara se moverá al sentido contrario del arrastre. 
-  - **Rotación de la cámara**: El jugador mantendrá dos dedos y arrastrará de manera horizontal. La cámara se moverá en el sentido de arrastre. 
-  - **Zoom**: El jugador mantendrá dos dedos en la pantalla y juntará o separará estos. El zoom se incrementará o disminuirá en función de si se acercan o alejan, respectivamente.
+- **Movimiento de la cámara**: El jugador mantendrá su dedo en la pantalla y arrastrará. La cámara se moverá al sentido contrario del arrastre. 
+- **Rotación de la cámara**: El jugador mantendrá dos dedos y arrastrará de manera horizontal. La cámara se moverá en el sentido de arrastre. 
+- **Zoom**: El jugador mantendrá dos dedos en la pantalla y juntará o separará estos. El zoom se incrementará o disminuirá en función de si se acercan o alejan, respectivamente.
 
-**Zoom:**   
- ![Zoom](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/zoom-fingers.gif)
+![Zoom](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/zoom-fingers.gif)
 
 ## **3 - ARTE 2D** 
 
-### **3.1 - Moodboard – Laura** 
+### **3.1 - Moodboard** 
 
-### **3.2 - Concepts – Marco/Laura**
+### **3.2 - Concepts**
 
 | Título                      | Imagen                                                                                                   | Descripción                                                                                                                                                                      |
 |-----------------------------|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -265,17 +269,17 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | **3.2.12 - Mejoras de buceo**   | ![Mejoras de buceo](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Mejoras%20de%20buceo.png)   | Este edificio esta basado en el casco de un buceador antiguo. |
 | **3.2.13 - Poseidón**   | ![Poseidón](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)   | Este es el enemigo principal del juego, Poseidón. Su diseño está basado en juegos que esten basados en el mundo de la mitología griega, como God of War o Hades. <br><br> Se ha elegido un aspecto serio, con el pelo y barba larga porque es el aspecto que suelen tener los dioses en sus representaciones, ya sean en juegos o en la ficción. <br><br> También se le quiere dar la impresión de poderoso, para que tenga sentido que sea el que tenga amenazados a los jugadores durante el gameplay. Tampoco se le quería dar un aspecto muy oscuro porque no es malvado, simplemente está enfadado. |
 
-
-
 ## **4 - DISEÑO 3D – Adri C.**
 
-## **5 - GAME DESIGN  – Adri/Luming** 
-**- Flujo de juego**
-#### **Introducción y Configuración del Juego:**
+## **5 - GAME DESIGN** 
+
+### **5.1 - Flujo de juego**
+
+#### **5.1.1 - Introducción y Configuración del Juego**
 El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
 
 
-#### **Tutoriales:**
+#### **5.1.2 - Tutoriales**
 - El jugador se somete a un tutorial inicial que le enseña cómo funciona la gestión de recursos dentro de la ciudad. Aprende cómo construir edificios, qué recursos existen y cuáles son sus funcionalidades.
 Durante el tutorial, se notifica al jugador que Poseidón recaudará una cantidad de algas como impuesto. Si no se cumple este impuesto, Poseidón procederá a destruir aleatoriamente edificios en la ciudad.
 Expediciones:
@@ -287,43 +291,47 @@ Tutorial de Expediciones:
 
 ![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/DiagramaTutorial.png)
 
-#### **Progresión del Juego:**
+#### **5.1.3 - Progresión del Juego**
 La obtención de recursos y nuevas mecánicas depende del número de expediciones y los objetos clave encontrados.
 Todo el progreso de juego se tomara en un mismo mapa, y apartir de la septima se podra explorar otras zonas si se haya descubierto el mapa.
 
-- Primera Expedición: El jugador puede encontrar perlas, recursos versátiles pero difíciles de conseguir. También puede cazar peces para mantenerlos en una pecera para uso en el museo o en el generador de electricidad.
+- **Primera Expedición**: El jugador puede encontrar perlas, recursos versátiles pero difíciles de conseguir. También puede cazar peces para mantenerlos en una pecera para uso en el museo o en el generador de electricidad.
 
-- Tercera Expedición: Si el jugador encuentra un mapa, se desbloquea la mecánica de encontrar mapas. Posteriormente, Poseidón exige un impuesto imposible de pagar, lo que resulta en la destrucción de un edificio. El jugador descubre la madera, un recurso necesario para reparar edificios.Tras la reparacion, se le ofrece al jugador una tablilla de paratridente, asi para evitar la ira de poseidon.
+- **Tercera Expedición**: Si el jugador encuentra un mapa, se desbloquea la mecánica de encontrar mapas. Posteriormente, Poseidón exige un impuesto imposible de pagar, lo que resulta en la destrucción de un edificio. El jugador descubre la madera, un recurso necesario para reparar edificios.Tras la reparacion, se le ofrece al jugador una tablilla de paratridente, asi para evitar la ira de poseidon.
 
-- Quinta Expedición: El jugador puede encontrar una tablilla y un suministro de hierro. Esto demuestra la posibilidad de mejorar los edificios a través de la investigación. Los edificios se mejoran utilizando el hierro.
+- **Quinta Expedición**: El jugador puede encontrar una tablilla y un suministro de hierro. Esto demuestra la posibilidad de mejorar los edificios a través de la investigación. Los edificios se mejoran utilizando el hierro.
 
-- Sexta Expedición: El jugador encuentra un casco dorado en el mapa, lo que desbloquea mejoras relacionadas con el buceo.
+- **Sexta Expedición**: El jugador encuentra un casco dorado en el mapa, lo que desbloquea mejoras relacionadas con el buceo.
 
-- Séptima Expedición: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
+- **Séptima Expedición**: Si el jugador encuentra la tablilla del generador de electricidad y se encuentra con anguilas, se desbloquea la construcción de generadores de electricidad. Las anguilas se pueden guardar en la pecera para su uso posterior.
+  
 ![Progresion de expediciones](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Flujo%20de%20expedicion.png)
 
-#### **Colección y Museo:**
-- Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
+#### **5.1.4 - Colección y Museo**
 
-### **5.1 - Diseño de nivel**
+Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar diversas plantas marinas para completar el libro de museo, que debe ser reconstruido.
+
+### **5.2 - Diseño de nivel**
+
 Los niveles en este juego representarán las diferentes zonas de expedición y serán diseñados a mano con distribuciones específicas de niveles de profundidad. Estas distribuciones se han diseñado con el propósito de plantear desafíos y dificultades para el jugador antes de que este adquiera objetos que lo hagan inmune a ciertos peligros.
 
 Sin embargo, es importante destacar que los recursos que no funcionen como desencadenantes clave para avanzar en el juego serán generados aleatoriamente por la zona. Esto permite que el jugador encuentre variedad en cada expedición y promueve la exploración activa para reunir recursos útiles en su búsqueda para reconstruir la ciudad perdida de Atlantis.
 
-#### **Curva de aprendizaje:**
-Explicacion:
+### **5.3 - Curva de aprendizaje**
+
 La única manera de que el jugador adquiera nuevas habilidades es a través de expediciones. En otras palabras, cuantas más expediciones complete, más habilidades podrá desarrollar. El juego presenta un grid de hexágonos, cada uno con diferentes propiedades: algunos albergan depredadores, otros contienen recursos y otros son el hogar de criaturas únicas. Por lo tanto, es responsabilidad del jugador explorar cada zona de manera explícita.
 
 El contenido de cada casilla varía en cada expedición, lo que significa que si el jugador ha adquirido suficiente experiencia de expediciones fallidas, estará mejor preparado para enfrentar los desafíos que se presenten en el mapa, como los depredadores. El jugador debe considerar cuidadosamente su ruta para evitar perder tiempo transitando áreas de menos beneficio, a menos que disponga de objetos o elementos que le permitan acceder a esas zonas. En caso contrario, la expedición se verá afectada por una pérdida de tiempo de expedicion.
 
 ![Curva de aprendizaje](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Curva%20de%20aprendizaje.png)
-#### **Flujo de recaudacion:**
-Explicacion:
+
+### **5.4 - Flujo de recaudacion:**
+
 Esta mecánica se ha diseñado para evitar que los jugadores aceleren demasiado el progreso del juego, centrándose en la productividad de las algas que el jugador genera por segundo. Esta elección se ha realizado con el objetivo de garantizar que, a medida que los jugadores avanzan en el juego, no alcancen un nivel de productividad excesivamente alto que pudiera llevar al desinterés y, en última instancia, al abandono del juego.
 
 Para prevenir este escenario, se ha implementado un porcentaje de recaudacion que depende de la productividad de las algas por segundo. De esta manera, se permite una variedad de estrategias para abordar este ajuste de probabilidad. Por ejemplo, los jugadores pueden optar por sacrificar edificios para mantener su productividad, dado que el costo de reparación no es elevado, o incluso buscar un equilibrio entre ganar mucho y gastar mucho. Esta mecánica ofrece a los jugadores una serie de decisiones estratégicas que influyen en su progreso en el juego.
-![Intensidad de recaudacion ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Intensidad%20de%20recaudacion.png)
 
+![Intensidad de recaudacion ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Intensidad%20de%20recaudacion.png)
 
 ## **6 - DIAGRAMA DE FLUJO**
 
@@ -341,7 +349,7 @@ Para prevenir este escenario, se ha implementado un porcentaje de recaudacion qu
   
 - **DERROTA**: si fallas en la expedición accedes a la pantalla de derrota. Desde aquí puedes volver a la pantalla de juego. 
 
-## **7 - INTERFACES – Laura** 
+## **7 - INTERFACES** 
 
 | Título                           | Imagen                                                                                                                                                             | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -360,10 +368,11 @@ Para prevenir este escenario, se ha implementado un porcentaje de recaudacion qu
 | **7.4.6 - TIENDA DE RECURSOS**     | ![Interfaz - Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/f3a10538-0711-4210-bdf6-cba0a10cb172)              | Tienda de intercambio de objetos. <br><br> Contiene: <br> - Primer objeto y cuantos se dan. <br> - Segundo objeto y cuantos se obtienen. <br> - Flechas para aumentar el ratio de intercambio (5->1 / 10->2) <br> - Scrollbar para ver más intercambios.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | **7.4.7 - INVENTARIO**            | ![Interfaz - Inventario](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Interfaces/Interfaz%20-%20Inventario.jpg) | Menú que se abre al pulsar el engranaje. <br><br> Contiene: <br> - Pestañas para seleccionar entre los distintos tipos de recursos. <br> - Casillas con el icono del recurso y su cantidad. <br> - Botón para salir.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
-
 ## **8 - NARRATIVA** 
 
-**Sinopsis:** Hace siglos, fui un habitante de la legendaria ciudad perdida de Atlantis, un lugar misterioso y enigmático que se ocultaba en las profundidades del océano. Sin embargo, mi existencia en ese antiguo reino se mantuvo en un sueño profundo, sepultado bajo las corrientes marinas, hasta que un día, el mismísimo Poseidón, el dios del mar, me despertó de mi largo letargo.
+### **8.1 - Sinopsis:** 
+
+Hace siglos, fui un habitante de la legendaria ciudad perdida de Atlantis, un lugar misterioso y enigmático que se ocultaba en las profundidades del océano. Sin embargo, mi existencia en ese antiguo reino se mantuvo en un sueño profundo, sepultado bajo las corrientes marinas, hasta que un día, el mismísimo Poseidón, el dios del mar, me despertó de mi largo letargo.
 
 Poseidón me recordó el verdadero propósito de Atlantis, una ciudad concebida como una fábrica de algas. El océano, con el paso de los siglos, se había vuelto cada vez más turbio y tóxico, poniendo en peligro su delicado equilibrio. Poseidón, en su sabiduría, comprendió que era esencial purificar sus aguas para proteger su reino acuático y la vida que lo habitaba.
 
@@ -375,35 +384,41 @@ Mi jornada comenzó con la exploración de los vastos jardines de algas que rode
 
 A medida que pasarían los años, Atlantis resurgiría de su letargo, con nuevas estructuras y tecnologías olvidadas que una vez más se pondrían en funcionamiento. Nuestra misión era clara: cuidar de las aguas que tanto amaba Poseidón y, al hacerlo, mantener viva la leyenda de la ciudad perdida de Atlantis.
 
-**Mundo:** En el mundo de Atlantis, abundan diversas formas de vida marina, algunas únicas y adaptadas a las profundidades del océano. Las criaturas más importantes son:
+### **8.2 - Mundo** 
 
-Los leviatanes dorados: enormes criaturas acuáticas de piel escamosa que Poseidón ha designado como protectores de las fronteras de Atlantis. Estos seres majestuosos nadan a lo largo de los límites del reino, manteniendo a raya a los depredadores y evitando invitados no deseados.
+En el mundo de Atlantis, abundan diversas formas de vida marina, algunas únicas y adaptadas a las profundidades del océano. Las criaturas más importantes son:
 
-Las medusas cantaoras: delicadas y hermosas medusas bioluminiscentes que llenan los océanos con su melodioso canto. Estas criaturas, a pesar de su belleza, pueden ser peligrosas para aquellos que se aventuran demasiado cerca sin la protección adecuada.
+- **Los leviatanes dorados**: enormes criaturas acuáticas de piel escamosa que Poseidón ha designado como protectores de las fronteras de Atlantis. Estos seres majestuosos nadan a lo largo de los límites del reino, manteniendo a raya a los depredadores y evitando invitados no deseados.
 
-Los delfines de esmeralda: delfines especialmente inteligentes y dotados de una habilidad excepcional para la navegación. Son conocidos por guiar a los viajeros perdidos de regreso a Atlantis y por su antiguo vínculo con los habitantes de la ciudad.
+- **Las medusas cantaoras**: delicadas y hermosas medusas bioluminiscentes que llenan los océanos con su melodioso canto. Estas criaturas, a pesar de su belleza, pueden ser peligrosas para aquellos que se aventuran demasiado cerca sin la protección adecuada.
 
-Los tiburones sombríos: feroces depredadores marinos, ágiles y letales, que acechan en las profundidades en busca de presas desprevenidas. Son conocidos por su destreza y astucia en la caza, representando una amenaza constante para aquellos que se aventuran fuera de los límites de la ciudad.
+- **Los delfines de esmeralda**: delfines especialmente inteligentes y dotados de una habilidad excepcional para la navegación. Son conocidos por guiar a los viajeros perdidos de regreso a Atlantis y por su antiguo vínculo con los habitantes de la ciudad.
 
-Los peces vampiro: criaturas oscuras y siniestras que se alimentan de la energía vital de otras formas de vida marina. Estos peces poseen una capacidad innata para el sigilo.
+- **Los tiburones sombríos**: feroces depredadores marinos, ágiles y letales, que acechan en las profundidades en busca de presas desprevenidas. Son conocidos por su destreza y astucia en la caza, representando una amenaza constante para aquellos que se aventuran fuera de los límites de la ciudad.
 
-Los peces león: depredadores agresivos y territoriales, con una melena de espinas venenosas que los hace formidables en la lucha. Los peces león protegen sus territorios ferozmente, las leyendas cuentan que protegen objetos de gran valor.
+- **Los peces vampiro**: criaturas oscuras y siniestras que se alimentan de la energía vital de otras formas de vida marina. Estos peces poseen una capacidad innata para el sigilo.
 
-Los rapes abisales: depredadores de aguas profundas que tiene la capacidad de generar una luz bioluminiscente para atraer a presas más pequeñas hacia él. Aunque no es particularmente hábil en la lucha directa, su capacidad para atraer a otros depredadores hacia su ubicación lo convierte en una amenaza indirecta para aquellos que se aventuran más allá de los límites seguros de la ciudad.
+- **Los peces león**: depredadores agresivos y territoriales, con una melena de espinas venenosas que los hace formidables en la lucha. Los peces león protegen sus territorios ferozmente, las leyendas cuentan que protegen objetos de gran valor.
+
+- **Los rapes abisales**: depredadores de aguas profundas que tiene la capacidad de generar una luz bioluminiscente para atraer a presas más pequeñas hacia él. Aunque no es particularmente hábil en la lucha directa, su capacidad para atraer a otros depredadores hacia su ubicación lo convierte en una amenaza indirecta para aquellos que se aventuran más allá de los límites seguros de la ciudad.
 
 Los depredadores están bajo el control de Poseidón, además de mantener el equilibrio en el océano, también sirven como ejecutores de su voluntad en el mundo submarino. Poseidón los ha dotado de inteligencia y fuerza sobrenatural para asegurarse de que su reino permanezca intacto y a salvo.
 
 La desaparición de Atlantis fue el resultado de un cataclismo natural, un gran terremoto submarino que desencadenó una serie de tsunamis devastadores. Aunque los habitantes de Atlantis habían desarrollado una tecnología avanzada para protegerse de muchos peligros, esta catástrofe resultó ser demasiado. A pesar de sus esfuerzos por contener y controlar los efectos, la ciudad no pudo resistir al colapso masivo de su estructura principal, sumergiéndola en lo más profundo de las aguas, donde permaneció oculta durante siglos, hasta que Poseidón decidió despertarla una vez más.
 
-### **8.1 - Personajes**
+### **8.3 - Personajes**
 
-Poseidon: Poseidón es un ser imponente, majestuoso y autoritario, que gobierna el reino submarino con una mano firme y dominante. Su personalidad se define por su egoísmo, ya que ante todo prioriza su propio poder y su vasto océano por encima de cualquier otra consideración. Su obsesión por la preservación de su reino lo lleva a tomar decisiones egocéntricas que pueden afectar a otros, incluso a aquellos que sirven a sus propósitos. Su plan secreto detrás de la construcción de Atlantis y la recolección masiva de algas se vincula estrechamente con su ambición de dominio absoluto sobre los océanos y la tierra. 
+#### **8.3.1 - Poseidon** 
+
+Poseidón es un ser imponente, majestuoso y autoritario, que gobierna el reino submarino con una mano firme y dominante. Su personalidad se define por su egoísmo, ya que ante todo prioriza su propio poder y su vasto océano por encima de cualquier otra consideración. Su obsesión por la preservación de su reino lo lleva a tomar decisiones egocéntricas que pueden afectar a otros, incluso a aquellos que sirven a sus propósitos. Su plan secreto detrás de la construcción de Atlantis y la recolección masiva de algas se vincula estrechamente con su ambición de dominio absoluto sobre los océanos y la tierra. 
 
 Poseidón ha ideado un intrincado esquema para aumentar su influencia y poder en el mundo, utilizando las propiedades purificadoras de las algas para crear un mecanismo que le permita controlar los flujos de energía natural del planeta. Planea extender su dominio sobre los mares y las tierras adyacentes. La razón detrás de su egoísmo radica en una profunda desconfianza hacia los otros dioses, especialmente hacia Zeus, su hermano. Desde tiempos inmemoriales, Poseidón ha sentido envidia de la influencia de Zeus en el reino de los dioses y está decidido a superarlo.
 
 Cuando su ira se desata, Poseidón no duda en utilizar su tridente, un arma de inmenso poder que puede convocar tormentas y terremotos masivos, como medio de castigo y control. Sus ataques están destinados a recordarle a aquellos que desafían su autoridad quién es el verdadero soberano de los mares.
 
-Zeus: El poderoso rey de los dioses del Olimpo en la mitología griega, personifica la autoridad, la justicia y la supremacía divina. Su personalidad se caracteriza por su carisma imponente, su astucia estratégica y su enfoque en mantener el equilibrio en el universo divino. Es considerado el padre de dioses y hombres y es reverenciado por su poderío y su capacidad para imponer orden en el mundo.
+#### **8.3.2 - Zeus**
+
+El poderoso rey de los dioses del Olimpo en la mitología griega, personifica la autoridad, la justicia y la supremacía divina. Su personalidad se caracteriza por su carisma imponente, su astucia estratégica y su enfoque en mantener el equilibrio en el universo divino. Es considerado el padre de dioses y hombres y es reverenciado por su poderío y su capacidad para imponer orden en el mundo.
 
 En contraste con su hermano Poseidón, Zeus exhibe una visión más equilibrada y menos egocéntrica en su gobierno. Aunque es conocido por su temperamento impredecible y su ira inmensa cuando se le provoca, también se destaca por su sentido de la justicia y su apego a las leyes divinas. Zeus es protector de los débiles y castigador de los arrogantes y desafiantes, representando un equilibrio entre el poder y la sabiduría.
 
@@ -411,9 +426,13 @@ Como señor del cielo y el trueno, su dominio se extiende sobre el rayo y el rel
 
 Aunque está en conflicto con su hermano Poseidón, Zeus tiende a adoptar un enfoque más diplomático para resolver las disputas entre los dioses, prefiriendo la resolución pacífica de conflictos siempre que sea posible. Sin embargo, cuando se le desafía en exceso o cuando se violan los principios de la justicia divina, puede desencadenar su ira formidable y desatar tormentas y castigos divinos sobre los culpables.
 
-Jugador, buzo: El buzo, un valiente y decidido aventurero acuático, es el protagonista principal encargado de la crucial tarea de restaurar Atlantis. Posee una pasión innata por el océano y una determinación inquebrantable, el buzo se sumerge en las profundidades desconocidas para desentrañar los misterios perdidos de la antigua ciudad submarina y sus alrededores. El buzo, como el héroe solitario en esta odisea submarina, se convierte en el símbolo de la esperanza y el renacimiento de Atlantis, personificando la perseverancia y el sacrificio necesarios para preservar un legado olvidado y proteger el equilibrio frágil de un mundo marino amenazado.
+#### **8.3.3 - El buzo (Jugador)**
 
-**El conflicto entre los dos hermanos explicado:** El conflicto entre Zeus y Poseidón tiene sus raíces en una antigua disputa por el dominio y el poder en el reino de los dioses del Olimpo. Según la mitología griega, después de que los tres hermanos, Zeus, Poseidón y Hades, derrocaran a su padre, Cronos, y repartieran el universo entre ellos, surgieron diferencias fundamentales que dieron origen a la rivalidad persistente entre los dos dioses.
+El buzo, un valiente y decidido aventurero acuático, es el protagonista principal encargado de la crucial tarea de restaurar Atlantis. Posee una pasión innata por el océano y una determinación inquebrantable, el buzo se sumerge en las profundidades desconocidas para desentrañar los misterios perdidos de la antigua ciudad submarina y sus alrededores. El buzo, como el héroe solitario en esta odisea submarina, se convierte en el símbolo de la esperanza y el renacimiento de Atlantis, personificando la perseverancia y el sacrificio necesarios para preservar un legado olvidado y proteger el equilibrio frágil de un mundo marino amenazado.
+
+### **8.4 - El conflicto entre los dos hermanos** 
+
+El conflicto entre Zeus y Poseidón tiene sus raíces en una antigua disputa por el dominio y el poder en el reino de los dioses del Olimpo. Según la mitología griega, después de que los tres hermanos, Zeus, Poseidón y Hades, derrocaran a su padre, Cronos, y repartieran el universo entre ellos, surgieron diferencias fundamentales que dieron origen a la rivalidad persistente entre los dos dioses.
 
 El conflicto se intensificó por una serie de eventos que se remontan a la Titanomaquia, la guerra épica entre los titanes y los dioses olímpicos por el control supremo del cosmos. Durante esta guerra, Zeus lideró a los dioses olímpicos en su lucha contra los titanes y finalmente emergió victorioso, estableciéndose así como el principal gobernante del Olimpo.
 
@@ -421,9 +440,47 @@ Sin embargo, Poseidón, el dios del mar, resentido por lo que consideraba un des
 
 A lo largo de los siglos, el desacuerdo sobre la delimitación de los dominios divinos y la cuestión de quién poseía la autoridad suprema sobre el mundo natural condujo a enfrentamientos intermitentes entre Zeus y Poseidón. La competencia por el control sobre los elementos naturales, en particular el cielo y el mar, exacerbó aún más las tensiones y alimentó la enemistad duradera entre los dos dioses poderosos.
 
-## **9 - MÚSICA Y SONIDO – David** 
+## **9 - MÚSICA Y SONIDO** 
 
-## **10 - PENSAMIENTO COMPUTACIONAL – Todos**
+### **9.1 - Música**
+
+La música deberá reflejar la grandeza de la Atlántida, así como el peligro inminente que representa Poseidón para el progreso de construcción de esta. Será una banda sonora donde se mezclen elementos propios de la [Grecia Clásica](https://www.youtube.com/watch?v=cSaGjZKmEag) y algo más modernos, como samples o drums y beats de batería.
+
+Esto supone la inclusión de diferentes instrumentos propios de la Grecia Clásica, como pueden ser la flauta de pan, la lira y coros cantando a Acapella. Se compondrán, inicialmente, un total de 6 temas.
+
+#### **9.1.1 - Menú principal**
+
+Este tema esta enfocado a poder ser loopeable. Se basa en una melodía majestuosa, invitando al jugador a iniciar el juego, como si el fuera el gobernante de la Atlántida, pero al mismo tiempo ser solemne y calmado.
+
+#### **9.1.2 - Tema principal**
+
+Se toca durante todo el desarrollo del juego. Al ser un tema que esta sonando constantemente, se busca una melodía calmada, que acompañe al jugador durante la reconstrucción de la Atlántida. Tendrá como objetivo sumergir al jugador dentro del juego y que no se fatigue.
+
+#### **9.1.3 - Tema de Poseidón**
+
+Un tema más imponente y amenazante. Utiliza elementos musicales que sugieran que Poseidón es un personaje peligroso y que no hay que enfadarle en ningún momento. Este tema se presenta cada vez que el jugador tenga un encuentro con Poseidón, y a futuro puede haber diferentes variaciones del tema, con el mismo lei motiv, si es necesario para la historia.
+
+#### **9.1.4 - Tema de la expedición**
+
+El tema más rápido y dinámico, así como emocionante, de toda la bansa sonora. Al ser un minijuego donde se necesitará dinamismo y toma rápida de decisiones, se puede plantear el mayor uso de elementos musicales modernos, como pueden ser instrumentos electrónicos o samples, sin perder en ningún momento la cohesión con tema principal, que es la Grecia Clásica.
+
+#### **9.1.5 - Tema de derrota**
+
+Tema que se da únicamente si el jugador ha perdido en la expedición. Es melancólico y triste, reflejando la pérdida que supone para el jugador el haber fracasado.
+
+### **9.2 - Sonido**
+
+El juego contará con diferentes efectos sonoros. Estos, opcionalmente, serán pasados por un filtro para que parezca que están debajo del agua. Entre estos, destacan:
+- **Botones**: Tanto del menú principal como lo que haya dentro del juego.
+- **Sonidos bajo el agua**: Usados para que suenen de vez en cuando y se de realismo al hecho de que el jugador se encuentra en un entorno submarino.
+- **Sonidos de construcción**: Utilizados cuando se construya un edificio.
+- **Sonidos de interfaces**: Dan sonido a las interfaces cuando se abren o se cierran.
+- **Diálogo de Poseidón**: Sonidos, que no significan nada, pero que simulan el habla de Poseidón. Empleados cuando se den los diálogos con este.
+- **Sonidos de la expedición**: Colección de diferentes sonidos (definidos posteriormente) que se usarán en el minijuego de la expedición.
+- **Otros sonidos**: Diferentes sonidos que sean necesarios a medida que se desarrolla el juego. Se apuntarán aquí una vez sean definidos.
+
+## **10 - PENSAMIENTO COMPUTACIONAL**
+
 La *destreza principal* que se entrena será la **evaluación**, debido a que en nuestro juego habrá que gestionar los recursos de manera continua. Es importante la planificación tanto para la construccion de la ciudad como para la expedición, detección de errores a través de analizar la velocidad de morir en la expedición, los números de edificios que destruya el jugador.
 
 Las mecánicas cruciales de la construcción de la ciudad son:
@@ -440,6 +497,7 @@ Las mecánicas cruciales para la expedición son:
 - Evitar **morir rápido**, se otorgará una herramienta para poder observar cómo se finaliza la expedición, lo mucho que se muere, el tiempo que se tarda en morir o en completar el nivel.
 
 ## **11 - MODELO DE NEGOCIO** 
+
 - **B2P (Buy to Play)**: El usuario deberá pagar cierta cantidad de dinero para poder utilizar el producto.
   
 ### **11.1 - MAPA DE EMPATÍA DEL USUARIO:**
