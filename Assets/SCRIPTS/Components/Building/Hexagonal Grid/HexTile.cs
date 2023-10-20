@@ -1,16 +1,16 @@
 using GGG.Shared;
-
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-namespace GGG.Components.Buildings {
-
+namespace GGG.Components.Buildings
+{
     [ExecuteAlways]
-    public class HexTile : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerExitHandler {
+    public class HexTile : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerExitHandler
+    {
         public HexTileGenerationSettings settings;
         public TileType tileType;
 
@@ -36,12 +36,14 @@ namespace GGG.Components.Buildings {
 
         #region Unity Events
 
-        private void OnValidate() {
+        private void OnValidate()
+        {
             if (tilePrefab == null || Application.isPlaying) { return; }
             _isDirty = true;
         }
 
-        private void Start() {
+        private void Start()
+        {
             _manager = TileManager.instance;
             _isEmpty = _currentBuilding == null;
 
@@ -53,20 +55,25 @@ namespace GGG.Components.Buildings {
 
             // TODO - Apply the cost manually
             ClearCost = 50;
-
         }
 
-        private void Update() {
+        private void Update()
+        {
             if (_isDirty && Application.isEditor)
             {
+                Transform goAux = transform.Find("HighlightTile(Clone)");
 
                 if (Application.isPlaying)
                 {
                     GameObject.Destroy(tilePrefab);
+                    if (goAux != null)
+                        GameObject.Destroy(goAux.gameObject);
                 }
                 else
                 {
                     GameObject.DestroyImmediate(tilePrefab);
+                    if (goAux != null)
+                        GameObject.DestroyImmediate(goAux.gameObject);
                 }
                 tilePrefab = null;
 
@@ -77,51 +84,71 @@ namespace GGG.Components.Buildings {
             _isEmpty = !_currentBuilding;
         }
 
-        #endregion
+        #endregion Unity Events
 
         #region Getters&Setters
 
-        public bool TileEmpty() { return _isEmpty; }
-        public BuildingComponent GetCurrentBuilding() { return _currentBuilding; }
-        public Vector3 SpawnPosition() { return transform.position + new Vector3(0, 1f); }
-        public void SetBuilding(BuildingComponent building) {
+        public bool TileEmpty()
+        { return _isEmpty; }
+
+        public BuildingComponent GetCurrentBuilding()
+        { return _currentBuilding; }
+
+        public Vector3 SpawnPosition()
+        { return transform.position + new Vector3(0, 1f); }
+
+        public void SetBuilding(BuildingComponent building)
+        {
             _currentBuilding = building;
             _isEmpty = building == null;
         }
-        public TileType GetTileType() { return tileType; }
 
-        public void SetTileType(TileType type) { 
+        public TileType GetTileType()
+        { return tileType; }
+
+        public void SetTileType(TileType type)
+        {
             tileType = type;
             for (int i = 0; i < transform.childCount; i++)
                 Destroy(transform.GetChild(i).gameObject);
             AddTile();
         }
 
-        public int GetClearCost() { return ClearCost; }
+        public int GetClearCost()
+        { return ClearCost; }
 
-        #endregion
+        #endregion Getters&Setters
 
         #region Methods
 
         // summary:
         //  Generate random type of tile
-        public void RollTileType() {
+        public void RollTileType()
+        {
             tileType = (TileType)Random.Range(0, 3);
         }
 
-        public void AddTile() {
+        public void AddTile()
+        {
             tilePrefab = Instantiate(settings.GetTile(tileType), transform.position, Quaternion.Euler(0f, 0f, 0f), transform);
 
-            if (gameObject.GetComponent<MeshCollider>() == null) {
+            if (gameObject.GetComponent<MeshCollider>() == null)
+            {
                 MeshCollider collider = gameObject.AddComponent<MeshCollider>();
                 collider.sharedMesh = GetComponentInChildren<MeshFilter>().sharedMesh;
             }
+
+            if (_manager)
+            {
+                _highlightPrefab = Instantiate(_manager.highlightPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
+                _highlightPrefab.SetActive(false);
+            }
         }
 
-        private void SelectTile() {
+        private void SelectTile()
+        {
             if (_manager.GetSelectedTile() && _manager.GetSelectedTile() != this)
                 _manager.GetSelectedTile().DeselectTile();
-            
 
             _selected = true;
             _manager.SelectTile(this);
@@ -129,8 +156,9 @@ namespace GGG.Components.Buildings {
             OnHexSelect?.Invoke(this);
         }
 
-        public void DeselectTile() {
-            if(!_selected) return;
+        public void DeselectTile()
+        {
+            if (!_selected) return;
 
             OnHexDeselect?.Invoke();
             _manager.SelectTile(null);
@@ -138,12 +166,14 @@ namespace GGG.Components.Buildings {
             DeactivateHighlight();
         }
 
-        private void ActivateHighlight() {
+        private void ActivateHighlight()
+        {
             tilePrefab.SetActive(false);
             _highlightPrefab.SetActive(true);
         }
-        
-        private void DeactivateHighlight() {
+
+        private void DeactivateHighlight()
+        {
             tilePrefab.SetActive(true);
             _highlightPrefab.SetActive(false);
         }
@@ -153,7 +183,8 @@ namespace GGG.Components.Buildings {
             yield return new WaitForSeconds(0.1f);
             if (Holding.IsHolding()) yield break;
 
-            if (_currentBuilding) {
+            if (_currentBuilding)
+            {
                 _currentBuilding.Interact();
             }
 
@@ -161,16 +192,16 @@ namespace GGG.Components.Buildings {
             SelectTile();
         }
 
-        public void DestroyBuilding() {
+        public void DestroyBuilding()
+        {
             Destroy(_currentBuilding.gameObject);
             _currentBuilding = null;
         }
 
-
         /// <summary>
         /// Reveals tiles around itself, recursive function. Range is dependant on <paramref name="depth"/>
         /// </summary>
-        /// <param name="depth"> Range of the tiles to clear </param> 
+        /// <param name="depth"> Range of the tiles to clear </param>
         /// <param name="iter"> Internal stop variable, set it to 0 on base call </param>
         public void Reveal(int depth, int iter)
         {
@@ -182,7 +213,7 @@ namespace GGG.Components.Buildings {
             }
             gameObject.layer = 0;
             transform.GetChild(0).gameObject.layer = 0;
-            if(fow) fow.SetActive(false);
+            if (fow) fow.SetActive(false);
         }
 
         /// <summary>
@@ -193,26 +224,28 @@ namespace GGG.Components.Buildings {
             return (_isEmpty);
         }
 
-        #endregion
+        #endregion Methods
 
         #region Event System Methods
-        public void OnPointerEnter(PointerEventData eventData) {
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
             ActivateHighlight();
             OnHexHighlight?.Invoke();
         }
 
-        public void OnPointerExit(PointerEventData eventData) {
-            if(_selected) return;
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (_selected) return;
 
             DeactivateHighlight();
         }
 
-        public void OnPointerDown(PointerEventData eventData) {
+        public void OnPointerDown(PointerEventData eventData)
+        {
             StartCoroutine(TouchWait());
         }
 
-        #endregion
+        #endregion Event System Methods
     }
 }
-
-
