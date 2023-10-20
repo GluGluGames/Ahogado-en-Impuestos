@@ -6,6 +6,7 @@
 - 17/10/2023 - Se han corregido ciertas faltas ortográficas.
 - 17/10/2023 - Luming - Aumento de detalles en tablas para los edificios, poner tutorial y progresion en game design, adjuntando sus propias diagramas de flujo. Aparte, tambien se ha metido los graficos sobre la recaudacion y la curva de aprendizaje
 - 18/10/2023 - Luming - Aumento de explicaciones sobre la probabilidad de recaudacion y la curva de aprendizaje, y aclaracion de game design
+- 20/10/2023 - Luming - Corregido el game design, Intensidad de recaudacion -> Variedad de recaudacion segun la productividad, meter recursos de tipo de especial,
 ## 1 - MÉCANICAS 
 
 ### **1.1 - Mecánica principal**: 
@@ -54,6 +55,13 @@ Esta mecánica añade un elemento táctico al juego, donde los jugadores deben s
 - Perlas: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
 
 - Madera, Corales y Hierro: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
+
+**Recursos espciales del Juego:**
+- Tablilla: Las tablillas desempeñarán un papel fundamental en el juego, ya que servirán para desbloquear edificios especiales. En este caso, se han diseñado cuatro tablillas diferentes para desbloquear cuatro edificios distintos. Estos edificios incluyen un generador de electricidad, un paratrápido, un laboratorio y mejoras en las capacidades de buceo.
+Estas tablillas ofrecen a los jugadores la oportunidad de acceder a nuevas construcciones y mejoras que enriquecen su experiencia de juego y les brindan herramientas adicionales para la reconstrucción de la ciudad perdida de Atlantis.
+
+- Mapa: Los mapas desempeñan un papel crucial en el juego, ya que permiten a los jugadores desbloquear zonas diferentes, cada una con recursos únicos. Estos recursos pueden variar en cantidad y rareza, lo que fomenta la exploración activa y añade un elemento divertido y desafiante al juego. En total, se han diseñado cinco zonas distintas, cada una con su propio conjunto de tesoros por descubrir.
+Estas zonas desbloqueables brindan a los jugadores la oportunidad de diversificar su experiencia y recompensan su curiosidad a medida que se aventuran en lo desconocido en busca de tesoros submarinos. 
 
 ### **1.5 - Edificios** 
 #### **1.5.1 - Granja de algas**
@@ -164,7 +172,7 @@ Al mejorar: no tiene mejora.
 | Pez Vampiro | 1      | Su principal característica son los colmillos que sobresalen de su mandíbula inferior.Se ocultan en las aguas profundas y lanzan ataques a sus presas tipo emboscada.|
 | Pez Leon |     1     | Habita en aguas cálidas y es muy venenoso. Es carnívoro y se alimenta de crustáceos, camarones y otros peces.|
 | Medusa | 0.5/segundos| Criatura no ofensiva pero toxica, por lo que si se acerca demasiado puede ser intoxicado por su piel y perder vida de manera continua.
-| Trucha arcoiris | 0.5 | Critatura de tamaño medio, ofensiva pero ataque poco efectivo, distribuido en niveles medio profundo.|
+| Rapes abisales | 0.5 | Critatura de tamaño medio, ofensiva pero ataque poco efectivo, distribuido en niveles medio profundo.|
 
 #### Animales Inocentes
 |  Nombre   |  Size  | Descripciones |
@@ -254,7 +262,13 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 ![Museo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/21d670df-64b4-4a0c-b701-cd8d8978d6ce)
 
 #### **3.2.7 - Tienda**
-
+**Caracteristica:**
+- Pilares griegos
+- Ventanillas colocados por los lados par vender
+- Decoracion de una tienda, cartel, pizarra, productos, luz especial.
+**Justificacion:**
+  En el diseño de tiendas dentro del juego, hemos optado por incorporar principalmente características de tiendas contemporáneas. Esta elección se basa en la proximidad de estas características al público objetivo, lo que facilita a los jugadores la localización y el 
+  acceso rápido a las tiendas cuando sea necesario.
 ![Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/ead2404d-31f6-4163-a839-bc48436c2f64)
 
 #### **3.2.8 - Generador eléctrico**
@@ -321,18 +335,19 @@ Todo el progreso de juego se tomara en un mismo mapa, y apartir de la septima se
 Los niveles en este juego representarán las diferentes zonas de expedición y serán diseñados a mano con distribuciones específicas de niveles de profundidad. Estas distribuciones se han diseñado con el propósito de plantear desafíos y dificultades para el jugador antes de que este adquiera objetos que lo hagan inmune a ciertos peligros.
 
 Sin embargo, es importante destacar que los recursos que no funcionen como desencadenantes clave para avanzar en el juego serán generados aleatoriamente por la zona. Esto permite que el jugador encuentre variedad en cada expedición y promueve la exploración activa para reunir recursos útiles en su búsqueda para reconstruir la ciudad perdida de Atlantis.
+
 #### **Curva de aprendizaje:**
 Explicacion:
 La única manera de que el jugador adquiera nuevas habilidades es a través de expediciones. En otras palabras, cuantas más expediciones complete, más habilidades podrá desarrollar. El juego presenta un grid de hexágonos, cada uno con diferentes propiedades: algunos albergan depredadores, otros contienen recursos y otros son el hogar de criaturas únicas. Por lo tanto, es responsabilidad del jugador explorar cada zona de manera explícita.
 
-El contenido de cada casilla varía en cada expedición, lo que significa que si el jugador ha adquirido suficiente experiencia de expediciones fallidas, estará mejor preparado para enfrentar los desafíos que se presenten en el mapa, como los depredadores. Además, cada casilla está asociada con uno de los tres niveles de profundidad. El jugador debe considerar cuidadosamente su ruta para evitar perder tiempo transitando áreas no permitidas, a menos que disponga de objetos o elementos que le permitan acceder a esas zonas. En caso contrario, la expedición se verá afectada por una pérdida de tiempo de expedicion.
+El contenido de cada casilla varía en cada expedición, lo que significa que si el jugador ha adquirido suficiente experiencia de expediciones fallidas, estará mejor preparado para enfrentar los desafíos que se presenten en el mapa, como los depredadores. El jugador debe considerar cuidadosamente su ruta para evitar perder tiempo transitando áreas de menos beneficio, a menos que disponga de objetos o elementos que le permitan acceder a esas zonas. En caso contrario, la expedición se verá afectada por una pérdida de tiempo de expedicion.
 
 ![Curva de aprendizaje](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Curva%20de%20aprendizaje.png)
-#### **Intensidad de recaudacion:**
+#### **Flujo de recaudacion:**
 Explicacion:
 Esta mecánica se ha diseñado para evitar que los jugadores aceleren demasiado el progreso del juego, centrándose en la productividad de las algas que el jugador genera por segundo. Esta elección se ha realizado con el objetivo de garantizar que, a medida que los jugadores avanzan en el juego, no alcancen un nivel de productividad excesivamente alto que pudiera llevar al desinterés y, en última instancia, al abandono del juego.
 
-Para prevenir este escenario, se ha implementado una probabilidad de recolección de recursos en función de la productividad de las algas por segundo. De esta manera, se permite una variedad de estrategias para abordar este ajuste de probabilidad. Por ejemplo, los jugadores pueden optar por sacrificar edificios para mantener su productividad, dado que el costo de reparación no es elevado, o pueden arriesgarse a depender de la probabilidad de no sufrir una recolección, o incluso buscar un equilibrio entre ganar mucho y gastar mucho. Esta mecánica ofrece a los jugadores una serie de decisiones estratégicas que influyen en su progreso en el juego.
+Para prevenir este escenario, se ha implementado un porcentaje de recaudacion que depende de la productividad de las algas por segundo. De esta manera, se permite una variedad de estrategias para abordar este ajuste de probabilidad. Por ejemplo, los jugadores pueden optar por sacrificar edificios para mantener su productividad, dado que el costo de reparación no es elevado, o incluso buscar un equilibrio entre ganar mucho y gastar mucho. Esta mecánica ofrece a los jugadores una serie de decisiones estratégicas que influyen en su progreso en el juego.
 ![Intensidad de recaudacion ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Intensidad%20de%20recaudacion.png)
 
 
