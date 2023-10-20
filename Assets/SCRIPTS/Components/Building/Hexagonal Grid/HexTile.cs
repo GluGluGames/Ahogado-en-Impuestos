@@ -116,12 +116,6 @@ namespace GGG.Components.Buildings {
                 MeshCollider collider = gameObject.AddComponent<MeshCollider>();
                 collider.sharedMesh = GetComponentInChildren<MeshFilter>().sharedMesh;
             }
-
-            if (_manager)
-            {
-                _highlightPrefab = Instantiate(_manager.highlightPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
-                _highlightPrefab.SetActive(false);
-            }
         }
 
         private void SelectTile() {
@@ -189,6 +183,14 @@ namespace GGG.Components.Buildings {
             gameObject.layer = 0;
             transform.GetChild(0).gameObject.layer = 0;
             fow.SetActive(false);
+        }
+
+        /// <summary>
+        /// Only used on the minigame. It dicides if a tile is walkable. Used to know if an enemy can spawn. This is prob. useless
+        /// </summary>
+        public bool Walkable()
+        {
+            return (_isEmpty);
         }
 
         #endregion

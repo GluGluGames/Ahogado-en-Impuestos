@@ -1,18 +1,56 @@
-using System.Collections;
+using DG.Tweening;
+using GGG.Components.Buildings;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
-public class EnemiesManager : MonoBehaviour
+namespace GGG.Components.Enemies
 {
-    // Start is called before the first frame update
-    void Start()
+    public class EnemiesManager : MonoBehaviour
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public static EnemiesManager instance;
+        public List<EnemyBasic> enemies;
+        private List<HexTile> tiles = new List<HexTile>();
+        [SerializeField] private int _nEnemies = 0;
+        [SerializeField] private EnemyBasic[] enemiesPrefab;
+
+        // Start is called before the first frame update
+        private void Start()
+        {
+            tiles = TileManager.instance.GetComponentsInChildren<HexTile>().ToList();
+
+            for (int i = 0; i < _nEnemies; i++)
+            {
+                SpawnEnemy();
+            }
+        }
+
+        private bool SpawnEnemy() // Should take some enum as input to define type of enemy
+        {
+            HexTile hex = TileManager.instance.GetRandomHex();
+
+            foreach (EnemyBasic enemy in enemies)
+            {
+                if (enemy.currentTile == hex)
+                {
+                    Debug.Log("I cant spawn on here");
+                    SpawnEnemy();
+                    break;
+                }
+            }
+            if(enemiesPrefab != null)
+            {
+                EnemyBasic newEnem = Instantiate(enemiesPrefab[0]); // here is where you should use that enum...
+                newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y+ 1f, hex.transform.position.z);
+                newEnem.currentTile = hex;
+                
+                enemies.Add(newEnem);
+            }
+            
+
+            return true;
+        }
     }
 }

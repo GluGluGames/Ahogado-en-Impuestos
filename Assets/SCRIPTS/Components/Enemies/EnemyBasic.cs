@@ -27,25 +27,31 @@ namespace GGG.Components.Enemies
 
         void Start()
         {
-            TickManager.OnTick += HandleMovement;
+            TickManager.OnTick += this.HandleMovement;
             _rigidbody = GetComponent<Rigidbody>();
-
         }
 
         private void OnDestroy()
         {
-            TickManager.OnTick -= HandleMovement;
+            TickManager.OnTick -= this.HandleMovement;
         }
 
-        // Update is called once per frame
         void Update()
         {
-
+            if(!_gotPath)
+            {
+                GoToRandomTile();
+            }
         }
 
         private void GoToRandomTile()
         {
-
+            HexTile destination = TileManager.instance.GetRandomHex();
+            targetPosition = destination.transform.position;
+            currentPath = Pathfinder.FindPath(currentTile, destination);
+            currentPath.Reverse();
+            if (currentPath != null ) { _gotPath = true; }
+            
         }
 
         private void MoveTo(Vector3 targetPos)
@@ -74,7 +80,7 @@ namespace GGG.Components.Enemies
             {
                 currentTile = currentPath[0];
 
-                nextTile = currentPath[1];
+                nextTile = currentPath[0];
 
                 // if the next tile is not traversable, stop moving;
                 /*if (PlayerPosition.NextTile.tileType != HexTileGenerationSettings.TileType.Standard)
@@ -85,7 +91,7 @@ namespace GGG.Components.Enemies
                 }*/
 
                 targetPosition = nextTile.transform.position + new Vector3(0, 1f, 0);
-                MoveTo(PlayerPosition.TargetPosition);
+                MoveTo(targetPosition);
                 _gotPath = true;
                 currentPath.RemoveAt(0);
                 cubeCoordPos = nextTile.cubeCoordinate;

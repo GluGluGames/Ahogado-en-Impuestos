@@ -9,4 +9,6 @@ public class EnemyComponent : MonoBehaviour
     [SerializeField] private Enemy Enemy;
 
     public Action<Action, EnemyComponent> OnEnemyInteract;
+
+
 }
