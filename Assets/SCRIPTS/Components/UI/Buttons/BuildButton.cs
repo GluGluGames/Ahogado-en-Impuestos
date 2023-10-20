@@ -15,10 +15,12 @@ namespace GGG.Components.UI {
         [SerializeField] private Building BuildingInfo;
         [SerializeField] private TextMeshProUGUI BuildNameText;
         [SerializeField] private TMP_Text PriceText;
+        
 
-        private HexTile _selectedHexTile;
-        private BuildingComponent _auxBuild;
         private PlayerManager _player;
+        private HexTile _selectedHexTile;
+        private Resource _buildResource;
+        private BuildingComponent _auxBuild;
         private int _cost;
 
         public Action<BuildingComponent, HexTile> OnStructureBuild;
@@ -26,6 +28,7 @@ namespace GGG.Components.UI {
         public void Initialize()
         {
             _player = PlayerManager.Instance;
+            _buildResource = _player.GetMainResource();
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
@@ -39,7 +42,7 @@ namespace GGG.Components.UI {
         }
 
         private void BuildStructure() {
-            if (_player.GetResourceCount(BasicResources.SEAWEED) < _cost)
+            if (_player.GetResourceCount(_buildResource.GetName()) < _cost)
             {
                 // TODO - Can't buy warning
                 return;
@@ -50,7 +53,7 @@ namespace GGG.Components.UI {
 
             _selectedHexTile.SetBuilding(_auxBuild);
             OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
-            _player.AddResource(BasicResources.SEAWEED, -_cost);
+            _player.AddResource(_buildResource.GetName(), -_cost);
            
 
             //FOW

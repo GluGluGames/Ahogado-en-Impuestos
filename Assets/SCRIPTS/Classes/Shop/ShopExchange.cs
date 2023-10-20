@@ -9,11 +9,11 @@ namespace GGG.Classes.Shop
     public class ShopExchange
     {
         [Tooltip("Resource the player will give")]
-        [SerializeField] private BasicResource GivenResource;
+        [SerializeField] private Resource GivenResource;
         [Tooltip("Amount of the resource the player will give")]
         [SerializeField] private int GivenAmount;
         [Tooltip("Resource the player will receive")]
-        [SerializeField] private AdvanceResource ReceiveResource;
+        [SerializeField] private Resource ReceiveResource;
         [Tooltip("Amount of the resource the player will receive")]
         [SerializeField] private int ReceiveAmount;
 
@@ -21,13 +21,13 @@ namespace GGG.Classes.Shop
         /// Gets the resource the player will give
         /// </summary>
         /// <returns>The resource the player will give</returns>
-        public BasicResource GetGivenResource() { return GivenResource; }
+        public Resource GetGivenResource() => GivenResource;
 
         /// <summary>
         /// Gets the resource the player will receive
         /// </summary>
         /// <returns>The resource the player will receive</returns>
-        public AdvanceResource GetReceiveResource() { return ReceiveResource; }
+        public Resource GetReceiveResource() => ReceiveResource;
 
         /// <summary>
         /// Gets the amount of the resource the player will give

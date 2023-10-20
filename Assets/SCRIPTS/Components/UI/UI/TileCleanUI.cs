@@ -16,6 +16,7 @@ namespace GGG.Components.UI
         [SerializeField] private TMP_Text CostAmountText;
 
         private PlayerManager _player;
+        private Resource _cleanResource;
         private Transform _transform;
         private GameObject _viewport;
         private HexTile _selectedTile;
@@ -27,6 +28,7 @@ namespace GGG.Components.UI
         private void Start()
         {
             _player = PlayerManager.Instance;
+            _cleanResource = _player.GetMainResource();
             
             CleanButton.onClick.AddListener(CleanTile);
             CloseButton.onClick.AddListener(Close);
@@ -49,14 +51,14 @@ namespace GGG.Components.UI
 
         private void CleanTile()
         {
-            if (_player.GetResourceCount(BasicResources.SEAWEED) < _selectedTile.GetClearCost())
+            if (_player.GetResourceCount(_cleanResource.GetName()) < _selectedTile.GetClearCost())
             {
                 // TODO - Can't clear tile warning
                 return;
             }
             
             _selectedTile.SetTileType(TileType.Standard);
-            _player.AddResource(BasicResources.SEAWEED, -_selectedTile.GetClearCost());
+            _player.AddResource(_cleanResource.GetName(), -_selectedTile.GetClearCost());
             Close();
         }
 

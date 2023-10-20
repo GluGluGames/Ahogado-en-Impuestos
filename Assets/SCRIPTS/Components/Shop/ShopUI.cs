@@ -42,9 +42,15 @@ namespace GGG.Components.Shop
 
             _player = PlayerManager.Instance;
 
+            int i = 0;
             foreach(ShopExchange exchange in Exchanges) {
                 _initialGivenAmounts.Add(exchange.GetGivenAmount());
                 _initialReceiveAmounts.Add(exchange.GetReceiveAmount());
+
+                GiveItemImage[i].sprite = exchange.GetGivenResource().GetSprite();
+                ReceiveItemImage[i].sprite = exchange.GetReceiveResource().GetSprite();
+
+                i++;
             }
 
             CloseButton.onClick.AddListener(CloseShop);
@@ -83,13 +89,13 @@ namespace GGG.Components.Shop
 
         public void Exchange(int i)
         {
-            if(_player.GetResourceCount(Exchanges[i].GetGivenResource().GetResource()) < Exchanges[i].GetGivenAmount()) {
+            if(_player.GetResourceCount(Exchanges[i].GetGivenResource().GetName()) < Exchanges[i].GetGivenAmount()) {
                 // TODO - Denegate exchange
                 return;
             }
 
-            _player.AddResource(Exchanges[i].GetGivenResource().GetResource(), -Exchanges[i].GetGivenAmount());
-            _player.AddResource(Exchanges[i].GetReceiveResource().GetResource(), Exchanges[i].GetReceiveAmount());
+            _player.AddResource(Exchanges[i].GetGivenResource().GetName(), -Exchanges[i].GetGivenAmount());
+            _player.AddResource(Exchanges[i].GetReceiveResource().GetName(), Exchanges[i].GetReceiveAmount());
         }
 
         public void OpenShop()

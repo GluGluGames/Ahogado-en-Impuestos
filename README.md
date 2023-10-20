@@ -7,6 +7,7 @@
 - 17/10/2023 - Luming - Aumento de detalles en tablas para los edificios, poner tutorial y progresion en game design, adjuntando sus propias diagramas de flujo. Aparte, tambien se ha metido los graficos sobre la recaudacion y la curva de aprendizaje
 - 18/10/2023 - Luming - Aumento de explicaciones sobre la probabilidad de recaudacion y la curva de aprendizaje, y aclaracion de game design
 - 20/10/2023 - Luming - Corregido el game design, Intensidad de recaudacion -> Variedad de recaudacion segun la productividad, meter recursos de tipo de especial,
+- 20/10/2023 - Adrián S - Añadido de los personajes protagonistas de la historia
 - 
 ## 1 - MÉCANICAS 
 
@@ -267,16 +268,15 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
     
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/e18ae0cf-61f9-48d1-9ecb-844aa4c26f6d)
 
+  El laboratorio está basado en un observatorio, ya que se ha decidido que es lo más icónico y representativo para un edificio cuyo fin es investigar y descubrir cosas dentro del juego. Está basado en edificios con el mismo fin de otros juegos del estilo, como el 
+  laboratorio de Clash of Clans.
+
 #### **3.2.6 - Museo**
 
 ![Museo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/21d670df-64b4-4a0c-b701-cd8d8978d6ce)
 
 #### **3.2.7 - Tienda**
-**Caracteristica:**
-- Pilares griegos
-- Ventanillas colocados por los lados par vender
-- Decoracion de una tienda, cartel, pizarra, productos, luz especial.
-**Justificacion:**
+
   En el diseño de tiendas dentro del juego, hemos optado por incorporar principalmente características de tiendas contemporáneas. Esta elección se basa en la proximidad de estas características al público objetivo, lo que facilita a los jugadores la localización y el 
   acceso rápido a las tiendas cuando sea necesario.
 ![Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/ead2404d-31f6-4163-a839-bc48436c2f64)
@@ -289,6 +289,8 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/6c6302cd-5aab-4e76-9176-b5fcd0399685)
 
+  El almacén de peces está basado en un templo griego fusionado con una pecera, para cumplir con la estética de la Atlantis y además dar la impresión de que está relacionado con el mundo submarino.
+
 #### **3.2.10 - Alamacén de peces (nivel 2)**
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/5c8e9690-8699-4400-8fd2-bb0d4be62d4a)
@@ -297,11 +299,10 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ![image](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)
 
-### **3.3 - Personajes**
+  Este es el enemigo principal del juego, Poseidón. Su diseño está basado en juegos que esten basados en el mundo de la mitología griega, como God of War o Hades. Se ha elegido un aspecto serio, con el pelo y barba larga porque es el aspecto que suelen tener los 
+  dioses en sus representaciones, ya sean en juegos o en la ficción. También se le quiere dar la impresióin de poderoso, para que tenga sentido que sea el que tenga amenazados a los jugadores durante el gameplay. Tampoco se le quería dar un aspecto muy oscuro porque 
+  no es malvado, simplemente está enfadado.
 
-#### **3.3.1 - Estilo visual personajes**
-
-- Los personajes dentro de los diálogos tendrán una estética diferente a la del juego, al estilo Hades. Cuando los personajes hablen tendrán una imagen suya a modo de splash art. Se ha tomado esta deicisón porque creemos que favorecerá a la narrativa y a la satisfacción visual del jugador, es decir, que será atractiva para los usuarios.
 
 ## **4 - DISEÑO 3D – Adri C.**
 
@@ -455,7 +456,31 @@ Los depredadores están bajo el control de Poseidón, además de mantener el equ
 
 La desaparición de Atlantis fue el resultado de un cataclismo natural, un gran terremoto submarino que desencadenó una serie de tsunamis devastadores. Aunque los habitantes de Atlantis habían desarrollado una tecnología avanzada para protegerse de muchos peligros, esta catástrofe resultó ser demasiado. A pesar de sus esfuerzos por contener y controlar los efectos, la ciudad no pudo resistir al colapso masivo de su estructura principal, sumergiéndola en lo más profundo de las aguas, donde permaneció oculta durante siglos, hasta que Poseidón decidió despertarla una vez más.
 
-### **8.1 - Personajes – Adri C.**
+### **8.1 - Personajes**
+
+Poseidon: Poseidón es un ser imponente, majestuoso y autoritario, que gobierna el reino submarino con una mano firme y dominante. Su personalidad se define por su egoísmo, ya que ante todo prioriza su propio poder y su vasto océano por encima de cualquier otra consideración. Su obsesión por la preservación de su reino lo lleva a tomar decisiones egocéntricas que pueden afectar a otros, incluso a aquellos que sirven a sus propósitos. Su plan secreto detrás de la construcción de Atlantis y la recolección masiva de algas se vincula estrechamente con su ambición de dominio absoluto sobre los océanos y la tierra. 
+
+Poseidón ha ideado un intrincado esquema para aumentar su influencia y poder en el mundo, utilizando las propiedades purificadoras de las algas para crear un mecanismo que le permita controlar los flujos de energía natural del planeta. Planea extender su dominio sobre los mares y las tierras adyacentes. La razón detrás de su egoísmo radica en una profunda desconfianza hacia los otros dioses, especialmente hacia Zeus, su hermano. Desde tiempos inmemoriales, Poseidón ha sentido envidia de la influencia de Zeus en el reino de los dioses y está decidido a superarlo.
+
+Cuando su ira se desata, Poseidón no duda en utilizar su tridente, un arma de inmenso poder que puede convocar tormentas y terremotos masivos, como medio de castigo y control. Sus ataques están destinados a recordarle a aquellos que desafían su autoridad quién es el verdadero soberano de los mares.
+
+Zeus: El poderoso rey de los dioses del Olimpo en la mitología griega, personifica la autoridad, la justicia y la supremacía divina. Su personalidad se caracteriza por su carisma imponente, su astucia estratégica y su enfoque en mantener el equilibrio en el universo divino. Es considerado el padre de dioses y hombres y es reverenciado por su poderío y su capacidad para imponer orden en el mundo.
+
+En contraste con su hermano Poseidón, Zeus exhibe una visión más equilibrada y menos egocéntrica en su gobierno. Aunque es conocido por su temperamento impredecible y su ira inmensa cuando se le provoca, también se destaca por su sentido de la justicia y su apego a las leyes divinas. Zeus es protector de los débiles y castigador de los arrogantes y desafiantes, representando un equilibrio entre el poder y la sabiduría.
+
+Como señor del cielo y el trueno, su dominio se extiende sobre el rayo y el relámpago, lo que le otorga una fuerza formidable sobre los elementos naturales. A menudo se le representa como un líder noble y compasivo que, a pesar de su poder absoluto, muestra comprensión y benevolencia hacia aquellos que honran su autoridad. Su capacidad para establecer alianzas estratégicas y su enfoque en mantener la armonía entre los dioses lo convierten en un gobernante respetado y reverenciado en el Olimpo.
+
+Aunque está en conflicto con su hermano Poseidón, Zeus tiende a adoptar un enfoque más diplomático para resolver las disputas entre los dioses, prefiriendo la resolución pacífica de conflictos siempre que sea posible. Sin embargo, cuando se le desafía en exceso o cuando se violan los principios de la justicia divina, puede desencadenar su ira formidable y desatar tormentas y castigos divinos sobre los culpables.
+
+Jugador, buzo: El buzo, un valiente y decidido aventurero acuático, es el protagonista principal encargado de la crucial tarea de restaurar Atlantis. Posee una pasión innata por el océano y una determinación inquebrantable, el buzo se sumerge en las profundidades desconocidas para desentrañar los misterios perdidos de la antigua ciudad submarina y sus alrededores. El buzo, como el héroe solitario en esta odisea submarina, se convierte en el símbolo de la esperanza y el renacimiento de Atlantis, personificando la perseverancia y el sacrificio necesarios para preservar un legado olvidado y proteger el equilibrio frágil de un mundo marino amenazado.
+
+**El conflicto entre los dos hermanos explicado:** El conflicto entre Zeus y Poseidón tiene sus raíces en una antigua disputa por el dominio y el poder en el reino de los dioses del Olimpo. Según la mitología griega, después de que los tres hermanos, Zeus, Poseidón y Hades, derrocaran a su padre, Cronos, y repartieran el universo entre ellos, surgieron diferencias fundamentales que dieron origen a la rivalidad persistente entre los dos dioses.
+
+El conflicto se intensificó por una serie de eventos que se remontan a la Titanomaquia, la guerra épica entre los titanes y los dioses olímpicos por el control supremo del cosmos. Durante esta guerra, Zeus lideró a los dioses olímpicos en su lucha contra los titanes y finalmente emergió victorioso, estableciéndose así como el principal gobernante del Olimpo.
+
+Sin embargo, Poseidón, el dios del mar, resentido por lo que consideraba un despojo de su dominio marítimo por parte de Zeus, comenzó a desafiar indirectamente la autoridad de su hermano, reclamando territorios más allá de su reino original y tratando de expandir su influencia sobre la tierra y el mar.
+
+A lo largo de los siglos, el desacuerdo sobre la delimitación de los dominios divinos y la cuestión de quién poseía la autoridad suprema sobre el mundo natural condujo a enfrentamientos intermitentes entre Zeus y Poseidón. La competencia por el control sobre los elementos naturales, en particular el cielo y el mar, exacerbó aún más las tensiones y alimentó la enemistad duradera entre los dos dioses poderosos.
 
 ## **9 - MÚSICA Y SONIDO – David** 
 

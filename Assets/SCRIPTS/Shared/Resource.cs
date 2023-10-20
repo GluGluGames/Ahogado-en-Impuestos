@@ -3,15 +3,16 @@ using UnityEngine;
 
 namespace GGG.Shared
 {
-    public abstract class Resource : ScriptableObject
+    [CreateAssetMenu(fileName = "Resource", menuName = "Game/Resource")]
+    public class Resource : ScriptableObject
     {
         [SerializeField] private LocalizedString Name;
         [SerializeField] private LocalizedString Description;
         [SerializeField] private Sprite Sprite;
         [SerializeField] private Sprite SelectedSprite;
 
-        public LocalizedString GetName() { return Name; }
-        public LocalizedString GetDescription() { return Description; }
+        public string GetName() { return Name.GetLocalizedString(); }
+        public string GetDescription() { return Description.GetLocalizedString(); }
         public Sprite GetSprite() { return Sprite; }
 
         public Sprite GetSelectedSprite() { return SelectedSprite; }

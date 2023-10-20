@@ -20,6 +20,7 @@ namespace GGG.Components.UI
         #endregion
 
         [SerializeField] private TextMeshProUGUI SeaweedsText;
+        [SerializeField] private Resource ShownResource;
         [SerializeField] private bool OnMinigame;
         
         private PlayerManager _player;
@@ -37,8 +38,9 @@ namespace GGG.Components.UI
             MenusHandle();
         }
 
-        private void Update() {
-            SeaweedsText.text = $"Seaweeds: {_player.GetResourceCount(BasicResources.SEAWEED)}";
+        private void Update()
+        {
+            SeaweedsText.SetText(_player.GetResourceCount(ShownResource.GetName()).ToString());
         }
 
         private void MenusHandle()
