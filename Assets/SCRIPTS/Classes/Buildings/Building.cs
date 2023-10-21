@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.Serialization;
+using GGG.Shared;
 
 namespace GGG.Classes.Buildings
 {
+
     public abstract class Building : ScriptableObject {
         [Header("Generic fields")]
         [Tooltip("Name of the building")] 
@@ -16,7 +17,11 @@ namespace GGG.Classes.Buildings
         [Space(10)]
         [Header("Building Fields")]
         [Tooltip("The price to build the building")]
-        [SerializeField] private int InitialPrice;
+        [SerializeField] private int PrimaryPrice;
+        [SerializeField] private Resource PrimaryPriceType;
+        [Tooltip("The price to build the building")]
+        [SerializeField] private int SecondaryPrice;
+        [SerializeField] private Resource SecondaryPriceType;
         [Tooltip("Determines if the player needs to click the building to interact with it")]
         [SerializeField] private bool NeededInteraction;
         [Tooltip("Determines the height of the building")]
@@ -56,8 +61,13 @@ namespace GGG.Classes.Buildings
         /// Gets the price of the building
         /// </summary>
         /// <returns></returns>
-        public int GetPrice() { return InitialPrice; }
         
+        public int GetPrimaryPrice() { return PrimaryPrice; }
+        public int GetSecondaryPrice() { return SecondaryPrice; }
+
+        public Resource GetPrimaryResource() { return PrimaryPriceType; }
+        public Resource GetSecondaryResource() { return SecondaryPriceType; }
+
         /// <summary>
         /// Determines if the building needs player interaction to work
         /// </summary>

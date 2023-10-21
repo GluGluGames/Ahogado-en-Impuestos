@@ -14,7 +14,7 @@ namespace GGG.Components.UI
     {
         [SerializeField] private Button CleanButton;
         [SerializeField] private Button CloseButton;
-        [SerializeField] private TMP_Text CostAmountText;
+        [SerializeField] private GameObject Container;
 
         private PlayerManager _player;
         private Resource _cleanResource;
@@ -23,6 +23,8 @@ namespace GGG.Components.UI
         private HexTile _selectedTile;
 
         private bool _open;
+
+        private TextMeshProUGUI CostAmountText;
         
         public Action OnMenuOpen;
 
@@ -41,11 +43,16 @@ namespace GGG.Components.UI
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
 
+            Container.GetComponentsInChildren<Image>()[1].sprite = _cleanResource.GetSprite();
+            CostAmountText = Container.GetComponentInChildren<TextMeshProUGUI>();
+
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
                 tile.OnHexSelect += Open;
             }
+
+            
         }
         
         public bool IsOpen() { return _open; }

@@ -13,10 +13,8 @@ using UnityEngine.UI;
 namespace GGG.Components.UI {
     public class BuildButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler {
         [SerializeField] private Building BuildingInfo;
-        [SerializeField] private TextMeshProUGUI BuildNameText;
-        [SerializeField] private TMP_Text PriceText;
+        [SerializeField] private GameObject Container;
         
-
         private PlayerManager _player;
         private HexTile _selectedHexTile;
         private Resource _buildResource;
@@ -35,14 +33,32 @@ namespace GGG.Components.UI {
                 tile.OnHexSelect += (x) => _selectedHexTile = tile;
             }
 
-            _cost = BuildingInfo.GetPrice();
+            _cost = BuildingInfo.GetPrimaryPrice();
             
-            BuildNameText.SetText(BuildingInfo.GetName());
-            PriceText.SetText(_cost.ToString());
+            TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>();
+            Image[] images = Container.GetComponentsInChildren<Image>();
+
+            if (texts.Length == 2 && images.Length == 2)
+            {
+                texts[0].text = BuildingInfo.GetPrimaryPrice().ToString();
+                images[0].sprite = BuildingInfo.GetPrimaryResource().GetSprite();
+
+                if (BuildingInfo.GetSecondaryPrice() == 0)
+                {
+                    images[1].gameObject.SetActive(false);
+                }
+                else
+                {
+                    texts[1].text = BuildingInfo.GetSecondaryPrice().ToString();
+                    images[1].sprite = BuildingInfo.GetSecondaryResource().GetSprite();
+                }
+            }
         }
 
         private void BuildStructure() {
-            if (_player.GetResourceCount(_buildResource.GetName()) < _cost)
+            bool aux = BuildingInfo.GetSecondaryPrice() != 0;
+
+            if (_player.GetResourceCount(BuildingInfo.GetPrimaryResource().GetName()) < BuildingInfo.GetPrimaryPrice() || aux && _player.GetResourceCount(BuildingInfo.GetSecondaryResource()?.GetName()) < BuildingInfo.GetSecondaryPrice())
             {
                 // TODO - Can't buy warning
                 return;
@@ -53,8 +69,10 @@ namespace GGG.Components.UI {
 
             _selectedHexTile.SetBuilding(_auxBuild);
             OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
-            _player.AddResource(_buildResource.GetName(), -_cost);
-           
+
+            _player.AddResource(BuildingInfo.GetPrimaryResource().GetName(), -BuildingInfo.GetPrimaryPrice());
+            if(aux) _player.AddResource(BuildingInfo.GetSecondaryResource()?.GetName(), -BuildingInfo.GetSecondaryPrice());
+
 
             //FOW
             _selectedHexTile.Reveal(_auxBuild.visionRange, 0);

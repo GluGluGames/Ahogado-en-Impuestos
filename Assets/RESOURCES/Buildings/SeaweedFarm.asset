@@ -16,7 +16,10 @@ MonoBehaviour:
   Description: 
   Icon: {fileID: 21300000, guid: fe4b884b0ffb6cd499f947927fb165ec, type: 3}
   Prefab: {fileID: 8113010406866780128, guid: 8807a79897f001d4085fe45216d838dd, type: 3}
-  InitialPrice: 0
+  PrimaryPrice: 0
+  PrimaryPriceType: {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  SecondaryPrice: 0
+  SecondaryPriceType: {fileID: 0}
   NeededInteraction: 0
   SpawnHeight: 0.3
   Resource: {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
