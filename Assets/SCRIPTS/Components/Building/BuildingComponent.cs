@@ -19,6 +19,6 @@ namespace GGG.Components.Buildings {
 
         public bool NeedInteraction() { return Build.NeedInteraction(); }
         
-        public int GetBuildCost() { return Build.GetPrice(); }
+        public int GetBuildCost() { return Build.GetPrimaryPrice(); }
     }
 }
