@@ -41,7 +41,16 @@ namespace GGG.Components.UI {
             _open = false;
             transform.position = new Vector3(0, -400f, 0);
         }
-        
+
+        private void LateUpdate()
+        {
+            if (_open && !_viewport.activeInHierarchy)
+            {
+                // TODO - Solve bug where the interface doesn't open and the state is ON_UI
+                Close();
+            }
+        }
+
         public bool IsOpen() { return _open; }
 
         private void Open(HexTile tile) {

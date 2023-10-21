@@ -119,6 +119,8 @@ namespace GGG.Components.Museum
             SeaButton.image.sprite = SeaButton.spriteState.selectedSprite;
             FishButton.image.sprite = FishButton.spriteState.disabledSprite;
             ExpeditionButton.image.sprite = ExpeditionButton.spriteState.disabledSprite;
+            
+            SelectResource(_seaResources, _seaButtons, _seaActive, 0, 0);
         }
 
         #endregion
