@@ -8,10 +8,11 @@
 - 17/10/2023 - Luming - Aumento de detalles en tablas para los edificios, poner tutorial y progresion en game design, adjuntando sus propias diagramas de flujo. Aparte, tambien se ha metido los graficos sobre la recaudacion y la curva de aprendizaje
 - 18/10/2023 - Luming - Aumento de explicaciones sobre la probabilidad de recaudacion y la curva de aprendizaje, y aclaracion de game design
 - 20/10/2023 - Luming - Corregido el game design, Intensidad de recaudacion -> Variedad de recaudacion segun la productividad, meter recursos de tipo de especial,arreglar las columnas de reparacion
-- 20/10/2023 - Adrián S - Añadido de los personajes protagonistas de la historia
+- 20/10/2023 - Adrián S. - Añadido de los personajes protagonistas de la historia
 - 21/10/2023 - Laura - Explicación de concepts e interfaces, y formato
 - 21/10/2023 - David - Música y sonido y mejoras en el estilo.
-- 21/10/2023 - Added 3D Models
+- 21/10/2023 - Adrián S. - Added 3D Models
+- 21/10/2023 - Adrián A. - Revisión de erratas.
   
 ## 1 - MÉCANICAS 
 
@@ -24,7 +25,7 @@ El juego se divide en dos grandes apartados. El primero de ellos es el **escenar
 
 Este escenario consiste en un mapa dividido en terrenos hexagonales. Estos terrenos serán generados de forma procedural en el editor del juego, pero podrán y serán modificados por los artistas para hacer que este mundo sea artísticamente agradable y produzca cierto atractivo. Algunos ejemplos de una estructura “grid hexagonal” como esta se encuentran en juegos como “Before we Leave” o “Civilization”. En estos juegos las casillas aportan más o menos recursos dependiendo de su posición o recursos naturales. En nuestro caso no haremos esto, sino que lo simplificaremos, los recursos otorgados solo dependen de los edificios cercanos a esta casilla. 
 
-En el juego de Civilization los mapas son procedurales, pero en el nuestro serán creados a mano por el equipo. 
+En el juego de Civilization los mapas son procedurales, pero en el nuestro serán semiprocedurales, generados proceduralmente y posteriormente retocados a mano por el equipo. 
 
 Estas casillas al principio se encuentran asilvestradas, pero pagando una suma de recursos pasas a poder construir el edificio que se desee.  
 
@@ -33,7 +34,7 @@ Cuando comiences el juego las casillas lejanas van a estar cubiertas por una “
 ### **1.3 - Minijuegos** 
 
 #### **1.3.1 - Plataforma hexagonal**
-Se utilizara el grid de hexagonos para la expedicion, lo que se va a crear son los prompt que se generaran de forma procedural(aleatoria dentro del mapa) para una experiencia nueva hacia el jugador,aparte de ello, se va a introducir prompts de logro que existe una cantidad minima de encontrarlos.
+Se utilizara el grid de hexagonos para la expedicion, lo que se va a crear son los prompt que se generaran de forma procedural(aleatoria dentro del mapa) para una experiencia nueva hacia el jugador. Aparte, se van a introducir ciertos recursos muy raros de encontrar, y además otorgan un logro al obtenerlos. 
 
 #### **1.3.2 - Niebla de guerra**
 En el mágico mundo submarino de nuestro juego, la niebla de guerra es una característica crucial que añade un toque de misterio a cada aventura. A medida que los jugadores se adentran en las profundidades del océano, la visibilidad se ve afectada por la profundidad de la zona y el nivel de su casco submarino. Esta limitación en la visión invita a los jugadores a explorar lo desconocido, estimulando su curiosidad y el deseo de desvelar los secretos que aguardan en las profundidades.
@@ -124,7 +125,7 @@ El generador de electricidad requerirá de anguilas eléctricas para construirse
 
 #### **1.5.4 - Paratridente**
 
-El impresionante Paratridente, cuya construcción conlleva un coste significativo, posee una característica única y vital: su capacidad para proteger una zona designada durante una única ráfaga de furia. Para mantener su eficacia, este artefacto debe ser cargado con la energía eléctrica de las anguilas eléctricas, lo que añade un elemento de recolección estratégica a la ecuación. Cada Paratridente está equipado con tres cargas, lo que se traduce en tres oportunidades de activación. 
+El impresionante Paratridente, cuya construcción conlleva un coste significativo, posee una característica única y vital: su capacidad para proteger una zona designada durante una única ráfaga de furia. Para mantener su eficacia, este artefacto debe ser cargado con la energía eléctrica de las anguilas eléctricas, lo que añade un elemento de recolección estratégica a la ecuación. Cada Paratridente está equipado entre una y tres cargas, dependiendo del nivel de la estructura. 
 
 Cada vez que la furia de Poseidón desciende sobre una casilla protegida por el Paratridente, este responde de manera inmediata, anulando el peligro y consumiendo una de sus preciadas cargas. Sin embargo, tras cada intervención, el Paratridente requiere un período de tiempo para recargar su cúpula defensiva, que puede realizarse hasta en tres ocasiones. 
 
@@ -234,11 +235,12 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
   - **Rueda del ratón**: Dependiendo de la dirección, la cámara se acercará o se alejará.
 
+
+  
+![Keyboard layout](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Mapeo%20de%20controles.jpg)
 - **Morado**: Movimiento de cámara
 - **Rojo**: Rotación de cámara
 - **Amarillo**: Zoom de cámara
-  
-![Keyboard layout](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Mapeo%20de%20controles.jpg)
 
 ### 2.2 - Pantalla táctil: 
 
@@ -281,9 +283,9 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | **3.2.6 - Museo**   | ![Museo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/21d670df-64b4-4a0c-b701-cd8d8978d6ce)   | En el museo se mezcla el estilo de los templos griegos con las cúpulas del barroco para darle ese aspecto distintivo de museo. <br><br> Además, se añade una concha arriba para representar los recursos que puedes ver interactuando con el mismo. Por último se incluyó una cristalera en el centro a modo de decoración. |
 | **3.2.7 - Tienda**   | ![Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/ead2404d-31f6-4163-a839-bc48436c2f64)   | En el diseño de tiendas dentro del juego, hemos optado por incorporar principalmente características de tiendas contemporáneas. <br><br> Esta elección se basa en la proximidad de estas características al público objetivo, lo que facilita a los jugadores la localización y el acceso rápido a las tiendas cuando sea necesario. |
 | **3.2.8 - Generador eléctrico**   | ![Generador eléctrico](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/16921824-70bc-4e13-9dbd-2a25c31585c9)   | Al generador eléctrico se le da un toque más industrial y se añaden contenedores donde las ánguilas eléctricas pueden nadar. <br><br> Además se incluye una cristalera como en el museo, y motivos griegos de decoración. |
-| **3.2.9 - Alamacén de peces (nivel 1)**   | ![Almacén de peces N1](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/6c6302cd-5aab-4e76-9176-b5fcd0399685)   | El Almacén de peces está basado en un templo griego fusionado con una pecera, para cumplir con la estética de la Atlantis y además dar la impresión de que está relacionado con el mundo submarino. |
-| **3.2.10 - Alamacén de peces (nivel 2)**   | ![Almacén de peces N2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/5c8e9690-8699-4400-8fd2-bb0d4be62d4a)   | El nivel 2 del Almacén de peces cambia la forma de la pecera, en vez de ser una esfera pasa a ser un ortoedro, alargando así la estructura y añadiendo 1 par de columnas a lo largo. |
-| **3.2.11 - Alamacén de peces (nivel 3)**   | ![Almacén de peces N3](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/4df4507b-03e7-4150-b774-cf6c87cbd6b0)   | El último nivel del Almacén de peces tiene una base hexagonal, al ser el nivel final su diseño es un poco más complejo y el acuario de su interior pasa a ser un prisma hexagonal, además de tener una columna por cada arista vertical del acuario interior. |
+| **3.2.9 - Almacén de peces (nivel 1)**   | ![Almacén de peces N1](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/6c6302cd-5aab-4e76-9176-b5fcd0399685)   | El Almacén de peces está basado en un templo griego fusionado con una pecera, para cumplir con la estética de la Atlantis y además dar la impresión de que está relacionado con el mundo submarino. |
+| **3.2.10 - Almacén de peces (nivel 2)**   | ![Almacén de peces N2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/5c8e9690-8699-4400-8fd2-bb0d4be62d4a)   | El nivel 2 del Almacén de peces cambia la forma de la pecera, en vez de ser una esfera pasa a ser un ortoedro, alargando así la estructura y añadiendo 1 par de columnas a lo largo. |
+| **3.2.11 - Almacén de peces (nivel 3)**   | ![Almacén de peces N3](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/4df4507b-03e7-4150-b774-cf6c87cbd6b0)   | El último nivel del Almacén de peces tiene una base hexagonal, al ser el nivel final su diseño es un poco más complejo y el acuario de su interior pasa a ser un prisma hexagonal, además de tener una columna por cada arista vertical del acuario interior. |
 | **3.2.12 - Mejoras de buceo**   | ![Mejoras de buceo](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Mejoras%20de%20buceo.png)   | Este edificio esta basado en el casco de un buceador antiguo. |
 | **3.2.13 - Poseidón**   | ![Poseidón](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)   | Este es el enemigo principal del juego, Poseidón. Su diseño está basado en juegos que esten basados en el mundo de la mitología griega, como God of War o Hades. <br><br> Se ha elegido un aspecto serio, con el pelo y barba larga porque es el aspecto que suelen tener los dioses en sus representaciones, ya sean en juegos o en la ficción. <br><br> También se le quiere dar la impresión de poderoso, para que tenga sentido que sea el que tenga amenazados a los jugadores durante el gameplay. Tampoco se le quería dar un aspecto muy oscuro porque no es malvado, simplemente está enfadado. |
 
