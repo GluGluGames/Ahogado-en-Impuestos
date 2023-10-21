@@ -54,8 +54,9 @@ namespace GGG.Components.Buildings
 
             if (Player) {
                 _playerPosCube = playerSpawnTile.cubeCoordinate;
-                Player.transform.position = playerSpawnTile.transform.position + new Vector3(0.0f, 1f, 0.0f);
+                Player.position = playerSpawnTile.transform.position + new Vector3(0.0f, 1f, 0.0f);
                 PlayerPosition.CurrentTile = playerSpawnTile;
+                PlayerPosition.PlayerPos = playerSpawnTile.cubeCoordinate;
 
                 foreach (HexTile tileAux in hexTiles)
                     tileAux.OnHexSelect += (tileAux) =>
