@@ -53,7 +53,7 @@ namespace GGG.Components.UI
 
             SellButton.onClick.AddListener(OnSellButton);
             UpgradeButton.onClick.AddListener(OnUpgradeButton);
-            CloseButton.onClick.AddListener(Close);
+            CloseButton.onClick.AddListener(() => Close(true));
         }
         
         public bool IsOpen() { return _open; }
@@ -71,7 +71,7 @@ namespace GGG.Components.UI
         {
             InteractButton.onClick.AddListener(() => {
                 action.Invoke();
-                Close();
+                Close(false);
             });
 
             if(!build.NeedInteraction()) InteractButton.gameObject.SetActive(false);
@@ -85,7 +85,7 @@ namespace GGG.Components.UI
             _selectedTile.DestroyBuilding();
             
             _selectedBuilding = null;
-            Close();
+            Close(true);
         }
 
         private void OnUpgradeButton()
@@ -104,7 +104,7 @@ namespace GGG.Components.UI
             OnMenuOpen?.Invoke();
         }
 
-        public void Close()
+        public void Close(bool resumeGame)
         {
             if(!_open) return;
 
@@ -112,11 +112,12 @@ namespace GGG.Components.UI
             {
                 _panel.SetActive(false);
                 CloseButton.gameObject.SetActive(false);
+                InteractButton.onClick.RemoveAllListeners();
             };
             
             _selectedTile.DeselectTile();
             _selectedTile = null;
-            GameManager.Instance.OnUIClose();
+            if(resumeGame) GameManager.Instance.OnUIClose();
             _open = false;
         }
     }

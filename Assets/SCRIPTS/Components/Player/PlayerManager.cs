@@ -32,6 +32,9 @@ namespace GGG.Components.Player
             
             foreach (string i in _resources.Keys)
                 _resourcesCount.Add(i, 0);
+            
+            // DEBUG - DELETE LATER
+            _resourcesCount["Perla"] += 1;
         }
 
         private void OnValidate()

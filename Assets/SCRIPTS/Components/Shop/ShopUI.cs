@@ -105,6 +105,8 @@ namespace GGG.Components.Shop
 
             Viewport.SetActive(true);
             transform.DOMoveX(Screen.width * 0.5f, 2f, true).SetEase(Ease.InOutExpo);
+            GameManager.Instance.OnUIOpen();
+            Debug.Log(GameManager.Instance.GetGameState());
             _open = true;
         }
 
