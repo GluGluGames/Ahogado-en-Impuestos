@@ -289,13 +289,13 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 ## **4 - DISEÑO 3D**
 
-![Ayuntamiento](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hall.PNG)
-![Pecera](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/fishtank.PNG)
-![Laboratorio](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/lab.PNG)
-![Granja de algas](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/seaweed3D.PNG)
-![Hexágono](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagon.PNG)
-![Hexágono no construible](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonNon.PNG)
-![Hexágono pavimentado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonPavement.PNG)
+| **4.1 - Ayuntamiento**	| ![Ayuntamiento](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hall.PNG)
+| **4.2 - Alamacén de peces (nivel 1)**   | ![Pecera](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/fishtank.PNG)
+| **4.3 - Laboratorio**   | ![Laboratorio](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/lab.PNG)
+| **4.4 - Granja de algas (nivel 1)**	| ![Granja de algas](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/seaweed3D.PNG)
+| **4.5 - Hexágono**	| ![Hexágono](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagon.PNG)
+| **4.6 - Hexágono no construible**	| ![Hexágono no construible](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonNon.PNG)
+| **4.7 - Hexágono pavimentado**	| ![Hexágono pavimentado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonPavement.PNG)
 
 
 ## **5 - GAME DESIGN** 
