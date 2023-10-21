@@ -11,6 +11,7 @@
 - 20/10/2023 - Adrián S - Añadido de los personajes protagonistas de la historia
 - 21/10/2023 - Laura - Explicación de concepts e interfaces, y formato
 - 21/10/2023 - David - Música y sonido y mejoras en el estilo.
+- 21/10/2023 - Added 3D Models
   
 ## 1 - MÉCANICAS 
 
@@ -286,7 +287,16 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | **3.2.12 - Mejoras de buceo**   | ![Mejoras de buceo](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Mejoras%20de%20buceo.png)   | Este edificio esta basado en el casco de un buceador antiguo. |
 | **3.2.13 - Poseidón**   | ![Poseidón](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/384f2ae0-e269-45a3-b106-1085326a5022)   | Este es el enemigo principal del juego, Poseidón. Su diseño está basado en juegos que esten basados en el mundo de la mitología griega, como God of War o Hades. <br><br> Se ha elegido un aspecto serio, con el pelo y barba larga porque es el aspecto que suelen tener los dioses en sus representaciones, ya sean en juegos o en la ficción. <br><br> También se le quiere dar la impresión de poderoso, para que tenga sentido que sea el que tenga amenazados a los jugadores durante el gameplay. Tampoco se le quería dar un aspecto muy oscuro porque no es malvado, simplemente está enfadado. |
 
-## **4 - DISEÑO 3D – Adri C.**
+## **4 - DISEÑO 3D**
+
+![Ayuntamiento](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hall.PNG)
+![Pecera](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/fishtank.PNG)
+![Laboratorio](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/lab.PNG)
+![Granja de algas](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/seaweed3D.PNG)
+![Hexágono](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagon.PNG)
+![Hexágono no construible](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonNon.PNG)
+![Hexágono pavimentado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonPavement.PNG)
+
 
 ## **5 - GAME DESIGN** 
 
