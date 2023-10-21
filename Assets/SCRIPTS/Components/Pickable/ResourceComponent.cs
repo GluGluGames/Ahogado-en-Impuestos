@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq.Expressions;
+using GGG.Components.Ticks;
 
 namespace GGG.Components.Resources
 {
@@ -12,7 +13,8 @@ namespace GGG.Components.Resources
     {
         [SerializeField] private Resource _resource;
         [SerializeField] private int _amount;
-        [SerializeField] private Collider collider;
+        [SerializeField] private Collider colliderResource;
+        [SerializeField] private bool _alwaysVisible;
 
         private bool _collided = false;
 
@@ -53,9 +55,11 @@ namespace GGG.Components.Resources
         }
 
         private void Start()
-        {
+{
             onResourceCollideEnter += RecolectResource;
             onResourceCollideExit += DeleteMySelf;
+            TickManager.OnTick += HandleVisibility;
+            HandleVisibility();
         }
 
         private void RecolectResource()
@@ -83,11 +87,27 @@ namespace GGG.Components.Resources
             catch { }
 
             ResourceManager.Instance.sumResourceCollected();
+            TickManager.OnTick -= HandleVisibility;
+
             Destroy(this.gameObject);
         }
 
         #endregion
 
+        private void HandleVisibility()
+        {
+            if(!_alwaysVisible)
+            {
+                if(currentTile != null && currentTile.gameObject.layer == 7)
+                {
+                    gameObject.layer = 7;
+                }
+                else if(currentTile != null)
+                {
+                    gameObject.layer = 9;
+                }
+            }
+        }
     }
 }
 

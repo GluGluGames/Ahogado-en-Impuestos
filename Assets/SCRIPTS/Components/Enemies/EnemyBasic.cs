@@ -13,6 +13,7 @@ namespace GGG.Components.Enemies
         [SerializeField] private int _hp;
         [SerializeField] private bool _killable;
         [SerializeField] private bool _stoppable;
+        [SerializeField] private bool _alwaysVisible;
 
         private Rigidbody _rigidbody;
 
@@ -28,7 +29,9 @@ namespace GGG.Components.Enemies
         void Start()
         {
             TickManager.OnTick += this.HandleMovement;
+            TickManager.OnTick += this.HandleVisibility;
             _rigidbody = GetComponent<Rigidbody>();
+            HandleVisibility();
         }
 
         private void OnDestroy()
@@ -96,6 +99,36 @@ namespace GGG.Components.Enemies
                 currentPath.RemoveAt(0);
                 cubeCoordPos = nextTile.cubeCoordinate;
             }
+        }
+
+        private void HandleVisibility()
+        {
+            // Prob this should be a FSM
+            if(nextTile != null && !_alwaysVisible)
+            {
+                if(nextTile.gameObject.layer == 0 || (currentTile != null && currentTile.gameObject.layer == 0))
+                {
+                    gameObject.layer = 8;
+                } else 
+                {
+                    gameObject.layer = 7;
+                }
+            } else if (currentTile != null && !_alwaysVisible)
+            {
+                if(currentTile.gameObject.layer == 0)
+                {
+                    gameObject.layer = 8;
+                }
+                else
+                {
+                    gameObject.layer = 7;
+                }
+            } else if(_alwaysVisible)
+            {
+                currentTile.gameObject.layer = 8;
+            }
+            
+
         }
     }
 
