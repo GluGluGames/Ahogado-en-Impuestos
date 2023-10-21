@@ -27,11 +27,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5058980151156736
-    m_Localized: A seaweed
+    m_Localized: Main resource within the game, it can be used for construction,
+      research and paying Poseidon.
     m_Metadata:
       m_Items: []
   - m_Id: 5059067057135616
-    m_Localized: It's a coral
+    m_Localized: Resource used to build some structures.
     m_Metadata:
       m_Items: []
   - m_Id: 5089344810770432
@@ -39,7 +40,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5089653742231552
-    m_Localized: M
+    m_Localized: Repair material for destroyed buildings.
     m_Metadata:
       m_Items: []
   - m_Id: 5089805827694592
@@ -47,7 +48,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5089932684419072
-    m_Localized: Electric eel
+    m_Localized: "\rCreature that has an electric charge."
     m_Metadata:
       m_Items: []
   - m_Id: 5318241074667520
@@ -55,7 +56,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5318384809271296
-    m_Localized: Carp
+    m_Localized: Large creature imported from fresh water.
     m_Metadata:
       m_Items: []
   - m_Id: 5318477272702976
@@ -63,7 +64,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5318582721699840
-    m_Localized: Clown
+    m_Localized: "\rYou can find it among anemones."
     m_Metadata:
       m_Items: []
   - m_Id: 5318708924112896
@@ -71,7 +72,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5318815098724352
-    m_Localized: Jelly
+    m_Localized: "\rNon-aggressive creature but toxic to the touch."
     m_Metadata:
       m_Items: []
   - m_Id: 5318951912726528
@@ -79,7 +80,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5319047299588096
-    m_Localized: Pearl
+    m_Localized: ' Purchasing resource more valuable than seaweed.'
     m_Metadata:
       m_Items: []
   - m_Id: 5319177775996928
@@ -87,7 +88,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5319180707815424
-    m_Localized: Seashell
+    m_Localized: Decorative resources, to increase the prestige level of the city.
     m_Metadata:
       m_Items: []
   - m_Id: 5319369841565696
@@ -95,7 +96,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5319372978905088
-    m_Localized: Seasnail
+    m_Localized: Rare resource, it can serve as a decoy for some agressive fish.
     m_Metadata:
       m_Items: []
   - m_Id: 5322712206925824
@@ -107,7 +108,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5329860664090624
-    m_Localized: ScrapMetal
+    m_Localized: Scrap metal collected from the seabed. You can use it to build.
     m_Metadata:
       m_Items: []
   - m_Id: 5330008022573056
@@ -115,7 +116,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5330094488150016
-    m_Localized: Red Seaweed
+    m_Localized: ' Purchasing resource more valuable than seaweed but less valuable
+      than pearls.'
     m_Metadata:
       m_Items: []
   - m_Id: 5330370674679808
@@ -123,7 +125,91 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5330373770076160
-    m_Localized: Starfish
+    m_Localized: If it breaks an arm, a new starfish grows.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6117615866339328
+    m_Localized: Accelerator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6117766764814336
+    m_Localized: Acceleration material that you can use during the expedition to
+      increase your speed for a limited time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6118451879206912
+    m_Localized: Map
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6118515909451776
+    m_Localized: Use maps to unlock unknown areas and obtain more valuable resources.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6119559997546496
+    m_Localized: Tablet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6119628742189056
+    m_Localized: Essential material for research.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6120150647824384
+    m_Localized: Bass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6120423906729984
+    m_Localized: Medium creature that can be consumed within the expedition to recover
+      energy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6121655375355904
+    m_Localized: Flying fish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6121793397317632
+    m_Localized: It can glide above the water.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6122210046894080
+    m_Localized: Golden
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6122292045537280
+    m_Localized: Medium creature that increases generation speed for a limited time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6122659676282880
+    m_Localized: Golden fish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6122782149959680
+    m_Localized: Peaceful creature that escapes if the player is detected.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6123423538733056
+    m_Localized: Neon tetra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6123502391648256
+    m_Localized: Resource found at medium depth. It can be consumed by other fish,
+      increasing their effects.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6124133173026816
+    m_Localized: Vogue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6124231512678400
+    m_Localized: Medium-sized, non-offensive creature, it is used to give more energy
+      to the generator.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6124559259787264
+    m_Localized: Zebra fish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6124680798134272
+    m_Localized: Small fish that lives in shallow depths.
     m_Metadata:
       m_Items: []
   references:

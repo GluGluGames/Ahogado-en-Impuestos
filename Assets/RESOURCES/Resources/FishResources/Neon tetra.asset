@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97f482f4296cec4791a1c1aad32b77c, type: 3}
+  m_Name: Neon tetra
+  m_EditorClassIdentifier: 
+  Name:
+    m_TableReference:
+      m_TableCollectionName: GUID:f0dec55717509d1468c7ef0d543fd9b8
+    m_TableEntryReference:
+      m_KeyId: 6123423538733056
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Description:
+    m_TableReference:
+      m_TableCollectionName: GUID:f0dec55717509d1468c7ef0d543fd9b8
+    m_TableEntryReference:
+      m_KeyId: 6123502391648256
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Sprite: {fileID: 21300000, guid: 65c8e5e7161bdd840968d80ff2fb0e87, type: 3}
+  SelectedSprite: {fileID: 21300000, guid: 2bc7b139d65fd094abe70be70e7527c1, type: 3}
+  references:
+    version: 2
+    RefIds: []
