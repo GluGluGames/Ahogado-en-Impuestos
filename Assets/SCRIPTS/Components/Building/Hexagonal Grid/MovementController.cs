@@ -15,6 +15,7 @@ namespace GGG.Components.Buildings
             _lineRenderer = GetComponent<LineRenderer>();
             TickManager.OnTick += HandleMovement;
             _rigidbody = GetComponent<Rigidbody>();
+
         }
 
         private void Update()
