@@ -30,17 +30,17 @@ namespace GGG.Components.Enemies
         private bool SpawnEnemy() // Should take some enum as input to define type of enemy
         {
             HexTile hex = TileManager.instance.GetRandomHex();
+            bool spawned = false;
 
             foreach (EnemyBasic enemy in enemies)
             {
                 if (enemy.currentTile == hex)
                 {
-                    Debug.Log("I cant spawn on here");
-                    SpawnEnemy();
+                    spawned = SpawnEnemy();
                     break;
                 }
             }
-            if(enemiesPrefab != null)
+            if(enemiesPrefab != null && spawned == false)
             {
                 EnemyBasic newEnem = Instantiate(enemiesPrefab[0]); // here is where you should use that enum...
                 newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y+ 1f, hex.transform.position.z);
