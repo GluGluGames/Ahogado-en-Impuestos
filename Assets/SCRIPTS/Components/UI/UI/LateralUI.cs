@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using GGG.Components.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,10 +23,13 @@ namespace GGG.Components.UI
             
             OpenButton.onClick.AddListener(ToggleMenu);
             InventoryButton.onClick.AddListener(OpenInventory);
+            SettingsButton.onClick.AddListener(OpenSettings);
         }
 
         private void ToggleMenu()
         {
+            if (GameManager.Instance.IsOnUI()) return;
+            
             _open = !_open;
 
             if (_open) transform.DOMoveX(Screen.width * 0.5f + 660, 1.5f).SetEase(Ease.InQuad);
@@ -36,6 +40,13 @@ namespace GGG.Components.UI
         {
             _inventory.OpenInventory();
             ToggleMenu();
+        }
+
+        private void OpenSettings()
+        {
+            SceneManagement.Instance.OpenSettings();
+            ToggleMenu();
+            GameManager.Instance.OnUIOpen();
         }
     }
 }

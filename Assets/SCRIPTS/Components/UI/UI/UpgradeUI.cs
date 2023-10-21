@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using GGG.Components.Core;
 using GGG.Shared;
 
 namespace GGG.Components.UI
@@ -115,6 +116,7 @@ namespace GGG.Components.UI
             
             _selectedTile.DeselectTile();
             _selectedTile = null;
+            GameManager.Instance.OnUIClose();
             _open = false;
         }
     }

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using GGG.Components.Buildings;
 using System;
+using GGG.Components.Core;
 using GGG.Components.Player;
 using GGG.Shared;
 using TMPro;
@@ -88,6 +89,7 @@ namespace GGG.Components.UI
 
             _selectedTile.DeselectTile();
             _selectedTile = null;
+            GameManager.Instance.OnUIClose();
             _open = false;
         }
     }

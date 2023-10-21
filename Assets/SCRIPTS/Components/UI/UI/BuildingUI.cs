@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using GGG.Components.Core;
 
 namespace GGG.Components.UI {
     public class BuildingUI : MonoBehaviour {
@@ -65,6 +66,7 @@ namespace GGG.Components.UI {
             };
             _selectedTile.DeselectTile();
             _selectedTile = null;
+            GameManager.Instance.OnUIClose();
             _open = false;
         }
     }

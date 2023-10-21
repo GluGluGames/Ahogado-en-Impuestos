@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using DG.Tweening;
+using GGG.Components.Core;
 
 namespace GGG.Components.UI
 {
@@ -255,6 +256,8 @@ namespace GGG.Components.UI
                 _viewport.SetActive(false);
                 _open = false;
             };
+            
+            GameManager.Instance.OnUIClose();
         }
 
         #endregion

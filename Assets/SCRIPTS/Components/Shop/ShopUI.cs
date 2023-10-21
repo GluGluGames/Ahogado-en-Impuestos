@@ -1,4 +1,5 @@
 using GGG.Classes.Shop;
+using GGG.Components.Core;
 using GGG.Components.Player;
 
 using UnityEngine;
@@ -116,6 +117,7 @@ namespace GGG.Components.Shop
                 _open = false;
             };
             
+            GameManager.Instance.OnUIClose();
         }
     }
 }

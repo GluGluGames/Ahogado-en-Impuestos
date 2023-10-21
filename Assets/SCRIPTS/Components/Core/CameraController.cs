@@ -32,6 +32,7 @@ namespace GGG.Components.Core
         [SerializeField] private float MovementTime;
 
         private InputManager _input;
+        private GameManager _gameManager;
         private Transform _transform;
         private Camera _mainCamera;
         private Transform _cameraTransform;
@@ -51,6 +52,7 @@ namespace GGG.Components.Core
 
         private void Start() {
             _input = InputManager.Instance;
+            _gameManager = GameManager.Instance;
             _transform = transform;
             _mainCamera = Camera.main;
             _mainCanvas = GameObject.FindGameObjectWithTag("HUD").GetComponent<Canvas>();
@@ -62,11 +64,16 @@ namespace GGG.Components.Core
             _newZoom = _cameraTransform.localPosition;
         }
 
-        private void Update() {
+        private void Update()
+        {
+            if (!_gameManager.PlayingGame()) return;
+            
             StartCoroutine(HandleMouseInput());
         }
 
         private void LateUpdate() {
+            if (!_gameManager.PlayingGame()) return;
+            
             HandleCameraMovement();
             HandleCameraRotation();
             HandleZoom();

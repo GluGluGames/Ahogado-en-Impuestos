@@ -129,6 +129,7 @@ namespace GGG.Components.Menus
         private void OnCloseButton()
         {
             SceneManagement.Instance.CloseSettings();
+            if(GameManager.Instance.IsOnUI()) GameManager.Instance.OnUIClose();
         }
 
         private void OnCreditsButton()

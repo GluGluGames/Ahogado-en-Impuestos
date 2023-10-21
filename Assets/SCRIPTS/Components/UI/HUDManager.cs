@@ -1,3 +1,4 @@
+using GGG.Components.Core;
 using GGG.Components.Player;
 using GGG.Shared;
 
@@ -24,12 +25,14 @@ namespace GGG.Components.UI
         [SerializeField] private bool OnMinigame;
         
         private PlayerManager _player;
+        private GameManager _gameManager;
         private BuildingUI _buildingUI;
         private TileCleanUI _tileCleanUI;
         private UpgradeUI _upgradeUI;
 
         private void Start() {
             _player = PlayerManager.Instance;
+            _gameManager = GameManager.Instance;
 
             _buildingUI = GetComponentInChildren<BuildingUI>();
             _tileCleanUI = GetComponentInChildren<TileCleanUI>();
@@ -50,16 +53,19 @@ namespace GGG.Components.UI
             _buildingUI.OnMenuOpen += () => {
                 _tileCleanUI.Close();
                 _upgradeUI.Close();
+                _gameManager.OnUIOpen();
             };
 
             _tileCleanUI.OnMenuOpen += () => {
                 _buildingUI.Close();
                 _upgradeUI.Close();
+                _gameManager.OnUIOpen();
             };
 
             _upgradeUI.OnMenuOpen += () => {
                 _buildingUI.Close();
                 _tileCleanUI.Close();
+                _gameManager.OnUIOpen();
             };
         }
     }
