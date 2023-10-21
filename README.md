@@ -531,11 +531,11 @@ Las mecánicas cruciales para la expedición son:
 
 #### **11.1.1 - ENFOCADO EN NIÑOS**
 
-  ![Mapa de empatía - niños]([https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/2c8842c8-9df5-4b82-b25c-fd792a60b1dc](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Mapa%20de%20empatía%20niños.png))
+  ![Mapa de empatía - niños](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Mapa%20de%20empatía%20niños.png)
 
 #### **11.1.2 - ENFOCADO A GENTE ENTRE 20 y 40 AÑOS**
 
-  ![MapaDeEmpatiaAdultos]([https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/4fa62dcb-7776-4e1e-8f05-a0987c05aa2d](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Mapa%20de%20empatía%20adultos.png))
+  ![MapaDeEmpatiaAdultos](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Mapa%20de%20empatía%20adultos.png)
 
 ### **11.2 - CAJA DE HERRAMIENTAS**
   
