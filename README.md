@@ -13,6 +13,7 @@
 - 21/10/2023 - David - Música y sonido y mejoras en el estilo.
 - 21/10/2023 - Adrián S. - Added 3D Models
 - 21/10/2023 - Adrián A. - Revisión de erratas.
+- 21/10/2023 - Luming - Correcion de Mecanicas en recursos y desarrollar pensamineto computacional
   
 ## 1 - MÉCANICAS 
 
@@ -68,13 +69,17 @@ Esta mecánica añade un elemento táctico al juego, donde los jugadores deben s
 
 #### **1.4.1 - Recursos generales**
 
-- **Algas Verdes**: Se utilizan tanto para el costo de construcción como para el costo de mejoras en la ciudad. Estos son recursos esenciales para la expansión y mejora de la ciudad.
+- **Algas Verdes**: Se utilizan tanto para el costo de construcción. Estos son recursos esenciales para la expansión y mejora de la ciudad.
 
 - **Algas Rojas**: Se utilizan para comprar objetos de aumento (boosts) dentro de la tienda del juego. Estos objetos pueden proporcionar ventajas temporales a los jugadores y pueden ser útiles en situaciones específicas.
 
 - **Perlas**: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
 
 - **Madera, Corales y Hierro**: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
+
+- **Conchas**:Recurso de rareza  alta, puede atraer a animales grande para proteccion dentro de la expedicion.
+
+- **Caracolas**: Recursos de finalidad decorativa, puede aumentar el nivel de prestigio de la ciudad.
 
 #### **1.4.2 - Recursos especiales**
 
@@ -189,6 +194,9 @@ Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubier
   - **Materiales de construcción**: recogidos en naufragios durante las expecidiones, como madera y hierro.
   - **Peces**: como anguilas eléctricas.
 
+### Mencion espacial para edificios que esten cercas :
+El juego dispone de zonas que aumenta de diferentes formas a los edificios, es decir, si se consigue una cantidad de edificios del mismo tipo en casillas cercanas, aumentan sus funcionalidades, ya sea la productividad o aceleracion de investigacion, etc... Por lo tanto, si el jugador consigue encontrar esas zonas especiales, puede aprovecharlos y planificar el crecimiento de la ciudad.
+
 ### 1.6 Animales 
 #### Animales Depredadores
 |  Nombre   |  Damage  | Descripciones |
@@ -197,7 +205,7 @@ Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubier
 | Pez Vampiro | 1      | Su principal característica son los colmillos que sobresalen de su mandíbula inferior.Se ocultan en las aguas profundas y lanzan ataques a sus presas tipo emboscada.|
 | Pez Leon |     1     | Habita en aguas cálidas y es muy venenoso. Es carnívoro y se alimenta de crustáceos, camarones y otros peces.|
 | Medusa | 0.5/segundos| Criatura no ofensiva pero toxica, por lo que si se acerca demasiado puede ser intoxicado por su piel y perder vida de manera continua.
-| Rapes abisales | 0.5 | Critatura de tamaño medio, ofensiva pero ataque poco efectivo, distribuido en niveles medio profundo.|
+| Rapes abisales | 0| Critatura de tamaño medio, ofensivo, no hace danio, pero atrae a los depredadores.|
 
 #### Animales Inocentes
 |  Nombre   |  Size  | Descripciones |
@@ -361,7 +369,6 @@ Esta mecánica se ha diseñado para evitar que los jugadores aceleren demasiado 
 
 Para prevenir este escenario, se ha implementado un porcentaje de recaudacion que depende de la productividad de las algas por segundo. De esta manera, se permite una variedad de estrategias para abordar este ajuste de probabilidad. Por ejemplo, los jugadores pueden optar por sacrificar edificios para mantener su productividad, dado que el costo de reparación no es elevado, o incluso buscar un equilibrio entre ganar mucho y gastar mucho. Esta mecánica ofrece a los jugadores una serie de decisiones estratégicas que influyen en su progreso en el juego.
 
-![Intensidad de recaudacion ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Intensidad%20de%20recaudacion.png)
 
 ## **6 - DIAGRAMA DE FLUJO**
 
@@ -511,7 +518,11 @@ El juego contará con diferentes efectos sonoros. Estos, opcionalmente, serán p
 
 ## **10 - PENSAMIENTO COMPUTACIONAL**
 
-La *destreza principal* que se entrena será la **evaluación**, debido a que en nuestro juego habrá que gestionar los recursos de manera continua. Es importante la planificación tanto para la construccion de la ciudad como para la expedición, detección de errores a través de analizar la velocidad de morir en la expedición, los números de edificios que destruya el jugador.
+La *destreza principal* que se entrena será la **evaluación**, debido a que en nuestro juego habrá que gestionar los recursos de manera continua. Es importante la planificación tanto para la construccion de la ciudad como para la expedición, detección de errores a través de analizar la velocidad de morir en la expedición, los números de edificios que destruya el jugador. 
+
+- Importancia de la Planificación: En el juego, la planificación es un factor crítico tanto en la construcción de la ciudad como en la preparación de expediciones. Los jugadores deben comprender la relevancia de una planificación sólida para alcanzar sus objetivos con éxito. La planificación incluye la disposición de edificios y la toma de decisiones estratégicas para garantizar el progreso eficiente y la supervivencia durante las expediciones.
+
+- Detección de Errores: El análisis de la velocidad de morir en una expedición y el número de edificios destruidos por el jugador son indicadores clave para evaluar el pensamiento computacional. Estos elementos permiten identificar posibles errores en la estrategia del jugador y áreas de mejora. El juego fomenta la reflexión y el aprendizaje a través de la evaluación de estos errores, lo que lleva a una mejora continua en la toma de decisiones y la ejecución de estrategias.
 
 Las mecánicas cruciales de la construcción de la ciudad son:
 - Los *costes* de los edificios a la hora de construirlos
@@ -525,6 +536,21 @@ Las mecánicas cruciales para la expedición son:
 - Tener en cuenta la **buena gestión de recursos** que posee, priorizando los objetivos. Debido a que no se permite la estancia permanente dentro de la expedición.
 - Registrar si el **pathing** para obtener los recursos es **óptimo**. El jugador tiene varios caminos para alcanzar el mismo objetivo.
 - Evitar **morir rápido**, se otorgará una herramienta para poder observar cómo se finaliza la expedición, lo mucho que se muere, el tiempo que se tarda en morir o en completar el nivel.
+ 
+**Otras destrezas:**  
+- Reconocer Elementos Clave: El juego desafía al jugador a identificar los recursos esenciales para la reconstrucción de la ciudad. Debe priorizar la recolección de estos recursos más urgentes durante las expediciones. Además, es fundamental que el jugador identifique cuáles ayudas disponibles son más importantes para cada expedición, ya que las ayudas de la tienda pueden tener diferentes funcionalidades en situaciones diversas. El dominio de estas habilidades es esencial para el progreso exitoso en el juego.
+
+- Sistema de representacion: Organización Visual del Progreso: El juego brinda a los jugadores la oportunidad de organizar su progreso utilizando diagramas o tablas. Esta característica permite a los jugadores planificar su avance de manera más visual y mantener una organización efectiva de su progreso en el juego. Con esta herramienta, los jugadores pueden tener una visión general de su estrategia y recursos, lo que facilita la toma de decisiones informadas y el seguimiento de sus objetivos. Esta capacidad de representación visual mejora la experiencia del jugador y su capacidad para administrar eficazmente su camino hacia el éxito en el juego.
+
+- Identificacion de patronesReconocimiento de patrones : El juego incorpora patrones ocultos de diversas formas, ya sea en el comportamiento de los enemigos o en la disposición de los distritos. Estos patrones se traducen en conjuntos específicos de casillas que mejoran las funcionalidades de los edificios de maneras diversas. Si un jugador puede identificar y reconocer estos patrones ocultos, obtiene una ventaja significativa al jugar. El reconocimiento de estos patrones se convierte en una habilidad clave que puede mejorar la experiencia del jugador y su capacidad para tomar decisiones estratégicas acertadas en el juego.
+
+
+  
+Descomposición:  
+- Deducción de problemas en otros más pequeños:
+	- Enfrentando Desafíos Significativos: En el transcurso del juego, el jugador se verá enfrentado a desafíos considerables, como la falta de recursos para satisfacer las demandas de Poseidón, lo que resulta en la destrucción de edificios. Ante estos desafíos, el jugador debe descomponerlos en problemas más manejables para encontrar soluciones efectivas. Por ejemplo, el jugador debe identificar si la escasez de recursos proviene de una falta de mejoras en las granjas o de la necesidad de realizar más expediciones. Esta descomposición de problemas en problemas más pequeños le permite abordar cada aspecto por separado y tomar decisiones más rápidas y efectivas.
+
+	- Exploración Estratégica: Durante la exploración, el jugador puede encontrarse con múltiples depredadores que vigilan los recursos que desea recolectar. Para abordar esta situación, el jugador debe descomponer el enfrentamiento en varios enfrentamientos individuales (1v1) con cada depredador, en lugar de considerarlo como un enfrentamiento masivo. Esto permite al jugador tomar decisiones estratégicas para abordar cada amenaza de manera más efectiva y aumenta sus posibilidades de éxito en la exploración.
 
 ## **11 - MODELO DE NEGOCIO** 
 
