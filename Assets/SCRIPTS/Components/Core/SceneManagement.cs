@@ -53,6 +53,7 @@ namespace GGG.Components.Core
         private readonly List<AsyncOperation> _sceneAsyncOperation = new();
         private GraphicRaycaster _raycaster;
         private float _totalSceneProgress;
+        private bool _settingsOpen;
 
         #region Scene Management
 
@@ -118,12 +119,14 @@ namespace GGG.Components.Core
         {
             SettingsViewport.SetActive(true);
             _raycaster.enabled = true;
+            _settingsOpen = true;
         }
 
         public void CloseSettings()
         {
             SettingsViewport.SetActive(false);
             _raycaster.enabled = false;
+            _settingsOpen = false;
         }
         
         #endregion
@@ -142,7 +145,7 @@ namespace GGG.Components.Core
             CreditsViewport.SetActive(false);
             CreditsPanel.transform.DOKill();
             CreditsPanel.transform.position = new Vector3(CreditsPanel.transform.position.x, CREDITS_INITIAL_POSITION);
-            _raycaster.enabled = false;
+            if(!_settingsOpen) _raycaster.enabled = false;
         }
 
         #endregion
