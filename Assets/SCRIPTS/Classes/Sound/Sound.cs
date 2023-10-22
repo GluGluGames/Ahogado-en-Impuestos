@@ -3,8 +3,8 @@ using GGG.Shared;
 
 namespace GGG.Classes.Sound
 {
-    [System.Serializable]
-    public class Sound
+    [CreateAssetMenu(fileName = "Sound", menuName = "Game/Sound")]
+    public class Sound : ScriptableObject
     {
         [Tooltip("Name of the sound clip.")]
         public string ClipName;

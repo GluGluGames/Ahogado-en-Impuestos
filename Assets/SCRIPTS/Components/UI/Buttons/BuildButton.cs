@@ -64,6 +64,7 @@ namespace GGG.Components.UI {
                 return;
             }
             
+            SoundManager.Instance.Play("Build");
             GameObject auxGo = BuildingInfo.Spawn(_selectedHexTile.SpawnPosition());
             _auxBuild = auxGo.GetComponent<BuildingComponent>();
 

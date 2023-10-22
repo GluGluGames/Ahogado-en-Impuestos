@@ -45,7 +45,7 @@ namespace GGG
                 return;
             }
 
-            foreach (Classes.Sound.Sound s in Sounds)
+            foreach (Sound s in Sounds)
             {
                 s.Source = gameObject.AddComponent<AudioSource>();
                 s.Source.clip = s.AudioClip;
@@ -66,6 +66,11 @@ namespace GGG
                 if (s.PlayOnAwake)
                     s.Source.Play();
             }
+        }
+
+        private void OnValidate()
+        {
+            Sounds = Resources.LoadAll<Sound>("Sounds");
         }
 
         #endregion
@@ -97,7 +102,7 @@ namespace GGG
         {
             _isMusicActive = active;
         }
-        public bool getMusicActive()
+        public bool GetMusicActive()
         {
             return _isMusicActive;
         }
@@ -126,6 +131,11 @@ namespace GGG
                 return;
             }
             s.Source.Play();
+        }
+
+        public void PlayScriptable(Sound sound)
+        {
+            Play(sound.name);
         }
 
         public void Resume(string clipName)

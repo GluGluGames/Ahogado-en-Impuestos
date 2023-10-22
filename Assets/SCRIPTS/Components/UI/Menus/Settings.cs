@@ -77,7 +77,7 @@ namespace GGG.Components.Menus
         {
             AudioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("GeneralVolume"));
 
-            if (SoundManager.Instance.getMusicActive())
+            if (SoundManager.Instance.GetMusicActive())
                 AudioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
             else
                 AudioMixer.SetFloat("Music", -50);
@@ -156,7 +156,7 @@ namespace GGG.Components.Menus
         /// <param name="volume">New value of the music volume.</param>
         public void SetMusicVolume(float volume)
         {
-            if (!SoundManager.Instance.getMusicActive()) return;
+            if (!SoundManager.Instance.GetMusicActive()) return;
 
             AudioMixer.SetFloat("Music", volume);
             PlayerPrefs.SetFloat("MusicVolume", volume);

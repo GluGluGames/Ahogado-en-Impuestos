@@ -180,7 +180,10 @@ MonoBehaviour:
   GeneralMixerGroup: {fileID: 24300002, guid: 1a1b6f937486c874daad9bf427880555, type: 2}
   MusicMixerGroup: {fileID: 9008902751201532172, guid: 1a1b6f937486c874daad9bf427880555, type: 2}
   SoundEffectsMixerGroup: {fileID: -1082304055561850417, guid: 1a1b6f937486c874daad9bf427880555, type: 2}
-  Sounds: []
+  Sounds:
+  - {fileID: 11400000, guid: a3618193511725c488d2d30c89099583, type: 2}
+  - {fileID: 11400000, guid: 8fd95a3480852b74e87c6d3a35fbbb22, type: 2}
+  - {fileID: 11400000, guid: 2e5b8a84dbea3464d92a0cb5c170b0e2, type: 2}
 --- !u!1 &5251139647467894522
 GameObject:
   m_ObjectHideFlags: 0
