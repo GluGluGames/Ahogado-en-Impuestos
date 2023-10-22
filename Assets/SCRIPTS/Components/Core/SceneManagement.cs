@@ -55,6 +55,24 @@ namespace GGG.Components.Core
         private float _totalSceneProgress;
         private bool _settingsOpen;
 
+        public Action OnGameSceneLoaded;
+        public Action OnGameSceneUnloaded;
+
+        private void Start()
+        {
+            SceneManager.sceneUnloaded += (scene) =>
+            {
+                if(scene.buildIndex == (int) SceneIndexes.GAME_SCENE)
+                    OnGameSceneUnloaded?.Invoke();;
+            };
+
+            SceneManager.sceneLoaded += (scene, mode) =>
+            {
+                if (scene.buildIndex == (int)SceneIndexes.GAME_SCENE)
+                    OnGameSceneLoaded?.Invoke();
+            };
+        }
+
         #region Scene Management
 
         public void AddSceneToLoad(SceneIndexes scene)

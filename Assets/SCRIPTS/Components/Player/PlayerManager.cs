@@ -1,8 +1,12 @@
+using System;
 using GGG.Shared;
 
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using System.Linq;
+using GGG.Components.Core;
+using UnityEngine.SceneManagement;
 
 namespace GGG.Components.Player
 {
@@ -21,6 +25,9 @@ namespace GGG.Components.Player
             if (Instance != null) return;
 
             Instance = this;
+
+            SceneManagement.Instance.OnGameSceneLoaded += LoadResourcesCount;
+            SceneManagement.Instance.OnGameSceneUnloaded += SaveResourcesCount;
         }
 
         #endregion
@@ -32,16 +39,26 @@ namespace GGG.Components.Player
         private Dictionary<string, int> _resourcesCount = new();
         private Dictionary<string, Resource> _resources = new();
 
+        [Serializable]
+        public class ResourceData
+        {
+            public string Name;
+            public int Count;
+        }
+
         private void Start()
         {
             foreach (Resource i in Resources)
                 _resources.Add(i.GetName(), i);
-            
-            foreach (string i in _resources.Keys)
-                _resourcesCount.Add(i, 0);
-            
+
+            if (_resourcesCount.Count <= 0)
+            {
+                foreach (string i in _resources.Keys)
+                    _resourcesCount.Add(i, 0);
+            }
+
             // DEBUG - DELETE LATER
-            _resourcesCount["Perla"] += 1;
+            if(_resourcesCount["Perla"] <= 0) _resourcesCount["Perla"] += 1;
         }
 
         private void OnValidate()
@@ -69,5 +86,36 @@ namespace GGG.Components.Player
         public int GetResourceNumber() => _resources.Count;
 
         public Resource GetMainResource() => TempMainResource;
+
+        private void SaveResourcesCount()
+        {
+            ResourceData[] resourceDataList = new ResourceData[_resourcesCount.Count];
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");
+            int i = 0;
+            
+            foreach (var pair in _resourcesCount)
+            {
+                ResourceData data = new ResourceData();
+                data.Name = pair.Key;
+                data.Count = pair.Value;
+                resourceDataList[i] = data;
+                i++;
+            }
+            
+            string jsonData = JsonHelper.ToJson(resourceDataList, true);
+            print(jsonData);
+            File.WriteAllText(filePath, jsonData);
+        }
+
+        private void LoadResourcesCount()
+        {
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");
+            
+            string data;
+            data = File.ReadAllText(filePath);
+
+            ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data);
+            _resourcesCount = resources.ToDictionary(item => item.Name, item => item.Count);
+        }
     }
 }
