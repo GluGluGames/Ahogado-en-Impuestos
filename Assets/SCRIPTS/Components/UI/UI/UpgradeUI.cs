@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System;
 using GGG.Components.Core;
 using GGG.Shared;
+using System.Collections.Generic;
 
 namespace GGG.Components.UI
 {
@@ -16,6 +17,8 @@ namespace GGG.Components.UI
         [SerializeField] private Button SellButton;
         [SerializeField] private Button UpgradeButton;
         [SerializeField] private Button InteractButton;
+
+        [SerializeField] private GameObject InteractParent;
 
         private PlayerManager _player;
         private Resource _sellResource;
@@ -31,6 +34,7 @@ namespace GGG.Components.UI
 
         private void Start()
         {
+
             _player = PlayerManager.Instance;
             _sellResource = _player.GetMainResource();
 
@@ -74,8 +78,8 @@ namespace GGG.Components.UI
                 Close(false);
             });
 
-            if(!build.NeedInteraction()) InteractButton.gameObject.SetActive(false);
-            else InteractButton.gameObject.SetActive(true);
+            if (!build.NeedInteraction()) InteractParent.SetActive(false); //InteractButton.gameObject.SetActive(false);
+            else InteractParent.SetActive(true); //InteractButton.gameObject.SetActive(true); 
         }
 
         private void OnSellButton()
@@ -99,6 +103,7 @@ namespace GGG.Components.UI
             _open = true;
             _selectedTile = tile;
             _panel.SetActive(true);
+
             CloseButton.gameObject.SetActive(true);
             _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
             OnMenuOpen?.Invoke();
