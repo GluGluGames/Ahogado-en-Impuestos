@@ -18,10 +18,10 @@ namespace GGG.Components.Buildings
 
         }
 
-        private void Update()
+        private void OnDisable()
         {
-            // Update line renderer based on current PlayerPosition.currentPath
-            //UpdateLineRenderer(PlayerPosition.currentPath);
+            Debug.Log("me desabilito");
+            TickManager.OnTick -= HandleMovement;
         }
 
         /// <summary>

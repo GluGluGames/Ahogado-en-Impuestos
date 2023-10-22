@@ -12,6 +12,12 @@ namespace GGG.Components.Player
         public static PlayerManager Instance;
 
         private void Awake() {
+
+            if(_PlayerModel != null)
+            {
+                GameObject.Instantiate(_PlayerModel, transform);
+
+            }
             if (Instance != null) return;
 
             Instance = this;
@@ -21,6 +27,7 @@ namespace GGG.Components.Player
 
         [SerializeField] private List<Resource> Resources;
         [SerializeField] private Resource TempMainResource;
+        [SerializeField] private GameObject _PlayerModel;
 
         private Dictionary<string, int> _resourcesCount = new();
         private Dictionary<string, Resource> _resources = new();
