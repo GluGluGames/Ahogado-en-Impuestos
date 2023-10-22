@@ -2,12 +2,11 @@ using System;
 using GGG.Shared;
 
 using System.Collections.Generic;
-using System.Collections;
 using System.IO;
 using UnityEngine;
 using System.Linq;
 using GGG.Components.Core;
-using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 namespace GGG.Components.Player
 {
@@ -27,7 +26,7 @@ namespace GGG.Components.Player
 
             Instance = this;
 
-            SceneManagement.Instance.OnGameSceneLoaded += () => StartCoroutine(LoadResourcesCount());
+            SceneManagement.Instance.OnGameSceneLoaded += LoadResourcesCount;
             SceneManagement.Instance.OnGameSceneUnloaded += SaveResourcesCount;
         }
 
@@ -108,29 +107,15 @@ namespace GGG.Components.Player
             File.WriteAllText(filePath, jsonData);
         }
 
-        private IEnumerator LoadResourcesCount()
+        private void LoadResourcesCount()
         {
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");
             
-            #if UNITY_EDITOR
-            filePath = "file://" + filePath;
-            #endif
-            
             string data;
-            if (filePath.Contains("://") || filePath.Contains(":///"))
-            {
-                UnityWebRequest www = UnityWebRequest.Get(filePath);
-                yield return www.SendWebRequest();
-                data = www.downloadHandler.text;
-            }
-            else
-            {
-                data = File.ReadAllText(filePath);
-            }
+            data = File.ReadAllText(filePath);
 
             ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data);
             _resourcesCount = resources.ToDictionary(item => item.Name, item => item.Count);
-            yield return null;
         }
     }
 }
