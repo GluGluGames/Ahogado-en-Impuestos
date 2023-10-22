@@ -12,6 +12,7 @@ namespace GGG.Components.Menus
         [SerializeField] private Button PlayButton;
         [SerializeField] private Button SettingsButton;
         [SerializeField] private Button CreditsButton;
+        [SerializeField] private Button ExitButton;
 
         private SceneManagement _sceneManagement;
 
@@ -22,6 +23,7 @@ namespace GGG.Components.Menus
             PlayButton.onClick.AddListener(OnStartButton);
             SettingsButton.onClick.AddListener(OnSettingsButton);
             CreditsButton.onClick.AddListener(OnCreditsButton);
+            ExitButton.onClick.AddListener(OnExitButton);
         }
 
         private void OnStartButton()
@@ -41,6 +43,11 @@ namespace GGG.Components.Menus
         private void OnCreditsButton()
         {
             _sceneManagement.OpenCredits();
+        }
+
+        private void OnExitButton()
+        {
+            Application.Quit();
         }
     }
 }
