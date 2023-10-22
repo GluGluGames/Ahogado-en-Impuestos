@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -52,6 +53,13 @@ namespace GGG.Components.Buildings
                 playerSpawnTile = GetRandomHex();
             }
 
+
+            // JUGADOR
+            GameObject aux= GameObject.Find("PlayerModel");
+            if(aux != null)
+            {
+                Player = aux.transform;
+            }
             if (Player) {
                 _playerPosCube = playerSpawnTile.cubeCoordinate;
                 Player.position = playerSpawnTile.transform.position + new Vector3(0.0f, 1f, 0.0f);

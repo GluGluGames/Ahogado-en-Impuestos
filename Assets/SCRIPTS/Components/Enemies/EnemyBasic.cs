@@ -37,6 +37,8 @@ namespace GGG.Components.Enemies
         private void OnDestroy()
         {
             TickManager.OnTick -= this.HandleMovement;
+            TickManager.OnTick -= this.HandleVisibility;
+
         }
 
         void Update()
