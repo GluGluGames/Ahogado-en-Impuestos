@@ -51,6 +51,8 @@ namespace GGG.Components.Menus
         [SerializeField] private Button CloseButton;
         [Tooltip("Credits Button")] 
         [SerializeField] private Button CreditsButton;
+        [Tooltip("ExitButton")] 
+        [SerializeField] private Button ExitGameButton;
 
         private bool _languageActive = false;
 
@@ -135,6 +137,11 @@ namespace GGG.Components.Menus
         private void OnCreditsButton()
         {
             SceneManagement.Instance.OpenCredits();
+        }
+
+        private void OnExitGame()
+        {
+            Application.Quit();
         }
 
         #endregion

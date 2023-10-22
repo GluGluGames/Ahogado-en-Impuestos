@@ -54,8 +54,12 @@ namespace GGG.Classes.Buildings
         /// Spawns the building
         /// </summary>
         /// <param name="position">The position where the building will be spawned</param>
+        /// <param name="parent">The parent where the building will spawn</param>
         /// <returns>The instance of the building</returns>
-        public GameObject Spawn(Vector3 position) { return Instantiate(Prefab, new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0)); }
+        public GameObject Spawn(Vector3 position, Transform parent)
+        {
+            return Instantiate(Prefab, new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0), parent);
+        }
 
         /// <summary>
         /// Gets the price of the building
