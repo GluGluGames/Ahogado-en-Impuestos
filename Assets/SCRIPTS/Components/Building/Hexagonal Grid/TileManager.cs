@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Linq;
 using GGG.Shared;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -50,6 +51,7 @@ namespace GGG.Components.Buildings
 
 
             HexTile playerSpawnTile = GetRandomHex();
+            Debug.Log("ASD");
             while (playerSpawnTile.tileType != TileType.Cliff)
             {
                 playerSpawnTile = GetRandomHex();
@@ -63,9 +65,11 @@ namespace GGG.Components.Buildings
                 Player = aux.transform;
             }
             if (Player) {
+                PlayerPosition.currentPath = new List<HexTile>();
                 _playerPosCube = playerSpawnTile.cubeCoordinate;
                 Player.position = playerSpawnTile.transform.position + new Vector3(0.0f, 1f, 0.0f);
                 PlayerPosition.CurrentTile = playerSpawnTile;
+
                 PlayerPosition.PlayerPos = playerSpawnTile.cubeCoordinate;
 
                 foreach (HexTile tileAux in hexTiles)
@@ -77,6 +81,9 @@ namespace GGG.Components.Buildings
                             _path.Reverse();
                             PlayerPosition.currentPath = _path;
                         }
+                        _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
+                        _path.Reverse();
+                        PlayerPosition.currentPath = _path;
                     };
 
                 // FOW
@@ -86,6 +93,19 @@ namespace GGG.Components.Buildings
             {
                 RevealTile(hexTiles[hexTiles.Length / 2], 3);
             }
+        }
+
+        private void OnDestroy()
+        {
+            HexTile[] hexTiles = gameObject.GetComponentsInChildren<HexTile>();
+            foreach (HexTile tileAux in hexTiles)
+                tileAux.OnHexSelect -= (tileAux) =>
+                {
+                    Debug.Log(PlayerPosition.CurrentTile);
+                    _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
+                    _path.Reverse();
+                    PlayerPosition.currentPath = _path;
+                };
         }
 
         public void RegisterTile(HexTile tile)

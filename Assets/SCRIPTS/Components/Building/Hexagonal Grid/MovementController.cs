@@ -14,13 +14,12 @@ namespace GGG.Components.Buildings
         {
             _lineRenderer = GetComponent<LineRenderer>();
             TickManager.OnTick += HandleMovement;
+                        
             _rigidbody = GetComponent<Rigidbody>();
-
         }
 
         private void OnDisable()
         {
-            Debug.Log("me desabilito");
             TickManager.OnTick -= HandleMovement;
         }
 
@@ -41,45 +40,53 @@ namespace GGG.Components.Buildings
             _lineRenderer.SetPositions(points.ToArray());
         }
 
-
         /// <summary>
         /// Function that updates the player position on relation with his path. If there is no path, then this will not work. It also moves the player rigidbody.
         /// </summary>
         public void HandleMovement()
         {
-            if (PlayerPosition.currentPath == null || PlayerPosition.currentPath.Count <= 1)
+            try
             {
-                PlayerPosition.NextTile = null;
+                if (PlayerPosition.currentPath == null || PlayerPosition.currentPath.Count <= 1)
+                {
+                    PlayerPosition.NextTile = null;
 
-                if (PlayerPosition.currentPath != null && PlayerPosition.currentPath.Count > 0)
+                    if (PlayerPosition.currentPath != null && PlayerPosition.currentPath.Count > 0)
+                    {
+                        PlayerPosition.CurrentTile = PlayerPosition.currentPath[0];
+                        PlayerPosition.NextTile = PlayerPosition.CurrentTile;
+                    }
+
+                    gotPath = false;
+                    UpdateLineRenderer(new List<HexTile>());
+                }
+                else
                 {
                     PlayerPosition.CurrentTile = PlayerPosition.currentPath[0];
-                    PlayerPosition.NextTile = PlayerPosition.CurrentTile;
+
+                    PlayerPosition.NextTile = PlayerPosition.currentPath[1];
+
+                    // if the next tile is not traversable, stop moving;
+                    /*if (PlayerPosition.NextTile.tileType != HexTileGenerationSettings.TileType.Standard)
+                    {
+                        PlayerPosition.currentPath.Clear();
+                        HandleMovement();
+                        return;
+                    }*/
+
+                    PlayerPosition.TargetPosition = PlayerPosition.NextTile.transform.position + new Vector3(0, 1f, 0);
+                    MoveTo(PlayerPosition.TargetPosition);
+                    gotPath = true;
+                    PlayerPosition.currentPath.RemoveAt(0);
+                    PlayerPosition.PlayerPos = PlayerPosition.NextTile.cubeCoordinate;
+                    UpdateLineRenderer(PlayerPosition.currentPath);
                 }
-
-                gotPath = false;
-                UpdateLineRenderer(new List<HexTile>());
             }
-            else
+            catch(System.Exception e)
             {
-                PlayerPosition.CurrentTile = PlayerPosition.currentPath[0];
+                Debug.Log("Proccess probably stopped while executing");
+                Debug.Log(e);
 
-                PlayerPosition.NextTile = PlayerPosition.currentPath[1];
-
-                // if the next tile is not traversable, stop moving;
-                /*if (PlayerPosition.NextTile.tileType != HexTileGenerationSettings.TileType.Standard)
-                {
-                    PlayerPosition.currentPath.Clear();
-                    HandleMovement();
-                    return;
-                }*/
-
-                PlayerPosition.TargetPosition = PlayerPosition.NextTile.transform.position + new Vector3(0, 1f, 0);
-                MoveTo(PlayerPosition.TargetPosition);
-                gotPath = true;
-                PlayerPosition.currentPath.RemoveAt(0);
-                PlayerPosition.PlayerPos = PlayerPosition.NextTile.cubeCoordinate;
-                UpdateLineRenderer(PlayerPosition.currentPath);
             }
         }
 
