@@ -1,4 +1,5 @@
 using UnityEngine;
+using GGG.Components.UI;
 
 namespace GGG.Components.Player
 {
@@ -26,5 +27,11 @@ namespace GGG.Components.Player
         {
             _overlaps--;
         }
+
+        private void Lost()
+        {
+            FindObjectOfType<EndExpeditionUI>().OnEndGame(false);
+        }
+
     }
 }
