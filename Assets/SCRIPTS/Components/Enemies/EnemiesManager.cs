@@ -42,7 +42,7 @@ namespace GGG.Components.Enemies
             }
             if(enemiesPrefab != null && spawned == false)
             {
-                EnemyBasic newEnem = Instantiate(enemiesPrefab[0]); // here is where you should use that enum...
+                EnemyBasic newEnem = Instantiate(enemiesPrefab[0], transform); // here is where you should use that enum...
                 newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y+ 1f, hex.transform.position.z);
                 newEnem.currentTile = hex;
                 

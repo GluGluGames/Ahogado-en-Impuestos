@@ -50,7 +50,7 @@ namespace GGG.Components.Resources
             {
                 int rand = Random.Range(0, _resourcePrefabs.Count);
 
-                ResourceComponent newResource = Instantiate(_resourcePrefabs[rand]);
+                ResourceComponent newResource = Instantiate(_resourcePrefabs[rand], transform);
                 newResource.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
                 newResource.currentTile = hex;
 

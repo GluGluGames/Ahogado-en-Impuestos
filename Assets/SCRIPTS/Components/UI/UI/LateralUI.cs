@@ -25,20 +25,31 @@ namespace GGG.Components.UI
             OpenButton.onClick.AddListener(ToggleMenu);
             InventoryButton.onClick.AddListener(OpenInventory);
             SettingsButton.onClick.AddListener(OpenSettings);
-            ExpeditionButton.onClick.AddListener(() => HUDManager.Instance.ChangeScene(SceneIndexes.MINIGAME, SceneIndexes.GAME_SCENE));
+            ExpeditionButton.onClick.AddListener(() =>
+            {
+                HUDManager.Instance.ChangeScene(SceneIndexes.MINIGAME, SceneIndexes.GAME_SCENE);
+                GameManager.Instance.OnUIClose();
+            });
         }
 
         private void ToggleMenu()
         {
-            if (GameManager.Instance.IsOnUI()) return;
+            if (GameManager.Instance.IsOnUI() && !_open) return;
             
             _open = !_open;
 
-            if (_open) transform.DOMoveX(Screen.width * 0.5f + 660, 0.75f).SetEase(Ease.InQuad);
-            else transform.DOMoveX(Screen.width * 0.5f + 970, 0.75f).SetEase(Ease.OutCubic);
-            
-            if(_open) OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
-            else OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            if (_open)
+            {
+                transform.DOMoveX(Screen.width * 0.5f + 660, 0.75f).SetEase(Ease.InQuad);
+                OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                GameManager.Instance.OnUIOpen();
+            }
+            else
+            {
+                transform.DOMoveX(Screen.width * 0.5f + 970, 0.75f).SetEase(Ease.OutCubic);
+                OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                GameManager.Instance.OnUIClose();
+            }
         }
 
         private void OpenInventory()

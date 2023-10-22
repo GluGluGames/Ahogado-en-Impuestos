@@ -23,7 +23,7 @@ public class Pathfinder : MonoBehaviour
         bool gotPath = EvaluateNextNode(nodesNotEvaluated, nodesAlreadyEvaluated, origin, destination, out List<HexTile> path);
 
         int iter = 0;
-        while (!gotPath)
+        while (!gotPath && iter < 1000)
         {
             iter++;
             gotPath = EvaluateNextNode(nodesNotEvaluated, nodesAlreadyEvaluated, origin, destination, out path);

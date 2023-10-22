@@ -1,3 +1,4 @@
+using GGG.Components.Core;
 using UnityEngine.Localization;
 using TMPro;
 using UnityEngine;
@@ -21,7 +22,11 @@ namespace GGG.Components.UI
 
         private void Start()
         {
-            button.onClick.AddListener(() => HUDManager.Instance.ChangeScene(SceneIndexes.GAME_SCENE, SceneIndexes.MINIGAME));
+            button.onClick.AddListener(() =>
+            {
+                HUDManager.Instance.ChangeScene(SceneIndexes.GAME_SCENE, SceneIndexes.MINIGAME);
+                GameManager.Instance.OnUIClose();
+            });
         }
 
         public void OnEndGame(bool isWin)
@@ -29,6 +34,7 @@ namespace GGG.Components.UI
             Viewport.gameObject.SetActive(true);
             OutcomeText.text = OutcomeString[isWin ? 0 : 1].GetLocalizedString();
             SubtitleText.text = SubtitleString[isWin ? 0 : 1].GetLocalizedString();
+            GameManager.Instance.OnUIOpen();
         }
 
 

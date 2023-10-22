@@ -34,7 +34,7 @@ namespace GGG.Components.Enemies
             HandleVisibility();
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             TickManager.OnTick -= this.HandleMovement;
             TickManager.OnTick -= this.HandleVisibility;

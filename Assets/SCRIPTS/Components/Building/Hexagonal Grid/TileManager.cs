@@ -1,7 +1,9 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Linq;
+using GGG.Shared;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace GGG.Components.Buildings
@@ -69,9 +71,12 @@ namespace GGG.Components.Buildings
                 foreach (HexTile tileAux in hexTiles)
                     tileAux.OnHexSelect += (tileAux) =>
                     {
-                        _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
-                        _path.Reverse();
-                        PlayerPosition.currentPath = _path;
+                        if (SceneManager.GetSceneByBuildIndex((int)SceneIndexes.MINIGAME).isLoaded)
+                        {
+                            _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tileAux);
+                            _path.Reverse();
+                            PlayerPosition.currentPath = _path;
+                        }
                     };
 
                 // FOW
