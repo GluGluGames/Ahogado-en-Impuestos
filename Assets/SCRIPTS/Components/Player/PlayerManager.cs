@@ -25,9 +25,6 @@ namespace GGG.Components.Player
             if (Instance != null) return;
 
             Instance = this;
-
-            SceneManagement.Instance.OnGameSceneLoaded += LoadResourcesCount;
-            SceneManagement.Instance.OnGameSceneUnloaded += SaveResourcesCount;
         }
 
         #endregion
@@ -51,11 +48,8 @@ namespace GGG.Components.Player
             foreach (Resource i in Resources)
                 _resources.Add(i.GetName(), i);
 
-            if (_resourcesCount.Count <= 0)
-            {
-                foreach (string i in _resources.Keys)
+            foreach (string i in _resources.Keys)
                     _resourcesCount.Add(i, 0);
-            }
 
             // DEBUG - DELETE LATER
             if(_resourcesCount["Perla"] <= 0) _resourcesCount["Perla"] += 1;
