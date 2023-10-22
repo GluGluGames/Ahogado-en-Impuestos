@@ -20,7 +20,9 @@ namespace GGG.Components.Player
         // so that only certain collisions count. Physics layers help too.
         private void OnTriggerEnter(Collider other)
         {
-            _overlaps++;
+            //_overlaps++;
+            if (other.transform.gameObject.layer == 9) return;
+            Lost();
         }
 
         private void OnTriggerExit(Collider other)

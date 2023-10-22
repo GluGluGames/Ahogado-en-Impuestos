@@ -68,5 +68,12 @@ namespace GGG.Components.UI
                 _gameManager.OnUIOpen();
             };
         }
+
+        public void ChangeScene(SceneIndexes sceneToLoad, SceneIndexes sceneToUnload)
+        { 
+            SceneManagement.Instance.AddSceneToUnload(sceneToUnload);
+            SceneManagement.Instance.AddSceneToLoad(sceneToLoad);
+            SceneManagement.Instance.UpdateScenes();
+        }
     }
 }

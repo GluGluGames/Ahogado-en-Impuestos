@@ -1,6 +1,8 @@
 using UnityEngine.Localization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using GGG.Shared;
 
 namespace GGG.Components.UI
 {
@@ -13,12 +15,22 @@ namespace GGG.Components.UI
         [SerializeField] private LocalizedString[] SubtitleString;
 
         [SerializeField] private GameObject Viewport;
+        [SerializeField] private Button button;
+
+
+
+        private void Start()
+        {
+            button.onClick.AddListener(() => HUDManager.Instance.ChangeScene(SceneIndexes.GAME_SCENE, SceneIndexes.MINIGAME));
+        }
 
         public void OnEndGame(bool isWin)
         {
             Viewport.gameObject.SetActive(true);
-            OutcomeText.text = OutcomeString[isWin ? 1 : 0].GetLocalizedString();
-            SubtitleText.text = SubtitleString[isWin ? 1 : 0].GetLocalizedString();
+            OutcomeText.text = OutcomeString[isWin ? 0 : 1].GetLocalizedString();
+            SubtitleText.text = SubtitleString[isWin ? 0 : 1].GetLocalizedString();
         }
+
+
     }
 }

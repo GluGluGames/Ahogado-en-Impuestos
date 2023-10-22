@@ -3,6 +3,7 @@ using DG.Tweening;
 using GGG.Components.Core;
 using UnityEngine;
 using UnityEngine.UI;
+using GGG.Shared;
 
 namespace GGG.Components.UI
 {
@@ -24,6 +25,7 @@ namespace GGG.Components.UI
             OpenButton.onClick.AddListener(ToggleMenu);
             InventoryButton.onClick.AddListener(OpenInventory);
             SettingsButton.onClick.AddListener(OpenSettings);
+            ExpeditionButton.onClick.AddListener(() => HUDManager.Instance.ChangeScene(SceneIndexes.MINIGAME, SceneIndexes.GAME_SCENE));
         }
 
         private void ToggleMenu()

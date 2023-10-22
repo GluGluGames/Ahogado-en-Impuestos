@@ -58,8 +58,8 @@ namespace GGG.Components.Core
         #region Scene Management
 
         public void AddSceneToLoad(SceneIndexes scene)
-        {
-            _sceneAsyncOperation.Add(SceneManager.LoadSceneAsync((int) scene, LoadSceneMode.Additive));
+        { 
+           _sceneAsyncOperation.Add(SceneManager.LoadSceneAsync((int) scene, LoadSceneMode.Additive));
         }
 
         public void AddSceneToUnload(SceneIndexes scene)

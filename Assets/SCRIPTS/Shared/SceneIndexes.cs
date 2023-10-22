@@ -4,6 +4,7 @@ namespace GGG.Shared
     {
         SHARED,
         MAIN_MENU,
-        GAME_SCENE
+        GAME_SCENE,
+        MINIGAME
     }
 }
