@@ -243,6 +243,7 @@ namespace GGG.Components.UI
             
             _viewport.SetActive(true);
             _open = true;
+            GameManager.Instance.OnUIOpen();
 
             transform.DOMoveY(Screen.height * 0.5f, 0.5f).SetEase(Ease.OutBounce);
         }

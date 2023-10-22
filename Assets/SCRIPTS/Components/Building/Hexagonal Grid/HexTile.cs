@@ -2,6 +2,7 @@ using GGG.Shared;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GGG.Components.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -181,7 +182,7 @@ namespace GGG.Components.Buildings
         private IEnumerator TouchWait()
         {
             yield return new WaitForSeconds(0.1f);
-            if (Holding.IsHolding()) yield break;
+            if (Holding.IsHolding() || GameManager.Instance.IsOnUI()) yield break;
 
             if (_currentBuilding)
             {
@@ -230,6 +231,8 @@ namespace GGG.Components.Buildings
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (GameManager.Instance.IsOnUI()) return;
+            
             ActivateHighlight();
             OnHexHighlight?.Invoke();
         }

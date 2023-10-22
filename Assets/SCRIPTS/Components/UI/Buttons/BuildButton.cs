@@ -11,7 +11,7 @@ using GGG.Shared;
 using UnityEngine.UI;
 
 namespace GGG.Components.UI {
-    public class BuildButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler {
+    public class BuildButton : MonoBehaviour, IPointerDownHandler {
         [SerializeField] private Building BuildingInfo;
         [SerializeField] private GameObject Container;
         
@@ -81,15 +81,6 @@ namespace GGG.Components.UI {
         }
 
         #region Event Systems Method
-        
-        public void OnPointerEnter(PointerEventData eventData) {
-            transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutSine);
-        }
-
-        public void OnPointerExit(PointerEventData eventData) {
-            transform.DOKill();
-            transform.DOScale(new Vector3(1, 1, 1), 0.5f);
-        }
 
         public void OnPointerDown(PointerEventData eventData) {
             if (!_selectedHexTile.TileEmpty()) return;

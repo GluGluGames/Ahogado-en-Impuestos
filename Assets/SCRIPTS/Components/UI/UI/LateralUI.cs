@@ -32,14 +32,17 @@ namespace GGG.Components.UI
             
             _open = !_open;
 
-            if (_open) transform.DOMoveX(Screen.width * 0.5f + 660, 1.5f).SetEase(Ease.InQuad);
-            else transform.DOMoveX(Screen.width * 0.5f + 970, 1.5f).SetEase(Ease.OutCubic);
+            if (_open) transform.DOMoveX(Screen.width * 0.5f + 660, 0.75f).SetEase(Ease.InQuad);
+            else transform.DOMoveX(Screen.width * 0.5f + 970, 0.75f).SetEase(Ease.OutCubic);
+            
+            if(_open) OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+            else OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         private void OpenInventory()
         {
-            _inventory.OpenInventory();
             ToggleMenu();
+            _inventory.OpenInventory();
         }
 
         private void OpenSettings()

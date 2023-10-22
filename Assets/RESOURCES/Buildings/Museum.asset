@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298d12a8e5c28e84db330858210074d3, type: 3}
+  m_Name: Museum
+  m_EditorClassIdentifier: 
+  Name: Museum
+  Description: 
+  Icon: {fileID: 0}
+  Prefab: {fileID: 8966507657690627879, guid: 6d67b101ce8ff21409be2add9708ce8e, type: 3}
+  PrimaryPrice: 10
+  PrimaryPriceType: {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  SecondaryPrice: 0
+  SecondaryPriceType: {fileID: 0}
+  NeededInteraction: 1
+  SpawnHeight: 0.3

@@ -52,13 +52,13 @@ namespace GGG.Components.UI
             
             _buildingUI.OnMenuOpen += () => {
                 _tileCleanUI.Close();
-                _upgradeUI.Close();
+                _upgradeUI.Close(false);
                 _gameManager.OnUIOpen();
             };
 
             _tileCleanUI.OnMenuOpen += () => {
                 _buildingUI.Close();
-                _upgradeUI.Close();
+                _upgradeUI.Close(false);
                 _gameManager.OnUIOpen();
             };
 
