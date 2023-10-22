@@ -29,8 +29,6 @@ namespace GGG.Components.UI
         private BuildingUI _buildingUI;
         private TileCleanUI _tileCleanUI;
         private UpgradeUI _upgradeUI;
-        
-        private bool _resourcesLoaded;
 
         private void Start() {
             _player = PlayerManager.Instance;
@@ -39,16 +37,12 @@ namespace GGG.Components.UI
             _buildingUI = GetComponentInChildren<BuildingUI>();
             _tileCleanUI = GetComponentInChildren<TileCleanUI>();
             _upgradeUI = GetComponentInChildren<UpgradeUI>();
-
-            _player.OnResourcesCountLoad += () => _resourcesLoaded = true;
             
             MenusHandle();
         }
 
         private void Update()
         {
-            if (!_resourcesLoaded) return;
-            
             SeaweedsText.SetText(_player.GetResourceCount(ShownResource.GetName()).ToString());
         }
 
