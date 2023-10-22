@@ -26,9 +26,6 @@ namespace GGG.Components.Player
             if (Instance != null) return;
 
             Instance = this;
-
-            SceneManagement.Instance.OnGameSceneLoaded += () => StartCoroutine(LoadResourcesCount());
-            SceneManagement.Instance.OnGameSceneUnloaded += SaveResourcesCount;
         }
 
         #endregion
@@ -39,6 +36,8 @@ namespace GGG.Components.Player
 
         private Dictionary<string, int> _resourcesCount = new();
         private Dictionary<string, Resource> _resources = new();
+
+        public Action OnResourcesCountLoad;
 
         [Serializable]
         public class ResourceData
@@ -52,14 +51,12 @@ namespace GGG.Components.Player
             foreach (Resource i in Resources)
                 _resources.Add(i.GetName(), i);
 
-            if (_resourcesCount.Count <= 0)
-            {
-                foreach (string i in _resources.Keys)
-                    _resourcesCount.Add(i, 0);
-            }
+            StartCoroutine(LoadResourcesCount());
+        }
 
-            // DEBUG - DELETE LATER
-            if(_resourcesCount["Perla"] <= 0) _resourcesCount["Perla"] += 1;
+        private void OnEnable()
+        {
+            SceneManagement.Instance.OnGameSceneUnloaded += SaveResourcesCount;
         }
 
         private void OnValidate()
@@ -67,6 +64,12 @@ namespace GGG.Components.Player
             Resources = UnityEngine.Resources.LoadAll<Resource>("SeaResources").
                 Concat(UnityEngine.Resources.LoadAll<Resource>("ExpeditionResources")).
                 Concat(UnityEngine.Resources.LoadAll<Resource>("FishResources")).ToList();
+        }
+
+        private void OnDisable()
+        {
+            SceneManagement.Instance.OnGameSceneLoaded -= () => StartCoroutine(LoadResourcesCount());
+            SceneManagement.Instance.OnGameSceneUnloaded -= SaveResourcesCount;
         }
 
         public int GetResourceCount(string key)
@@ -130,7 +133,17 @@ namespace GGG.Components.Player
 
             ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data);
             _resourcesCount = resources.ToDictionary(item => item.Name, item => item.Count);
-            yield return null;
+            
+            if (_resourcesCount.Count <= 0)
+            {
+                foreach (string i in _resources.Keys)
+                    _resourcesCount.Add(i, 0);
+            }
+            
+            OnResourcesCountLoad?.Invoke();
+            
+            // DEBUG - DELETE LATER
+            if(_resourcesCount["Perla"] <= 0) _resourcesCount["Perla"] += 1;
         }
     }
 }

@@ -68,6 +68,11 @@ namespace GGG.Components.UI
 
             ResourcesCountText = new Dictionary<string, TextMeshProUGUI>(_player.GetResourceNumber());
 
+            _player.OnResourcesCountLoad += FillSeaResources;
+            _player.OnResourcesCountLoad += FillExpeditionResources;
+            _player.OnResourcesCountLoad += FillFishResources;
+            
+            /*
             if (SeaResources.Length > 0)
             {
                 FillSeaResources();
@@ -82,6 +87,7 @@ namespace GGG.Components.UI
             {
                 FillFishResources();
             }
+            */
 
             SeaButton.onClick.AddListener(() => HandleSeaToggle());
             ExpeditionButton.onClick.AddListener(() => HandleExpeditionToggle());
