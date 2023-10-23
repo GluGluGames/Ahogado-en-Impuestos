@@ -330,6 +330,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "a_Shortcuts",
+            "id": "ebd21048-48e1-4d3d-9151-099cdf47d13d",
+            "actions": [
+                {
+                    "name": "EscapeKey",
+                    "type": "Button",
+                    "id": "8bf9d4e2-fd1b-4dac-a9ed-1b6ba6843c29",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugConsole",
+                    "type": "Button",
+                    "id": "d6282583-d40f-459e-8723-90dfb5c163ff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2c7c9be3-5ba7-422c-804e-ed72b6ad978f",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "EscapeKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d958f97-d56c-445e-9491-68cfa5fc3825",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugConsole",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

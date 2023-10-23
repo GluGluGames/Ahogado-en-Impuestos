@@ -185,7 +185,7 @@ Transform:
   m_Children:
   - {fileID: 6813830519478212054}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!114 &2411754244141642639
 MonoBehaviour:
@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c02f3a66aa437439eacad019f49201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 0.1
-  RotationSpeed: 0.6
+  MovementSpeed: 10
+  RotationSpeed: 50
   ZoomAmount: {x: 0, y: -1, z: 1}
   ZoomLimitsY: {x: 8, y: 50}
   ZoomLimitsZ: {x: -50, y: -8}

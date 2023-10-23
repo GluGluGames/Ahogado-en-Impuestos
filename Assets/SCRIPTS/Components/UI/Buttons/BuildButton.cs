@@ -77,7 +77,7 @@ namespace GGG.Components.UI {
 
 
             //FOW
-            _selectedHexTile.Reveal(_auxBuild.visionRange, 0);
+            _selectedHexTile.Reveal(_auxBuild.GetVisionRange(), 0);
 
             _selectedHexTile = null;
         }

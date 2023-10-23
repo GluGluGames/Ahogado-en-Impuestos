@@ -62,14 +62,27 @@ namespace GGG.Classes.Buildings
         }
 
         /// <summary>
-        /// Gets the price of the building
+        /// Gets the primary price of the building
         /// </summary>
-        /// <returns></returns>
-        
+        /// <returns>The primary price</returns>
         public int GetPrimaryPrice() { return PrimaryPrice; }
+        
+        /// <summary>
+        /// Gets the secondary price of the building
+        /// </summary>
+        /// <returns>The secondary price</returns>
         public int GetSecondaryPrice() { return SecondaryPrice; }
-
+        
+        /// <summary>
+        /// Gets the primary resource
+        /// </summary>
+        /// <returns>The primary resource</returns>
         public Resource GetPrimaryResource() { return PrimaryPriceType; }
+        
+        /// <summary>
+        /// Gets the secondary resource
+        /// </summary>
+        /// <returns>The secondary resource</returns>
         public Resource GetSecondaryResource() { return SecondaryPriceType; }
 
         /// <summary>
