@@ -58,7 +58,7 @@ namespace GGG.Components.UI {
         private void BuildStructure() {
             bool aux = BuildingInfo.GetSecondaryPrice() != 0;
 
-            if (_player.GetResourceCount(BuildingInfo.GetPrimaryResource().GetName()) < BuildingInfo.GetPrimaryPrice() || aux && _player.GetResourceCount(BuildingInfo.GetSecondaryResource()?.GetName()) < BuildingInfo.GetSecondaryPrice())
+            if (_player.GetResourceCount(BuildingInfo.GetPrimaryResource().GetKey()) < BuildingInfo.GetPrimaryPrice() || aux && _player.GetResourceCount(BuildingInfo.GetSecondaryResource()?.GetKey()) < BuildingInfo.GetSecondaryPrice())
             {
                 // TODO - Can't buy warning
                 return;
@@ -72,8 +72,8 @@ namespace GGG.Components.UI {
             _selectedHexTile.SetBuilding(_auxBuild);
             OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
 
-            _player.AddResource(BuildingInfo.GetPrimaryResource().GetName(), -BuildingInfo.GetPrimaryPrice());
-            if(aux) _player.AddResource(BuildingInfo.GetSecondaryResource()?.GetName(), -BuildingInfo.GetSecondaryPrice());
+            _player.AddResource(BuildingInfo.GetPrimaryResource().GetKey(), -BuildingInfo.GetPrimaryPrice());
+            if(aux) _player.AddResource(BuildingInfo.GetSecondaryResource()?.GetKey(), -BuildingInfo.GetSecondaryPrice());
 
 
             //FOW

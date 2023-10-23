@@ -43,7 +43,7 @@ namespace GGG.Components.UI
 
         private void Update()
         {
-            SeaweedsText.SetText(_player.GetResourceCount(ShownResource.GetName()).ToString());
+            SeaweedsText.SetText(_player.GetResourceCount(ShownResource.GetKey()).ToString());
         }
 
         private void MenusHandle()

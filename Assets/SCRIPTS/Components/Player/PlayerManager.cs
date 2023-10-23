@@ -46,13 +46,13 @@ namespace GGG.Components.Player
         private void Start()
         {
             foreach (Resource i in Resources)
-                _resources.Add(i.GetName(), i);
+                _resources.Add(i.GetKey(), i);
 
-            foreach (string i in _resources.Keys)
-                    _resourcesCount.Add(i, 0);
+            foreach (string i in _resources.Keys) 
+                _resourcesCount.Add(i, 0);
 
             // DEBUG - DELETE LATER
-            if(_resourcesCount["Perla"] <= 0) _resourcesCount["Perla"] += 1;
+            if(_resourcesCount["Pearl"] <= 0) _resourcesCount["Pearl"] += 1;
         }
 
         private void OnValidate()

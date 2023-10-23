@@ -85,7 +85,7 @@ namespace GGG.Components.UI
         private void OnSellButton()
         {
             // TODO - Implement sell button
-            _player.AddResource(_sellResource.GetName(), Mathf.RoundToInt(_selectedBuilding.GetBuildCost() * 0.5f));
+            _player.AddResource(_sellResource.GetKey(), Mathf.RoundToInt(_selectedBuilding.GetBuildCost() * 0.5f));
             _selectedTile.DestroyBuilding();
             
             _selectedBuilding = null;
