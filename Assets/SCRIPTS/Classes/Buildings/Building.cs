@@ -26,6 +26,8 @@ namespace GGG.Classes.Buildings
         [SerializeField] private bool NeededInteraction;
         [Tooltip("Determines the height of the building")]
         [SerializeField] private float SpawnHeight;
+        [Tooltip("Determines the vision range of the building")] 
+        [SerializeField] private int VisionRange;
 
         /// <summary>
         /// Interacts with the building
@@ -90,6 +92,12 @@ namespace GGG.Classes.Buildings
         /// </summary>
         /// <returns>True if it needs player interaction. False otherwise</returns>
         public bool NeedInteraction() { return NeededInteraction; }
+
+        /// <summary>
+        /// Gets the vision range of the building
+        /// </summary>
+        /// <returns>The vision range</returns>
+        public int GetVisionRange() => VisionRange;
 
     }
 }

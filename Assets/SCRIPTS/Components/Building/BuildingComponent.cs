@@ -8,7 +8,6 @@ namespace GGG.Components.Buildings {
         [SerializeField] private Building Build;
 
         public Action<Action, BuildingComponent> OnBuildInteract;
-        private int _visionRange;
 
         private void Update() {
             if (Build.NeedInteraction()) return;
@@ -43,6 +42,6 @@ namespace GGG.Components.Buildings {
         /// Gets the vision range of the building
         /// </summary>
         /// <returns>The vision range</returns>
-        public int GetVisionRange() => _visionRange;
+        public int GetVisionRange() => Build.GetVisionRange();
     }
 }
