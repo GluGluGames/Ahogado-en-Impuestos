@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using GGG.Shared;
 
 namespace GGG.Classes.Buildings
 {
-
+    [Serializable]
     public abstract class Building : ScriptableObject {
         [Header("Generic fields")]
         [Tooltip("Name of the building")] 

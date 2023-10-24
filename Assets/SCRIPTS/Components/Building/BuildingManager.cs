@@ -1,8 +1,9 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.IO;
-using System.Text;
+using GGG.Classes.Buildings;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace GGG.Components.Buildings
 {
@@ -14,12 +15,7 @@ namespace GGG.Components.Buildings
         private class BuildingData
         {
             public Vector3 Position;
-            public int Level;
-
-            public BuildingData(Vector3 pos)
-            {
-                Position = pos;
-            }
+            public Building Building;
         }
 
         private void Awake()
@@ -29,16 +25,56 @@ namespace GGG.Components.Buildings
             Instance = this;
         }
 
-        
-
-        public void AddBuilding(BuildingComponent build)
-        {
-            
+        private void OnEnable() {
+            StartCoroutine(LoadBuildings());
         }
 
-        private void SaveBuildingData(BuildingData data)
+        private void OnDisable() {
+            SaveBuildings();
+        }
+
+        public void SaveBuildings() {
+            BuildingComponent[] buildings = GetComponentsInChildren<BuildingComponent>();
+            BuildingData[] saveData = new BuildingData[buildings.Length];
+            int i = 0;
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "buildings_data.json");
+
+            foreach (BuildingComponent build in buildings) {
+                BuildingData data = new BuildingData();
+                
+                data.Position = build.GetPosition();
+                data.Building = build.GetBuild();
+
+                saveData[i] = data;
+                i++;
+            }
+
+            string jsonData = JsonHelper.ToJson(saveData, true);
+            File.WriteAllText(filePath, jsonData);
+        }
+
+        private IEnumerator LoadBuildings()
         {
-            
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "buildings_data.json");
+#if UNITY_EDITOR
+            filePath = "file://" + filePath;
+#endif
+            string data;
+            if (filePath.Contains("://") || filePath.Contains(":///")) {
+                UnityWebRequest www = UnityWebRequest.Get(filePath);
+                yield return www.SendWebRequest();
+                data = www.downloadHandler.text;
+            }
+            else {
+                data = File.ReadAllText(filePath);
+            }
+
+            if (!string.IsNullOrEmpty(data)) {
+                BuildingData[] buildings = JsonHelper.FromJson<BuildingData>(data);
+                foreach (BuildingData build in buildings) {
+                    GameObject go = build.Building.Spawn(build.Position, transform);
+                }
+            }
         }
     }
 }

@@ -1,9 +1,14 @@
+using System;
+using System.Collections;
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using GGG.Shared;
 using System.Linq.Expressions;
+using GGG.Classes.Buildings;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -17,6 +22,14 @@ namespace GGG.Components.Buildings
         private HexTile _selectedTile;
         [SerializeField] private GameObject _FOWPrefab;
         [SerializeField] private bool FOWActive = false;
+
+        private HexTile[] _tiles;
+
+        [Serializable]
+        private class TileData {
+            public TileType Type;
+            public Building Building;
+        }
 
         #region playerInfo
 
@@ -93,6 +106,14 @@ namespace GGG.Components.Buildings
             {
                 RevealTile(hexTiles[hexTiles.Length / 2], 3);
             }
+        }
+
+        private void OnEnable() {
+            StartCoroutine(LoadTilesState());
+        }
+
+        private void OnDisable() {
+            SaveTilesState();
         }
 
         private void OnDestroy()
@@ -179,6 +200,59 @@ namespace GGG.Components.Buildings
                 tile.Reveal(depth, 0);
             }
 
+        }
+        
+        // Data persistence
+
+        private void SaveTilesState() {
+            _tiles = GetComponentsInChildren<HexTile>();
+            TileData[] saveData = new TileData[_tiles.Length];
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
+            int i = 0;
+
+            foreach (HexTile tile in _tiles) {
+                TileData data = new TileData();
+
+                data.Type = tile.GetTileType();
+                data.Building = tile.GetCurrentBuilding().GetBuild();
+                saveData[i] = data;
+                i++;
+            }
+
+            string jsonData = JsonHelper.ToJson(saveData, true);
+            File.WriteAllText(filePath, jsonData);
+        }
+
+        private IEnumerator LoadTilesState() {
+            _tiles = GetComponentsInChildren<HexTile>();
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
+#if UNITY_EDITOR
+            filePath = "file://" + filePath;
+#endif
+            string data;
+            if (filePath.Contains("://") || filePath.Contains(":///")) {
+                UnityWebRequest www = UnityWebRequest.Get(filePath);
+                yield return www.SendWebRequest();
+                data = www.downloadHandler.text;
+            }
+            else {
+                data = File.ReadAllText(filePath);
+            }
+
+            if (!string.IsNullOrEmpty(data)) {
+                TileData[] tiles = JsonHelper.FromJson<TileData>(data);
+                int i = 0;
+                
+                foreach (HexTile tile in _tiles) {
+                    tile.SetTileType(tiles[i].Type);
+                    // tile.SetBuilding(tiles[i].Building);
+                    
+                    i++;
+                }
+            }
+            else {
+                SaveTilesState();
+            }
         }
     }
 }
