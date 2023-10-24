@@ -352,54 +352,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""a_Shortcuts"",
-            ""id"": ""ebd21048-48e1-4d3d-9151-099cdf47d13d"",
-            ""actions"": [
-                {
-                    ""name"": ""EscapeKey"",
-                    ""type"": ""Button"",
-                    ""id"": ""8bf9d4e2-fd1b-4dac-a9ed-1b6ba6843c29"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""DebugConsole"",
-                    ""type"": ""Button"",
-                    ""id"": ""d6282583-d40f-459e-8723-90dfb5c163ff"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""2c7c9be3-5ba7-422c-804e-ed72b6ad978f"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""EscapeKey"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7d958f97-d56c-445e-9491-68cfa5fc3825"",
-                    ""path"": ""<Keyboard>/backquote"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DebugConsole"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -450,10 +402,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // a_Dialogue
         m_a_Dialogue = asset.FindActionMap("a_Dialogue", throwIfNotFound: true);
         m_a_Dialogue_Continue = m_a_Dialogue.FindAction("Continue", throwIfNotFound: true);
-        // a_Shortcuts
-        m_a_Shortcuts = asset.FindActionMap("a_Shortcuts", throwIfNotFound: true);
-        m_a_Shortcuts_EscapeKey = m_a_Shortcuts.FindAction("EscapeKey", throwIfNotFound: true);
-        m_a_Shortcuts_DebugConsole = m_a_Shortcuts.FindAction("DebugConsole", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -651,60 +599,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public A_DialogueActions @a_Dialogue => new A_DialogueActions(this);
-
-    // a_Shortcuts
-    private readonly InputActionMap m_a_Shortcuts;
-    private List<IA_ShortcutsActions> m_A_ShortcutsActionsCallbackInterfaces = new List<IA_ShortcutsActions>();
-    private readonly InputAction m_a_Shortcuts_EscapeKey;
-    private readonly InputAction m_a_Shortcuts_DebugConsole;
-    public struct A_ShortcutsActions
-    {
-        private @Controls m_Wrapper;
-        public A_ShortcutsActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @EscapeKey => m_Wrapper.m_a_Shortcuts_EscapeKey;
-        public InputAction @DebugConsole => m_Wrapper.m_a_Shortcuts_DebugConsole;
-        public InputActionMap Get() { return m_Wrapper.m_a_Shortcuts; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(A_ShortcutsActions set) { return set.Get(); }
-        public void AddCallbacks(IA_ShortcutsActions instance)
-        {
-            if (instance == null || m_Wrapper.m_A_ShortcutsActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_A_ShortcutsActionsCallbackInterfaces.Add(instance);
-            @EscapeKey.started += instance.OnEscapeKey;
-            @EscapeKey.performed += instance.OnEscapeKey;
-            @EscapeKey.canceled += instance.OnEscapeKey;
-            @DebugConsole.started += instance.OnDebugConsole;
-            @DebugConsole.performed += instance.OnDebugConsole;
-            @DebugConsole.canceled += instance.OnDebugConsole;
-        }
-
-        private void UnregisterCallbacks(IA_ShortcutsActions instance)
-        {
-            @EscapeKey.started -= instance.OnEscapeKey;
-            @EscapeKey.performed -= instance.OnEscapeKey;
-            @EscapeKey.canceled -= instance.OnEscapeKey;
-            @DebugConsole.started -= instance.OnDebugConsole;
-            @DebugConsole.performed -= instance.OnDebugConsole;
-            @DebugConsole.canceled -= instance.OnDebugConsole;
-        }
-
-        public void RemoveCallbacks(IA_ShortcutsActions instance)
-        {
-            if (m_Wrapper.m_A_ShortcutsActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IA_ShortcutsActions instance)
-        {
-            foreach (var item in m_Wrapper.m_A_ShortcutsActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_A_ShortcutsActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public A_ShortcutsActions @a_Shortcuts => new A_ShortcutsActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -745,10 +639,5 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IA_DialogueActions
     {
         void OnContinue(InputAction.CallbackContext context);
-    }
-    public interface IA_ShortcutsActions
-    {
-        void OnEscapeKey(InputAction.CallbackContext context);
-        void OnDebugConsole(InputAction.CallbackContext context);
     }
 }

@@ -58,7 +58,7 @@ namespace GGG.Components.UI {
         private void BuildStructure() {
             bool aux = BuildingInfo.GetSecondaryPrice() != 0;
 
-            if (_player.GetResourceCount(BuildingInfo.GetPrimaryResource().GetKey()) < BuildingInfo.GetPrimaryPrice() || aux && _player.GetResourceCount(BuildingInfo.GetSecondaryResource()?.GetKey()) < BuildingInfo.GetSecondaryPrice())
+            if (_player.GetResourceCount(BuildingInfo.GetPrimaryResource().GetName()) < BuildingInfo.GetPrimaryPrice() || aux && _player.GetResourceCount(BuildingInfo.GetSecondaryResource()?.GetName()) < BuildingInfo.GetSecondaryPrice())
             {
                 // TODO - Can't buy warning
                 return;
@@ -67,16 +67,17 @@ namespace GGG.Components.UI {
             SoundManager.Instance.Play("Build");
             GameObject auxGo = BuildingInfo.Spawn(_selectedHexTile.SpawnPosition(), GameObject.Find("Buildings").transform);
             _auxBuild = auxGo.GetComponent<BuildingComponent>();
+            BuildingManager.Instance.AddBuilding(_auxBuild);
 
             _selectedHexTile.SetBuilding(_auxBuild);
             OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
 
-            _player.AddResource(BuildingInfo.GetPrimaryResource().GetKey(), -BuildingInfo.GetPrimaryPrice());
-            if(aux) _player.AddResource(BuildingInfo.GetSecondaryResource()?.GetKey(), -BuildingInfo.GetSecondaryPrice());
+            _player.AddResource(BuildingInfo.GetPrimaryResource().GetName(), -BuildingInfo.GetPrimaryPrice());
+            if(aux) _player.AddResource(BuildingInfo.GetSecondaryResource()?.GetName(), -BuildingInfo.GetSecondaryPrice());
 
 
             //FOW
-            _selectedHexTile.Reveal(_auxBuild.GetVisionRange(), 0);
+            _selectedHexTile.Reveal(_auxBuild.visionRange, 0);
 
             _selectedHexTile = null;
         }

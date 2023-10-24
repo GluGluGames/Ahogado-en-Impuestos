@@ -66,14 +66,14 @@ namespace GGG.Components.Resources
         {
             int aux = 0;
             Debug.Log(ResourceManager.Instance);
-            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetKey(), out aux);
+            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out aux);
             Debug.Log("prev value: " + aux);
 
-            ResourceManager.Instance.resourcesCollected.Remove(_resource.GetKey());
-            ResourceManager.Instance.resourcesCollected.Add(_resource.GetKey(), _amount + aux);
+            ResourceManager.Instance.resourcesCollected.Remove(_resource.GetName());
+            ResourceManager.Instance.resourcesCollected.Add(_resource.GetName(), _amount + aux);
 
             int debug = 0;
-            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetKey(), out debug);
+            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out debug);
             Debug.Log("post value: " + debug);
            
         }

@@ -87,7 +87,7 @@ namespace GGG.Components.Core
             Vector3 moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y).normalized;
 
             if (moveDirection != Vector3.zero)
-                _newPosition += _transform.TransformDirection(moveDirection) * (MovementSpeed * Time.deltaTime);
+                _newPosition += _transform.TransformDirection(moveDirection) * MovementSpeed;
             
             _transform.position = Vector3.Lerp(_transform.position, _newPosition, Time.deltaTime * MovementTime);
         }
@@ -97,10 +97,10 @@ namespace GGG.Components.Core
         /// </summary>
         private void HandleCameraRotation() {
             if(_input.CameraRotation() == 1) { // E
-                _newRotation *= Quaternion.Euler(Vector3.up * (-RotationSpeed * Time.deltaTime));
+                _newRotation *= Quaternion.Euler(Vector3.up * -RotationSpeed);
             }
             if(_input.CameraRotation() == -1) { // Q
-                _newRotation *= Quaternion.Euler(Vector3.up * (RotationSpeed * Time.deltaTime));
+                _newRotation *= Quaternion.Euler(Vector3.up * RotationSpeed);
             }
 
             _transform.rotation = Quaternion.Lerp(_transform.rotation, _newRotation, Time.deltaTime * MovementTime);
