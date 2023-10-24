@@ -16,7 +16,10 @@ namespace GGG.Components.Buildings
         {
             public Vector3 Position;
             public Building Building;
+            public HexTile Tile;
         }
+
+        public static Action<BuildingComponent[]> OnBuildsLoad;
 
         private void Awake()
         {
@@ -44,6 +47,7 @@ namespace GGG.Components.Buildings
                 
                 data.Position = build.GetPosition();
                 data.Building = build.GetBuild();
+                data.Tile = build.GetCurrentTile();
 
                 saveData[i] = data;
                 i++;
@@ -74,6 +78,8 @@ namespace GGG.Components.Buildings
                 foreach (BuildingData build in buildings) {
                     GameObject go = build.Building.Spawn(build.Position, transform);
                 }
+
+                OnBuildsLoad?.Invoke(FindObjectsOfType<BuildingComponent>());
             }
         }
     }

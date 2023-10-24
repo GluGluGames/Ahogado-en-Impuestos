@@ -28,8 +28,10 @@ namespace GGG.Components.Buildings
         [Serializable]
         private class TileData {
             public TileType Type;
-            public Building Building;
+            public bool IsEmpty;
         }
+
+        public static Action<BuildingComponent[]> OnTilesStateLoaded;
 
         #region playerInfo
 
@@ -109,7 +111,7 @@ namespace GGG.Components.Buildings
         }
 
         private void OnEnable() {
-            StartCoroutine(LoadTilesState());
+            BuildingManager.OnBuildsLoad += (builds) => StartCoroutine(LoadTilesState(builds));
         }
 
         private void OnDisable() {
@@ -214,7 +216,7 @@ namespace GGG.Components.Buildings
                 TileData data = new TileData();
 
                 data.Type = tile.GetTileType();
-                data.Building = tile.GetCurrentBuilding().GetBuild();
+                data.IsEmpty = tile.TileEmpty();
                 saveData[i] = data;
                 i++;
             }
@@ -223,7 +225,7 @@ namespace GGG.Components.Buildings
             File.WriteAllText(filePath, jsonData);
         }
 
-        private IEnumerator LoadTilesState() {
+        private IEnumerator LoadTilesState(BuildingComponent[] builds) {
             _tiles = GetComponentsInChildren<HexTile>();
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
 #if UNITY_EDITOR
@@ -241,14 +243,21 @@ namespace GGG.Components.Buildings
 
             if (!string.IsNullOrEmpty(data)) {
                 TileData[] tiles = JsonHelper.FromJson<TileData>(data);
-                int i = 0;
+                int i = 0, j = 0;
                 
                 foreach (HexTile tile in _tiles) {
                     tile.SetTileType(tiles[i].Type);
-                    // tile.SetBuilding(tiles[i].Building);
+                    if (!tiles[i].IsEmpty)
+                    {
+                        tile.SetBuilding(builds[j]);
+                        tile.Reveal(builds[j].GetVisionRange(), 0);
+                        j++;
+                    }
                     
                     i++;
                 }
+                
+                OnTilesStateLoaded?.Invoke(builds);
             }
             else {
                 SaveTilesState();

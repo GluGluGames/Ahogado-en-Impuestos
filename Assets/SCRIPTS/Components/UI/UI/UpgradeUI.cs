@@ -49,6 +49,8 @@ namespace GGG.Components.UI
             foreach (BuildButton button in _buttons)
                 button.OnStructureBuild += UpdateBuildings;
 
+            TileManager.OnTilesStateLoaded += UpdateBuildings;
+
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
@@ -69,6 +71,19 @@ namespace GGG.Components.UI
                 _selectedBuilding = building;
                 Open(buildingTile);
             };
+        }
+
+        private void UpdateBuildings(BuildingComponent[] buildings)
+        {
+            foreach (BuildingComponent building in buildings)
+            {
+                building.OnBuildInteract += (x, y) =>
+                {
+                    OnBuildInteract(x, y);
+                    _selectedBuilding = building;
+                    Open(building.GetCurrentTile());
+                };
+            }
         }
 
         private void OnBuildInteract(Action action, BuildingComponent build) 
