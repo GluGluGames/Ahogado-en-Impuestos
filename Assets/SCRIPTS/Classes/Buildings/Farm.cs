@@ -24,7 +24,7 @@ namespace GGG.Classes.Buildings
                 return;
             }
             
-            PlayerManager.Instance.AddResource(Resource.GetKey(), InitialGeneration);
+            PlayerManager.Instance.AddResource(Resource.GetName(), InitialGeneration);
             _cooldownDelta = InitialCooldown;
         }
     }
