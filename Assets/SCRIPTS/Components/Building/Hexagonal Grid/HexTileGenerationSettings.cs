@@ -1,11 +1,9 @@
-using System;
 using UnityEngine;
 
 
 
 namespace GGG.Components.Buildings
 {
-    [Serializable]
     public enum TileType
     {
         Standard,

@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using Lean.Touch;
 
 namespace GGG.Components.Core
 {
@@ -59,17 +58,12 @@ namespace GGG.Components.Core
             _mainCanvas = GameObject.FindGameObjectWithTag("HUD").GetComponent<Canvas>();
             _graphicRaycaster = _mainCanvas.GetComponent<GraphicRaycaster>();
 
-            #if UNITY_ANDROID
-            LeanTouch.OnFingerDown += (x) => Holding.IsHolding(true);
-            LeanTouch.OnFingerUp += (x) => Holding.IsHolding(false);
-            #endif
-
             _cameraTransform = _mainCamera.transform;
             _newPosition = _transform.position;
             _newRotation = _transform.rotation;
             _newZoom = _cameraTransform.localPosition;
         }
-#if !UNITY_ANDROID
+
         private void Update()
         {
             if (!_gameManager.PlayingGame()) return;
@@ -84,7 +78,6 @@ namespace GGG.Components.Core
             HandleCameraRotation();
             HandleZoom();
         }
-#endif
 
         /// <summary>
         /// Handles the camera movement
@@ -94,9 +87,7 @@ namespace GGG.Components.Core
             Vector3 moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y).normalized;
 
             if (moveDirection != Vector3.zero)
-                _newPosition += _transform.TransformDirection(moveDirection) * (MovementSpeed * Time.deltaTime);
-                
-            
+                _newPosition += _transform.TransformDirection(moveDirection) * MovementSpeed;
             
             _transform.position = Vector3.Lerp(_transform.position, _newPosition, Time.deltaTime * MovementTime);
         }
@@ -104,13 +95,12 @@ namespace GGG.Components.Core
         /// <summary>
         /// Handles the camera rotation
         /// </summary>
-        private void HandleCameraRotation()
-        {
+        private void HandleCameraRotation() {
             if(_input.CameraRotation() == 1) { // E
-                _newRotation *= Quaternion.Euler(Vector3.up * (-RotationSpeed * Time.deltaTime));
+                _newRotation *= Quaternion.Euler(Vector3.up * -RotationSpeed);
             }
             if(_input.CameraRotation() == -1) { // Q
-                _newRotation *= Quaternion.Euler(Vector3.up * (RotationSpeed * Time.deltaTime));
+                _newRotation *= Quaternion.Euler(Vector3.up * RotationSpeed);
             }
 
             _transform.rotation = Quaternion.Lerp(_transform.rotation, _newRotation, Time.deltaTime * MovementTime);
@@ -119,22 +109,17 @@ namespace GGG.Components.Core
         /// <summary>
         /// Handles the camera zoom
         /// </summary>
-        private void HandleZoom()
-        {
-            bool zoom = false;
-            
+        private void HandleZoom() {
             if(_input.CameraZoom() > 0f) {
                 _newZoom += ZoomAmount;
-                zoom = true;
             }
             if(_input.CameraZoom() < 0f) {
                 _newZoom -= ZoomAmount;
-                zoom = true;
             }
 
             ClampZoom();
 
-            if(zoom) _cameraTransform.localPosition = Vector3.Lerp(_cameraTransform.localPosition, _newZoom, Time.deltaTime * MovementTime);
+            _cameraTransform.localPosition = Vector3.Lerp(_cameraTransform.localPosition, _newZoom, Time.deltaTime * MovementTime);
         }
 
         /// <summary>

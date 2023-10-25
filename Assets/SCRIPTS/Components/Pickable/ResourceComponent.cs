@@ -74,10 +74,13 @@ namespace GGG.Components.Resources
         private void RecolectResource()
         {
             int aux = 0;
-
             ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out aux);
+
             ResourceManager.Instance.resourcesCollected.Remove(_resource.GetName());
             ResourceManager.Instance.resourcesCollected.Add(_resource.GetName(), _amount + aux);
+
+            int debug = 0;
+            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out debug);
         }
 
         private void DeleteMySelf()

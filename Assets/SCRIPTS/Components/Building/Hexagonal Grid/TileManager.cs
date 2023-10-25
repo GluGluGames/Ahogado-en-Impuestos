@@ -1,14 +1,9 @@
-using System;
-using System.Collections;
 using JetBrains.Annotations;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using GGG.Shared;
 using System.Linq.Expressions;
-using GGG.Classes.Buildings;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -22,16 +17,6 @@ namespace GGG.Components.Buildings
         private HexTile _selectedTile;
         [SerializeField] private GameObject _FOWPrefab;
         [SerializeField] private bool FOWActive = false;
-
-        private HexTile[] _tiles;
-
-        [Serializable]
-        private class TileData {
-            public TileType Type;
-            public bool IsEmpty;
-        }
-
-        public static Action<BuildingComponent[]> OnTilesStateLoaded;
 
         #region playerInfo
 
@@ -110,15 +95,6 @@ namespace GGG.Components.Buildings
             }
         }
 
-        private void OnEnable()
-        {
-            BuildingManager.OnBuildsLoad += OnBuildsLoad;
-        }
-
-        private void OnDisable() {
-            SaveTilesState();
-        }
-
         private void OnDestroy()
         {
             HexTile[] hexTiles = gameObject.GetComponentsInChildren<HexTile>();
@@ -130,11 +106,7 @@ namespace GGG.Components.Buildings
                     _path.Reverse();
                     PlayerPosition.currentPath = _path;
                 };
-
-            BuildingManager.OnBuildsLoad -= OnBuildsLoad;
         }
-
-        private void OnBuildsLoad(BuildingComponent[] builds) => StartCoroutine(LoadTilesState(builds));
 
         public void RegisterTile(HexTile tile)
         {
@@ -207,66 +179,6 @@ namespace GGG.Components.Buildings
                 tile.Reveal(depth, 0);
             }
 
-        }
-        
-        // Data persistence
-
-        private void SaveTilesState() {
-            _tiles = GetComponentsInChildren<HexTile>();
-            TileData[] saveData = new TileData[_tiles.Length];
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
-            int i = 0;
-
-            foreach (HexTile tile in _tiles) {
-                TileData data = new TileData();
-
-                data.Type = tile.GetTileType();
-                data.IsEmpty = tile.TileEmpty();
-                saveData[i] = data;
-                i++;
-            }
-
-            string jsonData = JsonHelper.ToJson(saveData, true);
-            File.WriteAllText(filePath, jsonData);
-        }
-
-        private IEnumerator LoadTilesState(BuildingComponent[] builds) {
-            _tiles = GetComponentsInChildren<HexTile>();
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
-#if UNITY_EDITOR
-            filePath = "file://" + filePath;
-#endif
-            string data;
-            if (filePath.Contains("://") || filePath.Contains(":///")) {
-                UnityWebRequest www = UnityWebRequest.Get(filePath);
-                yield return www.SendWebRequest();
-                data = www.downloadHandler.text;
-            }
-            else {
-                data = File.ReadAllText(filePath);
-            }
-
-            if (!string.IsNullOrEmpty(data)) {
-                TileData[] tiles = JsonHelper.FromJson<TileData>(data);
-                int i = 0, j = 0;
-                
-                foreach (HexTile tile in _tiles) {
-                    tile.SetTileType(tiles[i].Type);
-                    if (!tiles[i].IsEmpty)
-                    {
-                        tile.SetBuilding(builds[j]);
-                        tile.Reveal(builds[j].GetVisionRange(), 0);
-                        j++;
-                    }
-                    
-                    i++;
-                }
-                
-                OnTilesStateLoaded?.Invoke(builds);
-            }
-            else {
-                SaveTilesState();
-            }
         }
     }
 }

@@ -42,9 +42,27 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "SecondaryTouch",
+                    "type": "Value",
+                    "id": "8276be31-d317-4ad3-84ae-357452f36b93",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "PrimaryTouchContact",
                     "type": "Button",
                     "id": "6b73ab07-17a3-4730-846a-e28d77382730",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SecondaryTouchContact",
+                    "type": "Button",
+                    "id": "a89aa249-e74e-47de-94fd-ba894361f71a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -208,6 +226,17 @@
                 },
                 {
                     "name": "",
+                    "id": "ea4831a1-23ab-4a8b-acd4-13e72bbe564c",
+                    "path": "<Touchscreen>/touch0/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "PrimaryTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "39b58710-bce7-4a1a-be6a-a339605f366f",
                     "path": "<Mouse>/position",
                     "interactions": "",
@@ -219,12 +248,45 @@
                 },
                 {
                     "name": "",
+                    "id": "f65a1e75-c93d-402d-a6fb-cc2ab1d53fb1",
+                    "path": "<Touchscreen>/touch1/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "SecondaryTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "14cbc622-2891-42ea-bfed-6b955c199f9f",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse",
                     "action": "PrimaryTouchContact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86e0b34b-4277-43e4-8d4b-5ab17bbd4af6",
+                    "path": "<Touchscreen>/touch0/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "PrimaryTouchContact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43ad7243-4f94-4c98-ae36-55c2591fce0b",
+                    "path": "<Touchscreen>/touch1/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "SecondaryTouchContact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -255,52 +317,15 @@
                     "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "a_Shortcuts",
-            "id": "ebd21048-48e1-4d3d-9151-099cdf47d13d",
-            "actions": [
-                {
-                    "name": "EscapeKey",
-                    "type": "Button",
-                    "id": "8bf9d4e2-fd1b-4dac-a9ed-1b6ba6843c29",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DebugConsole",
-                    "type": "Button",
-                    "id": "d6282583-d40f-459e-8723-90dfb5c163ff",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "2c7c9be3-5ba7-422c-804e-ed72b6ad978f",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "EscapeKey",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "7d958f97-d56c-445e-9491-68cfa5fc3825",
-                    "path": "<Keyboard>/backquote",
+                    "id": "ca02adcd-6a81-4679-9088-c09647b9ac19",
+                    "path": "<Touchscreen>/primaryTouch/press",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "DebugConsole",
+                    "groups": "Touchscreen",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -325,6 +350,17 @@
             "devices": [
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Touchscreen",
+            "bindingGroup": "Touchscreen",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
                     "isOptional": false,
                     "isOR": false
                 }

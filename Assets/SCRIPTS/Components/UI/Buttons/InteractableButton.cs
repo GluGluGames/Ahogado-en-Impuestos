@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
@@ -12,10 +11,6 @@ namespace GGG.Components.UI {
         public void OnPointerExit(PointerEventData eventData) {
             transform.DOKill();
             transform.DOScale(Vector3.one, 1f);
-        }
-
-        private void OnDisable() {
-            transform.DOKill();
         }
     }
 }
