@@ -31,7 +31,7 @@ namespace GGG.Components.Core
             
             // Credits Screen
             CreditsViewport.SetActive(false);
-            CreditsPanel.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.6f);
+            CreditsPanel.transform.position = new Vector3(CreditsPanel.transform.position.x, CREDITS_INITIAL_POSITION);
             ExitButton.onClick.AddListener(CloseCredits);
         }
         
@@ -48,28 +48,12 @@ namespace GGG.Components.Core
         [SerializeField] private Button ExitButton;
         [SerializeField] private float CreditsDuration = 60f;
 
+        private const int CREDITS_INITIAL_POSITION = -550;
+        
         private readonly List<AsyncOperation> _sceneAsyncOperation = new();
         private GraphicRaycaster _raycaster;
         private float _totalSceneProgress;
         private bool _settingsOpen;
-
-        public Action OnGameSceneLoaded;
-        public Action OnGameSceneUnloaded;
-
-        private void Start()
-        {
-            SceneManager.sceneUnloaded += (scene) =>
-            {
-                if(scene.buildIndex == (int) SceneIndexes.GAME_SCENE)
-                    OnGameSceneUnloaded?.Invoke();;
-            };
-
-            SceneManager.sceneLoaded += (scene, mode) =>
-            {
-                if (scene.buildIndex == (int)SceneIndexes.GAME_SCENE)
-                    OnGameSceneLoaded?.Invoke();
-            };
-        }
 
         #region Scene Management
 
@@ -152,7 +136,7 @@ namespace GGG.Components.Core
         public void OpenCredits()
         {
             CreditsViewport.SetActive(true);
-            CreditsPanel.transform.DOMoveY(Screen.height * 5.5f, CreditsDuration).SetEase(Ease.Linear).onComplete += CloseCredits;
+            CreditsPanel.transform.DOMoveY(5500, CreditsDuration).SetEase(Ease.Linear).onComplete += CloseCredits;
             _raycaster.enabled = true;
         }
 
@@ -160,7 +144,7 @@ namespace GGG.Components.Core
         {
             CreditsViewport.SetActive(false);
             CreditsPanel.transform.DOKill();
-            CreditsPanel.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.6f);
+            CreditsPanel.transform.position = new Vector3(CreditsPanel.transform.position.x, CREDITS_INITIAL_POSITION);
             if(!_settingsOpen) _raycaster.enabled = false;
         }
 

@@ -1,5 +1,4 @@
 # Ahogado-en-Impuestos
-**LinkTree:** https://linktr.ee/gluglugames
 
 ![LogoGluGluGames2](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/bb7bf48e-2b66-48a7-9d21-e7d79f0473aa)
 

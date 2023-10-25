@@ -64,7 +64,6 @@ namespace GGG.Components.Menus
             
             CloseButton.onClick.AddListener(OnCloseButton);
             CreditsButton.onClick.AddListener(OnCreditsButton);
-            ExitGameButton.onClick.AddListener(OnExitGame);
         }
 
         #endregion
