@@ -164,6 +164,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2320281019385162878}
   - component: {fileID: 2411754244141642639}
+  - component: {fileID: 7874826810178936260}
+  - component: {fileID: 8067191688476216727}
+  - component: {fileID: 1844219012645863070}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -199,9 +202,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c02f3a66aa437439eacad019f49201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 0.1
-  RotationSpeed: 0.6
+  MovementSpeed: 10
+  RotationSpeed: 50
   ZoomAmount: {x: 0, y: -1, z: 1}
   ZoomLimitsY: {x: 8, y: 50}
   ZoomLimitsZ: {x: -50, y: -8}
   MovementTime: 5
+--- !u!114 &7874826810178936260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6919211136089341334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e278200a08f9b9f419a13f87e9559ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Use:
+    Filter: 0
+    IgnoreStartedOverGui: 1
+    RequiredFingerCount: 1
+    RequiredMouseButtons: 0
+    RequiredSelectable: {fileID: 0}
+  ScreenDepth:
+    Conversion: 1
+    Camera: {fileID: 5171943371470811850}
+    Object: {fileID: 0}
+    Layers:
+      serializedVersion: 2
+      m_Bits: 4294967291
+    Distance: 0
+  sensitivity: 1
+  damping: -1
+  inertia: 0
+  defaultPosition: {x: 0, y: 0, z: 0}
+  remainingDelta: {x: 0, y: 0, z: 0}
+--- !u!114 &8067191688476216727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6919211136089341334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7c91b26689a054d88448aba6dfe424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Use:
+    Filter: 0
+    IgnoreStartedOverGui: 1
+    RequiredFingerCount: 2
+    RequiredMouseButtons: 0
+    RequiredSelectable: {fileID: 0}
+  axis: {x: 0, y: 1, z: 0}
+  space: 0
+  sensitivity: 1
+--- !u!114 &1844219012645863070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6919211136089341334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Use:
+    Filter: 0
+    IgnoreStartedOverGui: 1
+    RequiredFingerCount: 2
+    RequiredMouseButtons: 0
+    RequiredSelectable: {fileID: 0}
+  _camera: {fileID: 5171943371470811850}
+  relative: 1
+  sensitivity: 1
+  damping: -1
+  remainingScale: {x: 0, y: 0, z: 0}

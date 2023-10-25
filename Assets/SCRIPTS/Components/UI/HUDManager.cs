@@ -30,6 +30,8 @@ namespace GGG.Components.UI
         private TileCleanUI _tileCleanUI;
         private UpgradeUI _upgradeUI;
 
+        private bool _playerInitialized;
+
         private void Start() {
             _player = PlayerManager.Instance;
             _gameManager = GameManager.Instance;
@@ -37,13 +39,20 @@ namespace GGG.Components.UI
             _buildingUI = GetComponentInChildren<BuildingUI>();
             _tileCleanUI = GetComponentInChildren<TileCleanUI>();
             _upgradeUI = GetComponentInChildren<UpgradeUI>();
+
+            SeaweedsText.gameObject.SetActive(false);
+            _player.OnPlayerInitialized += () => {
+                _playerInitialized = true;
+                SeaweedsText.gameObject.SetActive(true);
+            };
             
             MenusHandle();
         }
 
-        private void Update()
-        {
-            SeaweedsText.SetText(_player.GetResourceCount(ShownResource.GetName()).ToString());
+        private void Update() {
+            if (!_playerInitialized) return;
+            
+            SeaweedsText.SetText(_player.GetResourceCount(ShownResource.GetKey()).ToString());
         }
 
         private void MenusHandle()

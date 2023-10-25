@@ -49,6 +49,8 @@ namespace GGG.Components.UI
             foreach (BuildButton button in _buttons)
                 button.OnStructureBuild += UpdateBuildings;
 
+            TileManager.OnTilesStateLoaded += UpdateBuildings;
+
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
@@ -71,6 +73,19 @@ namespace GGG.Components.UI
             };
         }
 
+        private void UpdateBuildings(BuildingComponent[] buildings)
+        {
+            foreach (BuildingComponent building in buildings)
+            {
+                building.OnBuildInteract += (x, y) =>
+                {
+                    OnBuildInteract(x, y);
+                    _selectedBuilding = building;
+                    Open(building.GetCurrentTile());
+                };
+            }
+        }
+
         private void OnBuildInteract(Action action, BuildingComponent build) 
         {
             InteractButton.onClick.AddListener(() => {
@@ -85,7 +100,7 @@ namespace GGG.Components.UI
         private void OnSellButton()
         {
             // TODO - Implement sell button
-            _player.AddResource(_sellResource.GetName(), Mathf.RoundToInt(_selectedBuilding.GetBuildCost() * 0.5f));
+            _player.AddResource(_sellResource.GetKey(), Mathf.RoundToInt(_selectedBuilding.GetBuildCost() * 0.5f));
             _selectedTile.DestroyBuilding();
             
             _selectedBuilding = null;

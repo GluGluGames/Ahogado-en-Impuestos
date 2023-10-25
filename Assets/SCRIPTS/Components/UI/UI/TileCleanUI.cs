@@ -59,14 +59,14 @@ namespace GGG.Components.UI
 
         private void CleanTile()
         {
-            if (_player.GetResourceCount(_cleanResource.GetName()) < _selectedTile.GetClearCost())
+            if (_player.GetResourceCount(_cleanResource.GetKey()) < _selectedTile.GetClearCost())
             {
                 // TODO - Can't clear tile warning
                 return;
             }
             
             _selectedTile.SetTileType(TileType.Standard);
-            _player.AddResource(_cleanResource.GetName(), -_selectedTile.GetClearCost());
+            _player.AddResource(_cleanResource.GetKey(), -_selectedTile.GetClearCost());
             Close();
         }
 
