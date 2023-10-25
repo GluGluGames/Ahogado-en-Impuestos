@@ -39,6 +39,11 @@ namespace GGG.Components.Resources
 
         private void OnTriggerEnter(Collider other)
         {
+            //if(!_collided)
+            //{
+            //    onResourceCollideEnter.Invoke();
+            //    _collided = true;
+            //}
             StartCoroutine(TickManager.Instance.WaitSeconds(0, 3, () => Debug.Log("esperando..."),
                 () =>
                 {
@@ -69,16 +74,13 @@ namespace GGG.Components.Resources
         private void RecolectResource()
         {
             int aux = 0;
-            Debug.Log(ResourceManager.Instance);
             ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out aux);
-            Debug.Log("prev value: " + aux);
 
             ResourceManager.Instance.resourcesCollected.Remove(_resource.GetName());
             ResourceManager.Instance.resourcesCollected.Add(_resource.GetName(), _amount + aux);
 
             int debug = 0;
             ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out debug);
-            Debug.Log("post value: " + debug);
         }
 
         private void DeleteMySelf()
