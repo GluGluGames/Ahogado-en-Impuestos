@@ -52,8 +52,9 @@ namespace GGG.Components.Player
             foreach (Resource i in Resources)
                 _resources.Add(i.GetKey(), i);
 
-            foreach (string i in _resources.Keys) 
-                _resourcesCount.Add(i, 0);
+            if(_resourcesCount.Count <= 0)
+                foreach (string i in _resources.Keys) 
+                    _resourcesCount.Add(i, 0);
         }
 
         private void OnEnable() {

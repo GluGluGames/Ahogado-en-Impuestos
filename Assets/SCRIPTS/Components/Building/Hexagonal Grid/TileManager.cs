@@ -110,8 +110,9 @@ namespace GGG.Components.Buildings
             }
         }
 
-        private void OnEnable() {
-            BuildingManager.OnBuildsLoad += (builds) => StartCoroutine(LoadTilesState(builds));
+        private void OnEnable()
+        {
+            BuildingManager.OnBuildsLoad += OnBuildsLoad;
         }
 
         private void OnDisable() {
@@ -129,7 +130,11 @@ namespace GGG.Components.Buildings
                     _path.Reverse();
                     PlayerPosition.currentPath = _path;
                 };
+
+            BuildingManager.OnBuildsLoad -= OnBuildsLoad;
         }
+
+        private void OnBuildsLoad(BuildingComponent[] builds) => StartCoroutine(LoadTilesState(builds));
 
         public void RegisterTile(HexTile tile)
         {
