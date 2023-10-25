@@ -59,20 +59,22 @@ namespace GGG.Components.Core
             _mainCanvas = GameObject.FindGameObjectWithTag("HUD").GetComponent<Canvas>();
             _graphicRaycaster = _mainCanvas.GetComponent<GraphicRaycaster>();
 
+            #if UNITY_ANDROID
             LeanTouch.OnFingerDown += (x) => Holding.IsHolding(true);
             LeanTouch.OnFingerUp += (x) => Holding.IsHolding(false);
+            #endif
 
             _cameraTransform = _mainCamera.transform;
             _newPosition = _transform.position;
             _newRotation = _transform.rotation;
             _newZoom = _cameraTransform.localPosition;
         }
-
+#if !UNITY_ANDROID
         private void Update()
         {
             if (!_gameManager.PlayingGame()) return;
             
-            // StartCoroutine(HandleMouseInput());
+            StartCoroutine(HandleMouseInput());
         }
 
         private void LateUpdate() {
@@ -82,6 +84,7 @@ namespace GGG.Components.Core
             HandleCameraRotation();
             HandleZoom();
         }
+#endif
 
         /// <summary>
         /// Handles the camera movement
@@ -91,10 +94,11 @@ namespace GGG.Components.Core
             Vector3 moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y).normalized;
 
             if (moveDirection != Vector3.zero)
-            {
                 _newPosition += _transform.TransformDirection(moveDirection) * (MovementSpeed * Time.deltaTime);
-                _transform.position = Vector3.Lerp(_transform.position, _newPosition, Time.deltaTime * MovementTime);
-            }
+                
+            
+            
+            _transform.position = Vector3.Lerp(_transform.position, _newPosition, Time.deltaTime * MovementTime);
         }
 
         /// <summary>
@@ -102,18 +106,14 @@ namespace GGG.Components.Core
         /// </summary>
         private void HandleCameraRotation()
         {
-            bool rotate = false;
-            
             if(_input.CameraRotation() == 1) { // E
                 _newRotation *= Quaternion.Euler(Vector3.up * (-RotationSpeed * Time.deltaTime));
-                rotate = true;
             }
             if(_input.CameraRotation() == -1) { // Q
                 _newRotation *= Quaternion.Euler(Vector3.up * (RotationSpeed * Time.deltaTime));
-                rotate = true;
             }
 
-            if(rotate) _transform.rotation = Quaternion.Lerp(_transform.rotation, _newRotation, Time.deltaTime * MovementTime);
+            _transform.rotation = Quaternion.Lerp(_transform.rotation, _newRotation, Time.deltaTime * MovementTime);
         }
 
         /// <summary>
