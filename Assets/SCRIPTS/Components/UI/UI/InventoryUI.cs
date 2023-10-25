@@ -1,3 +1,4 @@
+using System.Collections;
 using GGG.Shared;
 using GGG.Components.Player;
 
@@ -53,35 +54,27 @@ namespace GGG.Components.UI
 
         void Awake()
         {
-            SeaResources = Resources.LoadAll<Resource>("RESOURCES/SeaResources");
-            ExpeditionResources = Resources.LoadAll<Resource>("RESOURCES/ExpeditionResources");
-            FishResources = Resources.LoadAll<Resource>("RESOURCES/FishResources");
-            
             CloseButton.onClick.AddListener(CloseInventory);
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
             _player = PlayerManager.Instance;
             _viewport = transform.GetChild(0).gameObject;
             transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f + _INITIAL_POSITION);
 
             ResourcesCountText = new Dictionary<string, TextMeshProUGUI>(_player.GetResourceNumber());
+            
+            SeaResources = Resources.LoadAll<Resource>("RESOURCES/SeaResources");
+            ExpeditionResources = Resources.LoadAll<Resource>("RESOURCES/ExpeditionResources");
+            FishResources = Resources.LoadAll<Resource>("RESOURCES/FishResources");
 
-            if (SeaResources.Length > 0)
-            {
-                FillSeaResources();
-            }
-
-            if (ExpeditionResources.Length > 0)
-            {
-                FillExpeditionResources();
-            }
-
-            if (FishResources.Length > 0)
-            {
-                FillFishResources();
-            }
+            while (SeaResources.Length <= 0 || ExpeditionResources.Length <= 0 || FishResources.Length <= 0)
+                yield return null;
+            
+            FillSeaResources();
+            FillExpeditionResources();
+            FillFishResources();
 
             SeaButton.onClick.AddListener(() => HandleSeaToggle());
             ExpeditionButton.onClick.AddListener(() => HandleExpeditionToggle());
@@ -130,7 +123,7 @@ namespace GGG.Components.UI
                     int index = i;
                     SeaButtons[i].onClick.AddListener(() => AddListener(SeaResources, SeaButtons, 0, index));
 
-                    ResourcesCountText[SeaResources[i].GetName()] =
+                    ResourcesCountText[SeaResources[i].GetKey()] =
                         SeaButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
                 }
             }
@@ -157,7 +150,7 @@ namespace GGG.Components.UI
                     ExpeditionButtons[i].onClick
                         .AddListener(() => AddListener(ExpeditionResources, ExpeditionButtons, 1, index));
 
-                    ResourcesCountText[ExpeditionResources[i].GetName()] =
+                    ResourcesCountText[ExpeditionResources[i].GetKey()] =
                         ExpeditionButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
                 }
             }
@@ -183,7 +176,7 @@ namespace GGG.Components.UI
                     int index = i;
                     FishButtons[i].onClick.AddListener(() => AddListener(FishResources, FishButtons, 2, index));
 
-                    ResourcesCountText[FishResources[i].GetName()] =
+                    ResourcesCountText[FishResources[i].GetKey()] =
                         FishButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
                 }
             }

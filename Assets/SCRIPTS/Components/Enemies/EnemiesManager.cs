@@ -11,10 +11,10 @@ namespace GGG.Components.Enemies
     {
 
         public static EnemiesManager instance;
-        public List<Enemy> enemies;
+        public List<EnemyBasic> enemies;
         private List<HexTile> tiles = new List<HexTile>();
         [SerializeField] private int _nEnemies = 0;
-        [SerializeField] private Enemy[] enemiesPrefab;
+        [SerializeField] private EnemyBasic[] enemiesPrefab;
 
         // Start is called before the first frame update
         private void Start()
@@ -27,12 +27,12 @@ namespace GGG.Components.Enemies
             }
         }
 
-        private bool SpawnEnemy()
+        private bool SpawnEnemy() // Should take some enum as input to define type of enemy
         {
             HexTile hex = TileManager.instance.GetRandomHex();
             bool spawned = false;
 
-            foreach (Enemy enemy in enemies)
+            foreach (EnemyBasic enemy in enemies)
             {
                 if (enemy.currentTile == hex)
                 {
@@ -42,10 +42,10 @@ namespace GGG.Components.Enemies
             }
             if(enemiesPrefab != null && spawned == false)
             {
-                Enemy newEnem = Instantiate(enemiesPrefab[0], transform);
+                EnemyBasic newEnem = Instantiate(enemiesPrefab[0], transform); // here is where you should use that enum...
                 newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y+ 1f, hex.transform.position.z);
                 newEnem.currentTile = hex;
-                newEnem.isDirty = true;
+                
                 enemies.Add(newEnem);
             }
             
