@@ -1,11 +1,8 @@
-using GGG.Shared;
 using GGG.Components.Buildings;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.Linq.Expressions;
 using GGG.Components.Ticks;
+using GGG.Shared;
+using System;
+using UnityEngine;
 
 namespace GGG.Components.Resources
 {
@@ -23,39 +20,46 @@ namespace GGG.Components.Resources
         public Action onResourceCollideExit;
 
         #region getters and setters
-        public Resource GetResource() { return _resource; }
-        public int GetAmount() { return _amount; }
 
-        public void SetResource(Resource resource) { _resource = resource; }
-        public void SetAmount(int amount) { _amount = amount; }
+        public Resource GetResource()
+        { return _resource; }
 
-        #endregion
+        public int GetAmount()
+        { return _amount; }
+
+        public void SetResource(Resource resource)
+        { _resource = resource; }
+
+        public void SetAmount(int amount)
+        { _amount = amount; }
+
+        #endregion getters and setters
 
         #region Methods
 
         private void OnTriggerEnter(Collider other)
         {
-            //if(!_collided)
-            //{
-            //    onResourceCollideEnter.Invoke();
-            //    _collided = true;
-            //}
-            RecolectResource();
-            DeleteMySelf();
+            StartCoroutine(TickManager.Instance.WaitSeconds(0, 3, () => Debug.Log("esperando..."),
+                () =>
+                {
+                    Debug.Log("FIN!!!");
+                    RecolectResource();
+                    DeleteMySelf();
+                }));
+
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if(_collided)
+            if (_collided)
             {
                 onResourceCollideExit.Invoke();
                 _collided = false;
             }
-            
         }
 
         private void Start()
-{
+        {
             onResourceCollideEnter += RecolectResource;
             onResourceCollideExit += DeleteMySelf;
             TickManager.OnTick += HandleVisibility;
@@ -75,7 +79,6 @@ namespace GGG.Components.Resources
             int debug = 0;
             ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out debug);
             Debug.Log("post value: " + debug);
-           
         }
 
         private void DeleteMySelf()
@@ -92,17 +95,17 @@ namespace GGG.Components.Resources
             Destroy(this.gameObject);
         }
 
-        #endregion
+        #endregion Methods
 
         private void HandleVisibility()
         {
-            if(!_alwaysVisible)
+            if (!_alwaysVisible)
             {
-                if(currentTile != null && currentTile.gameObject.layer == 7)
+                if (currentTile != null && currentTile.gameObject.layer == 7)
                 {
                     gameObject.layer = 7;
                 }
-                else if(currentTile != null)
+                else if (currentTile != null)
                 {
                     gameObject.layer = 9;
                 }
@@ -110,4 +113,3 @@ namespace GGG.Components.Resources
         }
     }
 }
-
