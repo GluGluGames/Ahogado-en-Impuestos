@@ -40,13 +40,13 @@ namespace GGG.Components.UI
 
             if (_open)
             {
-                transform.DOMoveX(Screen.width * 0.5f + 660, 0.75f).SetEase(Ease.InQuad);
+                transform.DOMoveX(Screen.width * 0.85f, 0.75f).SetEase(Ease.InQuad);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
                 GameManager.Instance.OnUIOpen();
             }
             else
             {
-                transform.DOMoveX(Screen.width * 0.5f + 970, 0.75f).SetEase(Ease.OutCubic);
+                transform.DOMoveX(Screen.width + 5, 0.75f).SetEase(Ease.OutCubic);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                 GameManager.Instance.OnUIClose();
             }

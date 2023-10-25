@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using GGG.Shared;
 
 namespace GGG.Classes.Buildings
 {
-
+    [Serializable]
     public abstract class Building : ScriptableObject {
         [Header("Generic fields")]
         [Tooltip("Name of the building")] 
@@ -26,6 +27,8 @@ namespace GGG.Classes.Buildings
         [SerializeField] private bool NeededInteraction;
         [Tooltip("Determines the height of the building")]
         [SerializeField] private float SpawnHeight;
+        [Tooltip("Determines the vision range of the building")] 
+        [SerializeField] private int VisionRange;
 
         /// <summary>
         /// Interacts with the building
@@ -62,14 +65,27 @@ namespace GGG.Classes.Buildings
         }
 
         /// <summary>
-        /// Gets the price of the building
+        /// Gets the primary price of the building
         /// </summary>
-        /// <returns></returns>
-        
+        /// <returns>The primary price</returns>
         public int GetPrimaryPrice() { return PrimaryPrice; }
+        
+        /// <summary>
+        /// Gets the secondary price of the building
+        /// </summary>
+        /// <returns>The secondary price</returns>
         public int GetSecondaryPrice() { return SecondaryPrice; }
-
+        
+        /// <summary>
+        /// Gets the primary resource
+        /// </summary>
+        /// <returns>The primary resource</returns>
         public Resource GetPrimaryResource() { return PrimaryPriceType; }
+        
+        /// <summary>
+        /// Gets the secondary resource
+        /// </summary>
+        /// <returns>The secondary resource</returns>
         public Resource GetSecondaryResource() { return SecondaryPriceType; }
 
         /// <summary>
@@ -77,6 +93,12 @@ namespace GGG.Classes.Buildings
         /// </summary>
         /// <returns>True if it needs player interaction. False otherwise</returns>
         public bool NeedInteraction() { return NeededInteraction; }
+
+        /// <summary>
+        /// Gets the vision range of the building
+        /// </summary>
+        /// <returns>The vision range</returns>
+        public int GetVisionRange() => VisionRange;
 
     }
 }

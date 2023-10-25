@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 namespace GGG.Components.Buildings
 {
-    [ExecuteAlways]
+    [ExecuteAlways, Serializable]
     public class HexTile : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerExitHandler
     {
         public HexTileGenerationSettings settings;
@@ -90,7 +90,7 @@ namespace GGG.Components.Buildings
         #region Getters&Setters
 
         public bool TileEmpty()
-        { return _isEmpty; }
+        { return !_currentBuilding; }
 
         public BuildingComponent GetCurrentBuilding()
         { return _currentBuilding; }
@@ -101,7 +101,9 @@ namespace GGG.Components.Buildings
         public void SetBuilding(BuildingComponent building)
         {
             _currentBuilding = building;
-            _isEmpty = building == null;
+            if(building) 
+                building.SetTile(this);
+            _isEmpty = !building;
         }
 
         public TileType GetTileType()
@@ -195,6 +197,7 @@ namespace GGG.Components.Buildings
 
         public void DestroyBuilding()
         {
+            _currentBuilding.SetTile(null);
             Destroy(_currentBuilding.gameObject);
             _currentBuilding = null;
         }
