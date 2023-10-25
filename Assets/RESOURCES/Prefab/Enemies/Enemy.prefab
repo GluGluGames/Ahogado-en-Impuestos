@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5600997113059675379}
   - component: {fileID: 4646512849814036381}
   - component: {fileID: 6326225309583343666}
+  - component: {fileID: 3760353128847623154}
   - component: {fileID: 3259349959482383914}
-  - component: {fileID: -5867601079309053694}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -107,6 +107,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3760353128847623154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940864056320743620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0835652fa819ad74ab327ac608c36e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 1940864056320743620}
+  _hp: 30
+  _killable: 0
+  _stoppable: 0
+  _alwaysVisible: 1
+  currentTile: {fileID: 0}
+  nextTile: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  currentPath: []
+  cubeCoordPos: {x: 0, y: 0, z: 0}
 --- !u!54 &3259349959482383914
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,26 +156,3 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-5867601079309053694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940864056320743620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddd3df92c6135a429caf49382120495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: 
-  Description: 
-  Icon: {fileID: 0}
-  Prefab: {fileID: 0}
-  SpawnHeight: 0
-  hp: 0
-  isStoppable: 0
-  _alwaysVisible: 0
-  currentTile: {fileID: 0}
-  cubeCoordPos: {x: 0, y: 0, z: 0}
-  isDirty: 0
