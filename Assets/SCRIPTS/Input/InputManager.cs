@@ -43,6 +43,7 @@ namespace GGG.Input {
         // SHORTCUTS BUTTONS
         public bool Escape() => _input.a_Shortcuts.EscapeKey.WasPerformedThisFrame();
         public bool DebuConsole() => _input.a_Shortcuts.DebugConsole.WasPerformedThisFrame();
+        public bool EnterKey() => _input.a_Shortcuts.EnterKey.WasPerformedThisFrame();
 
         #endregion
     }

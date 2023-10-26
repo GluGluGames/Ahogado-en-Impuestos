@@ -301,6 +301,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnterKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""bdeedfb4-5592-4ffa-a6b7-f4d28f7df517"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -321,8 +330,19 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/backquote"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""DebugConsole"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd88ddeb-0c7f-4786-946a-38731cf77d9f"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""EnterKey"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -368,6 +388,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_a_Shortcuts = asset.FindActionMap("a_Shortcuts", throwIfNotFound: true);
         m_a_Shortcuts_EscapeKey = m_a_Shortcuts.FindAction("EscapeKey", throwIfNotFound: true);
         m_a_Shortcuts_DebugConsole = m_a_Shortcuts.FindAction("DebugConsole", throwIfNotFound: true);
+        m_a_Shortcuts_EnterKey = m_a_Shortcuts.FindAction("EnterKey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -555,12 +576,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IA_ShortcutsActions> m_A_ShortcutsActionsCallbackInterfaces = new List<IA_ShortcutsActions>();
     private readonly InputAction m_a_Shortcuts_EscapeKey;
     private readonly InputAction m_a_Shortcuts_DebugConsole;
+    private readonly InputAction m_a_Shortcuts_EnterKey;
     public struct A_ShortcutsActions
     {
         private @Controls m_Wrapper;
         public A_ShortcutsActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @EscapeKey => m_Wrapper.m_a_Shortcuts_EscapeKey;
         public InputAction @DebugConsole => m_Wrapper.m_a_Shortcuts_DebugConsole;
+        public InputAction @EnterKey => m_Wrapper.m_a_Shortcuts_EnterKey;
         public InputActionMap Get() { return m_Wrapper.m_a_Shortcuts; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -576,6 +599,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @DebugConsole.started += instance.OnDebugConsole;
             @DebugConsole.performed += instance.OnDebugConsole;
             @DebugConsole.canceled += instance.OnDebugConsole;
+            @EnterKey.started += instance.OnEnterKey;
+            @EnterKey.performed += instance.OnEnterKey;
+            @EnterKey.canceled += instance.OnEnterKey;
         }
 
         private void UnregisterCallbacks(IA_ShortcutsActions instance)
@@ -586,6 +612,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @DebugConsole.started -= instance.OnDebugConsole;
             @DebugConsole.performed -= instance.OnDebugConsole;
             @DebugConsole.canceled -= instance.OnDebugConsole;
+            @EnterKey.started -= instance.OnEnterKey;
+            @EnterKey.performed -= instance.OnEnterKey;
+            @EnterKey.canceled -= instance.OnEnterKey;
         }
 
         public void RemoveCallbacks(IA_ShortcutsActions instance)
@@ -637,5 +666,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnEscapeKey(InputAction.CallbackContext context);
         void OnDebugConsole(InputAction.CallbackContext context);
+        void OnEnterKey(InputAction.CallbackContext context);
     }
 }

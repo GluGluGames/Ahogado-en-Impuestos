@@ -279,6 +279,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "EnterKey",
+                    "type": "Button",
+                    "id": "bdeedfb4-5592-4ffa-a6b7-f4d28f7df517",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -299,8 +308,19 @@
                     "path": "<Keyboard>/backquote",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "DebugConsole",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd88ddeb-0c7f-4786-946a-38731cf77d9f",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "EnterKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
