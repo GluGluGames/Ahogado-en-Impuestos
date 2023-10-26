@@ -44,21 +44,6 @@ namespace GGG.Components.Ticks
             StartCoroutine(Tick());
         }
 
-        public IEnumerator WaitSeconds(int currentSeconds, int maxSeconds, Action onEachSecond, Action onEnd)
-        {
-            currentSeconds++;
-            yield return new WaitForSeconds(1);
-            onEachSecond.Invoke();
-            if (currentSeconds < maxSeconds)
-            {
-                StartCoroutine(WaitSeconds(currentSeconds, maxSeconds, onEachSecond, onEnd));
-            }
-            else
-            {
-                onEnd.Invoke();
-            }
-        }
-
         private void OnDestroy()
         {
             if (canBeDeleted == false) { wantsDestroy = true; }

@@ -155,7 +155,6 @@ namespace GGG.Components.Buildings
 
             _selected = true;
             _manager.SelectTile(this);
-            print($"Selected {gameObject.name}");
             OnHexSelect?.Invoke(this);
         }
 

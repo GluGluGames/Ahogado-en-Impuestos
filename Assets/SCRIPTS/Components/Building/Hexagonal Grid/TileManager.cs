@@ -66,7 +66,6 @@ namespace GGG.Components.Buildings
 
 
             HexTile playerSpawnTile = GetRandomHex();
-            Debug.Log("ASD");
             while (playerSpawnTile.tileType != TileType.Cliff)
             {
                 playerSpawnTile = GetRandomHex();

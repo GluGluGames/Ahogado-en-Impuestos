@@ -1,11 +1,9 @@
-using GGG.Shared;
 using GGG.Components.Buildings;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.Linq.Expressions;
 using GGG.Components.Ticks;
+using GGG.Shared;
+using System;
+using System.Collections;
+using UnityEngine;
 
 namespace GGG.Components.Resources
 {
@@ -15,6 +13,7 @@ namespace GGG.Components.Resources
         [SerializeField] private int _amount;
         [SerializeField] private Collider colliderResource;
         [SerializeField] private bool _alwaysVisible;
+        private bool WaitSecond = true;
 
         private bool _collided = false;
 
@@ -23,13 +22,20 @@ namespace GGG.Components.Resources
         public Action onResourceCollideExit;
 
         #region getters and setters
-        public Resource GetResource() { return _resource; }
-        public int GetAmount() { return _amount; }
 
-        public void SetResource(Resource resource) { _resource = resource; }
-        public void SetAmount(int amount) { _amount = amount; }
+        public Resource GetResource()
+        { return _resource; }
 
-        #endregion
+        public int GetAmount()
+        { return _amount; }
+
+        public void SetResource(Resource resource)
+        { _resource = resource; }
+
+        public void SetAmount(int amount)
+        { _amount = amount; }
+
+        #endregion getters and setters
 
         #region Methods
 
@@ -41,7 +47,8 @@ namespace GGG.Components.Resources
             //    _collided = true;
             //}
 
-            StartCoroutine(TickManager.Instance.WaitSeconds(0, 3, () => Debug.Log("esperando..."),
+            WaitSecond = true;
+            Coroutine aux = StartCoroutine(WaitSeconds(0, 3, () => Debug.Log("esperando..."),
                 () =>
                 {
                     Debug.Log("FIN!!!");
@@ -52,16 +59,16 @@ namespace GGG.Components.Resources
 
         private void OnTriggerExit(Collider other)
         {
-            if(_collided)
+            WaitSecond = false;
+            if (_collided)
             {
                 onResourceCollideExit.Invoke();
                 _collided = false;
             }
-            
         }
 
         private void Start()
-{
+        {
             onResourceCollideEnter += RecolectResource;
             onResourceCollideExit += DeleteMySelf;
             TickManager.OnTick += HandleVisibility;
@@ -75,11 +82,7 @@ namespace GGG.Components.Resources
 
             ResourceManager.Instance.resourcesCollected.Remove(_resource.GetName());
             ResourceManager.Instance.resourcesCollected.Add(_resource.GetName(), _amount + aux);
-
-            int debug = 0;
-            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out debug);
         }
-
 
         private void DeleteMySelf()
         {
@@ -95,22 +98,38 @@ namespace GGG.Components.Resources
             Destroy(this.gameObject);
         }
 
-        #endregion
+        #endregion Methods
 
         private void HandleVisibility()
         {
-            if(!_alwaysVisible)
+            if (!_alwaysVisible)
             {
-                if(currentTile != null && currentTile.gameObject.layer == 7)
+                if (currentTile != null && currentTile.gameObject.layer == 7)
                 {
                     gameObject.layer = 7;
                 }
-                else if(currentTile != null)
+                else if (currentTile != null)
                 {
                     gameObject.layer = 9;
                 }
             }
         }
+
+        private IEnumerator WaitSeconds(int currentSeconds, int maxSeconds, Action onEachSecond, Action onEnd)
+        {
+
+            currentSeconds++;
+            yield return new WaitForSeconds(1);
+            onEachSecond.Invoke();
+            if (!WaitSecond) { yield break; }
+            if (currentSeconds < maxSeconds)
+            {
+                StartCoroutine(WaitSeconds(currentSeconds, maxSeconds, onEachSecond, onEnd));
+            }
+            else
+            {
+                onEnd.Invoke();
+            }
+        }
     }
 }
-
