@@ -40,8 +40,14 @@ namespace GGG.Components.Resources
             //    onResourceCollideEnter.Invoke();
             //    _collided = true;
             //}
-            RecolectResource();
-            DeleteMySelf();
+
+            StartCoroutine(TickManager.Instance.WaitSeconds(0, 3, () => Debug.Log("esperando..."),
+                () =>
+                {
+                    Debug.Log("FIN!!!");
+                    RecolectResource();
+                    DeleteMySelf();
+                }));
         }
 
         private void OnTriggerExit(Collider other)
