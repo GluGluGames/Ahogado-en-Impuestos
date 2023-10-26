@@ -77,6 +77,8 @@ namespace GGG.Components.Player
             return _resourcesCount[key];
         }
 
+        public List<Resource> GetResources() => Resources;
+
         public Resource GetResource(string resourceKey) => _resources[resourceKey];
 
         public void AddResource(string resourceKey, int amount) {
