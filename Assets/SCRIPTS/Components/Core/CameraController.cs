@@ -15,6 +15,8 @@ namespace GGG.Components.Core
         [Header("Movement")]
         [Tooltip("Movement speed of the camera")]
         [SerializeField] private float MovementSpeed;
+        [SerializeField] private Vector2 MinBounds;
+        [SerializeField] private Vector2 MaxBounds;
         [Space(5)]
         [Header("Rotation")]
         [Tooltip("Rotation speed of the camera")]
@@ -94,9 +96,14 @@ namespace GGG.Components.Core
             Vector3 moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y).normalized;
 
             if (moveDirection != Vector3.zero)
+            {
                 _newPosition += _transform.TransformDirection(moveDirection) * (MovementSpeed * Time.deltaTime);
-                
-            
+
+                _newPosition.x = Mathf.Clamp(_newPosition.x, MinBounds.x, MaxBounds.x);
+                _newPosition.z = Mathf.Clamp(_newPosition.z, MinBounds.y, MaxBounds.y);
+
+                _newPosition.y = 0;
+            }
             
             _transform.position = Vector3.Lerp(_transform.position, _newPosition, Time.deltaTime * MovementTime);
         }
@@ -174,6 +181,8 @@ namespace GGG.Components.Core
                     if (plane.Raycast(ray, out float distance)) {
                         _dragCurrentPosition = ray.GetPoint(distance);
                         _newPosition = _transform.position + (_dragStartPosition - _dragCurrentPosition);
+                        _newPosition.x = Mathf.Clamp(_newPosition.x, MinBounds.x, MaxBounds.x);
+                        _newPosition.z = Mathf.Clamp(_newPosition.z, MinBounds.y, MaxBounds.y);
                         Holding.IsHolding(true);
                     }
                 }
