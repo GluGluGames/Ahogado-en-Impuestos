@@ -19,8 +19,8 @@ namespace GGG.Components.Neptune
         #endregion
 
         private int secondsPassed = 0;
-        private int firstEvent = 5;
-        private int request = 10;
+        [SerializeField] private int firstEvent = 5;
+        [SerializeField] private int request = 10;
         private Coroutine TickCoroutine;
         private Action OnEvent;
 
@@ -36,7 +36,7 @@ namespace GGG.Components.Neptune
                 }
                 else
                 {
-                    Debug.Log("quito algas");
+                    PlayerManager.Instance.AddResource("Seaweed", -request);
                 }
             };
             TickCoroutine = StartCoroutine(Tick());
