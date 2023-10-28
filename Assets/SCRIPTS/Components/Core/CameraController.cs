@@ -29,6 +29,10 @@ namespace GGG.Components.Core
         [SerializeField] private Vector2 ZoomLimitsY;
         [Tooltip("Limit of zoom in the Z axis")]
         [SerializeField] private Vector2 ZoomLimitsZ;
+        #if UNITY_ANDROID
+        [Tooltip("Limit of zoom in the Y axis when using touch screen")]
+        [SerializeField] private Vector2 ZoomLimitsTouch;
+        #endif
         [Space(5)]
         [Header("Other")]
         [Tooltip("Amount of movement over time")]
@@ -78,15 +82,20 @@ namespace GGG.Components.Core
             
             StartCoroutine(HandleMouseInput());
         }
+#endif
 
         private void LateUpdate() {
             if (!_gameManager.PlayingGame()) return;
             
+#if UNITY_ANDROID
+            ClampCamera();
+#else
             HandleCameraMovement();
             HandleCameraRotation();
             HandleZoom();
-        }
 #endif
+
+        }
 
         /// <summary>
         /// Handles the camera movement
@@ -189,6 +198,25 @@ namespace GGG.Components.Core
 
                 _results.Clear();
             } else Holding.IsHolding(false);
+        }
+
+        private void ClampCamera()
+        {
+            Vector3 newPosition = _transform.position;
+            
+            newPosition.x = Mathf.Clamp(newPosition.x, MinBounds.x, MaxBounds.x);
+            newPosition.y = 0;
+            newPosition.z = Mathf.Clamp(newPosition.z, MinBounds.x, MaxBounds.y);
+
+            _transform.position = newPosition;
+
+            Vector3 newScale = _transform.localScale;
+
+            newScale.x = 1;
+            newScale.y = Mathf.Clamp(newScale.y, ZoomLimitsTouch.x, ZoomLimitsTouch.y);
+            newScale.z = Mathf.Clamp(newScale.z, ZoomLimitsTouch.x, ZoomLimitsTouch.y);
+
+            _transform.localScale = newScale;
         }
     }
 }
