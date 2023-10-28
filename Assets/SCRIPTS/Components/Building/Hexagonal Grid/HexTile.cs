@@ -248,6 +248,8 @@ namespace GGG.Components.Buildings
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (eventData.button != PointerEventData.InputButton.Left) return;
+            
             StartCoroutine(TouchWait());
         }
 
