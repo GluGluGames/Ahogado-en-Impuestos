@@ -35,7 +35,9 @@ namespace GGG.Input {
         public float CameraZoom() => _input.a_Camera.CameraZoom.ReadValue<float>();
         public bool IsTouching() => _input.a_Camera.PrimaryTouchContact.WasPerformedThisFrame();
         public Vector2 TouchPosition() => _input.a_Camera.PrimaryTouch.ReadValue<Vector2>();
-        public bool IsHolding() => _input.a_Camera.PrimaryTouchContact.inProgress; 
+        public bool IsHolding() => _input.a_Camera.PrimaryTouchContact.inProgress;
+        public bool IsSecondaryTouching() => _input.a_Camera.SecondaryTouch.WasPerformedThisFrame();
+        public bool IsSecondaryHolding() => _input.a_Camera.SecondaryTouch.inProgress;
         
         // DIALOGUE BUTTONS
         public bool MouseClick() => _input.a_Dialogue.Continue.WasPerformedThisFrame();

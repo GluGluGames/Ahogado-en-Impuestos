@@ -71,6 +71,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondaryTouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""7e386f33-63fb-47d1-8449-46f77d88baab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -249,6 +258,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""PrimaryTouchContact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2634f6f9-f8ea-4c38-a878-a3ecccc95f03"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""SecondaryTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -381,6 +401,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_a_Camera_CameraZoom = m_a_Camera.FindAction("CameraZoom", throwIfNotFound: true);
         m_a_Camera_PrimaryTouch = m_a_Camera.FindAction("PrimaryTouch", throwIfNotFound: true);
         m_a_Camera_PrimaryTouchContact = m_a_Camera.FindAction("PrimaryTouchContact", throwIfNotFound: true);
+        m_a_Camera_SecondaryTouch = m_a_Camera.FindAction("SecondaryTouch", throwIfNotFound: true);
         // a_Dialogue
         m_a_Dialogue = asset.FindActionMap("a_Dialogue", throwIfNotFound: true);
         m_a_Dialogue_Continue = m_a_Dialogue.FindAction("Continue", throwIfNotFound: true);
@@ -455,6 +476,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_a_Camera_CameraZoom;
     private readonly InputAction m_a_Camera_PrimaryTouch;
     private readonly InputAction m_a_Camera_PrimaryTouchContact;
+    private readonly InputAction m_a_Camera_SecondaryTouch;
     public struct A_CameraActions
     {
         private @Controls m_Wrapper;
@@ -464,6 +486,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @CameraZoom => m_Wrapper.m_a_Camera_CameraZoom;
         public InputAction @PrimaryTouch => m_Wrapper.m_a_Camera_PrimaryTouch;
         public InputAction @PrimaryTouchContact => m_Wrapper.m_a_Camera_PrimaryTouchContact;
+        public InputAction @SecondaryTouch => m_Wrapper.m_a_Camera_SecondaryTouch;
         public InputActionMap Get() { return m_Wrapper.m_a_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -488,6 +511,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PrimaryTouchContact.started += instance.OnPrimaryTouchContact;
             @PrimaryTouchContact.performed += instance.OnPrimaryTouchContact;
             @PrimaryTouchContact.canceled += instance.OnPrimaryTouchContact;
+            @SecondaryTouch.started += instance.OnSecondaryTouch;
+            @SecondaryTouch.performed += instance.OnSecondaryTouch;
+            @SecondaryTouch.canceled += instance.OnSecondaryTouch;
         }
 
         private void UnregisterCallbacks(IA_CameraActions instance)
@@ -507,6 +533,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PrimaryTouchContact.started -= instance.OnPrimaryTouchContact;
             @PrimaryTouchContact.performed -= instance.OnPrimaryTouchContact;
             @PrimaryTouchContact.canceled -= instance.OnPrimaryTouchContact;
+            @SecondaryTouch.started -= instance.OnSecondaryTouch;
+            @SecondaryTouch.performed -= instance.OnSecondaryTouch;
+            @SecondaryTouch.canceled -= instance.OnSecondaryTouch;
         }
 
         public void RemoveCallbacks(IA_CameraActions instance)
@@ -657,6 +686,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnCameraZoom(InputAction.CallbackContext context);
         void OnPrimaryTouch(InputAction.CallbackContext context);
         void OnPrimaryTouchContact(InputAction.CallbackContext context);
+        void OnSecondaryTouch(InputAction.CallbackContext context);
     }
     public interface IA_DialogueActions
     {

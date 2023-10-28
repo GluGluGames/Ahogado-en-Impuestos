@@ -81,6 +81,7 @@ namespace GGG.Components.Core
             if (!_gameManager.PlayingGame()) return;
             
             StartCoroutine(HandleMouseInput());
+            StartCoroutine(HandleLeftMouseInput());
         }
 #endif
 
@@ -137,20 +138,16 @@ namespace GGG.Components.Core
         /// </summary>
         private void HandleZoom()
         {
-            bool zoom = false;
-            
             if(_input.CameraZoom() > 0f) {
                 _newZoom += ZoomAmount;
-                zoom = true;
             }
             if(_input.CameraZoom() < 0f) {
                 _newZoom -= ZoomAmount;
-                zoom = true;
             }
 
             ClampZoom();
 
-            if(zoom) _cameraTransform.localPosition = Vector3.Lerp(_cameraTransform.localPosition, _newZoom, Time.deltaTime * MovementTime);
+            _cameraTransform.localPosition = Vector3.Lerp(_cameraTransform.localPosition, _newZoom, Time.deltaTime * MovementTime);
         }
 
         /// <summary>
@@ -198,6 +195,37 @@ namespace GGG.Components.Core
 
                 _results.Clear();
             } else Holding.IsHolding(false);
+        }
+        
+        private IEnumerator HandleLeftMouseInput() {
+            if (_input.IsSecondaryTouching()) {
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+                Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
+
+                if (plane.Raycast(ray, out float distance)) {
+                    _dragStartPosition = ray.GetPoint(distance);
+                }
+            }
+
+            yield return new WaitForSeconds(0.05f);
+
+            if (_input.IsSecondaryHolding()) {
+                _pointerEventData.position = _input.TouchPosition();
+                _graphicRaycaster.Raycast(_pointerEventData, _results);
+
+                if (_results.Count == 0) {
+                    Plane plane = new Plane(Vector3.up, Vector3.zero);
+                    Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
+
+                    if (plane.Raycast(ray, out float distance))
+                    {
+                        _dragCurrentPosition = ray.GetPoint(distance);
+                        // _newRotation = Quaternion.Euler(_transform.localEulerAngles + new Vector3(_dragStartPosition.x - _dragCurrentPosition.x, 0, 0));
+                    }
+                }
+
+                _results.Clear();
+            }
         }
 
         #if UNITY_ANDROID
