@@ -200,6 +200,7 @@ namespace GGG.Components.Core
             } else Holding.IsHolding(false);
         }
 
+        #if UNITY_ANDROID
         private void ClampCamera()
         {
             Vector3 newPosition = _transform.position;
@@ -218,5 +219,6 @@ namespace GGG.Components.Core
 
             _transform.localScale = newScale;
         }
+        #endif
     }
 }
