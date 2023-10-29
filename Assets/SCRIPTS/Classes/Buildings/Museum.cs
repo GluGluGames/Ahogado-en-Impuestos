@@ -8,7 +8,7 @@ namespace GGG.Classes.Buildings
     {
         private MuseumUI _museum;
         
-        public override void Interact()
+        public override void Interact(int level)
         {
             _museum = FindObjectOfType<MuseumUI>();
 

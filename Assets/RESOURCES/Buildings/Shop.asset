@@ -16,10 +16,15 @@ MonoBehaviour:
   Description: 
   Icon: {fileID: 0}
   Prefab: {fileID: 2848397803213574801, guid: a01308c2ea2811a48b3c1cf08cc7e93e, type: 3}
-  PrimaryPrice: 10
-  PrimaryPriceType: {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  SecondaryPrice: 1
-  SecondaryPriceType: {fileID: 11400000, guid: 1e0744310eaf9584d9b628feb1a2be84, type: 2}
+  CanBeUpgraded: 0
+  UpgradePrefabs: []
+  BuildCost:
+    Costs: 0a00000005000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+    - {fileID: 11400000, guid: a8559bbb5f45e404eaccd92c5b2f2d19, type: 2}
+  UpgradeCost: []
+  MaxLevel: 0
   NeededInteraction: 1
   SpawnHeight: 0.3
   VisionRange: 2

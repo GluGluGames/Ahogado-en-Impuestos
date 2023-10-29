@@ -16,13 +16,31 @@ MonoBehaviour:
   Description: 
   Icon: {fileID: 21300000, guid: fe4b884b0ffb6cd499f947927fb165ec, type: 3}
   Prefab: {fileID: 8113010406866780128, guid: 8807a79897f001d4085fe45216d838dd, type: 3}
-  PrimaryPrice: 0
-  PrimaryPriceType: {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  SecondaryPrice: 0
-  SecondaryPriceType: {fileID: 0}
+  CanBeUpgraded: 1
+  UpgradePrefabs:
+  - {fileID: 4193575569453847927, guid: adf814844c50bad47bf0ac2552d143f7, type: 3}
+  - {fileID: 1889224551149711422, guid: 5f70c08caac5733408e0406a0459c193, type: 3}
+  BuildCost:
+    Costs: 00000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  UpgradeCost:
+  - Costs: 0a000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  - Costs: 190000000a000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+    - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
+  - Costs: 32000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  MaxLevel: 3
   NeededInteraction: 0
   SpawnHeight: 0.3
   VisionRange: 2
   Resource: {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  InitialGeneration: 1
-  InitialCooldown: 2
+  InitialGeneration: 4
+  ResourcesGeneration:
+  - 3
+  - 1
