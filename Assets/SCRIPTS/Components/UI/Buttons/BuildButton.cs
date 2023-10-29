@@ -19,7 +19,7 @@ namespace GGG.Components.UI {
         private HexTile _selectedHexTile;
         private Resource _buildResource;
         private BuildingComponent _auxBuild;
-        private int _cost;
+        private ResourceCost _cost;
 
         public Action<BuildingComponent, HexTile> OnStructureBuild;
 
@@ -33,46 +33,58 @@ namespace GGG.Components.UI {
                 tile.OnHexSelect += (x) => _selectedHexTile = tile;
             }
 
-            _cost = BuildingInfo.GetPrimaryPrice();
+            _cost = BuildingInfo.GetBuildingCost();
             
             TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>();
             Image[] images = Container.GetComponentsInChildren<Image>();
+            
+            texts[0].text = _cost.GetCost(0).ToString();
+            images[0].sprite = _cost.GetResource(0).GetSprite();
 
-            if (texts.Length == 2 && images.Length == 2)
+            for (int i = 1; i < images.Length; i++)
             {
-                texts[0].text = BuildingInfo.GetPrimaryPrice().ToString();
-                images[0].sprite = BuildingInfo.GetPrimaryResource().GetSprite();
-
-                if (BuildingInfo.GetSecondaryPrice() == 0)
+                if (i >= _cost.GetCostsAmount())
                 {
-                    images[1].gameObject.SetActive(false);
+                    images[i].gameObject.SetActive(false);
+                    continue;
                 }
-                else
+                
+                if (_cost.GetCost(i) == 0)
                 {
-                    texts[1].text = BuildingInfo.GetSecondaryPrice().ToString();
-                    images[1].sprite = BuildingInfo.GetSecondaryResource().GetSprite();
+                    images[i].gameObject.SetActive(false);
+                    continue;
                 }
+                
+                texts[i].SetText(_cost.GetCost(i).ToString());
+                images[i].sprite = _cost.GetResource(i).GetSprite();
             }
+            
         }
 
-        private void BuildStructure() {
-            bool aux = BuildingInfo.GetSecondaryPrice() != 0;
-
-            if (_player.GetResourceCount(BuildingInfo.GetPrimaryResource().GetKey()) < BuildingInfo.GetPrimaryPrice() || aux && _player.GetResourceCount(BuildingInfo.GetSecondaryResource()?.GetKey()) < BuildingInfo.GetSecondaryPrice())
+        private void BuildStructure()
+        {
+            for (int i = 0; i < _cost.GetCostsAmount(); i++)
             {
-                // TODO - Can't buy warning
-                return;
+                if (_player.GetResourceCount(_cost.GetResource(i).GetKey()) < _cost.GetCost(i))
+                {
+                    // TODO - Can't buy warning
+                    return;
+                }
             }
             
             SoundManager.Instance.Play("Build");
-            GameObject auxGo = BuildingInfo.Spawn(_selectedHexTile.SpawnPosition(), GameObject.Find("Buildings").transform);
+            GameObject auxGo = BuildingInfo.Spawn(_selectedHexTile.SpawnPosition(), GameObject.Find("Buildings").transform, 1, false);
             _auxBuild = auxGo.GetComponent<BuildingComponent>();
 
             _selectedHexTile.SetBuilding(_auxBuild);
             OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
 
-            _player.AddResource(BuildingInfo.GetPrimaryResource().GetKey(), -BuildingInfo.GetPrimaryPrice());
-            if(aux) _player.AddResource(BuildingInfo.GetSecondaryResource()?.GetKey(), -BuildingInfo.GetSecondaryPrice());
+            for (int i = 0; i < _cost.GetCostsAmount(); i++)
+            {
+                if(!_cost.GetResource(i)) continue;
+                
+                _player.AddResource(_cost.GetResource(i).GetKey(), -_cost.GetCost(i));
+            }
 
 
             //FOW

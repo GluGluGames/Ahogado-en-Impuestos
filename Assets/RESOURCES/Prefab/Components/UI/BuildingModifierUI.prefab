@@ -248,7 +248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 64.5, y: -55.513596}
+  m_AnchoredPosition: {x: 129, y: -55.513596}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &333706719988928483
@@ -1512,7 +1512,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CloseButton: {fileID: 5273766139091554472}
   SellButton: {fileID: 7264172453391498191}
+  SellResource: {fileID: 5873079002122108078}
+  SellCost: {fileID: 7148534769846109941}
+  UpgradePanel: {fileID: 7427473175975237013}
   UpgradeButton: {fileID: 8933229539672335972}
+  UpgradeResources:
+  - {fileID: 2582748966619882587}
+  - {fileID: 1471656797450005668}
+  UpgradeCost:
+  - {fileID: 3392293153478371720}
+  - {fileID: 874551736627927319}
   InteractButton: {fileID: 6612347723547609996}
   InteractParent: {fileID: 4392540586869080894}
 --- !u!1 &6083427654039063616
@@ -1773,7 +1782,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3250976320573444286
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2333,7 +2342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6382825404744587873
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2759,7 +2768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2204430023873934158
 RectTransform:
   m_ObjectHideFlags: 0

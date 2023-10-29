@@ -9,7 +9,7 @@ namespace GGG.Classes.Buildings
     {
         private ShopUI _shop;
 
-        public override void Interact()
+        public override void Interact(int level)
         {
             _shop = FindObjectOfType<ShopUI>();
 

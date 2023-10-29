@@ -16,7 +16,7 @@ namespace GGG.Components.Buildings
         {
             public Vector3 Position;
             public Building Building;
-            public HexTile Tile;
+            public int Level;
         }
 
         public static Action<BuildingComponent[]> OnBuildsLoad;
@@ -47,7 +47,7 @@ namespace GGG.Components.Buildings
                 
                 data.Position = build.GetPosition();
                 data.Building = build.GetBuild();
-                data.Tile = build.GetCurrentTile();
+                data.Level = build.GetCurrentLevel();
 
                 saveData[i] = data;
                 i++;
@@ -75,11 +75,17 @@ namespace GGG.Components.Buildings
 
             if (!string.IsNullOrEmpty(data)) {
                 BuildingData[] buildings = JsonHelper.FromJson<BuildingData>(data);
+                BuildingComponent[] buildingComponents = new BuildingComponent[buildings.Length];
+                int i = 0;
+                
                 foreach (BuildingData build in buildings) {
-                    GameObject go = build.Building.Spawn(build.Position, transform);
+                    GameObject go = build.Building.Spawn(build.Position, transform, build.Level, false);
+                    buildingComponents[i] = go.GetComponent<BuildingComponent>();
+                    buildingComponents[i].SetLevel(build.Level);
+                    i++;
                 }
 
-                OnBuildsLoad?.Invoke(FindObjectsOfType<BuildingComponent>());
+                OnBuildsLoad?.Invoke(buildingComponents);
             }
         }
     }
