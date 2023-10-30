@@ -80,13 +80,13 @@ namespace GGG.Classes.Buildings
                 
                 GameObject go = Instantiate(Prefab, new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0), parent);
                 Destroy(go.transform.GetChild(0).gameObject);
-                Instantiate(UpgradePrefabs[level - 1], new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0), go.transform);
+                Instantiate(UpgradePrefabs[level - 2], new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0), go.transform);
                 
                 return go;
             }
 
             Destroy(parent.GetChild(0).gameObject);
-            Instantiate(UpgradePrefabs[level - 1], new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0), parent);
+            Instantiate(UpgradePrefabs[level - 2], new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0), parent);
             return null;
         }
 
