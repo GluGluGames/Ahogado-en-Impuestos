@@ -76,11 +76,11 @@ namespace GGG.Classes.Buildings
             {
                 if(level == 1)
                     return Instantiate(Prefab, new Vector3(position.x, SpawnHeight, position.z),
-                    Quaternion.Euler(0, -45, 0), parent);
+                    Quaternion.identity, parent);
                 
-                GameObject go = Instantiate(Prefab, new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0), parent);
+                GameObject go = Instantiate(Prefab, new Vector3(position.x, SpawnHeight, position.z), Quaternion.identity, parent);
                 Destroy(go.transform.GetChild(0).gameObject);
-                Instantiate(UpgradePrefabs[level - 2], new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0), go.transform);
+                Instantiate(UpgradePrefabs[level - 2], new Vector3(position.x, SpawnHeight, position.z), Quaternion.identity, go.transform);
                 
                 return go;
             }
