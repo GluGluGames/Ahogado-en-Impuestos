@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using GGG.Classes.Buildings;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -19,6 +21,8 @@ namespace GGG.Components.Buildings
             public int Level;
         }
 
+        private List<BuildingComponent> _buildings = new();
+        
         public static Action<BuildingComponent[]> OnBuildsLoad;
 
         private void Awake()
@@ -28,6 +32,16 @@ namespace GGG.Components.Buildings
             Instance = this;
         }
 
+        private void Update() {
+            if (_buildings.Count == 0) return;
+
+            foreach (BuildingComponent build in _buildings) {
+                if(build.NeedInteraction()) continue;
+                
+                build.GetBuild().Interact(build.GetCurrentLevel());
+            }
+        }
+
         private void OnEnable() {
             StartCoroutine(LoadBuildings());
         }
@@ -35,6 +49,8 @@ namespace GGG.Components.Buildings
         private void OnDisable() {
             SaveBuildings();
         }
+
+        public void AddBuilding(BuildingComponent build) => _buildings.Add(build);
 
         public void SaveBuildings() {
             BuildingComponent[] buildings = GetComponentsInChildren<BuildingComponent>();
@@ -86,6 +102,7 @@ namespace GGG.Components.Buildings
                 }
 
                 OnBuildsLoad?.Invoke(buildingComponents);
+                _buildings = buildingComponents.ToList();
             }
         }
     }

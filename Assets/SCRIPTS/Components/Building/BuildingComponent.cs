@@ -11,12 +11,6 @@ namespace GGG.Components.Buildings {
         private HexTile _currentTile;
         private int _currentLevel = 1;
 
-        private void Update() {
-            if (Build.NeedInteraction()) return;
-            
-            Build.Interact(_currentLevel);
-        }
-
         /// <summary>
         /// Interact with the building
         /// </summary>
