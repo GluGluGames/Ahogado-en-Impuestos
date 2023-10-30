@@ -25,5 +25,18 @@ namespace GGG.Classes.Buildings
             PlayerManager.Instance.AddResource(Resource.GetKey(), 1);
             _cooldownDelta = level == 1 ? InitialGeneration : ResourcesGeneration[level - 2];
         }
+
+        /// <summary>
+        /// Gets the generated resource
+        /// </summary>
+        /// <returns>The generated resource</returns>
+        public Resource GetResource() => Resource;
+
+        /// <summary>
+        /// Gets the generation based on the level of the building.
+        /// </summary>
+        /// <param name="level">Level of the building</param>
+        /// <returns>The time (in seconds) between the generation of 1 resource</returns>
+        public float GetGeneration(int level) => level == 1 ? InitialGeneration : ResourcesGeneration[level - 2];
     }
 }

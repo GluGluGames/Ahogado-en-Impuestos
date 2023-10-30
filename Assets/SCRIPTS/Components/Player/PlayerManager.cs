@@ -49,16 +49,14 @@ namespace GGG.Components.Player
 
         private void Start()
         {
+            StartCoroutine(LoadResourcesCount());
+            
             foreach (Resource i in Resources)
                 _resources.Add(i.GetKey(), i);
 
             if(_resourcesCount.Count <= 0)
                 foreach (string i in _resources.Keys) 
                     _resourcesCount.Add(i, 0);
-        }
-
-        private void OnEnable() {
-            StartCoroutine(LoadResourcesCount());
         }
 
         private void OnDisable() {
@@ -135,9 +133,6 @@ namespace GGG.Components.Player
             else {
                 SaveResourcesCount();
             }
-
-            // DEBUG - DELETE LATER
-            if(_resourcesCount["Pearl"] <= 0) _resourcesCount["Pearl"] += 1;
             
             OnPlayerInitialized?.Invoke();
         }

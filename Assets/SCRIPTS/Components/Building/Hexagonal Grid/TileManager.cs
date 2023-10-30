@@ -133,7 +133,16 @@ namespace GGG.Components.Buildings
             BuildingManager.OnBuildsLoad -= OnBuildsLoad;
         }
 
-        private void OnBuildsLoad(BuildingComponent[] builds) => StartCoroutine(LoadTilesState(builds));
+        private void OnBuildsLoad(BuildingComponent[] builds)
+        {
+            if (builds == null)
+            {
+                OnTilesStateLoaded?.Invoke(null);
+                return;
+            }
+            
+            StartCoroutine(LoadTilesState(builds));
+        }
 
         public void RegisterTile(HexTile tile)
         {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GGG.Classes.Buildings;
+using GGG.Components.Player;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -21,7 +22,9 @@ namespace GGG.Components.Buildings
             public int Level;
         }
 
+        private PlayerManager _player;
         private List<BuildingComponent> _buildings = new();
+        private const string _EXIT_TIME = "ExitTime";
         
         public static Action<BuildingComponent[]> OnBuildsLoad;
 
@@ -42,12 +45,40 @@ namespace GGG.Components.Buildings
             }
         }
 
-        private void OnEnable() {
-            StartCoroutine(LoadBuildings());
+        private IEnumerator Start()
+        {
+            _player = PlayerManager.Instance;
+            
+            yield return LoadBuildings();
+
+            if (_buildings.Count == 0) yield break;
+            
+            TimeSpan time = DateTime.Now - DateTime.Parse(PlayerPrefs.GetString(_EXIT_TIME));
+
+            if (time.Minutes < 3f) yield break;
+            
+            foreach (BuildingComponent build in _buildings)
+            {
+                if (build.NeedInteraction()) continue;
+                
+                Farm farm = (Farm) build.GetBuild();
+                int generatedTime = time.Minutes >= 180 ? 180 : time.Minutes;
+                int resourcesGenerated =
+                    Mathf.RoundToInt((generatedTime * 60) / farm.GetGeneration(build.GetCurrentLevel()));
+                    
+                _player.AddResource(farm.GetResource().GetKey(), resourcesGenerated);
+            }
         }
 
-        private void OnDisable() {
+        private void OnDisable()
+        {
             SaveBuildings();
+        }
+
+        private void OnApplicationQuit()
+        {
+            PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
+            PlayerPrefs.Save();
         }
 
         public void AddBuilding(BuildingComponent build) => _buildings.Add(build);
@@ -103,6 +134,11 @@ namespace GGG.Components.Buildings
 
                 OnBuildsLoad?.Invoke(buildingComponents);
                 _buildings = buildingComponents.ToList();
+            }
+            else
+            {
+                OnBuildsLoad?.Invoke(null);
+                _buildings = new List<BuildingComponent>();
             }
         }
     }
