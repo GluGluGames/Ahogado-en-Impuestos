@@ -8,6 +8,7 @@ using TMPro;
 using System.Collections.Generic;
 using DG.Tweening;
 using GGG.Components.Core;
+using GGG.Input;
 
 namespace GGG.Components.UI
 {
@@ -31,21 +32,22 @@ namespace GGG.Components.UI
 
         #region Private variables
 
-        private Resource[] SeaResources;
-        private Resource[] ExpeditionResources;
-        private Resource[] FishResources;
+        private Resource[] _seaResources;
+        private Resource[] _expeditionResources;
+        private Resource[] _fishResources;
 
-        private Button[] SeaButtons;
-        private Button[] ExpeditionButtons;
-        private Button[] FishButtons;
+        private Button[] _seaButtons;
+        private Button[] _expeditionButtons;
+        private Button[] _fishButtons;
 
-        private Dictionary<string, TextMeshProUGUI> ResourcesCountText;
+        private Dictionary<string, TextMeshProUGUI> _resourcesCountText;
 
         private const int _INITIAL_POSITION = -1100;
 
         private PlayerManager _player;
+        private InputManager _input;
         private GameObject _viewport;
-        private int active = 0;
+        private int _active = 0;
         private bool _open;
 
         #endregion
@@ -60,16 +62,17 @@ namespace GGG.Components.UI
         private IEnumerator Start()
         {
             _player = PlayerManager.Instance;
+            _input = InputManager.Instance;
             _viewport = transform.GetChild(0).gameObject;
             transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f + _INITIAL_POSITION);
 
-            ResourcesCountText = new Dictionary<string, TextMeshProUGUI>(_player.GetResourceNumber());
+            _resourcesCountText = new Dictionary<string, TextMeshProUGUI>(_player.GetResourceNumber());
             
-            SeaResources = Resources.LoadAll<Resource>("RESOURCES/SeaResources");
-            ExpeditionResources = Resources.LoadAll<Resource>("RESOURCES/ExpeditionResources");
-            FishResources = Resources.LoadAll<Resource>("RESOURCES/FishResources");
+            _seaResources = Resources.LoadAll<Resource>("RESOURCES/SeaResources");
+            _expeditionResources = Resources.LoadAll<Resource>("RESOURCES/ExpeditionResources");
+            _fishResources = Resources.LoadAll<Resource>("RESOURCES/FishResources");
 
-            while (SeaResources.Length <= 0 || ExpeditionResources.Length <= 0 || FishResources.Length <= 0)
+            while (_seaResources.Length <= 0 || _expeditionResources.Length <= 0 || _fishResources.Length <= 0)
                 yield return null;
             
             FillSeaResources();
@@ -90,12 +93,9 @@ namespace GGG.Components.UI
 
         private void Update()
         {
-            if (!_open) return;
-
-            foreach (string key in ResourcesCountText.Keys)
-            {
-                ResourcesCountText[key].SetText(_player.GetResourceCount(key).ToString());
-            }
+            if (!_open || !_input.Escape()) return;
+            
+            CloseInventory();
         }
 
         #endregion
@@ -105,79 +105,79 @@ namespace GGG.Components.UI
 
         private void FillSeaResources()
         {
-            SeaButtons = SeaContainer.GetComponentsInChildren<Button>();
-            for (int i = 0; i < SeaButtons.Length; i++)
+            _seaButtons = SeaContainer.GetComponentsInChildren<Button>();
+            for (int i = 0; i < _seaButtons.Length; i++)
             {
-                if (SeaResources.Length <= i)
+                if (_seaResources.Length <= i)
                 {
-                    SeaButtons[i].transform.parent.transform.parent.gameObject.SetActive(false);
+                    _seaButtons[i].transform.parent.transform.parent.gameObject.SetActive(false);
                 }
                 else
                 {
-                    SeaButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
-                    SeaButtons[i].image.sprite = SeaResources[i].GetSprite();
+                    _seaButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
+                    _seaButtons[i].image.sprite = _seaResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
-                    aux.selectedSprite = SeaResources[i].GetSelectedSprite();
-                    aux.disabledSprite = SeaResources[i].GetSprite();
-                    SeaButtons[i].spriteState = aux;
+                    aux.selectedSprite = _seaResources[i].GetSelectedSprite();
+                    aux.disabledSprite = _seaResources[i].GetSprite();
+                    _seaButtons[i].spriteState = aux;
                     int index = i;
-                    SeaButtons[i].onClick.AddListener(() => AddListener(SeaResources, SeaButtons, 0, index));
+                    _seaButtons[i].onClick.AddListener(() => AddListener(_seaResources, _seaButtons, 0, index));
 
-                    ResourcesCountText[SeaResources[i].GetKey()] =
-                        SeaButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
+                    _resourcesCountText[_seaResources[i].GetKey()] =
+                        _seaButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
                 }
             }
         }
 
         private void FillExpeditionResources()
         {
-            ExpeditionButtons = ExpeditionContainer.GetComponentsInChildren<Button>();
-            for (int i = 0; i < ExpeditionButtons.Length; i++)
+            _expeditionButtons = ExpeditionContainer.GetComponentsInChildren<Button>();
+            for (int i = 0; i < _expeditionButtons.Length; i++)
             {
-                if (ExpeditionResources.Length <= i)
+                if (_expeditionResources.Length <= i)
                 {
-                    ExpeditionButtons[i].transform.parent.transform.parent.gameObject.SetActive(false);
+                    _expeditionButtons[i].transform.parent.transform.parent.gameObject.SetActive(false);
                 }
                 else
                 {
-                    ExpeditionButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
-                    ExpeditionButtons[i].image.sprite = ExpeditionResources[i].GetSprite();
+                    _expeditionButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
+                    _expeditionButtons[i].image.sprite = _expeditionResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
-                    aux.selectedSprite = ExpeditionResources[i].GetSelectedSprite();
-                    aux.disabledSprite = ExpeditionResources[i].GetSprite();
-                    ExpeditionButtons[i].spriteState = aux;
+                    aux.selectedSprite = _expeditionResources[i].GetSelectedSprite();
+                    aux.disabledSprite = _expeditionResources[i].GetSprite();
+                    _expeditionButtons[i].spriteState = aux;
                     int index = i;
-                    ExpeditionButtons[i].onClick
-                        .AddListener(() => AddListener(ExpeditionResources, ExpeditionButtons, 1, index));
+                    _expeditionButtons[i].onClick
+                        .AddListener(() => AddListener(_expeditionResources, _expeditionButtons, 1, index));
 
-                    ResourcesCountText[ExpeditionResources[i].GetKey()] =
-                        ExpeditionButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
+                    _resourcesCountText[_expeditionResources[i].GetKey()] =
+                        _expeditionButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
                 }
             }
         }
 
         private void FillFishResources()
         {
-            FishButtons = FishContainer.GetComponentsInChildren<Button>();
-            for (int i = 0; i < FishButtons.Length; i++)
+            _fishButtons = FishContainer.GetComponentsInChildren<Button>();
+            for (int i = 0; i < _fishButtons.Length; i++)
             {
-                if (FishResources.Length <= i)
+                if (_fishResources.Length <= i)
                 {
-                    FishButtons[i].transform.parent.transform.parent.gameObject.SetActive(false);
+                    _fishButtons[i].transform.parent.transform.parent.gameObject.SetActive(false);
                 }
                 else
                 {
-                    FishButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
-                    FishButtons[i].image.sprite = FishResources[i].GetSprite();
+                    _fishButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
+                    _fishButtons[i].image.sprite = _fishResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
-                    aux.disabledSprite = FishResources[i].GetSprite();
-                    aux.selectedSprite = FishResources[i].GetSelectedSprite();
-                    FishButtons[i].spriteState = aux;
+                    aux.disabledSprite = _fishResources[i].GetSprite();
+                    aux.selectedSprite = _fishResources[i].GetSelectedSprite();
+                    _fishButtons[i].spriteState = aux;
                     int index = i;
-                    FishButtons[i].onClick.AddListener(() => AddListener(FishResources, FishButtons, 2, index));
+                    _fishButtons[i].onClick.AddListener(() => AddListener(_fishResources, _fishButtons, 2, index));
 
-                    ResourcesCountText[FishResources[i].GetKey()] =
-                        FishButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
+                    _resourcesCountText[_fishResources[i].GetKey()] =
+                        _fishButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
                 }
             }
         }
@@ -189,7 +189,7 @@ namespace GGG.Components.UI
 
         public void HandleSeaToggle()
         {
-            if (active == 0) return;
+            if (_active == 0) return;
 
             SeaButton.image.sprite = SeaButton.spriteState.selectedSprite;
             ExpeditionButton.image.sprite = ExpeditionButton.spriteState.disabledSprite;
@@ -198,12 +198,12 @@ namespace GGG.Components.UI
             ExpeditionContainer.SetActive(false);
             FishContainer.SetActive(false);
 
-            active = 0;
+            _active = 0;
         }
 
         public void HandleExpeditionToggle()
         {
-            if (active == 1) return;
+            if (_active == 1) return;
 
             ExpeditionButton.image.sprite = ExpeditionButton.spriteState.selectedSprite;
             SeaButton.image.sprite = SeaButton.spriteState.disabledSprite;
@@ -212,12 +212,12 @@ namespace GGG.Components.UI
             ExpeditionContainer.SetActive(true);
             FishContainer.SetActive(false);
 
-            active = 1;
+            _active = 1;
         }
 
         public void HandleFishToggle()
         {
-            if (active == 2) return;
+            if (_active == 2) return;
 
             FishButton.image.sprite = FishButton.spriteState.selectedSprite;
             ExpeditionButton.image.sprite = ExpeditionButton.spriteState.disabledSprite;
@@ -227,17 +227,22 @@ namespace GGG.Components.UI
             ExpeditionContainer.SetActive(false);
             FishContainer.SetActive(true);
 
-            active = 2;
+            _active = 2;
         }
 
         public void OpenInventory()
         {
             if (_open) return;
-            
+
             _viewport.SetActive(true);
             _open = true;
             GameManager.Instance.OnUIOpen();
-
+            
+            foreach (string key in _resourcesCountText.Keys)
+            {
+                _resourcesCountText[key].SetText(_player.GetResourceCount(key).ToString());
+            }
+            
             transform.DOMoveY(Screen.height * 0.5f, 0.5f).SetEase(Ease.OutBounce);
         }
 

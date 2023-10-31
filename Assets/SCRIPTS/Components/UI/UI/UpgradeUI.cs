@@ -1,15 +1,14 @@
 using GGG.Components.Buildings;
 using GGG.Components.Player;
+using GGG.Components.Core;
+using GGG.Shared;
+using GGG.Input;
 
+using System;
+using TMPro;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using GGG.Components.Core;
-using GGG.Shared;
-using System.Collections.Generic;
-using System.Globalization;
-using TMPro;
 
 namespace GGG.Components.UI
 {
@@ -30,6 +29,7 @@ namespace GGG.Components.UI
         [SerializeField] private GameObject InteractParent;
 
         private PlayerManager _player;
+        private InputManager _input;
         private Resource _sellResource;
         private GameObject _panel;
         private BuildButton[] _buttons;
@@ -38,12 +38,11 @@ namespace GGG.Components.UI
         private BuildingComponent _selectedBuilding;
 
         private bool _open;
-        
-        public Action OnMenuOpen;
 
         private void Start()
         {
             _player = PlayerManager.Instance;
+            _input = InputManager.Instance;
             _sellResource = _player.GetMainResource();
 
             _panel = transform.GetChild(0).gameObject;
@@ -59,12 +58,6 @@ namespace GGG.Components.UI
 
             TileManager.OnTilesStateLoaded += UpdateBuildings;
 
-            HexTile[] tiles = FindObjectsOfType<HexTile>();
-
-            foreach (HexTile tile in tiles) {
-                // tile.OnHexDeselect += Close;
-            }
-
             SellButton.onClick.AddListener(OnSellButton);
             UpgradeButton.onClick.AddListener(OnUpgradeButton);
             CloseButton.onClick.AddListener(() => Close(true));
@@ -72,6 +65,11 @@ namespace GGG.Components.UI
 
         private void Update()
         {
+            if (_open && _input.Escape()) {
+                Close(true);
+                return;
+            }
+            
             if (!_selectedBuilding) return;
             if (!_selectedBuilding.GetBuild().CanUpgraded())
             {
@@ -83,15 +81,13 @@ namespace GGG.Components.UI
             ResourceCost[] cost = _selectedBuilding.GetBuild().GetUpgradeCost();
             int currentLevel = _selectedBuilding.GetCurrentLevel() - 1;
             
-            for (int i = 0; i < cost[currentLevel].GetCostsAmount(); i++)
-            {
-                if (_player.GetResourceCount(cost[currentLevel].GetResource(i).GetKey()) <
-                    cost[currentLevel].GetCost(i))
-                {
-                    UpgradeButton.interactable = false;
-                    UpgradeButton.image.color = new Color(0.81f, 0.84f, 0.81f, 0.9f);
-                    return;
-                }
+            for (int i = 0; i < cost[currentLevel].GetCostsAmount(); i++) {
+                if (_player.GetResourceCount(cost[currentLevel].GetResource(i).GetKey()) >=
+                    cost[currentLevel].GetCost(i)) continue;
+                
+                UpgradeButton.interactable = false;
+                UpgradeButton.image.color = new Color(0.81f, 0.84f, 0.81f, 0.9f);
+                return;
             }
 
             UpgradeButton.interactable = true;
@@ -107,8 +103,9 @@ namespace GGG.Components.UI
             };
         }
 
-        private void UpdateBuildings(BuildingComponent[] buildings)
-        {
+        private void UpdateBuildings(BuildingComponent[] buildings) {
+            if (buildings == null) return;
+            
             foreach (BuildingComponent building in buildings)
             {
                 building.OnBuildInteract += (x, y) =>
@@ -197,11 +194,11 @@ namespace GGG.Components.UI
             else UpgradeButton.gameObject.SetActive(false);
 
             CloseButton.gameObject.SetActive(true);
+            GameManager.Instance.OnUIOpen();
             _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
-            OnMenuOpen?.Invoke();
         }
 
-        public void Close(bool resumeGame)
+        private void Close(bool resumeGame)
         {
             if(!_open) return;
 

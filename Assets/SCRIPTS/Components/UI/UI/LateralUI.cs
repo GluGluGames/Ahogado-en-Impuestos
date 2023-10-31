@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using GGG.Components.Core;
+using GGG.Input;
 using UnityEngine;
 using UnityEngine.UI;
 using GGG.Shared;
@@ -14,12 +15,14 @@ namespace GGG.Components.UI
         [SerializeField] private Button InventoryButton;
         [SerializeField] private Button ExpeditionButton;
 
+        private InputManager _input;
         private InventoryUI _inventory;
 
         private bool _open;
 
         private void Start()
         {
+            _input = InputManager.Instance;
             _inventory = FindObjectOfType<InventoryUI>();
             
             OpenButton.onClick.AddListener(ToggleMenu);
@@ -30,6 +33,12 @@ namespace GGG.Components.UI
                 HUDManager.Instance.ChangeScene(SceneIndexes.MINIGAME, SceneIndexes.GAME_SCENE);
                 GameManager.Instance.OnUIClose();
             });
+        }
+
+        private void Update() {
+            if (!_input.Escape()) return;
+            
+            ToggleMenu();
         }
 
         private void ToggleMenu()

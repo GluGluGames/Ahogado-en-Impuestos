@@ -5,19 +5,20 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using GGG.Components.Core;
+using GGG.Input;
 
 namespace GGG.Components.UI {
     public class BuildingUI : MonoBehaviour {
         [SerializeField] private Button CloseButton;
 
+        private InputManager _input;
         private GameObject _viewport;
         private BuildButton[] _buttons;
         private bool _open;
         private HexTile _selectedTile;
-        
-        public Action OnMenuOpen;
-    
+
         private void Start() {
+            _input = InputManager.Instance;
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             
@@ -42,16 +43,11 @@ namespace GGG.Components.UI {
             transform.position = new Vector3(0, -400f, 0);
         }
 
-        private void LateUpdate()
-        {
-            if (_open && !_viewport.activeInHierarchy)
-            {
-                // TODO - Solve bug where the interface doesn't open and the state is ON_UI
-                Close();
-            }
-        }
+        private void Update() {
+            if (!_open || !_input.Escape()) return;
 
-        public bool IsOpen() { return _open; }
+            Close();
+        }
 
         private void Open(HexTile tile) {
             if (_open || tile.GetTileType() != TileType.Standard || !tile.TileEmpty()) {
@@ -62,11 +58,12 @@ namespace GGG.Components.UI {
             _open = true;
             _viewport.SetActive(true);
             CloseButton.gameObject.SetActive(true);
+            GameManager.Instance.OnUIOpen();
+            
             transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
-            OnMenuOpen?.Invoke();
         }
 
-        public void Close() {
+        private void Close() {
             if (!_open) return;
             
             transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine).onComplete += () => {
