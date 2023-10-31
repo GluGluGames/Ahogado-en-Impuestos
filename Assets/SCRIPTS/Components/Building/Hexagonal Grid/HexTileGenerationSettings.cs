@@ -8,7 +8,8 @@ namespace GGG.Components.Buildings
     {
         Standard,
         Water,
-        Cliff
+        Cliff,
+        Walkable
     }
 
     [CreateAssetMenu(menuName = "TileGen/GenerationSettings")]
@@ -17,6 +18,7 @@ namespace GGG.Components.Buildings
         [SerializeField] private GameObject Standar;
         [SerializeField] private GameObject Water;
         [SerializeField] private GameObject Cliff;
+        [SerializeField] private GameObject Walkable;
 
         public GameObject GetTile(TileType tileType)
         {
@@ -25,6 +27,7 @@ namespace GGG.Components.Buildings
                 case TileType.Standard: return Standar;
                 case TileType.Water: return Water;
                 case TileType.Cliff: return Cliff;
+                case TileType.Walkable: return Walkable;
             }
             return null;
         }
