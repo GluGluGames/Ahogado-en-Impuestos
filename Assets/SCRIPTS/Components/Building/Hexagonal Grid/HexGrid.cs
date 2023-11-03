@@ -55,7 +55,7 @@ namespace GGG.Components.Buildings {
                         GridInitialPosition, new Vector2Int(x, y), Radius, IsFlatTopped);
                     hexTile.settings = Settings;
                     hexTile.RollTileType();
-                    hexTile.AddTile();
+                    hexTile.AddTile(hexTile.tileType);
 
                     // Assign its offset coordinates for human parsing (Column, Row)
                     hexTile.offsetCoordinate = new Vector2Int(x, y);

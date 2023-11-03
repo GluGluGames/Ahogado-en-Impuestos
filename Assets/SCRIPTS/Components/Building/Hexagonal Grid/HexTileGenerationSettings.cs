@@ -10,7 +10,8 @@ namespace GGG.Components.Buildings
     {
         Standard,
         Water,
-        Cliff
+        Cliff,
+        Build
     }
 
     [CreateAssetMenu(menuName = "TileGen/GenerationSettings")]
@@ -19,16 +20,18 @@ namespace GGG.Components.Buildings
         [SerializeField] private GameObject Standar;
         [SerializeField] private GameObject Water;
         [SerializeField] private GameObject Cliff;
+        [SerializeField] private GameObject Build;
 
         public GameObject GetTile(TileType tileType)
         {
-            switch (tileType)
+            return tileType switch
             {
-                case TileType.Standard: return Standar;
-                case TileType.Water: return Water;
-                case TileType.Cliff: return Cliff;
-            }
-            return null;
+                TileType.Standard => Standar,
+                TileType.Water => Water,
+                TileType.Cliff => Cliff,
+                TileType.Build => Build,
+                _ => null
+            };
         }
     }
 }

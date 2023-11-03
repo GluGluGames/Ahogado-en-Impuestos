@@ -78,7 +78,7 @@ namespace GGG.Components.Buildings
                 }
                 tilePrefab = null;
 
-                AddTile();
+                AddTile(tileType);
                 _isDirty = false;
             }
 
@@ -101,8 +101,13 @@ namespace GGG.Components.Buildings
         public void SetBuilding(BuildingComponent building)
         {
             _currentBuilding = building;
-            if(building) 
+            if(building)
+            {
                 building.SetTile(this);
+                for (int i = 0; i < transform.childCount; i++)
+                    Destroy(transform.GetChild(i).gameObject);
+                AddTile(TileType.Build);
+            }
             _isEmpty = !building;
         }
 
@@ -114,7 +119,7 @@ namespace GGG.Components.Buildings
             tileType = type;
             for (int i = 0; i < transform.childCount; i++)
                 Destroy(transform.GetChild(i).gameObject);
-            AddTile();
+            AddTile(type);
         }
 
         public int GetClearCost()
@@ -131,9 +136,10 @@ namespace GGG.Components.Buildings
             tileType = (TileType)Random.Range(0, 3);
         }
 
-        public void AddTile()
+        public void AddTile(TileType type)
         {
-            tilePrefab = Instantiate(settings.GetTile(tileType), transform.position, Quaternion.Euler(0f, 0f, 0f), transform);
+            tilePrefab = Instantiate(settings.GetTile(type), transform.position, 
+                Quaternion.Euler(type == TileType.Build ? -90f : 0f, 0f, 0f), transform);
 
             if (gameObject.GetComponent<MeshCollider>() == null)
             {
