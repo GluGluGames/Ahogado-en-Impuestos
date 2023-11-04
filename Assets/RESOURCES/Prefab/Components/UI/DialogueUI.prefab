@@ -92,20 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9717333488de89944b257da8adadd188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogueLines:
-  - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum laoreet ligula
-    in semper pulvinar. Pellentesque vulputate congue mattis. Ut sapien tortor, fermentum
-    non ornare sed, tristique nec odio. Curabitur sed aliquam augue, non imperdiet
-    diam. Nulla a magna sem. Fusce ultrices faucibus sagittis. Sed pharetra convallis
-    nisl, eu ullamcorper enim ornare nec. Etiam sed gravida turpis. Aenean accumsan
-    euismod efficitur. Nunc sit amet neque sem. In in dapibus leo.
-  - This is me a a a a a a a a a a a a a  a a a a a a a a a a a
   TypingSpeed: 0.1
-  AvatarList:
-  - {fileID: 21300000, guid: 99353ba9aaf065d489390912ef172dae, type: 3}
+  DialogueText: {fileID: 0}
   Avatar: {fileID: 5188359122456171814}
-  CharacterNames:
-  - Ares
   NameText: {fileID: 4708716558371099527}
 --- !u!1 &673925020153968731
 GameObject:
@@ -117,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6044299635641749083}
   - component: {fileID: 5543212910820009711}
+  - component: {fileID: 677593481414485352}
   m_Layer: 5
   m_Name: DialogueUI
   m_TagString: Untagged
@@ -159,6 +149,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Viewport: {fileID: 556094110632139549}
   Avatar: {fileID: 5188359122456171814}
+--- !u!114 &677593481414485352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673925020153968731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9717333488de89944b257da8adadd188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TypingSpeed: 0.1
+  DialogueText: {fileID: 3565917290214202}
+  Avatar: {fileID: 5188359122456171814}
+  NameText: {fileID: 4708716558371099527}
 --- !u!1 &1850216262462731131
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +332,7 @@ GameObject:
   - component: {fileID: 1437003181279187206}
   - component: {fileID: 976854271335306319}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,7 +498,7 @@ GameObject:
   - component: {fileID: 2467867159660315894}
   - component: {fileID: 1708235829423076291}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DialogueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

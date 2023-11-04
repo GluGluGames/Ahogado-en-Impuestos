@@ -15,20 +15,20 @@ namespace GGG.Components.Dialogue {
             _dialogue.DialogueStart += DialogueOpen;
             _dialogue.DialogueEnd += DialogueClose;
 
-            transform.position = new Vector3(0f, -400f, 0f);
+            transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.5f);
             Avatar.color = new Color(1f, 1f, 1f, 0f);
         }
 
         private void DialogueOpen() {
             Viewport.SetActive(true);
-            transform.DOMove(new Vector3(0f, 0f, 0f), 1f).SetEase(Ease.OutBounce);
+            transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 1f).SetEase(Ease.InSine);
             Avatar.DOFade(1f, 2f);
         }
 
         private void DialogueClose() {
 
             Avatar.DOFade(0f, 0.5f);
-            transform.DOMove(new Vector3(0f, -400f, 0f), 0.5f).SetEase(Ease.OutFlash).onComplete += () => { 
+            transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * -0.5f), 0.5f).SetEase(Ease.OutSine).onComplete += () => { 
                 Viewport.SetActive(false); 
             };
 

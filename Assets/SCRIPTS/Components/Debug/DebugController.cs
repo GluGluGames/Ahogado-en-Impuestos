@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using GGG.Classes.Debug;
 using GGG.Components.Core;
 using GGG.Components.Museum;
@@ -7,7 +5,10 @@ using GGG.Components.Player;
 using GGG.Components.Shop;
 using GGG.Input;
 using GGG.Shared;
+
 using UnityEngine;
+using System.Collections.Generic;
+using GGG.Components.Taxes;
 
 namespace GGG.Components.Debug
 {
@@ -18,6 +19,7 @@ namespace GGG.Components.Debug
         private static DebugCommand SHOW_RESOURCES;
         private static DebugCommand OPEN_SHOP;
         private static DebugCommand OPEN_MUSEUM;
+        private static DebugCommand TRIGGER_TAXES;
         private static List<object> _commandList;
         
         private InputManager _inputManager;
@@ -73,7 +75,8 @@ namespace GGG.Components.Debug
                 (resourceKey, resourceNumber) => {
                     if (!_playerManager.GetResource(resourceKey)) return;
                     
-                    _playerManager.AddResource(resourceKey, resourceNumber); 
+                    OnDebugConsole();
+                    _playerManager.AddResource(resourceKey, resourceNumber);
                 });
 
             SHOW_RESOURCES = new DebugCommand("show_resources", "Shows the list of resources", "show_resources", () =>
@@ -93,6 +96,12 @@ namespace GGG.Components.Debug
                 OnDebugConsole();
                 FindObjectOfType<MuseumUI>().Open();
             });
+            
+            TRIGGER_TAXES = new DebugCommand("trigger_taxes", "Poseidon will tax you", "trigger_taxes", () =>
+            {
+                OnDebugConsole();
+                FindObjectOfType<TaxManager>().TriggerTaxes();
+            });
                 
             _commandList = new List<object>
             {
@@ -101,6 +110,7 @@ namespace GGG.Components.Debug
                 SHOW_RESOURCES,
                 OPEN_SHOP,
                 OPEN_MUSEUM,
+                TRIGGER_TAXES,
             };
         }
 
