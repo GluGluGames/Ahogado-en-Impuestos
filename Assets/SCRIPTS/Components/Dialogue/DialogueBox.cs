@@ -72,6 +72,7 @@ namespace GGG.Components.Dialogue
                 if(_currentDialogue.IsMoreAvatars()) Avatar.sprite = _currentDialogue.GetNextAvatar();
                 if(_currentDialogue.IsMoreNames()) NameText.SetText(_currentDialogue.GetNextName());
                 
+                _delta = _DIALOGUE_THRESHOLD;
                 StartCoroutine(TypeText(_currentDialogue.GetNextDialogue()));
             }
             else {

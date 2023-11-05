@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using GGG.Components.Core;
 using UnityEngine.UI;
 
 namespace GGG.Components.Dialogue {
@@ -14,22 +15,24 @@ namespace GGG.Components.Dialogue {
 
             _dialogue.DialogueStart += DialogueOpen;
             _dialogue.DialogueEnd += DialogueClose;
-
-            transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.5f);
+            
+            Viewport.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.3f);
             Avatar.color = new Color(1f, 1f, 1f, 0f);
         }
 
         private void DialogueOpen() {
             Viewport.SetActive(true);
-            transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 1f).SetEase(Ease.InSine);
+            Viewport.transform.DOMoveY(Screen.height * 0.145f, 1f).SetEase(Ease.InSine);
             Avatar.DOFade(1f, 2f);
+            GameManager.Instance.OnUIOpen();
         }
 
         private void DialogueClose() {
 
             Avatar.DOFade(0f, 0.5f);
-            transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * -0.5f), 0.5f).SetEase(Ease.OutSine).onComplete += () => { 
+            Viewport.transform.DOMoveY(Screen.height * -0.3f, 1f).SetEase(Ease.OutSine).onComplete += () => { 
                 Viewport.SetActive(false); 
+                GameManager.Instance.OnUIClose();
             };
 
         }

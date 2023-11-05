@@ -13,6 +13,7 @@ namespace GGG.Components.Taxes
         [SerializeField] private DialogueText Dialogue;
 
         private DialogueBox _dialogueBox;
+        private TaxUI _taxUI;
         private float _intervalDelta;
         private bool _stopInterval;
 
@@ -21,10 +22,14 @@ namespace GGG.Components.Taxes
             _dialogueBox = FindObjectOfType<DialogueBox>();
             if (!_dialogueBox) throw new Exception("No dialogue box found");
 
+            _taxUI = GetComponent<TaxUI>();
+
             _dialogueBox.DialogueStart += () => _stopInterval = true;
-            _dialogueBox.DialogueEnd += () => _stopInterval = false;
+            _taxUI.OnOptionSelected += () => _stopInterval = false;
             
             _intervalDelta = TaxesInterval * 60;
+            _dialogueBox.DialogueEnd += _taxUI.Open;
+            _taxUI.OnOptionSelected += () => _dialogueBox.DialogueEnd -= _taxUI.Open;
         }
 
         private void Update()

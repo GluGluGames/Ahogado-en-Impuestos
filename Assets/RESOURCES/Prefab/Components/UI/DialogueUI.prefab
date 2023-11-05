@@ -37,11 +37,11 @@ RectTransform:
   m_Father: {fileID: 6044299635641749083}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 157.29498}
   m_SizeDelta: {x: 1920, y: 314.58997}
-  m_Pivot: {x: -0.00000004656613, y: -0.000000059604645}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9016096394952076828
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9717333488de89944b257da8adadd188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypingSpeed: 0.1
+  TypingSpeed: 0.05
   DialogueText: {fileID: 3565917290214202}
   Avatar: {fileID: 5188359122456171814}
   NameText: {fileID: 4708716558371099527}
@@ -560,7 +560,7 @@ MonoBehaviour:
     accumsan euismod efficitur. Nunc sit amet neque sem. In in dapibus leo.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -584,15 +584,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.7
+  m_fontSize: 35.4
   m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 8
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
