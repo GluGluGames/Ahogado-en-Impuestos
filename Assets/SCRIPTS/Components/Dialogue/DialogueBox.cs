@@ -1,9 +1,10 @@
-using System;
 using GGG.Input;
+using GGG.Classes.Dialogue;
 
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,25 +14,22 @@ namespace GGG.Components.Dialogue
 {
     public class DialogueBox : MonoBehaviour {
         [Header("Dialogue")]
-        [SerializeField] [TextArea] private List<string> DialogueLines;
         [SerializeField] private float TypingSpeed = 0.1f;
+        [SerializeField] private TMP_Text DialogueText;
 
         [Space(5)] 
         [Header("Other Fields")] 
-        [SerializeField] private List<Sprite> AvatarList;
         [SerializeField] private Image Avatar;
-        [SerializeField] private List<string> CharacterNames;
         [SerializeField] private TMP_Text NameText;
 
         private InputManager _input;
-        private TMP_Text _text;
+
+        private const float _DIALOGUE_THRESHOLD = 1f;
         
-        private int _lineIdx;
-        private int _avatarIdx;
-        private int _characterIdx;
-        private bool _started;
-        private bool _finished;
+        private DialogueText _currentDialogue;
         private bool _currentTextFinished;
+        private bool _started;
+        private float _delta;
         private StringBuilder _currentText;
 
         public Action DialogueStart;
@@ -39,48 +37,43 @@ namespace GGG.Components.Dialogue
 
         private void Start() {
             _input = InputManager.Instance;
-            _text = GetComponent<TMP_Text>();
-
-            _started = false;
-            _finished = false;
-            _currentTextFinished = false;
-            
-            _lineIdx = 0;
-            _avatarIdx = 0;
-            _characterIdx = 0;
-            
-            NameText.SetText(CharacterNames[_characterIdx]);
-            Avatar.sprite = AvatarList[_avatarIdx];
+            _delta = _DIALOGUE_THRESHOLD;
         }
 
         private void Update() {
-            if (!_started || _finished) return;
+            if (_currentDialogue == null) return;
             
             OnDialogueContinue();
         }
 
-        private void OnDialogueStart() {
-            if (_finished || _started) return;
+        public void StartDialogue() {
+            if (_started) return;
             
-            StartCoroutine(TypeText(DialogueLines[_lineIdx++]));
             DialogueStart.Invoke();
+            StartCoroutine(TypeText(_currentDialogue.GetNextDialogue()));
             _started = true;
         }
 
         private void OnDialogueContinue() {
+            if (_delta > 0)
+            {
+                _delta -= Time.deltaTime;
+                return;
+            }
+            
             if (!_input.MouseClick()) return;
             
-            if (_lineIdx < DialogueLines.Count) {
+            if (!_currentDialogue.DialogueEnd()) {
                 if (!_currentTextFinished) {
                     ShowAllText();
                     return;
                 }
 
-                StartCoroutine(TypeText(DialogueLines[_lineIdx++]));
-                if(_avatarIdx + 1 < AvatarList.Count)
-                    Avatar.sprite = AvatarList[++_avatarIdx];
-                if(_characterIdx + 1 < CharacterNames.Count)
-                    NameText.SetText(CharacterNames[++_characterIdx]);
+                if(_currentDialogue.IsMoreAvatars()) Avatar.sprite = _currentDialogue.GetNextAvatar();
+                if(_currentDialogue.IsMoreNames()) NameText.SetText(_currentDialogue.GetNextName());
+                
+                _delta = _DIALOGUE_THRESHOLD;
+                StartCoroutine(TypeText(_currentDialogue.GetNextDialogue()));
             }
             else {
                 if (!_currentTextFinished) {
@@ -93,15 +86,17 @@ namespace GGG.Components.Dialogue
         }
 
         private void OnDialogueEnd() {
-            _finished = true;
+            _started = false;
+            _delta = _DIALOGUE_THRESHOLD;
+            _currentDialogue.ResetDialogue();
+            _currentDialogue = null;
             DialogueEnd?.Invoke();
         }
 
-        private void OnValidate() {
-            if (DialogueLines.Count <= 0) return;
-
-            if (_text == null) _text = GetComponentInChildren<TMP_Text>();
-            _text.SetText(DialogueLines[0]);
+        public void AddNewDialogue(DialogueText dialogue)
+        {
+            _currentDialogue = dialogue;
+            StartDialogue();
         }
 
         private IEnumerator TypeText(string text) {
@@ -110,7 +105,7 @@ namespace GGG.Components.Dialogue
             
             for (int i = 0; i < text.Length; i++) {
                 _currentText.Append(text[i]);
-                _text.SetText(_currentText.ToString());
+                DialogueText.SetText(_currentText.ToString());
                 yield return new WaitForSeconds(TypingSpeed);
             }
             
@@ -119,7 +114,7 @@ namespace GGG.Components.Dialogue
 
         private void ShowAllText() {
             StopAllCoroutines();
-            _text.SetText(DialogueLines[_lineIdx - 1]);
+            DialogueText.SetText(_currentDialogue.GetPreviousDialogue());
             _currentTextFinished = true;
         }
     }
