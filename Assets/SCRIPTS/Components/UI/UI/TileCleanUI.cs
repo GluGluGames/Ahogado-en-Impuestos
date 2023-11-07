@@ -75,7 +75,7 @@ namespace GGG.Components.UI
 
         private void Open(HexTile tile)
         {
-            if (_open || tile.GetTileType() == TileType.Standard)
+            if (_open || tile.GetTileType() is TileType.Standard or TileType.Build)
                 return;
 
             _viewport.SetActive(true);

@@ -116,6 +116,8 @@ namespace GGG.Components.Buildings
 
         public void SetTileType(TileType type)
         {
+            if (type == tileType) return;
+            
             tileType = type;
             for (int i = 0; i < transform.childCount; i++)
                 Destroy(transform.GetChild(i).gameObject);
@@ -140,6 +142,8 @@ namespace GGG.Components.Buildings
         {
             tilePrefab = Instantiate(settings.GetTile(type), transform.position, 
                 Quaternion.Euler(type == TileType.Build ? -90f : 0f, 0f, 0f), transform);
+
+            tileType = type;
 
             if (gameObject.GetComponent<MeshCollider>() == null)
             {
