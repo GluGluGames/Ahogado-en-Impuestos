@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 using GGG.Components.Core;
@@ -20,6 +21,11 @@ namespace GGG.Components.Dialogue {
             Avatar.color = new Color(1f, 1f, 1f, 0f);
         }
 
+        private void OnDisable() {
+            _dialogue.DialogueStart -= DialogueOpen;
+            _dialogue.DialogueEnd -= DialogueClose;
+        }
+
         private void DialogueOpen() {
             Viewport.SetActive(true);
             Viewport.transform.DOMoveY(Screen.height * 0.145f, 1f).SetEase(Ease.InSine);
@@ -31,10 +37,10 @@ namespace GGG.Components.Dialogue {
 
             Avatar.DOFade(0f, 0.5f);
             Viewport.transform.DOMoveY(Screen.height * -0.3f, 1f).SetEase(Ease.OutSine).onComplete += () => { 
-                Viewport.SetActive(false); 
-                GameManager.Instance.OnUIClose();
+                Viewport.SetActive(false);
             };
 
+            GameManager.Instance.OnUIClose();
         }
     }
 }

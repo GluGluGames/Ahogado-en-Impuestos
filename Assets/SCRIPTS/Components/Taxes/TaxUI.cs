@@ -6,6 +6,7 @@ using TMPro;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using GGG.Components.Neptune;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,8 +23,6 @@ namespace GGG.Components.Taxes
         [SerializeField] private Button PayButton;
         [SerializeField] private Button NotPayButton;
 
-        private const int _INITIAL_POSITION = -1100;
-
         private PlayerManager _player;
         private readonly Dictionary<Resource, int> _taxResources = new();
         private readonly System.Random _random = new();
@@ -38,6 +37,8 @@ namespace GGG.Components.Taxes
             
             PayButton.onClick.AddListener(PayTaxes);
             NotPayButton.onClick.AddListener(NotPayTaxes);
+
+            transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 1.2f);
         }
 
         public void Open()
@@ -46,18 +47,17 @@ namespace GGG.Components.Taxes
 
             _open = true;
             Viewport.SetActive(true);
-            GameManager.Instance.OnUIOpen();
-            
             GenerateTaxes();
 
             transform.DOMoveY(Screen.height * 0.5f, 0.75f).SetEase(Ease.OutBounce);
+            GameManager.Instance.OnUIOpen();
         }
 
         private void Close()
         {
             if (!_open) return;
 
-            transform.DOMoveY(Screen.height * 0.5f + _INITIAL_POSITION, 0.75f).SetEase(Ease.OutBounce).onComplete +=
+            transform.DOMoveY(Screen.height * 1.2f, 0.75f).SetEase(Ease.OutBounce).onComplete +=
             () =>
             {
                 _open = false;
@@ -111,7 +111,7 @@ namespace GGG.Components.Taxes
 
         private void NotPayTaxes()
         {
-            // TODO - DESTROY RANDOM BUILDING
+            NeptuneManager.Instance.DestroyRandomStructure();
             Close();
         }
     }

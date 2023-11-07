@@ -14,18 +14,21 @@ namespace GGG.Components.Neptune
     public class NeptuneManager : MonoBehaviour
     {
         #region singleton
-        private NeptuneManager Instance;
-        
+        public static NeptuneManager Instance;
+
+        private void Awake() {
+            if (Instance) return;
+
+            Instance = this;
+        }
+
         #endregion
 
-        private int secondsPassed = 0;
-        [SerializeField] private int firstEvent = 5;
-        [SerializeField] private int request = 10;
-        private Coroutine TickCoroutine;
-        private Action OnEvent;
+        private List<BuildingComponent> _buildings;
 
-        private void Start()
-        {
+        private void Start() {
+            _buildings = BuildingManager.Instance.GetBuildings();
+            /*
             Instance = this;
             OnEvent += () =>
             {
@@ -40,7 +43,11 @@ namespace GGG.Components.Neptune
                 }
             };
             TickCoroutine = StartCoroutine(Tick());
+            */
         }
+        
+        /*
+        
         private IEnumerator Tick()
         {
             if(secondsPassed == firstEvent)
@@ -52,6 +59,7 @@ namespace GGG.Components.Neptune
             secondsPassed++;
             StartCoroutine(Tick());
         }
+        
 
         private void OnDisable()
         {
@@ -62,14 +70,14 @@ namespace GGG.Components.Neptune
         {
             return PlayerManager.Instance.GetResourceCount("Seaweed") >= request;
         }
+        */
 
-        private void destroyRandomStructure()
-        {
-            BuildingComponent[] buildings = BuildingManager.Instance.GetComponentsInChildren<BuildingComponent>();
-            int rand = Random.Range(0, buildings.Length);
-            BuildingComponent building = buildings[rand];
+        public void DestroyRandomStructure() {
+            if (_buildings.Count <= 0) return;
+            
+            int rand = Random.Range(0, _buildings.Count);
+            BuildingComponent building = _buildings[rand];
             building.GetCurrentTile().DestroyBuilding();
-            Destroy(building);
         }
     }
 }

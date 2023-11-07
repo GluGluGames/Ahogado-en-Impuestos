@@ -209,7 +209,7 @@ namespace GGG.Components.Core
 
             yield return new WaitForSeconds(0.05f);
 
-            if (_input.IsSecondaryHolding()) {
+            if (_input.IsSecondaryTouching()) {
                 _pointerEventData.position = _input.TouchPosition();
                 _graphicRaycaster.Raycast(_pointerEventData, _results);
 

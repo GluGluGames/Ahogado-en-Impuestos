@@ -199,8 +199,9 @@ namespace GGG.Components.Buildings
             tile.fow = fow;
             tile.gameObject.layer = 7; // Layer is "Hidden"
 
-            tile.transform.GetChild(0).gameObject.layer = 7;
-
+            tile.gameObject.transform.GetChild(0).gameObject.layer = 7;
+            for (int i = 0; i < tile.gameObject.transform.GetChild(0).childCount; i++)
+                tile.gameObject.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.layer = 7;
         }
 
         /// <summary>

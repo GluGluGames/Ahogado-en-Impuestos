@@ -81,6 +81,8 @@ namespace GGG.Components.Buildings
             PlayerPrefs.Save();
         }
 
+        public List<BuildingComponent> GetBuildings() => _buildings;
+
         public void AddBuilding(BuildingComponent build) => _buildings.Add(build);
 
         public void SaveBuildings() {
