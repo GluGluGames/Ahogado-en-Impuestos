@@ -712,3 +712,29 @@ La administración eficiente de nuestra estructura de costos garantiza una asign
 - **Paga lo que puedas**: se introducirá una opción de "Paga lo que Puedas" que otorgará a los jugadores la libertad de determinar cuánto desean pagar por los juegos. Esto promoverá la accesibilidad y permitirá a los usuarios contribuir según sus capacidades financieras.
 
 La estrategia de ingresos se fundamenta en la diversificación y la adaptabilidad, lo que nos capacita para generar beneficios mientras mantenemos un firme compromiso con la oferta de aprendizaje y entretenimiento accesible para una amplia audiencia.
+
+## 12. Mechanics,Dynamics,Aesthetics?
+### **Mecánicas (Mechanics):**   
+En el juego, las mecánicas giran en torno a la gestión de recursos, y estos recursos son el núcleo de la experiencia del jugador. Los recursos principales incluyen algas, corales, perlas, conchas y caracolas, y son esenciales para todas las acciones dentro y fuera de la ciudad.
+
+Construcción y Gestión: Los jugadores deben utilizar estos recursos para construir, destruir, reparar y mejorar edificios dentro de la ciudad. Cada edificio tiene su propio coste, lo que requiere que los jugadores tomen decisiones estratégicas sobre cómo asignar recursos de manera eficiente. Algunos edificios son más caros de construir pero ofrecen un mayor rendimiento, mientras que otros actúan como salvavidas en momentos críticos. Cada edificio tiene funciones específicas que contribuyen al progreso de la ciudad.
+
+Recursos en Expediciones: Fuera de la ciudad, los jugadores pueden navegar libremente por diferentes escenarios durante las expediciones. La exploración es esencial para obtener recursos y avanzar en la historia del juego. La generación de recursos varía en cada expedición, lo que requiere que los jugadores adapten sus estrategias a las condiciones cambiantes. Además, durante las expediciones, los jugadores pueden descubrir mapas y mejoras de edificios, lo que contribuye al sentido de descubrimiento.
+
+### **Dinámicas (Dynamics):**   
+Las dinámicas del juego se centran en los desafíos y la gestión eficiente de recursos. Los elementos clave que influyen en estas dinámicas son:
+
+Desafío en la Administración de Recursos: Los jugadores deben equilibrar los costos de diferentes recursos y asegurarse de que tienen suficientes algas para cumplir con las demandas de Poseidón y evitar la destrucción de edificios, lo que ralentizaría el progreso.
+
+Decisión Estratégica: Los jugadores también deben decidir en qué edificios invertir para mejorar el rendimiento y si deben mejorar su equipo de buceo. Cada elección afecta la eficiencia de la ciudad y la capacidad del jugador para enfrentar obstáculos.
+
+Tiempo Limitado en Expediciones: Durante las expediciones, los jugadores tienen un tiempo limitado, lo que requiere una planificación cuidadosa para maximizar la recolección de recursos y el descubrimiento de elementos importantes.
+
+Estrategias de Esquiva: Los enemigos en las expediciones presentan un desafío adicional, ya que los jugadores deben desarrollar estrategias para evitar ser cazados. Ser capturado limita la cantidad de recursos que se pueden llevar de regreso a la ciudad.
+
+### **Estética (Aesthetics):**  
+La estética principal del juego es el desafío, que se presenta en forma de gestión de recursos, toma de decisiones estratégicas y resolución de obstáculos. Los jugadores se enfrentan a un objetivo ambicioso de reconstruir la gloria pasada de Atlantis, lo que añade un elemento épico a la historia. La fantasía se entrelaza con la trama, ya que los jugadores interpretan el papel de un fantasma resucitado bajo el mandato de Poseidón.
+
+El descubrimiento también es un componente clave, ya que los jugadores exploran escenarios diversos, conocen criaturas y desbloquean nuevas funcionalidades. Además, se fomenta el coleccionismo, lo que añade un toque de iniciativa al juego.
+
+En resumen, el juego combina mecánicas de gestión de recursos con desafíos estratégicos y elementos de exploración y fantasía para brindar a los jugadores una experiencia emocionante y gratificante. Las decisiones que toman y las estrategias que desarrollan influyen en el ritmo de reconstrucción de Atlantis y su éxito en las expediciones.
