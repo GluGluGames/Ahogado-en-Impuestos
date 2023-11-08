@@ -98,7 +98,7 @@ La granja de algas generara un número de algas por unidad de tiempo. Al subirla
 
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Productividad | Justificacion|
 | :--: | :--: | :--: | :--: | :--: | ------------ |
-| 1 | 2000 algasverdes + 400 corales| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
+| 1 | 1000 algasverdes| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
 | 2 | x| 400 Hierro + 400 corales | 400 madera |  40 algas/3s | Nivel intermedio, corresponde con productividad medio bajo, incentivar al jugador acceder a expedicion para conseguir el mejor nivel de la construccion |
 | 3 | x| 600 Hierro + 400 corales | 800 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
 
