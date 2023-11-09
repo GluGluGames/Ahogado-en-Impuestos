@@ -135,7 +135,7 @@ namespace GGG.Components.Buildings
         //  Generate random type of tile
         public void RollTileType()
         {
-            tileType = (TileType)Random.Range(0, 4);
+            tileType = (TileType)Random.Range(0, 3);
         }
 
         public void AddTile(TileType type)
