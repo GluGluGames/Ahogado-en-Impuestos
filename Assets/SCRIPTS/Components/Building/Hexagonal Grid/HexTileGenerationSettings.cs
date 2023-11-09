@@ -1,17 +1,15 @@
-using System;
 using UnityEngine;
 
 
 
 namespace GGG.Components.Buildings
 {
-    [Serializable]
     public enum TileType
     {
         Standard,
         Water,
         Cliff,
-        Build
+        Unwalkable
     }
 
     [CreateAssetMenu(menuName = "TileGen/GenerationSettings")]
@@ -20,18 +18,18 @@ namespace GGG.Components.Buildings
         [SerializeField] private GameObject Standar;
         [SerializeField] private GameObject Water;
         [SerializeField] private GameObject Cliff;
-        [SerializeField] private GameObject Build;
+        [SerializeField] private GameObject Unwalkable;
 
         public GameObject GetTile(TileType tileType)
         {
-            return tileType switch
+            switch (tileType)
             {
-                TileType.Standard => Standar,
-                TileType.Water => Water,
-                TileType.Cliff => Cliff,
-                TileType.Build => Build,
-                _ => null
-            };
+                case TileType.Standard: return Standar;
+                case TileType.Water: return Water;
+                case TileType.Cliff: return Cliff;
+                case TileType.Unwalkable: return Unwalkable;
+            }
+            return null;
         }
     }
 }
