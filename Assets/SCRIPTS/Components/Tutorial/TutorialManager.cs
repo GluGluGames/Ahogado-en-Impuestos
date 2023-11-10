@@ -8,11 +8,25 @@ namespace GGG.Components.Tutorial
 {
     public class TutorialManager : MonoBehaviour
     {
-        [SerializeField] private List<TutorialBase> Tutorials;
+        public static TutorialManager Instance;
 
-        private void OnValidate()
+        private void Awake()
         {
-            Tutorials = Resources.LoadAll<TutorialBase>("Tutorials").ToList();
+            if (Instance != null) return;
+
+            Instance = this;
+        }
+
+        public void StartTutorial(TutorialBase tutorial)
+        {
+            if (tutorial.Started()) return;
+
+            tutorial.StartTutorial(CloseUI);
+        }
+
+        private void CloseUI()
+        {
+            
         }
     }
 }

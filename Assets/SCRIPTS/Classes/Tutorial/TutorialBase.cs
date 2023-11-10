@@ -7,10 +7,13 @@ namespace GGG.Classes.Tutorial
     public abstract class TutorialBase : ScriptableObject
     {
         [SerializeField] private DialogueText[] Dialogues;
+        [SerializeField] private bool Triggered;
 
         public static Action OnTutorialFinish;
         public static Action OnTutorialStart;
 
-        public abstract void StartTutorial();
+        public bool Started() => Triggered;
+
+        public abstract void StartTutorial(Action OnTutorialEnd);
     }
 }

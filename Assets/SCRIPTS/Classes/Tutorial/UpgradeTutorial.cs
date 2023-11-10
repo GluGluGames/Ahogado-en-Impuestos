@@ -1,11 +1,12 @@
+using System;
 using UnityEngine;
 
 namespace GGG.Classes.Tutorial
 {
-    [CreateAssetMenu(fileName = "BuildTutorial", menuName = "Game/Tutorials/BuildTutorial")]
+    [CreateAssetMenu(fileName = "UpgradeTutorial", menuName = "Game/Tutorials/UpgradeTutorial")]
     public class UpgradeTutorial : TutorialBase
     {
-        public override void StartTutorial()
+        public override void StartTutorial(Action OnTutorialEnd)
         {
             throw new System.NotImplementedException();
         }
