@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 104780495323694853}
   - component: {fileID: 3331947095449941960}
   - component: {fileID: 6302836250613476604}
+  - component: {fileID: 7342173576322601314}
   m_Layer: 0
   m_Name: EnemyBasic
   m_TagString: Untagged
@@ -157,3 +158,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7342173576322601314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407563467665678216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5fcdd442ba38ae449e9a398a3639fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  executeOnLoop: 1
+  interruptOptions: 0
+  Patruyar_action_message: PATRUYOMESSAGE
+  Dormir_action_message: DUERMOMESSAGE
+  Avisar_action_message: AVISOMESSAGE

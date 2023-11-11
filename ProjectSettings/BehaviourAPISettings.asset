@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c7c430cdc1a9db41aa9253710cfd647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RootPath: Assets/BehaviourAPI Unity Package/GUI Designer
+  GenerateScriptDefaultPath: Assets/Scripts/
+  GenerateScriptDefaultName: NewBehaviourRunner
+  LeafNodeColor: {r: 1, g: 0.45, b: 0.15, a: 1}
+  DecoratorColor: {r: 0.35, g: 0.95, b: 0.65, a: 1}
+  CompositeColor: {r: 0.25, g: 0.7, b: 0.9, a: 1}
+  StateColor: {r: 1, g: 0.45, b: 0.15, a: 1}
+  TransitionColor: {r: 0.65, g: 0.7, b: 0.75, a: 1}
+  LeafFactorColor: {r: 0.45, g: 0.65, b: 1, a: 1}
+  CurveFactorColor: {r: 0.4, g: 0.4, b: 0.75, a: 1}
+  FusionFactorColor: {r: 0.7, g: 0.3, b: 0.7, a: 1}
+  SelectableNodeColor: {r: 1, g: 0.45, b: 0.15, a: 1}
+  BucketColor: {r: 0.7, g: 0.3, b: 0.25, a: 1}
