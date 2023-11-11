@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using GGG.Shared;
@@ -25,6 +26,8 @@ namespace GGG.Components.Core
 
         private SceneManagement _sceneManagement;
         private GameState _currentState;
+
+        public static Action OnGameStart;
 
         #region Unity Events
 
@@ -54,13 +57,18 @@ namespace GGG.Components.Core
             _language = PlayerPrefs.HasKey("LocalKey") ? (Language)PlayerPrefs.GetInt("LocalKey") : Language.Spanish;
         }
         
+        public void StartGame()
+        {
+            _currentState = GameState.PLAYING;
+            OnGameStart?.Invoke();
+        }
+        
         #endregion
 
         #region Getters & Setters
         public Language GetCurrentLanguage() => _language;
         public void SetLanguage(Language language) => _language = language;
         public GameState GetGameState() => _currentState;
-        public void SetGameState(GameState state) => _currentState = state;
         public void OnUIOpen() => _currentState = GameState.ON_UI;
         public void OnUIClose() => _currentState = GameState.PLAYING;
         public bool IsOnUI() => _currentState == GameState.ON_UI;

@@ -1,8 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using GGG.Components.Core;
 using GGG.Classes.Tutorial;
+
+using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace GGG.Components.Tutorial
 {
@@ -17,16 +19,30 @@ namespace GGG.Components.Tutorial
             Instance = this;
         }
 
-        public void StartTutorial(TutorialBase tutorial)
-        {
-            if (tutorial.Started()) return;
+        [SerializeField] private List<TutorialBase> Tutorials;
 
-            tutorial.StartTutorial(CloseUI);
+        private TutorialUI _ui;
+
+        private void Start()
+        {
+            _ui = FindObjectOfType<TutorialUI>();
+            
+            GameManager.OnGameStart += () => StartTutorial("InitialTutorial");
         }
 
-        private void CloseUI()
+        private void OnValidate()
         {
+            Tutorials = Resources.LoadAll<TutorialBase>("Tutorials").ToList();
+        }
+
+        private void StartTutorial(string tutorialKey)
+        {
+            TutorialBase tutorial = Tutorials.Find((x) => x.GetKey() == tutorialKey);
             
+            if (!tutorial)
+                throw new Exception("Not tutorial found");
+                
+            if(!tutorial.Completed()) tutorial.StartTutorial(_ui.Close);
         }
     }
 }
