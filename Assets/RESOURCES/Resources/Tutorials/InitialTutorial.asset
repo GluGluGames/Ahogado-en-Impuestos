@@ -13,5 +13,27 @@ MonoBehaviour:
   m_Name: InitialTutorial
   m_EditorClassIdentifier: 
   TutorialKey: InitialTutorial
-  Dialogues: []
+  Dialogues:
+  - DialogueLines:
+    - "\xA1Bienvenido a a la Atl\xE1ntida! Parece que se te ha encomendado la misi\xF3n
+      de reconstruir la antigua ciudad de la Atl\xE1ntida. \xA1Qu\xE9 misi\xF3n m\xE1s
+      dura!"
+    - Deja que te de algunos consejos para facilitarte las cosas.
+    AvatarList:
+    - {fileID: 21300000, guid: 99353ba9aaf065d489390912ef172dae, type: 3}
+    CharacterNames:
+    - "Poseid\xF3n"
+  Panels:
+  - Title: "Movimiento de la c\xE1mara"
+    Image: {fileID: 21300000, guid: 7238e86783c895349bdfdb409c96cfd6, type: 3}
+    Text: "Puedes controlar la c\xE1mara usando las teclas WASD. Tambi\xE9n puedes
+      hacer click con el rat\xF3n y arrastrarlo para mover la c\xE1mara. \xA1Vamos,
+      prueba a ver!"
+  - Title: "Rotaci\xF3n de la c\xE1mara"
+    Image: {fileID: 21300000, guid: 7238e86783c895349bdfdb409c96cfd6, type: 3}
+    Text: "Usa las teclas Q y E para rotar la c\xE1mara."
+  - Title: "Zoom de la c\xE1mara"
+    Image: {fileID: 21300000, guid: 7238e86783c895349bdfdb409c96cfd6, type: 3}
+    Text: "Utiliza la rueda del rat\xF3n para acercar la c\xE1mara al terreno, o
+      alejarlo."
   TutorialCompleted: 0

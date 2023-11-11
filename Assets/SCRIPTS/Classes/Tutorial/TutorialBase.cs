@@ -1,6 +1,7 @@
 using System;
 using GGG.Classes.Dialogue;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GGG.Classes.Tutorial
 {
@@ -8,6 +9,7 @@ namespace GGG.Classes.Tutorial
     {
         [SerializeField] private string TutorialKey;
         [SerializeField] private DialogueText[] Dialogues;
+        [SerializeField] private TutorialPanel[] Panels;
         [SerializeField] private bool TutorialCompleted;
 
         public static Action OnTutorialFinish;
