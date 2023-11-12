@@ -5,6 +5,7 @@ using GGG.Classes.Tutorial;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 namespace GGG.Components.Tutorial
 {
@@ -22,12 +23,15 @@ namespace GGG.Components.Tutorial
         [SerializeField] private List<TutorialBase> Tutorials;
 
         private TutorialUI _ui;
+        private GraphicRaycaster _raycaster;
 
         private void Start()
         {
-            _ui = FindObjectOfType<TutorialUI>();
+            SceneManagement.Instance.OnGameSceneLoaded += () => StartTutorial("InitialTutorial");
+            _ui = GetComponentInChildren<TutorialUI>();
             
-            GameManager.OnGameStart += () => StartTutorial("InitialTutorial");
+            _raycaster = GetComponent<GraphicRaycaster>();
+            _raycaster.enabled = false;
         }
 
         private void OnValidate()
@@ -41,8 +45,13 @@ namespace GGG.Components.Tutorial
             
             if (!tutorial)
                 throw new Exception("Not tutorial found");
-                
-            if(!tutorial.Completed()) tutorial.StartTutorial(_ui.Close);
+
+            if (!tutorial.Completed())
+            {
+                _raycaster.enabled = true;
+                _ui.OnContinueButton += () => StartCoroutine(tutorial.NextStep());
+                StartCoroutine(tutorial.StartTutorial(_ui.Open, _ui.Close, _ui.SetTutorialFields));
+            }
         }
     }
 }
