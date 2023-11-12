@@ -41,8 +41,14 @@ public class Timer : MonoBehaviour
 
     private void Win()
     {
+        Pause();   
         _timerText.gameObject.SetActive(false);
         FindObjectOfType<EndExpeditionUI>().OnEndGame(true);
+    }
+
+    public void Pause()
+    {
+        paused = true;
     }
 
 }
