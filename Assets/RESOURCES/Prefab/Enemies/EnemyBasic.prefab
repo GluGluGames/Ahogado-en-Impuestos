@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1062659874357267328}
   - component: {fileID: 5437536782548138750}
   - component: {fileID: 104780495323694853}
-  - component: {fileID: 3331947095449941960}
   - component: {fileID: 6302836250613476604}
-  - component: {fileID: 7342173576322601314}
+  - component: {fileID: 3331947095449941960}
+  - component: {fileID: 2557339169096508649}
   m_Layer: 0
   m_Name: EnemyBasic
   m_TagString: Untagged
@@ -108,29 +108,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3331947095449941960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5407563467665678216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddd3df92c6135a429caf49382120495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: 
-  Description: 
-  Icon: {fileID: 0}
-  Prefab: {fileID: 5407563467665678216}
-  SpawnHeight: 0
-  hp: 0
-  isStoppable: 0
-  _alwaysVisible: 1
-  currentTile: {fileID: 0}
-  cubeCoordPos: {x: 0, y: 0, z: 0}
-  isDirty: 0
 --- !u!54 &6302836250613476604
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -158,7 +135,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7342173576322601314
+--- !u!114 &3331947095449941960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,11 +144,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 5407563467665678216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5fcdd442ba38ae449e9a398a3639fef, type: 3}
+  m_Script: {fileID: 11500000, guid: bddd3df92c6135a429caf49382120495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  executeOnLoop: 1
-  interruptOptions: 0
-  Patruyar_action_message: PATRUYOMESSAGE
-  Dormir_action_message: DUERMOMESSAGE
-  Avisar_action_message: AVISOMESSAGE
+  Name: 
+  Description: 
+  Icon: {fileID: 0}
+  Prefab: {fileID: 5407563467665678216}
+  SpawnHeight: 0
+  hp: 0
+  isStoppable: 0
+  _alwaysVisible: 1
+  currentTile: {fileID: 0}
+  cubeCoordPos: {x: 0, y: 0, z: 0}
+  isDirty: 0
+--- !u!114 &2557339169096508649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407563467665678216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b3bbc45083a1242b9531e43871dfe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 7
+  angle: 65
+  playerRef: {fileID: 5956344537251347516, guid: 6fcdbe8e42bf69c449766f843a43ceac, type: 3}
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 1
+  canSeePlayer: 0
