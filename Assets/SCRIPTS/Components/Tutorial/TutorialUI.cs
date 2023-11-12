@@ -21,7 +21,7 @@ namespace GGG.Components.Tutorial
 
         private void Start()
         {
-            Viewport.transform.position = new Vector3(Screen.width * -1.3f, Screen.height * 0.5f);
+            Viewport.transform.position = new Vector3(Screen.width * -0.3f, Screen.height * 0.5f);
         }
 
         public void SetTutorialFields(string title, Sprite image, string text)
@@ -40,21 +40,22 @@ namespace GGG.Components.Tutorial
             _open = true;
             Viewport.SetActive(true);
             GameManager.Instance.OnUIOpen();
-
-            Viewport.transform.DOMoveX(Screen.width * 0.5f, 1.5f).SetEase(Ease.InQuad);
+            
+            Viewport.transform.DOMoveX(Screen.width * 0.5f, 1f).SetEase(Ease.InQuad);
         }
 
-        public void Close()
+        public void Close(bool tutorialEnd)
         {
             if (!_open) return;
 
-            Viewport.transform.DOMoveX(Screen.width * -1.3f, 1.5f).SetEase(Ease.OutQuad).onComplete += () =>
+            Viewport.transform.DOMoveX(Screen.width * -0.3f, 1f).SetEase(Ease.OutQuad).onComplete += () =>
             {
                 _open = false;
                 Viewport.SetActive(false);
             };
             
-            GameManager.Instance.OnUIClose();
+            if(!tutorialEnd) GameManager.Instance.OnTutorialStart();
+            else GameManager.Instance.OnUIClose();
         }
     }
 }

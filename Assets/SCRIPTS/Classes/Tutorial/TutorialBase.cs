@@ -29,8 +29,8 @@ namespace GGG.Classes.Tutorial
             _nextStep = false;
         }
         
-        protected IEnumerator TutorialOpen(Action OnTutorialStart, Action OnTutorialEnd, 
-            Action<string, Sprite, string> OnUiChange)
+        protected IEnumerator TutorialOpen(Action OnTutorialStart, Action<bool> OnTutorialEnd, 
+            Action<string, Sprite, string> OnUiChange, bool tutorialEnd)
         {
             OnUiChange?.Invoke(Panels[_currentPanel].GetTitle(), 
                 Panels[_currentPanel].GetImage(), 
@@ -39,13 +39,13 @@ namespace GGG.Classes.Tutorial
             OnTutorialStart?.Invoke();
         
             yield return new WaitUntil(() => _nextStep);
-            OnTutorialEnd?.Invoke();
+            OnTutorialEnd?.Invoke(tutorialEnd);
         }
 
         public bool Completed() => TutorialCompleted;
         public string GetKey() => TutorialKey;
 
-        public abstract IEnumerator StartTutorial(Action OnTutorialStart, Action OnTutorialEnd, 
+        public abstract IEnumerator StartTutorial(Action OnTutorialStart, Action<bool> OnTutorialEnd, 
             Action<string, Sprite, string> OnUiChange);
     }
 }

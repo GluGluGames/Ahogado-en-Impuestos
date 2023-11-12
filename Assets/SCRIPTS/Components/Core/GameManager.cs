@@ -71,6 +71,7 @@ namespace GGG.Components.Core
         public GameState GetGameState() => _currentState;
         public void OnUIOpen() => _currentState = GameState.ON_UI;
         public void OnUIClose() => _currentState = GameState.PLAYING;
+        public void OnTutorialStart() => _currentState = GameState.ON_TUTORIAL;
         public bool IsOnUI() => _currentState == GameState.ON_UI;
         public bool PlayingGame() => _currentState is GameState.PLAYING or GameState.MINIGAME;
 

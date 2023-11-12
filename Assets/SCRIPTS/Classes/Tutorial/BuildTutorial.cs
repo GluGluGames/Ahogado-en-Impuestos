@@ -7,7 +7,7 @@ namespace GGG.Classes.Tutorial
     [CreateAssetMenu(fileName = "BuildTutorial", menuName = "Game/Tutorials/BuildTutorial")]
     public class BuildTutorial : TutorialBase
     {
-        public override IEnumerator StartTutorial(Action OnTutorialStart, Action OnTutorialEnd, 
+        public override IEnumerator StartTutorial(Action OnTutorialStart, Action<bool> OnTutorialEnd, 
             Action<string, Sprite, string> OnUiChange)
         {
             throw new System.NotImplementedException();

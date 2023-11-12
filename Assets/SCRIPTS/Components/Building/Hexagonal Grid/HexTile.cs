@@ -193,7 +193,7 @@ namespace GGG.Components.Buildings
         private IEnumerator TouchWait()
         {
             yield return new WaitForSeconds(0.1f);
-            if (Holding.IsHolding() || GameManager.Instance.IsOnUI()) yield break;
+            if (Holding.IsHolding() || !GameManager.Instance.PlayingGame()) yield break;
 
             if (_currentBuilding)
             {
@@ -245,7 +245,7 @@ namespace GGG.Components.Buildings
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (GameManager.Instance.IsOnUI()) return;
+            if (!GameManager.Instance.PlayingGame()) return;
             
             ActivateHighlight();
             OnHexHighlight?.Invoke();

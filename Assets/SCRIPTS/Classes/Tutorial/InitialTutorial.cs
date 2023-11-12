@@ -1,31 +1,73 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using GGG.Classes.Tutorial;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InitialTutorial", menuName = "Game/Tutorials/InitialTutorial")]
 public class InitialTutorial : TutorialBase
 {
-    public override IEnumerator StartTutorial(Action OnTutorialStart, Action OnTutorialEnd, 
+    private GameObject _cameraTransform;
+    private Transform _mainCamera;
+    
+    public override IEnumerator StartTutorial(Action OnTutorialStart, Action<bool> OnTutorialEnd, 
         Action<string, Sprite, string> OnUiChange)
     {
-        yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange);
-        yield return CameraMovementStep();
-        Debug.Log("Step 1 complete");
-        
-        // OnTutorialEnd?.Invoke();
+        _cameraTransform = GameObject.Find("CameraPivot");
+        _mainCamera = Camera.main.transform;
+
+        List<IEnumerator> tutorialSteps = new()
+        {
+            CameraMovementStep(),
+            CameraRotationStep(),
+            CameraZoomStep()
+        };
+
+        foreach (IEnumerator step in tutorialSteps)
+        {
+            yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false);
+            yield return step;
+        }
+
+        yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true);
+        TutorialCompleted = true;
     }
 
     private IEnumerator CameraMovementStep()
     {
-        GameObject cameraTransform = GameObject.Find("CameraPivot");
-        Vector3 lastCameraPosition = cameraTransform.transform.position;
+        Vector3 lastCameraPosition = _cameraTransform.transform.position;
         float magnitude = 0f;
         
         while (magnitude < 10f)
         {
-            magnitude += (lastCameraPosition - cameraTransform.transform.position).magnitude;
-            lastCameraPosition = cameraTransform.transform.position;
+            magnitude += (lastCameraPosition - _cameraTransform.transform.position).magnitude;
+            lastCameraPosition = _cameraTransform.transform.position;
+            yield return null;
+        }
+    }
+
+    private IEnumerator CameraRotationStep()
+    {
+        Quaternion lastCameraRotation = _cameraTransform.transform.rotation;
+        float magnitude = 0f;
+        
+        while (magnitude < 25f)
+        {
+            magnitude += Quaternion.Angle(lastCameraRotation, _cameraTransform.transform.rotation);
+            lastCameraRotation = _cameraTransform.transform.rotation;
+            yield return null;
+        }
+    }
+
+    private IEnumerator CameraZoomStep()
+    {
+        Vector3 lastCameraPosition = _mainCamera.localPosition;
+        float magnitude = 0f;
+        
+        while (magnitude < 20f)
+        {
+            magnitude += (lastCameraPosition - _mainCamera.localPosition).magnitude;
+            lastCameraPosition = _mainCamera.localPosition;
             yield return null;
         }
     }
