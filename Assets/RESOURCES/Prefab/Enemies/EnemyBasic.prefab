@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6302836250613476604}
   - component: {fileID: 3331947095449941960}
   - component: {fileID: 2557339169096508649}
+  - component: {fileID: 7140456653824878596}
   m_Layer: 0
   m_Name: EnemyBasic
   m_TagString: Untagged
@@ -158,6 +159,8 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   cubeCoordPos: {x: 0, y: 0, z: 0}
   isDirty: 0
+  fov: {fileID: 2557339169096508649}
+  ai: {fileID: 7140456653824878596}
 --- !u!114 &2557339169096508649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,3 +183,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   canSeePlayer: 0
+--- !u!114 &7140456653824878596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407563467665678216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6fa842a4beca0419860b620e7333bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  executeOnLoop: 0
+  interruptOptions: 0
+  Patruyar_action_message: te vigilo
+  Dormir_action_message: me mimo
+  Chase_action_message: te mato

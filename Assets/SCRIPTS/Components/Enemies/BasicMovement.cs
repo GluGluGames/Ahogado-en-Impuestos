@@ -39,7 +39,7 @@ namespace GGG.Components.Enemies
             {
                 currentTile = currentPath[0];
 
-                nextTile = currentPath[0];
+                nextTile = currentPath[1];
 
                 // if the next tile is not traversable, stop moving;
                 /*if (PlayerPosition.NextTile.tileType != HexTileGenerationSettings.TileType.Standard)

@@ -18,6 +18,9 @@ namespace GGG.Components.Enemies
 
         public bool canSeePlayer;
 
+        public Action onGainDetection = () => { };
+        public Action onLostDetection = () => { };
+
         private void Start()
         {
             playerRef = GameObject.FindGameObjectWithTag("Player");
@@ -50,20 +53,25 @@ namespace GGG.Components.Enemies
 
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     {
+                        if(!canSeePlayer) { onGainDetection.Invoke(); }
                         canSeePlayer = true;
+                        
                     }
                     else
                     {
+                        if (canSeePlayer) { onLostDetection.Invoke(); }
                         canSeePlayer = false;
                     }
                 }
                 else
                 {
+                    if (canSeePlayer) { onLostDetection.Invoke(); }
                     canSeePlayer = false;
                 }
             }
             else if (canSeePlayer)
             {
+                if (canSeePlayer) { onLostDetection.Invoke(); }
                 canSeePlayer = false;
             }
         }
