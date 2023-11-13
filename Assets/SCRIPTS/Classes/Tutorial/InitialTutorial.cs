@@ -14,7 +14,7 @@ public class InitialTutorial : TutorialBase
         Action<string, Sprite, string> OnUiChange)
     {
         _cameraTransform = GameObject.Find("CameraPivot");
-        _mainCamera = Camera.main.transform;
+        _mainCamera = Camera.main.transform; 
 
         List<IEnumerator> tutorialSteps = new()
         {
@@ -22,14 +22,17 @@ public class InitialTutorial : TutorialBase
             CameraRotationStep(),
             CameraZoomStep()
         };
+        
+        yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false);
+        yield return null;
 
         foreach (IEnumerator step in tutorialSteps)
         {
-            yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false);
+            yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true);
             yield return step;
         }
 
-        yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true);
+        yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true, true);
         TutorialCompleted = true;
     }
 

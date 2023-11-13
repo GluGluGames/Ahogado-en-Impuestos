@@ -26,9 +26,10 @@ namespace GGG.Components.Tutorial
 
         public void SetTutorialFields(string title, Sprite image, string text)
         {
-            TitleText.SetText(title);
-            TutorialImage.sprite = image;
-            TutorialText.SetText(text);
+            if(!string.IsNullOrEmpty(title)) TitleText.SetText(title);
+            TutorialImage.gameObject.SetActive(image);
+            if(image) TutorialImage.sprite = image;
+            if(!string.IsNullOrEmpty(text)) TutorialText.SetText(text);
         }
 
         public void OnContinue() => OnContinueButton.Invoke();
@@ -52,10 +53,12 @@ namespace GGG.Components.Tutorial
             {
                 _open = false;
                 Viewport.SetActive(false);
+                
+                if(!tutorialEnd) GameManager.Instance.OnTutorialStart();
+                else GameManager.Instance.OnUIClose();
             };
             
-            if(!tutorialEnd) GameManager.Instance.OnTutorialStart();
-            else GameManager.Instance.OnUIClose();
+            
         }
     }
 }

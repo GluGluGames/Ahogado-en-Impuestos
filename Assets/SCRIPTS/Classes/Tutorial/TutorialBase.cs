@@ -30,7 +30,7 @@ namespace GGG.Classes.Tutorial
         }
         
         protected IEnumerator TutorialOpen(Action OnTutorialStart, Action<bool> OnTutorialEnd, 
-            Action<string, Sprite, string> OnUiChange, bool tutorialEnd)
+            Action<string, Sprite, string> OnUiChange, bool tutorialEnd, bool closePanel)
         {
             OnUiChange?.Invoke(Panels[_currentPanel].GetTitle(), 
                 Panels[_currentPanel].GetImage(), 
@@ -39,7 +39,7 @@ namespace GGG.Classes.Tutorial
             OnTutorialStart?.Invoke();
         
             yield return new WaitUntil(() => _nextStep);
-            OnTutorialEnd?.Invoke(tutorialEnd);
+            if(closePanel) OnTutorialEnd?.Invoke(tutorialEnd);
         }
 
         public bool Completed() => TutorialCompleted;
