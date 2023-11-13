@@ -21,8 +21,6 @@ namespace GGG.Components.Enemies
         
         private void Start()
         {
-            Debug.Log(movementController.currentTile);
-
             movementController.LaunchOnStart();
         }
 
