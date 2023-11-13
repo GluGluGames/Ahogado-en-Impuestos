@@ -10,7 +10,11 @@ namespace GGG.Classes.Tutorial
         public override IEnumerator StartTutorial(Action OnTutorialStart, Action<bool> OnTutorialEnd, 
             Action<string, Sprite, string> OnUiChange)
         {
-            throw new System.NotImplementedException();
+            yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true);
+        }
+
+        private IEnumerator BuildStep() {
+            yield return null;
         }
     }
 }

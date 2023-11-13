@@ -17,6 +17,8 @@ namespace GGG.Components.UI {
         private bool _open;
         private HexTile _selectedTile;
 
+        public static Action OnUiOpen;
+
         private void Start() {
             _input = InputManager.Instance;
             _viewport = transform.GetChild(0).gameObject;
@@ -61,6 +63,7 @@ namespace GGG.Components.UI {
             GameManager.Instance.OnUIOpen();
             
             transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
+            OnUiOpen?.Invoke();
         }
 
         private void Close() {

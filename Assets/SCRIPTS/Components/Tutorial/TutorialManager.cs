@@ -5,6 +5,7 @@ using GGG.Classes.Tutorial;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using GGG.Components.UI;
 using UnityEngine.UI;
 
 namespace GGG.Components.Tutorial
@@ -27,7 +28,10 @@ namespace GGG.Components.Tutorial
 
         private void Start()
         {
-            SceneManagement.Instance.OnGameSceneLoaded += () => StartTutorial("InitialTutorial");
+            SceneManagement.Instance.OnGameSceneLoaded += () => {
+                StartTutorial("InitialTutorial");
+                BuildingUI.OnUiOpen += () => StartTutorial("BuildTutorial");
+            };
             _ui = GetComponentInChildren<TutorialUI>();
             
             _raycaster = GetComponent<GraphicRaycaster>();
