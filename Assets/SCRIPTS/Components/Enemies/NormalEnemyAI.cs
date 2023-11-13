@@ -8,13 +8,14 @@ using UnityEngine;
 public class NormalEnemyAI : BehaviourRunner
 {
 
-    private StateTransition DetectPlayer;
-    private StateTransition LostPatience;
-    private StateTransition Rested;
-    private ExitTransition exit;
+    public StateTransition DetectPlayer;
+    public StateTransition LostPatience;
+    public StateTransition Rested;
+    public ExitTransition exit;
 
     public PushPerception playerDetected;
     public PushPerception playerLost;
+    public PushPerception RestedPush;
 
     public System.Action StartPatrol;
     public System.Func<Status> UpdatePatrol;
@@ -23,11 +24,12 @@ public class NormalEnemyAI : BehaviourRunner
     public System.Func<Status> UpdateChase;
     public System.Action StartSleep;
 
+    public float sleepTime = 2.0f;
+
+    public FSM NormalEnemyBehaviour = new FSM();
 
     protected override BehaviourGraph CreateGraph()
     {
-        FSM NormalEnemyBehaviour = new FSM();
-
         FunctionalAction Patrol_action = new FunctionalAction();
         Patrol_action.onStarted = StartPatrol;
         Patrol_action.onUpdated = UpdatePatrol;
@@ -41,8 +43,8 @@ public class NormalEnemyAI : BehaviourRunner
         exit = NormalEnemyBehaviour.CreateExitTransition(Chase, Status.None, statusFlags: StatusFlags.None);
 
         FunctionalAction Sleep_action = new FunctionalAction();
+
         Sleep_action.onStarted = StartSleep;
-        Sleep_action.onUpdated = () => Status.Running;
         State Sleep = NormalEnemyBehaviour.CreateState(Sleep_action);
 
         DetectPlayer = NormalEnemyBehaviour.CreateTransition(Patrol, Chase, statusFlags: StatusFlags.None);
@@ -53,6 +55,7 @@ public class NormalEnemyAI : BehaviourRunner
 
         playerDetected = new PushPerception(DetectPlayer);
         playerLost = new PushPerception(LostPatience);
+        RestedPush = new PushPerception(Rested);
         return NormalEnemyBehaviour;
     }
 }

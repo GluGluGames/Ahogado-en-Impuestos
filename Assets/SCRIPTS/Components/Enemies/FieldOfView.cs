@@ -17,6 +17,7 @@ namespace GGG.Components.Enemies
         public LayerMask obstructionMask;
 
         public bool canSeePlayer;
+        public bool imBlinded = false;
 
         public Action onGainDetection = () => { };
         public Action onLostDetection = () => { };
@@ -42,7 +43,7 @@ namespace GGG.Components.Enemies
         {
             Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
 
-            if (rangeChecks.Length != 0)
+            if (rangeChecks.Length != 0 && !imBlinded)
             {
                 Transform target = rangeChecks[0].transform;
                 Vector3 directionToTarget = (target.position - transform.position).normalized;
@@ -53,9 +54,8 @@ namespace GGG.Components.Enemies
 
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     {
-                        if(!canSeePlayer) { onGainDetection.Invoke(); }
+                        if (!canSeePlayer) { onGainDetection.Invoke(); }
                         canSeePlayer = true;
-                        
                     }
                     else
                     {
@@ -69,7 +69,7 @@ namespace GGG.Components.Enemies
                     canSeePlayer = false;
                 }
             }
-            else if (canSeePlayer)
+            else if (canSeePlayer || imBlinded)
             {
                 if (canSeePlayer) { onLostDetection.Invoke(); }
                 canSeePlayer = false;

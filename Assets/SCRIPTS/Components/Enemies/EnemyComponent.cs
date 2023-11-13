@@ -1,81 +1,48 @@
+using BehaviourAPI.Core;
+using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 namespace GGG.Components.Enemies
 {
     public class EnemyComponent : Enemy
     {
-        private IMovementController MovementController;
-        public FieldOfView fov;
-        public NormalEnemyAI ai;
+        [HideInInspector] public RandomMovement movementController;
 
         private void Awake()
         {
             Rb = GetComponent<Rigidbody>();
-            MovementController = new RandomMovement();
-            MovementController.SetGameObject(gameObject);
-            MovementController.SetAlwaysVisible(_alwaysVisible);
-            if (isDirty) MovementController.SetCurrentTile(currentTile);
-
-            fov.onGainDetection += () =>
-            {
-                currentTile = MovementController.GetCurrentTile();
-                ai.playerDetected.Fire();
-            };
-
-            fov.onLostDetection += () =>
-            {
-                //ai.playerLost.Fire();
-                //MovementController.LaunchOnDisable();
-            };
-
-            ai.StartPatrol += () =>
-            {
-                MovementController.LaunchOnStart();
-            };
-
-            ai.UpdatePatrol += () =>
-            {
-                if (currentTile != null) MovementController.LaunchOnUpdate();
-                return BehaviourAPI.Core.Status.Running;
-            };
-
-            ai.StartChase += () =>
-            {
-                Debug.Log("te persigo");
-                MovementController = new ChasingMovement();
-                MovementController.SetGameObject(gameObject);
-                MovementController.SetAlwaysVisible(_alwaysVisible);
-                MovementController.SetCurrentTile(currentTile);
-                MovementController.LaunchOnStart();
-            };
-
-            ai.UpdateChase += () =>
-            {
-                if (currentTile != null) MovementController.LaunchOnUpdate();
-                return BehaviourAPI.Core.Status.Running;
-            };
-
-            ai.StartSleep += () => { };
+            movementController = new RandomMovement();
+            movementController.SetGameObject(gameObject);
+            movementController.SetAlwaysVisible(_alwaysVisible);
+            if (isDirty) movementController.SetCurrentTile(currentTile);
         }
 
+        
         private void Start()
         {
-            //MovementController.LaunchOnStart();
+            Debug.Log(movementController.currentTile);
+
+            movementController.LaunchOnStart();
         }
 
         private void Update()
         {
             if (isDirty)
             {
-                MovementController.SetCurrentTile(currentTile);
+                movementController.SetCurrentTile(currentTile);
                 isDirty = false;
+            } 
+
+            if(movementController != null)
+            {
+                //currentTile = movementController.GetCurrentTile();
             }
-            //if (currentTile != null) MovementController.LaunchOnUpdate();
         }
 
         private void OnDisable()
         {
-            MovementController.LaunchOnDisable();
+            movementController.LaunchOnDisable();
         }
     }
 }

@@ -14,46 +14,50 @@ namespace GGG.Components.Enemies
         public Rigidbody rigidbody;
         public GameObject gameObject;
         public bool alwaysVisible;
+        public bool movingAllowed = true;
 
         public List<HexTile> currentPath = new List<HexTile>();
 
         public void HandleMovement()
         {
-            if (currentTile == null)
+            if (movingAllowed)
             {
-                return;
-            }
-            if (currentPath == null || currentPath.Count <= 1)
-            {
-                nextTile = null;
+                if (currentTile == null)
+                {
+                    return;
+                }
+                if (currentPath == null || currentPath.Count <= 1)
+                {
+                    nextTile = null;
 
-                if (currentPath != null && currentPath.Count > 0)
+                    if (currentPath != null && currentPath.Count > 0)
+                    {
+                        currentTile = currentPath[0];
+                        nextTile = currentTile;
+                    }
+
+                    gotPath = false;
+                }
+                else
                 {
                     currentTile = currentPath[0];
-                    nextTile = currentTile;
+
+                    nextTile = currentPath[1];
+
+                    // if the next tile is not traversable, stop moving;
+                    /*if (PlayerPosition.NextTile.tileType != HexTileGenerationSettings.TileType.Standard)
+                    {
+                        PlayerPosition.currentPath.Clear();
+                        HandleMovement();
+                        return;
+                    }*/
+
+                    targetPosition = nextTile.transform.position + new Vector3(0, 1f, 0);
+                    MoveTo(targetPosition);
+                    gotPath = true;
+                    currentPath.RemoveAt(0);
+                    cubeCoordPos = nextTile.cubeCoordinate;
                 }
-
-                gotPath = false;
-            }
-            else
-            {
-                currentTile = currentPath[0];
-
-                nextTile = currentPath[1];
-
-                // if the next tile is not traversable, stop moving;
-                /*if (PlayerPosition.NextTile.tileType != HexTileGenerationSettings.TileType.Standard)
-                {
-                    PlayerPosition.currentPath.Clear();
-                    HandleMovement();
-                    return;
-                }*/
-
-                targetPosition = nextTile.transform.position + new Vector3(0, 1f, 0);
-                MoveTo(targetPosition);
-                gotPath = true;
-                currentPath.RemoveAt(0);
-                cubeCoordPos = nextTile.cubeCoordinate;
             }
         }
 

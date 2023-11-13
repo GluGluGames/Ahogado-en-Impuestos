@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6302836250613476604}
   - component: {fileID: 3331947095449941960}
   - component: {fileID: 2557339169096508649}
+  - component: {fileID: 145976714395175787}
   - component: {fileID: 7140456653824878596}
   m_Layer: 0
   m_Name: EnemyBasic
@@ -159,8 +160,7 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   cubeCoordPos: {x: 0, y: 0, z: 0}
   isDirty: 0
-  fov: {fileID: 2557339169096508649}
-  ai: {fileID: 7140456653824878596}
+  movementController: {fileID: 0}
 --- !u!114 &2557339169096508649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b3bbc45083a1242b9531e43871dfe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 7
-  angle: 65
+  radius: 8
+  angle: 360
   playerRef: {fileID: 5956344537251347516, guid: 6fcdbe8e42bf69c449766f843a43ceac, type: 3}
   targetMask:
     serializedVersion: 2
@@ -183,6 +183,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   canSeePlayer: 0
+  imBlinded: 0
+--- !u!114 &145976714395175787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407563467665678216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6128505f69faba746a3aabc998453861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fov: {fileID: 2557339169096508649}
+  ai: {fileID: 7140456653824878596}
+  enemyComp: {fileID: 3331947095449941960}
 --- !u!114 &7140456653824878596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +213,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   executeOnLoop: 0
   interruptOptions: 0
-  Patruyar_action_message: te vigilo
-  Dormir_action_message: me mimo
-  Chase_action_message: te mato
+  sleepTime: 2

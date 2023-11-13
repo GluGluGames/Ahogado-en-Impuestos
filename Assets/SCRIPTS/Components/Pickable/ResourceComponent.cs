@@ -48,7 +48,7 @@ namespace GGG.Components.Resources
             //}
 
             WaitSecond = true;
-            Coroutine aux = StartCoroutine(WaitSeconds(0, 3, () => Debug.Log("esperando..."),
+            Coroutine aux = StartCoroutine(WaitSeconds(0, 3, () => { },
                 () =>
                 {
                     Debug.Log("FIN!!!");

@@ -11,7 +11,7 @@ namespace GGG.Components.Enemies
         // This has to be called on the start
         public override void LaunchOnStart()
         {
-            TickManager.OnTick += () => UnityEngine.Debug.Log(currentPath.ToArray());
+            movingAllowed = true;
             TickManager.OnTick += HandleMovement;
             TickManager.OnTick += HandleVisibility;
             HandleVisibility();
@@ -29,8 +29,10 @@ namespace GGG.Components.Enemies
 
         public override void LaunchOnDisable()
         {
+            movingAllowed = false;
             TickManager.OnTick -= HandleMovement;
             TickManager.OnTick -= HandleVisibility;
+            currentPath = null;
         }
 
         private void GoToTargetTile()
