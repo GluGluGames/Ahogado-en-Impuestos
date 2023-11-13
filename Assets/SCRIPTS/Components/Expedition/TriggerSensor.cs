@@ -32,7 +32,7 @@ namespace GGG.Components.Player
 
         private void Lost()
         {
-            FindObjectOfType<Timer>().Win(false);
+            FindObjectOfType<EndExpeditionUI>().OnEndGame(false);
         }
 
     }

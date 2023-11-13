@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
 
         _timerDelta -= Time.deltaTime;
 
-        if (_timerDelta <= 0) Win(true);
+        if (_timerDelta <= 0) Win();
 
         int minutes = Mathf.FloorToInt(_timerDelta / 60);
         int seconds = Mathf.FloorToInt(_timerDelta % 60);
@@ -39,16 +39,10 @@ public class Timer : MonoBehaviour
         _timerDelta = InitialTime;
     }
 
-    public void Win(bool win)
+    private void Win()
     {
-        Pause();   
         _timerText.gameObject.SetActive(false);
-        FindObjectOfType<EndExpeditionUI>().OnEndGame(win);
-    }
-
-    public void Pause()
-    {
-        paused = true;
+        FindObjectOfType<EndExpeditionUI>().OnEndGame(true);
     }
 
 }
