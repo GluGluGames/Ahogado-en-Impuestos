@@ -41,6 +41,7 @@ namespace GGG.Components.Tutorial
             _open = true;
             Viewport.SetActive(true);
             GameManager.Instance.OnUIOpen();
+            GameManager.Instance.SetTutorialOpen(true);
             
             Viewport.transform.DOMoveX(Screen.width * 0.5f, 1f).SetEase(Ease.InQuad);
         }
@@ -56,6 +57,8 @@ namespace GGG.Components.Tutorial
                 
                 if(!tutorialEnd) GameManager.Instance.OnTutorialStart();
                 else GameManager.Instance.OnUIClose();
+                
+                GameManager.Instance.SetTutorialOpen(false);
             };
             
             

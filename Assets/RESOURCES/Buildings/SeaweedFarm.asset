@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: SeaweedFarm
   Description: 
-  Icon: {fileID: 21300000, guid: fe4b884b0ffb6cd499f947927fb165ec, type: 3}
+  Icon: {fileID: 21300000, guid: 753b09b279f269b45be922f53ab8a3b4, type: 3}
   Prefab: {fileID: 8113010406866780128, guid: 8807a79897f001d4085fe45216d838dd, type: 3}
   CanBeUpgraded: 1
   UpgradePrefabs:
   - {fileID: 8137532259319120740, guid: be2351cfbf228b94287ee58d64b9d47e, type: 3}
   - {fileID: 1889224551149711422, guid: 5f70c08caac5733408e0406a0459c193, type: 3}
+  Unlocked: 1
   BuildCost:
     Costs: 00000000
     Resources:

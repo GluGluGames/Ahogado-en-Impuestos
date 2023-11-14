@@ -12,6 +12,7 @@ namespace GGG.Components.UI {
         [SerializeField] private Button CloseButton;
 
         private InputManager _input;
+        private GameManager _gameManager;
         private GameObject _viewport;
         private BuildButton[] _buttons;
         private bool _open;
@@ -21,6 +22,7 @@ namespace GGG.Components.UI {
 
         private void Start() {
             _input = InputManager.Instance;
+            _gameManager = GameManager.Instance;
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             
@@ -60,14 +62,14 @@ namespace GGG.Components.UI {
             _open = true;
             _viewport.SetActive(true);
             CloseButton.gameObject.SetActive(true);
-            GameManager.Instance.OnUIOpen();
+            OnUiOpen?.Invoke();
+            _gameManager.OnUIOpen();
             
             transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
-            OnUiOpen?.Invoke();
         }
 
-        private void Close() {
-            if (!_open) return;
+        public void Close() {
+            if (!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
             
             transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine).onComplete += () => {
                 _viewport.SetActive(false);
@@ -75,7 +77,7 @@ namespace GGG.Components.UI {
             };
             _selectedTile.DeselectTile();
             _selectedTile = null;
-            GameManager.Instance.OnUIClose();
+            _gameManager.OnUIClose();
             _open = false;
         }
     }

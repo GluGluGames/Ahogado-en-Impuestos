@@ -19,6 +19,8 @@ namespace GGG.Classes.Buildings
         [SerializeField] private bool CanBeUpgraded;
         [Tooltip("Upgrade prefabs of the building. If the building don't have an upgrade, leave it empty")]
         [SerializeField] private GameObject[] UpgradePrefabs;
+        [Tooltip("Determines if the player can buy the bulding")] 
+        [SerializeField] private bool Unlocked; 
         [Space(10)] [Header("Building Fields")] 
         [Tooltip("The price to build the building")] 
         [SerializeField] private ResourceCost BuildCost;
@@ -101,6 +103,12 @@ namespace GGG.Classes.Buildings
         /// </summary>
         /// <returns>The upgrade cost of the building</returns>
         public ResourceCost[] GetUpgradeCost() => UpgradeCost;
+
+        /// <summary>
+        /// Checks if the building is unlocked and can be buy
+        /// </summary>
+        /// <returns>True if the player can buy the build. False otherwise</returns>
+        public bool IsUnlocked() => Unlocked;
 
         /// <summary>
         /// Gets the cost of the building.
