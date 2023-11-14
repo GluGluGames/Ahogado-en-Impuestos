@@ -23,6 +23,11 @@ namespace GGG.Components.Enemies
         private void Start()
         {
             movementController.LaunchOnStart();
+            if (isDirty)
+            {
+                movementController.SetCurrentTile(currentTile);
+                isDirty = false;
+            }
         }
 
         private void Update()

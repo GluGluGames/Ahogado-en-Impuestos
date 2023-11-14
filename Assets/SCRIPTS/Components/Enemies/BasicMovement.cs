@@ -101,8 +101,10 @@ namespace GGG.Components.Enemies
 
         public void MoveTo(Vector3 targetPos)
         {
-            Quaternion angle = Quaternion.Euler(0, Vector3.Angle(targetPos, rigidbody.transform.forward), 0);
-            rigidbody.Move(targetPos, angle);
+            //Quaternion angle = Quaternion.Euler(0, Vector3.Angle(targetPos, rigidbody.transform.forward), 0);
+            gameObject.transform.LookAt(new Vector3(targetPos.x, targetPos.y + 0.5f, targetPos.z));
+            //rigidbody.Move(targetPos, angle);
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, targetPos, 1f);
         }
 
         public void SetAlwaysVisible(bool alwaysVisible)

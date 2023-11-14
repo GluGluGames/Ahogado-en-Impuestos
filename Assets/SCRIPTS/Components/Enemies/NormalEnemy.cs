@@ -28,21 +28,19 @@ namespace GGG.Components.Enemies
 
             ai.StartPatrol += () =>
             {
-                Debug.Log("patrullo");
                 enemyComp.movementController.imChasing = false;
                 fov.imBlinded = false;
             };
 
             ai.UpdatePatrol += () =>
             {
-                transform.LookAt(PlayerPosition.PlayerPos);
+                
                 if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdate();
                 return BehaviourAPI.Core.Status.Running;
             };
 
             ai.StartChase += () =>
             {
-                Debug.Log("te persigo");
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.imChasing = true;
                 fov.imBlinded = false;
@@ -50,6 +48,7 @@ namespace GGG.Components.Enemies
 
             ai.UpdateChase += () =>
             {
+                transform.LookAt(PlayerPosition.PlayerPos);
                 if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdate();
                 return BehaviourAPI.Core.Status.Running;
             };
@@ -57,7 +56,6 @@ namespace GGG.Components.Enemies
             ai.StartSleep += () =>
             {
                 enemyComp.movementController.movingAllowed = false;
-                Debug.Log("Me duermo");
                 fov.canSeePlayer = false;
                 fov.imBlinded = true;
                 StartCoroutine(OnSleepCoroutine()); 

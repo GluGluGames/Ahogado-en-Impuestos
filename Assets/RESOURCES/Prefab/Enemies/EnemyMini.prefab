@@ -156,6 +156,7 @@ MonoBehaviour:
   SpawnHeight: 0
   hp: 0
   size: 1
+  restTime: 0
   isStoppable: 0
   _alwaysVisible: 1
   currentTile: {fileID: 0}
@@ -175,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b3bbc45083a1242b9531e43871dfe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 6
-  angle: 360
+  radius: 7
+  angle: 167
   playerRef: {fileID: 5956344537251347516, guid: 6fcdbe8e42bf69c449766f843a43ceac, type: 3}
   targetMask:
     serializedVersion: 2

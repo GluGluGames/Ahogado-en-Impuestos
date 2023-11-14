@@ -56,8 +56,6 @@ namespace GGG.Components.Enemies
                         if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                         {
                             if (!canSeePlayer) { }
-                            Debug.Log(target.transform);
-                            Debug.Log(distanceToTarget);
                             onGainDetection.Invoke(target.transform);
                             canSeePlayer = true;
                         }
