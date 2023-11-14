@@ -66,13 +66,13 @@ Esta mecánica añade un elemento táctico al juego, donde los jugadores deben s
 
 **IA Enemigos**
 
-![Enemigo Normal ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
-![Enemigo Rabioso ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
-![Enemigo Mini ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
-![Chatarreros ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
-![Presa ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
-![Alarmante ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
-![Behaviour tree Avisado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
+![Enemigo Normal ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_NORMAL_ENEMY.png)
+![Enemigo Rabioso ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_BERSERKER_ENEMY.png)
+![Enemigo Mini ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_MINI_ENEMY.png)
+![Chatarreros ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_CHATARRERO_ENEMY.png)
+![Presa ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_PRESA_ENEMY.png)
+![Alarmante ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_VIGILANTE_ENEMY.png)
+![Behaviour tree Avisado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/BEHAVIOR_TREE_AVISADO.png)
 
 ### **1.4 - Recursos** 
 
