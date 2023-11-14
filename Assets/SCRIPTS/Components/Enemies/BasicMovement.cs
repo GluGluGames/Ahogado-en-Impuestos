@@ -1,4 +1,5 @@
 using GGG.Components.Buildings;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace GGG.Components.Enemies
         public bool alwaysVisible;
         public bool movingAllowed = true;
         public int enemyLayer = 0;
+        public Action onMove = ()=> { };
 
         public List<HexTile> currentPath = new List<HexTile>();
 
@@ -105,6 +107,7 @@ namespace GGG.Components.Enemies
             gameObject.transform.LookAt(new Vector3(targetPos.x, targetPos.y + 0.5f, targetPos.z));
             //rigidbody.Move(targetPos, angle);
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, targetPos, 1f);
+            onMove.Invoke();
         }
 
         public void SetAlwaysVisible(bool alwaysVisible)

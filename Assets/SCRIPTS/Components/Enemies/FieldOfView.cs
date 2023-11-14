@@ -43,7 +43,9 @@ namespace GGG.Components.Enemies
         {
             Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
 
-            if (rangeChecks.Length != 0 && !imBlinded)
+            if (imBlinded) return;
+            
+            if (rangeChecks.Length != 0)
             {
                 foreach (Collider target in rangeChecks)
                 {
@@ -72,7 +74,7 @@ namespace GGG.Components.Enemies
                     }
                 }
             }
-            else if (canSeePlayer || imBlinded)
+            else if (canSeePlayer)
             {
                 if (canSeePlayer) { onLostDetection.Invoke(); }
                 canSeePlayer = false;

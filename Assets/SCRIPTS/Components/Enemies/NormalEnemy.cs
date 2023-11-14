@@ -73,6 +73,7 @@ namespace GGG.Components.Enemies
 
         }
 
+
         private IEnumerator OnSleepCoroutine()
         {
             yield return new WaitForSeconds(2.0f);

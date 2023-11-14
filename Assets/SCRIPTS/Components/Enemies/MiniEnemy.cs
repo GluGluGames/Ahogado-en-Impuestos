@@ -1,8 +1,7 @@
-using System;
-using System.Collections;
-using UnityEngine;
 using GGG.Components.Buildings;
-using System.Linq.Expressions;
+using System.Collections;
+using System.Transactions;
+using UnityEngine;
 
 namespace GGG.Components.Enemies
 {
@@ -11,6 +10,9 @@ namespace GGG.Components.Enemies
         public FieldOfView fov;
         public MiniEnemyAI ai;
         public EnemyComponent enemyComp;
+        [SerializeField] private int stamina = 2;
+        [SerializeField] private int staminaRechargeTime = 2;
+        private int tiredness = 0;
 
         private void Awake()
         {
@@ -32,7 +34,6 @@ namespace GGG.Components.Enemies
                         ai.detectBiggerEnemyPush.Fire();
                     }
                 }
-
             };
 
             fov.onLostDetection += () =>
@@ -41,7 +42,6 @@ namespace GGG.Components.Enemies
                 enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
                 ai.lostPatiencePush.Fire();
             };
-
 
             ai.StartPatrol += () =>
             {
@@ -62,6 +62,7 @@ namespace GGG.Components.Enemies
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.imChasing = true;
                 fov.imBlinded = false;
+                enemyComp.movementController.onMove += countTiredness;
             };
 
             ai.UpdateChase += () =>
@@ -74,6 +75,7 @@ namespace GGG.Components.Enemies
             ai.SleepMethod += () =>
             {
                 Debug.Log("Me duermo");
+                enemyComp.movementController.onMove -= countTiredness;
                 enemyComp.movementController.movingAllowed = false;
                 fov.canSeePlayer = false;
                 fov.imBlinded = true;
@@ -83,9 +85,11 @@ namespace GGG.Components.Enemies
             ai.FleeMethod += () =>
             {
                 Debug.Log("huyo");
+                enemyComp.movementController.onMove -= countTiredness;
                 HexTile destination = enemyComp.movementController.Flee(3);
                 StartCoroutine(checkFleeingStatus(destination));
             };
+
 
         }
 
@@ -97,6 +101,21 @@ namespace GGG.Components.Enemies
         {
         }
 
+
+        private void countTiredness()
+        {
+            enemyComp.movementController.onMove += () =>
+            {
+                tiredness++;
+                if (tiredness == stamina)
+                {
+                    Debug.Log("descanso");
+                    StartCoroutine(onStaminaRecharge());
+                    tiredness = 0;
+                }
+            };
+        }
+
         private IEnumerator OnSleepCoroutine()
         {
             yield return new WaitForSeconds(enemyComp.restTime);
@@ -106,16 +125,26 @@ namespace GGG.Components.Enemies
 
         private IEnumerator checkFleeingStatus(HexTile destinationCheck)
         {
-            while(true)
+            while (true)
             {
                 yield return new WaitForSeconds(0.2f);
                 enemyComp.currentTile = enemyComp.movementController.currentTile;
-                if(enemyComp.movementController.currentTile.name.Equals(destinationCheck.name))
+                if (enemyComp.movementController.currentTile.name.Equals(destinationCheck.name))
                 {
                     break;
                 }
             }
             ai.distantPush.Fire();
+        }
+
+        private IEnumerator onStaminaRecharge()
+        {
+            fov.imBlinded = true;
+            enemyComp.movementController.movingAllowed = false;
+            yield return new WaitForSeconds(staminaRechargeTime);
+            fov.imBlinded = false;
+            enemyComp.movementController.movingAllowed = true;
+            Debug.Log("dejo de descansar");
         }
     }
 }
