@@ -1,31 +1,46 @@
-using GGG.Components.Buildings;
+using System;
 using System.Collections;
 using UnityEngine;
 
 namespace GGG.Components.Enemies
 {
-    public class NormalEnemy : MonoBehaviour
+    public class MiniEnemy : MonoBehaviour
     {
         public FieldOfView fov;
-        public NormalEnemyAI ai;
+        public MiniEnemyAI ai;
         public EnemyComponent enemyComp;
 
         private void Awake()
         {
             fov.onGainDetection += (trans) =>
             {
-                if (trans.tag == "Player") { 
-                enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
-                ai.playerDetected.Fire();
+                if (trans.tag == "Player")
+                {
+                    Debug.Log("detecto player");
+                    enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
+                    ai.playerDetectedPush.Fire();
                 }
+                else if(trans.GetComponent<EnemyComponent>() != null)
+                {
+                    Debug.Log("detecto enemigo");
+                    EnemyComponent aux = trans.GetComponent<EnemyComponent>();
+                    if(aux.size > enemyComp.size) 
+                    {
+                        enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
+                        ai.detectBiggerEnemyPush.Fire();
+                    }
+                }
+
             };
 
             fov.onLostDetection += () =>
             {
-                enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
-                ai.playerLost.Fire();
+                Debug.Log("pierdo deteccion");
+                //enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
+                //ai.lostPatiencePush.Fire();
             };
 
+            /*
             ai.StartPatrol += () =>
             {
                 Debug.Log("patrullo");
@@ -54,16 +69,15 @@ namespace GGG.Components.Enemies
                 return BehaviourAPI.Core.Status.Running;
             };
 
-            ai.StartSleep += () =>
+            ai.SleepMethod += () =>
             {
                 enemyComp.movementController.movingAllowed = false;
                 Debug.Log("Me duermo");
                 fov.canSeePlayer = false;
                 fov.imBlinded = true;
-                StartCoroutine(OnSleepCoroutine()); 
+                StartCoroutine(OnSleepCoroutine());
             };
-
-      
+            */
         }
 
         private void Start()
@@ -72,16 +86,13 @@ namespace GGG.Components.Enemies
 
         private void Update()
         {
-
         }
 
         private IEnumerator OnSleepCoroutine()
         {
             yield return new WaitForSeconds(2.0f);
             enemyComp.movementController.movingAllowed = true;
-            ai.RestedPush.Fire();
+            ai.restedPush.Fire();
         }
-
-
     }
 }

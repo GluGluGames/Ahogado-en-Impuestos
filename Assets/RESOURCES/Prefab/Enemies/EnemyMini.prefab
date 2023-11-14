@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 6302836250613476604}
   - component: {fileID: 3331947095449941960}
   - component: {fileID: 2557339169096508649}
-  - component: {fileID: 145976714395175787}
-  - component: {fileID: 7140456653824878596}
-  m_Layer: 15
-  m_Name: EnemyBasic
+  - component: {fileID: 4416470800238099999}
+  - component: {fileID: -7011913412452065925}
+  m_Layer: 16
+  m_Name: EnemyMini
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 109d6e820c209254685f466c7aced5bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -155,14 +155,14 @@ MonoBehaviour:
   Prefab: {fileID: 5407563467665678216}
   SpawnHeight: 0
   hp: 0
-  size: 3
+  size: 1
   isStoppable: 0
   _alwaysVisible: 1
   currentTile: {fileID: 0}
   cubeCoordPos: {x: 0, y: 0, z: 0}
   isDirty: 0
   movementController: {fileID: 0}
-  myLayerInt: 15
+  myLayerInt: 16
 --- !u!114 &2557339169096508649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,18 +175,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b3bbc45083a1242b9531e43871dfe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 8
+  radius: 6
   angle: 360
   playerRef: {fileID: 5956344537251347516, guid: 6fcdbe8e42bf69c449766f843a43ceac, type: 3}
   targetMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 35072
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 33921
+    m_Bits: 66689
   canSeePlayer: 0
   imBlinded: 0
---- !u!114 &145976714395175787
+--- !u!114 &4416470800238099999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,13 +195,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5407563467665678216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6128505f69faba746a3aabc998453861, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f93e2650fc7816419fa2b82eeefb48b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fov: {fileID: 2557339169096508649}
-  ai: {fileID: 7140456653824878596}
+  ai: {fileID: -7011913412452065925}
   enemyComp: {fileID: 3331947095449941960}
---- !u!114 &7140456653824878596
+--- !u!114 &-7011913412452065925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,9 +210,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5407563467665678216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c6fa842a4beca0419860b620e7333bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 390eb2f17bec3c6458dd93f857d9cb5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   executeOnLoop: 0
   interruptOptions: 0
-  sleepTime: 2

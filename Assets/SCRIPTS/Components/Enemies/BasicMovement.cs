@@ -15,6 +15,7 @@ namespace GGG.Components.Enemies
         public GameObject gameObject;
         public bool alwaysVisible;
         public bool movingAllowed = true;
+        public int enemyLayer = 0;
 
         public List<HexTile> currentPath = new List<HexTile>();
 
@@ -63,12 +64,12 @@ namespace GGG.Components.Enemies
 
         public void HandleVisibility()
         {
-            // Prob this should be a FSM
+            // This should be better done
             if (nextTile != null && !alwaysVisible)
             {
                 if (nextTile.gameObject.layer == 0 || (currentTile != null && currentTile.gameObject.layer == 0))
                 {
-                    gameObject.layer = 8;
+                    gameObject.layer = enemyLayer;
                 }
                 else
                 {
@@ -79,7 +80,7 @@ namespace GGG.Components.Enemies
             {
                 if (currentTile.gameObject.layer == 0)
                 {
-                    gameObject.layer = 8;
+                    gameObject.layer = enemyLayer;
                 }
                 else
                 {
@@ -88,7 +89,7 @@ namespace GGG.Components.Enemies
             }
             else if (alwaysVisible)
             {
-                gameObject.layer = 8;
+                gameObject.layer = enemyLayer;
             }
         }
 

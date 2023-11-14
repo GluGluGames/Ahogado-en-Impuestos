@@ -19,7 +19,7 @@ namespace GGG.Components.Enemies
         public bool canSeePlayer;
         public bool imBlinded = false;
 
-        public Action onGainDetection = () => { };
+        public Action<Transform> onGainDetection = (trans) => { };
         public Action onLostDetection = () => { };
 
         private void Start()
@@ -45,28 +45,33 @@ namespace GGG.Components.Enemies
 
             if (rangeChecks.Length != 0 && !imBlinded)
             {
-                Transform target = rangeChecks[0].transform;
-                Vector3 directionToTarget = (target.position - transform.position).normalized;
-
-                if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+                foreach (Collider target in rangeChecks)
                 {
-                    float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                    Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
 
-                    if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                    if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
                     {
-                        if (!canSeePlayer) { onGainDetection.Invoke(); }
-                        canSeePlayer = true;
+                        float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+
+                        if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                        {
+                            if (!canSeePlayer) { }
+                            Debug.Log(target.transform);
+                            Debug.Log(distanceToTarget);
+                            onGainDetection.Invoke(target.transform);
+                            canSeePlayer = true;
+                        }
+                        else
+                        {
+                            if (canSeePlayer) { onLostDetection.Invoke(); }
+                            canSeePlayer = false;
+                        }
                     }
                     else
                     {
                         if (canSeePlayer) { onLostDetection.Invoke(); }
                         canSeePlayer = false;
                     }
-                }
-                else
-                {
-                    if (canSeePlayer) { onLostDetection.Invoke(); }
-                    canSeePlayer = false;
                 }
             }
             else if (canSeePlayer || imBlinded)

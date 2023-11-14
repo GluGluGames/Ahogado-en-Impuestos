@@ -8,7 +8,7 @@ namespace GGG.Components.Enemies
     public class EnemyComponent : Enemy
     {
         [HideInInspector] public RandomMovement movementController;
-
+        public int myLayerInt;
         private void Awake()
         {
             Rb = GetComponent<Rigidbody>();
@@ -16,6 +16,7 @@ namespace GGG.Components.Enemies
             movementController.SetGameObject(gameObject);
             movementController.SetAlwaysVisible(_alwaysVisible);
             if (isDirty) movementController.SetCurrentTile(currentTile);
+            movementController.enemyLayer = myLayerInt;
         }
 
         
