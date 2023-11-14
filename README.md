@@ -15,6 +15,8 @@
 - 21/10/2023 - Adrián S. - Added 3D Models
 - 21/10/2023 - Adrián A. - Revisión de erratas.
 - 21/10/2023 - Luming - Correcion de Mecanicas en recursos y desarrollar pensamineto computacional
+- 10/11/2023 - Luming - Subir el análisis MDA de nuestro juego
+- 14/11/2023 - Luming - Corregir las mecanicas de construccion y subir FSM de diferentes enemigos
   
 ## 1 - MÉCANICAS 
 
@@ -58,13 +60,17 @@ Es fundamental comprender que las diferentes profundidades en el juego albergan 
 
 Esta mecánica añade un elemento táctico al juego, donde los jugadores deben sopesar cuidadosamente sus opciones y decidir si enfrentarán a un depredador, huirán o buscarán rutas de escape inteligentes para evitar situaciones peligrosas. La gestión adecuada de los encuentros con depredadores es esencial para una exitosa exploración del mundo submarino.
 
-**Diagrama de enemigos**
+**Diagrama de enemigos prototipo**
 
 ![Enemy Flow chart](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Enemy%20Flow.png)
 
-**FSM Enemigo**
+**FSM Enemigos**
 
-![Enemy FSM](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
+![Enemigo Normal FSM](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
+![Enemigo Rabioso FSM](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
+![Enemigo Mini FSM](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
+![Chatarreros FSM](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
+![Presa FSM](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
 
 ### **1.4 - Recursos** 
 
@@ -92,15 +98,23 @@ Estas zonas desbloqueables brindan a los jugadores la oportunidad de diversifica
 
 ### **1.5 - Edificios** 
 
+#### **1.5.0 - Ayuntamiento**
+Primer edificio de construccion donde se permite visualizar los recursos que posee el jugador de manera mas específica.
+| Nivel | Coste de construccion| Coste de mejora | Coste de reparacion|
+| :--: | :--: | :--: | :--: |
+| 1 | 0 algas verdes| x | Imposible de destruir dado que es la base de la ciudad, protegido por poseidon |
+
+
 #### **1.5.1 - Granja de algas**
 
 La granja de algas generara un número de algas por unidad de tiempo. Al subirla de nivel, el número de algas generadas aumentará.
+Cada nueva granja de algas aumentará 500 algas de precio, mientras que se sigue manteniendo los precios de mejorar.
 
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Productividad | Justificacion|
 | :--: | :--: | :--: | :--: | :--: | ------------ |
 | 1 | 1000 algasverdes| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
-| 2 | x| 400 Hierro + 400 corales | 400 madera |  40 algas/3s | Nivel intermedio, corresponde con productividad medio bajo, incentivar al jugador acceder a expedicion para conseguir el mejor nivel de la construccion |
-| 3 | x| 600 Hierro + 400 corales | 800 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
+| 2 | x| 400 Hierro + 400 corales | 200 madera |  40 algas/3s | Nivel intermedio, corresponde con productividad medio bajo, incentivar al jugador acceder a expedicion para conseguir el mejor nivel de la construccion |
+| 3 | x| 600 Hierro + 400 corales | 300 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
 
 #### **1.5.2 - Tienda de objetos**
 
