@@ -71,6 +71,8 @@ Esta mecánica añade un elemento táctico al juego, donde los jugadores deben s
 ![Enemigo Mini ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
 ![Chatarreros ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
 ![Presa ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
+![Alarmante ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
+![Behaviour tree Avisado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
 
 ### **1.4 - Recursos** 
 
@@ -108,6 +110,7 @@ Primer edificio de construccion donde se permite visualizar los recursos que pos
 #### **1.5.1 - Granja de algas**
 
 La granja de algas generara un número de algas por unidad de tiempo. Al subirla de nivel, el número de algas generadas aumentará.
+La primera granja de algas será gratis para el jugador.
 Cada nueva granja de algas aumentará 500 algas de precio, mientras que se sigue manteniendo los precios de mejorar.
 
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Productividad | Justificacion|
