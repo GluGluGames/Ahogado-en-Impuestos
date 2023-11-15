@@ -6,6 +6,7 @@ using GGG.Components.Buildings;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
+using GGG.Components.Core;
 using GGG.Components.Player;
 using GGG.Shared;
 using UnityEngine.UI;
@@ -14,49 +15,51 @@ namespace GGG.Components.UI {
     public class BuildButton : MonoBehaviour, IPointerDownHandler {
         [SerializeField] private Building BuildingInfo;
         [SerializeField] private GameObject Container;
+        [SerializeField] private Image[] ResourcesImages;
+        [SerializeField] private Image StructureSprite;
+        [SerializeField] private GameObject Padlock;
         
         private PlayerManager _player;
         private HexTile _selectedHexTile;
-        private Resource _buildResource;
         private BuildingComponent _auxBuild;
         private ResourceCost _cost;
 
         public Action<BuildingComponent, HexTile> OnStructureBuild;
+        public Action StructureBuild;
 
         public void Initialize()
         {
             _player = PlayerManager.Instance;
-            _buildResource = _player.GetMainResource();
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
                 tile.OnHexSelect += (x) => _selectedHexTile = tile;
             }
-
-            _cost = BuildingInfo.GetBuildingCost();
             
             TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>();
-            Image[] images = Container.GetComponentsInChildren<Image>();
             
-            texts[0].text = _cost.GetCost(0).ToString();
-            images[0].sprite = _cost.GetResource(0).GetSprite();
+            _cost = BuildingInfo.GetBuildingCost();
 
-            for (int i = 1; i < images.Length; i++)
+            StructureSprite.sprite = BuildingInfo.GetIcon();
+            texts[0].text = _cost.GetCost(0).ToString();
+            ResourcesImages[0].sprite = _cost.GetResource(0).GetSprite();
+            
+            if (!BuildingInfo.IsUnlocked())
             {
-                if (i >= _cost.GetCostsAmount())
-                {
-                    images[i].gameObject.SetActive(false);
+                StructureSprite.color = new Color(1, 1, 1, 0.5f);
+                ResourcesImages[0].gameObject.SetActive(false);
+                Padlock.gameObject.SetActive(true);
+                return;
+            }
+
+            for (int i = 1; i < ResourcesImages.Length; i++)
+            {
+                if (i >= _cost.GetCostsAmount() || _cost.GetCost(i) == 0)
                     continue;
-                }
                 
-                if (_cost.GetCost(i) == 0)
-                {
-                    images[i].gameObject.SetActive(false);
-                    continue;
-                }
-                
+                ResourcesImages[i].gameObject.SetActive(true);
                 texts[i].SetText(_cost.GetCost(i).ToString());
-                images[i].sprite = _cost.GetResource(i).GetSprite();
+                ResourcesImages[i].sprite = _cost.GetResource(i).GetSprite();
             }
             
         }
@@ -79,6 +82,7 @@ namespace GGG.Components.UI {
 
             _selectedHexTile.SetBuilding(_auxBuild);
             OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
+            StructureBuild?.Invoke();
 
             for (int i = 0; i < _cost.GetCostsAmount(); i++)
             {
@@ -94,10 +98,15 @@ namespace GGG.Components.UI {
             _selectedHexTile = null;
         }
 
+        private void UnlockBuilding()
+        {
+            Padlock.gameObject.SetActive(false);
+        }
+
         #region Event Systems Method
 
         public void OnPointerDown(PointerEventData eventData) {
-            if (!_selectedHexTile.TileEmpty()) return;
+            if (!BuildingInfo.IsUnlocked() || !_selectedHexTile.TileEmpty() || GameManager.Instance.TutorialOpen()) return;
             
             BuildStructure();
         }

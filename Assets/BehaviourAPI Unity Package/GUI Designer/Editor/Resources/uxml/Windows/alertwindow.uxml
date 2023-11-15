@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/BehaviourAPI%20Unity%20Package/GUI%20Designer/Editor/Resources/uss/default.uss?fileID=7433441132597879392&amp;guid=7bfa94199ea81a84faedb051a619dadc&amp;type=3#default" />
+    <ui:VisualElement style="width: auto; height: 100%; padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 20px; background-color: rgb(41, 41, 41);">
+        <ui:VisualElement>
+            <ui:VisualElement style="background-color: rgb(53, 53, 53); border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
+                <ui:Label display-tooltip-when-elided="true" name="aw-question-label" text="¿question?" class="text text-centered" />
+            </ui:VisualElement>
+            <ui:VisualElement style="justify-content: center; flex-direction: row;">
+                <ui:Button text="Yes" display-tooltip-when-elided="true" name="aw-yes-btn" class="text text-mid" style="width: 50px;" />
+                <ui:Button text="No" display-tooltip-when-elided="true" name="aw-no-btn" class="text text-mid" style="width: 50px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

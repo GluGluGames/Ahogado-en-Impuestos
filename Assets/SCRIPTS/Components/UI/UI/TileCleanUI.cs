@@ -1,3 +1,4 @@
+using System;
 using GGG.Components.Buildings;
 using GGG.Components.Core;
 using GGG.Components.Player;
@@ -19,6 +20,7 @@ namespace GGG.Components.UI
 
         private PlayerManager _player;
         private InputManager _input;
+        private GameManager _gameManager;
         private Resource _cleanResource;
         private Transform _transform;
         private GameObject _viewport;
@@ -28,14 +30,17 @@ namespace GGG.Components.UI
 
         private TextMeshProUGUI _costAmountText;
 
+        public Action OnUiOpen;
+
         private void Start()
         {
             _player = PlayerManager.Instance;
             _input = InputManager.Instance;
+            _gameManager = GameManager.Instance;
             _cleanResource = _player.GetMainResource();
             
             CleanButton.onClick.AddListener(CleanTile);
-            CloseButton.onClick.AddListener(Close);
+            CloseButton.onClick.AddListener(OnCloseButton);
             CloseButton.gameObject.SetActive(false);
 
             _transform = transform;
@@ -83,15 +88,14 @@ namespace GGG.Components.UI
             _costAmountText.SetText(_selectedTile.GetClearCost().ToString());
             _open = true;
             CloseButton.gameObject.SetActive(true);
-            GameManager.Instance.OnUIOpen();
+            OnUiOpen?.Invoke();
+            _gameManager.OnUIOpen();
 
             _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
         }
 
         public void Close()
         {
-            if (!_open) return;
-
             _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360), 0.1f).SetEase(Ease.InCubic).onComplete += () => {
                 _viewport.SetActive(false);
                 CloseButton.gameObject.SetActive(false);
@@ -99,8 +103,15 @@ namespace GGG.Components.UI
 
             _selectedTile.DeselectTile();
             _selectedTile = null;
-            GameManager.Instance.OnUIClose();
+            _gameManager.OnUIClose();
             _open = false;
+        }
+
+        private void OnCloseButton()
+        {
+            if (!_open || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
+
+            Close();
         }
     }
 }

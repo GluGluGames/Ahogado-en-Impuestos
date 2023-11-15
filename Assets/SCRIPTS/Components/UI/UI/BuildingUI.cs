@@ -12,17 +12,21 @@ namespace GGG.Components.UI {
         [SerializeField] private Button CloseButton;
 
         private InputManager _input;
+        private GameManager _gameManager;
         private GameObject _viewport;
         private BuildButton[] _buttons;
         private bool _open;
         private HexTile _selectedTile;
 
+        public static Action OnUiOpen;
+
         private void Start() {
             _input = InputManager.Instance;
+            _gameManager = GameManager.Instance;
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             
-            CloseButton.onClick.AddListener(Close);
+            CloseButton.onClick.AddListener(OnCloseButton);
             CloseButton.gameObject.SetActive(false);
 
             HexTile[] tiles = FindObjectsOfType<HexTile>();
@@ -58,21 +62,28 @@ namespace GGG.Components.UI {
             _open = true;
             _viewport.SetActive(true);
             CloseButton.gameObject.SetActive(true);
-            GameManager.Instance.OnUIOpen();
+            OnUiOpen?.Invoke();
+            _gameManager.OnUIOpen();
             
             transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
         }
-
-        private void Close() {
-            if (!_open) return;
+        
+        private void OnCloseButton() {
+            if (!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
             
+            Close();
+        }
+        
+        public void Close()
+        {
             transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine).onComplete += () => {
                 _viewport.SetActive(false);
                 CloseButton.gameObject.SetActive(false);
             };
+            
             _selectedTile.DeselectTile();
             _selectedTile = null;
-            GameManager.Instance.OnUIClose();
+            _gameManager.OnUIClose();
             _open = false;
         }
     }

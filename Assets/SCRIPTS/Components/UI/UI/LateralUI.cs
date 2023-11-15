@@ -43,7 +43,7 @@ namespace GGG.Components.UI
 
         private void ToggleMenu()
         {
-            if (GameManager.Instance.IsOnUI() && !_open) return;
+            if ((GameManager.Instance.IsOnUI() || GameManager.Instance.OnTutorial()) && !_open) return;
             
             _open = !_open;
 
@@ -60,6 +60,8 @@ namespace GGG.Components.UI
                 GameManager.Instance.OnUIClose();
             }
         }
+
+        public void ToggleOpenButton() => OpenButton.gameObject.SetActive(!OpenButton.gameObject.activeInHierarchy);
 
         private void OpenInventory()
         {
