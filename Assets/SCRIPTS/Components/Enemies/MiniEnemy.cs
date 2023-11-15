@@ -1,6 +1,6 @@
 using GGG.Components.Buildings;
 using System.Collections;
-using System.Transactions;
+using Unity.VisualScripting.YamlDotNet.Serialization;
 using UnityEngine;
 
 namespace GGG.Components.Enemies
@@ -20,13 +20,11 @@ namespace GGG.Components.Enemies
             {
                 if (trans.tag == "Player")
                 {
-                    //Debug.Log("detecto player");
                     enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
                     ai.playerDetectedPush.Fire();
                 }
                 else if (trans.GetComponent<EnemyComponent>() != null)
                 {
-                    //Debug.Log("detecto enemigo");
                     EnemyComponent aux = trans.GetComponent<EnemyComponent>();
                     if (aux.size > enemyComp.size)
                     {
@@ -38,14 +36,12 @@ namespace GGG.Components.Enemies
 
             fov.onLostDetection += () =>
             {
-                Debug.Log("pierdo deteccion");
                 enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
                 ai.lostPatiencePush.Fire();
             };
 
             ai.StartPatrol += () =>
             {
-                Debug.Log("patrullo");
                 enemyComp.movementController.imChasing = false;
                 fov.imBlinded = false;
             };
@@ -58,7 +54,6 @@ namespace GGG.Components.Enemies
 
             ai.StartChase += () =>
             {
-                Debug.Log("te persigo");
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.imChasing = true;
                 fov.imBlinded = false;
@@ -67,14 +62,14 @@ namespace GGG.Components.Enemies
 
             ai.UpdateChase += () =>
             {
-                transform.LookAt(PlayerPosition.PlayerPos);
+                
+                transform.LookAt(new Vector3(PlayerPosition.CurrentTile.transform.position.x, transform.position.y, PlayerPosition.CurrentTile.transform.position.z));
                 if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdate();
                 return BehaviourAPI.Core.Status.Running;
             };
 
             ai.SleepMethod += () =>
             {
-                Debug.Log("Me duermo");
                 enemyComp.movementController.onMove -= countTiredness;
                 enemyComp.movementController.movingAllowed = false;
                 fov.canSeePlayer = false;
@@ -84,13 +79,10 @@ namespace GGG.Components.Enemies
 
             ai.FleeMethod += () =>
             {
-                Debug.Log("huyo");
                 enemyComp.movementController.onMove -= countTiredness;
                 HexTile destination = enemyComp.movementController.Flee(3);
                 StartCoroutine(checkFleeingStatus(destination));
             };
-
-
         }
 
         private void Start()
@@ -101,19 +93,14 @@ namespace GGG.Components.Enemies
         {
         }
 
-
         private void countTiredness()
         {
-            enemyComp.movementController.onMove += () =>
+            tiredness++;
+            if (tiredness == stamina)
             {
-                tiredness++;
-                if (tiredness == stamina)
-                {
-                    Debug.Log("descanso");
-                    StartCoroutine(onStaminaRecharge());
-                    tiredness = 0;
-                }
-            };
+                StartCoroutine(onStaminaRecharge());
+                tiredness = 0;
+            }
         }
 
         private IEnumerator OnSleepCoroutine()
@@ -144,7 +131,6 @@ namespace GGG.Components.Enemies
             yield return new WaitForSeconds(staminaRechargeTime);
             fov.imBlinded = false;
             enemyComp.movementController.movingAllowed = true;
-            Debug.Log("dejo de descansar");
         }
     }
 }

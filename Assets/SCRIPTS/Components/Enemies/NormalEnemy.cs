@@ -9,6 +9,9 @@ namespace GGG.Components.Enemies
         public FieldOfView fov;
         public NormalEnemyAI ai;
         public EnemyComponent enemyComp;
+        [SerializeField] private int stamina = 2;
+        [SerializeField] private int staminaRechargeTime = 2;
+        private int tiredness = 0;
 
         private void Awake()
         {
@@ -44,11 +47,12 @@ namespace GGG.Components.Enemies
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.imChasing = true;
                 fov.imBlinded = false;
+                enemyComp.movementController.onMove += countTiredness;
             };
 
             ai.UpdateChase += () =>
             {
-                transform.LookAt(PlayerPosition.PlayerPos);
+                transform.LookAt(new Vector3(PlayerPosition.CurrentTile.transform.position.x, transform.position.y, PlayerPosition.CurrentTile.transform.position.z));
                 if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdate();
                 return BehaviourAPI.Core.Status.Running;
             };
@@ -56,23 +60,23 @@ namespace GGG.Components.Enemies
             ai.StartSleep += () =>
             {
                 enemyComp.movementController.movingAllowed = false;
+                enemyComp.movementController.onMove -= countTiredness;
                 fov.canSeePlayer = false;
                 fov.imBlinded = true;
                 StartCoroutine(OnSleepCoroutine()); 
             };
-
       
         }
 
-        private void Start()
+        private void countTiredness()
         {
+            tiredness++;
+            if (tiredness == stamina)
+            {
+                StartCoroutine(onStaminaRecharge());
+                tiredness = 0;
+            }
         }
-
-        private void Update()
-        {
-
-        }
-
 
         private IEnumerator OnSleepCoroutine()
         {
@@ -81,6 +85,13 @@ namespace GGG.Components.Enemies
             ai.RestedPush.Fire();
         }
 
-
+        private IEnumerator onStaminaRecharge()
+        {
+            fov.imBlinded = true;
+            enemyComp.movementController.movingAllowed = false;
+            yield return new WaitForSeconds(staminaRechargeTime);
+            fov.imBlinded = false;
+            enemyComp.movementController.movingAllowed = true;
+        }
     }
 }
