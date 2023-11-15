@@ -48,5 +48,10 @@ namespace GGG.Components.Enemies
         {
             movementController.LaunchOnDisable();
         }
+
+        private void OnDestroy()
+        {
+            movementController.LaunchOnDisable();
+        }
     }
 }

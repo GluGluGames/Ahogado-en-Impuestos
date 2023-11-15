@@ -1,19 +1,19 @@
 using GGG.Components.Buildings;
 using GGG.Components.Ticks;
-using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GGG.Components.Enemies
 {
     public class RandomMovement : BasicMovement
     {
-        public HexTile targetTile;
+        public HexTile targetTile = null;
         public bool imChasing = false;
-        public bool imFleeing= false;
+        public bool imBerserker = false;
+        public bool imFleeing = false;
+        public bool imChasingPlayer = true;
+        public Enemy targetEnemy;
 
         // This has to be called on the start
         public override void LaunchOnStart()
@@ -27,15 +27,34 @@ namespace GGG.Components.Enemies
         // This has to be called on the update
         public override void LaunchOnUpdate()
         {
-            if(imChasing && (targetTile != PlayerPosition.CurrentTile || targetTile == null))
+            if (imChasing && (targetTile != PlayerPosition.CurrentTile || targetTile == null) && !imBerserker)
             {
                 targetTile = PlayerPosition.CurrentTile;
                 AddToTargetTile();
+            }
+            else if (imBerserker)
+            {
+                if (imChasingPlayer && (targetTile != PlayerPosition.CurrentTile || targetTile == null))
+                {
+                    targetTile = PlayerPosition.CurrentTile;
+                    goTo(targetTile);
+                    Debug.Log(targetTile);
+
+                }
+                else if (targetEnemy != null && (targetTile != targetEnemy?.currentTile || targetTile == null)) 
+                {
+                    targetTile = targetEnemy?.currentTile;
+                    goTo(targetTile);
+                    Debug.Log(targetTile);
+                    Debug.Log(targetEnemy);
+
+                }
             }
             else if (!gotPath)
             {
                 GoToRandomTile();
             }
+            
         }
 
         public override void LaunchOnDisable()
@@ -59,7 +78,7 @@ namespace GGG.Components.Enemies
         {
             targetPosition = targetTile.transform.position;
             List<HexTile> addedPath;
-            if (currentPath.Count  > 0)
+            if (currentPath.Count > 0)
             {
                 addedPath = Pathfinder.FindPath(currentPath.Last(), targetTile);
             }
@@ -67,7 +86,7 @@ namespace GGG.Components.Enemies
             {
                 addedPath = Pathfinder.FindPath(currentTile, targetTile);
             }
-            
+
             addedPath.Reverse();
 
             foreach (HexTile tile in addedPath)
@@ -76,6 +95,12 @@ namespace GGG.Components.Enemies
             }
 
             if (currentPath != null) { gotPath = true; }
+        }
+
+        private void goTo(HexTile destination)
+        {
+            currentPath = Pathfinder.FindPath(currentTile, destination);
+            currentPath.Reverse();
         }
 
         public HexTile Flee(int maxDepth)
@@ -92,14 +117,14 @@ namespace GGG.Components.Enemies
             int aux = Random.Range(0, tile.neighbours.Count);
             HexTile auxTile = tile.neighbours[aux];
 
-            if(Vector3.Distance(auxTile.transform.position, currentTile.transform.position) <= Vector3.Distance(tile.transform.position, currentTile.transform.position))
+            if (Vector3.Distance(auxTile.transform.position, currentTile.transform.position) <= Vector3.Distance(tile.transform.position, currentTile.transform.position))
             {
                 auxTile = chooseNeighbourTileAway(maxDepth, curDepth, tile);
             }
             else
             {
                 curDepth++;
-                if(curDepth < maxDepth)
+                if (curDepth < maxDepth)
                 {
                     auxTile = chooseNeighbourTileAway(maxDepth, curDepth, auxTile);
                 }

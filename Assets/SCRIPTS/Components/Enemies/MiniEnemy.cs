@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GGG.Components.Enemies
 {
-    public class MiniEnemy : MonoBehaviour
+    public class BerserkerEnemy : MonoBehaviour
     {
         public FieldOfView fov;
         public MiniEnemyAI ai;
