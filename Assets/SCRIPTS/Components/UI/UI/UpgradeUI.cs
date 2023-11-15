@@ -30,6 +30,7 @@ namespace GGG.Components.UI
 
         private PlayerManager _player;
         private InputManager _input;
+        private GameManager _gameManager;
         private Resource _sellResource;
         private GameObject _panel;
         private BuildButton[] _buttons;
@@ -39,10 +40,14 @@ namespace GGG.Components.UI
 
         private bool _open;
 
+        public Action OnUiOpen;
+        public Action OnSellButtonPress;
+
         private void Start()
         {
             _player = PlayerManager.Instance;
             _input = InputManager.Instance;
+            _gameManager = GameManager.Instance;
             _sellResource = _player.GetMainResource();
 
             _panel = transform.GetChild(0).gameObject;
@@ -60,7 +65,7 @@ namespace GGG.Components.UI
 
             SellButton.onClick.AddListener(OnSellButton);
             UpgradeButton.onClick.AddListener(OnUpgradeButton);
-            CloseButton.onClick.AddListener(() => Close(true));
+            CloseButton.onClick.AddListener(OnCloseButton);
         }
 
         private void Update()
@@ -130,15 +135,21 @@ namespace GGG.Components.UI
 
         private void OnSellButton()
         {
+            if(!_open || _gameManager.TutorialOpen()) return;
+            
             _player.AddResource(_sellResource.GetKey(), Mathf.RoundToInt(_selectedBuilding.GetBuild().GetBuildingCost(0) * 0.5f));
+            BuildingManager.Instance.RemoveBuilding(_selectedBuilding);
             _selectedTile.DestroyBuilding();
             
             _selectedBuilding = null;
+            OnSellButtonPress?.Invoke();
             Close(true);
         }
 
         private void OnUpgradeButton()
         {
+            if(!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
+            
             ResourceCost[] cost = _selectedBuilding.GetBuild().GetUpgradeCost();
             int currentLevel = _selectedBuilding.GetCurrentLevel() - 1;
 
@@ -194,14 +205,20 @@ namespace GGG.Components.UI
             else UpgradeButton.gameObject.SetActive(false);
 
             CloseButton.gameObject.SetActive(true);
-            GameManager.Instance.OnUIOpen();
+            OnUiOpen?.Invoke();
+            _gameManager.OnUIOpen();
             _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
         }
 
-        private void Close(bool resumeGame)
+        private void OnCloseButton()
         {
-            if(!_open) return;
+            if(!_open || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
 
+            Close(true);
+        }
+
+        public void Close(bool resumeGame)
+        {
             _transform.DOMove(new Vector3(Screen.width * 0.5f, -360), 0.1f).SetEase(Ease.InCubic).onComplete += () => 
             {
                 _panel.SetActive(false);
@@ -217,7 +234,7 @@ namespace GGG.Components.UI
             _selectedTile.DeselectTile();
             _selectedBuilding = null;
             _selectedTile = null;
-            if(resumeGame) GameManager.Instance.OnUIClose();
+            if(resumeGame) _gameManager.OnUIClose();
             _open = false;
         }
     }

@@ -32,7 +32,7 @@ namespace GGG.Components.Menus
             _sceneManagement.AddSceneToLoad(SceneIndexes.GAME_SCENE);
             _sceneManagement.UpdateScenes();
             
-            GameManager.Instance.SetGameState(GameState.PLAYING);
+            GameManager.Instance.StartGame();
         }
 
         private void OnSettingsButton()

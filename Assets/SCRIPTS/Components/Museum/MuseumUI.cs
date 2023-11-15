@@ -1,3 +1,4 @@
+using System;
 using GGG.Components.Core;
 using UnityEngine;
 using GGG.Shared;
@@ -34,6 +35,8 @@ namespace GGG.Components.Museum
 
         [SerializeField] private float ButtonScale = 1;
         [SerializeField] private LocalizedString LockedString;
+
+        public static Action OnMuseumOpen;
 
         #endregion
 
@@ -297,6 +300,7 @@ namespace GGG.Components.Museum
             _open = true;
             _viewport.SetActive(true);
             GameManager.Instance.OnUIOpen();
+            OnMuseumOpen?.Invoke();
             
             transform.DOMoveY(Screen.height * 0.5f, 0.75f).SetEase(Ease.OutBounce);
         }

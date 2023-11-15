@@ -20,12 +20,14 @@ namespace GGG.Components.Buildings
         public Vector2Int offsetCoordinate;
         public Vector3Int cubeCoordinate;
         public List<HexTile> neighbours;
+        public bool selectable;
 
         [SerializeField] private int ClearCost;
 
         private TileManager _manager;
         private GameObject _highlightPrefab;
         private BuildingComponent _currentBuilding;
+        private GameManager _gameManager;
 
         private bool _isDirty = false;
         private bool _isEmpty;
@@ -46,7 +48,9 @@ namespace GGG.Components.Buildings
         private void Start()
         {
             _manager = TileManager.instance;
+            _gameManager = GameManager.Instance;
             _isEmpty = _currentBuilding == null;
+            selectable = true;
 
             if (_manager)
             {
@@ -194,7 +198,7 @@ namespace GGG.Components.Buildings
         private IEnumerator TouchWait()
         {
             yield return new WaitForSeconds(0.1f);
-            if (Holding.IsHolding() || GameManager.Instance.IsOnUI()) yield break;
+            if (Holding.IsHolding()) yield break;
 
             if (_currentBuilding)
             {
@@ -209,6 +213,7 @@ namespace GGG.Components.Buildings
         {
             _currentBuilding.SetTile(null);
             Destroy(_currentBuilding.gameObject);
+            SetTileType(TileType.Standard);
             _currentBuilding = null;
         }
 
@@ -246,7 +251,8 @@ namespace GGG.Components.Buildings
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (GameManager.Instance.IsOnUI()) return;
+            if (_gameManager.IsOnUI() || _gameManager.TutorialOpen() || !selectable ||
+                _gameManager.GetCurrentTutorial() == Tutorials.InitialTutorial) return;
             
             ActivateHighlight();
             OnHexHighlight?.Invoke();
@@ -261,7 +267,8 @@ namespace GGG.Components.Buildings
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (eventData.button != PointerEventData.InputButton.Left) return;
+            if (eventData.button != PointerEventData.InputButton.Left || _gameManager.IsOnUI() || 
+                _gameManager.GetCurrentTutorial() == Tutorials.InitialTutorial || !selectable) return;
             
             StartCoroutine(TouchWait());
         }
