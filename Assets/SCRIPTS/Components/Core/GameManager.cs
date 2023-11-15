@@ -26,6 +26,7 @@ namespace GGG.Components.Core
 
         private SceneManagement _sceneManagement;
         private GameState _currentState;
+        private Tutorials _currentTutorial;
         private bool _tutorialOpen;
 
         public static Action OnGameStart;
@@ -37,6 +38,7 @@ namespace GGG.Components.Core
             _sceneManagement = SceneManagement.Instance;
 
             _currentState = DebugMode ? GameState.PLAYING : GameState.MENU;
+            _currentTutorial = Tutorials.None;
             if (!DebugMode) InitializeGame();
         }
 
@@ -70,9 +72,10 @@ namespace GGG.Components.Core
         public Language GetCurrentLanguage() => _language;
         public void SetLanguage(Language language) => _language = language;
         public GameState GetGameState() => _currentState;
+        public Tutorials GetCurrentTutorial() => _currentTutorial;
+        public void SetCurrentTutorial(Tutorials tutorial) => _currentTutorial = tutorial;
         public void OnUIOpen() => _currentState = GameState.ON_UI;
         public void OnUIClose() => _currentState = GameState.PLAYING;
-        public void OnTutorialStart() => _currentState = GameState.ON_TUTORIAL;
         public bool OnTutorial() => _currentState == GameState.ON_TUTORIAL;
         public void SetTutorialOpen(bool open) => _tutorialOpen = open;
         public bool TutorialOpen() => _tutorialOpen;

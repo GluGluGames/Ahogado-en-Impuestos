@@ -26,7 +26,7 @@ namespace GGG.Components.UI {
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             
-            CloseButton.onClick.AddListener(Close);
+            CloseButton.onClick.AddListener(OnCloseButton);
             CloseButton.gameObject.SetActive(false);
 
             HexTile[] tiles = FindObjectsOfType<HexTile>();
@@ -67,14 +67,20 @@ namespace GGG.Components.UI {
             
             transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
         }
-
-        public void Close() {
+        
+        private void OnCloseButton() {
             if (!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
             
+            Close();
+        }
+        
+        public void Close()
+        {
             transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine).onComplete += () => {
                 _viewport.SetActive(false);
                 CloseButton.gameObject.SetActive(false);
             };
+            
             _selectedTile.DeselectTile();
             _selectedTile = null;
             _gameManager.OnUIClose();

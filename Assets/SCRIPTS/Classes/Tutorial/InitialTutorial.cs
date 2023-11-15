@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using GGG.Classes.Tutorial;
+using GGG.Components.Buildings;
+using GGG.Components.UI;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InitialTutorial", menuName = "Game/Tutorials/InitialTutorial")]
@@ -9,31 +11,54 @@ public class InitialTutorial : TutorialBase
 {
     private GameObject _cameraTransform;
     private Transform _mainCamera;
+    private List<IEnumerator> _tutorialSteps;
+    private LateralUI _lateralUI;
+    private HexTile[] _tiles;
     
-    public override IEnumerator StartTutorial(Action OnTutorialStart, Action<bool> OnTutorialEnd, 
+    public override IEnumerator StartTutorial(Action OnTutorialStart, Action<bool, bool> OnTutorialEnd, 
         Action<string, Sprite, string> OnUiChange)
     {
-        _cameraTransform = GameObject.Find("CameraPivot");
-        _mainCamera = Camera.main.transform; 
-
-        List<IEnumerator> tutorialSteps = new()
-        {
-            CameraMovementStep(),
-            CameraRotationStep(),
-            CameraZoomStep()
-        };
+        InitializeTutorial();
         
-        yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false);
-        yield return null;
+        yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
 
-        foreach (IEnumerator step in tutorialSteps)
+        foreach (IEnumerator step in _tutorialSteps)
         {
-            yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true);
+            yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true, true);
             yield return step;
         }
 
-        yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true, true);
+        yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true, true, true);
+        
+        FinishTutorial();
+    }
+
+    protected override void InitializeTutorial()
+    {
+        _cameraTransform = GameObject.Find("CameraPivot");
+        _mainCamera = Camera.main.transform;
+        _tiles = FindObjectsOfType<HexTile>();
+        _lateralUI = FindObjectOfType<LateralUI>();
+        
+        foreach (HexTile tile in _tiles)
+            tile.selectable = false;
+
+        _tutorialSteps = new() {
+            CameraMovementStep(),
+            CameraRotationStep(),
+            CameraZoomStep() 
+        };
+    }
+
+    protected override void FinishTutorial()
+    {
         TutorialCompleted = true;
+
+        foreach (HexTile tile in _tiles)
+        {
+            if (tile.tileType == TileType.Standard) tile.selectable = true;
+            else tile.selectable = false;
+        }
     }
 
     private IEnumerator CameraMovementStep()

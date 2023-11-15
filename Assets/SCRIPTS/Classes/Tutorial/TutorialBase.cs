@@ -22,15 +22,11 @@ namespace GGG.Classes.Tutorial
             _nextStep = false;
         }
 
-        public IEnumerator NextStep()
-        {
-            _nextStep = true;
-            yield return null;
-            _nextStep = false;
-        }
+        public void NextStep() => _nextStep = true;
         
-        protected IEnumerator TutorialOpen(Action OnTutorialStart, Action<bool> OnTutorialEnd, 
-            Action<string, Sprite, string> OnUiChange, bool tutorialEnd, bool closePanel)
+        
+        protected IEnumerator TutorialOpen(Action OnTutorialStart, Action<bool, bool> OnTutorialEnd, 
+            Action<string, Sprite, string> OnUiChange, bool tutorialEnd, bool closePanel, bool closeUi)
         {
             OnUiChange?.Invoke(Panels[_currentPanel].GetTitle(), 
                 Panels[_currentPanel].GetImage(), 
@@ -39,13 +35,17 @@ namespace GGG.Classes.Tutorial
             OnTutorialStart?.Invoke();
         
             yield return new WaitUntil(() => _nextStep);
-            if(closePanel) OnTutorialEnd?.Invoke(tutorialEnd);
+            if(closePanel) OnTutorialEnd?.Invoke(tutorialEnd, closeUi);
+            _nextStep = false;
         }
 
         public bool Completed() => TutorialCompleted;
         public string GetKey() => TutorialKey;
 
-        public abstract IEnumerator StartTutorial(Action OnTutorialStart, Action<bool> OnTutorialEnd, 
+        public abstract IEnumerator StartTutorial(Action OnTutorialStart, Action<bool, bool> OnTutorialEnd, 
             Action<string, Sprite, string> OnUiChange);
+
+        protected abstract void InitializeTutorial();
+        protected abstract void FinishTutorial();
     }
 }
