@@ -1,4 +1,4 @@
-using GGG.Components.Buildings;
+ using GGG.Components.Buildings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,16 +62,16 @@ public class Pathfinder : MonoBehaviour
 
         // Otherwise, add out neighbours to the list and try to traverse them
         List<Node> neighbours = new List<Node>();
-        foreach (HexTile tile in currentNode.target.neighbours)
+        foreach (HexTile tile in currentNode.target.neighbours) 
         {
             Node node = new Node(tile, origin, destination, currentNode.GetCost());
 
-            // If the tile tyoe isn't something we can traverse, then make the cost really high
-            //if (tile.tileType != HexTileGenerationSettings.TileType.Standard)
-            //{
-            //    node.baseCost = 9999999;
-            //    // continue
-            //}
+            //If the tile type isn't something we can traverse, then make the cost really high
+            if (tile.tileType == TileType.Cliff || tile.tileType == TileType.Water)
+            {
+                node.baseCost = 10;
+                // continue
+            }
             neighbours.Add(node);
         }
 

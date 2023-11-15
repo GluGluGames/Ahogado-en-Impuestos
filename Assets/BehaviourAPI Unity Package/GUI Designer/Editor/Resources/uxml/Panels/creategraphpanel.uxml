@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement style="width: 100%; align-items: center; padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 20px; background-color: rgba(38, 38, 38, 0.95); height: 100%;">
+        <ui:VisualElement style="height: 100%; width: 30%; min-width: 300px;">
+            <ui:Label text="CREATE BEHAVIOUR GRAPH" display-tooltip-when-elided="true" style="font-size: 20px; -unity-text-align: upper-center; -unity-font-definition: initial; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; -unity-font: resource(&apos;Fonts/Cascadia&apos;);" />
+            <ui:VisualElement style="height: 3px; border-top-left-radius: 3px; border-bottom-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; background-color: rgb(89, 89, 89); margin-bottom: 10px;" />
+            <ui:Label text="Select graph type:" display-tooltip-when-elided="true" style="font-size: 16px; margin-left: 3px; -unity-font-definition: initial; margin-bottom: 15px; margin-top: 5px; -unity-font: resource(&apos;Fonts/Cascadia&apos;);" />
+            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" horizontal-scroller-visibility="Hidden" name="cgp-graph-sv" style="max-height: 80%; min-height: 30%;" />
+            <ui:TextField picking-mode="Ignore" value="newbehaviourgraph" text="newbehaviourgraph" name="cgp-name-field" max-length="-1" label="graph name:" style="font-size: 16px; margin-top: 10px; -unity-font-definition: initial; -unity-font: resource(&apos;Fonts/Cascadia&apos;);" />
+            <ui:Button text="Create" display-tooltip-when-elided="true" name="cgp-create-btn" style="-unity-font-definition: initial; font-size: 20px; margin-top: 20px; -unity-font: resource(&apos;Fonts/Cascadia&apos;);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Button text="Close" display-tooltip-when-elided="true" name="cgp-close-btn" style="-unity-font-definition: initial; font-size: 20px; width: 100px; position: absolute; top: 10px; right: 20px; -unity-font: resource(&apos;Fonts/Cascadia&apos;);" />
+</ui:UXML>

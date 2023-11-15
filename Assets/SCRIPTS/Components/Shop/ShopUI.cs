@@ -1,3 +1,4 @@
+using System;
 using GGG.Classes.Shop;
 using GGG.Components.Core;
 using GGG.Components.Player;
@@ -35,6 +36,8 @@ namespace GGG.Components.Shop
         private List<int> _initialReceiveAmounts = new();
 
         private bool _open;
+
+        public static Action OnShopOpen;
 
         private void Start()
         {
@@ -106,7 +109,7 @@ namespace GGG.Components.Shop
             Viewport.SetActive(true);
             transform.DOMoveX(Screen.width * 0.5f, 2f, true).SetEase(Ease.InOutExpo);
             GameManager.Instance.OnUIOpen();
-            Debug.Log(GameManager.Instance.GetGameState());
+            OnShopOpen?.Invoke();
             _open = true;
         }
 

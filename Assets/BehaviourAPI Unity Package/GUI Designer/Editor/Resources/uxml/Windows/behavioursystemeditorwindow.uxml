@@ -1,0 +1,32 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/BehaviourAPI%20Unity%20Package/GUI%20Designer/Editor/Resources/uss/default.uss?fileID=7433441132597879392&amp;guid=7bfa94199ea81a84faedb051a619dadc&amp;type=3#default" />
+    <Style src="project://database/Assets/BehaviourAPI%20Unity%20Package/GUI%20Designer/Editor/Resources/uss/window.uss?fileID=7433441132597879392&amp;guid=06606009490d1534d9be0b41e0d7badb&amp;type=3#window" />
+    <uie:Toolbar name="bw-toolbar" class="toolbar" style="height: auto;">
+        <ui:VisualElement name="bw-toolbar-left" class="toolbar-section">
+            <ui:DropdownField label="Graph" index="-1" name="bw-graph-select" choices="-" class="text" />
+            <ui:VisualElement name="bw-edit-toolbar" style="flex-direction: row; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; background-color: rgb(60, 60, 60); padding-left: 3px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px; justify-content: flex-start; align-items: center; margin-left: 5px; max-width: 60%; overflow: hidden;">
+                <ui:Button text="M" display-tooltip-when-elided="true" name="bw-setmain-graph-btn" tooltip="Convert selected graph to main graph in the current system" class="toolbar-btn toolbar-squared-btn" />
+                <ui:Button text="+" display-tooltip-when-elided="true" name="bw-add-graph-btn" tooltip="Open the graph creation panel" class="toolbar-btn toolbar-squared-btn" />
+                <ui:Button display-tooltip-when-elided="true" name="bw-remove-graph-btn" tooltip="Delete the selected graph." class="toolbar-btn toolbar-squared-btn" style="background-image: url(&apos;project://database/Assets/BehaviourAPI%20Unity%20Package/GUI%20Designer/Editor/Resources/Icons/delete.png?fileID=2800000&amp;guid=c046d8dc01bd1094a8de02bff5a4ece7&amp;type=3#delete&apos;);" />
+                <ui:Button display-tooltip-when-elided="true" name="bw-clear-graph-btn" tooltip="Delete all nodes in the selected graph" class="toolbar-btn toolbar-squared-btn" style="background-image: resource(&apos;Icons/clear&apos;);" />
+                <ui:Button display-tooltip-when-elided="true" name="bw-script-btn" tooltip="Open the code generation panel." class="toolbar-btn toolbar-squared-btn" style="background-image: url(&apos;project://database/Assets/BehaviourAPI%20Unity%20Package/GUI%20Designer/Editor/Resources/Icons/code.png?fileID=2800000&amp;guid=dd2972ab964903a44817886b07f1fe51&amp;type=3#code&apos;); height: 30px;" />
+            </ui:VisualElement>
+            <uie:ToolbarSpacer style="width: 20px;" />
+            <ui:VisualElement name="bw-common-toolbar" style="flex-direction: row;">
+                <uie:ToolbarToggle focusable="false" label="MAP" name="bw-minimap-toggle" value="true" class="toolbar-btn text" style="justify-content: center; width: 60px; font-size: 20px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="align-items: flex-end; justify-content: center;">
+            <ui:Label display-tooltip-when-elided="true" name="bw-path-label" class="text" />
+            <ui:Label display-tooltip-when-elided="true" name="bw-mode-label" class="text" />
+        </ui:VisualElement>
+    </uie:Toolbar>
+    <ui:VisualElement name="bw-main">
+        <ui:VisualElement name="bw-graph" class="panel-fullwidth" />
+        <ui:IMGUIContainer name="bw-inspector" />
+    </ui:VisualElement>
+    <ui:VisualElement name="bw-empty" class="cover" style="display: flex;">
+        <ui:Label text="Edit mode: Press the EDIT button in a EditorBehaviourRunner script or BehaviourSystemAsset" display-tooltip-when-elided="true" name="Label" class="text text-header" />
+        <ui:Label text="Play mode: Press the OPEN button in a RuntimeDebugger script" display-tooltip-when-elided="true" class="text text-header" />
+    </ui:VisualElement>
+</ui:UXML>

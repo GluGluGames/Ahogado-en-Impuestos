@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GGG.Classes.Buildings;
+using GGG.Components.Core;
 using GGG.Components.Player;
+using GGG.Shared;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -23,6 +25,7 @@ namespace GGG.Components.Buildings
         }
 
         private PlayerManager _player;
+        private GameManager _gameManager;
         private List<BuildingComponent> _buildings = new();
         private const string _EXIT_TIME = "ExitTime";
         
@@ -36,7 +39,7 @@ namespace GGG.Components.Buildings
         }
 
         private void Update() {
-            if (_buildings.Count == 0) return;
+            if (_buildings.Count == 0 || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
 
             foreach (BuildingComponent build in _buildings) {
                 if(build.NeedInteraction()) continue;
@@ -48,6 +51,7 @@ namespace GGG.Components.Buildings
         private IEnumerator Start()
         {
             _player = PlayerManager.Instance;
+            _gameManager = GameManager.Instance;
             
             yield return LoadBuildings();
 
@@ -84,6 +88,8 @@ namespace GGG.Components.Buildings
         public List<BuildingComponent> GetBuildings() => _buildings;
 
         public void AddBuilding(BuildingComponent build) => _buildings.Add(build);
+
+        public void RemoveBuilding(BuildingComponent build) => _buildings.Remove(build);
 
         public void SaveBuildings() {
             BuildingComponent[] buildings = GetComponentsInChildren<BuildingComponent>();

@@ -1,0 +1,43 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/BehaviourAPI%20Unity%20Package/GUI%20Designer/Editor/Resources/uss/node.uss?fileID=7433441132597879392&amp;guid=81512d53a4bea9b4494135dc1f99b76f&amp;type=3#node" />
+    <Style src="project://database/Assets/BehaviourAPI%20Unity%20Package/GUI%20Designer/Editor/Resources/uss/default.uss?fileID=7433441132597879392&amp;guid=7bfa94199ea81a84faedb051a619dadc&amp;type=3#default" />
+    <ui:VisualElement name="node-div" class="node-div" style="padding-top: 12px; padding-bottom: 12px; position: relative;">
+        <ui:VisualElement name="node-ports" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; justify-content: space-between; flex-direction: column;">
+            <ui:VisualElement name="node-root" style="padding-left: 20px; padding-right: 20px; margin-left: 3px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px; display: none; top: -5px;">
+                <ui:VisualElement name="node-root-tag" style="background-color: rgb(209, 209, 209); border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; display: flex;">
+                    <ui:Label text="ROOT" display-tooltip-when-elided="true" name="node-root-label" style="-unity-text-align: upper-center; font-size: 12px; -unity-font-style: bold; -unity-font: url(&apos;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#Arial&apos;); color: rgb(65, 65, 65);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="input" style="display: flex; justify-content: center; align-items: center;" />
+            <ui:VisualElement name="output" style="align-items: center; justify-content: center;" />
+            <ui:VisualElement name="node-port-cover" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: none;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="node-border" class="node-border">
+            <ui:VisualElement name="node-status">
+                <ui:VisualElement name="contents" class="node-rect">
+                    <ui:VisualElement name="top">
+                        <ui:VisualElement name="node-container">
+                            <ui:VisualElement name="title" style="height: auto; flex-direction: row; flex-basis: auto; justify-content: space-around; align-items: stretch;">
+                                <ui:TextField max-length="30" name="title-input-field" tooltip="Node name" style="flex-shrink: 0; flex-grow: 1;" />
+                                <ui:VisualElement name="node-warning" style="background-image: resource(&apos;Icons/push&apos;); -unity-background-image-tint-color: rgb(255, 212, 102); width: 20px; display: none;" />
+                            </ui:VisualElement>
+                            <ui:VisualElement name="node-details" style="flex-direction: column; align-items: stretch;">
+                                <ui:VisualElement name="node-icon" style="display: flex;">
+                                    <ui:VisualElement name="node-icon-div" style="display: flex; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; align-items: center; justify-content: center; padding-left: 5px; padding-right: 5px; background-color: rgb(38, 38, 38); margin-left: 10px; margin-right: 10px;">
+                                        <ui:Label display-tooltip-when-elided="true" name="node-icon-label" text="Node" class="text" style="font-size: 12px; -unity-text-align: upper-center; overflow: hidden; white-space: normal; -unity-font-style: bold;" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="node-extension-div" style="align-items: stretch;">
+                                <ui:VisualElement name="node-extension-toggle-fit" style="align-items: center;">
+                                    <ui:Toggle focusable="true" value="true" name="node-extension-toggle" class="unity-foldout__toggle" style="align-items: center; -unity-text-align: upper-left; justify-content: flex-start; left: 3px;" />
+                                </ui:VisualElement>
+                                <ui:VisualElement name="node-extension-content" style="display: flex;" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

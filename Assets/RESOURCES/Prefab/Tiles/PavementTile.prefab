@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a19eb09229fe78444b4611d3d73ea8ac, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a19eb09229fe78444b4611d3d73ea8ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -66,7 +66,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7a536f193dd91364fadc735d24f2ad05, type: 2}
     - target: {fileID: 919132149155446097, guid: a19eb09229fe78444b4611d3d73ea8ac, type: 3}
       propertyPath: m_Name
-      value: HexagonPavement Variant
+      value: PavementTile
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a19eb09229fe78444b4611d3d73ea8ac, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

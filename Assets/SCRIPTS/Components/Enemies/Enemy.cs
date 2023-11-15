@@ -24,6 +24,8 @@ namespace GGG.Components.Enemies
         [SerializeField] protected float SpawnHeight;
 
         [SerializeField] protected int hp;
+        [SerializeField] public int size;
+        [SerializeField] public float restTime;
         [SerializeField] protected bool isStoppable;
         [SerializeField] protected bool _alwaysVisible;
 

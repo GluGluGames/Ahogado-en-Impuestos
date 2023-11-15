@@ -78,7 +78,7 @@ namespace GGG.Components.Core
 #if !UNITY_ANDROID
         private void Update()
         {
-            if (!_gameManager.PlayingGame()) return;
+            if (_gameManager.IsOnUI() || _gameManager.TutorialOpen()) return;
             
             StartCoroutine(HandleMouseInput());
             StartCoroutine(HandleLeftMouseInput());
@@ -86,7 +86,7 @@ namespace GGG.Components.Core
 #endif
 
         private void LateUpdate() {
-            if (!_gameManager.PlayingGame()) return;
+            if (_gameManager.IsOnUI() || _gameManager.TutorialOpen()) return;
             
 #if UNITY_ANDROID
             ClampCamera();
