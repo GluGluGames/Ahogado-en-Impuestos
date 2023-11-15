@@ -1,0 +1,50 @@
+.panel-fullwidth {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+}
+
+.text {
+    -unity-font: resource('Fonts/Cascadia');
+    -unity-font-definition: initial;
+}
+
+.text-header {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    -unity-font-style: bold;
+}
+
+.text-mid {
+    font-size: 16px;
+}
+
+.text-centered {
+    -unity-text-align: upper-center;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    white-space: normal;
+}
+
+.panel {
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgba(38, 38, 38, 0.95);
+    height: 100%;
+    width: 100%;
+}
+
+.text-big {
+    font-size: 20px;
+}

@@ -73,7 +73,7 @@ namespace GGG.Components.Buildings
 
 
             // JUGADOR
-            GameObject aux= GameObject.Find("PlayerModel");
+            GameObject aux = GameObject.Find("PlayerModel");
             if(aux != null)
             {
                 Player = aux.transform;

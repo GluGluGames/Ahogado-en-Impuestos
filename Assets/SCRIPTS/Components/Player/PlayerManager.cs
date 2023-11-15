@@ -72,7 +72,11 @@ namespace GGG.Components.Player
 
         public int GetResourceCount(string key)
         {
-            return _resourcesCount[key];
+            int count = 0;
+            _resourcesCount.TryGetValue(key, out count);
+            
+            return count;
+            //return _resourcesCount[key];
         }
 
         public List<Resource> GetResources() => Resources;

@@ -142,6 +142,7 @@ namespace GGG.Components.Buildings
         {
             tilePrefab = Instantiate(settings.GetTile(type), transform.position, 
                 Quaternion.Euler(type == TileType.Build ? -90f : 0f, 0f, 0f), transform);
+            tilePrefab.layer = 10;
 
             tileType = type;
 

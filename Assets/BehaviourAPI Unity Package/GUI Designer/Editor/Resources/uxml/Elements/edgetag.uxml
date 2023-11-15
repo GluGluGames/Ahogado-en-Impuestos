@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/BehaviourAPI%20Unity%20Package/GUI%20Designer/Editor/Resources/uss/default.uss?fileID=7433441132597879392&amp;guid=7bfa94199ea81a84faedb051a619dadc&amp;type=3#default" />
+    <ui:VisualElement style="position: absolute; left: -30px; width: 60px; align-items: center; height: 60px; top: -30px; justify-content: center;">
+        <ui:VisualElement name="edge-number-div" style="background-color: rgb(29, 29, 29); padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px; margin-bottom: 3px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(75, 75, 75); border-right-color: rgb(75, 75, 75); border-top-color: rgb(75, 75, 75); border-bottom-color: rgb(75, 75, 75); display: none;">
+            <ui:Label text="0" display-tooltip-when-elided="true" name="edge-number-label" class="text" style="-unity-text-align: upper-center; display: flex; -unity-font-style: bold;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="edge-status-div" style="padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px; background-color: rgb(29, 29, 29); display: none; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(99, 99, 99); border-right-color: rgb(99, 99, 99); border-top-color: rgb(99, 99, 99); border-bottom-color: rgb(99, 99, 99);">
+            <ui:Label display-tooltip-when-elided="true" name="edge-status-label" text="Success" class="text" style="display: flex; -unity-text-align: upper-center; -unity-font-style: bold; color: rgb(18, 255, 0);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

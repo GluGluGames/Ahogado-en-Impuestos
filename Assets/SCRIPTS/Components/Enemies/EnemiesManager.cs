@@ -42,7 +42,8 @@ namespace GGG.Components.Enemies
             }
             if (enemiesPrefab != null && spawned == false)
             {
-                Enemy newEnem = Instantiate(enemiesPrefab[0], transform);
+                int enemIndex = Random.Range(0, enemiesPrefab.Length);
+                Enemy newEnem = Instantiate(enemiesPrefab[enemIndex], transform);
                 newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
                 newEnem.currentTile = hex;
                 newEnem.isDirty = true;
