@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using GGG.Components.Buildings;
+using GGG.Components.Shop;
 using GGG.Components.UI;
 using GGG.Shared;
 using UnityEngine.UI;
@@ -48,6 +49,7 @@ namespace GGG.Components.Tutorial
         {
             StartTutorial("InitialTutorial", null);
             BuildingUI.OnUiOpen += () => StartTutorial("BuildTutorial", "InitialTutorial");
+            ShopUI.OnShopOpen += () => StartTutorial("ShopTutorial", "BuildTutorial");
         }
 
         private void StartTutorial(string tutorialKey, string previousTutorialKey)

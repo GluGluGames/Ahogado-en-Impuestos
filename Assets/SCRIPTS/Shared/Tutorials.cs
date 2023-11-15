@@ -5,5 +5,6 @@ namespace GGG.Shared
         None,
         InitialTutorial,
         BuildTutorial,
+        ShopTutorial
     }
 }

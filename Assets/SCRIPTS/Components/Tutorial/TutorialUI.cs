@@ -56,13 +56,8 @@ namespace GGG.Components.Tutorial
                 _open = false;
                 Viewport.SetActive(false);
 
-                if (tutorialEnd)
-                {
-                    GameManager.Instance.SetCurrentTutorial(Tutorials.None);
-                }
-                
+                if (tutorialEnd) GameManager.Instance.SetCurrentTutorial(Tutorials.None);
                 if (closeUi) GameManager.Instance.OnUIClose();
-                
                 GameManager.Instance.SetTutorialOpen(false);
             };
             

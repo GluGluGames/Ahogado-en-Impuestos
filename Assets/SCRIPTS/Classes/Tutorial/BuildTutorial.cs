@@ -9,6 +9,8 @@ namespace GGG.Classes.Tutorial
     [CreateAssetMenu(fileName = "BuildTutorial", menuName = "Game/Tutorials/BuildTutorial")]
     public class BuildTutorial : TutorialBase
     {
+        private LateralUI _lateralUI;
+        
         private BuildingUI _buildingUi;
         private BuildButton[] _buildButtons;
 
@@ -89,6 +91,7 @@ namespace GGG.Classes.Tutorial
             
             _buildButtons = FindObjectsOfType<BuildButton>();
             _tiles = FindObjectsOfType<HexTile>();
+            if (!_lateralUI) _lateralUI = FindObjectOfType<LateralUI>();
             if (!_buildingUi) _buildingUi = FindObjectOfType<BuildingUI>();
             if (!_upgradeUI) _upgradeUI = FindObjectOfType<UpgradeUI>();
             if (!_tileCleanUI) _tileCleanUI = FindObjectOfType<TileCleanUI>();
@@ -112,6 +115,7 @@ namespace GGG.Classes.Tutorial
             _upgradeUI.OnUiOpen -= CheckUpgradeMenuOpen;
             _upgradeUI.OnSellButtonPress -= CheckStructureSold;
             _tileCleanUI.OnUiOpen -= CheckTileCleanUi;
+            _lateralUI.ToggleOpenButton();
         }
 
         private IEnumerator BuildStep() {

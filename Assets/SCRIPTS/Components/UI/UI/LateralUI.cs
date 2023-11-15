@@ -61,6 +61,8 @@ namespace GGG.Components.UI
             }
         }
 
+        public void ToggleOpenButton() => OpenButton.gameObject.SetActive(!OpenButton.gameObject.activeInHierarchy);
+
         private void OpenInventory()
         {
             ToggleMenu();

@@ -40,6 +40,8 @@ public class InitialTutorial : TutorialBase
         _tiles = FindObjectsOfType<HexTile>();
         _lateralUI = FindObjectOfType<LateralUI>();
         
+        _lateralUI.ToggleOpenButton();
+        
         foreach (HexTile tile in _tiles)
             tile.selectable = false;
 
