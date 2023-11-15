@@ -53,6 +53,7 @@ namespace GGG.Components.Tutorial
             ShopUI.OnShopOpen += () => StartTutorial("ShopTutorial", "BuildTutorial");
             // LaboratoryUI.OnLaboratoryOpen += () => StartTutorial("LaboratoryTutorial", "BuildTutorial");
             MuseumUI.OnMuseumOpen += () => StartTutorial("MuseumTutorial", "BuildTutorial");
+            // GeneratorUI.OnGeneratorOpen += () => StartTutorial("GeneratorTutorial", "BuildTutorial");
         }
 
         private void StartTutorial(string tutorialKey, string previousTutorialKey)

@@ -8,6 +8,7 @@ namespace GGG.Shared
         ShopTutorial,
         InventoryTutorial,
         LaboratoryTutorial,
-        MuseumTutorial
+        MuseumTutorial,
+        GeneratorTutorial
     }
 }
