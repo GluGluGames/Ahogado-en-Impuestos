@@ -5,6 +5,9 @@ namespace GGG.Shared
         None,
         InitialTutorial,
         BuildTutorial,
-        ShopTutorial
+        ShopTutorial,
+        InventoryTutorial,
+        LaboratoryTutorial,
+        MuseumTutorial
     }
 }

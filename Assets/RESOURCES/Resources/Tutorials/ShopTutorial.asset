@@ -14,4 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TutorialKey: ShopTutorial
   Dialogues: []
-  TutorialCompleted: 0
+  Panels:
+  - Title: Tienda
+    Image: {fileID: 0}
+    Text: "Esta es la tienda. Aqu\xED podr\xE1s intercambiar tus materiales por otros
+      m\xE1s avanzados."
+  - Title: Cantidad
+    Image: {fileID: 0}
+    Text: Usando las flechas, puedes aumentar la cantidad que recibes y que das.
+  - Title: 
+    Image: {fileID: 0}
+    Text: "Por ejemplo, en este intercambio, recibir\xEDas 2 corales dando 4 algas."
+  TutorialCompleted: 1
