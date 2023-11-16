@@ -32,8 +32,7 @@ namespace GGG.Components.Museum
         [SerializeField] private GameObject SeaBackground;
         [SerializeField] private GameObject ExpeditionBackground;
         [SerializeField] private GameObject FishBackground;
-
-        [SerializeField] private float ButtonScale = 1;
+        
         [SerializeField] private LocalizedString LockedString;
 
         public static Action OnMuseumOpen;
@@ -131,11 +130,10 @@ namespace GGG.Components.Museum
             {
                 if (_seaResources.Length <= i)
                 {
-                    _seaButtons[i].gameObject.SetActive(false);
+                    _seaButtons[i].transform.parent.gameObject.SetActive(false);
                 }
                 else
                 {
-                    _seaButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                     _seaButtons[i].image.sprite = _seaResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
                     aux.selectedSprite = _seaResources[i].GetSelectedSprite();
@@ -156,11 +154,10 @@ namespace GGG.Components.Museum
             {
                 if (_expeditionResources.Length <= i)
                 {
-                    _expeditionButtons[i].gameObject.SetActive(false);
+                    _expeditionButtons[i].transform.parent.gameObject.SetActive(false);
                 }
                 else
                 {
-                    _expeditionButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                     _expeditionButtons[i].image.sprite = _expeditionResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
                     aux.selectedSprite = _expeditionResources[i].GetSelectedSprite();
@@ -181,11 +178,10 @@ namespace GGG.Components.Museum
             {
                 if (_fishResources.Length <= i)
                 {
-                    _fishButtons[i].gameObject.SetActive(false);
+                    _fishButtons[i].transform.parent.gameObject.SetActive(false);
                 }
                 else
                 {
-                    _fishButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                     _fishButtons[i].image.sprite = _fishResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
                     aux.disabledSprite = _fishResources[i].GetSprite();
