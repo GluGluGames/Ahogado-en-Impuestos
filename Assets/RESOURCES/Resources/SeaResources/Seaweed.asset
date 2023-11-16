@@ -34,7 +34,9 @@ MonoBehaviour:
   Sprite: {fileID: 21300000, guid: 2540e32f8c0189d4a9d396599b1f16d2, type: 3}
   SelectedSprite: {fileID: 21300000, guid: d78ca2de9ccf6e6489289b930375c665, type: 3}
   DisabledSprite: {fileID: 21300000, guid: fa156b22816a46b419f17ffa5246bd3c, type: 3}
-  CanBeResearched: 0
+  CanBeResearched: 1
+  IsUnlocked: 1
+  ResearchTime: 0
   references:
     version: 2
     RefIds: []

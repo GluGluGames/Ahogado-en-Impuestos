@@ -106,13 +106,7 @@ namespace GGG.Components.Museum
             InitArray(_expeditionActive, _expeditionButtons);
             InitArray(_fishActive, _fishButtons);
 
-            for (int i = 0; i < _seaResources.Length; i++)
-            {
-                UnlockResource(_seaActive, _seaButtons, i);
-            }
-
-            UnlockResource(_expeditionActive, _expeditionButtons, 0);
-            UnlockResource(_fishActive, _fishButtons, 0);
+            CheckResources();
 
             SeaButton.onClick.AddListener(HandleSeaToggle);
             ExpeditionButton.onClick.AddListener(HandleExpeditionToggle);
@@ -296,12 +290,25 @@ namespace GGG.Components.Museum
             _activeResource[type] = i;
         }
 
+        private void CheckResources()
+        {
+            for (int i = 0; i < _seaResources.Length; i++)
+                if(_seaResources[i].Unlocked()) UnlockResource(_seaActive, _seaButtons, i);
+            
+            for (int i = 0; i < _expeditionResources.Length; i++)
+                if(_expeditionResources[i].Unlocked()) UnlockResource(_expeditionActive, _expeditionButtons, i);
+            
+            for (int i = 0; i < _fishResources.Length; i++)
+                if(_fishResources[i].Unlocked()) UnlockResource(_fishActive, _fishButtons, i);
+        }
+
         public void Open()
         {
             if (_open) return;
             
             _open = true;
             _viewport.SetActive(true);
+            CheckResources();
             GameManager.Instance.OnUIOpen();
             OnMuseumOpen?.Invoke();
             

@@ -15,8 +15,6 @@ namespace GGG.Classes.Buildings
         [SerializeField] private Sprite Icon;
         [Tooltip("Icon of the building when is selected.")] 
         [SerializeField] private Sprite SelectedIcon;
-        [Tooltip("Icon of the building when is disabled.")]
-        [SerializeField] private Sprite DisabledIcon;
         [Tooltip("Initial prefab of the building")]
         [SerializeField] private GameObject Prefab;
         [Tooltip("Determines if the building can be upgrades")] 
@@ -24,7 +22,9 @@ namespace GGG.Classes.Buildings
         [Tooltip("Upgrade prefabs of the building. If the building don't have an upgrade, leave it empty")]
         [SerializeField] private GameObject[] UpgradePrefabs;
         [Tooltip("Determines if the player can buy the bulding")] 
-        [SerializeField] private bool Unlocked; 
+        [SerializeField] private bool Unlocked;
+        [Tooltip("Time that takes to be researched. In seconds")] 
+        [SerializeField] private int ResearchTime;
         [Space(10)] [Header("Building Fields")] 
         [Tooltip("The price to build the building")] 
         [SerializeField] private ResourceCost BuildCost;
@@ -67,12 +67,6 @@ namespace GGG.Classes.Buildings
         /// </summary>
         /// <returns>The sprite of the building being selected</returns>
         public Sprite GetSelectedIcon() => SelectedIcon;
-
-        /// <summary>
-        /// Gets the disabled icon of the building
-        /// </summary>
-        /// <returns>The spite of the building being disabled</returns>
-        public Sprite GetDisabledIcon() => DisabledIcon;
 
         /// <summary>
         /// Checks if the building can be upgraded
@@ -125,6 +119,17 @@ namespace GGG.Classes.Buildings
         /// </summary>
         /// <returns>True if the player can buy the build. False otherwise</returns>
         public bool IsUnlocked() => Unlocked;
+
+        /// <summary>
+        /// Unlocks the building
+        /// </summary>
+        public void Unlock() => Unlocked = true;
+
+        /// <summary>
+        /// Gets the time that takes to research the building
+        /// </summary>
+        /// <returns>The time that takes to research the building</returns>
+        public int GetResearchTime() => ResearchTime;
 
         /// <summary>
         /// Gets the cost of the building.

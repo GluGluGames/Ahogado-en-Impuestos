@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Museum
   Description: 
-  Icon: {fileID: 21300000, guid: 5e8bccc89d4cd5e4cb00aeb8aa311396, type: 3}
+  Icon: {fileID: 21300000, guid: b7bce7f55159f4e4086cfc98616fe3b2, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: b7bce7f55159f4e4086cfc98616fe3b2, type: 3}
+  DisabledIcon: {fileID: 21300000, guid: b7bce7f55159f4e4086cfc98616fe3b2, type: 3}
   Prefab: {fileID: 8966507657690627879, guid: 6d67b101ce8ff21409be2add9708ce8e, type: 3}
   CanBeUpgraded: 0
   UpgradePrefabs: []
   Unlocked: 0
+  ResearchTime: 0
   BuildCost:
     Costs: 1900000001000000
     Resources:
