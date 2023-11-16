@@ -52,7 +52,6 @@ namespace GGG.Components.UI
 
             _panel = transform.GetChild(0).gameObject;
             _panel.SetActive(false);
-            CloseButton.gameObject.SetActive(false);
             _transform = transform;
             _transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360);
 
@@ -203,8 +202,7 @@ namespace GGG.Components.UI
                 }
             } 
             else UpgradeButton.gameObject.SetActive(false);
-
-            CloseButton.gameObject.SetActive(true);
+            
             OnUiOpen?.Invoke();
             _gameManager.OnUIOpen();
             _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
@@ -222,7 +220,6 @@ namespace GGG.Components.UI
             _transform.DOMove(new Vector3(Screen.width * 0.5f, -360), 0.1f).SetEase(Ease.InCubic).onComplete += () => 
             {
                 _panel.SetActive(false);
-                CloseButton.gameObject.SetActive(false);
                 InteractButton.onClick.RemoveAllListeners();
                 
                 for (int i = 1; i < UpgradeCost.Length; i++)

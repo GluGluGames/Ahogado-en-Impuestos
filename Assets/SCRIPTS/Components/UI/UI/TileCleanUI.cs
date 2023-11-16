@@ -41,7 +41,6 @@ namespace GGG.Components.UI
             
             CleanButton.onClick.AddListener(CleanTile);
             CloseButton.onClick.AddListener(OnCloseButton);
-            CloseButton.gameObject.SetActive(false);
 
             _transform = transform;
             _transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360);
@@ -49,7 +48,7 @@ namespace GGG.Components.UI
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
 
-            Container.GetComponentsInChildren<Image>()[1].sprite = _cleanResource.GetSprite();
+            Container.GetComponentInChildren<Image>().sprite = _cleanResource.GetSprite();
             _costAmountText = Container.GetComponentInChildren<TextMeshProUGUI>();
 
             HexTile[] tiles = FindObjectsOfType<HexTile>();
@@ -87,7 +86,6 @@ namespace GGG.Components.UI
             _selectedTile = tile;
             _costAmountText.SetText(_selectedTile.GetClearCost().ToString());
             _open = true;
-            CloseButton.gameObject.SetActive(true);
             OnUiOpen?.Invoke();
             _gameManager.OnUIOpen();
 
@@ -98,7 +96,6 @@ namespace GGG.Components.UI
         {
             _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360), 0.1f).SetEase(Ease.InCubic).onComplete += () => {
                 _viewport.SetActive(false);
-                CloseButton.gameObject.SetActive(false);
             };
 
             _selectedTile.DeselectTile();

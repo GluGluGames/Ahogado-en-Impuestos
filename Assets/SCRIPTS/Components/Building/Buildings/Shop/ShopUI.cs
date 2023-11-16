@@ -67,10 +67,10 @@ namespace GGG.Components.Shop
         {
             for(int i = 0; i < Exchanges.Count; i++) {
                 GiveItemImage[i].sprite = Exchanges[i].GetGivenResource().GetSprite();
-                GiveAmountText[i].SetText(Exchanges[i].GetGivenAmount().ToString());
+                GiveAmountText[i].SetText($"{Exchanges[i].GetGivenAmount().ToString()} {Exchanges[i].GetGivenResource().GetName()}");
 
                 ReceiveItemImage[i].sprite = Exchanges[i].GetReceiveResource().GetSprite();
-                ReceiveAmountText[i].SetText(Exchanges[i].GetReceiveAmount().ToString());
+                ReceiveAmountText[i].SetText($"{Exchanges[i].GetReceiveAmount().ToString()} {Exchanges[i].GetReceiveResource().GetName()}");
             }
         }
 
