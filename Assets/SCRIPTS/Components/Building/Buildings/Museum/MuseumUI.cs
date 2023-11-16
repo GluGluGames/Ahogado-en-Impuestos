@@ -106,13 +106,7 @@ namespace GGG.Components.Museum
             InitArray(_expeditionActive, _expeditionButtons);
             InitArray(_fishActive, _fishButtons);
 
-            for (int i = 0; i < _seaResources.Length; i++)
-            {
-                UnlockResource(_seaActive, _seaButtons, i);
-            }
-
-            UnlockResource(_expeditionActive, _expeditionButtons, 0);
-            UnlockResource(_fishActive, _fishButtons, 0);
+            CheckResources();
 
             SeaButton.onClick.AddListener(HandleSeaToggle);
             ExpeditionButton.onClick.AddListener(HandleExpeditionToggle);
@@ -143,11 +137,10 @@ namespace GGG.Components.Museum
                 {
                     _seaButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                     _seaButtons[i].image.sprite = _seaResources[i].GetSprite();
-                    _seaButtons[i].interactable = _seaResources[i].Unlocked();
                     SpriteState aux = new SpriteState();
                     aux.selectedSprite = _seaResources[i].GetSelectedSprite();
                     aux.highlightedSprite = _seaResources[i].GetSelectedSprite();
-                    aux.disabledSprite = _seaResources[i].GetDisabledSprite();
+                    aux.disabledSprite = _seaResources[i].GetSprite();
                     _seaButtons[i].spriteState = aux;
                     int index = i;
                     _seaButtons[i].onClick
@@ -172,7 +165,7 @@ namespace GGG.Components.Museum
                     SpriteState aux = new SpriteState();
                     aux.selectedSprite = _expeditionResources[i].GetSelectedSprite();
                     aux.highlightedSprite = _expeditionResources[i].GetSelectedSprite();
-                    aux.disabledSprite = _expeditionResources[i].GetDisabledSprite();
+                    aux.disabledSprite = _expeditionResources[i].GetSprite();
                     _expeditionButtons[i].spriteState = aux;
                     int index = i;
                     _expeditionButtons[i].onClick.AddListener(() =>
@@ -195,7 +188,7 @@ namespace GGG.Components.Museum
                     _fishButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                     _fishButtons[i].image.sprite = _fishResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
-                    aux.disabledSprite = _fishResources[i].GetDisabledSprite();
+                    aux.disabledSprite = _fishResources[i].GetSprite();
                     aux.selectedSprite = _fishResources[i].GetSelectedSprite();
                     aux.highlightedSprite = _fishResources[i].GetSelectedSprite();
                     _fishButtons[i].spriteState = aux;
@@ -297,12 +290,25 @@ namespace GGG.Components.Museum
             _activeResource[type] = i;
         }
 
+        private void CheckResources()
+        {
+            for (int i = 0; i < _seaResources.Length; i++)
+                if(_seaResources[i].Unlocked()) UnlockResource(_seaActive, _seaButtons, i);
+            
+            for (int i = 0; i < _expeditionResources.Length; i++)
+                if(_expeditionResources[i].Unlocked()) UnlockResource(_expeditionActive, _expeditionButtons, i);
+            
+            for (int i = 0; i < _fishResources.Length; i++)
+                if(_fishResources[i].Unlocked()) UnlockResource(_fishActive, _fishButtons, i);
+        }
+
         public void Open()
         {
             if (_open) return;
             
             _open = true;
             _viewport.SetActive(true);
+            CheckResources();
             GameManager.Instance.OnUIOpen();
             OnMuseumOpen?.Invoke();
             

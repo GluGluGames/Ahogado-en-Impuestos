@@ -11,7 +11,6 @@ namespace GGG.Shared
         [SerializeField] private LocalizedString Description;
         [SerializeField] private Sprite Sprite;
         [SerializeField] private Sprite SelectedSprite;
-        [SerializeField] private Sprite DisabledSprite;
         [SerializeField] private bool CanBeResearched;
         [SerializeField] private bool IsUnlocked;
         [Tooltip("Time in seconds")]
@@ -22,7 +21,6 @@ namespace GGG.Shared
         public string GetDescription() => Description.GetLocalizedString();
         public Sprite GetSprite() => Sprite;
         public Sprite GetSelectedSprite() => SelectedSprite;
-        public Sprite GetDisabledSprite() => DisabledSprite;
         public void DiscoverResource() => CanBeResearched = true;
         public bool Unlocked() => IsUnlocked;
         public void Unlock() => IsUnlocked = true;

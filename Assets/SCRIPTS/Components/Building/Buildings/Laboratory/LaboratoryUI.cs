@@ -227,7 +227,7 @@ namespace GGG.Components.Laboratory
                 {
                     _buildingsButton[i].image.sprite = _buildings[i].GetIcon();
                     SpriteState aux = new();
-                    aux.disabledSprite = _buildings[i].GetDisabledIcon();
+                    aux.disabledSprite = _buildings[i].GetIcon();
                     aux.highlightedSprite = _buildings[i].GetSelectedIcon();
                     _buildingsButton[i].spriteState = aux;
                     _buildingsButton[i].interactable = !_buildings[i].IsUnlocked();
@@ -250,8 +250,9 @@ namespace GGG.Components.Laboratory
                 else
                 {
                     buttons[i].image.sprite = resources[i].GetSprite();
+                    buttons[i].image.color = resources[i].CanResearch() ? Color.white : Color.black;
                     SpriteState aux = new();
-                    aux.disabledSprite = resources[i].GetDisabledSprite();
+                    aux.disabledSprite = resources[i].GetSprite();
                     aux.highlightedSprite = resources[i].GetSelectedSprite();
                     buttons[i].spriteState = aux;
                     buttons[i].interactable = resources[i].CanResearch();
@@ -267,33 +268,29 @@ namespace GGG.Components.Laboratory
             for (int i = 0; i < _seaResources.Length; i++)
             {
                 if(_seaButtons.Length <= i) break;
-                
-                _seaButtons[i].interactable = _seaResources[i].CanResearch();
-                _seaButtons[i].transform.parent.gameObject.SetActive(!_seaResources[i].Unlocked());
-                if (_activeResource.Any(resource => resource == _seaResources[i]))
-                    _seaButtons[i].transform.parent.gameObject.SetActive(false);
+                CheckButton(_seaButtons[i], _seaResources[i]);
             }
 
             for (int i = 0; i < _expeditionResources.Length; i++)
             {
                 if (_expeditionButtons.Length <= i) break;
-                
-                _expeditionButtons[i].interactable = _expeditionResources[i].CanResearch();
-                _expeditionButtons[i].transform.parent.gameObject.SetActive(!_expeditionResources[i].Unlocked());
-                if (_activeResource.Any(resource => resource == _expeditionResources[i]))
-                    _expeditionButtons[i].transform.parent.gameObject.SetActive(false);
+                CheckButton(_expeditionButtons[i], _expeditionResources[i]);
             }
 
             for (int i = 0; i < _fishResources.Length; i++)
             {
                 if (_fishButtons.Length <= i) break;
-                
-                _fishButtons[i].interactable = _fishResources[i].CanResearch();
-                _fishButtons[i].transform.parent.gameObject.SetActive(!_fishResources[i].Unlocked());
-                if (_activeResource.Any(resource => resource == _fishResources[i]))
-                    _fishButtons[i].transform.parent.gameObject.SetActive(false);
-                
+                CheckButton(_fishButtons[i], _fishResources[i]);
             }
+        }
+
+        private void CheckButton(Button button, Resource resource)
+        {
+            button.interactable = resource.CanResearch();
+            button.image.color = resource.CanResearch() ? Color.white : Color.black;
+            button.transform.parent.gameObject.SetActive(!resource.Unlocked());
+            if (_activeResource.Any(r => r == resource))
+                button.transform.parent.gameObject.SetActive(false);
         }
 
         private void SaveResearchProgress()
