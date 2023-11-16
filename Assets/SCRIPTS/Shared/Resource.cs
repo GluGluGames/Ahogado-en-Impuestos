@@ -11,11 +11,20 @@ namespace GGG.Shared
         [SerializeField] private LocalizedString Description;
         [SerializeField] private Sprite Sprite;
         [SerializeField] private Sprite SelectedSprite;
+        [SerializeField] private bool CanBeResearched;
+        [SerializeField] private bool IsUnlocked;
+        [Tooltip("Time in seconds")]
+        [SerializeField] private int ResearchTime;
 
         public string GetKey() => Key;
         public string GetName() => Name.GetLocalizedString();
         public string GetDescription() => Description.GetLocalizedString();
         public Sprite GetSprite() => Sprite;
         public Sprite GetSelectedSprite() => SelectedSprite;
+        public void DiscoverResource() => CanBeResearched = true;
+        public bool Unlocked() => IsUnlocked;
+        public void Unlock() => IsUnlocked = true;
+        public bool CanResearch() => CanBeResearched;
+        public int GetResearchTime() => ResearchTime;
     }
 }

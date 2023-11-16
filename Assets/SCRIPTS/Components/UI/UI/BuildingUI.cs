@@ -53,6 +53,12 @@ namespace GGG.Components.UI {
             Close();
         }
 
+        private void CheckBuildings()
+        {
+            foreach(BuildButton button in _buttons)
+                button.CheckUnlockState();
+        }
+
         private void Open(HexTile tile) {
             if (_open || tile.GetTileType() != TileType.Standard || !tile.TileEmpty()) {
                 return; 
@@ -61,6 +67,7 @@ namespace GGG.Components.UI {
             _selectedTile = tile;
             _open = true;
             _viewport.SetActive(true);
+            CheckBuildings();
             CloseButton.gameObject.SetActive(true);
             OnUiOpen?.Invoke();
             _gameManager.OnUIOpen();

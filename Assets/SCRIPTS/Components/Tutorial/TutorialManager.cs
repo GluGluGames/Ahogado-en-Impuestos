@@ -1,15 +1,15 @@
-using System;
 using GGG.Components.Core;
 using GGG.Classes.Tutorial;
-
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
-using GGG.Components.Buildings;
+using GGG.Components.Laboratory;
 using GGG.Components.Museum;
 using GGG.Components.Shop;
 using GGG.Components.UI;
 using GGG.Shared;
+
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+using System;
 using UnityEngine.UI;
 
 namespace GGG.Components.Tutorial
@@ -51,7 +51,7 @@ namespace GGG.Components.Tutorial
             StartTutorial("InitialTutorial", null);
             BuildingUI.OnUiOpen += () => StartTutorial("BuildTutorial", "InitialTutorial");
             ShopUI.OnShopOpen += () => StartTutorial("ShopTutorial", "BuildTutorial");
-            // LaboratoryUI.OnLaboratoryOpen += () => StartTutorial("LaboratoryTutorial", "BuildTutorial");
+            LaboratoryUI.OnLaboratoryOpen += () => StartTutorial("LaboratoryTutorial", "BuildTutorial");
             MuseumUI.OnMuseumOpen += () => StartTutorial("MuseumTutorial", "BuildTutorial");
             // GeneratorUI.OnGeneratorOpen += () => StartTutorial("GeneratorTutorial", "BuildTutorial");
         }

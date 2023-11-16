@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb196c66bfd54048896696680fa974b, type: 3}
+  m_Name: SeaweedFarm
+  m_EditorClassIdentifier: 
+  Name: SeaweedFarm
+  Description: 
+  Icon: {fileID: 21300000, guid: 1fba44ffcbee6a94b803548c19aa0432, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: 1fba44ffcbee6a94b803548c19aa0432, type: 3}
+  DisabledIcon: {fileID: 21300000, guid: 1fba44ffcbee6a94b803548c19aa0432, type: 3}
+  Prefab: {fileID: 8113010406866780128, guid: 8807a79897f001d4085fe45216d838dd, type: 3}
+  CanBeUpgraded: 1
+  UpgradePrefabs:
+  - {fileID: 8137532259319120740, guid: be2351cfbf228b94287ee58d64b9d47e, type: 3}
+  - {fileID: 1889224551149711422, guid: 5f70c08caac5733408e0406a0459c193, type: 3}
+  Unlocked: 1
+  BuildCost:
+    Costs: 00000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  UpgradeCost:
+  - Costs: 0a000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  - Costs: 190000000a000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+    - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
+  - Costs: 32000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  MaxLevel: 3
+  NeededInteraction: 0
+  SpawnHeight: 0.36
+  VisionRange: 2
+  Resource: {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  InitialGeneration: 4
+  ResourcesGeneration:
+  - 3
+  - 1
