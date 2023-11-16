@@ -26,7 +26,6 @@ namespace GGG.Components.UI
         [SerializeField] private Button SeaButton;
         [SerializeField] private Button ExpeditionButton;
         [SerializeField] private Button FishButton;
-        [SerializeField] private float ButtonScale = 1;
 
         #endregion
 
@@ -87,6 +86,7 @@ namespace GGG.Components.UI
             FishButton.image.sprite = FishButton.spriteState.disabledSprite;
             ExpeditionButton.image.sprite = ExpeditionButton.spriteState.disabledSprite;
 
+            SeaContainer.SetActive(true);
             ExpeditionContainer.SetActive(false);
             FishContainer.SetActive(false);
         }
@@ -114,9 +114,9 @@ namespace GGG.Components.UI
                 }
                 else
                 {
-                    _seaButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                     _seaButtons[i].image.sprite = _seaResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
+                    aux.highlightedSprite = _seaResources[i].GetSelectedSprite();
                     aux.selectedSprite = _seaResources[i].GetSelectedSprite();
                     aux.disabledSprite = _seaResources[i].GetSprite();
                     _seaButtons[i].spriteState = aux;
@@ -124,7 +124,7 @@ namespace GGG.Components.UI
                     _seaButtons[i].onClick.AddListener(() => AddListener(_seaResources, _seaButtons, 0, index));
 
                     _resourcesCountText[_seaResources[i].GetKey()] =
-                        _seaButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
+                        _seaButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>(true);
                 }
             }
         }
@@ -140,9 +140,9 @@ namespace GGG.Components.UI
                 }
                 else
                 {
-                    _expeditionButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                     _expeditionButtons[i].image.sprite = _expeditionResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
+                    aux.highlightedSprite = _expeditionResources[i].GetSelectedSprite();
                     aux.selectedSprite = _expeditionResources[i].GetSelectedSprite();
                     aux.disabledSprite = _expeditionResources[i].GetSprite();
                     _expeditionButtons[i].spriteState = aux;
@@ -167,9 +167,9 @@ namespace GGG.Components.UI
                 }
                 else
                 {
-                    _fishButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                     _fishButtons[i].image.sprite = _fishResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
+                    aux.highlightedSprite = _fishResources[i].GetSelectedSprite();
                     aux.disabledSprite = _fishResources[i].GetSprite();
                     aux.selectedSprite = _fishResources[i].GetSelectedSprite();
                     _fishButtons[i].spriteState = aux;
