@@ -24,7 +24,9 @@ namespace GGG.Classes.Buildings
         [Tooltip("Upgrade prefabs of the building. If the building don't have an upgrade, leave it empty")]
         [SerializeField] private GameObject[] UpgradePrefabs;
         [Tooltip("Determines if the player can buy the bulding")] 
-        [SerializeField] private bool Unlocked; 
+        [SerializeField] private bool Unlocked;
+        [Tooltip("Time that takes to be researched. In seconds")] 
+        [SerializeField] private int ResearchTime;
         [Space(10)] [Header("Building Fields")] 
         [Tooltip("The price to build the building")] 
         [SerializeField] private ResourceCost BuildCost;
@@ -125,6 +127,17 @@ namespace GGG.Classes.Buildings
         /// </summary>
         /// <returns>True if the player can buy the build. False otherwise</returns>
         public bool IsUnlocked() => Unlocked;
+
+        /// <summary>
+        /// Unlocks the building
+        /// </summary>
+        public void Unlock() => Unlocked = true;
+
+        /// <summary>
+        /// Gets the time that takes to research the building
+        /// </summary>
+        /// <returns>The time that takes to research the building</returns>
+        public int GetResearchTime() => ResearchTime;
 
         /// <summary>
         /// Gets the cost of the building.

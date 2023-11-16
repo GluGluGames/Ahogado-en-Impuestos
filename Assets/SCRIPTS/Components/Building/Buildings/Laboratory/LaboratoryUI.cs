@@ -14,8 +14,9 @@ namespace GGG.Components.Laboratory
 {
     public class LaboratoryUI : MonoBehaviour
     {
-        [Header("Bars")] 
+        [Header("Images")] 
         [SerializeField] private Image[] ProgressBars;
+        [SerializeField] private Image[] CurrentResources;
         [Space(5), Header("Texts")] 
         [SerializeField] private TMP_Text[] Counters;
         [Space(5), Header("Containers")] 
@@ -45,6 +46,8 @@ namespace GGG.Components.Laboratory
         private GameObject _viewport;
         private int _selected;
         private bool _open;
+
+        private Action _onResourceFinish;
 
         private void Awake()
         {
@@ -76,33 +79,25 @@ namespace GGG.Components.Laboratory
         private void Start()
         {
             if (_seaResources.Length > 0)
-            {
                 FillResources(ref _seaButtons, _seaResources, 0);
-                foreach (Button button in _seaButtons)
-                    button.onClick.AddListener(OnResourceSelected);
-            }
+            
 
             if (_expeditionResources.Length > 0)
-            {
                 FillResources(ref _expeditionButtons, _expeditionResources, 1);
-                foreach (Button button in _expeditionButtons)
-                    button.onClick.AddListener(OnResourceSelected);
-            }
+ 
 
             if (_fishResources.Length > 0)
-            {
                 FillResources(ref _fishButtons, _fishResources, 2);
-                foreach (Button button in _fishButtons)
-                    button.onClick.AddListener(OnResourceSelected);
-            }
+            
 
             if (_buildings.Length > 0)
                 FillBuildings();
             
-            foreach (Image progressBar in ProgressBars)
+            for (int i = 0; i < ProgressBars.Length; i++)
             {
                 // TODO - Check if the player have an active research
-                progressBar.fillAmount = 0;
+                ProgressBars[i].fillAmount = 0;
+                CurrentResources[i].enabled = false;
             }
 
             _barActive = new bool[ProgressBars.Length];
@@ -134,7 +129,7 @@ namespace GGG.Components.Laboratory
             ResourcesContainer.SetActive(false);
         }
 
-        private void OnResourceSelected()
+        private void OnResourceSelected(Resource resource)
         {
             OpenBarContainer();
             
@@ -142,27 +137,56 @@ namespace GGG.Components.Laboratory
             {
                 if (_barActive[i]) continue;
 
-                StartCoroutine(FillProgressBar(i, 60));
-                _barActive[i] = true;
+                CurrentResources[i].enabled = true;
+                CurrentResources[i].sprite = resource.GetSprite();
+                
+                StartCoroutine(FillProgressBar(i, resource.GetResearchTime(), resource));
                 return;
             }
             
         }
 
-        private IEnumerator FillProgressBar(int idx, float totalTime)
+        private void OnBuildingSelected(Building building)
         {
-            float deltaTime = 0f;
+            OpenBarContainer();
+            
+            for (int i = 0; i < _barActive.Length; i++)
+            {
+                if (_barActive[i]) continue;
 
-            while (deltaTime < totalTime)
+                CurrentResources[i].enabled = true;
+                CurrentResources[i].sprite = building.GetIcon();
+                
+                StartCoroutine(FillProgressBar(i, building.GetResearchTime(), null, building));
+                return;
+            }
+        }
+
+        private IEnumerator FillProgressBar(int idx, float totalTime, Resource resource = null, Building building = null)
+        {
+            float deltaTime = totalTime;
+            _barActive[idx] = true;
+            
+
+            while (deltaTime >= 0f)
             {
                 ProgressBars[idx].fillAmount += Time.deltaTime / totalTime;
-                deltaTime += Time.deltaTime;
+                
+                int minutes = Mathf.FloorToInt(deltaTime / 60);
+                int seconds = Mathf.FloorToInt(deltaTime % 60);
+                Counters[idx].SetText($"{minutes:00}:{seconds:00}");
+                
+                deltaTime -= Time.deltaTime;
                 yield return null;
             }
             
-            // TODO - Unlock the resource
+            if (resource) resource.DiscoverResource();
+            if (building) building.Unlock();
+            
             ProgressBars[idx].fillAmount = 0f;
+            Counters[idx].SetText("--:--");
             _barActive[idx] = false;
+            CurrentResources[idx].enabled = false;
         }
 
         private void FillBuildings()
@@ -182,6 +206,11 @@ namespace GGG.Components.Laboratory
                     aux.highlightedSprite = _buildings[i].GetSelectedIcon();
                     _buildingsButton[i].spriteState = aux;
                     _buildingsButton[i].interactable = !_buildings[i].IsUnlocked();
+                    foreach (Button button in _buildingsButton)
+                    {
+                        Building building = _buildings[i];
+                        button.onClick.AddListener(() => OnBuildingSelected(building));
+                    }
                 }
             }
         }
@@ -203,6 +232,12 @@ namespace GGG.Components.Laboratory
                     aux.highlightedSprite = resources[i].GetSelectedSprite();
                     buttons[i].spriteState = aux;
                     buttons[i].interactable = resources[i].CanResearch();
+
+                    foreach (Button button in buttons)
+                    {
+                        Resource resource = resources[i];
+                        button.onClick.AddListener(() => OnResourceSelected(resource));
+                    }
                 }
             }
         }
