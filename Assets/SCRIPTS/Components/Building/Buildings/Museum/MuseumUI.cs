@@ -145,6 +145,7 @@ namespace GGG.Components.Museum
                     _seaButtons[i].image.sprite = _seaResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
                     aux.selectedSprite = _seaResources[i].GetSelectedSprite();
+                    aux.highlightedSprite = _seaResources[i].GetSelectedSprite();
                     aux.disabledSprite = _seaResources[i].GetSprite();
                     _seaButtons[i].spriteState = aux;
                     int index = i;
@@ -169,6 +170,7 @@ namespace GGG.Components.Museum
                     _expeditionButtons[i].image.sprite = _expeditionResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
                     aux.selectedSprite = _expeditionResources[i].GetSelectedSprite();
+                    aux.highlightedSprite = _expeditionResources[i].GetSelectedSprite();
                     aux.disabledSprite = _expeditionResources[i].GetSprite();
                     _expeditionButtons[i].spriteState = aux;
                     int index = i;
@@ -194,6 +196,7 @@ namespace GGG.Components.Museum
                     SpriteState aux = new SpriteState();
                     aux.disabledSprite = _fishResources[i].GetSprite();
                     aux.selectedSprite = _fishResources[i].GetSelectedSprite();
+                    aux.highlightedSprite = _fishResources[i].GetSelectedSprite();
                     _fishButtons[i].spriteState = aux;
                     int index = i;
                     _fishButtons[i].onClick

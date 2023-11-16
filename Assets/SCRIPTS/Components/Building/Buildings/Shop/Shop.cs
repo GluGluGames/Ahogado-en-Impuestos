@@ -1,8 +1,8 @@
-using GGG.Components.Shop;
+using GGG.Classes.Buildings;
 
 using UnityEngine;
 
-namespace GGG.Classes.Buildings
+namespace GGG.Components.Shop
 {
     [CreateAssetMenu(fileName = "Shop", menuName = "Game/Buildings/Shop")]
     public class Shop : Building

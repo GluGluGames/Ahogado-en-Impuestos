@@ -1,7 +1,7 @@
-using GGG.Components.Museum;
+using GGG.Classes.Buildings;
 using UnityEngine;
 
-namespace GGG.Classes.Buildings
+namespace GGG.Components.Museum
 {
     [CreateAssetMenu(fileName = "Museum", menuName = "Game/Buildings/Museum")]
     public class Museum : Building
