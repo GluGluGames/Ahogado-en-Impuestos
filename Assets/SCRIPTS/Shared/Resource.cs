@@ -13,6 +13,7 @@ namespace GGG.Shared
         [SerializeField] private Sprite SelectedSprite;
         [SerializeField] private Sprite DisabledSprite;
         [SerializeField] private bool CanBeResearched;
+        [SerializeField] private bool IsUnlocked;
         [Tooltip("Time in seconds")]
         [SerializeField] private int ResearchTime;
 
@@ -23,6 +24,8 @@ namespace GGG.Shared
         public Sprite GetSelectedSprite() => SelectedSprite;
         public Sprite GetDisabledSprite() => DisabledSprite;
         public void DiscoverResource() => CanBeResearched = true;
+        public bool Unlocked() => IsUnlocked;
+        public void Unlock() => IsUnlocked = true;
         public bool CanResearch() => CanBeResearched;
         public int GetResearchTime() => ResearchTime;
     }

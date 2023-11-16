@@ -143,10 +143,11 @@ namespace GGG.Components.Museum
                 {
                     _seaButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                     _seaButtons[i].image.sprite = _seaResources[i].GetSprite();
+                    _seaButtons[i].interactable = _seaResources[i].Unlocked();
                     SpriteState aux = new SpriteState();
                     aux.selectedSprite = _seaResources[i].GetSelectedSprite();
                     aux.highlightedSprite = _seaResources[i].GetSelectedSprite();
-                    aux.disabledSprite = _seaResources[i].GetSprite();
+                    aux.disabledSprite = _seaResources[i].GetDisabledSprite();
                     _seaButtons[i].spriteState = aux;
                     int index = i;
                     _seaButtons[i].onClick
@@ -171,7 +172,7 @@ namespace GGG.Components.Museum
                     SpriteState aux = new SpriteState();
                     aux.selectedSprite = _expeditionResources[i].GetSelectedSprite();
                     aux.highlightedSprite = _expeditionResources[i].GetSelectedSprite();
-                    aux.disabledSprite = _expeditionResources[i].GetSprite();
+                    aux.disabledSprite = _expeditionResources[i].GetDisabledSprite();
                     _expeditionButtons[i].spriteState = aux;
                     int index = i;
                     _expeditionButtons[i].onClick.AddListener(() =>
@@ -194,7 +195,7 @@ namespace GGG.Components.Museum
                     _fishButtons[i].gameObject.transform.localScale = new Vector3(ButtonScale, ButtonScale, 1);
                     _fishButtons[i].image.sprite = _fishResources[i].GetSprite();
                     SpriteState aux = new SpriteState();
-                    aux.disabledSprite = _fishResources[i].GetSprite();
+                    aux.disabledSprite = _fishResources[i].GetDisabledSprite();
                     aux.selectedSprite = _fishResources[i].GetSelectedSprite();
                     aux.highlightedSprite = _fishResources[i].GetSelectedSprite();
                     _fishButtons[i].spriteState = aux;

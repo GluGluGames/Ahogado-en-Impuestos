@@ -23,6 +23,7 @@ namespace GGG.Components.UI {
         private HexTile _selectedHexTile;
         private BuildingComponent _auxBuild;
         private ResourceCost _cost;
+        private bool _dirtyFlag;
 
         public Action<BuildingComponent, HexTile> OnStructureBuild;
         public Action StructureBuild;
@@ -62,6 +63,29 @@ namespace GGG.Components.UI {
                 ResourcesImages[i].sprite = _cost.GetResource(i).GetSprite();
             }
             
+        }
+
+        public void CheckUnlockState()
+        {
+            if (!BuildingInfo.IsUnlocked() || _dirtyFlag) return;
+            
+            StructureSprite.color = new Color(1, 1, 1, 1);
+            ResourcesImages[0].gameObject.SetActive(true);
+            Padlock.gameObject.SetActive(false);
+            
+            TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>();
+            
+            for (int i = 1; i < ResourcesImages.Length; i++)
+            {
+                if (i >= _cost.GetCostsAmount() || _cost.GetCost(i) == 0)
+                    continue;
+                
+                ResourcesImages[i].gameObject.SetActive(true);
+                texts[i].SetText(_cost.GetCost(i).ToString());
+                ResourcesImages[i].sprite = _cost.GetResource(i).GetSprite();
+            }
+
+            _dirtyFlag = true;
         }
 
         private void BuildStructure()
