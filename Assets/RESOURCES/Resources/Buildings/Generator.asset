@@ -9,24 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9710e833774f16044bf2c2d31a0f35f3, type: 3}
-  m_Name: Laboratory
+  m_Script: {fileID: 11500000, guid: 86ae8f2495a80c343b7f018ab2b63feb, type: 3}
+  m_Name: Generator
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Generador
   Description: 
-  Icon: {fileID: 21300000, guid: b7bce7f55159f4e4086cfc98616fe3b2, type: 3}
-  SelectedIcon: {fileID: 21300000, guid: b7bce7f55159f4e4086cfc98616fe3b2, type: 3}
-  Prefab: {fileID: 3729789129001329043, guid: 5129a88a28bc3b048b6ab1509a81b1bd, type: 3}
+  Icon: {fileID: 21300000, guid: 349ea7a41a7636b4cbb81daeb346c6e4, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: 349ea7a41a7636b4cbb81daeb346c6e4, type: 3}
+  Prefab: {fileID: 9069191146074213081, guid: c6891ec131267f943a159296d976c5ff, type: 3}
   CanBeUpgraded: 0
   UpgradePrefabs: []
-  Unlocked: 1
-  ResearchTime: 0
+  Unlocked: 0
+  ResearchTime: 900
   BuildCost:
-    Costs: 32000000
+    Costs: 96000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
   UpgradeCost: []
   MaxLevel: 1
   NeededInteraction: 1
-  SpawnHeight: 0.36
+  SpawnHeight: 0.13
   VisionRange: 2

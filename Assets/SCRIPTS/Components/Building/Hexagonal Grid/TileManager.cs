@@ -7,6 +7,7 @@ using System.Linq;
 using GGG.Shared;
 using System.Linq.Expressions;
 using GGG.Classes.Buildings;
+using GGG.Components.Core;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -115,7 +116,8 @@ namespace GGG.Components.Buildings
         }
 
         private void OnDisable() {
-            if (SceneManager.GetSceneByBuildIndex((int) SceneIndexes.GAME_SCENE) != SceneManager.GetActiveScene())
+            if (SceneManager.GetSceneByBuildIndex((int) SceneIndexes.GAME_SCENE) != SceneManager.GetActiveScene()
+                || GameManager.Instance.GetCurrentTutorial() == Tutorials.BuildTutorial)
                 return;
             
             SaveTilesState();

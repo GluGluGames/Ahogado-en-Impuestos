@@ -60,24 +60,19 @@ namespace GGG.Components.Core
         private void Start() {
             _input = InputManager.Instance;
             _gameManager = GameManager.Instance;
-            _transform = transform;
-            _mainCamera = Camera.main;
-            _mainCanvas = GameObject.FindGameObjectWithTag("HUD").GetComponent<Canvas>();
-            _graphicRaycaster = _mainCanvas.GetComponent<GraphicRaycaster>();
+            
 
             #if UNITY_ANDROID
             LeanTouch.OnFingerDown += (x) => Holding.IsHolding(true);
             LeanTouch.OnFingerUp += (x) => Holding.IsHolding(false);
             #endif
 
-            _cameraTransform = _mainCamera.transform;
-            _newPosition = _transform.position;
-            _newRotation = _transform.rotation;
-            _newZoom = _cameraTransform.localPosition;
+            Initialize();
         }
 #if !UNITY_ANDROID
         private void Update()
         {
+            if(!_cameraTransform) Initialize();
             if (_gameManager.IsOnUI() || _gameManager.TutorialOpen()) return;
             
             StartCoroutine(HandleMouseInput());
@@ -96,6 +91,18 @@ namespace GGG.Components.Core
             HandleZoom();
 #endif
 
+        }
+
+        private void Initialize()
+        {
+            _transform = transform;
+            _mainCamera = Camera.main;
+            _mainCanvas = GameObject.FindGameObjectWithTag("HUD").GetComponent<Canvas>();
+            _graphicRaycaster = _mainCanvas.GetComponent<GraphicRaycaster>();
+            _cameraTransform = _mainCamera.transform;
+            _newPosition = _transform.position;
+            _newRotation = _transform.rotation;
+            _newZoom = _cameraTransform.localPosition;
         }
 
         /// <summary>

@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace GGG.Components.Generator
 {
+    [CreateAssetMenu(fileName = "Generator", menuName = "Game/Buildings/Generator")]
     public class Generator : Building
     {
         private GeneratorUI _ui;
