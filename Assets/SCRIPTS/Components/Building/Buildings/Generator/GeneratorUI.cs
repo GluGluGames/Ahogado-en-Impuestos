@@ -79,7 +79,7 @@ namespace GGG.Components.Generator
         private void ActiveLevelPanel(int idx)
         {
             for (int i = 0; i < LevelContainers.Length; i++)
-                LevelContainers[i].SetActive(i == idx - 1);
+                LevelContainers[i].SetActive(i == idx);
             
         }
 
