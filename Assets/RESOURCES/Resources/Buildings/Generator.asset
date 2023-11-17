@@ -17,16 +17,25 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 349ea7a41a7636b4cbb81daeb346c6e4, type: 3}
   SelectedIcon: {fileID: 21300000, guid: 349ea7a41a7636b4cbb81daeb346c6e4, type: 3}
   Prefab: {fileID: 9069191146074213081, guid: c6891ec131267f943a159296d976c5ff, type: 3}
-  CanBeUpgraded: 0
-  UpgradePrefabs: []
+  CanBeUpgraded: 1
+  UpgradePrefabs:
+  - {fileID: 9069191146074213081, guid: c6891ec131267f943a159296d976c5ff, type: 3}
+  - {fileID: 9069191146074213081, guid: c6891ec131267f943a159296d976c5ff, type: 3}
   Unlocked: 1
   ResearchTime: 900
   BuildCost:
     Costs: 00000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  UpgradeCost: []
-  MaxLevel: 1
+  UpgradeCost:
+  - Costs: 0a000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  - Costs: 0a000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  MaxLevel: 3
   NeededInteraction: 1
+  CanBoost: 0
   SpawnHeight: 0.35
   VisionRange: 2

@@ -27,7 +27,14 @@ MonoBehaviour:
     Costs: f4010000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  UpgradeCost: []
+  UpgradeCost:
+  - Costs: 2c010000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  - Costs: f401000019000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+    - {fileID: 11400000, guid: b8e4cd17a2a28e947ae97cdbed7bd413, type: 2}
   MaxLevel: 3
   NeededInteraction: 0
   CanBoost: 1
