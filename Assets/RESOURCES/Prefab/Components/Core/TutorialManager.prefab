@@ -56,9 +56,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tutorials:
   - {fileID: 11400000, guid: 46aa4404522c4fb488a7203d96659ff3, type: 2}
+  - {fileID: 11400000, guid: 345f6dad9cf69ec47942d4b2eba4a8e4, type: 2}
   - {fileID: 11400000, guid: 2e4518094e473f24ab548a89e72c80a6, type: 2}
+  - {fileID: 11400000, guid: 737aa28c974a57a41befe732f4afa409, type: 2}
+  - {fileID: 11400000, guid: d94bec4eecad1534086390376ec8bf7c, type: 2}
+  - {fileID: 11400000, guid: a6c3c3ef0568e814d9fc77f4f59f43c5, type: 2}
   - {fileID: 11400000, guid: ddf180f2bc43b7e42a8146c1a7f27092, type: 2}
-  - {fileID: 11400000, guid: a215bbade7687d14f9331ce9802c3986, type: 2}
 --- !u!223 &1148007489695868601
 Canvas:
   m_ObjectHideFlags: 0
@@ -152,27 +155,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5500532679539780657, guid: 575a5c712d67aee48a84bec249a329bf, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5500532679539780657, guid: 575a5c712d67aee48a84bec249a329bf, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5500532679539780657, guid: 575a5c712d67aee48a84bec249a329bf, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5500532679539780657, guid: 575a5c712d67aee48a84bec249a329bf, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5500532679539780657, guid: 575a5c712d67aee48a84bec249a329bf, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5500532679539780657, guid: 575a5c712d67aee48a84bec249a329bf, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5500532679539780657, guid: 575a5c712d67aee48a84bec249a329bf, type: 3}
       propertyPath: m_LocalPosition.x

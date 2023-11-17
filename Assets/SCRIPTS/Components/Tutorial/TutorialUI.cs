@@ -13,16 +13,15 @@ namespace GGG.Components.Tutorial
         [SerializeField] private GameObject Viewport;
         [Header("Tutorial Fields")]
         [SerializeField] private TMP_Text TitleText;
-        [SerializeField] private Image TutorialImage;
         [SerializeField] private TMP_Text TutorialText;
-        [SerializeField] private Button ContinueButton;
+        [SerializeField] private Image TutorialImage;
         
         private bool _open;
         public Action OnContinueButton;
 
         private void Start()
         {
-            Viewport.transform.position = new Vector3(Screen.width * -0.3f, Screen.height * 0.5f);
+            Viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
         }
 
         public void SetTutorialFields(string title, Sprite image, string text)
@@ -51,7 +50,7 @@ namespace GGG.Components.Tutorial
         {
             if (!_open) return;
 
-            Viewport.transform.DOMoveX(Screen.width * -0.3f, 1f).SetEase(Ease.OutQuad).onComplete += () =>
+            Viewport.transform.DOMoveX(Screen.width * -0.5f, 1f).SetEase(Ease.OutQuad).onComplete += () =>
             {
                 _open = false;
                 Viewport.SetActive(false);
