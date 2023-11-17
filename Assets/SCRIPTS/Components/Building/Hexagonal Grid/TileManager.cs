@@ -115,6 +115,9 @@ namespace GGG.Components.Buildings
         }
 
         private void OnDisable() {
+            if (SceneManager.GetSceneByBuildIndex((int) SceneIndexes.GAME_SCENE) != SceneManager.GetActiveScene())
+                return;
+            
             SaveTilesState();
         }
 

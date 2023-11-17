@@ -35,7 +35,7 @@ namespace GGG.Components.UI
             ExpeditionButton.onClick.AddListener(() =>
             {
                 _sceneManagement.AddSceneToLoad(SceneIndexes.MINIGAME);
-                _sceneManagement.AddSceneToUnload(SceneIndexes.MAIN_MENU);
+                _sceneManagement.AddSceneToUnload(SceneIndexes.GAME_SCENE);
                 _sceneManagement.UpdateScenes();
                 _gameManager.OnUIClose();
             });
