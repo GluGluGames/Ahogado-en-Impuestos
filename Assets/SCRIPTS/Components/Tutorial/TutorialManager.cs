@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using GGG.Components.Generator;
 using UnityEngine.UI;
 
 namespace GGG.Components.Tutorial
@@ -53,7 +54,7 @@ namespace GGG.Components.Tutorial
             ShopUI.OnShopOpen += () => StartTutorial("ShopTutorial", "BuildTutorial");
             LaboratoryUI.OnLaboratoryOpen += () => StartTutorial("LaboratoryTutorial", "BuildTutorial");
             MuseumUI.OnMuseumOpen += () => StartTutorial("MuseumTutorial", "BuildTutorial");
-            // GeneratorUI.OnGeneratorOpen += () => StartTutorial("GeneratorTutorial", "BuildTutorial");
+            GeneratorUI.OnGeneratorOpen += () => StartTutorial("GeneratorTutorial", "BuildTutorial");
         }
 
         private void StartTutorial(string tutorialKey, string previousTutorialKey)

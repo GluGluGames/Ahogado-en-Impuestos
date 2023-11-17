@@ -8,6 +8,7 @@ using GGG.Shared;
 
 using UnityEngine;
 using System.Collections.Generic;
+using GGG.Components.Generator;
 using GGG.Components.Laboratory;
 using GGG.Components.Taxes;
 
@@ -21,6 +22,7 @@ namespace GGG.Components.Debug
         private static DebugCommand OPEN_SHOP;
         private static DebugCommand OPEN_MUSEUM;
         private static DebugCommand OPEN_LABORATORY;
+        private static DebugCommand OPEN_GENERATOR;
         private static DebugCommand TRIGGER_TAXES;
         private static List<object> _commandList;
         
@@ -104,6 +106,12 @@ namespace GGG.Components.Debug
                 OnDebugConsole();
                 FindObjectOfType<LaboratoryUI>().Open();
             });
+
+            OPEN_GENERATOR = new DebugCommand("open_generator", "Opens the generator", "open_generator", () =>
+            {
+                OnDebugConsole();
+                FindObjectOfType<GeneratorUI>().Open();
+            });
             
             TRIGGER_TAXES = new DebugCommand("trigger_taxes", "Poseidon will tax you", "trigger_taxes", () =>
             {
@@ -119,6 +127,7 @@ namespace GGG.Components.Debug
                 OPEN_SHOP,
                 OPEN_MUSEUM,
                 OPEN_LABORATORY,
+                OPEN_GENERATOR,
                 TRIGGER_TAXES,
             };
         }
