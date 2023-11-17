@@ -61,9 +61,12 @@ namespace GGG.Components.Resources
 
         private void OnTriggerExit(Collider other)
         {
+
             WaitSecond = false;
             if (_collided)
             {
+                _pickProgressUI.current = 0;
+                _pickProgressUI.gameObject.SetActive(false);
                 onResourceCollideExit.Invoke();
                 _collided = false;
             }
