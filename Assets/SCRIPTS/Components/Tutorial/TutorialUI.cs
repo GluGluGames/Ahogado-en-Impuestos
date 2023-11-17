@@ -22,6 +22,7 @@ namespace GGG.Components.Tutorial
         private void Start()
         {
             Viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
+            Viewport.SetActive(false);
         }
 
         public void SetTutorialFields(string title, Sprite image, string text)
