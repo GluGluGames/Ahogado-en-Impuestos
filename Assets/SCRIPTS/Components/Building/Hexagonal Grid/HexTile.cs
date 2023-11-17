@@ -233,7 +233,7 @@ namespace GGG.Components.Buildings
             gameObject.layer = 0;
             transform.GetChild(0).gameObject.layer = 0;
             for (int i = 0; i < transform.GetChild(0).childCount; i++)
-                transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.layer = 0;
+                transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.layer = 10;
             if (fow) fow.SetActive(false);
         }
 
