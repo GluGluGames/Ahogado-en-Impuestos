@@ -14,5 +14,9 @@ namespace GGG.Components.Laboratory
             
             _ui.Open();
         }
+
+        public override void Boost(int level) { }
+        
+        public override void EndBoost(int level) { }
     }
 }

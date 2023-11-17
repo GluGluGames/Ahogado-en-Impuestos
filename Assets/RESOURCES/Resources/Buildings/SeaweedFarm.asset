@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: SeaweedFarm
   Description: 
-  Icon: {fileID: 21300000, guid: 1fba44ffcbee6a94b803548c19aa0432, type: 3}
-  SelectedIcon: {fileID: 21300000, guid: 1fba44ffcbee6a94b803548c19aa0432, type: 3}
-  DisabledIcon: {fileID: 21300000, guid: 1fba44ffcbee6a94b803548c19aa0432, type: 3}
+  Icon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
   Prefab: {fileID: 8113010406866780128, guid: 8807a79897f001d4085fe45216d838dd, type: 3}
   CanBeUpgraded: 1
   UpgradePrefabs:
-  - {fileID: 8137532259319120740, guid: be2351cfbf228b94287ee58d64b9d47e, type: 3}
-  - {fileID: 1889224551149711422, guid: 5f70c08caac5733408e0406a0459c193, type: 3}
+  - {fileID: 2201435938415596008, guid: 1bf6f53fe1a1e334385aa0735ff376bb, type: 3}
+  - {fileID: 4952556870660823925, guid: 17288a6535838e6448cb1f8496dc4cb1, type: 3}
   Unlocked: 1
+  ResearchTime: 0
   BuildCost:
     Costs: 00000000
     Resources:
@@ -40,10 +40,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
   MaxLevel: 3
   NeededInteraction: 0
+  CanBoost: 1
   SpawnHeight: 0.36
   VisionRange: 2
   Resource: {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  InitialGeneration: 4
+  InitialGeneration: 6
   ResourcesGeneration:
   - 3
   - 1

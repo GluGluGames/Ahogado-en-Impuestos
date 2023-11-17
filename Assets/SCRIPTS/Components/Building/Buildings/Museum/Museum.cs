@@ -14,5 +14,9 @@ namespace GGG.Components.Museum
 
             _museum.Open();
         }
+
+        public override void Boost(int level) { }
+        
+        public override void EndBoost(int level) { }
     }
 }

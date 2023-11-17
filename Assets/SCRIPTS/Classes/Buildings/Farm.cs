@@ -26,6 +26,20 @@ namespace GGG.Classes.Buildings
             _cooldownDelta = level == 1 ? InitialGeneration : ResourcesGeneration[level - 2];
         }
 
+        public override void Boost(int level)
+        {
+            if(!CanBeBoost()) return;
+
+            if (level == 1) InitialGeneration -= InitialGeneration * 0.25f;
+            else ResourcesGeneration[level - 2] -= ResourcesGeneration[level - 2] * 0.25f;
+        }
+
+        public override void EndBoost(int level)
+        {
+            if (level == 1) InitialGeneration += InitialGeneration * 0.25f;
+            else ResourcesGeneration[level - 2] += ResourcesGeneration[level - 2] * 0.25f;
+        }
+
         /// <summary>
         /// Gets the generated resource
         /// </summary>

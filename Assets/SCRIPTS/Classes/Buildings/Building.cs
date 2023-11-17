@@ -34,6 +34,8 @@ namespace GGG.Classes.Buildings
         [SerializeField] private int MaxLevel;
         [Tooltip("Determines if the player needs to click the building to interact with it")]
         [SerializeField] private bool NeededInteraction;
+        [Tooltip("Determines if the building can be boosted")] 
+        [SerializeField] private bool CanBoost;
         [Tooltip("Determines the height of the building")]
         [SerializeField] private float SpawnHeight;
         [Tooltip("Determines the vision range of the building")] 
@@ -43,6 +45,14 @@ namespace GGG.Classes.Buildings
         /// Interacts with the building
         /// </summary>
         public abstract void Interact(int level);
+
+        /// <summary>
+        /// Boost the building depending on the level
+        /// </summary>
+        /// <param name="level">The level of the building</param>
+        public abstract void Boost(int level);
+
+        public abstract void EndBoost(int level);
 
         /// <summary>
         /// Gets the name of the building
@@ -73,6 +83,12 @@ namespace GGG.Classes.Buildings
         /// </summary>
         /// <returns>True if it can be upgraded. False otherwise</returns>
         public bool CanUpgraded() => CanBeUpgraded;
+
+        /// <summary>
+        /// Checks if the building can be boost
+        /// </summary>
+        /// <returns>True if it can be boost. False otherwise</returns>
+        public bool CanBeBoost() => CanBoost;
 
         /// <summary>
         /// Spawns the building

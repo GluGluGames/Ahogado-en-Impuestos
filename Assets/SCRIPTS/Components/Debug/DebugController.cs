@@ -110,7 +110,7 @@ namespace GGG.Components.Debug
             OPEN_GENERATOR = new DebugCommand("open_generator", "Opens the generator", "open_generator", () =>
             {
                 OnDebugConsole();
-                FindObjectOfType<GeneratorUI>().Open();
+                FindObjectOfType<GeneratorUI>().Open(3);
             });
             
             TRIGGER_TAXES = new DebugCommand("trigger_taxes", "Poseidon will tax you", "trigger_taxes", () =>

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using GGG.Classes.Buildings;
+
 using UnityEngine;
 
 namespace GGG.Components.Generator
@@ -14,7 +13,11 @@ namespace GGG.Components.Generator
         {
             if(!_ui) _ui = FindObjectOfType<GeneratorUI>();
 
-            _ui.Open();
+            _ui.Open(level);
         }
+
+        public override void Boost(int level) { }
+        
+        public override void EndBoost(int level) { }
     }
 }

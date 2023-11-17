@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9710e833774f16044bf2c2d31a0f35f3, type: 3}
   m_Name: Laboratory
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Laboratorio
   Description: 
-  Icon: {fileID: 21300000, guid: b7bce7f55159f4e4086cfc98616fe3b2, type: 3}
-  SelectedIcon: {fileID: 21300000, guid: b7bce7f55159f4e4086cfc98616fe3b2, type: 3}
+  Icon: {fileID: 21300000, guid: 1a98bbf24b216ea4da3ad31969c2c608, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: 1a98bbf24b216ea4da3ad31969c2c608, type: 3}
   Prefab: {fileID: 3729789129001329043, guid: 5129a88a28bc3b048b6ab1509a81b1bd, type: 3}
   CanBeUpgraded: 0
   UpgradePrefabs: []
@@ -28,5 +28,6 @@ MonoBehaviour:
   UpgradeCost: []
   MaxLevel: 1
   NeededInteraction: 1
+  CanBoost: 0
   SpawnHeight: 0.36
   VisionRange: 2

@@ -15,5 +15,9 @@ namespace GGG.Components.Shop
 
             _shop.OpenShop();
         }
+
+        public override void Boost(int level) { }
+        
+        public override void EndBoost(int level) { }
     }
 }
