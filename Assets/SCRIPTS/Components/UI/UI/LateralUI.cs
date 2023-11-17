@@ -16,6 +16,8 @@ namespace GGG.Components.UI
         [SerializeField] private Button ExpeditionButton;
 
         private InputManager _input;
+        private GameManager _gameManager;
+        private SceneManagement _sceneManagement;
         private InventoryUI _inventory;
 
         private bool _open;
@@ -23,6 +25,8 @@ namespace GGG.Components.UI
         private void Start()
         {
             _input = InputManager.Instance;
+            _sceneManagement = SceneManagement.Instance;
+            _gameManager = GameManager.Instance;
             _inventory = FindObjectOfType<InventoryUI>();
             
             OpenButton.onClick.AddListener(ToggleMenu);
@@ -30,8 +34,10 @@ namespace GGG.Components.UI
             SettingsButton.onClick.AddListener(OpenSettings);
             ExpeditionButton.onClick.AddListener(() =>
             {
-                HUDManager.Instance.ChangeScene(SceneIndexes.MINIGAME, SceneIndexes.GAME_SCENE);
-                GameManager.Instance.OnUIClose();
+                _sceneManagement.AddSceneToLoad(SceneIndexes.MINIGAME);
+                _sceneManagement.AddSceneToUnload(SceneIndexes.MAIN_MENU);
+                _sceneManagement.UpdateScenes();
+                _gameManager.OnUIClose();
             });
         }
 
@@ -51,13 +57,13 @@ namespace GGG.Components.UI
             {
                 transform.DOMoveX(Screen.width * 0.85f, 0.75f).SetEase(Ease.InQuad);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
-                GameManager.Instance.OnUIOpen();
+                _gameManager.OnUIOpen();
             }
             else
             {
                 transform.DOMoveX(Screen.width + 5, 0.75f).SetEase(Ease.OutCubic);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-                GameManager.Instance.OnUIClose();
+               _gameManager.OnUIClose();
             }
         }
 
@@ -71,9 +77,9 @@ namespace GGG.Components.UI
 
         private void OpenSettings()
         {
-            SceneManagement.Instance.OpenSettings();
+            _sceneManagement.OpenSettings();
             ToggleMenu();
-            GameManager.Instance.OnUIOpen();
+            _gameManager.OnUIOpen();
         }
     }
 }

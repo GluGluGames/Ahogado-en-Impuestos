@@ -18,13 +18,17 @@ namespace GGG.Components.UI
         [SerializeField] private GameObject Viewport;
         [SerializeField] private Button button;
 
-
+        private SceneManagement _sceneManagement;
 
         private void Start()
         {
+            _sceneManagement = SceneManagement.Instance;
+            
             button.onClick.AddListener(() =>
             {
-                HUDManager.Instance.ChangeScene(SceneIndexes.GAME_SCENE, SceneIndexes.MINIGAME);
+                _sceneManagement.AddSceneToLoad(SceneIndexes.GAME_SCENE);
+                _sceneManagement.AddSceneToUnload(SceneIndexes.MINIGAME);
+                _sceneManagement.UpdateScenes();
                 GameManager.Instance.OnUIClose();
             });
         }

@@ -41,12 +41,11 @@ namespace GGG.Components.UI
 
         private Dictionary<string, TextMeshProUGUI> _resourcesCountText;
 
-        private const int _INITIAL_POSITION = -1100;
-
         private PlayerManager _player;
         private InputManager _input;
+        private HUDManager _hudManager;
         private GameObject _viewport;
-        private int _active = 0;
+        private int _active;
         private bool _open;
 
         #endregion
@@ -62,14 +61,15 @@ namespace GGG.Components.UI
         {
             _player = PlayerManager.Instance;
             _input = InputManager.Instance;
+            _hudManager = HUDManager.Instance;
             _viewport = transform.GetChild(0).gameObject;
-            transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f + _INITIAL_POSITION);
+            _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
 
             _resourcesCountText = new Dictionary<string, TextMeshProUGUI>(_player.GetResourceNumber());
             
-            _seaResources = Resources.LoadAll<Resource>("RESOURCES/SeaResources");
-            _expeditionResources = Resources.LoadAll<Resource>("RESOURCES/ExpeditionResources");
-            _fishResources = Resources.LoadAll<Resource>("RESOURCES/FishResources");
+            _seaResources = Resources.LoadAll<Resource>("SeaResources");
+            _expeditionResources = Resources.LoadAll<Resource>("ExpeditionResources");
+            _fishResources = Resources.LoadAll<Resource>("FishResources");
 
             while (_seaResources.Length <= 0 || _expeditionResources.Length <= 0 || _fishResources.Length <= 0)
                 yield return null;
@@ -78,9 +78,9 @@ namespace GGG.Components.UI
             FillExpeditionResources();
             FillFishResources();
 
-            SeaButton.onClick.AddListener(() => HandleSeaToggle());
-            ExpeditionButton.onClick.AddListener(() => HandleExpeditionToggle());
-            FishButton.onClick.AddListener(() => HandleFishToggle());
+            SeaButton.onClick.AddListener(HandleSeaToggle);
+            ExpeditionButton.onClick.AddListener(HandleExpeditionToggle);
+            FishButton.onClick.AddListener(HandleFishToggle);
 
             SeaButton.image.sprite = SeaButton.spriteState.selectedSprite;
             FishButton.image.sprite = FishButton.spriteState.disabledSprite;
@@ -115,13 +115,17 @@ namespace GGG.Components.UI
                 else
                 {
                     _seaButtons[i].image.sprite = _seaResources[i].GetSprite();
-                    SpriteState aux = new SpriteState();
-                    aux.highlightedSprite = _seaResources[i].GetSelectedSprite();
-                    aux.selectedSprite = _seaResources[i].GetSelectedSprite();
-                    aux.disabledSprite = _seaResources[i].GetSprite();
+                    SpriteState aux = new()
+                    {
+                        highlightedSprite = _seaResources[i].GetSelectedSprite(),
+                        selectedSprite = _seaResources[i].GetSelectedSprite(),
+                        disabledSprite = _seaResources[i].GetSprite()
+                    };
+                    
                     _seaButtons[i].spriteState = aux;
                     int index = i;
-                    _seaButtons[i].onClick.AddListener(() => AddListener(_seaResources, _seaButtons, 0, index));
+                    _seaButtons[i].onClick.AddListener(() => 
+                        AddListener(_seaResources[index], _fishButtons[index]));
 
                     _resourcesCountText[_seaResources[i].GetKey()] =
                         _seaButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>(true);
@@ -141,14 +145,17 @@ namespace GGG.Components.UI
                 else
                 {
                     _expeditionButtons[i].image.sprite = _expeditionResources[i].GetSprite();
-                    SpriteState aux = new SpriteState();
-                    aux.highlightedSprite = _expeditionResources[i].GetSelectedSprite();
-                    aux.selectedSprite = _expeditionResources[i].GetSelectedSprite();
-                    aux.disabledSprite = _expeditionResources[i].GetSprite();
+                    SpriteState aux = new()
+                    {
+                        highlightedSprite = _expeditionResources[i].GetSelectedSprite(),
+                        selectedSprite = _expeditionResources[i].GetSelectedSprite(),
+                        disabledSprite = _expeditionResources[i].GetSprite()
+                    };
                     _expeditionButtons[i].spriteState = aux;
                     int index = i;
                     _expeditionButtons[i].onClick
-                        .AddListener(() => AddListener(_expeditionResources, _expeditionButtons, 1, index));
+                        .AddListener(() => 
+                            AddListener(_expeditionResources[index], _fishButtons[index]));
 
                     _resourcesCountText[_expeditionResources[i].GetKey()] =
                         _expeditionButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
@@ -168,13 +175,16 @@ namespace GGG.Components.UI
                 else
                 {
                     _fishButtons[i].image.sprite = _fishResources[i].GetSprite();
-                    SpriteState aux = new SpriteState();
-                    aux.highlightedSprite = _fishResources[i].GetSelectedSprite();
-                    aux.disabledSprite = _fishResources[i].GetSprite();
-                    aux.selectedSprite = _fishResources[i].GetSelectedSprite();
+                    SpriteState aux = new()
+                    {
+                        highlightedSprite = _fishResources[i].GetSelectedSprite(),
+                        disabledSprite = _fishResources[i].GetSprite(),
+                        selectedSprite = _fishResources[i].GetSelectedSprite()
+                    };
                     _fishButtons[i].spriteState = aux;
                     int index = i;
-                    _fishButtons[i].onClick.AddListener(() => AddListener(_fishResources, _fishButtons, 2, index));
+                    _fishButtons[i].onClick.AddListener(() => 
+                        AddListener(_fishResources[index], _fishButtons[index]));
 
                     _resourcesCountText[_fishResources[i].GetKey()] =
                         _fishButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
@@ -182,12 +192,20 @@ namespace GGG.Components.UI
             }
         }
 
-        private void AddListener(Resource[] resources, Button[] buttons, int type, int i)
+        private void AddListener(Resource resource, Button button)
         {
-            //
+            if (_hudManager.ResourceBeingShown(resource))
+            {
+                if(_hudManager.HideResource(resource))
+                    button.image.sprite = resource.GetSprite();
+                return;
+            }
+            
+            if(_hudManager.ShowResource(resource));
+                button.image.sprite = resource.GetSelectedSprite();
         }
 
-        public void HandleSeaToggle()
+        private void HandleSeaToggle()
         {
             if (_active == 0) return;
 
@@ -201,7 +219,7 @@ namespace GGG.Components.UI
             _active = 0;
         }
 
-        public void HandleExpeditionToggle()
+        private void HandleExpeditionToggle()
         {
             if (_active == 1) return;
 
@@ -215,7 +233,7 @@ namespace GGG.Components.UI
             _active = 1;
         }
 
-        public void HandleFishToggle()
+        private void HandleFishToggle()
         {
             if (_active == 2) return;
 
@@ -243,14 +261,14 @@ namespace GGG.Components.UI
                 _resourcesCountText[key].SetText(_player.GetResourceCount(key).ToString());
             }
             
-            transform.DOMoveY(Screen.height * 0.5f, 0.5f).SetEase(Ease.OutBounce);
+            _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.5f).SetEase(Ease.InCubic);
         }
 
-        public void CloseInventory()
+        private void CloseInventory()
         {
             if (!_open) return;
 
-            transform.DOMoveY(Screen.height * 0.5f + _INITIAL_POSITION, 0.5f).SetEase(Ease.OutBounce).onComplete += () =>
+            _viewport.transform.DOMoveX(Screen.width * -0.5f, 0.5f).SetEase(Ease.OutCubic).onComplete += () =>
             {
                 _viewport.SetActive(false);
                 _open = false;
