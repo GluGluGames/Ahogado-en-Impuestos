@@ -40,6 +40,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3475483300583572583}
     m_Modifications:
+    - target: {fileID: 87790348993152764, guid: 573ce7fe8df29ae48b1cbfdf0549683f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c98bf8cd32f49184da17eec79a2c07cf, type: 2}
+    - target: {fileID: 4624893103116926925, guid: 573ce7fe8df29ae48b1cbfdf0549683f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c98bf8cd32f49184da17eec79a2c07cf, type: 2}
     - target: {fileID: 4905389124310570033, guid: 573ce7fe8df29ae48b1cbfdf0549683f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -88,6 +96,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SeaweedFarm_Level3
       objectReference: {fileID: 0}
+    - target: {fileID: 6549100314890144726, guid: 573ce7fe8df29ae48b1cbfdf0549683f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 69c4aeb75f8286e41a8d0c31e311eb3c, type: 2}
+    - target: {fileID: 9006241984175897498, guid: 573ce7fe8df29ae48b1cbfdf0549683f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c98bf8cd32f49184da17eec79a2c07cf, type: 2}
+    - target: {fileID: 9165235968673930371, guid: 573ce7fe8df29ae48b1cbfdf0549683f, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1de70c52d947d784282be805cc28d550, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
