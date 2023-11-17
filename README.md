@@ -17,6 +17,7 @@
 - 21/10/2023 - Luming - Correcion de Mecanicas en recursos y desarrollar pensamineto computacional
 - 10/11/2023 - Luming - Subir el análisis MDA de nuestro juego
 - 14/11/2023 - Luming - Corregir las mecanicas de construccion y subir FSM de diferentes enemigos
+- 17/11/2023 - Luming - Reescribir el texto de la MDA
   
 ## 1 - MÉCANICAS 
 
@@ -730,28 +731,9 @@ La administración eficiente de nuestra estructura de costos garantiza una asign
 
 La estrategia de ingresos se fundamenta en la diversificación y la adaptabilidad, lo que nos capacita para generar beneficios mientras mantenemos un firme compromiso con la oferta de aprendizaje y entretenimiento accesible para una amplia audiencia.
 
-## 12. Mechanics,Dynamics,Aesthetics?
-### **Mecánicas (Mechanics):**   
-En el juego, las mecánicas giran en torno a la gestión de recursos, y estos recursos son el núcleo de la experiencia del jugador. Los recursos principales incluyen algas, corales, perlas, conchas y caracolas, y son esenciales para todas las acciones dentro y fuera de la ciudad.
+## 12. Mechanics,Dynamics,Aesthetics? 
+La estética principal de este juego es el desafío; el jugador debe gestionar recursos tanto dentro como fuera de la ciudad. Se le marca un objetivo de reconstruir la gloria del pasado de Atlantis, la cual tuvo una historia espectacular. Dentro de la ciudad, el jugador se enfrenta a retos de cómo usar los recursos para sacar el máximo beneficio, por lo que el jugador se tiene que planificar cómo organizar entre el ganar y gastar de los recursos. Además, fuera del escenario, el jugador se enfrenta a obstáculos que le impiden recoger recursos, ya sean limitaciones del propio escenario como rocas, remolinos o diferentes tipos de enemigos. El juego no solo contiene desafíos; la fantasía también está involucrada dentro del juego. El jugador actúa como un fantasma resucitado, el cual fue despertado por Poseidón y asignado como encargado de la ciudad. Aparte, el descubrimiento tiene un papel importante dentro del juego; el jugador podrá navegar en diferentes escenarios mediante navegación, así consigue conocer a distintas criaturas, mapas, desbloqueando nuevas funcionalidades de los edificios y equipamientos de buceo. Y como se había dicho antes, el jugador puede conocer diferentes criaturas, por lo que también incluimos coleccionismo dentro del juego, así dando al jugador una iniciativa.
 
-Construcción y Gestión: Los jugadores deben utilizar estos recursos para construir, destruir, reparar y mejorar edificios dentro de la ciudad. Cada edificio tiene su propio coste, lo que requiere que los jugadores tomen decisiones estratégicas sobre cómo asignar recursos de manera eficiente. Algunos edificios son más caros de construir pero ofrecen un mayor rendimiento, mientras que otros actúan como salvavidas en momentos críticos. Cada edificio tiene funciones específicas que contribuyen al progreso de la ciudad.
+El desafío viene dado por varios elementos claves: administrar los costos de diferentes recursos, el tiempo limitado de exploración y los enemigos que estarán distribuidos dentro del mapa de exploración. El jugador, por una parte, debe ver si la proporción de construir/mejorar está equilibrada, pensar en cómo puede conseguir algas suficientes para cada recolección, así previniendo la destrucción de los edificios, lo cual ralentiza el ritmo de la reconstrucción. No solo eso, el jugador también debe decidir en cuáles edificios invertir para subir el rendimiento, también se destaca que el jugador puede conseguir mejores equipos de buceo si los mejora. Por otro lado, durante la expedición, el jugador será limitado por el tiempo de energía, por lo que dentro del escenario se tiene que plantear la exploración de manera correcta, ya que en cada expedición, la generación de recursos puede estar distribuida de manera distinta (Solo el mapa será creado manualmente, los recursos se regenerarán en distintas posiciones en cada ocasión). Aparte, para darle un desafío más al jugador, este tendrá que usar estrategias para esquivar a los enemigos, ya que una vez cazado, el jugador solo podrá volver con muy pocos recursos a la ciudad, lo que aportará casi nulo a la ciudad.
 
-Recursos en Expediciones: Fuera de la ciudad, los jugadores pueden navegar libremente por diferentes escenarios durante las expediciones. La exploración es esencial para obtener recursos y avanzar en la historia del juego. La generación de recursos varía en cada expedición, lo que requiere que los jugadores adapten sus estrategias a las condiciones cambiantes. Además, durante las expediciones, los jugadores pueden descubrir mapas y mejoras de edificios, lo que contribuye al sentido de descubrimiento.
-
-### **Dinámicas (Dynamics):**   
-Las dinámicas del juego se centran en los desafíos y la gestión eficiente de recursos. Los elementos clave que influyen en estas dinámicas son:
-
-Desafío en la Administración de Recursos: Los jugadores deben equilibrar los costos de diferentes recursos y asegurarse de que tienen suficientes algas para cumplir con las demandas de Poseidón y evitar la destrucción de edificios, lo que ralentizaría el progreso.
-
-Decisión Estratégica: Los jugadores también deben decidir en qué edificios invertir para mejorar el rendimiento y si deben mejorar su equipo de buceo. Cada elección afecta la eficiencia de la ciudad y la capacidad del jugador para enfrentar obstáculos.
-
-Tiempo Limitado en Expediciones: Durante las expediciones, los jugadores tienen un tiempo limitado, lo que requiere una planificación cuidadosa para maximizar la recolección de recursos y el descubrimiento de elementos importantes.
-
-Estrategias de Esquiva: Los enemigos en las expediciones presentan un desafío adicional, ya que los jugadores deben desarrollar estrategias para evitar ser cazados. Ser capturado limita la cantidad de recursos que se pueden llevar de regreso a la ciudad.
-
-### **Estética (Aesthetics):**  
-La estética principal del juego es el desafío, que se presenta en forma de gestión de recursos, toma de decisiones estratégicas y resolución de obstáculos. Los jugadores se enfrentan a un objetivo ambicioso de reconstruir la gloria pasada de Atlantis, lo que añade un elemento épico a la historia. La fantasía se entrelaza con la trama, ya que los jugadores interpretan el papel de un fantasma resucitado bajo el mandato de Poseidón.
-
-El descubrimiento también es un componente clave, ya que los jugadores exploran escenarios diversos, conocen criaturas y desbloquean nuevas funcionalidades. Además, se fomenta el coleccionismo, lo que añade un toque de iniciativa al juego.
-
-En resumen, el juego combina mecánicas de gestión de recursos con desafíos estratégicos y elementos de exploración y fantasía para brindar a los jugadores una experiencia emocionante y gratificante. Las decisiones que toman y las estrategias que desarrollan influyen en el ritmo de reconstrucción de Atlantis y su éxito en las expediciones.
+En el juego, actúan principalmente los recursos, es decir, todos giran en torno al recurso, formando como mecánica principal del juego. Los recursos principales serán las algas, los corales, las perlas, las conchas y las caracolas; todo tipo de construcción o mejora depende de ellos. Los recursos existen para poder usarlos; en este caso, el jugador los usará para construir, destruir, reparar, mejorar edificios dentro de la ciudad. Cada edificio tendrá un costo distinto, algunos serán más complicados para construir pero aportarán un rendimiento mayor a la ciudad; otros actuarán como última medida para salvar la partida, cada uno de ellos tiene distintas funcionalidades para ayudar a la ciudad. En la parte de expedición, el jugador podrá navegar libremente por el escenario; si es cazado, volverá a la ciudad casi sin recursos; habrá variedad de recursos en el escenario, con distintas cantidades, y puede avanzar una pequeña historia que hay dentro del juego. Aparte, el jugador puede descubrir diferentes mapas y diferentes mejoras de edificios, lo que conlleva al descubrimiento.
