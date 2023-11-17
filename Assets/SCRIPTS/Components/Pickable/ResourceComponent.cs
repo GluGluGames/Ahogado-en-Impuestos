@@ -1,5 +1,6 @@
 using GGG.Components.Buildings;
 using GGG.Components.Ticks;
+using GGG.Components.UI;
 using GGG.Shared;
 using System;
 using System.Collections;
@@ -11,8 +12,8 @@ namespace GGG.Components.Resources
     {
         [SerializeField] private Resource _resource;
         [SerializeField] private int _amount;
-        [SerializeField] private Collider colliderResource;
         [SerializeField] private bool _alwaysVisible;
+        [SerializeField] private PickResourceProgressionUI _pickProgressUI;
         private bool WaitSecond = true;
 
         private bool _collided = false;
@@ -41,18 +42,19 @@ namespace GGG.Components.Resources
 
         private void OnTriggerEnter(Collider other)
         {
-            //if(!_collided)
-            //{
-            //    onResourceCollideEnter.Invoke();
-            //    _collided = true;
-            //}
-
+            _pickProgressUI.gameObject.SetActive(true);
             WaitSecond = true;
-            Coroutine aux = StartCoroutine(WaitSeconds(0, 3, () => { },
+            Coroutine aux = StartCoroutine(
+                WaitSeconds(0, 3, 
+                () => 
+                {
+                    _pickProgressUI.current++;
+                },
                 () =>
                 {
-                    Debug.Log("FIN!!!");
                     RecolectResource();
+                    _pickProgressUI.current = 0;
+                    _pickProgressUI.gameObject.SetActive(false);
                     DeleteMySelf();
                 }));
         }
@@ -69,6 +71,7 @@ namespace GGG.Components.Resources
 
         private void Start()
         {
+            _pickProgressUI = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).Find("ProgressBar").GetComponent<PickResourceProgressionUI>();
             onResourceCollideEnter += RecolectResource;
             onResourceCollideExit += DeleteMySelf;
             TickManager.OnTick += HandleVisibility;
