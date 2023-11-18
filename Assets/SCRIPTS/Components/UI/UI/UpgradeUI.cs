@@ -77,14 +77,21 @@ namespace GGG.Components.UI
             if (!_selectedBuilding) return;
             if (!_selectedBuilding.GetBuild().CanUpgraded())
             {
-                UpgradePanel.gameObject.SetActive(false);
+                UpgradePanel.SetActive(false);
                 return;
             }
             
-            UpgradePanel.gameObject.SetActive(true);
+            UpgradePanel.SetActive(true);
             ResourceCost[] cost = _selectedBuilding.GetBuild().GetUpgradeCost();
             int currentLevel = _selectedBuilding.GetCurrentLevel() - 1;
+
+            if (currentLevel + 1 >= _selectedBuilding.GetBuild().GetMaxLevel())
+            {
+                UpgradePanel.SetActive(false);
+                return;
+            }
             
+            UpgradePanel.SetActive(true);
             for (int i = 0; i < cost[currentLevel].GetCostsAmount(); i++) {
                 if (_player.GetResourceCount(cost[currentLevel].GetResource(i).GetKey()) >=
                     cost[currentLevel].GetCost(i)) continue;
@@ -201,7 +208,7 @@ namespace GGG.Components.UI
                         _selectedBuilding.GetBuild().GetUpgradeResource(currentLevel, i).GetSprite();
                 }
             } 
-            else UpgradeButton.gameObject.SetActive(false);
+            else UpgradePanel.SetActive(false);
             
             OnUiOpen?.Invoke();
             _gameManager.OnUIOpen();

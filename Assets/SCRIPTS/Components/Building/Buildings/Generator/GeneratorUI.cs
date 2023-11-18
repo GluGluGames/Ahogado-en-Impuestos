@@ -106,6 +106,7 @@ namespace GGG.Components.Generator
             if (!building) return;
 
             building.GetBuild().Boost(building.GetCurrentLevel());
+            print("Boost!");
             _currentGeneration[level - 1]++;
             _buildingBoosting[level - 1, idx] = true;
             StartCoroutine(BoostBuilding(building.GetBuild(), level, idx));
@@ -122,6 +123,7 @@ namespace GGG.Components.Generator
             }
 
             building.EndBoost(level);
+            print("End boost");
             _currentGeneration[level - 1]--;
             _buildingBoosting[level - 1, idx] = false;
         }
