@@ -17,7 +17,7 @@ namespace GGG.Components.Dialogue {
             _dialogue.DialogueStart += DialogueOpen;
             _dialogue.DialogueEnd += DialogueClose;
             
-            Viewport.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.3f);
+            Viewport.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.7f);
             Avatar.color = new Color(1f, 1f, 1f, 0f);
         }
 
@@ -28,7 +28,7 @@ namespace GGG.Components.Dialogue {
 
         private void DialogueOpen() {
             Viewport.SetActive(true);
-            Viewport.transform.DOMoveY(Screen.height * 0.145f, 1f).SetEase(Ease.InSine);
+            Viewport.transform.DOMoveY(0, 1f).SetEase(Ease.InSine);
             Avatar.DOFade(1f, 2f);
             GameManager.Instance.OnUIOpen();
         }
@@ -36,7 +36,7 @@ namespace GGG.Components.Dialogue {
         private void DialogueClose() {
 
             Avatar.DOFade(0f, 0.5f);
-            Viewport.transform.DOMoveY(Screen.height * -0.3f, 1f).SetEase(Ease.OutSine).onComplete += () => { 
+            Viewport.transform.DOMoveY(Screen.height * -0.7f, 1f).SetEase(Ease.OutSine).onComplete += () => { 
                 Viewport.SetActive(false);
             };
 
