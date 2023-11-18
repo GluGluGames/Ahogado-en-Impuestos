@@ -93,7 +93,11 @@ namespace GGG.Components.UI
 
         private void Update()
         {
-            if (!_open || !_input.Escape()) return;
+            if (!_open) return;
+
+            UpdateResourcesAmount();
+            
+            if (!_input.Escape()) return;
             
             CloseInventory();
         }
@@ -102,6 +106,16 @@ namespace GGG.Components.UI
 
         #region Methods
 
+
+        private void UpdateResourcesAmount()
+        {
+            foreach (string key in _resourcesCountText.Keys)
+            {
+                if (_player.GetResourceCount(key) == 0) continue;
+                
+                _resourcesCountText[key].SetText(_player.GetResourceCount(key).ToString());
+            }
+        }
 
         private void FillSeaResources()
         {
@@ -118,14 +132,12 @@ namespace GGG.Components.UI
                     SpriteState aux = new()
                     {
                         highlightedSprite = _seaResources[i].GetSelectedSprite(),
-                        selectedSprite = _seaResources[i].GetSelectedSprite(),
-                        disabledSprite = _seaResources[i].GetSprite()
                     };
                     
                     _seaButtons[i].spriteState = aux;
                     int index = i;
                     _seaButtons[i].onClick.AddListener(() => 
-                        AddListener(_seaResources[index], _fishButtons[index]));
+                        AddListener(_seaResources[index], _seaButtons[index]));
 
                     _resourcesCountText[_seaResources[i].GetKey()] =
                         _seaButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>(true);
@@ -148,14 +160,12 @@ namespace GGG.Components.UI
                     SpriteState aux = new()
                     {
                         highlightedSprite = _expeditionResources[i].GetSelectedSprite(),
-                        selectedSprite = _expeditionResources[i].GetSelectedSprite(),
-                        disabledSprite = _expeditionResources[i].GetSprite()
                     };
                     _expeditionButtons[i].spriteState = aux;
                     int index = i;
                     _expeditionButtons[i].onClick
                         .AddListener(() => 
-                            AddListener(_expeditionResources[index], _fishButtons[index]));
+                            AddListener(_expeditionResources[index], _expeditionButtons[index]));
 
                     _resourcesCountText[_expeditionResources[i].GetKey()] =
                         _expeditionButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
@@ -178,8 +188,6 @@ namespace GGG.Components.UI
                     SpriteState aux = new()
                     {
                         highlightedSprite = _fishResources[i].GetSelectedSprite(),
-                        disabledSprite = _fishResources[i].GetSprite(),
-                        selectedSprite = _fishResources[i].GetSelectedSprite()
                     };
                     _fishButtons[i].spriteState = aux;
                     int index = i;
@@ -201,7 +209,7 @@ namespace GGG.Components.UI
                 return;
             }
             
-            if(_hudManager.ShowResource(resource));
+            if(_hudManager.ShowResource(resource))
                 button.image.sprite = resource.GetSelectedSprite();
         }
 
@@ -248,6 +256,19 @@ namespace GGG.Components.UI
             _active = 2;
         }
 
+        private void HandleSelectedResources()
+        {
+            for(int i = 0; i < _seaResources.Length; i++)
+                _seaButtons[i].image.sprite = _hudManager.ResourceBeingShown(_seaResources[i]) ? 
+                    _seaResources[i].GetSelectedSprite() : _seaResources[i].GetSprite();
+            for(int i = 0; i < _expeditionResources.Length; i++)
+                _expeditionButtons[i].image.sprite = _hudManager.ResourceBeingShown(_expeditionResources[i]) ? 
+                    _expeditionResources[i].GetSelectedSprite() : _expeditionResources[i].GetSprite();
+            for(int i = 0; i < _fishResources.Length; i++)
+                _fishButtons[i].image.sprite = _hudManager.ResourceBeingShown(_fishResources[i]) ? 
+                    _fishResources[i].GetSelectedSprite() : _fishResources[i].GetSprite();
+        }
+
         public void OpenInventory()
         {
             if (_open) return;
@@ -255,6 +276,8 @@ namespace GGG.Components.UI
             _viewport.SetActive(true);
             _open = true;
             GameManager.Instance.OnUIOpen();
+            
+            HandleSelectedResources();
             
             foreach (string key in _resourcesCountText.Keys)
             {
