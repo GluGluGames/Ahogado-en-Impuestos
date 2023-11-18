@@ -32,7 +32,7 @@ namespace GGG.Components.Core
             // Credits Screen
             CreditsViewport.SetActive(false);
             CreditsPanel.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.6f);
-            ExitButton.onClick.AddListener(CloseCredits);
+            ExitButton.onClick.AddListener(() => StartCoroutine(CloseCredits(0)));
         }
         
         #endregion
@@ -152,12 +152,15 @@ namespace GGG.Components.Core
         public void OpenCredits()
         {
             CreditsViewport.SetActive(true);
-            CreditsPanel.transform.DOMoveY(Screen.height * 5.5f, CreditsDuration).SetEase(Ease.Linear).onComplete += CloseCredits;
+            CreditsPanel.transform.DOMoveY(Screen.height * 4.8f, CreditsDuration).SetEase(Ease.Linear).onComplete += 
+                () => StartCoroutine(CloseCredits(2));
             _raycaster.enabled = true;
         }
 
-        private void CloseCredits()
+        private IEnumerator CloseCredits(int waitTime)
         {
+            yield return new WaitForSeconds(waitTime);
+            
             CreditsViewport.SetActive(false);
             CreditsPanel.transform.DOKill();
             CreditsPanel.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.6f);
