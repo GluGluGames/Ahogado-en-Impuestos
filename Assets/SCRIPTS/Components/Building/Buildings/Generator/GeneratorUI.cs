@@ -19,13 +19,13 @@ namespace GGG.Components.Generator
         [Header("Generator fields")] 
         [SerializeField] private Building Generator;
         [SerializeField] private int[] BoostTimes;
+        [SerializeField] private Sprite[] BoostButtonToggles;
         [Space(5), Header("Containers")] 
         [SerializeField] private GameObject[] LevelContainers;
         [Space(5), Header("Text")] 
         [SerializeField] private TMP_Text[] BostTextsLevel1;
         [SerializeField] private TMP_Text[] BostTextsLevel2;
         [SerializeField] private TMP_Text[] BostTextsLevel3;
-        [FormerlySerializedAs("BostButtons")]
         [Space(5), Header("Buttons")]
         [SerializeField] private Button[] BostButtonsLevel1;
         [SerializeField] private Button[] BostButtonsLevel2;
@@ -58,8 +58,13 @@ namespace GGG.Components.Generator
             {
                 int idx = i;
                 BostButtonsLevel1[i].onClick.AddListener(() => OnBuildingBoost(1, idx));
+                BostButtonsLevel1[i].image.sprite = null;
+                
                 BostButtonsLevel2[i].onClick.AddListener(() => OnBuildingBoost(2, idx));
+                BostButtonsLevel2[i].image.sprite = null;
+                
                 BostButtonsLevel3[i].onClick.AddListener(() => OnBuildingBoost(3, idx));
+                BostButtonsLevel3[i].image.sprite = null;
             }
             
             CloseButton.onClick.AddListener(Close);
@@ -106,10 +111,36 @@ namespace GGG.Components.Generator
             if (!building) return;
 
             building.GetBuild().Boost(building.GetCurrentLevel());
-            print("Boost!");
+            
+            ChangeButtonSprite(level, idx, true);
             _currentGeneration[level - 1]++;
             _buildingBoosting[level - 1, idx] = true;
+            
             StartCoroutine(BoostBuilding(building.GetBuild(), level, idx));
+        }
+
+        private void ChangeButtonSprite(int level, int idx, bool visible)
+        {
+            Color color = new (1, 1, 1, visible ? 1 : 0);
+            
+            switch (level)
+            {
+                case 1:
+                    BostButtonsLevel1[idx].image.sprite = BoostButtonToggles[level - 1];
+                    BostButtonsLevel1[idx].interactable = !visible;
+                    BostButtonsLevel1[idx].image.color = color;
+                    break;
+                case 2:
+                    BostButtonsLevel2[idx].image.sprite = BoostButtonToggles[level - 1];
+                    BostButtonsLevel2[idx].interactable = !visible;
+                    BostButtonsLevel2[idx].image.color = color;
+                    break;
+                default:
+                    BostButtonsLevel3[idx].image.sprite = BoostButtonToggles[level - 1];
+                    BostButtonsLevel3[idx].interactable = !visible;
+                    BostButtonsLevel3[idx].image.color = color;
+                    break;
+            }
         }
 
         private IEnumerator BoostBuilding(Building building, int level, int idx)
@@ -123,7 +154,8 @@ namespace GGG.Components.Generator
             }
 
             building.EndBoost(level);
-            print("End boost");
+            
+            ChangeButtonSprite(level, idx, false);
             _currentGeneration[level - 1]--;
             _buildingBoosting[level - 1, idx] = false;
         }
@@ -145,6 +177,17 @@ namespace GGG.Components.Generator
             }
         }
 
+        private void HandleButtonToggles(int level)
+        {
+            for (int i = 0; i < level; i++)
+            {
+                for (int j = 0; j < BostButtonsLevel1.Length; j++)
+                {
+                    ChangeButtonSprite(i + 1, j, _buildingBoosting[i, j]);
+                }
+            }
+        }
+
         public void Open(int level)
         {
             if(_open) return;
@@ -155,6 +198,7 @@ namespace GGG.Components.Generator
             OnGeneratorOpen?.Invoke();
             
             HandleLevelButtons(level);
+            HandleButtonToggles(level);
             FindGeneratorTile();
             ChangeBuildText();
 
