@@ -26,9 +26,12 @@ namespace GGG.Components.Resources
             Instance = this;
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            for(int i = 0; i < _nResourcesMax; ++i)
+            // This is made so the scene charges first and then the start method is called.
+            yield return null;
+
+            for (int i = 0; i < _nResourcesMax; ++i)
             {
                 SpawnRandomResource();
             }
