@@ -144,8 +144,10 @@ namespace GGG.Components.Buildings
 
         public void AddTile(TileType type)
         {
+            int random = Random.Range(1, 7);
+            
             tilePrefab = Instantiate(settings.GetTile(type), transform.position, 
-                Quaternion.identity, transform);
+                Quaternion.Euler(0f, 0f + 60 * random, 0f), transform);
             tilePrefab.layer = 10;
 
             tileType = type;
