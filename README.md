@@ -15,6 +15,9 @@
 - 21/10/2023 - Adrián S. - Added 3D Models
 - 21/10/2023 - Adrián A. - Revisión de erratas.
 - 21/10/2023 - Luming - Correcion de Mecanicas en recursos y desarrollar pensamineto computacional
+- 10/11/2023 - Luming - Subir el análisis MDA de nuestro juego
+- 14/11/2023 - Luming - Corregir las mecanicas de construccion y subir FSM de diferentes enemigos
+- 17/11/2023 - Luming - Reescribir el texto de la MDA
   
 ## 1 - MÉCANICAS 
 
@@ -58,13 +61,19 @@ Es fundamental comprender que las diferentes profundidades en el juego albergan 
 
 Esta mecánica añade un elemento táctico al juego, donde los jugadores deben sopesar cuidadosamente sus opciones y decidir si enfrentarán a un depredador, huirán o buscarán rutas de escape inteligentes para evitar situaciones peligrosas. La gestión adecuada de los encuentros con depredadores es esencial para una exitosa exploración del mundo submarino.
 
-**Diagrama de enemigos**
+**Diagrama de enemigos prototipo**
 
 ![Enemy Flow chart](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Enemy%20Flow.png)
 
-**FSM Enemigo**
+**IA Enemigos**
 
-![Enemy FSM](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
+![Enemigo Normal ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_NORMAL_ENEMY.png)
+![Enemigo Rabioso ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_BERSERKER_ENEMY.png)
+![Enemigo Mini ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_MINI_ENEMY.png)
+![Chatarreros ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_CHATARRERO_ENEMY.png)
+![Presa ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_PRESA_ENEMY.png)
+![Alarmante ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_VIGILANTE_ENEMY.png)
+![Behaviour tree Avisado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/BEHAVIOR_TREE_AVISADO.png)
 
 ### **1.4 - Recursos** 
 
@@ -92,15 +101,24 @@ Estas zonas desbloqueables brindan a los jugadores la oportunidad de diversifica
 
 ### **1.5 - Edificios** 
 
+#### **1.5.0 - Ayuntamiento**
+Primer edificio de construccion donde se permite visualizar los recursos que posee el jugador de manera mas específica.
+| Nivel | Coste de construccion| Coste de mejora | Coste de reparacion|
+| :--: | :--: | :--: | :--: |
+| 1 | 0 algas verdes| x | Imposible de destruir dado que es la base de la ciudad, protegido por poseidon |
+
+
 #### **1.5.1 - Granja de algas**
 
 La granja de algas generara un número de algas por unidad de tiempo. Al subirla de nivel, el número de algas generadas aumentará.
+La primera granja de algas será gratis para el jugador.
+Cada nueva granja de algas aumentará 500 algas de precio, mientras que se sigue manteniendo los precios de mejorar.
 
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Productividad | Justificacion|
 | :--: | :--: | :--: | :--: | :--: | ------------ |
-| 1 | 2000 algasverdes + 400 corales| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
-| 2 | x| 400 Hierro + 400 corales | 400 madera |  40 algas/3s | Nivel intermedio, corresponde con productividad medio bajo, incentivar al jugador acceder a expedicion para conseguir el mejor nivel de la construccion |
-| 3 | x| 600 Hierro + 400 corales | 800 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
+| 1 | 1000 algasverdes| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
+| 2 | x| 400 Hierro + 400 corales | 200 madera |  40 algas/3s | Nivel intermedio, corresponde con productividad medio bajo, incentivar al jugador acceder a expedicion para conseguir el mejor nivel de la construccion |
+| 3 | x| 600 Hierro + 400 corales | 300 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
 
 #### **1.5.2 - Tienda de objetos**
 
@@ -298,6 +316,32 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | **3.2.12 - Mejoras de buceo**   | ![Mejoras de buceo](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Mejoras%20de%20buceo.png)   | Este edificio esta basado en el casco de un buceador antiguo. |
 | **3.2.13 - Poseidón**   | ![Poseidón](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/dd6f7903-ed9f-44f4-90ed-ea7202adedfd)   | Este es el enemigo principal del juego, Poseidón. Su diseño está basado en juegos que esten basados en el mundo de la mitología griega, como God of War o Hades. <br><br> Se ha elegido un aspecto serio, con el pelo y barba larga porque es el aspecto que suelen tener los dioses en sus representaciones, ya sean en juegos o en la ficción. <br><br> También se le quiere dar la impresión de poderoso, para que tenga sentido que sea el que tenga amenazados a los jugadores durante el gameplay. Tampoco se le quería dar un aspecto muy oscuro porque no es malvado, simplemente está enfadado. |
 
+#### **Iconos del juego***
+| Nombre del Documento | Enlace |
+|-----------------------|--------|
+| Caracola              | ![Caracola](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/Caracola.png) |
+| Perla                 | ![Perla](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/Perla.png) |
+| Viga                  | ![Viga](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/Viga.png) |
+| Acelerador            | ![Acelerador](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/acelerador.png) |
+| AlgaRoja              | ![AlgaRoja](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/algaRoja.png) |
+| AlgaVerde             | ![AlgaVerde](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/algaVerde.png) |
+| AnguilaEléctrica      | ![AnguilaEléctrica](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/anguilaElectrica.png) |
+| Boga                  | ![Boga](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/boga.png) |
+| Concha                | ![Concha](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/concha.png) |
+| CoralNaranja          | ![CoralNaranja](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/coralNaranja.png) |
+| Dorada                | ![Dorada](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/dorada.png) |
+| Lubina                | ![Lubina](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/lubina.png) |
+| Madera                | ![Madera](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/madera.png) |
+| Mapa                  | ![Mapa](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/mapa.png) |
+| Medusa                | ![Medusa](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/medusa.png) |
+| Molyvelifera          | ![Molyvelifera](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/molyvelifera.png) |
+| PezCebra              | ![PezCebra](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/pezCebra.png) |
+| PezDorado             | ![PezDorado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/pezDorado.png) |
+| PezNeon               | ![PezNeon](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/pezNeon.png) |
+| Tablilla              | ![Tablilla](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/tablilla.png) |
+| Tiburon               | ![Tiburon](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/tiburon.png) |
+| TruchaArcoiris        | ![TruchaArcoiris](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/truchaArcoriris.png) |
+
 ## **4 - DISEÑO 3D**
 
 | Título | Imagen |
@@ -309,6 +353,29 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | **4.5 - Hexágono** | ![Hexágono](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagon.PNG) |
 | **4.6 - Hexágono no construible** | ![Hexágono no construible](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonNon.PNG) |
 | **4.7 - Hexágono pavimentado** | ![Hexágono pavimentado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonPavement.PNG) |
+### Edificios actualizados para Beta
+| Nombre del Edificio | Enlace |
+|----------------------|--------|
+| Pecera_Nivel 1           | ![FishFarm_1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/FishFarm_1_Icon.png) |
+| Pecera_Nivel 2           | ![FishFarm_2](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/FishFarm_2_Icon.png) |
+| Pecera_Nivel 3           | ![FishFarm_3](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/FishFarm_3_Icon.png) |
+| Laboratorio           | ![Laboratory](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/Laboratory_Icon.png) |
+| Granja de algas_1       | ![SeaweerdFarm_1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/SeaweerdFarm_1_Icon.png) |
+
+### Prompts del juego
+| Nombre de la Criatura | Enlace a la Imagen |
+|------------------------|--------------------|
+| Almeja                 | ![Almeja](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Almeja.jpg) |
+| Boga                   | ![Boga](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Boga.jpg) |
+| Dorada                 | ![Dorada](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Dorada.jpg) |
+| Pez Dorado             | ![Pez Dorado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/GoldFish.jpg) |
+| Mapa                   | ![Mapa](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Mapa.jpg) |
+| Pez Vampiro            | ![Pez Vampiro](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Pez%20vampiro.jpg) |
+| Rape                   | ![Rape](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Rape.jpg) |
+
+
+
+
 
 ## **5 - GAME DESIGN** 
 
@@ -355,6 +422,15 @@ Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar di
 Los niveles en este juego representarán las diferentes zonas de expedición y serán diseñados a mano con distribuciones específicas de niveles de profundidad. Estas distribuciones se han diseñado con el propósito de plantear desafíos y dificultades para el jugador antes de que este adquiera objetos que lo hagan inmune a ciertos peligros.
 
 Sin embargo, es importante destacar que los recursos que no funcionen como desencadenantes clave para avanzar en el juego serán generados aleatoriamente por la zona. Esto permite que el jugador encuentre variedad en cada expedición y promueve la exploración activa para reunir recursos útiles en su búsqueda para reconstruir la ciudad perdida de Atlantis.
+
+| Nombre del Nivel | Imagen |
+|-------------------|--------|
+| Tutorial         | ![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%20tutorial.PNG) |
+| Nivel 1          | ![Nivel 1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%201.PNG) |
+| Nivel 2          | ![Nivel 2](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%202.PNG) |
+| Nivel 3          | ![Nivel 3](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%203.PNG) |
+| Nivel 4          | ![Nivel 4](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%204.PNG) |
+
 
 ### **5.3 - Curva de aprendizaje**
 
@@ -712,3 +788,10 @@ La administración eficiente de nuestra estructura de costos garantiza una asign
 - **Paga lo que puedas**: se introducirá una opción de "Paga lo que Puedas" que otorgará a los jugadores la libertad de determinar cuánto desean pagar por los juegos. Esto promoverá la accesibilidad y permitirá a los usuarios contribuir según sus capacidades financieras.
 
 La estrategia de ingresos se fundamenta en la diversificación y la adaptabilidad, lo que nos capacita para generar beneficios mientras mantenemos un firme compromiso con la oferta de aprendizaje y entretenimiento accesible para una amplia audiencia.
+
+## 12. Mechanics,Dynamics,Aesthetics? 
+La estética principal de este juego es el desafío; el jugador debe gestionar recursos tanto dentro como fuera de la ciudad. Se le marca un objetivo de reconstruir la gloria del pasado de Atlantis, la cual tuvo una historia espectacular. Dentro de la ciudad, el jugador se enfrenta a retos de cómo usar los recursos para sacar el máximo beneficio, por lo que el jugador se tiene que planificar cómo organizar entre el ganar y gastar de los recursos. Además, fuera del escenario, el jugador se enfrenta a obstáculos que le impiden recoger recursos, ya sean limitaciones del propio escenario como rocas, remolinos o diferentes tipos de enemigos. El juego no solo contiene desafíos; la fantasía también está involucrada dentro del juego. El jugador actúa como un fantasma resucitado, el cual fue despertado por Poseidón y asignado como encargado de la ciudad. Aparte, el descubrimiento tiene un papel importante dentro del juego; el jugador podrá navegar en diferentes escenarios mediante navegación, así consigue conocer a distintas criaturas, mapas, desbloqueando nuevas funcionalidades de los edificios y equipamientos de buceo. Y como se había dicho antes, el jugador puede conocer diferentes criaturas, por lo que también incluimos coleccionismo dentro del juego, así dando al jugador una iniciativa.
+
+El desafío viene dado por varios elementos claves: administrar los costos de diferentes recursos, el tiempo limitado de exploración y los enemigos que estarán distribuidos dentro del mapa de exploración. El jugador, por una parte, debe ver si la proporción de construir/mejorar está equilibrada, pensar en cómo puede conseguir algas suficientes para cada recolección, así previniendo la destrucción de los edificios, lo cual ralentiza el ritmo de la reconstrucción. No solo eso, el jugador también debe decidir en cuáles edificios invertir para subir el rendimiento, también se destaca que el jugador puede conseguir mejores equipos de buceo si los mejora. Por otro lado, durante la expedición, el jugador será limitado por el tiempo de energía, por lo que dentro del escenario se tiene que plantear la exploración de manera correcta, ya que en cada expedición, la generación de recursos puede estar distribuida de manera distinta (Solo el mapa será creado manualmente, los recursos se regenerarán en distintas posiciones en cada ocasión). Aparte, para darle un desafío más al jugador, este tendrá que usar estrategias para esquivar a los enemigos, ya que una vez cazado, el jugador solo podrá volver con muy pocos recursos a la ciudad, lo que aportará casi nulo a la ciudad.
+
+En el juego, actúan principalmente los recursos, es decir, todos giran en torno al recurso, formando como mecánica principal del juego. Los recursos principales serán las algas, los corales, las perlas, las conchas y las caracolas; todo tipo de construcción o mejora depende de ellos. Los recursos existen para poder usarlos; en este caso, el jugador los usará para construir, destruir, reparar, mejorar edificios dentro de la ciudad. Cada edificio tendrá un costo distinto, algunos serán más complicados para construir pero aportarán un rendimiento mayor a la ciudad; otros actuarán como última medida para salvar la partida, cada uno de ellos tiene distintas funcionalidades para ayudar a la ciudad. En la parte de expedición, el jugador podrá navegar libremente por el escenario; si es cazado, volverá a la ciudad casi sin recursos; habrá variedad de recursos en el escenario, con distintas cantidades, y puede avanzar una pequeña historia que hay dentro del juego. Aparte, el jugador puede descubrir diferentes mapas y diferentes mejoras de edificios, lo que conlleva al descubrimiento.
