@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
 using GGG.Classes.Buildings;
 using TMPro;
 using UnityEngine.Serialization;
@@ -32,18 +33,27 @@ namespace GGG.Components.Generator
         [SerializeField] private Button[] BostButtonsLevel3;
         [SerializeField] private Button[] LevelButtons;
         [SerializeField] private Button CloseButton;
+
+        private class GeneratorData
+        {
+            public BuildingComponent Generator;
+            public int BoostIndex;
+        }
         
         public static Action OnGeneratorOpen;
 
         private GameManager _gameManager;
-        
+
+        private Dictionary<BuildingComponent, int> _generators = new ();
+        private readonly Dictionary<BuildingComponent, int[]> _currentGeneration = new ();
+        private readonly Dictionary<BuildingComponent, bool[,]> _buildingBoosting = new();
         private List<HexTile> _tiles;
+        private List<BuildingComponent> _buildings;
         private HexTile _generatorTile;
-        private readonly int[] _currentGeneration = new int[3];
-        private readonly bool[,] _buildingBoosting = new bool[3, 6];
         
         private GameObject _viewport;
         private bool _open;
+        private BuildingComponent _currentGenerator;
 
         private void Awake()
         {
@@ -79,6 +89,7 @@ namespace GGG.Components.Generator
             _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
 
             _tiles = FindObjectsOfType<HexTile>().ToList();
+            BuildingManager.OnBuildsLoad += OnBuildLoads;
         }
 
         private void ActiveLevelPanel(int idx)
@@ -91,7 +102,7 @@ namespace GGG.Components.Generator
         private void FindGeneratorTile()
         {
             _generatorTile = _tiles.Find(t => 
-                t.GetCurrentBuilding() && t.GetCurrentBuilding().GetBuild().Equals(Generator));
+                t.GetCurrentBuilding() && t.GetCurrentBuilding().Equals(_currentGenerator));
 
             if (!_generatorTile)
                 throw new Exception("Generator Tile not found");
@@ -106,15 +117,17 @@ namespace GGG.Components.Generator
 
         private void OnBuildingBoost(int level, int idx)
         {
-            if (_currentGeneration[level - 1] >= level || _buildingBoosting[level - 1, idx]) return;
+            if (_currentGeneration[_currentGenerator][level - 1] >= level || 
+                _buildingBoosting[_currentGenerator][level - 1, idx]) return;
+            
             BuildingComponent building = _generatorTile.neighbours[idx].GetCurrentBuilding();
             if (!building) return;
 
             building.GetBuild().Boost(building.GetCurrentLevel());
             
             ChangeButtonSprite(level, idx, true);
-            _currentGeneration[level - 1]++;
-            _buildingBoosting[level - 1, idx] = true;
+            _currentGeneration[_currentGenerator][level - 1]++;
+            _buildingBoosting[_currentGenerator][level - 1, idx] = true;
             
             StartCoroutine(BoostBuilding(building.GetBuild(), level, idx));
         }
@@ -146,6 +159,7 @@ namespace GGG.Components.Generator
         private IEnumerator BoostBuilding(Building building, int level, int idx)
         {
             float deltaTime = BoostTimes[level - 1];
+            BuildingComponent aux = _currentGenerator;
 
             while (deltaTime > 0)
             {
@@ -156,8 +170,8 @@ namespace GGG.Components.Generator
             building.EndBoost(level);
             
             ChangeButtonSprite(level, idx, false);
-            _currentGeneration[level - 1]--;
-            _buildingBoosting[level - 1, idx] = false;
+            _currentGeneration[_currentGenerator][level - 1]--;
+            _buildingBoosting[_currentGenerator][level - 1, idx] = false;
         }
 
         private void ChangeBuildText()
@@ -183,9 +197,67 @@ namespace GGG.Components.Generator
             {
                 for (int j = 0; j < BostButtonsLevel1.Length; j++)
                 {
-                    ChangeButtonSprite(i + 1, j, _buildingBoosting[i, j]);
+                    ChangeButtonSprite(i + 1, j, _buildingBoosting[_currentGenerator][i, j]);
                 }
             }
+        }
+
+        private void FindGenerator(int level)
+        {
+            _buildings = BuildingManager.Instance.GetBuildings();
+            if (_buildings == null) return;
+            
+            foreach (BuildingComponent building in _buildings)
+            {
+                if(building.GetBuild().GetType() != typeof(Generator)) continue;
+
+                _currentGenerator = building;
+
+                if (_generators.ContainsKey(building))
+                {
+                    _generators[building] = _generators[building] == level ? _generators[building] : level;
+                    continue;
+                }
+
+                _generators.Add(building, level);
+                _currentGeneration.Add(building, new int[3]);
+                _buildingBoosting.Add(building, new bool[3,6]);
+            }
+        }
+
+        private void OnBuildLoads(BuildingComponent[] buildings)
+        {
+            if (buildings == null) return;
+
+            _buildings = buildings.ToList();
+
+            foreach (BuildingComponent building in buildings)
+            {
+                if (building.GetBuild().GetType() != typeof(Generator)) continue;
+
+                StartCoroutine(LoadGeneratorState(building));
+            }
+        }
+
+        private void SaveGeneratorState()
+        {
+            if (_generators.Count <= 0) return;
+            
+            GeneratorData[] saveData = new GeneratorData[_generators.Count];
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
+
+            foreach (BuildingComponent generator in _generators.Keys)
+            {
+                GeneratorData data = new()
+                {
+                    Generator = generator
+                };
+            }
+        }
+
+        private IEnumerator LoadGeneratorState(BuildingComponent generator)
+        {
+            yield return null;
         }
 
         public void Open(int level)
@@ -195,6 +267,8 @@ namespace GGG.Components.Generator
             
             _viewport.SetActive(true);
             _gameManager.OnUIOpen();
+            FindGenerator(level);
+            
             OnGeneratorOpen?.Invoke();
             
             HandleLevelButtons(level);
@@ -216,6 +290,7 @@ namespace GGG.Components.Generator
                 
                 LevelButtons[1].gameObject.SetActive(false);
                 LevelButtons[2].gameObject.SetActive(false);
+                _currentGenerator = null;
                 _generatorTile = null;
             };
             
