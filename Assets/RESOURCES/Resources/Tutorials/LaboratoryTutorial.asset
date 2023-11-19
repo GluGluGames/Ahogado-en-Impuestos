@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 409f2333b8a11c542a002d53a9115830, type: 3}
+  m_Name: LaboratoryTutorial
+  m_EditorClassIdentifier: 
+  TutorialKey: LaboratoryTutorial
+  Dialogues: []
+  Panels:
+  - Title: Laboratorio
+    Image: {fileID: 0}
+    Text: "Este es el laboratorio. Aqu\xED podr\xE1s desbloquear nuevos recursos
+      para conseguir y nuevos edificios que construir."
+  - Title: Desbloqueo
+    Image: {fileID: 0}
+    Text: Pulsa el icono encima de una de las barras de progreso y selecciona el
+      recurso o el edificio que quieres desbloquear.
+  TutorialCompleted: 0

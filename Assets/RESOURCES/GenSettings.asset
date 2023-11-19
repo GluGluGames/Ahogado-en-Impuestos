@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c131b2bba5eb0e4a92915d7058c7948, type: 3}
+  m_Name: GenSettings
+  m_EditorClassIdentifier: 
+  Standar: {fileID: 5287772880044038087, guid: 3f0e481c1b3da544796758239ad45ca3, type: 3}
+  Water:
+  - {fileID: 8956753354664748225, guid: 3211e0b762e9a8840adc7ba7a18bd79c, type: 3}
+  - {fileID: 3382254893663101414, guid: 585a4ea8822d150489e067f00ceea6cf, type: 3}
+  Cliff:
+  - {fileID: 9167445932578917885, guid: b6ab659f608c03a42a9e3175ff02c729, type: 3}
+  - {fileID: 4655917609274798875, guid: 3b9cbfb93a7dfd24b99a266b8baff910, type: 3}
+  Build: {fileID: 8409277049709587083, guid: 63de9fda2f4ae6541a83956eaf7a0c01, type: 3}

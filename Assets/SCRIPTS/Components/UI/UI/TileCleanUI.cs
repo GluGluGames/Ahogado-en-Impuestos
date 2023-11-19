@@ -1,10 +1,12 @@
-using DG.Tweening;
-using GGG.Components.Buildings;
 using System;
+using GGG.Components.Buildings;
 using GGG.Components.Core;
 using GGG.Components.Player;
+using GGG.Input;
 using GGG.Shared;
+
 using TMPro;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +19,8 @@ namespace GGG.Components.UI
         [SerializeField] private GameObject Container;
 
         private PlayerManager _player;
+        private InputManager _input;
+        private GameManager _gameManager;
         private Resource _cleanResource;
         private Transform _transform;
         private GameObject _viewport;
@@ -24,18 +28,19 @@ namespace GGG.Components.UI
 
         private bool _open;
 
-        private TextMeshProUGUI CostAmountText;
-        
-        public Action OnMenuOpen;
+        private TextMeshProUGUI _costAmountText;
+
+        public Action OnUiOpen;
 
         private void Start()
         {
             _player = PlayerManager.Instance;
+            _input = InputManager.Instance;
+            _gameManager = GameManager.Instance;
             _cleanResource = _player.GetMainResource();
             
             CleanButton.onClick.AddListener(CleanTile);
-            CloseButton.onClick.AddListener(Close);
-            CloseButton.gameObject.SetActive(false);
+            CloseButton.onClick.AddListener(OnCloseButton);
 
             _transform = transform;
             _transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360);
@@ -43,19 +48,21 @@ namespace GGG.Components.UI
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
 
-            Container.GetComponentsInChildren<Image>()[1].sprite = _cleanResource.GetSprite();
-            CostAmountText = Container.GetComponentInChildren<TextMeshProUGUI>();
+            Container.GetComponentInChildren<Image>().sprite = _cleanResource.GetSprite();
+            _costAmountText = Container.GetComponentInChildren<TextMeshProUGUI>();
 
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
                 tile.OnHexSelect += Open;
             }
-
-            
         }
-        
-        public bool IsOpen() { return _open; }
+
+        private void Update() {
+            if (!_open || !_input.Escape()) return;
+
+            Close();
+        }
 
         private void CleanTile()
         {
@@ -72,32 +79,36 @@ namespace GGG.Components.UI
 
         private void Open(HexTile tile)
         {
-            if (_open || tile.GetTileType() == TileType.Standard)
+            if (_open || tile.GetTileType() is TileType.Standard or TileType.Build)
                 return;
 
             _viewport.SetActive(true);
             _selectedTile = tile;
-            CostAmountText.SetText(_selectedTile.GetClearCost().ToString());
+            _costAmountText.SetText(_selectedTile.GetClearCost().ToString());
             _open = true;
-            CloseButton.gameObject.SetActive(true);
-            OnMenuOpen?.Invoke();
+            OnUiOpen?.Invoke();
+            _gameManager.OnUIOpen();
 
             _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
         }
 
         public void Close()
         {
-            if (!_open) return;
-
             _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360), 0.1f).SetEase(Ease.InCubic).onComplete += () => {
                 _viewport.SetActive(false);
-                CloseButton.gameObject.SetActive(false);
             };
 
             _selectedTile.DeselectTile();
             _selectedTile = null;
-            GameManager.Instance.OnUIClose();
+            _gameManager.OnUIClose();
             _open = false;
+        }
+
+        private void OnCloseButton()
+        {
+            if (!_open || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
+
+            Close();
         }
     }
 }

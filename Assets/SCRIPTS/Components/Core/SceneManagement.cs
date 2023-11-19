@@ -31,8 +31,8 @@ namespace GGG.Components.Core
             
             // Credits Screen
             CreditsViewport.SetActive(false);
-            CreditsPanel.transform.position = new Vector3(CreditsPanel.transform.position.x, CREDITS_INITIAL_POSITION);
-            ExitButton.onClick.AddListener(CloseCredits);
+            CreditsPanel.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.6f);
+            ExitButton.onClick.AddListener(() => StartCoroutine(CloseCredits(0)));
         }
         
         #endregion
@@ -48,9 +48,8 @@ namespace GGG.Components.Core
         [SerializeField] private Button ExitButton;
         [SerializeField] private float CreditsDuration = 60f;
 
-        private const int CREDITS_INITIAL_POSITION = -550;
-        
         private readonly List<AsyncOperation> _sceneAsyncOperation = new();
+        private SoundManager _soundManager;
         private GraphicRaycaster _raycaster;
         private float _totalSceneProgress;
         private bool _settingsOpen;
@@ -58,22 +57,41 @@ namespace GGG.Components.Core
         public Action OnGameSceneLoaded;
         public Action OnGameSceneUnloaded;
 
+        public Action OnMinigameSceneLoaded;
+
         private void Start()
         {
+            _soundManager = SoundManager.Instance;
+            
             SceneManager.sceneUnloaded += (scene) =>
             {
-                if(scene.buildIndex == (int) SceneIndexes.GAME_SCENE)
-                    OnGameSceneUnloaded?.Invoke();;
+                if (scene.buildIndex == (int)SceneIndexes.GAME_SCENE)
+                    OnGameSceneUnloaded?.Invoke();
+                
             };
 
             SceneManager.sceneLoaded += (scene, mode) =>
             {
                 if (scene.buildIndex == (int)SceneIndexes.GAME_SCENE)
+                {
                     OnGameSceneLoaded?.Invoke();
+                    
+                    _soundManager.Stop("MainMenu");
+                    _soundManager.Play("MainTheme");
+                    _soundManager.Play("AmbientSound");
+                }
+            };
+
+            SceneManager.sceneLoaded += (scene, mode) =>
+            {
+                if (scene.buildIndex == (int)SceneIndexes.MINIGAME)
+                    OnMinigameSceneLoaded?.Invoke();
             };
         }
 
         #region Scene Management
+
+        public SceneIndexes CurrentScene() => (SceneIndexes)SceneManager.GetActiveScene().buildIndex;
 
         public void AddSceneToLoad(SceneIndexes scene)
         { 
@@ -154,15 +172,18 @@ namespace GGG.Components.Core
         public void OpenCredits()
         {
             CreditsViewport.SetActive(true);
-            CreditsPanel.transform.DOMoveY(5500, CreditsDuration).SetEase(Ease.Linear).onComplete += CloseCredits;
+            CreditsPanel.transform.DOMoveY(Screen.height * 4.8f, CreditsDuration).SetEase(Ease.Linear).onComplete += 
+                () => StartCoroutine(CloseCredits(2));
             _raycaster.enabled = true;
         }
 
-        private void CloseCredits()
+        private IEnumerator CloseCredits(int waitTime)
         {
+            yield return new WaitForSeconds(waitTime);
+            
             CreditsViewport.SetActive(false);
             CreditsPanel.transform.DOKill();
-            CreditsPanel.transform.position = new Vector3(CreditsPanel.transform.position.x, CREDITS_INITIAL_POSITION);
+            CreditsPanel.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.6f);
             if(!_settingsOpen) _raycaster.enabled = false;
         }
 

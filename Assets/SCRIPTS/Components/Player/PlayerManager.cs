@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using GGG.Shared;
 
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.IO;
 using UnityEngine;
 using System.Linq;
 using GGG.Components.Core;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 namespace GGG.Components.Player
@@ -36,6 +38,8 @@ namespace GGG.Components.Player
         private Dictionary<string, int> _resourcesCount = new();
         private Dictionary<string, Resource> _resources = new();
 
+        public Action OnPlayerInitialized;
+
         [Serializable]
         public class ResourceData
         {
@@ -45,14 +49,18 @@ namespace GGG.Components.Player
 
         private void Start()
         {
+            StartCoroutine(LoadResourcesCount());
+            
             foreach (Resource i in Resources)
-                _resources.Add(i.GetName(), i);
+                _resources.Add(i.GetKey(), i);
 
-            foreach (string i in _resources.Keys)
+            if(_resourcesCount.Count <= 0)
+                foreach (string i in _resources.Keys) 
                     _resourcesCount.Add(i, 0);
+        }
 
-            // DEBUG - DELETE LATER
-            if(_resourcesCount["Perla"] <= 0) _resourcesCount["Perla"] += 1;
+        private void OnDisable() {
+            SaveResourcesCount();
         }
 
         private void OnValidate()
@@ -64,8 +72,14 @@ namespace GGG.Components.Player
 
         public int GetResourceCount(string key)
         {
-            return _resourcesCount[key];
+            int count = 0;
+            _resourcesCount.TryGetValue(key, out count);
+            
+            return count;
+            //return _resourcesCount[key];
         }
+
+        public List<Resource> GetResources() => Resources;
 
         public Resource GetResource(string resourceKey) => _resources[resourceKey];
 
@@ -97,19 +111,34 @@ namespace GGG.Components.Player
             }
             
             string jsonData = JsonHelper.ToJson(resourceDataList, true);
-            print(jsonData);
             File.WriteAllText(filePath, jsonData);
         }
 
-        private void LoadResourcesCount()
+        private IEnumerator LoadResourcesCount()
         {
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");
-            
+#if UNITY_EDITOR
+            filePath = "file://" + filePath;
+#endif
             string data;
-            data = File.ReadAllText(filePath);
+            if (filePath.Contains("://") || filePath.Contains(":///")) {
+                UnityWebRequest www = UnityWebRequest.Get(filePath);
+                yield return www.SendWebRequest();
+                data = www.downloadHandler.text;
+            }
+            else {
+                data = File.ReadAllText(filePath);
+            }
 
-            ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data);
-            _resourcesCount = resources.ToDictionary(item => item.Name, item => item.Count);
+            if (data != "") {
+                ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data);
+                _resourcesCount = resources.ToDictionary(item => item.Name, item => item.Count);
+            }
+            else {
+                SaveResourcesCount();
+            }
+            
+            OnPlayerInitialized?.Invoke();
         }
     }
 }

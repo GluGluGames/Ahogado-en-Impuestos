@@ -1,5 +1,6 @@
 using UnityEngine;
 using GGG.Components.UI;
+using System.Linq.Expressions;
 
 namespace GGG.Components.Player
 {
@@ -32,7 +33,7 @@ namespace GGG.Components.Player
 
         private void Lost()
         {
-            FindObjectOfType<EndExpeditionUI>().OnEndGame(false);
+            FindObjectOfType<Timer>(true).Win(false);
         }
 
     }

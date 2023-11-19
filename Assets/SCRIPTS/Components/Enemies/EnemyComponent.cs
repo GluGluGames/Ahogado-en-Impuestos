@@ -1,14 +1,57 @@
-using GGG.Components.Buildings;
+using BehaviourAPI.Core;
+using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 
-public class EnemyComponent : MonoBehaviour
+namespace GGG.Components.Enemies
 {
-    [SerializeField] private Enemy Enemy;
+    public class EnemyComponent : Enemy
+    {
+        [HideInInspector] public RandomMovement movementController;
+        public GameObject model1;
+        public GameObject model2;
+        public int myLayerInt;
+        private void Awake()
+        {
+            Rb = GetComponent<Rigidbody>();
+            movementController = new RandomMovement();
+            movementController.SetGameObject(gameObject);
+            movementController.SetAlwaysVisible(_alwaysVisible);
+            if (isDirty) movementController.SetCurrentTile(currentTile);
+            movementController.enemyLayer = myLayerInt;
 
-    public Action<Action, EnemyComponent> OnEnemyInteract;
+            movementController.model1 = model1;
+            movementController.model2 = model2;
+        }
 
+        
+        private void Start()
+        {
+            movementController.LaunchOnStart();
+            if (isDirty)
+            {
+                movementController.SetCurrentTile(currentTile);
+                isDirty = false;
+            }
+        }
 
+        private void Update()
+        {
+            if (isDirty)
+            {
+                movementController.SetCurrentTile(currentTile);
+                isDirty = false;
+            } 
+
+            if(movementController != null)
+            {
+                //currentTile = movementController.GetCurrentTile();
+            }
+        }
+
+        private void OnDisable()
+        {
+            movementController.LaunchOnDisable();
+        }
+    }
 }

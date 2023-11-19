@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdfcb848ecf0d14a8bffe1266450878, type: 3}
+  m_Name: ShopTutorial
+  m_EditorClassIdentifier: 
+  TutorialKey: ShopTutorial
+  Dialogues: []
+  Panels:
+  - Title: Tienda
+    Image: {fileID: 0}
+    Text: "Esta es la tienda. Aqu\xED podr\xE1s intercambiar tus materiales por otros
+      m\xE1s avanzados."
+  - Title: Cantidad
+    Image: {fileID: 0}
+    Text: Usando las flechas, puedes aumentar la cantidad que recibes y que das.
+  - Title: 
+    Image: {fileID: 0}
+    Text: "Por ejemplo, en este intercambio, recibir\xEDas 2 corales dando 4 algas."
+  TutorialCompleted: 0

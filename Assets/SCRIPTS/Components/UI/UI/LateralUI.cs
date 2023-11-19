@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using GGG.Components.Core;
+using GGG.Input;
 using UnityEngine;
 using UnityEngine.UI;
 using GGG.Shared;
@@ -14,43 +15,61 @@ namespace GGG.Components.UI
         [SerializeField] private Button InventoryButton;
         [SerializeField] private Button ExpeditionButton;
 
+        private InputManager _input;
+        private GameManager _gameManager;
+        private SceneManagement _sceneManagement;
         private InventoryUI _inventory;
 
+        private GameObject _viewport;
         private bool _open;
 
         private void Start()
         {
+            _input = InputManager.Instance;
+            _sceneManagement = SceneManagement.Instance;
+            _gameManager = GameManager.Instance;
             _inventory = FindObjectOfType<InventoryUI>();
+            _viewport = transform.GetChild(0).gameObject;
             
             OpenButton.onClick.AddListener(ToggleMenu);
             InventoryButton.onClick.AddListener(OpenInventory);
             SettingsButton.onClick.AddListener(OpenSettings);
             ExpeditionButton.onClick.AddListener(() =>
             {
-                HUDManager.Instance.ChangeScene(SceneIndexes.MINIGAME, SceneIndexes.GAME_SCENE);
-                GameManager.Instance.OnUIClose();
+                _sceneManagement.AddSceneToLoad(SceneIndexes.MINIGAME);
+                _sceneManagement.AddSceneToUnload(SceneIndexes.GAME_SCENE);
+                _sceneManagement.UpdateScenes();
+                _gameManager.OnUIClose();
             });
+        }
+
+        private void Update() {
+            if (!_input.Escape()) return;
+            
+            ToggleMenu();
         }
 
         private void ToggleMenu()
         {
-            if (GameManager.Instance.IsOnUI() && !_open) return;
+            if ((GameManager.Instance.IsOnUI() || GameManager.Instance.OnTutorial()) && !_open) return;
             
             _open = !_open;
 
             if (_open)
             {
-                transform.DOMoveX(Screen.width * 0.85f, 0.75f).SetEase(Ease.InQuad);
+                _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InQuad);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
-                GameManager.Instance.OnUIOpen();
+                _gameManager.OnUIOpen();
             }
             else
             {
-                transform.DOMoveX(Screen.width + 5, 0.75f).SetEase(Ease.OutCubic);
+                _viewport.transform.DOMoveX(Screen.width * 0.65f, 0.75f).SetEase(Ease.OutCubic);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-                GameManager.Instance.OnUIClose();
+               _gameManager.OnUIClose();
             }
         }
+
+        public void ToggleOpenButton() => OpenButton.gameObject.SetActive(!OpenButton.gameObject.activeInHierarchy);
 
         private void OpenInventory()
         {
@@ -60,9 +79,9 @@ namespace GGG.Components.UI
 
         private void OpenSettings()
         {
-            SceneManagement.Instance.OpenSettings();
+            _sceneManagement.OpenSettings();
             ToggleMenu();
-            GameManager.Instance.OnUIOpen();
+            _gameManager.OnUIOpen();
         }
     }
 }

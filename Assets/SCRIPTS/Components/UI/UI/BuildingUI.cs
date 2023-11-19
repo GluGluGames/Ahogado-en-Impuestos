@@ -4,25 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
+using GGG.Classes.Buildings;
 using GGG.Components.Core;
+using GGG.Input;
 
 namespace GGG.Components.UI {
     public class BuildingUI : MonoBehaviour {
         [SerializeField] private Button CloseButton;
 
+        private InputManager _input;
+        private BuildingManager _buildingManager;
+        private GameManager _gameManager;
         private GameObject _viewport;
         private BuildButton[] _buttons;
         private bool _open;
         private HexTile _selectedTile;
-        
-        public Action OnMenuOpen;
-    
+
+        public static Action OnUiOpen;
+
         private void Start() {
+            _input = InputManager.Instance;
+            _gameManager = GameManager.Instance;
+            _buildingManager = BuildingManager.Instance;
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             
-            CloseButton.onClick.AddListener(Close);
-            CloseButton.gameObject.SetActive(false);
+            CloseButton.onClick.AddListener(OnCloseButton);
 
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
@@ -33,50 +41,67 @@ namespace GGG.Components.UI {
             _buttons = GetComponentsInChildren<BuildButton>(true);
 
             foreach (BuildButton button in _buttons) {
-                button.Initialize();
+                button.Initialize(_buildingManager);
                 button.OnStructureBuild += (x, y) => Close();
             }
 
-
             _open = false;
-            transform.position = new Vector3(0, -400f, 0);
+            _viewport.transform.position = new Vector3(Screen.width * 0.5f, 0, 0);
         }
 
-        private void LateUpdate()
-        {
-            if (_open && !_viewport.activeInHierarchy)
+        private void Update() {
+            if (!_open ) return;
+
+            if (!_viewport.activeInHierarchy)
             {
-                // TODO - Solve bug where the interface doesn't open and the state is ON_UI
-                Close();
+                _viewport.SetActive(true);
             }
+            
+            if (!_input.Escape()) return;
+            Close();
         }
 
-        public bool IsOpen() { return _open; }
+        private void CheckBuildings()
+        {
+            foreach(BuildButton button in _buttons)
+                button.CheckUnlockState();
+        }
 
         private void Open(HexTile tile) {
             if (_open || tile.GetTileType() != TileType.Standard || !tile.TileEmpty()) {
                 return; 
             }
             
-            _selectedTile = tile;
-            _open = true;
-            _viewport.SetActive(true);
-            CloseButton.gameObject.SetActive(true);
-            transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
-            OnMenuOpen?.Invoke();
-        }
-
-        public void Close() {
-            if (!_open) return;
-            
-            transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine).onComplete += () => {
-                _viewport.SetActive(false);
-                CloseButton.gameObject.SetActive(false);
+            _viewport.transform.DOMoveY(Screen.height * 0.5f, 0.75f).SetEase(Ease.InCubic).onComplete += () =>
+            {
+                _open = true;
             };
+            
+            _selectedTile = tile;
+            _viewport.SetActive(true);
+            CheckBuildings();
+            OnUiOpen?.Invoke();
+            _gameManager.OnUIOpen();
+        }
+        
+        private void OnCloseButton() {
+            if (!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
+            
+            Close();
+        }
+        
+        public void Close()
+        {
+            _viewport.transform.DOMoveY(0, 0.75f).SetEase(Ease.OutCubic).onComplete += () => {
+                _viewport.SetActive(false);
+                _open = false;
+                _gameManager.OnUIClose();
+            };
+            
             _selectedTile.DeselectTile();
             _selectedTile = null;
-            GameManager.Instance.OnUIClose();
-            _open = false;
+            
+            
         }
     }
 }

@@ -1,10 +1,17 @@
+using System;
+using System.Collections;
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using GGG.Shared;
 using System.Linq.Expressions;
+using GGG.Classes.Buildings;
+using GGG.Components.Core;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace GGG.Components.Buildings
@@ -18,8 +25,19 @@ namespace GGG.Components.Buildings
         [SerializeField] private GameObject _FOWPrefab;
         [SerializeField] private bool FOWActive = false;
 
-        #region playerInfo
+        private HexTile[] _tiles;
+        public bool aux;
 
+        [Serializable]
+        private class TileData {
+            public TileType Type;
+            public bool IsEmpty;
+        }
+
+        public static Action<BuildingComponent[]> OnTilesStateLoaded;
+
+        #region playerInfo
+        
         [SerializeField] private Transform Player;
         private Vector3Int _playerPosCube;
         private List<HexTile> _path;
@@ -28,9 +46,16 @@ namespace GGG.Components.Buildings
 
         private void Awake()
         {
-            instance = this;
-            _tilesDic = new Dictionary<Vector3Int, HexTile>();
+            if(!instance)
+                instance = this;
+        }
 
+        private void OnEnable()
+        {
+            BuildingManager.OnBuildsLoad += OnBuildsLoad;
+            
+            _tilesDic = new Dictionary<Vector3Int, HexTile>();
+            
             HexTile[] hexTiles = gameObject.GetComponentsInChildren<HexTile>();
 
             // Register every hex playerSpawnTile
@@ -46,28 +71,17 @@ namespace GGG.Components.Buildings
                 List<HexTile> neighbours = GetNeighbours(hexTile);
                 hexTile.neighbours = neighbours;
             }
-
-            // Put the player somewhere
-
-
-            HexTile playerSpawnTile = GetRandomHex();
-            Debug.Log("ASD");
-            while (playerSpawnTile.tileType != TileType.Cliff)
-            {
-                playerSpawnTile = GetRandomHex();
-            }
-
-
-            // JUGADOR
-            GameObject aux= GameObject.Find("PlayerModel");
-            if(aux != null)
-            {
-                Player = aux.transform;
-            }
+            
             if (Player) {
+                HexTile playerSpawnTile = GetRandomHex();
+                while (playerSpawnTile.tileType != TileType.Cliff)
+                {
+                    playerSpawnTile = GetRandomHex();
+                }
+                
                 PlayerPosition.currentPath = new List<HexTile>();
                 _playerPosCube = playerSpawnTile.cubeCoordinate;
-                Player.position = playerSpawnTile.transform.position + new Vector3(0.0f, 1f, 0.0f);
+                Player.position = playerSpawnTile.transform.position + new Vector3(0.0f, PlayerPosition.heightOffset, 0.0f);
                 PlayerPosition.CurrentTile = playerSpawnTile;
 
                 PlayerPosition.PlayerPos = playerSpawnTile.cubeCoordinate;
@@ -93,6 +107,16 @@ namespace GGG.Components.Buildings
             {
                 RevealTile(hexTiles[hexTiles.Length / 2], 3);
             }
+
+            aux = true;
+        }
+
+        private void OnDisable() {
+            if (SceneManager.GetSceneByBuildIndex((int) SceneIndexes.GAME_SCENE) != SceneManager.GetActiveScene()
+                || GameManager.Instance.GetCurrentTutorial() == Tutorials.BuildTutorial)
+                return;
+            
+            SaveTilesState();
         }
 
         private void OnDestroy()
@@ -106,6 +130,19 @@ namespace GGG.Components.Buildings
                     _path.Reverse();
                     PlayerPosition.currentPath = _path;
                 };
+
+            BuildingManager.OnBuildsLoad -= OnBuildsLoad;
+        }
+
+        private void OnBuildsLoad(BuildingComponent[] builds)
+        {
+            if (builds == null)
+            {
+                OnTilesStateLoaded?.Invoke(null);
+                return;
+            }
+            
+            StartCoroutine(LoadTilesState(builds));
         }
 
         public void RegisterTile(HexTile tile)
@@ -163,8 +200,9 @@ namespace GGG.Components.Buildings
             tile.fow = fow;
             tile.gameObject.layer = 7; // Layer is "Hidden"
 
-            tile.transform.GetChild(0).gameObject.layer = 7;
-
+            tile.gameObject.transform.GetChild(0).gameObject.layer = 7;
+            for (int i = 0; i < tile.gameObject.transform.GetChild(0).childCount; i++)
+                tile.gameObject.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.layer = 7;
         }
 
         /// <summary>
@@ -179,6 +217,66 @@ namespace GGG.Components.Buildings
                 tile.Reveal(depth, 0);
             }
 
+        }
+        
+        // Data persistence
+
+        private void SaveTilesState() {
+            _tiles = GetComponentsInChildren<HexTile>();
+            TileData[] saveData = new TileData[_tiles.Length];
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
+            int i = 0;
+
+            foreach (HexTile tile in _tiles) {
+                TileData data = new TileData();
+
+                data.Type = tile.GetTileType();
+                data.IsEmpty = tile.TileEmpty();
+                saveData[i] = data;
+                i++;
+            }
+
+            string jsonData = JsonHelper.ToJson(saveData, true);
+            File.WriteAllText(filePath, jsonData);
+        }
+
+        private IEnumerator LoadTilesState(BuildingComponent[] builds) {
+            _tiles = GetComponentsInChildren<HexTile>();
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
+#if UNITY_EDITOR
+            filePath = "file://" + filePath;
+#endif
+            string data;
+            if (filePath.Contains("://") || filePath.Contains(":///")) {
+                UnityWebRequest www = UnityWebRequest.Get(filePath);
+                yield return www.SendWebRequest();
+                data = www.downloadHandler.text;
+            }
+            else {
+                data = File.ReadAllText(filePath);
+            }
+
+            if (!string.IsNullOrEmpty(data)) {
+                TileData[] tiles = JsonHelper.FromJson<TileData>(data);
+                int i = 0, j = 0;
+                
+                foreach (HexTile tile in _tiles) {
+                    tile.SetTileType(tiles[i].Type);
+                    if (!tiles[i].IsEmpty)
+                    {
+                        tile.SetBuilding(builds[j]);
+                        tile.Reveal(builds[j].GetVisionRange(), 0);
+                        j++;
+                    }
+                    
+                    i++;
+                }
+                
+                OnTilesStateLoaded?.Invoke(builds);
+            }
+            else {
+                SaveTilesState();
+            }
         }
     }
 }

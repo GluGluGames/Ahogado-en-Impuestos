@@ -64,15 +64,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""SecondaryTouch"",
-                    ""type"": ""Value"",
-                    ""id"": ""8276be31-d317-4ad3-84ae-357452f36b93"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""PrimaryTouchContact"",
                     ""type"": ""Button"",
                     ""id"": ""6b73ab07-17a3-4730-846a-e28d77382730"",
@@ -82,9 +73,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SecondaryTouchContact"",
+                    ""name"": ""SecondaryTouch"",
                     ""type"": ""Button"",
-                    ""id"": ""a89aa249-e74e-47de-94fd-ba894361f71a"",
+                    ""id"": ""7e386f33-63fb-47d1-8449-46f77d88baab"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -248,34 +239,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ea4831a1-23ab-4a8b-acd4-13e72bbe564c"",
-                    ""path"": ""<Touchscreen>/touch0/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touchscreen"",
-                    ""action"": ""PrimaryTouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""39b58710-bce7-4a1a-be6a-a339605f366f"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse"",
                     ""action"": ""PrimaryTouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f65a1e75-c93d-402d-a6fb-cc2ab1d53fb1"",
-                    ""path"": ""<Touchscreen>/touch1/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touchscreen"",
-                    ""action"": ""SecondaryTouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -292,23 +261,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""86e0b34b-4277-43e4-8d4b-5ab17bbd4af6"",
-                    ""path"": ""<Touchscreen>/touch0/press"",
+                    ""id"": ""2634f6f9-f8ea-4c38-a878-a3ecccc95f03"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Touchscreen"",
-                    ""action"": ""PrimaryTouchContact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""43ad7243-4f94-4c98-ae36-55c2591fce0b"",
-                    ""path"": ""<Touchscreen>/touch1/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touchscreen"",
-                    ""action"": ""SecondaryTouchContact"",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""SecondaryTouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -339,15 +297,72 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Continue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""a_Shortcuts"",
+            ""id"": ""ebd21048-48e1-4d3d-9151-099cdf47d13d"",
+            ""actions"": [
+                {
+                    ""name"": ""EscapeKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""8bf9d4e2-fd1b-4dac-a9ed-1b6ba6843c29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugConsole"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6282583-d40f-459e-8723-90dfb5c163ff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnterKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""bdeedfb4-5592-4ffa-a6b7-f4d28f7df517"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2c7c9be3-5ba7-422c-804e-ed72b6ad978f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""EscapeKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ca02adcd-6a81-4679-9088-c09647b9ac19"",
-                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""id"": ""7d958f97-d56c-445e-9491-68cfa5fc3825"",
+                    ""path"": ""<Keyboard>/backquote"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Touchscreen"",
-                    ""action"": ""Continue"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""DebugConsole"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd88ddeb-0c7f-4786-946a-38731cf77d9f"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""EnterKey"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -376,17 +391,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Touchscreen"",
-            ""bindingGroup"": ""Touchscreen"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Touchscreen>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
         }
     ]
 }");
@@ -396,12 +400,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_a_Camera_CameraRotation = m_a_Camera.FindAction("CameraRotation", throwIfNotFound: true);
         m_a_Camera_CameraZoom = m_a_Camera.FindAction("CameraZoom", throwIfNotFound: true);
         m_a_Camera_PrimaryTouch = m_a_Camera.FindAction("PrimaryTouch", throwIfNotFound: true);
-        m_a_Camera_SecondaryTouch = m_a_Camera.FindAction("SecondaryTouch", throwIfNotFound: true);
         m_a_Camera_PrimaryTouchContact = m_a_Camera.FindAction("PrimaryTouchContact", throwIfNotFound: true);
-        m_a_Camera_SecondaryTouchContact = m_a_Camera.FindAction("SecondaryTouchContact", throwIfNotFound: true);
+        m_a_Camera_SecondaryTouch = m_a_Camera.FindAction("SecondaryTouch", throwIfNotFound: true);
         // a_Dialogue
         m_a_Dialogue = asset.FindActionMap("a_Dialogue", throwIfNotFound: true);
         m_a_Dialogue_Continue = m_a_Dialogue.FindAction("Continue", throwIfNotFound: true);
+        // a_Shortcuts
+        m_a_Shortcuts = asset.FindActionMap("a_Shortcuts", throwIfNotFound: true);
+        m_a_Shortcuts_EscapeKey = m_a_Shortcuts.FindAction("EscapeKey", throwIfNotFound: true);
+        m_a_Shortcuts_DebugConsole = m_a_Shortcuts.FindAction("DebugConsole", throwIfNotFound: true);
+        m_a_Shortcuts_EnterKey = m_a_Shortcuts.FindAction("EnterKey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -467,9 +475,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_a_Camera_CameraRotation;
     private readonly InputAction m_a_Camera_CameraZoom;
     private readonly InputAction m_a_Camera_PrimaryTouch;
-    private readonly InputAction m_a_Camera_SecondaryTouch;
     private readonly InputAction m_a_Camera_PrimaryTouchContact;
-    private readonly InputAction m_a_Camera_SecondaryTouchContact;
+    private readonly InputAction m_a_Camera_SecondaryTouch;
     public struct A_CameraActions
     {
         private @Controls m_Wrapper;
@@ -478,9 +485,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @CameraRotation => m_Wrapper.m_a_Camera_CameraRotation;
         public InputAction @CameraZoom => m_Wrapper.m_a_Camera_CameraZoom;
         public InputAction @PrimaryTouch => m_Wrapper.m_a_Camera_PrimaryTouch;
-        public InputAction @SecondaryTouch => m_Wrapper.m_a_Camera_SecondaryTouch;
         public InputAction @PrimaryTouchContact => m_Wrapper.m_a_Camera_PrimaryTouchContact;
-        public InputAction @SecondaryTouchContact => m_Wrapper.m_a_Camera_SecondaryTouchContact;
+        public InputAction @SecondaryTouch => m_Wrapper.m_a_Camera_SecondaryTouch;
         public InputActionMap Get() { return m_Wrapper.m_a_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -502,15 +508,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PrimaryTouch.started += instance.OnPrimaryTouch;
             @PrimaryTouch.performed += instance.OnPrimaryTouch;
             @PrimaryTouch.canceled += instance.OnPrimaryTouch;
-            @SecondaryTouch.started += instance.OnSecondaryTouch;
-            @SecondaryTouch.performed += instance.OnSecondaryTouch;
-            @SecondaryTouch.canceled += instance.OnSecondaryTouch;
             @PrimaryTouchContact.started += instance.OnPrimaryTouchContact;
             @PrimaryTouchContact.performed += instance.OnPrimaryTouchContact;
             @PrimaryTouchContact.canceled += instance.OnPrimaryTouchContact;
-            @SecondaryTouchContact.started += instance.OnSecondaryTouchContact;
-            @SecondaryTouchContact.performed += instance.OnSecondaryTouchContact;
-            @SecondaryTouchContact.canceled += instance.OnSecondaryTouchContact;
+            @SecondaryTouch.started += instance.OnSecondaryTouch;
+            @SecondaryTouch.performed += instance.OnSecondaryTouch;
+            @SecondaryTouch.canceled += instance.OnSecondaryTouch;
         }
 
         private void UnregisterCallbacks(IA_CameraActions instance)
@@ -527,15 +530,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PrimaryTouch.started -= instance.OnPrimaryTouch;
             @PrimaryTouch.performed -= instance.OnPrimaryTouch;
             @PrimaryTouch.canceled -= instance.OnPrimaryTouch;
-            @SecondaryTouch.started -= instance.OnSecondaryTouch;
-            @SecondaryTouch.performed -= instance.OnSecondaryTouch;
-            @SecondaryTouch.canceled -= instance.OnSecondaryTouch;
             @PrimaryTouchContact.started -= instance.OnPrimaryTouchContact;
             @PrimaryTouchContact.performed -= instance.OnPrimaryTouchContact;
             @PrimaryTouchContact.canceled -= instance.OnPrimaryTouchContact;
-            @SecondaryTouchContact.started -= instance.OnSecondaryTouchContact;
-            @SecondaryTouchContact.performed -= instance.OnSecondaryTouchContact;
-            @SecondaryTouchContact.canceled -= instance.OnSecondaryTouchContact;
+            @SecondaryTouch.started -= instance.OnSecondaryTouch;
+            @SecondaryTouch.performed -= instance.OnSecondaryTouch;
+            @SecondaryTouch.canceled -= instance.OnSecondaryTouch;
         }
 
         public void RemoveCallbacks(IA_CameraActions instance)
@@ -599,6 +599,68 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public A_DialogueActions @a_Dialogue => new A_DialogueActions(this);
+
+    // a_Shortcuts
+    private readonly InputActionMap m_a_Shortcuts;
+    private List<IA_ShortcutsActions> m_A_ShortcutsActionsCallbackInterfaces = new List<IA_ShortcutsActions>();
+    private readonly InputAction m_a_Shortcuts_EscapeKey;
+    private readonly InputAction m_a_Shortcuts_DebugConsole;
+    private readonly InputAction m_a_Shortcuts_EnterKey;
+    public struct A_ShortcutsActions
+    {
+        private @Controls m_Wrapper;
+        public A_ShortcutsActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @EscapeKey => m_Wrapper.m_a_Shortcuts_EscapeKey;
+        public InputAction @DebugConsole => m_Wrapper.m_a_Shortcuts_DebugConsole;
+        public InputAction @EnterKey => m_Wrapper.m_a_Shortcuts_EnterKey;
+        public InputActionMap Get() { return m_Wrapper.m_a_Shortcuts; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(A_ShortcutsActions set) { return set.Get(); }
+        public void AddCallbacks(IA_ShortcutsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_A_ShortcutsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_A_ShortcutsActionsCallbackInterfaces.Add(instance);
+            @EscapeKey.started += instance.OnEscapeKey;
+            @EscapeKey.performed += instance.OnEscapeKey;
+            @EscapeKey.canceled += instance.OnEscapeKey;
+            @DebugConsole.started += instance.OnDebugConsole;
+            @DebugConsole.performed += instance.OnDebugConsole;
+            @DebugConsole.canceled += instance.OnDebugConsole;
+            @EnterKey.started += instance.OnEnterKey;
+            @EnterKey.performed += instance.OnEnterKey;
+            @EnterKey.canceled += instance.OnEnterKey;
+        }
+
+        private void UnregisterCallbacks(IA_ShortcutsActions instance)
+        {
+            @EscapeKey.started -= instance.OnEscapeKey;
+            @EscapeKey.performed -= instance.OnEscapeKey;
+            @EscapeKey.canceled -= instance.OnEscapeKey;
+            @DebugConsole.started -= instance.OnDebugConsole;
+            @DebugConsole.performed -= instance.OnDebugConsole;
+            @DebugConsole.canceled -= instance.OnDebugConsole;
+            @EnterKey.started -= instance.OnEnterKey;
+            @EnterKey.performed -= instance.OnEnterKey;
+            @EnterKey.canceled -= instance.OnEnterKey;
+        }
+
+        public void RemoveCallbacks(IA_ShortcutsActions instance)
+        {
+            if (m_Wrapper.m_A_ShortcutsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IA_ShortcutsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_A_ShortcutsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_A_ShortcutsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public A_ShortcutsActions @a_Shortcuts => new A_ShortcutsActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -617,27 +679,23 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_MouseSchemeIndex];
         }
     }
-    private int m_TouchscreenSchemeIndex = -1;
-    public InputControlScheme TouchscreenScheme
-    {
-        get
-        {
-            if (m_TouchscreenSchemeIndex == -1) m_TouchscreenSchemeIndex = asset.FindControlSchemeIndex("Touchscreen");
-            return asset.controlSchemes[m_TouchscreenSchemeIndex];
-        }
-    }
     public interface IA_CameraActions
     {
         void OnCameraMovement(InputAction.CallbackContext context);
         void OnCameraRotation(InputAction.CallbackContext context);
         void OnCameraZoom(InputAction.CallbackContext context);
         void OnPrimaryTouch(InputAction.CallbackContext context);
-        void OnSecondaryTouch(InputAction.CallbackContext context);
         void OnPrimaryTouchContact(InputAction.CallbackContext context);
-        void OnSecondaryTouchContact(InputAction.CallbackContext context);
+        void OnSecondaryTouch(InputAction.CallbackContext context);
     }
     public interface IA_DialogueActions
     {
         void OnContinue(InputAction.CallbackContext context);
+    }
+    public interface IA_ShortcutsActions
+    {
+        void OnEscapeKey(InputAction.CallbackContext context);
+        void OnDebugConsole(InputAction.CallbackContext context);
+        void OnEnterKey(InputAction.CallbackContext context);
     }
 }
