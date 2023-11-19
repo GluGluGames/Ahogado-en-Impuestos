@@ -225,9 +225,15 @@ namespace GGG.Components.Laboratory
                 }
                 else
                 {
-                    _buildingsButton[i].image.sprite = _buildings[i].GetIcon();
+                    if (_buildings[i].IsUnlocked())
+                    {
+                        _buildingsButton[i].transform.parent.gameObject.SetActive(false);
+                        continue;
+                    }
+                    
+                    _buildingsButton[i].image.sprite = _buildings[i].GetResearchIcon();
                     SpriteState aux = new();
-                    aux.disabledSprite = _buildings[i].GetIcon();
+                    aux.disabledSprite = _buildings[i].GetResearchIcon();
                     aux.highlightedSprite = _buildings[i].GetSelectedIcon();
                     _buildingsButton[i].spriteState = aux;
                     _buildingsButton[i].interactable = !_buildings[i].IsUnlocked();

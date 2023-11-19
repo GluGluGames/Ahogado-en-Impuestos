@@ -15,6 +15,8 @@ namespace GGG.Classes.Buildings
         [SerializeField] private Sprite Icon;
         [Tooltip("Icon of the building when is selected.")] 
         [SerializeField] private Sprite SelectedIcon;
+        [Tooltip("Icon of the building when researched in the laboratory")]
+        [SerializeField] private Sprite ResearchIcon;
         [Tooltip("Initial prefab of the building")]
         [SerializeField] private GameObject Prefab;
         [Tooltip("Determines if the building can be upgrades")] 
@@ -77,6 +79,12 @@ namespace GGG.Classes.Buildings
         /// </summary>
         /// <returns>The sprite of the building being selected</returns>
         public Sprite GetSelectedIcon() => SelectedIcon;
+
+        /// <summary>
+        /// Gets the icon when researched of the building
+        /// </summary>
+        /// <returns>The sprite of the building when being researched</returns>
+        public Sprite GetResearchIcon() => ResearchIcon;
 
         /// <summary>
         /// Checks if the building can be upgraded
