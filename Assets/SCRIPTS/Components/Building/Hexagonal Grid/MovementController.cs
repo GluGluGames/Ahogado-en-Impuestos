@@ -101,5 +101,6 @@ namespace GGG.Components.Buildings
 
             TileManager.instance.RevealTile(PlayerPosition.NextTile, 3);
         }
+
     }
 }

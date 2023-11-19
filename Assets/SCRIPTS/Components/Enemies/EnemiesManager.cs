@@ -1,5 +1,6 @@
 using DG.Tweening;
 using GGG.Components.Buildings;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -17,8 +18,12 @@ namespace GGG.Components.Enemies
         [SerializeField] private Enemy[] enemiesPrefab;
 
         // Start is called before the first frame update
-        private void Start()
+
+        private IEnumerator Start()
         {
+            // This is made so the scene charges first and then the start method is called.
+            yield return null;
+
             tiles = TileManager.instance.GetComponentsInChildren<HexTile>().ToList();
 
             for (int i = 0; i < _nEnemies; i++)
