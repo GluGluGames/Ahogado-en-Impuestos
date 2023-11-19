@@ -190,11 +190,13 @@ MonoBehaviour:
   size: 3
   restTime: 1
   isStoppable: 0
-  _alwaysVisible: 1
+  _alwaysVisible: 0
   currentTile: {fileID: 0}
   cubeCoordPos: {x: 0, y: 0, z: 0}
   isDirty: 0
   movementController: {fileID: 0}
+  model1: {fileID: 8606884701800896940}
+  model2: {fileID: 300575701491477464}
   myLayerInt: 15
 --- !u!114 &2557339169096508649
 MonoBehaviour:
