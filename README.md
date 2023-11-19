@@ -316,6 +316,32 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | **3.2.12 - Mejoras de buceo**   | ![Mejoras de buceo](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Mejoras%20de%20buceo.png)   | Este edificio esta basado en el casco de un buceador antiguo. |
 | **3.2.13 - Poseidón**   | ![Poseidón](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/dd6f7903-ed9f-44f4-90ed-ea7202adedfd)   | Este es el enemigo principal del juego, Poseidón. Su diseño está basado en juegos que esten basados en el mundo de la mitología griega, como God of War o Hades. <br><br> Se ha elegido un aspecto serio, con el pelo y barba larga porque es el aspecto que suelen tener los dioses en sus representaciones, ya sean en juegos o en la ficción. <br><br> También se le quiere dar la impresión de poderoso, para que tenga sentido que sea el que tenga amenazados a los jugadores durante el gameplay. Tampoco se le quería dar un aspecto muy oscuro porque no es malvado, simplemente está enfadado. |
 
+#### **Iconos del juego***
+| Nombre del Documento | Enlace |
+|-----------------------|--------|
+| Caracola              | ![Caracola](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/Caracola.png) |
+| Perla                 | ![Perla](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/Perla.png) |
+| Viga                  | ![Viga](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/Viga.png) |
+| Acelerador            | ![Acelerador](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/acelerador.png) |
+| AlgaRoja              | ![AlgaRoja](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/algaRoja.png) |
+| AlgaVerde             | ![AlgaVerde](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/algaVerde.png) |
+| AnguilaEléctrica      | ![AnguilaEléctrica](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/anguilaElectrica.png) |
+| Boga                  | ![Boga](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/boga.png) |
+| Concha                | ![Concha](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/concha.png) |
+| CoralNaranja          | ![CoralNaranja](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/coralNaranja.png) |
+| Dorada                | ![Dorada](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/dorada.png) |
+| Lubina                | ![Lubina](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/lubina.png) |
+| Madera                | ![Madera](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/madera.png) |
+| Mapa                  | ![Mapa](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/mapa.png) |
+| Medusa                | ![Medusa](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/medusa.png) |
+| Molyvelifera          | ![Molyvelifera](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/molyvelifera.png) |
+| PezCebra              | ![PezCebra](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/pezCebra.png) |
+| PezDorado             | ![PezDorado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/pezDorado.png) |
+| PezNeon               | ![PezNeon](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/pezNeon.png) |
+| Tablilla              | ![Tablilla](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/tablilla.png) |
+| Tiburon               | ![Tiburon](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/tiburon.png) |
+| TruchaArcoiris        | ![TruchaArcoiris](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/truchaArcoriris.png) |
+
 ## **4 - DISEÑO 3D**
 
 | Título | Imagen |
@@ -327,6 +353,17 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | **4.5 - Hexágono** | ![Hexágono](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagon.PNG) |
 | **4.6 - Hexágono no construible** | ![Hexágono no construible](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonNon.PNG) |
 | **4.7 - Hexágono pavimentado** | ![Hexágono pavimentado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonPavement.PNG) |
+### Edificios actualizados para Beta
+| Nombre del Edificio | Enlace |
+|----------------------|--------|
+| Pecera_Nivel 1           | ![FishFarm_1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/FishFarm_1_Icon.png) |
+| Pecera_Nivel 2           | ![FishFarm_2](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/FishFarm_2_Icon.png) |
+| Pecera_Nivel 3           | ![FishFarm_3](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/FishFarm_3_Icon.png) |
+| Laboratorio           | ![Laboratory](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/Laboratory_Icon.png) |
+| Granja de algas_1       | ![SeaweerdFarm_1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/SeaweerdFarm_1_Icon.png) |
+
+
+
 
 ## **5 - GAME DESIGN** 
 
