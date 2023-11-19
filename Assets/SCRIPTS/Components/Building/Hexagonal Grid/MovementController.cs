@@ -74,7 +74,7 @@ namespace GGG.Components.Buildings
                         return;
                     }*/
 
-                    PlayerPosition.TargetPosition = PlayerPosition.NextTile.transform.position + new Vector3(0, 1f, 0);
+                    PlayerPosition.TargetPosition = PlayerPosition.NextTile.transform.position + new Vector3(0, PlayerPosition.heightOffset, 0);
                     MoveTo(PlayerPosition.TargetPosition);
                     gotPath = true;
                     PlayerPosition.currentPath.RemoveAt(0);
@@ -98,7 +98,7 @@ namespace GGG.Components.Buildings
         {
             Quaternion angle = Quaternion.Euler(0, Vector3.Angle(targetPos, transform.forward), 0);
             _rigidbody.Move(targetPos, angle);
-
+            _rigidbody.transform.GetChild(1).LookAt(new Vector3(targetPos.x, _rigidbody.transform.position.y, targetPos.y));
             TileManager.instance.RevealTile(PlayerPosition.NextTile, 3);
         }
 

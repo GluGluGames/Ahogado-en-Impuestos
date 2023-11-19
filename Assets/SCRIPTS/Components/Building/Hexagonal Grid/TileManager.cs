@@ -80,7 +80,7 @@ namespace GGG.Components.Buildings
                 
                 PlayerPosition.currentPath = new List<HexTile>();
                 _playerPosCube = playerSpawnTile.cubeCoordinate;
-                Player.position = playerSpawnTile.transform.position + new Vector3(0.0f, 1f, 0.0f);
+                Player.position = playerSpawnTile.transform.position + new Vector3(0.0f, PlayerPosition.heightOffset, 0.0f);
                 PlayerPosition.CurrentTile = playerSpawnTile;
 
                 PlayerPosition.PlayerPos = playerSpawnTile.cubeCoordinate;

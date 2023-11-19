@@ -13,5 +13,6 @@ namespace GGG.Components.Buildings
         public static HexTile CurrentTile;
         public static HexTile NextTile;
         public static List<HexTile> currentPath = new List<HexTile>();
+        public static float heightOffset = 0.6f;
     }
 }

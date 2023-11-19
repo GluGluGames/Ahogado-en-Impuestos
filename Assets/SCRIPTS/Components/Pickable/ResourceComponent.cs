@@ -42,6 +42,7 @@ namespace GGG.Components.Resources
 
         private void OnTriggerEnter(Collider other)
         {
+            _collided = true;
             _pickProgressUI.gameObject.SetActive(true);
             WaitSecond = true;
             Coroutine aux = StartCoroutine(
@@ -52,6 +53,7 @@ namespace GGG.Components.Resources
                 },
                 () =>
                 {
+                    _pickProgressUI.current = _pickProgressUI.maximum;
                     RecolectResource();
                     _pickProgressUI.current = 0;
                     _pickProgressUI.gameObject.SetActive(false);
@@ -74,7 +76,7 @@ namespace GGG.Components.Resources
 
         private void Start()
         {
-            _pickProgressUI = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).Find("ProgressBar").GetComponent<PickResourceProgressionUI>();
+            _pickProgressUI = GameObject.FindGameObjectWithTag("Player").transform.Find("HeaderBar").Find("ProgressBar").GetComponent<PickResourceProgressionUI>();
             onResourceCollideEnter += RecolectResource;
             onResourceCollideExit += DeleteMySelf;
             TickManager.OnTick += HandleVisibility;
