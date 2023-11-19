@@ -15,6 +15,7 @@ namespace GGG.Components.UI {
     public class BuildButton : MonoBehaviour, IPointerDownHandler {
         [SerializeField] private Building BuildingInfo;
         [SerializeField] private GameObject Container;
+        [SerializeField] private GameObject[] ResourcesContainers;
         [SerializeField] private Image[] ResourcesImages;
         [SerializeField] private Image StructureSprite;
         [SerializeField] private GameObject Padlock;
@@ -42,6 +43,7 @@ namespace GGG.Components.UI {
             _cost = BuildingInfo.GetBuildingCost();
 
             StructureSprite.sprite = BuildingInfo.GetIcon();
+            ResourcesContainers[0].SetActive(true);
             texts[0].text = _cost.GetCost(0).ToString();
             ResourcesImages[0].sprite = _cost.GetResource(0).GetSprite();
             
@@ -49,6 +51,7 @@ namespace GGG.Components.UI {
             {
                 StructureSprite.color = new Color(1, 1, 1, 0.5f);
                 ResourcesImages[0].gameObject.SetActive(false);
+                texts[0].gameObject.SetActive(false);
                 Padlock.gameObject.SetActive(true);
                 return;
             }
@@ -58,7 +61,7 @@ namespace GGG.Components.UI {
                 if (i >= _cost.GetCostsAmount() || _cost.GetCost(i) == 0)
                     continue;
                 
-                ResourcesImages[i].gameObject.SetActive(true);
+                ResourcesContainers[i].SetActive(true);
                 texts[i].SetText(_cost.GetCost(i).ToString());
                 ResourcesImages[i].sprite = _cost.GetResource(i).GetSprite();
             }
@@ -81,6 +84,7 @@ namespace GGG.Components.UI {
                     continue;
                 
                 ResourcesImages[i].gameObject.SetActive(true);
+                texts[i].gameObject.SetActive(true);
                 texts[i].SetText(_cost.GetCost(i).ToString());
                 ResourcesImages[i].sprite = _cost.GetResource(i).GetSprite();
             }

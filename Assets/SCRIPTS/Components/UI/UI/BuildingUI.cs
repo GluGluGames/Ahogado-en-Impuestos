@@ -27,7 +27,6 @@ namespace GGG.Components.UI {
             _viewport.SetActive(false);
             
             CloseButton.onClick.AddListener(OnCloseButton);
-            CloseButton.gameObject.SetActive(false);
 
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
@@ -42,14 +41,19 @@ namespace GGG.Components.UI {
                 button.OnStructureBuild += (x, y) => Close();
             }
 
-
             _open = false;
-            transform.position = new Vector3(0, -400f, 0);
+            _viewport.transform.position = new Vector3(Screen.width * 0.5f, 0, 0);
         }
 
         private void Update() {
-            if (!_open || !_input.Escape()) return;
+            if (!_open ) return;
 
+            if (!_viewport.activeInHierarchy)
+            {
+                _viewport.SetActive(true);
+            }
+            
+            if (!_input.Escape()) return;
             Close();
         }
 
@@ -64,15 +68,16 @@ namespace GGG.Components.UI {
                 return; 
             }
             
+            _viewport.transform.DOMoveY(Screen.height * 0.5f, 0.75f).SetEase(Ease.InCubic).onComplete += () =>
+            {
+                _open = true;
+            };
+            
             _selectedTile = tile;
-            _open = true;
             _viewport.SetActive(true);
             CheckBuildings();
-            CloseButton.gameObject.SetActive(true);
             OnUiOpen?.Invoke();
             _gameManager.OnUIOpen();
-            
-            transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine);
         }
         
         private void OnCloseButton() {
@@ -83,15 +88,16 @@ namespace GGG.Components.UI {
         
         public void Close()
         {
-            transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine).onComplete += () => {
+            _viewport.transform.DOMoveY(0, 0.75f).SetEase(Ease.OutCubic).onComplete += () => {
                 _viewport.SetActive(false);
-                CloseButton.gameObject.SetActive(false);
+                _open = false;
+                _gameManager.OnUIClose();
             };
             
             _selectedTile.DeselectTile();
             _selectedTile = null;
-            _gameManager.OnUIClose();
-            _open = false;
+            
+            
         }
     }
 }
