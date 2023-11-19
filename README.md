@@ -362,6 +362,18 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | Laboratorio           | ![Laboratory](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/Laboratory_Icon.png) |
 | Granja de algas_1       | ![SeaweerdFarm_1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/SeaweerdFarm_1_Icon.png) |
 
+### Prompts del juego
+| Nombre de la Criatura | Enlace a la Imagen |
+|------------------------|--------------------|
+| Almeja                 | ![Almeja](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Almeja.jpg) |
+| Boga                   | ![Boga](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Boga.jpg) |
+| Dorada                 | ![Dorada](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Dorada.jpg) |
+| Pez Dorado             | ![Pez Dorado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/GoldFish.jpg) |
+| Mapa                   | ![Mapa](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Mapa.jpg) |
+| Pez Vampiro            | ![Pez Vampiro](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Pez%20vampiro.jpg) |
+| Rape                   | ![Rape](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Rape.jpg) |
+
+
 
 
 
@@ -410,6 +422,15 @@ Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar di
 Los niveles en este juego representarán las diferentes zonas de expedición y serán diseñados a mano con distribuciones específicas de niveles de profundidad. Estas distribuciones se han diseñado con el propósito de plantear desafíos y dificultades para el jugador antes de que este adquiera objetos que lo hagan inmune a ciertos peligros.
 
 Sin embargo, es importante destacar que los recursos que no funcionen como desencadenantes clave para avanzar en el juego serán generados aleatoriamente por la zona. Esto permite que el jugador encuentre variedad en cada expedición y promueve la exploración activa para reunir recursos útiles en su búsqueda para reconstruir la ciudad perdida de Atlantis.
+
+| Nombre del Nivel | Imagen |
+|-------------------|--------|
+| Tutorial         | ![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%20tutorial.PNG) |
+| Nivel 1          | ![Nivel 1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%201.PNG) |
+| Nivel 2          | ![Nivel 2](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%202.PNG) |
+| Nivel 3          | ![Nivel 3](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%203.PNG) |
+| Nivel 4          | ![Nivel 4](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%204.PNG) |
+
 
 ### **5.3 - Curva de aprendizaje**
 
