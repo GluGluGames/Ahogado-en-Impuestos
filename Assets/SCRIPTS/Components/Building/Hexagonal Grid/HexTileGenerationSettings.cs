@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 
 
 namespace GGG.Components.Buildings
@@ -19,7 +19,7 @@ namespace GGG.Components.Buildings
     {
         [SerializeField] private GameObject Standar;
         [SerializeField] private GameObject Water;
-        [SerializeField] private GameObject Cliff;
+        [SerializeField] private GameObject[] Cliff;
         [SerializeField] private GameObject Build;
 
         public GameObject GetTile(TileType tileType)
@@ -28,7 +28,7 @@ namespace GGG.Components.Buildings
             {
                 TileType.Standard => Standar,
                 TileType.Water => Water,
-                TileType.Cliff => Cliff,
+                TileType.Cliff => Cliff[Random.Range(0, Cliff.Length)],
                 TileType.Build => Build,
                 _ => null
             };

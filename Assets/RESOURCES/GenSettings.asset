@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c131b2bba5eb0e4a92915d7058c7948, type: 3}
   m_Name: GenSettings
   m_EditorClassIdentifier: 
-  Standar: {fileID: 3355905021987513449, guid: 6fbb4067f3376a44f86695dec0dcf135, type: 3}
+  Standar: {fileID: 5287772880044038087, guid: 3f0e481c1b3da544796758239ad45ca3, type: 3}
   Water: {fileID: 8956753354664748225, guid: 3211e0b762e9a8840adc7ba7a18bd79c, type: 3}
-  Cliff: {fileID: 9167445932578917885, guid: b6ab659f608c03a42a9e3175ff02c729, type: 3}
+  Cliff:
+  - {fileID: 9167445932578917885, guid: b6ab659f608c03a42a9e3175ff02c729, type: 3}
+  - {fileID: 4655917609274798875, guid: 3b9cbfb93a7dfd24b99a266b8baff910, type: 3}
   Build: {fileID: 8409277049709587083, guid: 63de9fda2f4ae6541a83956eaf7a0c01, type: 3}

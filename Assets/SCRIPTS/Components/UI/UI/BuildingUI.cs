@@ -42,7 +42,7 @@ namespace GGG.Components.UI {
             }
 
             _open = false;
-            transform.position = new Vector3(0, -400f, 0);
+            _viewport.transform.position = new Vector3(Screen.width * 0.5f, 0, 0);
         }
 
         private void Update() {
@@ -68,7 +68,7 @@ namespace GGG.Components.UI {
                 return; 
             }
             
-            transform.DOMove(new Vector3(0f, 0f, 0f), 0.5f, true).SetEase(Ease.InOutSine).onComplete += () =>
+            _viewport.transform.DOMoveY(Screen.height * 0.5f, 0.75f).SetEase(Ease.InCubic).onComplete += () =>
             {
                 _open = true;
             };
@@ -88,7 +88,7 @@ namespace GGG.Components.UI {
         
         public void Close()
         {
-            transform.DOMove(new Vector3(0f, -400, 0f), 0.5f, true).SetEase(Ease.InOutSine).onComplete += () => {
+            _viewport.transform.DOMoveY(0, 0.75f).SetEase(Ease.OutCubic).onComplete += () => {
                 _viewport.SetActive(false);
                 _open = false;
                 _gameManager.OnUIClose();
