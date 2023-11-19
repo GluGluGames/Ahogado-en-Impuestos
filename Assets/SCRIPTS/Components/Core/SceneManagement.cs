@@ -56,6 +56,8 @@ namespace GGG.Components.Core
         public Action OnGameSceneLoaded;
         public Action OnGameSceneUnloaded;
 
+        public Action OnMinigameSceneLoaded;
+
         private void Start()
         {
             SceneManager.sceneUnloaded += (scene) =>
@@ -69,9 +71,17 @@ namespace GGG.Components.Core
                 if (scene.buildIndex == (int)SceneIndexes.GAME_SCENE)
                     OnGameSceneLoaded?.Invoke();
             };
+
+            SceneManager.sceneLoaded += (scene, mode) =>
+            {
+                if (scene.buildIndex == (int)SceneIndexes.MINIGAME)
+                    OnMinigameSceneLoaded?.Invoke();
+            };
         }
 
         #region Scene Management
+
+        public SceneIndexes CurrentScene() => (SceneIndexes)SceneManager.GetActiveScene().buildIndex;
 
         public void AddSceneToLoad(SceneIndexes scene)
         { 

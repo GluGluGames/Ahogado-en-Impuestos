@@ -11,6 +11,7 @@ using GGG.Components.Core;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace GGG.Components.Buildings
@@ -35,7 +36,7 @@ namespace GGG.Components.Buildings
         public static Action<BuildingComponent[]> OnTilesStateLoaded;
 
         #region playerInfo
-
+        
         [SerializeField] private Transform Player;
         private Vector3Int _playerPosCube;
         private List<HexTile> _path;
@@ -44,9 +45,16 @@ namespace GGG.Components.Buildings
 
         private void Awake()
         {
-            instance = this;
-            _tilesDic = new Dictionary<Vector3Int, HexTile>();
+            if(!instance)
+                instance = this;
+        }
 
+        private void OnEnable()
+        {
+            BuildingManager.OnBuildsLoad += OnBuildsLoad;
+            
+            _tilesDic = new Dictionary<Vector3Int, HexTile>();
+            
             HexTile[] hexTiles = gameObject.GetComponentsInChildren<HexTile>();
 
             // Register every hex playerSpawnTile
@@ -62,24 +70,14 @@ namespace GGG.Components.Buildings
                 List<HexTile> neighbours = GetNeighbours(hexTile);
                 hexTile.neighbours = neighbours;
             }
-
-            // Put the player somewhere
-
-
-            HexTile playerSpawnTile = GetRandomHex();
-            while (playerSpawnTile.tileType != TileType.Cliff)
-            {
-                playerSpawnTile = GetRandomHex();
-            }
-
-
-            // JUGADOR
-            GameObject aux = GameObject.Find("PlayerModel");
-            if(aux != null)
-            {
-                Player = aux.transform;
-            }
+            
             if (Player) {
+                HexTile playerSpawnTile = GetRandomHex();
+                while (playerSpawnTile.tileType != TileType.Cliff)
+                {
+                    playerSpawnTile = GetRandomHex();
+                }
+                
                 PlayerPosition.currentPath = new List<HexTile>();
                 _playerPosCube = playerSpawnTile.cubeCoordinate;
                 Player.position = playerSpawnTile.transform.position + new Vector3(0.0f, 1f, 0.0f);
@@ -108,11 +106,6 @@ namespace GGG.Components.Buildings
             {
                 RevealTile(hexTiles[hexTiles.Length / 2], 3);
             }
-        }
-
-        private void OnEnable()
-        {
-            BuildingManager.OnBuildsLoad += OnBuildsLoad;
         }
 
         private void OnDisable() {
