@@ -16,14 +16,14 @@ MonoBehaviour:
   Dialogues: []
   Panels:
   - Title: "Men\xFA de construcci\xF3n"
-    Image: {fileID: 0}
+    Image: {fileID: 21300000, guid: ef63ff3329148564795c6c1dd18f538f, type: 3}
     Text: "Este es el men\xFA de construcci\xF3n. Desde aqu\xED puedes construir
       los edificios que se alzar\xE1n en la nueva Atl\xE1ntida."
   - Title: Edificios
     Image: {fileID: 0}
     Text: "Por ahora tienes bloqueados la mayor\xEDa de edificios, salvo uno."
   - Title: Granja de algas
-    Image: {fileID: 0}
+    Image: {fileID: 21300000, guid: ef63ff3329148564795c6c1dd18f538f, type: 3}
     Text: "La granja de algas te ayudar\xE1 a conseguir tus primeros recursos para
       empezar a reconstruir la Atl\xE1ntida. \xA1Prueba a ponerlo!"
   - Title: Primer edificio
@@ -61,4 +61,4 @@ MonoBehaviour:
     Image: {fileID: 0}
     Text: "\xA1Enhorabuena! Ahora ya tienes todo lo que hay que tener para reconstruir
       la Atl\xE1ntida. \xA1\xC1nimo con ello!"
-  TutorialCompleted: 1
+  TutorialCompleted: 0
