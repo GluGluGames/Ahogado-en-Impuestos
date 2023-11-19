@@ -22,8 +22,8 @@ MonoBehaviour:
   UpgradePrefabs:
   - {fileID: 9069191146074213081, guid: c6891ec131267f943a159296d976c5ff, type: 3}
   - {fileID: 9069191146074213081, guid: c6891ec131267f943a159296d976c5ff, type: 3}
-  Unlocked: 1
-  ResearchTime: 900
+  Unlocked: 0
+  ResearchTime: 600
   BuildCost:
     Costs: 00000000
     Resources:
@@ -36,6 +36,7 @@ MonoBehaviour:
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
   MaxLevel: 3
+  MaxBuildingNumber: 1
   NeededInteraction: 1
   CanBoost: 0
   SpawnHeight: 0.35

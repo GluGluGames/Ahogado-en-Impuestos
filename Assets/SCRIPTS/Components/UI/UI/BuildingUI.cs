@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
+using GGG.Classes.Buildings;
 using GGG.Components.Core;
 using GGG.Input;
 
@@ -12,6 +14,7 @@ namespace GGG.Components.UI {
         [SerializeField] private Button CloseButton;
 
         private InputManager _input;
+        private BuildingManager _buildingManager;
         private GameManager _gameManager;
         private GameObject _viewport;
         private BuildButton[] _buttons;
@@ -23,6 +26,7 @@ namespace GGG.Components.UI {
         private void Start() {
             _input = InputManager.Instance;
             _gameManager = GameManager.Instance;
+            _buildingManager = BuildingManager.Instance;
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             
@@ -37,7 +41,7 @@ namespace GGG.Components.UI {
             _buttons = GetComponentsInChildren<BuildButton>(true);
 
             foreach (BuildButton button in _buttons) {
-                button.Initialize();
+                button.Initialize(_buildingManager);
                 button.OnStructureBuild += (x, y) => Close();
             }
 

@@ -34,6 +34,8 @@ namespace GGG.Classes.Buildings
         [SerializeField] private ResourceCost[] UpgradeCost;
         [Tooltip("Max level the build can be upgraded")] 
         [SerializeField] private int MaxLevel;
+        [Tooltip("Max buildings of this type that can be built. If the value is -1, there is no limit")]
+        [SerializeField] private int MaxBuildingNumber;
         [Tooltip("Determines if the player needs to click the building to interact with it")]
         [SerializeField] private bool NeededInteraction;
         [Tooltip("Determines if the building can be boosted")] 
@@ -169,6 +171,8 @@ namespace GGG.Classes.Buildings
             return BuildCost.GetCost(index);
         }
 
+        public void SetBuildingCost(int index, int amount) => BuildCost.AddCost(index, amount);
+
         /// <summary>
         /// Gets the upgrade cost of the building.
         /// </summary>
@@ -218,6 +222,12 @@ namespace GGG.Classes.Buildings
         /// </summary>
         /// <returns>Max level of the building</returns>
         public int GetMaxLevel() => MaxLevel;
+
+        /// <summary>
+        /// Gets the max number of the buildings of this type
+        /// </summary>
+        /// <returns>The max number of buildings. -1 if it can be built forever</returns>
+        public int GetMaxBuildingNumber() => MaxBuildingNumber;
 
         /// <summary>
         /// Determines if the building needs player interaction to work

@@ -27,6 +27,7 @@ namespace GGG.Components.Buildings
         private PlayerManager _player;
         private GameManager _gameManager;
         private List<BuildingComponent> _buildings = new();
+        private readonly Dictionary<Building, int> _buildingsCount = new();
         private const string _EXIT_TIME = "ExitTime";
         
         public static Action<BuildingComponent[]> OnBuildsLoad;
@@ -90,9 +91,19 @@ namespace GGG.Components.Buildings
 
         public List<BuildingComponent> GetBuildings() => _buildings;
 
-        public void AddBuilding(BuildingComponent build) => _buildings.Add(build);
+        public void AddBuilding(BuildingComponent build)
+        {
+            _buildingsCount[build.GetBuild()]++;
+            _buildings.Add(build);
+        }
 
-        public void RemoveBuilding(BuildingComponent build) => _buildings.Remove(build);
+        public void RemoveBuilding(BuildingComponent build)
+        {
+            _buildingsCount[build.GetBuild()]--;
+            _buildings.Remove(build);
+        }
+
+        public int GetBuildCount(Building build) => _buildingsCount[build];
 
         public void SaveBuildings() {
             BuildingComponent[] buildings = GetComponentsInChildren<BuildingComponent>();
@@ -127,10 +138,14 @@ namespace GGG.Components.Buildings
                 yield return www.SendWebRequest();
                 data = www.downloadHandler.text;
             }
-            else {
-                data = File.ReadAllText(filePath);
-            }
+            else data = File.ReadAllText(filePath);
+            
+            
+            Building[] builds = Resources.LoadAll<Building>("Buildings");
 
+            foreach (Building build in builds)
+                _buildingsCount.Add(build, 0);
+            
             if (!string.IsNullOrEmpty(data)) {
                 BuildingData[] buildings = JsonHelper.FromJson<BuildingData>(data);
                 BuildingComponent[] buildingComponents = new BuildingComponent[buildings.Length];
@@ -140,6 +155,7 @@ namespace GGG.Components.Buildings
                     GameObject go = build.Building.Spawn(build.Position, transform, build.Level, false);
                     buildingComponents[i] = go.GetComponent<BuildingComponent>();
                     buildingComponents[i].SetLevel(build.Level);
+                    _buildingsCount[buildingComponents[i].GetBuild()]++;
                     i++;
                 }
 

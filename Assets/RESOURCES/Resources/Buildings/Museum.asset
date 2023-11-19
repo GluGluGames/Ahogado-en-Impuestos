@@ -21,7 +21,7 @@ MonoBehaviour:
   CanBeUpgraded: 0
   UpgradePrefabs: []
   Unlocked: 0
-  ResearchTime: 0
+  ResearchTime: 180
   BuildCost:
     Costs: 1900000001000000
     Resources:
@@ -29,6 +29,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a8559bbb5f45e404eaccd92c5b2f2d19, type: 2}
   UpgradeCost: []
   MaxLevel: 1
+  MaxBuildingNumber: 1
   NeededInteraction: 1
   CanBoost: 0
   SpawnHeight: 0.36

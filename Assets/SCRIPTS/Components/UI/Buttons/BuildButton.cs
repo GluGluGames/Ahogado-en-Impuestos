@@ -21,17 +21,20 @@ namespace GGG.Components.UI {
         [SerializeField] private GameObject Padlock;
         
         private PlayerManager _player;
+        private BuildingManager _buildingManager;
         private HexTile _selectedHexTile;
         private BuildingComponent _auxBuild;
         private ResourceCost _cost;
         private bool _dirtyFlag;
+        private bool _maxBuildingsReached;
 
         public Action<BuildingComponent, HexTile> OnStructureBuild;
         public Action StructureBuild;
 
-        public void Initialize()
+        public void Initialize(BuildingManager manager)
         {
             _player = PlayerManager.Instance;
+            _buildingManager = manager;
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
             foreach (HexTile tile in tiles) {
@@ -49,10 +52,7 @@ namespace GGG.Components.UI {
             
             if (!BuildingInfo.IsUnlocked())
             {
-                StructureSprite.color = new Color(1, 1, 1, 0.5f);
-                ResourcesImages[0].gameObject.SetActive(false);
-                texts[0].gameObject.SetActive(false);
-                Padlock.gameObject.SetActive(true);
+                LockButton(texts);
                 return;
             }
 
@@ -68,15 +68,42 @@ namespace GGG.Components.UI {
             
         }
 
+        private void LockButton(TextMeshProUGUI[] texts)
+        {
+            StructureSprite.color = new Color(1, 1, 1, 0.5f);
+            ResourcesImages[0].gameObject.SetActive(false);
+            texts[0].gameObject.SetActive(false);
+            Padlock.gameObject.SetActive(true);
+            
+            for (int i = 1; i < ResourcesContainers.Length; i++)
+            {
+                if (!ResourcesContainers[i].gameObject.activeInHierarchy)
+                    continue;
+                
+                ResourcesContainers[i].SetActive(false);
+            }
+        }
+
         public void CheckUnlockState()
         {
-            if (!BuildingInfo.IsUnlocked() || _dirtyFlag) return;
+            int cont = _buildingManager.GetBuildCount(BuildingInfo);
+            TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>(true);
+            
+            if (BuildingInfo.IsUnlocked() && cont >= BuildingInfo.GetMaxBuildingNumber())
+            {
+                if (BuildingInfo.GetMaxBuildingNumber() == -1) return;
+                
+                LockButton(texts);
+                _maxBuildingsReached = true;
+                return;
+            }
+            
+            if (!BuildingInfo.IsUnlocked()) return;
             
             StructureSprite.color = new Color(1, 1, 1, 1);
             ResourcesImages[0].gameObject.SetActive(true);
+            texts[0].gameObject.SetActive(false);
             Padlock.gameObject.SetActive(false);
-            
-            TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>();
             
             for (int i = 1; i < ResourcesImages.Length; i++)
             {
@@ -88,8 +115,6 @@ namespace GGG.Components.UI {
                 texts[i].SetText(_cost.GetCost(i).ToString());
                 ResourcesImages[i].sprite = _cost.GetResource(i).GetSprite();
             }
-
-            _dirtyFlag = true;
         }
 
         private void BuildStructure()
@@ -126,15 +151,11 @@ namespace GGG.Components.UI {
             _selectedHexTile = null;
         }
 
-        private void UnlockBuilding()
-        {
-            Padlock.gameObject.SetActive(false);
-        }
-
         #region Event Systems Method
 
         public void OnPointerDown(PointerEventData eventData) {
-            if (!BuildingInfo.IsUnlocked() || !_selectedHexTile.TileEmpty() || GameManager.Instance.TutorialOpen()) return;
+            if (!BuildingInfo.IsUnlocked() || _maxBuildingsReached
+                || !_selectedHexTile.TileEmpty() || GameManager.Instance.TutorialOpen()) return;
             
             BuildStructure();
         }
