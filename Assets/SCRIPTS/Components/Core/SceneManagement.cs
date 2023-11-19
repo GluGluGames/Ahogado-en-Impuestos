@@ -49,6 +49,7 @@ namespace GGG.Components.Core
         [SerializeField] private float CreditsDuration = 60f;
 
         private readonly List<AsyncOperation> _sceneAsyncOperation = new();
+        private SoundManager _soundManager;
         private GraphicRaycaster _raycaster;
         private float _totalSceneProgress;
         private bool _settingsOpen;
@@ -60,16 +61,25 @@ namespace GGG.Components.Core
 
         private void Start()
         {
+            _soundManager = SoundManager.Instance;
+            
             SceneManager.sceneUnloaded += (scene) =>
             {
-                if(scene.buildIndex == (int) SceneIndexes.GAME_SCENE)
-                    OnGameSceneUnloaded?.Invoke();;
+                if (scene.buildIndex == (int)SceneIndexes.GAME_SCENE)
+                    OnGameSceneUnloaded?.Invoke();
+                
             };
 
             SceneManager.sceneLoaded += (scene, mode) =>
             {
                 if (scene.buildIndex == (int)SceneIndexes.GAME_SCENE)
+                {
                     OnGameSceneLoaded?.Invoke();
+                    
+                    _soundManager.Stop("MainMenu");
+                    _soundManager.Play("MainTheme");
+                    _soundManager.Play("AmbientSound");
+                }
             };
 
             SceneManager.sceneLoaded += (scene, mode) =>

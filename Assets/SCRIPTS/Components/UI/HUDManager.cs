@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using GGG.Components.Core;
 using UnityEngine.Networking;
 
 namespace GGG.Components.UI
@@ -41,6 +42,7 @@ namespace GGG.Components.UI
 
         private int _currentIdx = 1;
         private bool _playerInitialized;
+        private bool _dirtyFlag;
 
         private void Start() {
             _player = PlayerManager.Instance;
@@ -57,6 +59,14 @@ namespace GGG.Components.UI
         private void Update() {
             if (!_playerInitialized) return;
 
+            if (!_dirtyFlag && GameManager.Instance.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial)
+            {
+                ResourcesIcons[0].gameObject.SetActive(false);
+                return;
+            }
+            
+            _dirtyFlag = true;
+            
             for (int i = 0; i < _shownResource.Count; i++)
             {
                 if(!_shownResource[i]) continue;
