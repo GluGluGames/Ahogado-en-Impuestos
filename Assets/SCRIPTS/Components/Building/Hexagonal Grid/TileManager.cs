@@ -26,6 +26,7 @@ namespace GGG.Components.Buildings
         [SerializeField] private bool FOWActive = false;
 
         private HexTile[] _tiles;
+        public bool aux;
 
         [Serializable]
         private class TileData {
@@ -106,6 +107,8 @@ namespace GGG.Components.Buildings
             {
                 RevealTile(hexTiles[hexTiles.Length / 2], 3);
             }
+
+            aux = true;
         }
 
         private void OnDisable() {

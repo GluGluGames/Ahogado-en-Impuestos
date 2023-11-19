@@ -22,9 +22,9 @@ namespace GGG.Components.Enemies
         private IEnumerator Start()
         {
             // This is made so the scene charges first and then the start method is called.
-            yield return null;
+            yield return new WaitWhile(() => !TileManager.instance.aux);
 
-            tiles = TileManager.instance.GetComponentsInChildren<HexTile>().ToList();
+            // tiles = TileManager.instance.GetComponentsInChildren<HexTile>().ToList();
 
             for (int i = 0; i < _nEnemies; i++)
             {
@@ -49,7 +49,7 @@ namespace GGG.Components.Enemies
             {
                 int enemIndex = Random.Range(0, enemiesPrefab.Length);
                 Enemy newEnem = Instantiate(enemiesPrefab[enemIndex], transform);
-                newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
+                // newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
                 newEnem.currentTile = hex;
                 newEnem.isDirty = true;
                 enemies.Add(newEnem);

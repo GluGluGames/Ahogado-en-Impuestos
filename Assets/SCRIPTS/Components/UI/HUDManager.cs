@@ -58,14 +58,6 @@ namespace GGG.Components.UI
 
         private void Update() {
             if (!_playerInitialized) return;
-
-            if (!_dirtyFlag && GameManager.Instance.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial)
-            {
-                ResourcesIcons[0].gameObject.SetActive(false);
-                return;
-            }
-            
-            _dirtyFlag = true;
             
             for (int i = 0; i < _shownResource.Count; i++)
             {

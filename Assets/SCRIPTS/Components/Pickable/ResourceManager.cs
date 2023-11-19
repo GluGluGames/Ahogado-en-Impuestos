@@ -29,7 +29,7 @@ namespace GGG.Components.Resources
         private IEnumerator Start()
         {
             // This is made so the scene charges first and then the start method is called.
-            yield return null;
+            yield return new WaitWhile(() => !TileManager.instance.aux);
 
             for (int i = 0; i < _nResourcesMax; ++i)
             {
@@ -54,7 +54,7 @@ namespace GGG.Components.Resources
                 int rand = Random.Range(0, _resourcePrefabs.Count);
 
                 ResourceComponent newResource = Instantiate(_resourcePrefabs[rand], transform);
-                newResource.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
+                // newResource.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
                 newResource.currentTile = hex;
 
                 resourcesOnScene.Add(newResource);
