@@ -316,7 +316,7 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | **3.2.12 - Mejoras de buceo**   | ![Mejoras de buceo](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Mejoras%20de%20buceo.png)   | Este edificio esta basado en el casco de un buceador antiguo. |
 | **3.2.13 - Poseidón**   | ![Poseidón](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/dd6f7903-ed9f-44f4-90ed-ea7202adedfd)   | Este es el enemigo principal del juego, Poseidón. Su diseño está basado en juegos que esten basados en el mundo de la mitología griega, como God of War o Hades. <br><br> Se ha elegido un aspecto serio, con el pelo y barba larga porque es el aspecto que suelen tener los dioses en sus representaciones, ya sean en juegos o en la ficción. <br><br> También se le quiere dar la impresión de poderoso, para que tenga sentido que sea el que tenga amenazados a los jugadores durante el gameplay. Tampoco se le quería dar un aspecto muy oscuro porque no es malvado, simplemente está enfadado. |
 
-#### **Iconos del juego***
+#### **Iconos del juego**
 | Nombre del Documento | Enlace |
 |-----------------------|--------|
 | Caracola              | ![Caracola](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/Caracola.png) |
@@ -341,6 +341,24 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | Tablilla              | ![Tablilla](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/tablilla.png) |
 | Tiburon               | ![Tiburon](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/tiburon.png) |
 | TruchaArcoiris        | ![TruchaArcoiris](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/truchaArcoriris.png) |
+
+#### **Interaces**
+| Nombre del Mockup     | Imagen |
+|-----------------------|--------|
+| Clean UI              | ![Clean UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/CleanUi_Mockup.png) |
+| Generator UI          | ![Generator UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/GeneratorUi_Mockup.jpg) |
+| Icons UI              | ![Icons UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/IconsUi_Mockup.png) |
+| Inventory             | ![Inventory](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Inventory_Mockup.png) |
+| Laboratory            | ![Laboratory](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Laboratory_Mockup.png) |
+| Main Menu             | ![Main Menu](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/MainMenu_Mockup.png) |
+| Museum                | ![Museum](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Museum_Mockup.png) |
+| Settings              | ![Settings](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Settings_Mockup.png) |
+| Shop                  | ![Shop](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Shop_Mockup.png) |
+| Shop with Items       | ![Shop with Items](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Shop_Mockup_WItems.jpg) |
+| Tutorial              | ![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Tutorial_Mockup.png) |
+| Upgrade UI            | ![Upgrade UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/UpgradeUi_Mockup.png) |
+
+
 
 ## **4 - DISEÑO 3D**
 
@@ -480,7 +498,7 @@ Para prevenir este escenario, se ha implementado un porcentaje de recaudacion qu
 | **7.4.4 - MUSEO**                 | ![Interfaz - Museo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/24477786-f616-44aa-9dd9-9ea358bbb74e)              | Al clicar en el museo puedes ver todos los coleccionables del juego. <br><br> Contiene: <br> - Tres pestañas con los tres tipos de recursos. <br> - Iconos de los recursos que has encontrado. <br> - Iconos en negro de los recursos que no has encontrado. <br> - Iluminado el objeto seleccionado del cual se muestra la descripción. <br> - Cuadro con nombre y descripción del objeto seleccionado. <br> - Botón de salida.                                                                                                                                                                                                                                                                                                                               |
 | **7.4.5 - MEJORAS DE BUCEO**       | ![Interfaz - Mejoras de buceo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/0ccadc28-d681-43bf-98bf-116e64d41014)     | Se abre al pulsar el edificio de mejoras de buceo. <br><br> Contiene: <br> - Flechas para moverse entre mejoras. <br> - Descripción de la mejora. <br> - Botón para mejorar, con el precio de hacerlo. <br> - Nombre de la mejora. <br> - El borde de la interfaz y de la tarjeta de mejora cambia dependiendo de su nivel, de la forma indicada a la derecha.                                                                                                                                                                                                                                                                                                                       |
 | **7.4.6 - TIENDA DE RECURSOS**     | ![Interfaz - Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/f3a10538-0711-4210-bdf6-cba0a10cb172)              | Tienda de intercambio de objetos. <br><br> Contiene: <br> - Primer objeto y cuantos se dan. <br> - Segundo objeto y cuantos se obtienen. <br> - Flechas para aumentar el ratio de intercambio (5->1 / 10->2) <br> - Scrollbar para ver más intercambios.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| **7.4.7 - INVENTARIO**            | ![Interfaz - Inventario](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Interfaces/Interfaz%20-%20Inventario.jpg) | Menú que se abre al pulsar el engranaje. <br><br> Contiene: <br> - Pestañas para seleccionar entre los distintos tipos de recursos. <br> - Casillas con el icono del recurso y su cantidad. <br> - Botón para salir.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **7.4.7 - INVENTARIO**            | ![Interfaz - Inventario](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Interfaces/Interfaz%20-%20Inventario.jpg) | Menú que se abre al pulsar el engranaje. <br><br> Contiene: <br> - Pestañas para seleccionar entre los distintos tipos de recursos. <br> - Casillas con el icono del recurso y su cantidad. <br> - Botón para salir.                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 
 ## **8 - NARRATIVA** 
 
