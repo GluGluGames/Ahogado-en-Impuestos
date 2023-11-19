@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: GenSettings
   m_EditorClassIdentifier: 
   Standar: {fileID: 5287772880044038087, guid: 3f0e481c1b3da544796758239ad45ca3, type: 3}
-  Water: {fileID: 8956753354664748225, guid: 3211e0b762e9a8840adc7ba7a18bd79c, type: 3}
+  Water:
+  - {fileID: 8956753354664748225, guid: 3211e0b762e9a8840adc7ba7a18bd79c, type: 3}
+  - {fileID: 3382254893663101414, guid: 585a4ea8822d150489e067f00ceea6cf, type: 3}
   Cliff:
   - {fileID: 9167445932578917885, guid: b6ab659f608c03a42a9e3175ff02c729, type: 3}
   - {fileID: 4655917609274798875, guid: 3b9cbfb93a7dfd24b99a266b8baff910, type: 3}

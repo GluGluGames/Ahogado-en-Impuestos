@@ -18,7 +18,7 @@ namespace GGG.Components.Buildings
     public class HexTileGenerationSettings : ScriptableObject
     {
         [SerializeField] private GameObject Standar;
-        [SerializeField] private GameObject Water;
+        [SerializeField] private GameObject[] Water;
         [SerializeField] private GameObject[] Cliff;
         [SerializeField] private GameObject Build;
 
@@ -27,7 +27,7 @@ namespace GGG.Components.Buildings
             return tileType switch
             {
                 TileType.Standard => Standar,
-                TileType.Water => Water,
+                TileType.Water => Water[Random.Range(0, Water.Length)],
                 TileType.Cliff => Cliff[Random.Range(0, Cliff.Length)],
                 TileType.Build => Build,
                 _ => null

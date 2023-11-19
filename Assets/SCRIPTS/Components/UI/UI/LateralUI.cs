@@ -20,6 +20,7 @@ namespace GGG.Components.UI
         private SceneManagement _sceneManagement;
         private InventoryUI _inventory;
 
+        private GameObject _viewport;
         private bool _open;
 
         private void Start()
@@ -28,6 +29,7 @@ namespace GGG.Components.UI
             _sceneManagement = SceneManagement.Instance;
             _gameManager = GameManager.Instance;
             _inventory = FindObjectOfType<InventoryUI>();
+            _viewport = transform.GetChild(0).gameObject;
             
             OpenButton.onClick.AddListener(ToggleMenu);
             InventoryButton.onClick.AddListener(OpenInventory);
@@ -55,13 +57,13 @@ namespace GGG.Components.UI
 
             if (_open)
             {
-                transform.DOMoveX(Screen.width * 0.85f, 0.75f).SetEase(Ease.InQuad);
+                _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InQuad);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
                 _gameManager.OnUIOpen();
             }
             else
             {
-                transform.DOMoveX(Screen.width + 5, 0.75f).SetEase(Ease.OutCubic);
+                _viewport.transform.DOMoveX(Screen.width * 0.65f, 0.75f).SetEase(Ease.OutCubic);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                _gameManager.OnUIClose();
             }
