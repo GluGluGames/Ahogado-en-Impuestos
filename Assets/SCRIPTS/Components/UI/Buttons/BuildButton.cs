@@ -1,14 +1,14 @@
-using DG.Tweening;
 using GGG.Classes.Buildings;
-using TMPro;
 using GGG.Components.Buildings;
+using GGG.Components.Core;
+using GGG.Components.Player;
+using GGG.Components.HexagonalGrid;
+using GGG.Shared;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
-using GGG.Components.Core;
-using GGG.Components.Player;
-using GGG.Shared;
+using TMPro;
 using UnityEngine.UI;
 
 namespace GGG.Components.UI {

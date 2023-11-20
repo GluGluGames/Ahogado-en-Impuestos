@@ -1,5 +1,5 @@
-using GGG.Shared;
-using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +29,7 @@ namespace GGG.Components.Resources
         private IEnumerator Start()
         {
             // This is made so the scene charges first and then the start method is called.
-            yield return new WaitWhile(() => !TileManager.instance.aux);
+            yield return null;
 
             for (int i = 0; i < _nResourcesMax; ++i)
             {
@@ -39,7 +39,7 @@ namespace GGG.Components.Resources
 
         private bool SpawnRandomResource()
         {
-            HexTile hex = TileManager.instance.GetRandomHex();
+            HexTile hex = TileManager.Instance.GetRandomHex();
             bool spawned = false;
             foreach (ResourceComponent resource in resourcesOnScene)
             {

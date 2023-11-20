@@ -1,5 +1,5 @@
 using DG.Tweening;
-using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +22,7 @@ namespace GGG.Components.Enemies
         private IEnumerator Start()
         {
             // This is made so the scene charges first and then the start method is called.
-            yield return new WaitWhile(() => !TileManager.instance.aux);
+            yield return null;
 
             // tiles = TileManager.instance.GetComponentsInChildren<HexTile>().ToList();
 
@@ -34,7 +34,7 @@ namespace GGG.Components.Enemies
 
         private bool SpawnEnemy()
         {
-            HexTile hex = TileManager.instance.GetRandomHex();
+            HexTile hex = TileManager.Instance.GetRandomHex();
             bool spawned = false;
 
             foreach (Enemy enemy in enemies)

@@ -1,4 +1,4 @@
-using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

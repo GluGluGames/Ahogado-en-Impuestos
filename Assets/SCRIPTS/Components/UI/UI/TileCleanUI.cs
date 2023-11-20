@@ -1,5 +1,5 @@
 using System;
-using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
 using GGG.Components.Core;
 using GGG.Components.Player;
 using GGG.Input;

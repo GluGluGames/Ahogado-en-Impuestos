@@ -1,4 +1,5 @@
 using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
 using GGG.Components.Player;
 using GGG.Components.Core;
 using GGG.Shared;
@@ -123,7 +124,8 @@ namespace GGG.Components.UI
                 {
                     OnBuildInteract(x, y);
                     _selectedBuilding = building;
-                    Open(building.GetCurrentTile());
+                    // TODO
+                    //Open(building.GetCurrentTile());
                 };
             }
         }

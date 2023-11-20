@@ -71,7 +71,7 @@ namespace GGG.Components.Neptune
             
             int rand = Random.Range(0, _buildings.Count);
             BuildingComponent building = _buildings[rand];
-            building.GetCurrentTile().DestroyBuilding();
+            // building.GetCurrentTile().DestroyBuilding();
         }
     }
 }

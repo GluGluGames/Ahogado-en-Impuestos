@@ -8,7 +8,7 @@ namespace GGG.Components.Buildings {
         [SerializeField] private Building Build;
 
         public Action<Action, BuildingComponent> OnBuildInteract;
-        private HexTile _currentTile;
+        // private HexTile _currentTile;
         private int _currentLevel = 1;
 
         /// <summary>
@@ -60,6 +60,7 @@ namespace GGG.Components.Buildings {
         /// <returns>True if it needs. False otherwise</returns>
         public bool NeedInteraction() { return Build.NeedInteraction(); }
 
+        /*
         /// <summary>
         /// Gets the tile where the building is builded
         /// </summary>
@@ -67,6 +68,7 @@ namespace GGG.Components.Buildings {
         public HexTile GetCurrentTile() => _currentTile;
 
         public void SetTile(HexTile tile) => _currentTile = tile;
+        */
 
         /// <summary>
         /// Gets the current position of the building

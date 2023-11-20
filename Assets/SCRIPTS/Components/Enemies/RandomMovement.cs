@@ -1,11 +1,9 @@
-using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
 using GGG.Components.Ticks;
-using JetBrains.Annotations;
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GGG.Components.Enemies
 {
@@ -48,7 +46,7 @@ namespace GGG.Components.Enemies
 
         private void GoToRandomTile()
         {
-            HexTile destination = TileManager.instance.GetRandomHex();
+            HexTile destination = TileManager.Instance.GetRandomHex();
             targetPosition = destination.transform.position;
             currentPath = Pathfinder.FindPath(currentTile, destination);
             currentPath.Reverse();

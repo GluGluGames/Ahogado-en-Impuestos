@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
 using GGG.Components.UI;
 using UnityEngine;
 

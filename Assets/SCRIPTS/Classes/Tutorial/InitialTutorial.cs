@@ -1,9 +1,10 @@
+using GGG.Classes.Tutorial;
+using GGG.Components.UI;
+using GGG.Components.HexagonalGrid;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using GGG.Classes.Tutorial;
-using GGG.Components.Buildings;
-using GGG.Components.UI;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InitialTutorial", menuName = "Game/Tutorials/InitialTutorial")]
