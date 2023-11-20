@@ -59,18 +59,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34dc3d9f118089940a389743176af369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SeaResourcesContainer: {fileID: 308223053398563306}
-  ExpeditionResourcesContainer: {fileID: 6266935919378793727}
-  FishResourcesContainer: {fileID: 4091622665102222250}
+  ResourcesContainers:
+  - {fileID: 308223053398563306}
+  - {fileID: 6266935919378793727}
+  - {fileID: 4091622665102222250}
   Name: {fileID: 2418988377184250948}
   Description: {fileID: 4922737345492972502}
-  SeaButton: {fileID: 6535746446274687442}
-  ExpeditionButton: {fileID: 7411078714584459146}
-  FishButton: {fileID: 2592890603923119955}
+  ContainerButtons:
+  - {fileID: 6535746446274687442}
+  - {fileID: 7411078714584459146}
+  - {fileID: 2592890603923119955}
   CloseButton: {fileID: 7986956664233683899}
-  SeaBackground: {fileID: 308223053398563306}
-  ExpeditionBackground: {fileID: 6266935919378793727}
-  FishBackground: {fileID: 4091622665102222250}
   LockedString:
     m_TableReference:
       m_TableCollectionName: GUID:f0dec55717509d1468c7ef0d543fd9b8
@@ -8171,6 +8170,7 @@ GameObject:
   - component: {fileID: 7890157753545416190}
   - component: {fileID: 7986956664233683899}
   - component: {fileID: 6354984432827492093}
+  - component: {fileID: 2939865021062175844}
   m_Layer: 5
   m_Name: Exit_Button
   m_TagString: Untagged
@@ -8249,19 +8249,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6354984432827492093}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8794197701201156437}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6354984432827492093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8292,6 +8280,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2939865021062175844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8585100992261998938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41db14fe962bb0746a6d014aeb6451e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8794197701201156437
 GameObject:
   m_ObjectHideFlags: 0

@@ -116,8 +116,6 @@ namespace GGG.Components.Shop
 
         private void Close()
         {
-            if(!_open) return;
-
             _viewport.transform.DOMoveX(Screen.width * -0.5f, 0.75f, true).SetEase(Ease.OutCubic).onComplete += () => { 
                 _viewport.SetActive(false);
                 _open = false;
