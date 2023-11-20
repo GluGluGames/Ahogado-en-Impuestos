@@ -13,8 +13,7 @@ namespace GGG.Components.Shop
 {
     public class ShopUI : MonoBehaviour
     {
-        [Header("Essencials")]
-        [SerializeField] private GameObject Viewport;
+        [Header("Essentials")]
         [SerializeField] private List<ShopExchange> Exchanges;
         [Space(5)]
         [Header("Given Fields")]
@@ -27,13 +26,14 @@ namespace GGG.Components.Shop
         [Space(5)]
         [Header("Buttons Fields")]
         [SerializeField] private Button CloseButton;
-
-        private const float _INITIAL_POSITION = -1600f;
+        
         private const int _MAGNIFICATION_FACTOR = 2;
 
         private PlayerManager _player;
-        private List<int> _initialGivenAmounts = new();
-        private List<int> _initialReceiveAmounts = new();
+        private GameManager _gameManager;
+        private GameObject _viewport;
+        private readonly List<int> _initialGivenAmounts = new();
+        private readonly List<int> _initialReceiveAmounts = new();
 
         private bool _open;
 
@@ -41,26 +41,19 @@ namespace GGG.Components.Shop
 
         private void Start()
         {
-            Viewport.SetActive(false);
-            transform.position = new Vector3(Screen.width * 0.5f + _INITIAL_POSITION, Screen.height * 0.5f);
-
             _player = PlayerManager.Instance;
-
-            int i = 0;
+            _gameManager = GameManager.Instance;
+            
+            _viewport = transform.GetChild(0).gameObject;
+            _viewport.SetActive(false);
+            _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
+            
             foreach(ShopExchange exchange in Exchanges) {
                 _initialGivenAmounts.Add(exchange.GetGivenAmount());
                 _initialReceiveAmounts.Add(exchange.GetReceiveAmount());
-
-                GiveItemImage[i].sprite = exchange.GetGivenResource().GetSprite();
-                ReceiveItemImage[i].sprite = exchange.GetReceiveResource().GetSprite();
-
-                i++;
             }
 
-            CloseButton.onClick.AddListener(CloseShop);
-
-            // TODO - See if the game has already started and have generated exchanges
-            UpdateTrades();
+            CloseButton.onClick.AddListener(OnCloseButton);
         }
 
         private void UpdateTrades()
@@ -93,11 +86,8 @@ namespace GGG.Components.Shop
 
         public void Exchange(int i)
         {
-            if(_player.GetResourceCount(Exchanges[i].GetGivenResource().GetKey()) < Exchanges[i].GetGivenAmount()) {
-                // TODO - Denegate exchange
-                return;
-            }
-
+            if(_player.GetResourceCount(Exchanges[i].GetGivenResource().GetKey()) < Exchanges[i].GetGivenAmount()) return;
+            
             _player.AddResource(Exchanges[i].GetGivenResource().GetKey(), -Exchanges[i].GetGivenAmount());
             _player.AddResource(Exchanges[i].GetReceiveResource().GetKey(), Exchanges[i].GetReceiveAmount());
         }
@@ -106,23 +96,34 @@ namespace GGG.Components.Shop
         {
             if(_open) return;
 
-            Viewport.SetActive(true);
-            transform.DOMoveX(Screen.width * 0.5f, 2f, true).SetEase(Ease.InOutExpo);
-            GameManager.Instance.OnUIOpen();
+            _viewport.SetActive(true);
+            
+            UpdateTrades();
             OnShopOpen?.Invoke();
+            
+            _gameManager.OnUIOpen();
             _open = true;
+            
+            _viewport.transform.DOMoveX(Screen.width * 0.5f, 2f, true).SetEase(Ease.InCubic);
         }
 
-        public void CloseShop()
+        private void OnCloseButton()
+        {
+            if (!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
+            
+            Close();
+        }
+
+        private void Close()
         {
             if(!_open) return;
 
-            transform.DOMoveX(Screen.width * 0.5f + _INITIAL_POSITION, 2f, true).SetEase(Ease.InOutExpo).onComplete += () => { 
-                Viewport.SetActive(false);
+            _viewport.transform.DOMoveX(Screen.width * -0.5f, 0.75f, true).SetEase(Ease.OutCubic).onComplete += () => { 
+                _viewport.SetActive(false);
                 _open = false;
             };
             
-            GameManager.Instance.OnUIClose();
+            _gameManager.OnUIClose();
         }
     }
 }

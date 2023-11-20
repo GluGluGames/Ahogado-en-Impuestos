@@ -78,7 +78,7 @@ namespace GGG.Components.Generator
                 BostButtonsLevel3[i].image.sprite = null;
             }
             
-            CloseButton.onClick.AddListener(Close);
+            CloseButton.onClick.AddListener(OnCloseButton);
         }
 
         private void Start()
@@ -280,10 +280,15 @@ namespace GGG.Components.Generator
             _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InCubic);
         }
 
+        private void OnCloseButton()
+        {
+            if (!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
+
+            Close();
+        }
+
         private void Close()
         {
-            if (!_open) return;
-
             _viewport.transform.DOMoveX(Screen.width * -0.5f, 0.75f).SetEase(Ease.OutCubic).onComplete += () =>
             {
                 _open = false;

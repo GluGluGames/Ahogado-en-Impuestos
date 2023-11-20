@@ -106,8 +106,6 @@ namespace GGG.Components.UI {
             
             _selectedTile.DeselectTile();
             _selectedTile = null;
-            
-            
         }
     }
 }
