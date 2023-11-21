@@ -57,7 +57,7 @@ namespace GGG.Components.UI
 
             if (_open)
             {
-                _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InQuad);
+                _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InCubic);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
                 _gameManager.OnUIOpen();
             }

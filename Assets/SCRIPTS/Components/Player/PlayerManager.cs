@@ -8,7 +8,6 @@ using UnityEngine;
 using System.Linq;
 using GGG.Components.Core;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 
 namespace GGG.Components.Player
 {

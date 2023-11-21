@@ -104,7 +104,7 @@ namespace GGG.Components.Shop
             _gameManager.OnUIOpen();
             _open = true;
             
-            _viewport.transform.DOMoveX(Screen.width * 0.5f, 2f, true).SetEase(Ease.InCubic);
+            _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InCubic);
         }
 
         private void OnCloseButton()

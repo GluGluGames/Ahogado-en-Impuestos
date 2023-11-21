@@ -215,8 +215,6 @@ namespace GGG.Components.HexagonalGrid
 
         public void DestroyBuilding()
         {
-            // TODO
-            // _currentBuilding.SetTile(null);
             Destroy(_currentBuilding.gameObject);
             SetTileType(TileType.Standard);
             _currentBuilding = null;

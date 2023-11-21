@@ -51,7 +51,9 @@ namespace GGG.Components.HexagonalGrid
         private List<HexTile> _path;
 
         #endregion Player Info
-        
+
+        #region Unity Events
+
         private void Start()
         {
             BuildingManager.OnBuildsLoad += OnBuildsLoad;
@@ -86,7 +88,51 @@ namespace GGG.Components.HexagonalGrid
             SaveTilesState();
         }
 
+        #endregion
+
+        #region Getters&Setters
+
         public GameObject GetHighlightPrefab() => HighlightPrefab;
+        private void RegisterTile(HexTile tile) => _tilesDic.Add(tile.cubeCoordinate, tile);
+        
+        public void SelectTile(HexTile tile) => _selectedTile = tile;
+
+        public HexTile GetSelectedTile() => _selectedTile; 
+
+        public HexTile GetRandomHex()
+        {
+            int rand = Random.Range(0, _tiles.Count);
+            return _tiles.ElementAt(rand);
+        }
+        
+        private List<HexTile> GetNeighbours(HexTile tile)
+        {
+            List<HexTile> neighbours = new();
+
+            Vector3Int[] neighbourCoords = 
+            {
+                new (0, -1, 1),
+                new (1, -1 , 0),
+                new (1, 0, -1),
+                new (0, 1, -1),
+                new (-1, 1, 0),
+                new (-1, 0, 1)
+            };
+
+            foreach (Vector3Int neighbourCoord in neighbourCoords)
+            {
+                Vector3Int tileCoord = tile.cubeCoordinate;
+                
+                if (_tilesDic.TryGetValue(tileCoord + neighbourCoord, out HexTile neighbour))
+                    neighbours.Add(neighbour);
+            }
+            
+            return neighbours;
+        }
+
+        #endregion
+
+        #region Methods
 
         private IEnumerator InitializePlayer()
         {
@@ -123,43 +169,12 @@ namespace GGG.Components.HexagonalGrid
             PlayerPosition.currentPath = _path;
         }
 
-        private void RegisterTile(HexTile tile) => _tilesDic.Add(tile.cubeCoordinate, tile);
-
-        private List<HexTile> GetNeighbours(HexTile tile)
+        public void DestroyBuilding(BuildingComponent build)
         {
-            List<HexTile> neighbours = new();
-
-            Vector3Int[] neighbourCoords = 
-            {
-                new (0, -1, 1),
-                new (1, -1 , 0),
-                new (1, 0, -1),
-                new (0, 1, -1),
-                new (-1, 1, 0),
-                new (-1, 0, 1)
-            };
-
-            foreach (Vector3Int neighbourCoord in neighbourCoords)
-            {
-                Vector3Int tileCoord = tile.cubeCoordinate;
-                
-                if (_tilesDic.TryGetValue(tileCoord + neighbourCoord, out HexTile neighbour))
-                    neighbours.Add(neighbour);
-            }
-            
-            return neighbours;
+            HexTile buildTile = _tiles.Find((x) => x.GetCurrentBuilding() == build);
+            buildTile.DestroyBuilding();
         }
 
-        public void SelectTile(HexTile tile) => _selectedTile = tile;
-
-        public HexTile GetSelectedTile() => _selectedTile; 
-
-        public HexTile GetRandomHex()
-        {
-            int rand = Random.Range(0, _tiles.Count);
-            return _tiles.ElementAt(rand);
-        }
-        
         /// <summary>
         ///  Add prefab which acts as FOW. Also we make the basic hex invisible by changing its layer. We modify this when we eliminate the FOW.
         /// </summary>
@@ -186,8 +201,10 @@ namespace GGG.Components.HexagonalGrid
         {
             if(FowActive) tile.Reveal(depth, 0);
         }
+
+        #endregion
         
-        // Data persistence
+        #region Data persistence
 
         private void SaveTilesState() {
             TileData[] saveData = new TileData[_tiles.Count];
@@ -243,5 +260,7 @@ namespace GGG.Components.HexagonalGrid
                 i++;
             }
         }
+        
+        #endregion
     }
 }

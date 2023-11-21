@@ -55,10 +55,7 @@ namespace GGG.Components.UI
             _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
 
             _buttons = FindObjectsOfType<BuildButton>(true);
-
-            foreach (BuildButton button in _buttons)
-                button.OnStructureBuild += UpdateBuildings;
-
+            foreach (BuildButton button in _buttons) button.OnStructureBuild += UpdateBuildings;
             TileManager.OnBuildingTileLoaded += UpdateBuildings;
 
             SellButton.onClick.AddListener(OnSellButton);
@@ -98,7 +95,7 @@ namespace GGG.Components.UI
                 UpgradeCost[i].text = _selectedBuilding.GetBuild().GetUpgradeCost(currentLevel, i).ToString();
                 UpgradeResources[i].sprite = _selectedBuilding.GetBuild().GetUpgradeResource(currentLevel, i).GetSprite();
                 
-                if (_player.GetResourceCount(cost[currentLevel - 1].GetResource(i).GetKey()) < cost[currentLevel - 1].GetCost(i)) continue;
+                if (_player.GetResourceCount(cost[currentLevel - 1].GetResource(i).GetKey()) >= cost[currentLevel - 1].GetCost(i)) continue;
                 
                 price = false;
             }
@@ -116,15 +113,14 @@ namespace GGG.Components.UI
             };
         }
 
-        private void OnBuildInteract(Action action, BuildingComponent build) 
+        private void OnBuildInteract(Action action, BuildingComponent build)
         {
             InteractButton.onClick.AddListener(() => {
                 action.Invoke();
                 Close(false);
             });
 
-            if (!build.NeedInteraction()) InteractParent.SetActive(false); //InteractButton.gameObject.SetActive(false);
-            else InteractParent.SetActive(true); //InteractButton.gameObject.SetActive(true); 
+            InteractParent.SetActive(build.NeedInteraction());
         }
 
         private void OnSellButton()
@@ -146,9 +142,6 @@ namespace GGG.Components.UI
             
             ResourceCost[] cost = _selectedBuilding.GetBuild().GetUpgradeCost();
             int currentLevel = _selectedBuilding.GetCurrentLevel() - 1;
-
-            for (int i = 0; i < cost[currentLevel].GetCostsAmount(); i++)
-                if (_player.GetResourceCount(cost[currentLevel].GetResource(i).GetKey()) < cost[currentLevel].GetCost(i)) return;
             
             for (int i = 0; i < cost[currentLevel].GetCostsAmount(); i++)
                 _player.AddResource(cost[currentLevel].GetResource(i).GetKey(), -cost[currentLevel].GetCost(i));
