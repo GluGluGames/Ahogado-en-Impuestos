@@ -124,7 +124,7 @@ namespace GGG.Classes.Buildings
             }
 
             Destroy(parent.GetChild(0).gameObject);
-            Instantiate(UpgradePrefabs[level - 2], new Vector3(position.x, SpawnHeight, position.z), Quaternion.Euler(0, -45, 0), parent);
+            Instantiate(UpgradePrefabs[level - 2], new Vector3(position.x, SpawnHeight, position.z), Quaternion.identity, parent);
             return null;
         }
 
