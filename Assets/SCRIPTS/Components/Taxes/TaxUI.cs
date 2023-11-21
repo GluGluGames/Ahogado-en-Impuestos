@@ -72,7 +72,7 @@ namespace GGG.Components.Taxes
         private void GenerateTaxes()
         {
             // TODO - Algorithm that looks what the player have and generated the resources.
-            _taxResources.Add(_player.GetMainResource(), _random.Next(50, 100));
+            _taxResources.Add(_player.GetResource("Seaweed"), _random.Next(50, 100));
 
             bool found = false;
             int i = 0;

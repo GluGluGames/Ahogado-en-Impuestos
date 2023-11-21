@@ -28,6 +28,7 @@ namespace GGG.Components.Buildings
         private GameManager _gameManager;
         private List<BuildingComponent> _buildings = new();
         private readonly Dictionary<Building, int> _buildingsCount = new();
+        private List<Building> _builds;
         private const string _EXIT_TIME = "ExitTime";
         
         public static Action<BuildingComponent[]> OnBuildsLoad;
@@ -53,6 +54,9 @@ namespace GGG.Components.Buildings
         {
             _player = PlayerManager.Instance;
             _gameManager = GameManager.Instance;
+            
+            _builds = Resources.LoadAll<Building>("Buildings").ToList();
+            foreach (Building build in _builds) _buildingsCount.Add(build, 0);
             
             yield return LoadBuildings();
 
@@ -111,12 +115,14 @@ namespace GGG.Components.Buildings
             int i = 0;
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "buildings_data.json");
 
-            foreach (BuildingComponent build in buildings) {
-                BuildingData data = new BuildingData();
-                
-                data.Position = build.GetPosition();
-                data.Building = build.GetBuild();
-                data.Level = build.GetCurrentLevel();
+            foreach (BuildingComponent build in buildings)
+            {
+                BuildingData data = new()
+                {
+                    Position = build.GetPosition(),
+                    Building = build.GetBuild(),
+                    Level = build.GetCurrentLevel()
+                };
 
                 saveData[i] = data;
                 i++;
@@ -139,34 +145,27 @@ namespace GGG.Components.Buildings
                 data = www.downloadHandler.text;
             }
             else data = File.ReadAllText(filePath);
-            
-            
-            Building[] builds = Resources.LoadAll<Building>("Buildings");
 
-            foreach (Building build in builds)
-                _buildingsCount.Add(build, 0);
-            
-            if (!string.IsNullOrEmpty(data)) {
-                BuildingData[] buildings = JsonHelper.FromJson<BuildingData>(data);
-                BuildingComponent[] buildingComponents = new BuildingComponent[buildings.Length];
-                int i = 0;
-                
-                foreach (BuildingData build in buildings) {
-                    GameObject go = build.Building.Spawn(build.Position, transform, build.Level, false);
-                    buildingComponents[i] = go.GetComponent<BuildingComponent>();
-                    buildingComponents[i].SetLevel(build.Level);
-                    _buildingsCount[buildingComponents[i].GetBuild()]++;
-                    i++;
-                }
-
-                OnBuildsLoad?.Invoke(buildingComponents);
-                _buildings = buildingComponents.ToList();
-            }
-            else
+            if (string.IsNullOrEmpty(data))
             {
                 OnBuildsLoad?.Invoke(null);
-                _buildings = new List<BuildingComponent>();
+                yield break;
             }
+            
+            BuildingData[] buildings = JsonHelper.FromJson<BuildingData>(data);
+            BuildingComponent[] buildingComponents = new BuildingComponent[buildings.Length];
+            int i = 0;
+                
+            foreach (BuildingData build in buildings) {
+                GameObject go = build.Building.Spawn(build.Position, transform, build.Level, false);
+                buildingComponents[i] = go.GetComponent<BuildingComponent>();
+                buildingComponents[i].SetLevel(build.Level);
+                _buildingsCount[buildingComponents[i].GetBuild()]++;
+                i++;
+            }
+
+            OnBuildsLoad?.Invoke(buildingComponents);
+            _buildings = buildingComponents.ToList();
         }
     }
 }

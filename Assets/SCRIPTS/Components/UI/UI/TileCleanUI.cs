@@ -22,7 +22,6 @@ namespace GGG.Components.UI
         private InputManager _input;
         private GameManager _gameManager;
         private Resource _cleanResource;
-        private Transform _transform;
         private GameObject _viewport;
         private HexTile _selectedTile;
 
@@ -37,16 +36,15 @@ namespace GGG.Components.UI
             _player = PlayerManager.Instance;
             _input = InputManager.Instance;
             _gameManager = GameManager.Instance;
-            _cleanResource = _player.GetMainResource();
+            
+            _cleanResource = _player.GetResource("Seaweed");
             
             CleanButton.onClick.AddListener(CleanTile);
             CloseButton.onClick.AddListener(OnCloseButton);
 
-            _transform = transform;
-            _transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360);
-
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
+            _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
 
             Container.GetComponentInChildren<Image>().sprite = _cleanResource.GetSprite();
             _costAmountText = Container.GetComponentInChildren<TextMeshProUGUI>();
@@ -66,15 +64,17 @@ namespace GGG.Components.UI
 
         private void CleanTile()
         {
-            if (_player.GetResourceCount(_cleanResource.GetKey()) < _selectedTile.GetClearCost())
-            {
-                // TODO - Can't clear tile warning
-                return;
-            }
-            
             _selectedTile.SetTileType(TileType.Standard);
             _player.AddResource(_cleanResource.GetKey(), -_selectedTile.GetClearCost());
             Close();
+        }
+
+        private void CheckCleanState()
+        {
+            bool condition = _player.GetResourceCount(_cleanResource.GetKey()) < _selectedTile.GetClearCost();
+
+            CleanButton.interactable = !condition;
+            CleanButton.image.color = condition ? new Color(0.81f, 0.84f, 0.81f, 0.9f) : Color.white;
         }
 
         private void Open(HexTile tile)
@@ -82,26 +82,28 @@ namespace GGG.Components.UI
             if (_open || tile.GetTileType() is TileType.Standard or TileType.Build)
                 return;
 
-            _viewport.SetActive(true);
-            _selectedTile = tile;
-            _costAmountText.SetText(_selectedTile.GetClearCost().ToString());
             _open = true;
-            OnUiOpen?.Invoke();
-            _gameManager.OnUIOpen();
+            _selectedTile = tile;
+            
+            _costAmountText.SetText(_selectedTile.GetClearCost().ToString());
+            CheckCleanState();
 
-            _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
+            _viewport.SetActive(true);
+            _gameManager.OnUIOpen();
+            OnUiOpen?.Invoke();
+            _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InCubic);
         }
 
         public void Close()
         {
-            _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360), 0.1f).SetEase(Ease.InCubic).onComplete += () => {
+            _viewport.transform.DOMoveX(Screen.width * -0.5f, 0.75f).SetEase(Ease.OutCubic).onComplete += () => {
                 _viewport.SetActive(false);
+                _gameManager.OnUIClose();
+                _open = false;
             };
 
             _selectedTile.DeselectTile();
             _selectedTile = null;
-            _gameManager.OnUIClose();
-            _open = false;
         }
 
         private void OnCloseButton()

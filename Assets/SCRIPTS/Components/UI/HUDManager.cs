@@ -38,6 +38,7 @@ namespace GGG.Components.UI
         }
         
         private PlayerManager _player;
+        private GameManager _gameManager;
         private readonly List<Resource> _shownResource = new(3);
 
         private int _currentIdx = 1;
@@ -46,6 +47,7 @@ namespace GGG.Components.UI
 
         private void Start() {
             _player = PlayerManager.Instance;
+            _gameManager = GameManager.Instance;
 
             foreach(GameObject go in ResourceContainers)
                 go.SetActive(false);
@@ -69,6 +71,8 @@ namespace GGG.Components.UI
 
         private void OnDisable()
         {
+            if (_gameManager.OnTutorial()) return;
+            
             SaveShownResources();
         }
 
@@ -112,8 +116,6 @@ namespace GGG.Components.UI
 
             foreach (Resource resource in _shownResource)
             {
-                if(!resource) continue;
-                
                 ShownResource resourceData = new()
                 {
                     Resource = resource,
