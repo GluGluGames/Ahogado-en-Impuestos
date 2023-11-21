@@ -41,7 +41,7 @@ namespace GGG.Components.UI {
                 tile.OnHexSelect += (x) => _selectedHexTile = tile;
             }
             
-            TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>(true);
             
             _cost = BuildingInfo.GetBuildingCost();
 
@@ -71,8 +71,7 @@ namespace GGG.Components.UI {
         private void LockButton(TextMeshProUGUI[] texts)
         {
             StructureSprite.color = new Color(1, 1, 1, 0.5f);
-            ResourcesImages[0].gameObject.SetActive(false);
-            texts[0].gameObject.SetActive(false);
+            ResourcesContainers[0].SetActive(false);
             Padlock.gameObject.SetActive(true);
             
             for (int i = 1; i < ResourcesContainers.Length; i++)
@@ -101,8 +100,7 @@ namespace GGG.Components.UI {
             if (!BuildingInfo.IsUnlocked()) return;
             
             StructureSprite.color = new Color(1, 1, 1, 1);
-            ResourcesImages[0].gameObject.SetActive(true);
-            texts[0].gameObject.SetActive(false);
+            ResourcesContainers[0].SetActive(true);
             Padlock.gameObject.SetActive(false);
             
             for (int i = 1; i < ResourcesImages.Length; i++)
@@ -110,8 +108,7 @@ namespace GGG.Components.UI {
                 if (i >= _cost.GetCostsAmount() || _cost.GetCost(i) == 0)
                     continue;
                 
-                ResourcesImages[i].gameObject.SetActive(true);
-                texts[i].gameObject.SetActive(true);
+                ResourcesContainers[i].gameObject.SetActive(true);
                 texts[i].SetText(_cost.GetCost(i).ToString());
                 ResourcesImages[i].sprite = _cost.GetResource(i).GetSprite();
             }

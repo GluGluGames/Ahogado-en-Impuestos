@@ -30,24 +30,21 @@ namespace GGG.Components.Laboratory
         [Space(5), Header("Buttons")] 
         [SerializeField] private Button[] ResearchButtons;
         [SerializeField] private Button[] TabButtons;
+        [SerializeField] private Button BackButton;
         [SerializeField] private Button CloseButton;
         
         public static Action OnLaboratoryOpen;
-        
-        private Resource[] _seaResources;
-        private Resource[] _expeditionResources;
-        private Resource[] _fishResources;
+
+        private GameManager _gameManager;
+
+        private readonly Dictionary<int, Resource[]> _resources = new();
+        private readonly Dictionary<int, Button[]> _buttons = new();
         private Building[] _buildings;
 
-        private bool[] _barActive;
         private Resource[] _activeResource;
         private Building[] _activeBuilding;
+        private bool[] _barActive;
         private float[] _deltaTimes;
-
-        private Button[] _seaButtons;
-        private Button[] _expeditionButtons;
-        private Button[] _fishButtons;
-        private Button[] _buildingsButton;
         
         private GameObject _viewport;
         private int _selected;
@@ -66,9 +63,9 @@ namespace GGG.Components.Laboratory
 
         private void Awake()
         {
-            _seaResources = Resources.LoadAll<Resource>("SeaResources");
-            _expeditionResources = Resources.LoadAll<Resource>("ExpeditionResources");
-            _fishResources = Resources.LoadAll<Resource>("FishResources");
+            _resources.Add(0, Resources.LoadAll<Resource>("SeaResources"));
+            _resources.Add(1, Resources.LoadAll<Resource>("ExpeditionResources"));
+            _resources.Add(2, Resources.LoadAll<Resource>("FishResources"));
             _buildings = Resources.LoadAll<Building>("Buildings");
 
             _viewport = transform.GetChild(0).gameObject;
@@ -88,24 +85,22 @@ namespace GGG.Components.Laboratory
                 TabButtons[i].onClick.AddListener(() => ChangeTab(idx));
             }
             
-            CloseButton.onClick.AddListener(Close);
+            BackButton.onClick.AddListener(OpenBarContainer);
+            CloseButton.onClick.AddListener(OnCloseButton);
         }
 
         private IEnumerator Start()
         {
-            if (_seaResources.Length > 0)
-                FillResources(ref _seaButtons, _seaResources, 0);
+            _gameManager = GameManager.Instance;
+
+            for (int i = 0; i < _resources.Count; i++)
+            {
+                _buttons.Add(i, Containers[i].GetComponentsInChildren<Button>());
+                FillResources(_buttons[i], _resources[i]);
+            }
             
-
-            if (_expeditionResources.Length > 0)
-                FillResources(ref _expeditionButtons, _expeditionResources, 1);
- 
-
-            if (_fishResources.Length > 0)
-                FillResources(ref _fishButtons, _fishResources, 2);
-
-            if (_buildings.Length > 0)
-                FillBuildings();
+            _buttons.Add(3, Containers[3].GetComponentsInChildren<Button>());
+            FillBuildings();
             
             _barActive = new bool[ProgressBars.Length];
             _deltaTimes = new float[ProgressBars.Length];
@@ -216,37 +211,35 @@ namespace GGG.Components.Laboratory
 
         private void FillBuildings()
         {
-            _buildingsButton = Containers[3].GetComponentsInChildren<Button>();
-            for (int i = 0; i < _buildingsButton.Length; i++)
+            for (int i = 0; i < _buttons[3].Length; i++)
             {
                 if (_buildings.Length <= i)
                 {
-                    _buildingsButton[i].transform.parent.gameObject.SetActive(false);
+                    _buttons[3][i].transform.parent.gameObject.SetActive(false);
                 }
                 else
                 {
                     if (_buildings[i].IsUnlocked())
                     {
-                        _buildingsButton[i].transform.parent.gameObject.SetActive(false);
+                        _buttons[3][i].transform.parent.gameObject.SetActive(false);
                         continue;
                     }
                     
-                    _buildingsButton[i].image.sprite = _buildings[i].GetResearchIcon();
+                    _buttons[3][i].image.sprite = _buildings[i].GetResearchIcon();
                     SpriteState aux = new();
                     aux.disabledSprite = _buildings[i].GetResearchIcon();
                     aux.highlightedSprite = _buildings[i].GetSelectedIcon();
-                    _buildingsButton[i].spriteState = aux;
-                    _buildingsButton[i].interactable = !_buildings[i].IsUnlocked();
+                    _buttons[3][i].spriteState = aux;
+                    _buttons[3][i].interactable = !_buildings[i].IsUnlocked();
                     
                     Building building = _buildings[i];
-                    _buildingsButton[i].onClick.AddListener(() => OnBuildingSelected(building));
+                    _buttons[3][i].onClick.AddListener(() => OnBuildingSelected(building));
                 }
             }
         }
         
-        private void FillResources(ref Button[] buttons, Resource[] resources, int idx)
+        private void FillResources(Button[] buttons, Resource[] resources)
         {
-            buttons = Containers[idx].GetComponentsInChildren<Button>();
             for (int i = 0; i < buttons.Length; i++)
             {
                 if (resources.Length <= i)
@@ -271,22 +264,19 @@ namespace GGG.Components.Laboratory
 
         private void CheckResources()
         {
-            for (int i = 0; i < _seaResources.Length; i++)
+            for (int i = 0; i < _resources.Count; i++)
             {
-                if(_seaButtons.Length <= i) break;
-                CheckButton(_seaButtons[i], _seaResources[i]);
+                for (int j = 0; j < _resources[i].Length; j++)
+                {
+                    if (_buttons[i].Length <= j) break;
+                    CheckButton(_buttons[i][j], _resources[i][j]);
+                }
             }
 
-            for (int i = 0; i < _expeditionResources.Length; i++)
+            for (int i = 0; i < _buildings.Length; i++)
             {
-                if (_expeditionButtons.Length <= i) break;
-                CheckButton(_expeditionButtons[i], _expeditionResources[i]);
-            }
-
-            for (int i = 0; i < _fishResources.Length; i++)
-            {
-                if (_fishButtons.Length <= i) break;
-                CheckButton(_fishButtons[i], _fishResources[i]);
+                if (_buttons[3].Length <= i) break;
+                CheckButton(_buttons[3][i], _buildings[i]);
             }
         }
 
@@ -296,6 +286,15 @@ namespace GGG.Components.Laboratory
             button.image.color = resource.CanResearch() ? Color.white : Color.black;
             button.transform.parent.gameObject.SetActive(!resource.Unlocked());
             if (_activeResource.Any(r => r == resource))
+                button.transform.parent.gameObject.SetActive(false);
+        }
+
+        private void CheckButton(Button button, Building building)
+        {
+            button.interactable = !building.IsUnlocked();
+            button.image.color = !building.IsUnlocked() ? Color.white : Color.black;
+            button.transform.parent.gameObject.SetActive(!building.IsUnlocked());
+            if (_activeBuilding.Any(b => b == building))
                 button.transform.parent.gameObject.SetActive(false);
         }
 
@@ -388,25 +387,30 @@ namespace GGG.Components.Laboratory
 
             _open = true;
             _viewport.SetActive(true);
-            GameManager.Instance.OnUIOpen();
+            _gameManager.OnUIOpen();
             OnLaboratoryOpen?.Invoke();
 
             _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InCubic);
         }
 
+        private void OnCloseButton()
+        {
+            if (!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
+
+            Close();
+        }
+
         private void Close()
         {
-            if (!_open) return;
-
             _viewport.transform.DOMoveX(Screen.width * -0.5f, 0.75f).SetEase(Ease.OutCubic).onComplete += () =>
             {
                 _open = false;
                 _viewport.SetActive(false);
                 OpenBarContainer();
+                _gameManager.OnUIClose();
             };
 
             _selected = 0;
-            GameManager.Instance.OnUIClose();
         }
     }
 }
