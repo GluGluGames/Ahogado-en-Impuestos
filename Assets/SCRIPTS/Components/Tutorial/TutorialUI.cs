@@ -11,9 +11,11 @@ namespace GGG.Components.Tutorial
     public class TutorialUI : MonoBehaviour
     {
         [SerializeField] private GameObject Viewport;
+        [SerializeField] private GameObject[] Layouts;
         [Header("Tutorial Fields")]
+        [SerializeField] private GameObject TitleContainer;
         [SerializeField] private TMP_Text TitleText;
-        [SerializeField] private TMP_Text TutorialText;
+        [SerializeField] private TMP_Text[] TutorialText;
         [SerializeField] private Image TutorialImage;
         
         private bool _open;
@@ -27,10 +29,26 @@ namespace GGG.Components.Tutorial
 
         public void SetTutorialFields(string title, Sprite image, string text)
         {
-            TitleText.SetText(!string.IsNullOrEmpty(title) ? title : "");
-            TutorialImage.gameObject.SetActive(image);
-            if(image) TutorialImage.sprite = image;
-            TutorialText.SetText(!string.IsNullOrEmpty(text) ? text : "");
+            if (!string.IsNullOrEmpty(title))
+            {
+                TitleContainer.gameObject.SetActive(true);
+                TitleText.SetText(title);
+            }
+            else TitleContainer.gameObject.SetActive(false);
+            
+            
+            if (image)
+            {
+                TutorialImage.gameObject.SetActive(image);
+                TutorialImage.sprite = image;
+                TutorialText[0].SetText(!string.IsNullOrEmpty(text) ? text : "");
+            }
+            else
+            {
+                Layouts[0].SetActive(false);
+                Layouts[1].SetActive(true);
+                TutorialText[1].SetText(!string.IsNullOrEmpty(text) ? text : "");
+            }
         }
 
         public void OnContinue() => OnContinueButton.Invoke();
