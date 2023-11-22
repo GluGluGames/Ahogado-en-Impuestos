@@ -413,6 +413,8 @@ El jugador inicia la partida en una grid de hexágonos, específicamente en la c
 El juego es un idle que incentiva al jugador estar gastando continuamente los recursos que generan los generadores, en este caso las algas rojas y verdes. No obstante, el jugador puede llegar a tener una productividad excesiva, y el juego no suporta una productividad tan alta, por lo tanto vamos a seguir una formula
 Por otro lado, como mencionado anteriormente, el coste de las granjas iran aumentandose para que establecer una pared de crecimiento al jugador, ya sea para evitarel crecimiento rapido, dar margen a nuevos contenidos del juegos(Expedición).  
 Se va a introducir una tabla de coste/Produccion total para entender mejor como irá el juego
+![Tabla Production/Cost](https://github.com/GluGluGames/Ahogado-en-Impuestos/raw/develop/Game%20Design%20Documents/Coste-Produccion%20Granja.png)
+
 
 
 #### **5.1.2 - Tutoriales**
