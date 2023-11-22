@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7865890702781366767}
-  - component: {fileID: 6299372939667204369}
+  - component: {fileID: 1237551440149686502}
   m_Layer: 0
   m_Name: Laboratory
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6299372939667204369
+--- !u!114 &1237551440149686502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3729789129001329043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 027ad496a9e9dd34d9b86249ffffec33, type: 3}
+  m_Script: {fileID: 11500000, guid: 9710e833774f16044bf2c2d31a0f35f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Build: {fileID: 11400000, guid: b422480b22f3b0b4ca39c93c6de93567, type: 2}
+  BuildingData: {fileID: 11400000, guid: b422480b22f3b0b4ca39c93c6de93567, type: 2}
 --- !u!1001 &8011014436344899416
 PrefabInstance:
   m_ObjectHideFlags: 0

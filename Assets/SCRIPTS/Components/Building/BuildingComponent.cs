@@ -1,25 +1,50 @@
 using GGG.Classes.Buildings;
+using GGG.Shared;
+
 using System;
 using UnityEngine;
 
 namespace GGG.Components.Buildings {
-    public class BuildingComponent : MonoBehaviour {
+    public abstract class BuildingComponent : MonoBehaviour {
         [Tooltip("Type of building")]
-        [SerializeField] private Building Build;
+        [SerializeField] protected Building BuildingData;
+        
+        public Action<BuildingComponent> OnBuildSelect;
+        protected int CurrentLevel = 1;
+        protected ResourceCost CurrentPrice;
 
-        public Action<Action, BuildingComponent> OnBuildInteract;
-        private int _currentLevel = 1;
+        public abstract void Initialize();
 
         /// <summary>
-        /// Interact with the building
+        /// Select the building
         /// </summary>
-        public void Interact() { OnBuildInteract?.Invoke(() => Build.Interact(_currentLevel), this); }
+        public void Select()
+        {
+            OnBuildSelect?.Invoke(this);
+        }
+
+        public abstract void Interact();
+
+        protected virtual void OnLevelUp()
+        {
+            throw new Exception($"OnLevelUp not implemented on {name}");
+        }
+
+        public virtual void Boost()
+        {
+            throw new Exception($"Boost not implemented on {name}");
+        }
+
+        public virtual void EndBoost()
+        {
+            throw new Exception($"Boost not implemented on {name}");
+        }
 
         /// <summary>
         /// Gets the current level of the building
         /// </summary>
         /// <returns>The current level of the building</returns>
-        public int GetCurrentLevel() => _currentLevel;
+        public int GetCurrentLevel() => CurrentLevel;
 
         /// <summary>
         /// Sets the level of the building
@@ -28,10 +53,10 @@ namespace GGG.Components.Buildings {
         /// <exception cref="Exception">If the level is higher or lowest than the limits</exception>
         public void SetLevel(int level)
         {
-            if (level < 1 || level > Build.GetMaxLevel())
+            if (level < 1 || level > BuildingData.GetMaxLevel())
                 throw new Exception("Incorrect level");
             
-            _currentLevel = level;
+            CurrentLevel = level;
         }
 
         /// <summary>
@@ -40,23 +65,18 @@ namespace GGG.Components.Buildings {
         /// <returns>True if the level could be added. False otherwise</returns>
         public void AddLevel()
         {
-            if (_currentLevel + 1 > Build.GetMaxLevel())
+            if (CurrentLevel + 1 > BuildingData.GetMaxLevel())
                 throw new Exception("Max level reached");
-
-            _currentLevel++;
+            
+            CurrentLevel++;
+            OnLevelUp();
         }
 
         /// <summary>
         /// Gets the building information
         /// </summary>
         /// <returns>The building information</returns>
-        public Building GetBuild() => Build;
-
-        /// <summary>
-        /// The building needs interaction to work
-        /// </summary>
-        /// <returns>True if it needs. False otherwise</returns>
-        public bool NeedInteraction() { return Build.NeedInteraction(); }
+        public Building GetBuild() => BuildingData;
 
         /// <summary>
         /// Gets the current position of the building
@@ -68,6 +88,6 @@ namespace GGG.Components.Buildings {
         /// Gets the vision range of the building
         /// </summary>
         /// <returns>The vision range</returns>
-        public int GetVisionRange() => Build.GetVisionRange();
+        public int GetVisionRange() => BuildingData.GetVisionRange();
     }
 }

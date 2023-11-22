@@ -1,16 +1,16 @@
 using GGG.Classes.Debug;
 using GGG.Components.Core;
-using GGG.Components.Museum;
 using GGG.Components.Player;
-using GGG.Components.Shop;
+using GGG.Components.Buildings.Museum;
+using GGG.Components.Buildings.Shop;
+using GGG.Components.Buildings.Laboratory;
+using GGG.Components.Buildings.Generator;
+using GGG.Components.Taxes;
 using GGG.Input;
 using GGG.Shared;
 
 using UnityEngine;
 using System.Collections.Generic;
-using GGG.Components.Generator;
-using GGG.Components.Laboratory;
-using GGG.Components.Taxes;
 
 namespace GGG.Components.Debug
 {

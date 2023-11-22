@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bb196c66bfd54048896696680fa974b, type: 3}
-  m_Name: FishbowFarm
+  m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
+  m_Name: FishFarm
   m_EditorClassIdentifier: 
   Name: Granja de peces
   Description: 
@@ -20,30 +20,24 @@ MonoBehaviour:
   Prefab: {fileID: 533894112641316780, guid: c9a1bd5ac38800d4d9e0c95c0ee5623c, type: 3}
   CanBeUpgraded: 1
   UpgradePrefabs:
-  - {fileID: 1050729263615360978, guid: 4d606d8399f07af49a2d8200a3808d52, type: 3}
-  - {fileID: 2549623890381326028, guid: 829ccb03358bfe547ab1934f5398cb80, type: 3}
+  - {fileID: 4193575569453847927, guid: adf814844c50bad47bf0ac2552d143f7, type: 3}
+  - {fileID: 1889224551149711422, guid: 5f70c08caac5733408e0406a0459c193, type: 3}
   Unlocked: 1
   ResearchTime: 0
-  BuildCost:
-    Costs: f4010000
+  InitialCost:
+    Costs: 00000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
   UpgradeCost:
-  - Costs: 2c010000
+  - Costs: e8030000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  - Costs: f401000019000000
+  - Costs: c409000019000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
     - {fileID: 11400000, guid: b8e4cd17a2a28e947ae97cdbed7bd413, type: 2}
   MaxLevel: 3
   MaxBuildingNumber: -1
-  NeededInteraction: 0
   CanBoost: 1
-  SpawnHeight: 0.36
+  SpawnHeight: 0.32
   VisionRange: 2
-  Resource: {fileID: 11400000, guid: c22da4ff2ba2a0648961f398aa4807da, type: 2}
-  InitialGeneration: 6
-  ResourcesGeneration:
-  - 3
-  - 1

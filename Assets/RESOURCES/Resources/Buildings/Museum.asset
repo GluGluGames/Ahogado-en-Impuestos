@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 298d12a8e5c28e84db330858210074d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
   m_Name: Museum
   m_EditorClassIdentifier: 
   Name: Museo
@@ -20,17 +20,15 @@ MonoBehaviour:
   Prefab: {fileID: 8966507657690627879, guid: 6d67b101ce8ff21409be2add9708ce8e, type: 3}
   CanBeUpgraded: 0
   UpgradePrefabs: []
-  Unlocked: 0
-  ResearchTime: 180
-  BuildCost:
-    Costs: 1900000001000000
+  Unlocked: 1
+  ResearchTime: 900
+  InitialCost:
+    Costs: 00000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-    - {fileID: 11400000, guid: a8559bbb5f45e404eaccd92c5b2f2d19, type: 2}
   UpgradeCost: []
   MaxLevel: 1
   MaxBuildingNumber: 1
-  NeededInteraction: 1
   CanBoost: 0
-  SpawnHeight: 0.36
+  SpawnHeight: 0.32
   VisionRange: 2

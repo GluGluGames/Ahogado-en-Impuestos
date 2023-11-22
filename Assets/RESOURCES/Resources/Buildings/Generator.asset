@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86ae8f2495a80c343b7f018ab2b63feb, type: 3}
+  m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
   m_Name: Generator
   m_EditorClassIdentifier: 
   Name: Generador
@@ -20,24 +20,25 @@ MonoBehaviour:
   Prefab: {fileID: 9069191146074213081, guid: c6891ec131267f943a159296d976c5ff, type: 3}
   CanBeUpgraded: 1
   UpgradePrefabs:
-  - {fileID: 9069191146074213081, guid: c6891ec131267f943a159296d976c5ff, type: 3}
-  - {fileID: 9069191146074213081, guid: c6891ec131267f943a159296d976c5ff, type: 3}
-  Unlocked: 0
-  ResearchTime: 600
-  BuildCost:
+  - {fileID: 8322340004409967494, guid: c22b96f4cc1e143469a4ff1253f09e60, type: 3}
+  - {fileID: 6263181876697542000, guid: ad8fd66dbf2fcad4f9601de747992511, type: 3}
+  Unlocked: 1
+  ResearchTime: 900
+  InitialCost:
     Costs: 00000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
   UpgradeCost:
-  - Costs: 0a000000
+  - Costs: a00f00000a000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  - Costs: 0a000000
+    - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
+  - Costs: 6419000019000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+    - {fileID: 11400000, guid: b8e4cd17a2a28e947ae97cdbed7bd413, type: 2}
   MaxLevel: 3
-  MaxBuildingNumber: 1
-  NeededInteraction: 1
+  MaxBuildingNumber: -1
   CanBoost: 0
-  SpawnHeight: 0.35
+  SpawnHeight: 0.32
   VisionRange: 2

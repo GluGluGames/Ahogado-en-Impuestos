@@ -11,10 +11,9 @@ using DG.Tweening;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace GGG.Components.Laboratory
+namespace GGG.Components.Buildings.Laboratory
 {
     public class LaboratoryUI : MonoBehaviour
     {

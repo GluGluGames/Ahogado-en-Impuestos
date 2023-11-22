@@ -1,5 +1,5 @@
+using GGG.Classes.Buildings;
 using GGG.Components.Core;
-using GGG.Components.Buildings;
 using GGG.Components.HexagonalGrid;
 
 using DG.Tweening;
@@ -10,11 +10,9 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
-using GGG.Classes.Buildings;
 using TMPro;
-using UnityEngine.Serialization;
 
-namespace GGG.Components.Generator
+namespace GGG.Components.Buildings.Generator
 {
     public class GeneratorUI : MonoBehaviour
     {
@@ -124,13 +122,13 @@ namespace GGG.Components.Generator
             BuildingComponent building = _generatorTile.neighbours[idx].GetCurrentBuilding();
             if (!building) return;
 
-            building.GetBuild().Boost(building.GetCurrentLevel());
+            building.Boost();
             
             ChangeButtonSprite(level, idx, true);
             _currentGeneration[_currentGenerator][level - 1]++;
             _buildingBoosting[_currentGenerator][level - 1, idx] = true;
             
-            StartCoroutine(BoostBuilding(building.GetBuild(), level, idx));
+            StartCoroutine(BoostBuilding(building, level, idx));
         }
 
         private void ChangeButtonSprite(int level, int idx, bool visible)
@@ -157,7 +155,7 @@ namespace GGG.Components.Generator
             }
         }
 
-        private IEnumerator BoostBuilding(Building building, int level, int idx)
+        private IEnumerator BoostBuilding(BuildingComponent building, int level, int idx)
         {
             float deltaTime = BoostTimes[level - 1];
             BuildingComponent aux = _currentGenerator;
@@ -167,8 +165,8 @@ namespace GGG.Components.Generator
                 deltaTime -= Time.deltaTime;
                 yield return null;
             }
-
-            building.EndBoost(level);
+            
+            building.EndBoost();
             
             ChangeButtonSprite(level, idx, false);
             _currentGeneration[_currentGenerator][level - 1]--;

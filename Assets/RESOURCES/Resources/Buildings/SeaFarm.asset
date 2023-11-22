@@ -9,41 +9,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bb196c66bfd54048896696680fa974b, type: 3}
-  m_Name: SeaweedFarm
+  m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
+  m_Name: SeaFarm
   m_EditorClassIdentifier: 
-  Name: SeaweedFarm
+  Name: Granja marina
   Description: 
   Icon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
   SelectedIcon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
-  ResearchIcon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
+  ResearchIcon: {fileID: 0}
   Prefab: {fileID: 8113010406866780128, guid: 8807a79897f001d4085fe45216d838dd, type: 3}
   CanBeUpgraded: 1
   UpgradePrefabs:
-  - {fileID: 2201435938415596008, guid: 1bf6f53fe1a1e334385aa0735ff376bb, type: 3}
-  - {fileID: 4952556870660823925, guid: 17288a6535838e6448cb1f8496dc4cb1, type: 3}
+  - {fileID: 8137532259319120740, guid: be2351cfbf228b94287ee58d64b9d47e, type: 3}
+  - {fileID: 5717497606056758923, guid: 573ce7fe8df29ae48b1cbfdf0549683f, type: 3}
   Unlocked: 1
   ResearchTime: 0
-  BuildCost:
+  InitialCost:
     Costs: 00000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
   UpgradeCost:
-  - Costs: 0a000000
+  - Costs: 32000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  - Costs: 190000000a000000
+  - Costs: 960000000a000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-    - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
+    - {fileID: 11400000, guid: b8e4cd17a2a28e947ae97cdbed7bd413, type: 2}
   MaxLevel: 3
   MaxBuildingNumber: -1
-  NeededInteraction: 0
   CanBoost: 1
-  SpawnHeight: 0.36
+  SpawnHeight: 0.32
   VisionRange: 2
-  Resource: {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  InitialGeneration: 6
-  ResourcesGeneration:
-  - 3
-  - 1

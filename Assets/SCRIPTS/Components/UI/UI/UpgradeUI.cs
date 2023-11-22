@@ -106,21 +106,21 @@ namespace GGG.Components.UI
         
         private void UpdateBuildings(BuildingComponent building, HexTile buildingTile)
         {
-            building.OnBuildInteract += (x, y) => {
-                OnBuildInteract(x, y);
+            building.OnBuildSelect += (x) => {
+                OnBuildInteract(x);
                 _selectedBuilding = building;
                 Open(buildingTile);
             };
         }
 
-        private void OnBuildInteract(Action action, BuildingComponent build)
+        private void OnBuildInteract(BuildingComponent build)
         {
             InteractButton.onClick.AddListener(() => {
-                action.Invoke();
+                build.Interact();
                 Close(false);
             });
 
-            InteractParent.SetActive(build.NeedInteraction());
+            InteractParent.SetActive(true);
         }
 
         private void OnSellButton()
@@ -145,8 +145,8 @@ namespace GGG.Components.UI
             
             for (int i = 0; i < cost[currentLevel].GetCostsAmount(); i++)
                 _player.AddResource(cost[currentLevel].GetResource(i).GetKey(), -cost[currentLevel].GetCost(i));
-            
-            _selectedBuilding.AddLevel();
+
+            _selectedBuilding.GetComponent<BuildingComponent>().AddLevel();
             _selectedBuilding.GetBuild().Spawn(_selectedBuilding.transform.position, _selectedBuilding.transform, 
                 _selectedBuilding.GetCurrentLevel(), true);
             SoundManager.Instance.Play("Build");

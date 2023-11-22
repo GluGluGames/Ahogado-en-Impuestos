@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8224396097732451846}
-  - component: {fileID: 7074311413029918953}
+  - component: {fileID: 5346322443975701616}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &7074311413029918953
+--- !u!114 &5346322443975701616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2848397803213574801}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 027ad496a9e9dd34d9b86249ffffec33, type: 3}
+  m_Script: {fileID: 11500000, guid: a01c1c55499ca5c46887bb2201c30d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Build: {fileID: 11400000, guid: fd39501a9d011e24384e834ebcb7c9fc, type: 2}
+  BuildingData: {fileID: 11400000, guid: fd39501a9d011e24384e834ebcb7c9fc, type: 2}
 --- !u!1001 &4870552983640226586
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 using GGG.Shared;
+using UnityEngine.Serialization;
 
 namespace GGG.Classes.Buildings
 {
-    [Serializable]
-    public abstract class Building : ScriptableObject {
+    [CreateAssetMenu(menuName = "Game/Building", fileName = "Building")]
+    public class Building : ScriptableObject {
         [Header("Generic fields")]
         [Tooltip("Name of the building")] 
         [SerializeField] private string Name;
@@ -23,40 +24,26 @@ namespace GGG.Classes.Buildings
         [SerializeField] private bool CanBeUpgraded;
         [Tooltip("Upgrade prefabs of the building. If the building don't have an upgrade, leave it empty")]
         [SerializeField] private GameObject[] UpgradePrefabs;
-        [Tooltip("Determines if the player can buy the bulding")] 
+        [Tooltip("Determines if the player can buy the building")] 
         [SerializeField] private bool Unlocked;
         [Tooltip("Time that takes to be researched. In seconds")] 
         [SerializeField] private int ResearchTime;
+        [FormerlySerializedAs("BuildCost")]
         [Space(10)] [Header("Building Fields")] 
         [Tooltip("The price to build the building")] 
-        [SerializeField] private ResourceCost BuildCost;
+        [SerializeField] private ResourceCost InitialCost;
         [Tooltip("Price to upgrade the building.")] 
         [SerializeField] private ResourceCost[] UpgradeCost;
         [Tooltip("Max level the build can be upgraded")] 
         [SerializeField] private int MaxLevel;
         [Tooltip("Max buildings of this type that can be built. If the value is -1, there is no limit")]
         [SerializeField] private int MaxBuildingNumber;
-        [Tooltip("Determines if the player needs to click the building to interact with it")]
-        [SerializeField] private bool NeededInteraction;
         [Tooltip("Determines if the building can be boosted")] 
         [SerializeField] private bool CanBoost;
         [Tooltip("Determines the height of the building")]
         [SerializeField] private float SpawnHeight;
         [Tooltip("Determines the vision range of the building")] 
         [SerializeField] private int VisionRange;
-
-        /// <summary>
-        /// Interacts with the building
-        /// </summary>
-        public abstract void Interact(int level);
-
-        /// <summary>
-        /// Boost the building depending on the level
-        /// </summary>
-        /// <param name="level">The level of the building</param>
-        public abstract void Boost(int level);
-
-        public abstract void EndBoost(int level);
 
         /// <summary>
         /// Gets the name of the building
@@ -124,15 +111,14 @@ namespace GGG.Classes.Buildings
             }
 
             Destroy(parent.GetChild(0).gameObject);
-            Instantiate(UpgradePrefabs[level - 2], new Vector3(position.x, SpawnHeight, position.z), Quaternion.identity, parent);
-            return null;
+            return Instantiate(UpgradePrefabs[level - 2], new Vector3(position.x, SpawnHeight, position.z), Quaternion.identity, parent);
         }
 
         /// <summary>
         /// Gets the total cost of the building.
         /// </summary>
         /// <returns>The cost of the building</returns>
-        public ResourceCost GetBuildingCost() => BuildCost;
+        public ResourceCost GetBuildingCost() => InitialCost;
 
         /// <summary>
         /// Gets the total upgrade cost of the building
@@ -168,10 +154,8 @@ namespace GGG.Classes.Buildings
             if (index > 3)
                 throw new Exception($"No building cost with {index} index");
 
-            return BuildCost.GetCost(index);
+            return InitialCost.GetCost(index);
         }
-
-        public void SetBuildingCost(int index, int amount) => BuildCost.AddCost(index, amount);
 
         /// <summary>
         /// Gets the upgrade cost of the building.
@@ -199,7 +183,7 @@ namespace GGG.Classes.Buildings
             if (index > 3)
                 throw new Exception($"No building cost with {index} index");
 
-            return BuildCost.GetResource(index);
+            return InitialCost.GetResource(index);
         }
 
         /// <summary>
@@ -228,12 +212,6 @@ namespace GGG.Classes.Buildings
         /// </summary>
         /// <returns>The max number of buildings. -1 if it can be built forever</returns>
         public int GetMaxBuildingNumber() => MaxBuildingNumber;
-
-        /// <summary>
-        /// Determines if the building needs player interaction to work
-        /// </summary>
-        /// <returns>True if it needs player interaction. False otherwise</returns>
-        public bool NeedInteraction() { return NeededInteraction; }
 
         /// <summary>
         /// Gets the vision range of the building

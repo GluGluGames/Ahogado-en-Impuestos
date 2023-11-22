@@ -206,7 +206,7 @@ namespace GGG.Components.HexagonalGrid
 
             if (_currentBuilding)
             {
-                _currentBuilding.Interact();
+                _currentBuilding.Select();
             }
 
             ActivateHighlight();

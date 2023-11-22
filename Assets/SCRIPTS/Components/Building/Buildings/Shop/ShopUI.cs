@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using TMPro;
 using DG.Tweening;
 
-namespace GGG.Components.Shop
+namespace GGG.Components.Buildings.Shop
 {
     public class ShopUI : MonoBehaviour
     {

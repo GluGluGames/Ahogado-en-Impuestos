@@ -13,17 +13,19 @@ using UnityEngine.UI;
 
 namespace GGG.Components.UI {
     public class BuildButton : MonoBehaviour, IPointerDownHandler {
+        [Header("Information")]
         [SerializeField] private Building BuildingInfo;
+        [Space(5), Header("GameObjects References")]
         [SerializeField] private GameObject Container;
         [SerializeField] private GameObject[] ResourcesContainers;
+        [SerializeField] private GameObject Padlock;
+        [Space(5), Header("Images")]
         [SerializeField] private Image[] ResourcesImages;
         [SerializeField] private Image StructureSprite;
-        [SerializeField] private GameObject Padlock;
         
         private PlayerManager _player;
         private BuildingManager _buildingManager;
         private HexTile _selectedHexTile;
-        private BuildingComponent _auxBuild;
         private ResourceCost _cost;
         private bool _dirtyFlag;
         private bool _maxBuildingsReached;
@@ -117,21 +119,16 @@ namespace GGG.Components.UI {
         private void BuildStructure()
         {
             for (int i = 0; i < _cost.GetCostsAmount(); i++)
-            {
-                if (_player.GetResourceCount(_cost.GetResource(i).GetKey()) < _cost.GetCost(i))
-                {
-                    // TODO - Can't buy warning
-                    return;
-                }
-            }
+                if (_player.GetResourceCount(_cost.GetResource(i).GetKey()) < _cost.GetCost(i)) return;
             
             SoundManager.Instance.Play("Build");
-            GameObject auxGo = BuildingInfo.Spawn(_selectedHexTile.SpawnPosition(), GameObject.Find("Buildings").transform, 1, false);
-            _auxBuild = auxGo.GetComponent<BuildingComponent>();
-            BuildingManager.Instance.AddBuilding(_auxBuild);
+            GameObject auxGo = BuildingInfo.Spawn(_selectedHexTile.SpawnPosition(), 
+                GameObject.Find("Buildings").transform, 1, false);
+            BuildingComponent build = auxGo.GetComponent<BuildingComponent>();
+            BuildingManager.Instance.AddBuilding(build);
 
-            _selectedHexTile.SetBuilding(_auxBuild);
-            OnStructureBuild?.Invoke(_auxBuild, _selectedHexTile);
+            _selectedHexTile.SetBuilding(build);
+            OnStructureBuild?.Invoke(build, _selectedHexTile);
             StructureBuild?.Invoke();
 
             for (int i = 0; i < _cost.GetCostsAmount(); i++)
@@ -143,7 +140,7 @@ namespace GGG.Components.UI {
 
 
             //FOW
-            _selectedHexTile.Reveal(_auxBuild.GetVisionRange(), 0);
+            _selectedHexTile.Reveal(build.GetVisionRange(), 0);
 
             _selectedHexTile = null;
         }

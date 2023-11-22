@@ -1,22 +1,20 @@
-using GGG.Classes.Buildings;
+using GGG.Components.Buildings;
 using UnityEngine;
 
-namespace GGG.Components.Museum
+namespace GGG.Components.Buildings.Museum
 {
-    [CreateAssetMenu(fileName = "Museum", menuName = "Game/Buildings/Museum")]
-    public class Museum : Building
+    public class Museum : BuildingComponent
     {
         private MuseumUI _museum;
-        
-        public override void Interact(int level)
-        {
-            _museum = FindObjectOfType<MuseumUI>();
 
-            _museum.Open();
+        public override void Initialize()
+        {
+            if(!_museum) _museum = FindObjectOfType<MuseumUI>();
         }
 
-        public override void Boost(int level) { }
-        
-        public override void EndBoost(int level) { }
+        public override void Interact()
+        {
+            _museum.Open();
+        }
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-namespace GGG.Components.Museum
+namespace GGG.Components.Buildings.Museum
 {
     public class MuseumUI : MonoBehaviour
     {

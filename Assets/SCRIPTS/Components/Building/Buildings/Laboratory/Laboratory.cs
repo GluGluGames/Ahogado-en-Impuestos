@@ -1,22 +1,19 @@
-using GGG.Classes.Buildings;
-using UnityEngine;
+using GGG.Components.Buildings;
 
-namespace GGG.Components.Laboratory
+namespace GGG.Components.Buildings.Laboratory
 {
-    [CreateAssetMenu(fileName = "Laboratory", menuName = "Game/Buildings/Laboratory")]
-    public class Laboratory : Building
+    public class Laboratory : BuildingComponent
     {
         private LaboratoryUI _ui;
-        
-        public override void Interact(int level)
+
+        public override void Initialize()
         {
-            _ui = FindObjectOfType<LaboratoryUI>();
-            
-            _ui.Open();
+            if(!_ui) _ui = FindObjectOfType<LaboratoryUI>();
         }
 
-        public override void Boost(int level) { }
-        
-        public override void EndBoost(int level) { }
+        public override void Interact()
+        {
+            _ui.Open();
+        }
     }
 }
