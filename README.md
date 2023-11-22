@@ -18,6 +18,7 @@
 - 10/11/2023 - Luming - Subir el análisis MDA de nuestro juego
 - 14/11/2023 - Luming - Corregir las mecanicas de construccion y subir FSM de diferentes enemigos
 - 17/11/2023 - Luming - Reescribir el texto de la MDA
+- 22/11/2023 - Luming - Afinar las mecancias de produccion y coste de granja de algas
   
 ## 1 - MÉCANICAS 
 
@@ -101,6 +102,7 @@ Estas zonas desbloqueables brindan a los jugadores la oportunidad de diversifica
 
 ### **1.5 - Edificios** 
 
+
 #### **1.5.0 - Ayuntamiento**
 Primer edificio de construccion donde se permite visualizar los recursos que posee el jugador de manera mas específica.
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion|
@@ -112,13 +114,15 @@ Primer edificio de construccion donde se permite visualizar los recursos que pos
 
 La granja de algas generara un número de algas por unidad de tiempo. Al subirla de nivel, el número de algas generadas aumentará.
 La primera granja de algas será gratis para el jugador.
-Cada nueva granja de algas aumentará 500 algas de precio, mientras que se sigue manteniendo los precios de mejorar.
+Cada nueva granja de algas aumentará una cantidad que sigue una formula de $cost_{next} = cost_{base} \times (rate_{growth})^{owned}$  
+Significa que cada granja nueva tendra el coste coste base (1000 algas verdes) * (coeficientes de crecimiento)^Granjas obtenidas  
+En este caso haremos que el coeficiente de crecimiento = 1.05, asi para hacer mas asequible al jugador.
 
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Productividad | Justificacion|
 | :--: | :--: | :--: | :--: | :--: | ------------ |
-| 1 | 1000 algasverdes| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
-| 2 | x| 400 Hierro + 400 corales | 200 madera |  40 algas/3s | Nivel intermedio, corresponde con productividad medio bajo, incentivar al jugador acceder a expedicion para conseguir el mejor nivel de la construccion |
-| 3 | x| 600 Hierro + 400 corales | 300 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
+| 1 | 1k algas verdes + x cantidad| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
+| 2 | x| 5k algas verdes + 400 Hierro + 400 corales | 200 madera |  40 algas/3s | Nivel intermedio, corresponde con productividad medio bajo, incentivar al jugador acceder a expedicion para conseguir el mejor nivel de la construccion |
+| 3 | x| 10k algas verdes + 5k algas rojas + 600 Hierro + 400 corales | 300 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
 
 #### **1.5.2 - Tienda de objetos**
 
@@ -129,9 +133,9 @@ La tienda de objetos servirá al jugador para intercambiar un número de materia
 Al subirla de nivel: se ofrecerá un mayor número de intercambios al día y de recursos más valiosos.
 | Nivel | Coste de restauracion| Coste de mejora |Intercambios permitidos| Justificacion|
 | :--: | :--: | :--: | :--: |------------ |
-| 1 | 1000 algas verdes| x | 3 | La tienda se sirve como ayuda para el jugador, no queremos que el jugador se relegue solo en los intercambios de elementos
-| 2 | x| 200 hierro | 5 | En esta fase el jugador ya ha avanzado parte del juego, por lo tanto se le permite mas intercambios cada dia
-| 3 | x| 300 hierro  | 10 | Aqui el jugador ya habra avanzado bastante en la construccion de la ciudad por lo tanto se permiten hasta 10 ya que puede hacer falta los recursos en ocaciones, sin abusar del intercambio|
+| 1 | 1k algas verdes| x | 3 | La tienda se sirve como ayuda para el jugador, no queremos que el jugador se relegue solo en los intercambios de elementos
+| 2 | x| 2k algas rojas + 200 hierro | 5 | En esta fase el jugador ya ha avanzado parte del juego, por lo tanto se le permite mas intercambios cada dia
+| 3 | x| 3k algas rojas + 300 hierro  | 10 | Aqui el jugador ya habra avanzado bastante en la construccion de la ciudad por lo tanto se permiten hasta 10 ya que puede hacer falta los recursos en ocaciones, sin abusar del intercambio|
 
 #### **1.5.3 - Generador de electricidad**
 
@@ -141,9 +145,9 @@ El generador de electricidad requerirá de anguilas eléctricas para construirse
     
 | Nivel | Coste de Construcción | Coste de Mejora | Cargas - Aceleración / Tiempo | Recurso necesario para activar | Justificación |
 | :---: | :-------------------: | :-------------: | :------------------: | :-----------------------------: | :-----------: |
-| 1| 2000 algas verdes + 5 anguilas electricas | x | +10% de la productividad actual / 5min| 10 pez | Nivel bajo y de tipo acelerador, se pide cantidad mediano de recurso para activar y aumenta poca cantidad de productividad|
-| 2| x | 200 hierro + 15 anguilas electricas | 2 slots +30% de la productividad actual/10min | 15 pez | Nivel medio, se aumenta la productivad pero tambien el coste por uso. |
-| 3| x | 400 hierro + 25 anguilas electricas | 3 Slots +90% de la productividad actual /15min| 50 pez | Version final de la construccion, mejora significativa pero consumo significativo tambien.|
+| 1| 2k algas verdes + 5 anguilas electricas | x | +10% de la productividad actual / 5min| 10 pez | Nivel bajo y de tipo acelerador, se pide cantidad mediano de recurso para activar y aumenta poca cantidad de productividad|
+| 2| x | 10k algas + 200 hierro + 15 anguilas electricas | 2 slots +30% de la productividad actual/10min | 15 pez | Nivel medio, se aumenta la productivad pero tambien el coste por uso. |
+| 3| x | 20k algas + 400 hierro + 25 anguilas electricas | 3 Slots +90% de la productividad actual /15min| 50 pez | Version final de la construccion, mejora significativa pero consumo significativo tambien.|
 
  Al subirlo de nivel: en el nivel II habrá dos cargas disponibles y en el nivel III, tres cargas disponibles. El uso de estas cargas es asignado por el jugador.
 
@@ -157,9 +161,9 @@ En el caso desafortunado de que la furia de Poseidón impacte en un edificio rev
 
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Numero de protecciones | Tiempo de espera | Justificacion|
 | :--: | :--: | :--: | :--: | :--: |:--:| ------------ |
-| 1| 5000 algas verdes + 500 corales| x | 250 madera | 1 | 5min | Sirve como una proteccion basica para el jugador, pero puede ser mejorado en el futuro y aguanta mas iras de poseidon.|
-| 2| x| 500 hierro + 500 corales | 250 madera | 2 | 5min | Se aumenta a 2 veces el numero de protecciones, pero sera necesario cargado por el generador de electricidad.|
-| 3| x| 500 hierro + 500 corales | 250 madera | 3 | 3min | Monumento gigante que para 3 iras de poseidon, version mejorado de tiempo como recompensa para el jugador.|
+| 1| 5k algas verdes + 500 corales| x | 250 madera | 1 | 5min | Sirve como una proteccion basica para el jugador, pero puede ser mejorado en el futuro y aguanta mas iras de poseidon.|
+| 2| x| 5k algas + 500 hierro + 500 corales | 250 madera | 2 | 5min | Se aumenta a 2 veces el numero de protecciones, pero sera necesario cargado por el generador de electricidad.|
+| 3| x| 5k algas + 500 hierro + 500 corales | 250 madera | 3 | 3min | Monumento gigante que para 3 iras de poseidon, version mejorado de tiempo como recompensa para el jugador.|
 
 #### **1.5.5 - Mejoras de buceo**
 
@@ -170,8 +174,8 @@ Este majestuoso edificio de mejoras de buceo se convierte en un centro neurálgi
 | Nivel | Coste de construccion | Coste de mejora | Coste de reparacion| 
 | :--: | :--: | :--: | :--: |
 |  1 | 2500 algas verdes | x | 100 madera |
-|  2 | x | 500 hierro | 100 madera |
-|  3 | x | 750 hierro | 100 madera |
+|  2 | x | 5000 algas verdes + 500 hierro | 100 madera |
+|  3 | x | 7500 algas verdes + 750 hierro | 100 madera |
 
 | Tipo | Nivel requerido de edificio| Nivel Mejora | Coste de mejora | Efecto| Justificacion| 
 | :---:| :--:|:---:|:---:|:---:|:---:|
@@ -405,6 +409,10 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 #### **5.1.1 - Introducción y Configuración del Juego**
 El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
+##### Productividad total: 
+El juego es un idle que incentiva al jugador estar gastando continuamente los recursos que generan los generadores, en este caso las algas rojas y verdes. No obstante, el jugador puede llegar a tener una productividad excesiva, y el juego no suporta una productividad tan alta, por lo tanto vamos a seguir una formula
+Por otro lado, como mencionado anteriormente, el coste de las granjas iran aumentandose para que establecer una pared de crecimiento al jugador, ya sea para evitarel crecimiento rapido, dar margen a nuevos contenidos del juegos(Expedición).  
+Se va a introducir una tabla de coste/Produccion total para entender mejor como irá el juego
 
 
 #### **5.1.2 - Tutoriales**
