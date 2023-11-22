@@ -27,7 +27,7 @@ namespace GGG.Components.UI
             button.onClick.AddListener(() =>
             {
                 _sceneManagement.AddSceneToLoad(SceneIndexes.GAME_SCENE);
-                _sceneManagement.AddSceneToUnload(SceneIndexes.MINIGAME);
+                _sceneManagement.AddSceneToUnload(SceneIndexes.MINIGAME_LEVEL1);
                 _sceneManagement.UpdateScenes();
                 GameManager.Instance.OnUIClose();
             });

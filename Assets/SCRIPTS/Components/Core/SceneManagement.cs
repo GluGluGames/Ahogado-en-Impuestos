@@ -57,8 +57,6 @@ namespace GGG.Components.Core
         public Action OnGameSceneLoaded;
         public Action OnGameSceneUnloaded;
 
-        public Action OnMinigameSceneLoaded;
-
         private void Start()
         {
             _soundManager = SoundManager.Instance;
@@ -81,17 +79,11 @@ namespace GGG.Components.Core
                     _soundManager.Play("AmbientSound");
                 }
             };
-
-            SceneManager.sceneLoaded += (scene, mode) =>
-            {
-                if (scene.buildIndex == (int)SceneIndexes.MINIGAME)
-                    OnMinigameSceneLoaded?.Invoke();
-            };
         }
 
         #region Scene Management
 
-        public SceneIndexes CurrentScene() => (SceneIndexes)SceneManager.GetActiveScene().buildIndex;
+        public static bool InGameScene() => SceneManager.GetSceneByBuildIndex((int)SceneIndexes.GAME_SCENE) == SceneManager.GetActiveScene();
 
         public void AddSceneToLoad(SceneIndexes scene)
         { 

@@ -5,26 +5,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GGG.Components.Enemies
 {
     public class EnemiesManager : MonoBehaviour
     {
+        
+        [SerializeField] private Enemy[] EnemiesPrefab;
 
-        public static EnemiesManager instance;
-        public List<Enemy> enemies;
-        private List<HexTile> tiles = new List<HexTile>();
-        [SerializeField] private int _nEnemies = 0;
-        [SerializeField] private Enemy[] enemiesPrefab;
-
-        // Start is called before the first frame update
+        private readonly List<Enemy> _enemies = new();
+        private int _nEnemies;
 
         private IEnumerator Start()
         {
             // This is made so the scene charges first and then the start method is called.
             yield return null;
 
-            // tiles = TileManager.instance.GetComponentsInChildren<HexTile>().ToList();
+            _nEnemies = EnemiesPrefab.Length;
 
             for (int i = 0; i < _nEnemies; i++)
             {
@@ -37,7 +35,7 @@ namespace GGG.Components.Enemies
             HexTile hex = TileManager.Instance.GetRandomHex();
             bool spawned = false;
 
-            foreach (Enemy enemy in enemies)
+            foreach (Enemy enemy in _enemies)
             {
                 if (enemy.currentTile == hex)
                 {
@@ -45,14 +43,15 @@ namespace GGG.Components.Enemies
                     break;
                 }
             }
-            if (enemiesPrefab != null && spawned == false)
+            
+            if (EnemiesPrefab != null && spawned == false)
             {
-                int enemIndex = Random.Range(0, enemiesPrefab.Length);
-                Enemy newEnem = Instantiate(enemiesPrefab[enemIndex], transform);
-                // newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
+                int enemIndex = Random.Range(0, EnemiesPrefab.Length);
+                Enemy newEnem = Instantiate(EnemiesPrefab[enemIndex], transform);
+                newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
                 newEnem.currentTile = hex;
                 newEnem.isDirty = true;
-                enemies.Add(newEnem);
+                _enemies.Add(newEnem);
             }
 
 

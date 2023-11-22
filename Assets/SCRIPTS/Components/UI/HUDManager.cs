@@ -71,7 +71,7 @@ namespace GGG.Components.UI
 
         private void OnDisable()
         {
-            if (_gameManager.OnTutorial()) return;
+            if (!SceneManagement.InGameScene() || _gameManager.OnTutorial()) return;
             
             SaveShownResources();
         }

@@ -10,7 +10,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace GGG.Components.HexagonalGrid
@@ -81,8 +80,7 @@ namespace GGG.Components.HexagonalGrid
             foreach (HexTile tileAux in _tiles) tileAux.OnHexSelect -= InitializePath;
             BuildingManager.OnBuildsLoad -= OnBuildsLoad;
             
-            if (SceneManager.GetSceneByBuildIndex((int) SceneIndexes.GAME_SCENE) != SceneManager.GetActiveScene()
-                || GameManager.Instance.GetCurrentTutorial() == Tutorials.BuildTutorial)
+            if (!SceneManagement.InGameScene() || GameManager.Instance.GetCurrentTutorial() == Tutorials.BuildTutorial)
                 return;
             
             SaveTilesState();
@@ -94,7 +92,8 @@ namespace GGG.Components.HexagonalGrid
 
         public GameObject GetHighlightPrefab() => HighlightPrefab;
         private void RegisterTile(HexTile tile) => _tilesDic.Add(tile.cubeCoordinate, tile);
-        
+
+        public List<HexTile> GetHexTiles() => _tiles;
         public void SelectTile(HexTile tile) => _selectedTile = tile;
 
         public HexTile GetSelectedTile() => _selectedTile; 
@@ -148,7 +147,8 @@ namespace GGG.Components.HexagonalGrid
 
             PlayerPosition.PlayerPos = playerSpawnTile.cubeCoordinate;
 
-            yield return new WaitWhile(() => !SceneManager.GetSceneByBuildIndex((int)SceneIndexes.MINIGAME).isLoaded);
+            // yield return new WaitWhile(() => !SceneManager.GetSceneByBuildIndex((int)SceneIndexes.MINIGAME_LEVEL1).isLoaded);
+            yield return null;
 
             foreach (HexTile tileAux in _tiles)
                 tileAux.OnHexSelect += InitializePath;

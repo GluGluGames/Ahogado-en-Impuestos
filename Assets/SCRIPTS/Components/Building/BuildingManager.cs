@@ -81,8 +81,7 @@ namespace GGG.Components.Buildings
 
         private void OnDisable()
         {
-            if (_gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial ||
-                SceneManagement.Instance.CurrentScene() != SceneIndexes.GAME_SCENE) return;
+            if (_gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial || !SceneManagement.InGameScene()) return;
             
             SaveBuildings();
         }

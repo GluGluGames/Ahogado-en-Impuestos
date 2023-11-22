@@ -60,7 +60,8 @@ namespace GGG.Components.Player
 
         private void OnDisable()
         {
-            if (_gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
+            if (!SceneManagement.InGameScene() || 
+                _gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
             
             SaveResourcesCount();
         }

@@ -1,8 +1,6 @@
 using UnityEngine;
-using GGG.Components.UI;
-using System.Linq.Expressions;
 
-namespace GGG.Components.Player
+namespace GGG.Components.Expedition
 {
     public class TriggerSensor : MonoBehaviour
     {
@@ -22,7 +20,7 @@ namespace GGG.Components.Player
         private void OnTriggerEnter(Collider other)
         {
             //_overlaps++;
-            if (other.transform.gameObject.layer == 9) return;
+            if (other.transform.gameObject.layer != LayerMask.NameToLayer("Enemy")) return;
             Lost();
         }
 

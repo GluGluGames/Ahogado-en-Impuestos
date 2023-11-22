@@ -11,6 +11,7 @@ using DG.Tweening;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace GGG.Components.Laboratory
@@ -44,6 +45,7 @@ namespace GGG.Components.Laboratory
         private Resource[] _activeResource;
         private Building[] _activeBuilding;
         private bool[] _barActive;
+        private bool _wasOpen;
         private float[] _deltaTimes;
         
         private GameObject _viewport;
@@ -378,6 +380,8 @@ namespace GGG.Components.Laboratory
 
         private void OnDisable()
         {
+            if (!SceneManagement.InGameScene() || !_wasOpen) return;
+            
             SaveResearchProgress();
         }
 
@@ -386,6 +390,7 @@ namespace GGG.Components.Laboratory
             if (_open) return;
 
             _open = true;
+            _wasOpen = true;
             _viewport.SetActive(true);
             _gameManager.OnUIOpen();
             OnLaboratoryOpen?.Invoke();
