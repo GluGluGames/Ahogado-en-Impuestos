@@ -18,6 +18,7 @@ namespace GGG.Components.Resources
         private bool WaitSecond = true;
 
         private bool _collided = false;
+        private bool _resourcePicked;
 
         public HexTile currentTile;
         public Action onResourceCollideEnter;
@@ -46,18 +47,16 @@ namespace GGG.Components.Resources
             _collided = true;
             _pickProgressUI.gameObject.SetActive(true);
             WaitSecond = true;
-            Coroutine aux = StartCoroutine(
-                WaitSeconds(0, 3, 
-                () => 
+            StartCoroutine(WaitSeconds(0, 3, () => 
                 {
                     _pickProgressUI.current++;
-                },
-                () =>
+                }, () =>
                 {
                     _pickProgressUI.current = _pickProgressUI.maximum;
                     RecolectResource();
                     _pickProgressUI.current = 0;
                     _pickProgressUI.gameObject.SetActive(false);
+                    _resourcePicked = true;
                     DeleteMySelf();
                 }));
         }
@@ -66,13 +65,16 @@ namespace GGG.Components.Resources
         {
 
             WaitSecond = false;
-            if (_collided)
+            if (!_collided) return;
+            
+            _pickProgressUI.current = 0;
+            _pickProgressUI.gameObject.SetActive(false);
+            if (_resourcePicked)
             {
-                _pickProgressUI.current = 0;
-                _pickProgressUI.gameObject.SetActive(false);
                 onResourceCollideExit.Invoke();
-                _collided = false;
+                _resourcePicked = false;
             }
+            _collided = false;
         }
 
         private void Start()
@@ -104,7 +106,7 @@ namespace GGG.Components.Resources
             ResourceManager.Instance.sumResourceCollected();
             TickManager.OnTick -= HandleVisibility;
 
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
         #endregion Methods

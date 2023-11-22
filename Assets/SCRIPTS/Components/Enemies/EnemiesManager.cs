@@ -15,14 +15,13 @@ namespace GGG.Components.Enemies
         [SerializeField] private Enemy[] EnemiesPrefab;
 
         private readonly List<Enemy> _enemies = new();
+        private List<HexTile> _tiles;
         private int _nEnemies;
 
-        private IEnumerator Start()
+        private void Start()
         {
-            // This is made so the scene charges first and then the start method is called.
-            yield return null;
-
             _nEnemies = EnemiesPrefab.Length;
+            _tiles = FindObjectsOfType<HexTile>().ToList();
 
             for (int i = 0; i < _nEnemies; i++)
             {
@@ -32,29 +31,26 @@ namespace GGG.Components.Enemies
 
         private bool SpawnEnemy()
         {
-            HexTile hex = TileManager.Instance.GetRandomHex();
+            HexTile hex = _tiles[Random.Range(0, _tiles.Count)];
             bool spawned = false;
 
             foreach (Enemy enemy in _enemies)
             {
-                if (enemy.currentTile == hex)
-                {
-                    spawned = SpawnEnemy();
-                    break;
-                }
+                if (enemy.currentTile != hex) continue;
+                
+                spawned = SpawnEnemy();
+                break;
             }
+
+            if (EnemiesPrefab == null || spawned != false) return true;
             
-            if (EnemiesPrefab != null && spawned == false)
-            {
-                int enemIndex = Random.Range(0, EnemiesPrefab.Length);
-                Enemy newEnem = Instantiate(EnemiesPrefab[enemIndex], transform);
-                newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
-                newEnem.currentTile = hex;
-                newEnem.isDirty = true;
-                _enemies.Add(newEnem);
-            }
-
-
+            int enemIndex = Random.Range(0, EnemiesPrefab.Length);
+            Enemy newEnem = Instantiate(EnemiesPrefab[enemIndex], transform);
+            newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
+            newEnem.currentTile = hex;
+            newEnem.isDirty = true;
+            _enemies.Add(newEnem);
+            
             return true;
         }
     }

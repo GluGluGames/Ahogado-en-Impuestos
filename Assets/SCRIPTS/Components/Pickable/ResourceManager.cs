@@ -2,6 +2,7 @@ using GGG.Components.HexagonalGrid;
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,17 +21,16 @@ namespace GGG.Components.Resources
         public List<ResourceComponent> resourcesOnScene = new List<ResourceComponent>();
 
         private int _nResourcesCollected = 0;
+        private List<HexTile> _tiles;
 
         private void Awake()
         {
             Instance = this;
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
-            // This is made so the scene charges first and then the start method is called.
-            yield return null;
-
+            _tiles = FindObjectsOfType<HexTile>().ToList();
             for (int i = 0; i < _nResourcesMax; ++i)
             {
                 SpawnRandomResource();
@@ -39,26 +39,26 @@ namespace GGG.Components.Resources
 
         private bool SpawnRandomResource()
         {
-            HexTile hex = TileManager.Instance.GetRandomHex();
+            HexTile hex = _tiles[Random.Range(0, _tiles.Count)];
             bool spawned = false;
+            
             foreach (ResourceComponent resource in resourcesOnScene)
             {
-                if (resource.currentTile == hex)
-                {
-                    spawned = SpawnRandomResource();
-                    break;
-                }
+                if (resource.currentTile != hex) continue;
+                
+                spawned = SpawnRandomResource();
+                break;
             }
-            if (_resourcePrefabs != null && spawned == false)
-            {
-                int rand = Random.Range(0, _resourcePrefabs.Count);
 
-                ResourceComponent newResource = Instantiate(_resourcePrefabs[rand], transform);
-                newResource.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
-                newResource.currentTile = hex;
+            if (_resourcePrefabs == null || spawned ) return true;
+            
+            int rand = Random.Range(0, _resourcePrefabs.Count);
 
-                resourcesOnScene.Add(newResource);
-            }
+            ResourceComponent newResource = Instantiate(_resourcePrefabs[rand], transform);
+            newResource.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
+            newResource.currentTile = hex;
+
+            resourcesOnScene.Add(newResource);
 
             return true;
         }
