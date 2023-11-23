@@ -17,11 +17,11 @@ namespace GGG.Components.Buildings
 
         private GameManager _gameManager;
         
-        private Dictionary<int, List<Resource>> _resources = new();
-        private List<Button> _buttons = new();
+        private readonly Dictionary<int, List<Resource>> _resources = new();
+        private readonly List<Button> _buttons = new();
         private GameObject _viewport;
-        
-        private int _active = 0;
+
+        private Button _buttonActive;
         private bool _open;
 
         public static Action OnFarmUIOpen;
@@ -60,7 +60,7 @@ namespace GGG.Components.Buildings
             CloseButton.onClick.AddListener(OnCloseButton);
         }
 
-        private void InitializeButtons(int resource)
+        private void InitializeButtons(int resource, Resource currentResource, Farm farm)
         {
             int a = _buttons.Count / 2 - 1;
             
@@ -80,30 +80,51 @@ namespace GGG.Components.Buildings
 
                     _buttons[idx].spriteState = aux;
                     _buttons[idx].image.sprite = _buttons[idx].spriteState.disabledSprite;
+                    _buttons[idx].interactable = _resources[resource][i].Unlocked();
+                    _buttons[idx].image.color = _resources[resource][i].Unlocked() ? Color.white : Color.black;
 
-                    int index = idx;
-                    _buttons[idx].onClick.AddListener(() => SelectResource(index));
+                    int button = idx;
+                    int res = i;
+                    _buttons[idx].onClick.AddListener(() => SelectResource(button, _resources[resource][res], farm));
+
+                    if (!currentResource)
+                    {
+                        SelectedImage.color = new Color(1f, 1f, 1f, 0f);
+                        continue;
+                    }
+
+                    if (currentResource != _resources[resource][i]) continue;
+                    
+                    SelectResource(idx, _resources[resource][i], farm);
+                    SelectedImage.sprite = currentResource.GetSprite();
                 }
             }
-            //SelectResource(_active);
         }
         
-        private void SelectResource(int index)
+        private void SelectResource(int index, Resource resource, Farm farm)
         {
-            _buttons[index].image.sprite = _buttons[index].spriteState.disabledSprite;
-            _active = index;
+            if (_buttons[index] == _buttonActive) return;
+            
+            if (_buttonActive)
+                _buttonActive.image.sprite = _buttonActive.spriteState.disabledSprite;
+            
             _buttons[index].image.sprite = _buttons[index].spriteState.selectedSprite;
+            _buttonActive = _buttons[index];
 
             SelectedImage.sprite = _buttons[index].spriteState.disabledSprite;
+            SelectedImage.color = Color.white;
+            
+            if (farm.GetResource() == resource) return;
+            farm.Resource(resource);
         }
         
-        public void Open(FarmTypes type)
+        public void Open(FarmTypes type, Resource currentResource, Farm farm)
         {
             if(_open) return;
 
             _viewport.SetActive(true);
             
-            InitializeButtons((int) type);
+            InitializeButtons((int) type, currentResource, farm);
             OnFarmUIOpen?.Invoke();
             
             _gameManager.OnUIOpen();

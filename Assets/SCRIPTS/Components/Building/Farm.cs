@@ -29,7 +29,7 @@ namespace GGG.Components.Buildings
 
         public override void Interact()
         {
-            _ui.Open(FarmType);
+            _ui.Open(FarmType, _generationResource, this);
         }
 
         protected override void OnLevelUp()
