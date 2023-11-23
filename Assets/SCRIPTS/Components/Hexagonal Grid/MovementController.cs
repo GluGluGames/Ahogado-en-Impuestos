@@ -1,4 +1,7 @@
+using DG.Tweening;
 using GGG.Components.Ticks;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,17 +13,18 @@ namespace GGG.Components.HexagonalGrid
         public bool gotPath = false;
         private Rigidbody _rigidbody;
 
+        [SerializeField] private Ticker _ticker;
+
         private void Start()
         {
             _lineRenderer = GetComponent<LineRenderer>();
-            TickManager.OnTick += HandleMovement;
-                        
             _rigidbody = GetComponent<Rigidbody>();
+            _ticker.onTick += HandleMovement;
         }
 
         private void OnDisable()
         {
-            TickManager.OnTick -= HandleMovement;
+            _ticker.onTick -= HandleMovement;
         }
 
         /// <summary>
@@ -75,18 +79,18 @@ namespace GGG.Components.HexagonalGrid
                     }*/
 
                     PlayerPosition.TargetPosition = PlayerPosition.NextTile.transform.position + new Vector3(0, PlayerPosition.heightOffset, 0);
-                    MoveTo(PlayerPosition.TargetPosition);
                     gotPath = true;
                     PlayerPosition.currentPath.RemoveAt(0);
                     PlayerPosition.PlayerPos = PlayerPosition.NextTile.cubeCoordinate;
+                    MoveTo(PlayerPosition.TargetPosition);
+
                     UpdateLineRenderer(PlayerPosition.currentPath);
                 }
             }
-            catch(System.Exception e)
+            catch (System.Exception e)
             {
                 Debug.Log("Proccess probably stopped while executing");
                 Debug.Log(e);
-
             }
         }
 
@@ -96,11 +100,10 @@ namespace GGG.Components.HexagonalGrid
         /// <param name="targetPos"></param>
         private void MoveTo(Vector3 targetPos)
         {
-            Quaternion angle = Quaternion.Euler(0, Vector3.Angle(targetPos, transform.forward), 0);
-            _rigidbody.Move(targetPos, angle);
-            _rigidbody.transform.GetChild(1).LookAt(new Vector3(targetPos.x, _rigidbody.transform.position.y, targetPos.y));
+            Quaternion angle = Quaternion.Euler(0, 0, 0);
+            _rigidbody.transform.LookAt(targetPos);
+            _rigidbody.transform.position = targetPos;
             TileManager.Instance.RevealTile(PlayerPosition.NextTile, 3);
         }
-
     }
 }
