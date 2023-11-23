@@ -8,7 +8,7 @@ namespace GGG.Components.Buildings.Farm
     public class FarmUI : MonoBehaviour
     {
         private Resource[] _resources;
-        private List<Button[]> _buttons;
+        private List<Button> _buttons;
         private GameObject _viewport;
 
         [SerializeField] private GameObject[] Panels;
@@ -29,7 +29,7 @@ namespace GGG.Components.Buildings.Farm
         private void Awake()
         {
             _resources = Resources.LoadAll<Resource>(Type == 0 ? "SeaResources" : "FishResources");
-            _buttons = new List<Button[]>();
+            
 
             _viewport = transform.GetChild(0).gameObject;
             //_viewport.SetActive(false);
@@ -47,53 +47,53 @@ namespace GGG.Components.Buildings.Farm
 
         private void Initialize()
         {
+            List<Button[]> auxButtons = new List<Button[]>();
             foreach (var panel in Panels)
             {
-                _buttons.Add(panel.GetComponentsInChildren<Button>());
+                auxButtons.Add(panel.GetComponentsInChildren<Button>());
             }
 
-            //6
-            //12 - 6
-            //button - resources 
-            // 3
-            int divide = _resources.Length / 2;
-            int button = 0;
-            foreach (var buttonArray in _buttons)
+            _buttons = new List<Button>(auxButtons.Count * auxButtons[0].Length);
+
+            for (int i = 0; i < auxButtons[0].Length; i++)
             {
-                for (int i = 0; i < buttonArray.Length; i++)
+                for (int j = 0; j < auxButtons.Count; j++)
                 {
-                    if (i < divide)
-                    {
-                        SpriteState aux = new()
-                        {
-                            selectedSprite = _resources[i].GetSelectedSprite(),
-                            highlightedSprite = _resources[i].GetSelectedSprite(),
-                            disabledSprite = _resources[i].GetSprite()
-                        };
-
-                        buttonArray[i].spriteState = aux;
-                        buttonArray[i].image.sprite = buttonArray[i].spriteState.disabledSprite;
-
-                        int index = i;
-                        buttonArray[i].onClick.AddListener(() => SelectResource(button, i));
-                    }
-                    else buttonArray[i].gameObject.SetActive(false);
+                    if (i < auxButtons[i].Length) _buttons[i * auxButtons.Count + j] = auxButtons[j][i];
                 }
-
-                button++;
             }
+        
+            
 
+            for (int i = 0; i < _buttons.Count; i++)
+            {
+                    SpriteState aux = new()
+                    {
+                        selectedSprite = _resources[i].GetSelectedSprite(),
+                        highlightedSprite = _resources[i].GetSelectedSprite(),
+                        disabledSprite = _resources[i].GetSprite()
+                    };
 
-            SelectResource(0, _active);
+                    _buttons[i].spriteState = aux;
+                    _buttons[i].image.sprite = _buttons[i].spriteState.disabledSprite;
+
+                    int index = i;
+                    _buttons[i].onClick.AddListener(() => SelectResource(i));
+                
+
+            }
+            
+            //SelectResource(_active);
         }
+    
 
-        private void SelectResource(int button, int index)
+        private void SelectResource(int index)
         {
-            _buttons[button][index].image.sprite = _buttons[button][index].spriteState.disabledSprite;
+            _buttons[index].image.sprite = _buttons[index].spriteState.disabledSprite;
             _active = index;
-            _buttons[button][index].image.sprite = _buttons[button][index].spriteState.selectedSprite;
+            _buttons[index].image.sprite = _buttons[index].spriteState.selectedSprite;
 
-            SelectedImage.sprite = _buttons[button][index].spriteState.disabledSprite;
+            SelectedImage.sprite = _buttons[index].spriteState.disabledSprite;
         }
     }
 }
