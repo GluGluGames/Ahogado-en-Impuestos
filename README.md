@@ -137,6 +137,23 @@ Al subirla de nivel: se ofrecerá un mayor número de intercambios al día y de 
 | 2 | x| 2k algas rojas + 200 hierro | 5 | En esta fase el jugador ya ha avanzado parte del juego, por lo tanto se le permite mas intercambios cada dia
 | 3 | x| 3k algas rojas + 300 hierro  | 10 | Aqui el jugador ya habra avanzado bastante en la construccion de la ciudad por lo tanto se permiten hasta 10 ya que puede hacer falta los recursos en ocaciones, sin abusar del intercambio|
 
+Aquí se lista la tabla de los recursos que se pueden intercambiar; no obstante, los recursos de expedición solo se podrán desbloquear después de encontrarlos dentro de la expedición. Es decir, inicialmente quedarán bloqueados.  
+El propóstio de este edificio es para darle herramienta al jugador en caso de que quede atascado en algún recurso, pero excesivo en otro, entonces se le provee una posibilidad de hacer intercambios para estrategias más eficientes dentro de la ciudad, evitando la salida a expedición que será una aventura desconocida.  
+<<<Además, ya que el juego se consiste en un idle que se gasta y gana constantemente el recurso primario, en este las algas verdes y rojas, entonces se añade uan forma más al jugador para seguir enganchando al jugador, es destacable el precio pueda modificar después de varios testing por parte del jugador.>>>  
+
+| Recurso                      | Intercambio                                                       | Costo (Algas Rojas/Perlas) | Unidad de Intercambio |
+| ---------------------------- | ----------------------------------------------------------------- | -------------------- | ---------------------- |
+| Madera                       | Se vende por stack (20 maderas)                                   | 100 Algas/unidad     | Stack (20 maderas)     |
+|                              | Si stacks requeridos > 10, se puede comprar con perlas            | 1 Perla = 10 Stack    | -                      |
+| Hierro                       | Se vende por stack (10 hierro)                                    | 500 Algas Rojas/unidad | Stack (10 hierro)      |
+|                              | Si stacks requeridos > 2, se puede comprar con perlas             | 1 Perla = 2 Stack     | -                      |
+| Acelerador                   | -                                                                 | 100 Algas/unidad     | -                      |
+|                              |                                      				   | 1 Perla = 10 Aceleradores| -                      |
+| 1 Perla                      |                      | 1000 Algas Rojas (20 intercambios en 2 días)                    | -                      |
+| Algas Verdes                 |                                             | Si cantidad > 1000, se puede intercambiar por 1 Perla/1.25 x Algas Rojas                        |                      |
+| Aceleración Ganancias        |                                          | 2000 Algas Rojas/2 Perlas                    | (Solo aplicable en edificios de la ciudad, no se puede sobreusar) Aumenta el rendimiento 200% |
+
+
 #### **1.5.3 - Generador de electricidad**
 
 El generador de electricidad requerirá de anguilas eléctricas para construirse. Su principal función es generar cargas que pueden usarse para:
