@@ -238,6 +238,15 @@ Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubier
   - **Materiales de construcción**: recogidos en naufragios durante las expecidiones, como madera y hierro.
   - **Peces**: como anguilas eléctricas.
 
+#### **1.5.8 - Pecera**
+Edificio para el resguardo de criaturas destinadas a diversos usos en distintos edificios. Estas criaturas pueden ser utilizadas para alimentar el generador de electricidad o para embellecer la ciudad mediante la creación de distintas peceras. Cada pecera albergará su propio tipo de peces, evitando así la relación depredador-presa. Esto brinda al jugador la oportunidad de distribuir diversas peceras con el objetivo de construir su propia versión del antiguo Atlantis.
+| Nivel | Coste | Reparación | Almacenamiento |
+|-------|-------|------------|----------------|
+| 1     | 500 algas  | 100 madera        | 10 peces|
+| 2     | x   | 2k algas + 400 hierro + 400 corales       | 20            |
+| 3     | x   | 4k algas + 600 hierro + 600 corales      | 50             |
+
+
 ### Mencion espacial para edificios que esten cercas :
 El juego dispone de zonas que aumenta de diferentes formas a los edificios, es decir, si se consigue una cantidad de edificios del mismo tipo en casillas cercanas, aumentan sus funcionalidades, ya sea la productividad o aceleracion de investigacion, etc... Por lo tanto, si el jugador consigue encontrar esas zonas especiales, puede aprovecharlos y planificar el crecimiento de la ciudad.
 
