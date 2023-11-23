@@ -69,6 +69,7 @@ namespace GGG.Components.UI {
 
         private void CheckBuildings()
         {
+
             foreach(BuildButton button in _buttons)
                 button.CheckUnlockState();
         }

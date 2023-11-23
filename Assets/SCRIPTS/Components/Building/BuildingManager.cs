@@ -28,6 +28,7 @@ namespace GGG.Components.Buildings
         private GameManager _gameManager;
         
         private readonly Dictionary<Building, int> _buildingsCount = new();
+        private readonly Dictionary<Building, ResourceCost> _buildingsCosts = new();
         private List<BuildingComponent> _buildings = new();
         private List<Building> _builds;
         
@@ -35,14 +36,20 @@ namespace GGG.Components.Buildings
         private List<BuildingComponent> _fishFarms = new();
         
         private const string _EXIT_TIME = "ExitTime";
+        private const float _RATE_GROW = 1.05f;
         
         public static Action<BuildingComponent[]> OnBuildsLoad;
 
         private void Awake()
         {
-            if (Instance != null) return;
-
-            Instance = this;
+            if (!Instance) Instance = this;
+            
+            _builds = Resources.LoadAll<Building>("Buildings").ToList();
+            foreach (Building build in _builds)
+            {
+                _buildingsCount.Add(build, 0);
+                _buildingsCosts.Add(build, new ResourceCost(build.GetBuildingCost()));
+            }
         }
 
         private void Update() {
@@ -60,9 +67,6 @@ namespace GGG.Components.Buildings
         {
             _player = PlayerManager.Instance;
             _gameManager = GameManager.Instance;
-            
-            _builds = Resources.LoadAll<Building>("Buildings").ToList();
-            foreach (Building build in _builds) _buildingsCount.Add(build, 0);
             
             yield return LoadBuildings();
 
@@ -98,17 +102,20 @@ namespace GGG.Components.Buildings
         {
             Farm farm = (Farm) build;
             int generatedTime = time.Minutes >= 180 ? 180 : time.Minutes;
-            int resourcesGenerated =
-                Mathf.RoundToInt(generatedTime * 60 / farm.GetGeneration());
+            int resourcesGenerated = Mathf.RoundToInt(generatedTime * 60 / farm.GetGeneration());
                     
             _player.AddResource(farm.GetResource().GetKey(), resourcesGenerated);
         }
 
         public void AddBuilding(BuildingComponent build)
         {
-            _buildingsCount[build.GetBuild()]++;
             build.Initialize();
+            Building building = build.GetBuild();
+            _buildingsCount[building]++;
             _buildings.Add(build);
+            
+            int formula = Mathf.RoundToInt(building.GetBuildingCost().GetCost(0) * Mathf.Pow(_RATE_GROW, _buildingsCount[building]));
+            _buildingsCosts[building].AddCost(0, formula == 0 ? 20 : formula);
 
             if (build.GetType() != typeof(Farm)) return;
 
@@ -120,8 +127,12 @@ namespace GGG.Components.Buildings
 
         public void RemoveBuilding(BuildingComponent build)
         {
-            _buildingsCount[build.GetBuild()]--;
+            Building building = build.GetBuild();
+            _buildingsCount[building]--;
             _buildings.Remove(build);
+            
+            int formula = Mathf.RoundToInt(building.GetBuildingCost().GetCost(0) * Mathf.Pow(_RATE_GROW, _buildingsCount[building]));
+            _buildingsCosts[building].AddCost(0, formula <= 0 ? 0 : -formula);
             
             if (build.GetType() != typeof(Farm)) return;
 
@@ -132,6 +143,7 @@ namespace GGG.Components.Buildings
         }
 
         public int GetBuildCount(Building build) => _buildingsCount[build];
+        public ResourceCost GetBuildingCost(Building build) => _buildingsCosts[build];
 
         private void SaveBuildings() {
             BuildingComponent[] buildings = GetComponentsInChildren<BuildingComponent>();

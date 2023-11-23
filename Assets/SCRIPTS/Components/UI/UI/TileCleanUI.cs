@@ -23,9 +23,11 @@ namespace GGG.Components.UI
         private GameManager _gameManager;
         private Resource _cleanResource;
         private GameObject _viewport;
+        private HexTile[] _tiles;
         private HexTile _selectedTile;
 
         private bool _open;
+        private int _tilesClean;
 
         private TextMeshProUGUI _costAmountText;
 
@@ -49,10 +51,13 @@ namespace GGG.Components.UI
             Container.GetComponentInChildren<Image>().sprite = _cleanResource.GetSprite();
             _costAmountText = Container.GetComponentInChildren<TextMeshProUGUI>();
 
-            HexTile[] tiles = FindObjectsOfType<HexTile>();
+            _tiles = FindObjectsOfType<HexTile>();
+            _tilesClean = PlayerPrefs.HasKey("TilesClean") ? PlayerPrefs.GetInt("TilesClean") : 0;
 
-            foreach (HexTile tile in tiles) {
+            foreach (HexTile tile in _tiles) {
                 tile.OnHexSelect += Open;
+                if (_tilesClean > 0)
+                    tile.SetClearCost(Mathf.RoundToInt(tile.GetClearCost() + _tilesClean * 25));
             }
         }
 
@@ -66,6 +71,11 @@ namespace GGG.Components.UI
         {
             _selectedTile.SetTileType(TileType.Standard);
             _player.AddResource(_cleanResource.GetKey(), -_selectedTile.GetClearCost());
+            foreach (HexTile tile in _tiles)
+                tile.SetClearCost(Mathf.RoundToInt(tile.GetClearCost() + 25));
+            PlayerPrefs.SetInt("TilesClean", _tilesClean++);
+            PlayerPrefs.Save();
+            
             Close();
         }
 

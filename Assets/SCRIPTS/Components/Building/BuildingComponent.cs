@@ -11,7 +11,6 @@ namespace GGG.Components.Buildings {
         
         public Action<BuildingComponent> OnBuildSelect;
         protected int CurrentLevel = 1;
-        protected ResourceCost CurrentPrice;
 
         public abstract void Initialize();
 
