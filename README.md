@@ -167,9 +167,8 @@ El generador de electricidad requerirá de anguilas eléctricas para construirse
 | 3| x | 20k algas + 400 hierro + 25 anguilas electricas | 3 Slots +90% de la productividad actual /15min| 50 pez | Version final de la construccion, mejora significativa pero consumo significativo tambien.|
 
  Al subirlo de nivel: en el nivel II habrá dos cargas disponibles y en el nivel III, tres cargas disponibles. El uso de estas cargas es asignado por el jugador.
- Aquí se demuestra de manera visual una comparacion de la productividad de las algas.
- 
- ![Tabla Visua](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Generador%20de%20electricidad.png)
+ Aquí se demuestra de manera visual una comparacion de la productividad de las algas, el ejemplo escogido es la productividad de 3 granjas que estan alrededor de dicho edificio, por lo que los edificios maximos que acepta dicho edificio son 3.  
+ ![Tabla Visua](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Comparacion%20De%20productividad.png)
  
  
 
