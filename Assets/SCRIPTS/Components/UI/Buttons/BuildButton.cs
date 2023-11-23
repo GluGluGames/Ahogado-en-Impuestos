@@ -43,34 +43,13 @@ namespace GGG.Components.UI {
                 tile.OnHexSelect += (x) => _selectedHexTile = tile;
             }
             
-            TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>(true);
-            
-            _cost = BuildingInfo.GetBuildingCost();
-
+            _cost = _buildingManager.GetBuildingCost(BuildingInfo);
             StructureSprite.sprite = BuildingInfo.GetIcon();
-            ResourcesContainers[0].SetActive(true);
-            texts[0].text = _cost.GetCost(0).ToString();
-            ResourcesImages[0].sprite = _cost.GetResource(0).GetSprite();
             
-            if (!BuildingInfo.IsUnlocked())
-            {
-                LockButton(texts);
-                return;
-            }
-
-            for (int i = 1; i < ResourcesImages.Length; i++)
-            {
-                if (i >= _cost.GetCostsAmount() || _cost.GetCost(i) == 0)
-                    continue;
-                
-                ResourcesContainers[i].SetActive(true);
-                texts[i].SetText(_cost.GetCost(i).ToString());
-                ResourcesImages[i].sprite = _cost.GetResource(i).GetSprite();
-            }
-            
+            if (!BuildingInfo.IsUnlocked()) LockButton();
         }
 
-        private void LockButton(TextMeshProUGUI[] texts)
+        private void LockButton()
         {
             StructureSprite.color = new Color(1, 1, 1, 0.5f);
             ResourcesContainers[0].SetActive(false);
@@ -89,21 +68,22 @@ namespace GGG.Components.UI {
         {
             int cont = _buildingManager.GetBuildCount(BuildingInfo);
             TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>(true);
-            
-            if (BuildingInfo.IsUnlocked() && cont >= BuildingInfo.GetMaxBuildingNumber())
+
+            if (!BuildingInfo.IsUnlocked() 
+                || (BuildingInfo.GetMaxBuildingNumber() != -1 && cont >= BuildingInfo.GetMaxBuildingNumber()))
             {
-                if (BuildingInfo.GetMaxBuildingNumber() == -1) return;
-                
-                LockButton(texts);
+                LockButton();
                 _maxBuildingsReached = true;
                 return;
             }
             
-            if (!BuildingInfo.IsUnlocked()) return;
-            
+            Padlock.gameObject.SetActive(false);
             StructureSprite.color = new Color(1, 1, 1, 1);
             ResourcesContainers[0].SetActive(true);
-            Padlock.gameObject.SetActive(false);
+            
+            _cost = _buildingManager.GetBuildingCost(BuildingInfo);
+            texts[0].text = _cost.GetCost(0).ToString();
+            ResourcesImages[0].sprite = _cost.GetResource(0).GetSprite();
             
             for (int i = 1; i < ResourcesImages.Length; i++)
             {
@@ -124,13 +104,7 @@ namespace GGG.Components.UI {
             SoundManager.Instance.Play("Build");
             GameObject auxGo = BuildingInfo.Spawn(_selectedHexTile.SpawnPosition(), 
                 GameObject.Find("Buildings").transform, 1, false);
-            BuildingComponent build = auxGo.GetComponent<BuildingComponent>();
-            BuildingManager.Instance.AddBuilding(build);
-
-            _selectedHexTile.SetBuilding(build);
-            OnStructureBuild?.Invoke(build, _selectedHexTile);
-            StructureBuild?.Invoke();
-
+            
             for (int i = 0; i < _cost.GetCostsAmount(); i++)
             {
                 if(!_cost.GetResource(i)) continue;
@@ -138,10 +112,14 @@ namespace GGG.Components.UI {
                 _player.AddResource(_cost.GetResource(i).GetKey(), -_cost.GetCost(i));
             }
 
+            BuildingComponent build = auxGo.GetComponent<BuildingComponent>();
+            BuildingManager.Instance.AddBuilding(build);
+            _selectedHexTile.SetBuilding(build);
+            OnStructureBuild?.Invoke(build, _selectedHexTile);
+            StructureBuild?.Invoke();
 
             //FOW
             _selectedHexTile.Reveal(build.GetVisionRange(), 0);
-
             _selectedHexTile = null;
         }
 

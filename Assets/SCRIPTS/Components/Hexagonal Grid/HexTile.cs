@@ -61,7 +61,7 @@ namespace GGG.Components.HexagonalGrid
             }
 
             // TODO - Apply the cost manually
-            ClearCost = 50;
+            if(!PlayerPrefs.HasKey("TilesClean")) ClearCost = 50;
         }
 
         private void Update()
@@ -132,6 +132,8 @@ namespace GGG.Components.HexagonalGrid
 
         public int GetClearCost()
         { return ClearCost; }
+
+        public void SetClearCost(int cost) => ClearCost = cost;
 
         #endregion Getters&Setters
 

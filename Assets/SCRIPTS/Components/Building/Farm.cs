@@ -39,7 +39,7 @@ namespace GGG.Components.Buildings
 
         protected override void OnLevelUp()
         {
-            
+            _currentGeneration = ResourcesGeneration[CurrentLevel - 2];
         }
 
         public override void Boost()

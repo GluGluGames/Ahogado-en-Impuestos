@@ -244,6 +244,7 @@ namespace GGG.Components.HexagonalGrid
             if (string.IsNullOrEmpty(data)) yield break;
             
             TileData[] tiles = JsonHelper.FromJson<TileData>(data);
+            if(PlayerPrefs.HasKey("TilesClean")) PlayerPrefs.DeleteKey("TilesClean");
             int i = 0, j = 0;
 
             foreach (HexTile tile in _tiles)
