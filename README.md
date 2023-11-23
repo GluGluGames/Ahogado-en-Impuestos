@@ -410,9 +410,9 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 #### **5.1.1 - Introducción y Configuración del Juego**
 El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
 ##### Productividad total: 
-El juego es un idle que incentiva al jugador estar gastando continuamente los recursos que generan los generadores, en este caso las algas rojas y verdes. No obstante, el jugador puede llegar a tener una productividad excesiva, y el juego no suporta una productividad tan alta, por lo tanto vamos a seguir una formula
-Por otro lado, como mencionado anteriormente, el coste de las granjas iran aumentandose para que establecer una pared de crecimiento al jugador, ya sea para evitarel crecimiento rapido, dar margen a nuevos contenidos del juegos(Expedición).  
-Se va a introducir una tabla de coste/Produccion total para entender mejor como irá el juego
+El juego es un idle que motiva al jugador a gastar continuamente los recursos generados por los generadores, específicamente las algas rojas y verdes. No obstante, el jugador puede alcanzar una productividad excesiva, y el juego no admite niveles tan elevados de producción. Por lo tanto, vamos a implementar una fórmula. Además, como se mencionó previamente, el costo de las granjas aumentará para establecer una barrera al crecimiento del jugador. Esto se hace con el propósito de evitar un crecimiento demasiado rápido y para proporcionar espacio para la incorporación de nuevos contenidos en el juego, como expediciones.
+
+En el siguiente paso, se introducirá una tabla de costos/producción total para brindar una comprensión más clara de cómo se desarrollará el juego.
 ![Tabla Production/Cost](https://github.com/GluGluGames/Ahogado-en-Impuestos/raw/develop/Game%20Design%20Documents/Coste-Produccion%20Granja.png)
 
 
