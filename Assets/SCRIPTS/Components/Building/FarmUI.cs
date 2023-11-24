@@ -1,20 +1,29 @@
+using GGG.Shared;
+using GGG.Components.Core;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
-using GGG.Components.Core;
+using TMPro;
 using UnityEngine;
-using GGG.Shared;
 using UnityEngine.UI;
 
 namespace GGG.Components.Buildings
 {
     public class FarmUI : MonoBehaviour
     {
+        [Header("GameObjects")]
         [SerializeField] private GameObject[] Panels;
+        [Space(5),Header("Images")]
         [SerializeField] private Image SelectedImage;
+        [Space(5), Header("Texts")]
+        [SerializeField] private TMP_Text ResourceName;
+        [SerializeField] private TMP_Text GenerationAmount;
+        [Space(5), Header("Buttons")]
         [SerializeField] private Button CloseButton;
 
+        
         private GameManager _gameManager;
         
         private readonly Dictionary<int, List<Resource>> _resources = new();
@@ -45,6 +54,9 @@ namespace GGG.Components.Buildings
         private void Initialize()
         {
             _gameManager = GameManager.Instance;
+            
+            ResourceName.SetText("");
+            GenerationAmount.SetText("");
             
             List<Button[]> auxButtons = new ();
             foreach (GameObject panel in Panels) auxButtons.Add(panel.GetComponentsInChildren<Button>());
@@ -79,7 +91,7 @@ namespace GGG.Components.Buildings
                     };
 
                     _buttons[idx].spriteState = aux;
-                    _buttons[idx].image.sprite = _buttons[idx].spriteState.disabledSprite;
+                    _buttons[idx].image.sprite = _resources[resource][i].GetSprite();
                     _buttons[idx].interactable = _resources[resource][i].Unlocked();
                     _buttons[idx].image.color = _resources[resource][i].Unlocked() ? Color.white : Color.black;
 
@@ -87,16 +99,10 @@ namespace GGG.Components.Buildings
                     int res = i;
                     _buttons[idx].onClick.AddListener(() => SelectResource(button, _resources[resource][res], farm));
 
-                    if (!currentResource)
-                    {
-                        SelectedImage.color = new Color(1f, 1f, 1f, 0f);
-                        continue;
-                    }
-
-                    if (currentResource != _resources[resource][i]) continue;
+                    if (_resources[resource][i] != currentResource) continue;
                     
-                    SelectResource(idx, _resources[resource][i], farm);
-                    SelectedImage.sprite = currentResource.GetSprite();
+                    _buttons[idx].image.sprite = currentResource.GetSelectedSprite();
+                    _buttonActive = _buttons[idx];
                 }
             }
         }
@@ -108,11 +114,14 @@ namespace GGG.Components.Buildings
             if (_buttonActive)
                 _buttonActive.image.sprite = _buttonActive.spriteState.disabledSprite;
             
-            _buttons[index].image.sprite = _buttons[index].spriteState.selectedSprite;
+            _buttons[index].image.sprite = resource.GetSelectedSprite();
             _buttonActive = _buttons[index];
 
-            SelectedImage.sprite = _buttons[index].spriteState.disabledSprite;
+            SelectedImage.sprite = resource.GetSprite();
             SelectedImage.color = Color.white;
+            
+            ResourceName.SetText(resource.GetName());
+            GenerationAmount.SetText($"{1/farm.GetGeneration():0.00}/s");
             
             if (farm.GetResource() == resource) return;
             farm.Resource(resource);
@@ -123,6 +132,11 @@ namespace GGG.Components.Buildings
             if(_open) return;
 
             _viewport.SetActive(true);
+            
+            ResourceName.SetText(currentResource ? currentResource.GetName() : "");
+            GenerationAmount.SetText(currentResource ? $"{1/farm.GetGeneration():0.00}/s" : "");
+            SelectedImage.sprite = currentResource ? currentResource.GetSprite() : _resources[0][0].GetSprite();
+            SelectedImage.color = currentResource ? Color.white : new Color(1f, 1f, 1f, 0f);
             
             InitializeButtons((int) type, currentResource, farm);
             OnFarmUIOpen?.Invoke();
@@ -145,9 +159,14 @@ namespace GGG.Components.Buildings
             _viewport.transform.DOMoveX(Screen.width * -0.5f, 0.75f, true).SetEase(Ease.OutCubic).onComplete += () => { 
                 _viewport.SetActive(false);
                 _open = false;
+                
+                ResourceName.SetText("");
+                GenerationAmount.SetText("");
+                
+                _gameManager.OnUIClose();
             };
-            
-            _gameManager.OnUIClose();
+
+            _buttonActive = null;
         }
     }
 }

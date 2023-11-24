@@ -24,7 +24,7 @@ namespace GGG.Components.Buildings
         {
             _playerManager = PlayerManager.Instance;
             if (!_ui) _ui = FindObjectOfType<FarmUI>();
-            _currentGeneration = CurrentLevel == 1 ? InitialGeneration : ResourcesGeneration[CurrentLevel - 2];
+            _currentGeneration = _currentLevel == 1 ? InitialGeneration : ResourcesGeneration[_currentLevel - 2];
         }
 
         public override void Interact()
@@ -34,19 +34,19 @@ namespace GGG.Components.Buildings
 
         protected override void OnLevelUp()
         {
-            _currentGeneration = ResourcesGeneration[CurrentLevel - 2];
+            _currentGeneration = ResourcesGeneration[_currentLevel - 2];
         }
 
         public override void Boost()
         {
-            if (CurrentLevel == 1) _currentGeneration -= InitialGeneration * 0.25f;
-            else _currentGeneration -= ResourcesGeneration[CurrentLevel - 2] * 0.25f;
+            if (_currentLevel == 1) _currentGeneration -= InitialGeneration * 0.25f;
+            else _currentGeneration -= ResourcesGeneration[_currentLevel - 2] * 0.25f;
         }
 
         public override void EndBoost()
         {
-            if (CurrentLevel == 1) _currentGeneration += InitialGeneration * 0.25f;
-            else _currentGeneration += ResourcesGeneration[CurrentLevel - 2] * 0.25f;
+            if (_currentLevel == 1) _currentGeneration += InitialGeneration * 0.25f;
+            else _currentGeneration += ResourcesGeneration[_currentLevel - 2] * 0.25f;
         }
 
         public void Produce()
@@ -60,12 +60,6 @@ namespace GGG.Components.Buildings
             _playerManager.AddResource(_generationResource.GetKey(), 1);
             _cooldownDelta = _currentGeneration;
         }
-        
-        /// <summary>
-        /// Gets the type of the farm
-        /// </summary>
-        /// <returns>The type of the farm</returns>
-        public FarmTypes GetFarmType() => FarmType;
 
         /// <summary>
         /// Gets the resource that the farm is generating

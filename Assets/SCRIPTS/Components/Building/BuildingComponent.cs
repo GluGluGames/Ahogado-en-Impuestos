@@ -9,8 +9,11 @@ namespace GGG.Components.Buildings {
         [Tooltip("Type of building")]
         [SerializeField] protected Building BuildingData;
         
+        protected int _currentLevel = 1;
+        private ResourceCost _currentCost;
+        private int _id;
+        
         public Action<BuildingComponent> OnBuildSelect;
-        protected int CurrentLevel = 1;
 
         public abstract void Initialize();
 
@@ -40,10 +43,26 @@ namespace GGG.Components.Buildings {
         }
 
         /// <summary>
+        /// Gets the id of the building
+        /// </summary>
+        /// <returns>The id of the building</returns>
+        public int Id() => _id;
+
+        /// <summary>
+        /// Sets the id of the building
+        /// </summary>
+        /// <param name="id">The id of the building</param>
+        public void SetId(int id) => _id = id;
+
+        public ResourceCost CurrentCost() => _currentCost;
+
+        public void SetCurrentCost(ResourceCost cost) => _currentCost = cost;
+
+        /// <summary>
         /// Gets the current level of the building
         /// </summary>
         /// <returns>The current level of the building</returns>
-        public int GetCurrentLevel() => CurrentLevel;
+        public int CurrentLevel() => _currentLevel;
 
         /// <summary>
         /// Sets the level of the building
@@ -55,7 +74,7 @@ namespace GGG.Components.Buildings {
             if (level < 1 || level > BuildingData.GetMaxLevel())
                 throw new Exception("Incorrect level");
             
-            CurrentLevel = level;
+            _currentLevel = level;
         }
 
         /// <summary>
@@ -64,10 +83,10 @@ namespace GGG.Components.Buildings {
         /// <returns>True if the level could be added. False otherwise</returns>
         public void AddLevel()
         {
-            if (CurrentLevel + 1 > BuildingData.GetMaxLevel())
+            if (_currentLevel + 1 > BuildingData.GetMaxLevel())
                 throw new Exception("Max level reached");
             
-            CurrentLevel++;
+            _currentLevel++;
             OnLevelUp();
         }
 
@@ -75,18 +94,18 @@ namespace GGG.Components.Buildings {
         /// Gets the building information
         /// </summary>
         /// <returns>The building information</returns>
-        public Building GetBuild() => BuildingData;
+        public Building BuildData() => BuildingData;
 
         /// <summary>
         /// Gets the current position of the building
         /// </summary>
         /// <returns>The current position of the building</returns>
-        public Vector3 GetPosition() => transform.position;
+        public Vector3 Position() => transform.position;
 
         /// <summary>
         /// Gets the vision range of the building
         /// </summary>
         /// <returns>The vision range</returns>
-        public int GetVisionRange() => BuildingData.GetVisionRange();
+        public int VisionRange() => BuildingData.GetVisionRange();
     }
 }

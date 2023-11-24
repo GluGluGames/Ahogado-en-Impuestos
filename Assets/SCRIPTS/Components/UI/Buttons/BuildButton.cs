@@ -113,13 +113,15 @@ namespace GGG.Components.UI {
             }
 
             BuildingComponent build = auxGo.GetComponent<BuildingComponent>();
-            BuildingManager.Instance.AddBuilding(build);
+            _buildingManager.AddBuilding(build);
+            build.SetCurrentCost(_cost);
+            
             _selectedHexTile.SetBuilding(build);
             OnStructureBuild?.Invoke(build, _selectedHexTile);
             StructureBuild?.Invoke();
 
             //FOW
-            _selectedHexTile.Reveal(build.GetVisionRange(), 0);
+            _selectedHexTile.Reveal(build.VisionRange(), 0);
             _selectedHexTile = null;
         }
 

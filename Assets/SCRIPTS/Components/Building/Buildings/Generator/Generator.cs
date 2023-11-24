@@ -11,7 +11,7 @@ namespace GGG.Components.Buildings.Generator
 
         public override void Interact()
         {
-            _ui.Open(CurrentLevel);
+            _ui.Open(_currentLevel);
         }
     }
 }
