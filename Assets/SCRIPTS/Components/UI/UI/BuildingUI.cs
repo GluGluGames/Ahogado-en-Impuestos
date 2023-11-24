@@ -45,7 +45,7 @@ namespace GGG.Components.UI
             
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
-            _viewport.transform.position = new Vector3(Screen.width * 0.5f, 0, 0);
+            _viewport.transform.position = new Vector3(Screen.width * 0.5f, Screen.width * -0.5f, 0);
             
             Initialize();
             
@@ -104,7 +104,7 @@ namespace GGG.Components.UI
                 return; 
             }
             
-            _viewport.transform.DOMoveY(Screen.height * 0.5f, 0.75f).SetEase(Ease.InCubic).onComplete += () =>
+            _viewport.transform.DOMoveY(0, 0.75f).SetEase(Ease.InCubic).onComplete += () =>
             {
                 _open = true;
             };
@@ -124,7 +124,7 @@ namespace GGG.Components.UI
         
         public void Close()
         {
-            _viewport.transform.DOMoveY(0, 0.75f).SetEase(Ease.OutCubic).onComplete += () => {
+            _viewport.transform.DOMoveY(Screen.width * -0.5f, 0.75f).SetEase(Ease.OutCubic).onComplete += () => {
                 _viewport.SetActive(false);
                 _open = false;
                 _gameManager.OnUIClose();

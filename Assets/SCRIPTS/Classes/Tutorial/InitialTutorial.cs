@@ -92,6 +92,7 @@ public class InitialTutorial : TutorialBase
 
     private IEnumerator CameraZoomStep()
     {
+        #if !UNITY_ANDROID
         Vector3 lastCameraPosition = _mainCamera.localPosition;
         float magnitude = 0f;
         
@@ -101,5 +102,16 @@ public class InitialTutorial : TutorialBase
             lastCameraPosition = _mainCamera.localPosition;
             yield return null;
         }
+        #else
+        Vector3 lastCameraPosition = _cameraTransform.transform.localScale;
+        float magnitude = 0f;
+        
+        while (magnitude < 5f)
+        {
+            magnitude += (lastCameraPosition - _cameraTransform.transform.localScale).magnitude;
+            lastCameraPosition = _cameraTransform.transform.localScale;
+            yield return null;
+        }
+        #endif
     }
 }
