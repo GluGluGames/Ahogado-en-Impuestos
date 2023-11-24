@@ -7,9 +7,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 
-namespace GGG.Components.UI {
-    public class BuildingUI : MonoBehaviour {
+namespace GGG.Components.UI 
+{
+    public class BuildingUI : MonoBehaviour
+    {
+        [Header("GameObjects")] 
+        [SerializeField] private List<GameObject> Panels;
+
+        [Space(5), Header("Buttons")] 
+        [SerializeField] private Button RightArrow;
+        [SerializeField] private Button LeftArrow;
         [SerializeField] private Button CloseButton;
 
         // MANAGERS
@@ -24,6 +33,7 @@ namespace GGG.Components.UI {
         
         // VARIABLES
         private bool _open;
+        private int _currentPanel;
 
         //EVENTS
         public static Action OnUiOpen;
@@ -35,24 +45,13 @@ namespace GGG.Components.UI {
             
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
-            
-            CloseButton.onClick.AddListener(OnCloseButton);
-
-            HexTile[] tiles = FindObjectsOfType<HexTile>();
-
-            foreach (HexTile tile in tiles) {
-                tile.OnHexSelect += Open;
-            }
-
-            _buttons = GetComponentsInChildren<BuildButton>(true);
-
-            foreach (BuildButton button in _buttons) {
-                button.Initialize(_buildingManager);
-                button.OnStructureBuild += (x, y) => Close();
-            }
-
-            _open = false;
             _viewport.transform.position = new Vector3(Screen.width * 0.5f, 0, 0);
+            
+            Initialize();
+            
+            LeftArrow.onClick.AddListener(() => OnArrow(0));
+            RightArrow.onClick.AddListener(() => OnArrow(1));
+            CloseButton.onClick.AddListener(OnCloseButton);
         }
 
         private void Update() {
@@ -67,9 +66,35 @@ namespace GGG.Components.UI {
             Close();
         }
 
+        private void Initialize()
+        {
+            HexTile[] tiles = FindObjectsOfType<HexTile>();
+
+            foreach (HexTile tile in tiles) {
+                tile.OnHexSelect += Open;
+            }
+
+            _buttons = GetComponentsInChildren<BuildButton>(true);
+
+            foreach (BuildButton button in _buttons) {
+                button.Initialize(_buildingManager);
+                button.OnStructureBuild += (x, y) => Close();
+            }
+        }
+        
+        private void OnArrow(int arrow)
+        {
+            int idx = _currentPanel + (arrow == 0 ? -1 : 1);
+            
+            if (idx < 0 || idx >= Panels.Count) return;
+            
+            Panels[_currentPanel].SetActive(false);
+            Panels[idx].SetActive(true);
+            _currentPanel = idx;
+        }
+
         private void CheckBuildings()
         {
-
             foreach(BuildButton button in _buttons)
                 button.CheckUnlockState();
         }

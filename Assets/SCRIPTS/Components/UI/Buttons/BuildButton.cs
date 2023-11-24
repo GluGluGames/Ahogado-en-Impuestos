@@ -19,6 +19,8 @@ namespace GGG.Components.UI {
         [SerializeField] private GameObject Container;
         [SerializeField] private GameObject[] ResourcesContainers;
         [SerializeField] private GameObject Padlock;
+        [Space(5), Header("Texts")] 
+        [SerializeField] private TMP_Text StructureName;
         [Space(5), Header("Images")]
         [SerializeField] private Image[] ResourcesImages;
         [SerializeField] private Image StructureSprite;
@@ -45,6 +47,7 @@ namespace GGG.Components.UI {
             
             _cost = _buildingManager.GetBuildingCost(BuildingInfo);
             StructureSprite.sprite = BuildingInfo.GetIcon();
+            StructureName.SetText(BuildingInfo.GetName());
             
             if (!BuildingInfo.IsUnlocked()) LockButton();
         }
