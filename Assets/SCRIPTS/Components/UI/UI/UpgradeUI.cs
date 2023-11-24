@@ -114,7 +114,10 @@ namespace GGG.Components.UI
 
         private void OnBuildInteract(BuildingComponent build)
         {
-            InteractButton.onClick.AddListener(() => {
+            InteractButton.onClick.AddListener(() =>
+            {
+                if (!_open || _gameManager.OnTutorial() || _gameManager.TutorialOpen()) return;
+                
                 build.Interact();
                 Close(false);
             });
