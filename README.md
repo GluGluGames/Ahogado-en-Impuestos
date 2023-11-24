@@ -19,6 +19,7 @@
 - 14/11/2023 - Luming - Corregir las mecanicas de construccion y subir FSM de diferentes enemigos
 - 17/11/2023 - Luming - Reescribir el texto de la MDA
 - 22/11/2023 - Luming - Afinar las mecancias de produccion y coste de granja de algas
+- 24/11/2023 - Luming - Introducir explicacion visual del generador de electricidad,tienda y peceera; y añadido tiempo de recogido en Game Design
   
 ## 1 - MÉCANICAS 
 
@@ -86,11 +87,15 @@ Esta mecánica añade un elemento táctico al juego, donde los jugadores deben s
 
 - **Perlas**: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
 
-- **Madera, Corales y Hierro**: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
-
 - **Conchas**:Recurso de rareza  alta, puede atraer a animales grande para proteccion dentro de la expedicion.
 
 - **Caracolas**: Recursos de finalidad decorativa, puede aumentar el nivel de prestigio de la ciudad.
+
+- --------------------------------------------------------------------------------
+
+Recursos de expedicion:
+
+- **Madera, Corales y Hierro**: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
 
 #### **1.4.2 - Recursos especiales**
 
@@ -484,6 +489,19 @@ Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar di
 Los niveles en este juego representarán las diferentes zonas de expedición y serán diseñados a mano con distribuciones específicas de niveles de profundidad. Estas distribuciones se han diseñado con el propósito de plantear desafíos y dificultades para el jugador antes de que este adquiera objetos que lo hagan inmune a ciertos peligros.
 
 Sin embargo, es importante destacar que los recursos que no funcionen como desencadenantes clave para avanzar en el juego serán generados aleatoriamente por la zona. Esto permite que el jugador encuentre variedad en cada expedición y promueve la exploración activa para reunir recursos útiles en su búsqueda para reconstruir la ciudad perdida de Atlantis.
+
+Cabe destacar que existe un tiempo de recogida de recursos, ya que cada recurso es diferente y la cantidad que posee la casilla varía. Por lo tanto, se ha establecido un período de recogida distinto para cada casilla, determinado principalmente por el tipo de recurso que contiene y secundariamente por la cantidad de recursos presentes en la casilla.
+
+| Tipo de Recurso | Cantidad | Tiempo de Recogida | Tiempo Adicional si Cantidad Supera X |
+|------------------|----------|---------------------|---------------------------------------|
+| Madera         | 10     | 1 segundo          | cada 10 de madera suma 1 segundo de espera |             |
+| Hierro         | 10      | 2 segundo         | cada 10 de hierro suma 2 segundo de espera            |
+| Algas  (ya sea verde o roja)       | 1000      | 5 segundos          | Cada 1000 algas suma 1 segundo de espera |
+| Perla              | 1     | 30 segundos               | cada perla suma 30 segundos de espera |
+| Coral             | 10     | 1 segundo               | cada 10 coral suma 1 segundos de espera |
+
+
+
 
 | Nombre del Nivel | Imagen |
 |-------------------|--------|
