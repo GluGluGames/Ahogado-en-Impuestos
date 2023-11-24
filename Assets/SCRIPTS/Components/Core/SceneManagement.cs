@@ -83,8 +83,16 @@ namespace GGG.Components.Core
 
         #region Scene Management
 
-        public static bool InGameScene() => SceneManager.GetSceneByBuildIndex((int)SceneIndexes.GAME_SCENE) == SceneManager.GetActiveScene();
+        public static bool InGameScene()
+        {
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                if (SceneManager.GetSceneAt(i) == SceneManager.GetSceneByBuildIndex((int)SceneIndexes.GAME_SCENE))
+                    return true;
+            }
 
+            return false;
+        }
         public void AddSceneToLoad(SceneIndexes scene)
         { 
            _sceneAsyncOperation.Add(SceneManager.LoadSceneAsync((int) scene, LoadSceneMode.Additive));
