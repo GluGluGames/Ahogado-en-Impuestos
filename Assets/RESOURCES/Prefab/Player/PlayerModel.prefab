@@ -1890,7 +1890,7 @@ GameObject:
   - component: {fileID: 8719601965742170501}
   m_Layer: 11
   m_Name: ProgressBar
-  m_TagString: Untagged
+  m_TagString: PickUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1923,11 +1923,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fcbdb9c5da3b248b7f575e4739eb12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimum: 0
-  maximum: 3
-  current: 0
-  mask: {fileID: 2969591738415036682}
   camera: {fileID: 0}
+  FillBar: {fileID: 2969591738415036682}
 --- !u!1 &8705654551362129222
 GameObject:
   m_ObjectHideFlags: 0

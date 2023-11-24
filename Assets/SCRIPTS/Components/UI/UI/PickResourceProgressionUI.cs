@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,25 +7,39 @@ namespace GGG.Components.UI
 {
     public class PickResourceProgressionUI : MonoBehaviour
     {
+        
+        [SerializeField] private Image FillBar;
+        
+        private Camera _camera;
 
-        public int minimum = 0;
-        public int maximum = 3;
-        public int current = 0;
-        public Image mask;
-        [SerializeField] private GameObject camera;
+        private void OnEnable()
+        {
+            FillBar.fillAmount = 0;
+        }
+
+        private void Start()
+        {
+            _camera = Camera.main;
+        }
 
         private void Update()
         {
-            transform.LookAt(camera.transform.position);
-            GetCurrentFill();
+            transform.LookAt(transform.position + _camera.transform.rotation * Vector3.back, 
+                _camera.transform.rotation * Vector3.up);
         }
 
-        private void GetCurrentFill()
+        public IEnumerator PickResource(int recollectionTime)
         {
-            float currentOffset = current - minimum;
-            float maximumOffset = maximum - minimum;
-            float fillAmount = currentOffset / maximumOffset;
-            mask.fillAmount = fillAmount;
+            float aux = 0;
+
+            while (FillBar.fillAmount < 1)
+            {
+                FillBar.fillAmount = aux / recollectionTime;
+                aux += Time.deltaTime;
+                yield return null;
+            }
         }
+
+        public void StopPicking() => StopAllCoroutines();
     }
 }
