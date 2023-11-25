@@ -19,6 +19,7 @@
 - 14/11/2023 - Luming - Corregir las mecanicas de construccion y subir FSM de diferentes enemigos
 - 17/11/2023 - Luming - Reescribir el texto de la MDA
 - 22/11/2023 - Luming - Afinar las mecancias de produccion y coste de granja de algas
+- 24/11/2023 - Luming - Introducir explicacion visual del generador de electricidad,tienda y peceera; y añadido tiempo de recogido en Game Design
   
 ## 1 - MÉCANICAS 
 
@@ -86,11 +87,15 @@ Esta mecánica añade un elemento táctico al juego, donde los jugadores deben s
 
 - **Perlas**: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
 
-- **Madera, Corales y Hierro**: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
-
 - **Conchas**:Recurso de rareza  alta, puede atraer a animales grande para proteccion dentro de la expedicion.
 
 - **Caracolas**: Recursos de finalidad decorativa, puede aumentar el nivel de prestigio de la ciudad.
+
+- --------------------------------------------------------------------------------
+
+Recursos de expedicion:
+
+- **Madera, Corales y Hierro**: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
 
 #### **1.4.2 - Recursos especiales**
 
@@ -137,6 +142,23 @@ Al subirla de nivel: se ofrecerá un mayor número de intercambios al día y de 
 | 2 | x| 2k algas rojas + 200 hierro | 5 | En esta fase el jugador ya ha avanzado parte del juego, por lo tanto se le permite mas intercambios cada dia
 | 3 | x| 3k algas rojas + 300 hierro  | 10 | Aqui el jugador ya habra avanzado bastante en la construccion de la ciudad por lo tanto se permiten hasta 10 ya que puede hacer falta los recursos en ocaciones, sin abusar del intercambio|
 
+Aquí se lista la tabla de los recursos que se pueden intercambiar; no obstante, los recursos de expedición solo se podrán desbloquear después de encontrarlos dentro de la expedición. Es decir, inicialmente quedarán bloqueados.  
+El propóstio de este edificio es para darle herramienta al jugador en caso de que quede atascado en algún recurso, pero excesivo en otro, entonces se le provee una posibilidad de hacer intercambios para estrategias más eficientes dentro de la ciudad, evitando la salida a expedición que será una aventura desconocida.  
+<<<Además, ya que el juego se consiste en un idle que se gasta y gana constantemente el recurso primario, en este las algas verdes y rojas, entonces se añade uan forma más al jugador para seguir enganchando al jugador, es destacable el precio pueda modificar después de varios testing por parte del jugador.>>>  
+
+| Recurso                      | Intercambio                                                       | Costo (Algas Rojas/Perlas) | Unidad de Intercambio |
+| ---------------------------- | ----------------------------------------------------------------- | -------------------- | ---------------------- |
+| Madera                       | Se vende por stack (20 maderas)                                   | 100 Algas/unidad     | Stack (20 maderas)     |
+|                              | Si stacks requeridos > 10, se puede comprar con perlas            | 1 Perla = 10 Stack    | -                      |
+| Hierro                       | Se vende por stack (10 hierro)                                    | 500 Algas Rojas/unidad | Stack (10 hierro)      |
+|                              | Si stacks requeridos > 2, se puede comprar con perlas             | 1 Perla = 2 Stack     | -                      |
+| Acelerador                   | -                                                                 | 100 Algas/unidad     | -                      |
+|                              |                                      				   | 1 Perla = 10 Aceleradores| -                      |
+| 1 Perla                      |                      | 1000 Algas Rojas (20 intercambios en 2 días)                    | -                      |
+| Algas Verdes                 |                                             | Si cantidad > 1000, se puede intercambiar por 1 Perla/1.25 x Algas Rojas                        |                      |
+| Aceleración Ganancias        |                                          | 2000 Algas Rojas/2 Perlas                    | (Solo aplicable en edificios de la ciudad, no se puede sobreusar) Aumenta el rendimiento 200% |
+
+
 #### **1.5.3 - Generador de electricidad**
 
 El generador de electricidad requerirá de anguilas eléctricas para construirse. Su principal función es generar cargas que pueden usarse para:
@@ -150,6 +172,10 @@ El generador de electricidad requerirá de anguilas eléctricas para construirse
 | 3| x | 20k algas + 400 hierro + 25 anguilas electricas | 3 Slots +90% de la productividad actual /15min| 50 pez | Version final de la construccion, mejora significativa pero consumo significativo tambien.|
 
  Al subirlo de nivel: en el nivel II habrá dos cargas disponibles y en el nivel III, tres cargas disponibles. El uso de estas cargas es asignado por el jugador.
+ Aquí se demuestra de manera visual una comparacion de la productividad de las algas, el ejemplo escogido es la productividad de 3 granjas que estan alrededor de dicho edificio, por lo que los edificios maximos que acepta dicho edificio son 3.  
+ ![Tabla Visua](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Comparacion%20De%20productividad.png)
+ 
+ 
 
 #### **1.5.4 - Paratridente**
 
@@ -216,6 +242,15 @@ Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubier
   - **Materiales del mar**: como algas y corales.
   - **Materiales de construcción**: recogidos en naufragios durante las expecidiones, como madera y hierro.
   - **Peces**: como anguilas eléctricas.
+
+#### **1.5.8 - Pecera**
+Edificio para el resguardo de criaturas destinadas a diversos usos en distintos edificios. Estas criaturas pueden ser utilizadas para alimentar el generador de electricidad o para embellecer la ciudad mediante la creación de distintas peceras. Cada pecera albergará su propio tipo de peces, evitando así la relación depredador-presa. Esto brinda al jugador la oportunidad de distribuir diversas peceras con el objetivo de construir su propia versión del antiguo Atlantis.
+| Nivel | Coste | Reparación | Almacenamiento |
+|-------|-------|------------|----------------|
+| 1     | 500 algas  | 100 madera        | 10 peces|
+| 2     | x   | 2k algas + 400 hierro + 400 corales       | 20            |
+| 3     | x   | 4k algas + 600 hierro + 600 corales      | 50             |
+
 
 ### Mencion espacial para edificios que esten cercas :
 El juego dispone de zonas que aumenta de diferentes formas a los edificios, es decir, si se consigue una cantidad de edificios del mismo tipo en casillas cercanas, aumentan sus funcionalidades, ya sea la productividad o aceleracion de investigacion, etc... Por lo tanto, si el jugador consigue encontrar esas zonas especiales, puede aprovecharlos y planificar el crecimiento de la ciudad.
@@ -361,10 +396,10 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | Shop with Items       | ![Shop with Items](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Shop_Mockup_WItems.jpg) |
 | Tutorial              | ![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Tutorial_Mockup.png) |
 | Upgrade UI            | ![Upgrade UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/UpgradeUi_Mockup.png) |
-| Derrota               | ![Derrota UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Derrota/Interfaz%20derrota%20referencia.png)
-| Construccion          | ![Construccion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Construir/Interfaz%20construcci%C3%B3n%20referencia.png)
-| Expedicion            | ![Expedicion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Expedici%C3%B3n/Interfaz%20expedici%C3%B3n%20referencia%20con%20fondo.png)
-| Lateral               | ![Lateral UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Lateral/Interfaz%20lateral%20referencia.png)
+| Derrota               | ![Derrota UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Derrota/Interfaz%20derrota%20referencia.png)
+| Construccion          | ![Construccion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Construir/Interfaz%20construcci%C3%B3n%20referencia.png)
+| Expedicion            | ![Expedicion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Expedici%C3%B3n/Interfaz%20expedici%C3%B3n%20referencia%20con%20fondo.png)
+| Lateral               | ![Lateral UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Lateral/Interfaz%20lateral%20referencia.png)
 
 
 
@@ -410,9 +445,9 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 #### **5.1.1 - Introducción y Configuración del Juego**
 El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
 ##### Productividad total: 
-El juego es un idle que incentiva al jugador estar gastando continuamente los recursos que generan los generadores, en este caso las algas rojas y verdes. No obstante, el jugador puede llegar a tener una productividad excesiva, y el juego no suporta una productividad tan alta, por lo tanto vamos a seguir una formula
-Por otro lado, como mencionado anteriormente, el coste de las granjas iran aumentandose para que establecer una pared de crecimiento al jugador, ya sea para evitarel crecimiento rapido, dar margen a nuevos contenidos del juegos(Expedición).  
-Se va a introducir una tabla de coste/Produccion total para entender mejor como irá el juego
+El juego es un idle que motiva al jugador a gastar continuamente los recursos generados por los generadores, específicamente las algas rojas y verdes. No obstante, el jugador puede alcanzar una productividad excesiva, y el juego no admite niveles tan elevados de producción. Por lo tanto, vamos a implementar una fórmula. Además, como se mencionó previamente, el costo de las granjas aumentará para establecer una barrera al crecimiento del jugador. Esto se hace con el propósito de evitar un crecimiento demasiado rápido y para proporcionar espacio para la incorporación de nuevos contenidos en el juego, como expediciones.
+
+En el siguiente paso, se introducirá una tabla de costos/producción total para brindar una comprensión más clara de cómo se desarrollará el juego.
 ![Tabla Production/Cost](https://github.com/GluGluGames/Ahogado-en-Impuestos/raw/develop/Game%20Design%20Documents/Coste-Produccion%20Granja.png)
 
 
@@ -454,6 +489,19 @@ Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar di
 Los niveles en este juego representarán las diferentes zonas de expedición y serán diseñados a mano con distribuciones específicas de niveles de profundidad. Estas distribuciones se han diseñado con el propósito de plantear desafíos y dificultades para el jugador antes de que este adquiera objetos que lo hagan inmune a ciertos peligros.
 
 Sin embargo, es importante destacar que los recursos que no funcionen como desencadenantes clave para avanzar en el juego serán generados aleatoriamente por la zona. Esto permite que el jugador encuentre variedad en cada expedición y promueve la exploración activa para reunir recursos útiles en su búsqueda para reconstruir la ciudad perdida de Atlantis.
+
+Cabe destacar que existe un tiempo de recogida de recursos, ya que cada recurso es diferente y la cantidad que posee la casilla varía. Por lo tanto, se ha establecido un período de recogida distinto para cada casilla, determinado principalmente por el tipo de recurso que contiene y secundariamente por la cantidad de recursos presentes en la casilla.
+
+| Tipo de Recurso | Cantidad | Tiempo de Recogida | Tiempo Adicional si Cantidad Supera X |
+|------------------|----------|---------------------|---------------------------------------|
+| Madera         | 10     | 1 segundo          | cada 10 de madera suma 1 segundo de espera |             |
+| Hierro         | 10      | 2 segundo         | cada 10 de hierro suma 2 segundo de espera            |
+| Algas  (ya sea verde o roja)       | 1000      | 5 segundos          | Cada 1000 algas suma 1 segundo de espera |
+| Perla              | 1     | 30 segundos               | cada perla suma 30 segundos de espera |
+| Coral             | 10     | 1 segundo               | cada 10 coral suma 1 segundos de espera |
+
+
+
 
 | Nombre del Nivel | Imagen |
 |-------------------|--------|

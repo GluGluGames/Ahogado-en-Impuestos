@@ -52,7 +52,11 @@ namespace GGG.Components.UI
             foreach(GameObject go in ResourceContainers)
                 go.SetActive(false);
             
-            _player.OnPlayerInitialized += () => StartCoroutine(LoadShownResource());
+            _player.OnPlayerInitialized += () =>
+            {
+                StartCoroutine(LoadShownResource());
+                _playerInitialized = true;
+            };
         }
 
         private void Update() {
@@ -158,7 +162,6 @@ namespace GGG.Components.UI
                     ResourcesText[resource.Index].SetText(_player.GetResourceCount(resource.Resource.GetKey()).ToString());
                     
                 }
-                _currentIdx = _shownResource.Count == 0 ? 0 : ResourcesIcons.FindIndex(x => !x.gameObject.activeInHierarchy);
             }
             else
             {
@@ -170,7 +173,8 @@ namespace GGG.Components.UI
                 ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
             }
             
-            _playerInitialized = true;
+            _currentIdx = _shownResource.Count == 0 ? 0 : ResourcesIcons.FindIndex(x => !x.gameObject.activeInHierarchy);
+            //_playerInitialized = true;
         }
     }
 }

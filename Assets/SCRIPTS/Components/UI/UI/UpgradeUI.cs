@@ -72,16 +72,15 @@ namespace GGG.Components.UI
 
         private void OpenCheck()
         {
-            int currentLevel = _selectedBuilding.GetCurrentLevel();
-            ResourceCost[] cost = _selectedBuilding.GetBuild().GetUpgradeCost();
+            int currentLevel = _selectedBuilding.CurrentLevel();
+            ResourceCost[] cost = _selectedBuilding.BuildData().GetUpgradeCost();
             bool price = true;
             
-            SellResource.sprite = _selectedBuilding.GetBuild().GetBuildResource(0).GetSprite();
-            // TODO - Change price when upgraded
-            SellCost.SetText(Mathf.RoundToInt(_selectedBuilding.GetBuild().GetBuildingCost(0) * 0.5f).ToString());
+            SellResource.sprite = _selectedBuilding.BuildData().GetBuildResource(0).GetSprite();
+            SellCost.SetText(Mathf.RoundToInt(_selectedBuilding.CurrentCost().GetCost(0) * 0.5f).ToString());
             
-            bool activeCondition = _selectedBuilding.GetBuild().CanUpgraded() &&
-                             currentLevel < _selectedBuilding.GetBuild().GetMaxLevel();
+            bool activeCondition = _selectedBuilding.BuildData().CanUpgraded() &&
+                             currentLevel < _selectedBuilding.BuildData().GetMaxLevel();
             
             UpgradePanel.SetActive(activeCondition);
 
@@ -89,11 +88,11 @@ namespace GGG.Components.UI
             
             for (int i = 0; i < cost[currentLevel - 1].GetCostsAmount(); i++)
             {
-                if (!_selectedBuilding.GetBuild().GetUpgradeResource(currentLevel, i)) break;
+                if (!_selectedBuilding.BuildData().GetUpgradeResource(currentLevel, i)) break;
                 
                 UpgradeCost[i].transform.parent.gameObject.SetActive(true);
-                UpgradeCost[i].text = _selectedBuilding.GetBuild().GetUpgradeCost(currentLevel, i).ToString();
-                UpgradeResources[i].sprite = _selectedBuilding.GetBuild().GetUpgradeResource(currentLevel, i).GetSprite();
+                UpgradeCost[i].text = _selectedBuilding.BuildData().GetUpgradeCost(currentLevel, i).ToString();
+                UpgradeResources[i].sprite = _selectedBuilding.BuildData().GetUpgradeResource(currentLevel, i).GetSprite();
                 
                 if (_player.GetResourceCount(cost[currentLevel - 1].GetResource(i).GetKey()) >= cost[currentLevel - 1].GetCost(i)) continue;
                 
@@ -115,7 +114,10 @@ namespace GGG.Components.UI
 
         private void OnBuildInteract(BuildingComponent build)
         {
-            InteractButton.onClick.AddListener(() => {
+            InteractButton.onClick.AddListener(() =>
+            {
+                if (!_open || _gameManager.OnTutorial() || _gameManager.TutorialOpen()) return;
+                
                 build.Interact();
                 Close(false);
             });
@@ -127,7 +129,7 @@ namespace GGG.Components.UI
         {
             if(!_open || _gameManager.TutorialOpen()) return;
             
-            _player.AddResource(_sellResource.GetKey(), Mathf.RoundToInt(_selectedBuilding.GetBuild().GetBuildingCost(0) * 0.5f));
+            _player.AddResource(_sellResource.GetKey(), Mathf.RoundToInt(_selectedBuilding.CurrentCost().GetCost(0) * 0.5f));
             BuildingManager.Instance.RemoveBuilding(_selectedBuilding);
             _selectedTile.DestroyBuilding();
             
@@ -140,15 +142,16 @@ namespace GGG.Components.UI
         {
             if(!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
             
-            ResourceCost[] cost = _selectedBuilding.GetBuild().GetUpgradeCost();
-            int currentLevel = _selectedBuilding.GetCurrentLevel() - 1;
+            ResourceCost[] cost = _selectedBuilding.BuildData().GetUpgradeCost();
+            int currentLevel = _selectedBuilding.CurrentLevel() - 1;
             
             for (int i = 0; i < cost[currentLevel].GetCostsAmount(); i++)
                 _player.AddResource(cost[currentLevel].GetResource(i).GetKey(), -cost[currentLevel].GetCost(i));
 
-            _selectedBuilding.GetComponent<BuildingComponent>().AddLevel();
-            _selectedBuilding.GetBuild().Spawn(_selectedBuilding.transform.position, _selectedBuilding.transform, 
-                _selectedBuilding.GetCurrentLevel(), true);
+            _selectedBuilding.AddLevel();
+            _selectedBuilding.SetCurrentCost(cost[currentLevel]);
+            _selectedBuilding.BuildData().Spawn(_selectedBuilding.transform.position, _selectedBuilding.transform, 
+                _selectedBuilding.CurrentLevel(), true);
             SoundManager.Instance.Play("Build");
             Close(true);
         }

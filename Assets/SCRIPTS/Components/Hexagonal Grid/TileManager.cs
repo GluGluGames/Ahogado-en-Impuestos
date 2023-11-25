@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using GGG.Classes.Buildings;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -40,6 +41,7 @@ namespace GGG.Components.HexagonalGrid
         private class TileData {
             public TileType Type;
             public bool IsEmpty;
+            public int BuildId;
         }
 
         public static Action<BuildingComponent, HexTile> OnBuildingTileLoaded;
@@ -218,6 +220,8 @@ namespace GGG.Components.HexagonalGrid
                     IsEmpty = tile.TileEmpty()
                 };
 
+                if (!tile.TileEmpty()) data.BuildId = tile.GetCurrentBuilding().Id();
+
                 saveData[i] = data;
                 i++;
             }
@@ -252,9 +256,11 @@ namespace GGG.Components.HexagonalGrid
                 tile.SetTileType(tiles[i].Type);
                 if (!tiles[i].IsEmpty)
                 {
-                    tile.SetBuilding(builds[j]);
-                    tile.Reveal(builds[j].GetVisionRange(), 0);
-                    OnBuildingTileLoaded?.Invoke(builds[j], tile);
+                    BuildingComponent build = Array.Find(builds, (x) => x.Id() == tiles[i].BuildId);
+                    
+                    tile.SetBuilding(build);
+                    tile.Reveal(build.VisionRange(), 0);
+                    OnBuildingTileLoaded?.Invoke(build, tile);
                     j++;
                 }
 

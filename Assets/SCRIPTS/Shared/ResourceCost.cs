@@ -26,5 +26,6 @@ namespace GGG.Shared
         public Resource[] GetResource() => Resources;
         public int GetCostsAmount() => Costs.Length;
         public int AddCost(int index, int amount) => Costs[index] += amount;
+        public int SetCost(int index, int amount) => Costs[index] = amount;
     }
 }

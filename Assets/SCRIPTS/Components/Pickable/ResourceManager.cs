@@ -3,6 +3,7 @@ using GGG.Components.HexagonalGrid;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GGG.Shared;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,7 +18,7 @@ namespace GGG.Components.Resources
         [SerializeField] private List<ResourceComponent> _resourcePrefabs = new List<ResourceComponent>();
         [SerializeField] private int _nResourcesMax;
 
-        public Dictionary<string, int> resourcesCollected = new Dictionary<string, int>();
+        public Dictionary<Resource, int> resourcesCollected = new ();
         public List<ResourceComponent> resourcesOnScene = new List<ResourceComponent>();
 
         private int _nResourcesCollected = 0;
@@ -30,6 +31,13 @@ namespace GGG.Components.Resources
 
         private void Start()
         {
+            List<Resource> resources = UnityEngine.Resources.LoadAll<Resource>("SeaResources").Concat(
+                UnityEngine.Resources.LoadAll<Resource>("FishResources")).Concat(
+                UnityEngine.Resources.LoadAll<Resource>("ExpeditionResources")).ToList();
+
+            foreach (Resource resource in resources)
+                resourcesCollected.Add(resource, 0);
+            
             _tiles = FindObjectsOfType<HexTile>().ToList();
             for (int i = 0; i < _nResourcesMax; ++i)
             {

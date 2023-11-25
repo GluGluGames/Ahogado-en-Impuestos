@@ -1,12 +1,14 @@
+using GGG.Classes.Buildings;
+using GGG.Components.Core;
+using GGG.Components.Player;
+using GGG.Shared;
+
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using GGG.Classes.Buildings;
-using GGG.Components.Core;
-using GGG.Components.Player;
-using GGG.Shared;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -19,10 +21,16 @@ namespace GGG.Components.Buildings
         [Serializable]
         private class BuildingData
         {
+            public int Id;
             public Vector3 Position;
             public Building Building;
+            public ResourceCost CurrentCost;
             public int Level;
+            public Resource FarmResource;
         }
+
+        [SerializeField] private Building SeaFarm;
+        [SerializeField] private Resource Seaweed;
 
         private PlayerManager _player;
         private GameManager _gameManager;
@@ -31,9 +39,10 @@ namespace GGG.Components.Buildings
         private readonly Dictionary<Building, ResourceCost> _buildingsCosts = new();
         private List<BuildingComponent> _buildings = new();
         private List<Building> _builds;
+
         
-        private List<BuildingComponent> _seaFarms = new();
-        private List<BuildingComponent> _fishFarms = new();
+        private readonly List<Farm> _farms = new();
+        private int _currentId = 1;
         
         private const string _EXIT_TIME = "ExitTime";
         private const float _RATE_GROW = 1.05f;
@@ -53,14 +62,10 @@ namespace GGG.Components.Buildings
         }
 
         private void Update() {
-            if (_buildings.Count == 0 || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
+            if (_farms.Count == 0 || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
 
-            foreach (BuildingComponent build in _seaFarms) 
-                build.Interact();
-            
-            foreach (BuildingComponent build in _fishFarms)
-                build.Interact();
-            
+            foreach (Farm farm in _farms) 
+                farm.Produce();
         }
 
         private IEnumerator Start()
@@ -70,17 +75,14 @@ namespace GGG.Components.Buildings
             
             yield return LoadBuildings();
 
-            if (_fishFarms.Count == 0 && _seaFarms.Count == 0) yield break;
+            if (_farms.Count == 0) yield break;
             
             TimeSpan time = DateTime.Now - DateTime.Parse(PlayerPrefs.GetString(_EXIT_TIME));
 
-            if (time.Minutes < 3f) yield break;
+            if (time.Minutes < 1f) yield break;
+
+            foreach (Farm farm in _farms) if (farm.GetResource()) ResourceSummary(farm, time);
             
-            foreach (BuildingComponent build in _seaFarms)
-                ResourceSummary(build, time);
-                
-            foreach (BuildingComponent build in _fishFarms)
-                ResourceSummary(build, time);
         }
 
         private void OnDisable()
@@ -98,52 +100,54 @@ namespace GGG.Components.Buildings
 
         public List<BuildingComponent> GetBuildings() => _buildings;
 
-        private void ResourceSummary(BuildingComponent build, TimeSpan time)
+        private void ResourceSummary(Farm farm, TimeSpan time)
         {
-            Farm farm = (Farm) build;
             int generatedTime = time.Minutes >= 180 ? 180 : time.Minutes;
             int resourcesGenerated = Mathf.RoundToInt(generatedTime * 60 / farm.GetGeneration());
-                    
+            
             _player.AddResource(farm.GetResource().GetKey(), resourcesGenerated);
         }
 
         public void AddBuilding(BuildingComponent build)
         {
+            Building building = build.BuildData();
+            
             build.Initialize();
-            Building building = build.GetBuild();
+            build.SetId(_currentId);
             _buildingsCount[building]++;
             _buildings.Add(build);
+
+            do _currentId++; 
+            while (_buildings.Find((x) => x.Id() == _currentId));
             
             int formula = Mathf.RoundToInt(building.GetBuildingCost().GetCost(0) * Mathf.Pow(_RATE_GROW, _buildingsCount[building]));
-            _buildingsCosts[building].AddCost(0, formula == 0 ? 20 : formula);
+            _buildingsCosts[building].SetCost(0, formula);
 
-            if (build.GetType() != typeof(Farm)) return;
-
-            Farm farm = (Farm) build;
-            
-            if(farm.GetFarmType() == FarmTypes.SeaFarm) _seaFarms.Add(build);
-            else if (farm.GetFarmType() == FarmTypes.FishFarm) _fishFarms.Add(build);
+            if (build.GetType() == typeof(Farm)) _farms.Add((Farm) build);
         }
 
         public void RemoveBuilding(BuildingComponent build)
         {
-            Building building = build.GetBuild();
+            Building building = build.BuildData();
+            
             _buildingsCount[building]--;
             _buildings.Remove(build);
+            _currentId = build.Id();
             
             int formula = Mathf.RoundToInt(building.GetBuildingCost().GetCost(0) * Mathf.Pow(_RATE_GROW, _buildingsCount[building]));
-            _buildingsCosts[building].AddCost(0, formula <= 0 ? 0 : -formula);
+            _buildingsCosts[building].SetCost(0, formula <= 0 ? 0 : formula);
             
-            if (build.GetType() != typeof(Farm)) return;
-
-            Farm farm = (Farm) build;
-            
-            if(farm.GetFarmType() == FarmTypes.SeaFarm) _seaFarms.Remove(build);
-            else if (farm.GetFarmType() == FarmTypes.FishFarm) _fishFarms.Remove(build);
+            if (build.GetType() == typeof(Farm)) _farms.Remove((Farm) build);
         }
 
         public int GetBuildCount(Building build) => _buildingsCount[build];
-        public ResourceCost GetBuildingCost(Building build) => _buildingsCosts[build];
+        public ResourceCost GetBuildingCost(Building build)
+        {
+            if (build == SeaFarm && _buildingsCount[build] <= 0)
+                return new ResourceCost(new[] { 0 }, new[] { Seaweed });
+
+            return _buildingsCosts[build];
+        }
 
         private void SaveBuildings() {
             BuildingComponent[] buildings = GetComponentsInChildren<BuildingComponent>();
@@ -155,10 +159,18 @@ namespace GGG.Components.Buildings
             {
                 BuildingData data = new()
                 {
-                    Position = build.GetPosition(),
-                    Building = build.GetBuild(),
-                    Level = build.GetCurrentLevel()
+                    Id = build.Id(),
+                    Position = build.Position(),
+                    Building = build.BuildData(),
+                    Level = build.CurrentLevel(),
+                    CurrentCost = build.CurrentCost()
                 };
+
+                if (build.GetType() == typeof(Farm))
+                {
+                    Farm farm = (Farm)build;
+                    if (farm.GetResource()) data.FarmResource = farm.GetResource();
+                }
 
                 saveData[i] = data;
                 i++;
@@ -195,13 +207,24 @@ namespace GGG.Components.Buildings
             foreach (BuildingData build in buildings) {
                 GameObject go = build.Building.Spawn(build.Position, transform, build.Level, false);
                 buildingComponents[i] = go.GetComponent<BuildingComponent>();
+                
+                buildingComponents[i].SetId(build.Id);
                 buildingComponents[i].SetLevel(build.Level);
+                buildingComponents[i].SetCurrentCost(build.CurrentCost);
+                
+                if (buildingComponents[i].GetType() == typeof(Farm))
+                {
+                    Farm farm = (Farm)buildingComponents[i];
+                    if(build.FarmResource) farm.Resource(build.FarmResource);
+                }
+                
                 AddBuilding(buildingComponents[i]);
                 i++;
             }
 
-            OnBuildsLoad?.Invoke(buildingComponents);
+            while(_buildings.Find((x) => x.Id() == _currentId)) _currentId++;
             _buildings = buildingComponents.ToList();
+            OnBuildsLoad?.Invoke(buildingComponents);
         }
     }
 }

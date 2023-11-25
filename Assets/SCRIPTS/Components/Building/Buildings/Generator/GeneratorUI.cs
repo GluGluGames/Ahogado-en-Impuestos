@@ -179,14 +179,14 @@ namespace GGG.Components.Buildings.Generator
             {
                 BuildingComponent building = _generatorTile.neighbours[i].GetCurrentBuilding();
                 
-                BostTextsLevel1[i].SetText(building && building.GetBuild().CanBeBoost() ? 
-                    building.GetBuild().GetName() : "");
+                BostTextsLevel1[i].SetText(building && building.BuildData().CanBeBoost() ? 
+                    building.BuildData().GetName() : "");
                 
-                BostTextsLevel2[i].SetText(building && building.GetBuild().CanBeBoost() ? 
-                    building.GetBuild().GetName() : "");
+                BostTextsLevel2[i].SetText(building && building.BuildData().CanBeBoost() ? 
+                    building.BuildData().GetName() : "");
                 
-                BostTextsLevel3[i].SetText(building && building.GetBuild().CanBeBoost() ? 
-                    building.GetBuild().GetName() : "");
+                BostTextsLevel3[i].SetText(building && building.BuildData().CanBeBoost() ? 
+                    building.BuildData().GetName() : "");
             }
         }
 
@@ -208,7 +208,7 @@ namespace GGG.Components.Buildings.Generator
             
             foreach (BuildingComponent building in _buildings)
             {
-                if(building.GetBuild().GetType() != typeof(Generator)) continue;
+                if(building.BuildData().GetType() != typeof(Generator)) continue;
 
                 _currentGenerator = building;
 
@@ -232,7 +232,7 @@ namespace GGG.Components.Buildings.Generator
 
             foreach (BuildingComponent building in buildings)
             {
-                if (building.GetBuild().GetType() != typeof(Generator)) continue;
+                if (building.BuildData().GetType() != typeof(Generator)) continue;
 
                 StartCoroutine(LoadGeneratorState(building));
             }

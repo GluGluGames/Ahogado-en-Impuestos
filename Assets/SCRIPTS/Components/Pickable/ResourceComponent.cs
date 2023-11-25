@@ -15,13 +15,13 @@ namespace GGG.Components.Resources
         [SerializeField] private int _amount;
         [SerializeField] private bool _alwaysVisible;
         [SerializeField] private PickResourceProgressionUI _pickProgressUI;
+        [SerializeField] private int RecollectionTime;
         private bool WaitSecond = true;
 
         private bool _collided = false;
-        private bool _resourcePicked;
+        private bool _pickingResource;
 
         public HexTile currentTile;
-        public Action onResourceCollideEnter;
         public Action onResourceCollideExit;
 
         #region getters and setters
@@ -46,8 +46,12 @@ namespace GGG.Components.Resources
         {
             _collided = true;
             _pickProgressUI.gameObject.SetActive(true);
+
+            StartCoroutine(RecollectResource());
+
+            /*
             WaitSecond = true;
-            StartCoroutine(WaitSeconds(0, 3, () => 
+            StartCoroutine(WaitSeconds(0, 3, () =>
                 {
                     _pickProgressUI.current++;
                 }, () =>
@@ -59,40 +63,43 @@ namespace GGG.Components.Resources
                     _resourcePicked = true;
                     DeleteMySelf();
                 }));
+                */
         }
 
         private void OnTriggerExit(Collider other)
         {
-
-            WaitSecond = false;
             if (!_collided) return;
             
-            _pickProgressUI.current = 0;
             _pickProgressUI.gameObject.SetActive(false);
-            if (_resourcePicked)
+            
+            if (_pickingResource)
             {
-                onResourceCollideExit.Invoke();
-                _resourcePicked = false;
+                StopCoroutine(RecollectResource());
+                _pickProgressUI.StopPicking();
+                _pickingResource = false;
             }
             _collided = false;
         }
 
         private void Start()
         {
-            _pickProgressUI = GameObject.FindGameObjectWithTag("Player").transform.Find("HeaderBar").Find("ProgressBar").GetComponent<PickResourceProgressionUI>();
-            onResourceCollideEnter += RecolectResource;
+            _pickProgressUI = FindObjectOfType<PickResourceProgressionUI>(true);
             onResourceCollideExit += DeleteMySelf;
             TickManager.OnTick += HandleVisibility;
             HandleVisibility();
         }
 
-        private void RecolectResource()
+        private IEnumerator RecollectResource()
         {
-            int aux = 0;
-            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out aux);
-
-            ResourceManager.Instance.resourcesCollected.Remove(_resource.GetName());
-            ResourceManager.Instance.resourcesCollected.Add(_resource.GetName(), _amount + aux);
+            _pickingResource = true;
+            yield return _pickProgressUI.PickResource(RecollectionTime);
+            
+            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource, out int aux);
+            ResourceManager.Instance.resourcesCollected[_resource] += aux;
+            _resource.DiscoverResource();
+            _pickProgressUI.gameObject.SetActive(false);
+            _pickingResource = false;
+            DeleteMySelf();
         }
 
         private void DeleteMySelf()

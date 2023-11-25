@@ -19,6 +19,8 @@ namespace GGG.Components.UI {
         [SerializeField] private GameObject Container;
         [SerializeField] private GameObject[] ResourcesContainers;
         [SerializeField] private GameObject Padlock;
+        [Space(5), Header("Texts")] 
+        [SerializeField] private TMP_Text StructureName;
         [Space(5), Header("Images")]
         [SerializeField] private Image[] ResourcesImages;
         [SerializeField] private Image StructureSprite;
@@ -45,6 +47,7 @@ namespace GGG.Components.UI {
             
             _cost = _buildingManager.GetBuildingCost(BuildingInfo);
             StructureSprite.sprite = BuildingInfo.GetIcon();
+            StructureName.SetText(BuildingInfo.GetName());
             
             if (!BuildingInfo.IsUnlocked()) LockButton();
         }
@@ -113,13 +116,15 @@ namespace GGG.Components.UI {
             }
 
             BuildingComponent build = auxGo.GetComponent<BuildingComponent>();
-            BuildingManager.Instance.AddBuilding(build);
+            _buildingManager.AddBuilding(build);
+            build.SetCurrentCost(_cost);
+            
             _selectedHexTile.SetBuilding(build);
             OnStructureBuild?.Invoke(build, _selectedHexTile);
             StructureBuild?.Invoke();
 
             //FOW
-            _selectedHexTile.Reveal(build.GetVisionRange(), 0);
+            _selectedHexTile.Reveal(build.VisionRange(), 0);
             _selectedHexTile = null;
         }
 
