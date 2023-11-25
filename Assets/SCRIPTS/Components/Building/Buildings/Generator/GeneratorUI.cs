@@ -17,7 +17,6 @@ namespace GGG.Components.Buildings.Generator
     public class GeneratorUI : MonoBehaviour
     {
         [Header("Generator fields")] 
-        [SerializeField] private Building Generator;
         [SerializeField] private int[] BoostTimes;
         [SerializeField] private Sprite[] BoostButtonToggles;
         [Space(5), Header("Containers")] 
@@ -35,7 +34,7 @@ namespace GGG.Components.Buildings.Generator
 
         private class GeneratorData
         {
-            public BuildingComponent Generator;
+            public int GeneratorId;
             public int BoostIndex;
         }
         
@@ -43,16 +42,16 @@ namespace GGG.Components.Buildings.Generator
 
         private GameManager _gameManager;
 
-        private Dictionary<BuildingComponent, int> _generators = new ();
-        private readonly Dictionary<BuildingComponent, int[]> _currentGeneration = new ();
-        private readonly Dictionary<BuildingComponent, bool[,]> _buildingBoosting = new();
+        private readonly Dictionary<int, int> _generators = new ();
+        private readonly Dictionary<int, int[]> _currentGeneration = new ();
+        private readonly Dictionary<int, bool[,]> _buildingBoosting = new();
         private List<HexTile> _tiles;
         private List<BuildingComponent> _buildings;
         private HexTile _generatorTile;
         
         private GameObject _viewport;
         private bool _open;
-        private BuildingComponent _currentGenerator;
+        private int _currentGeneratorId;
 
         private void Awake()
         {
@@ -101,7 +100,7 @@ namespace GGG.Components.Buildings.Generator
         private void FindGeneratorTile()
         {
             _generatorTile = _tiles.Find(t => 
-                t.GetCurrentBuilding() && t.GetCurrentBuilding().Equals(_currentGenerator));
+                t.GetCurrentBuilding() && t.GetCurrentBuilding().Id().Equals(_currentGeneratorId));
 
             if (!_generatorTile)
                 throw new Exception("Generator Tile not found");
@@ -116,8 +115,8 @@ namespace GGG.Components.Buildings.Generator
 
         private void OnBuildingBoost(int level, int idx)
         {
-            if (_currentGeneration[_currentGenerator][level - 1] >= level || 
-                _buildingBoosting[_currentGenerator][level - 1, idx]) return;
+            if (_currentGeneration[_currentGeneratorId][level - 1] >= level || 
+                _buildingBoosting[_currentGeneratorId][level - 1, idx]) return;
             
             BuildingComponent building = _generatorTile.neighbours[idx].GetCurrentBuilding();
             if (!building) return;
@@ -125,8 +124,8 @@ namespace GGG.Components.Buildings.Generator
             building.Boost();
             
             ChangeButtonSprite(level, idx, true);
-            _currentGeneration[_currentGenerator][level - 1]++;
-            _buildingBoosting[_currentGenerator][level - 1, idx] = true;
+            _currentGeneration[_currentGeneratorId][level - 1]++;
+            _buildingBoosting[_currentGeneratorId][level - 1, idx] = true;
             
             StartCoroutine(BoostBuilding(building, level, idx));
         }
@@ -158,7 +157,6 @@ namespace GGG.Components.Buildings.Generator
         private IEnumerator BoostBuilding(BuildingComponent building, int level, int idx)
         {
             float deltaTime = BoostTimes[level - 1];
-            BuildingComponent aux = _currentGenerator;
 
             while (deltaTime > 0)
             {
@@ -169,8 +167,8 @@ namespace GGG.Components.Buildings.Generator
             building.EndBoost();
             
             ChangeButtonSprite(level, idx, false);
-            _currentGeneration[_currentGenerator][level - 1]--;
-            _buildingBoosting[_currentGenerator][level - 1, idx] = false;
+            _currentGeneration[_currentGeneratorId][level - 1]--;
+            _buildingBoosting[_currentGeneratorId][level - 1, idx] = false;
         }
 
         private void ChangeBuildText()
@@ -196,7 +194,7 @@ namespace GGG.Components.Buildings.Generator
             {
                 for (int j = 0; j < BostButtonsLevel1.Length; j++)
                 {
-                    ChangeButtonSprite(i + 1, j, _buildingBoosting[_currentGenerator][i, j]);
+                    ChangeButtonSprite(i + 1, j, _buildingBoosting[_currentGeneratorId][i, j]);
                 }
             }
         }
@@ -208,19 +206,19 @@ namespace GGG.Components.Buildings.Generator
             
             foreach (BuildingComponent building in _buildings)
             {
-                if(building.BuildData().GetType() != typeof(Generator)) continue;
+                if(building.GetType() != typeof(Generator)) continue;
 
-                _currentGenerator = building;
+                _currentGeneratorId = building.Id();
 
-                if (_generators.ContainsKey(building))
+                if (_generators.ContainsKey(_currentGeneratorId))
                 {
-                    _generators[building] = _generators[building] == level ? _generators[building] : level;
+                    _generators[building.Id()] = _generators[building.Id()] == level ? _generators[building.Id()] : level;
                     continue;
                 }
 
-                _generators.Add(building, level);
-                _currentGeneration.Add(building, new int[3]);
-                _buildingBoosting.Add(building, new bool[3,6]);
+                _generators.Add(building.Id(), level);
+                _currentGeneration.Add(building.Id(), new int[3]);
+                _buildingBoosting.Add(building.Id(), new bool[3,6]);
             }
         }
 
@@ -245,11 +243,11 @@ namespace GGG.Components.Buildings.Generator
             GeneratorData[] saveData = new GeneratorData[_generators.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
 
-            foreach (BuildingComponent generator in _generators.Keys)
+            foreach (int generator in _generators.Keys)
             {
                 GeneratorData data = new()
                 {
-                    Generator = generator
+                    GeneratorId = generator
                 };
             }
         }
@@ -270,9 +268,9 @@ namespace GGG.Components.Buildings.Generator
             
             OnGeneratorOpen?.Invoke();
             
+            FindGeneratorTile();
             HandleLevelButtons(level);
             HandleButtonToggles(level);
-            FindGeneratorTile();
             ChangeBuildText();
 
             _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InCubic);
@@ -294,7 +292,7 @@ namespace GGG.Components.Buildings.Generator
                 
                 LevelButtons[1].gameObject.SetActive(false);
                 LevelButtons[2].gameObject.SetActive(false);
-                _currentGenerator = null;
+                _currentGeneratorId = -1;
                 _generatorTile = null;
             };
             

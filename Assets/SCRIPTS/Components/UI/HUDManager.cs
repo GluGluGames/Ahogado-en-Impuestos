@@ -41,7 +41,7 @@ namespace GGG.Components.UI
         private GameManager _gameManager;
         private readonly List<Resource> _shownResource = new(3);
 
-        private int _currentIdx = 1;
+        private int _currentIdx;
         private bool _playerInitialized;
         private bool _dirtyFlag;
 
@@ -127,7 +127,7 @@ namespace GGG.Components.UI
                 i++;
             }
 
-            string jsonData = JsonHelper.ToJson(resourcesData, true);
+            string jsonData = JsonHelper.ToJson(resourcesData);
             File.WriteAllText(filePath, jsonData);
         }
 
@@ -160,7 +160,7 @@ namespace GGG.Components.UI
                     
                     ResourcesIcons[resource.Index].sprite = resource.Resource.GetSprite();
                     ResourcesText[resource.Index].SetText(_player.GetResourceCount(resource.Resource.GetKey()).ToString());
-                    
+                    _currentIdx = resource.Index;
                 }
             }
             else
