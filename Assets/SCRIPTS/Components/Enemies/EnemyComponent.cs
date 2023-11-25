@@ -2,6 +2,7 @@ using BehaviourAPI.Core;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using GGG.Components.Ticks;
 
 namespace GGG.Components.Enemies
 {
@@ -15,6 +16,7 @@ namespace GGG.Components.Enemies
         {
             Rb = GetComponent<Rigidbody>();
             movementController = new RandomMovement();
+            movementController.ticker = GetComponent<Ticker>();
             movementController.SetGameObject(gameObject);
             movementController.SetAlwaysVisible(_alwaysVisible);
             if (isDirty) movementController.SetCurrentTile(currentTile);

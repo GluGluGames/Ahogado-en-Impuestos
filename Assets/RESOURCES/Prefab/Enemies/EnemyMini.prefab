@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 2557339169096508649}
   - component: {fileID: 4416470800238099999}
   - component: {fileID: -7011913412452065925}
+  - component: {fileID: 1156658779559380563}
   m_Layer: 15
   m_Name: EnemyMini
   m_TagString: Untagged
@@ -252,3 +253,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   executeOnLoop: 0
   interruptOptions: 0
+--- !u!114 &1156658779559380563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407563467665678216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec3247242db7fa4da4e3c6a78426d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tickTime: 1
+  keepTicking: 1

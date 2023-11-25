@@ -12,13 +12,14 @@ namespace GGG.Components.Enemies
         public HexTile targetTile;
         public bool imChasing = false;
         public bool imFleeing= false;
+        public Ticker ticker;
 
         // This has to be called on the start
         public override void LaunchOnStart()
         {
             movingAllowed = true;
-            TickManager.OnTick += HandleMovement;
-            TickManager.OnTick += HandleVisibility;
+            ticker.onTick += HandleMovement;
+            ticker.onTick += HandleVisibility;
             HandleVisibility();
         }
 
@@ -39,8 +40,8 @@ namespace GGG.Components.Enemies
         public override void LaunchOnDisable()
         {
             movingAllowed = false;
-            TickManager.OnTick -= HandleMovement;
-            TickManager.OnTick -= HandleVisibility;
+            ticker.onTick -= HandleMovement;
+            ticker.onTick -= HandleVisibility;
             currentPath = null;
         }
 

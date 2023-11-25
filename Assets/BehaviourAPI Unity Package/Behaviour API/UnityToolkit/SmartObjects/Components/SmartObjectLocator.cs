@@ -1,11 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-
 namespace BehaviourAPI.UnityToolkit
 {
     /// <summary>
@@ -81,13 +76,11 @@ namespace BehaviourAPI.UnityToolkit
         /// <returns>The list of available smart objects</returns>
         public List<SmartObject> GetSmartObjects() => _availableSmartObjects;
 
-#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             UnityEditor.Handles.color = gizmoColor;
             UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, maxDistance);
         }
-
 
         private void OnDrawGizmos()
         {
@@ -95,7 +88,5 @@ namespace BehaviourAPI.UnityToolkit
 
             OnDrawGizmosSelected();
         }
-#endif
     }
-
 }
