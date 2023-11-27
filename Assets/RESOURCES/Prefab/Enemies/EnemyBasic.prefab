@@ -255,6 +255,7 @@ MonoBehaviour:
   executeOnLoop: 0
   interruptOptions: 0
   sleepTime: 3
+  bSRuntimeDebugger: {fileID: 4851737380658201866}
 --- !u!114 &3532860184323151696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eventHandler:
-    debugStatusChanges: 0
+    debugStatusChanges: 1
     identifier: 
 --- !u!1 &8087557099629385369
 GameObject:

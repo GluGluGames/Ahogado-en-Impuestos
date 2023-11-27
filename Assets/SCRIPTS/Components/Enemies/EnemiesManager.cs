@@ -1,17 +1,21 @@
 using DG.Tweening;
 using GGG.Components.HexagonalGrid;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace GGG.Components.Enemies
 {
     public class EnemiesManager : MonoBehaviour
     {
-        
+
+        [SerializeField] private int _maxEnemies;
+
         [SerializeField] private Enemy[] EnemiesPrefab;
 
         private readonly List<Enemy> _enemies = new();
@@ -23,7 +27,7 @@ namespace GGG.Components.Enemies
             _nEnemies = EnemiesPrefab.Length;
             _tiles = FindObjectsOfType<HexTile>().ToList();
 
-            for (int i = 0; i < _nEnemies; i++)
+            for (int i = 0; i < _maxEnemies; i++)
             {
                 SpawnEnemy();
             }
@@ -36,7 +40,7 @@ namespace GGG.Components.Enemies
 
             foreach (Enemy enemy in _enemies)
             {
-                if (enemy.currentTile != hex) continue;
+                if (enemy.currentTile != hex && enemy.currentTile != PlayerPosition.CurrentTile) continue;
                 
                 spawned = SpawnEnemy();
                 break;

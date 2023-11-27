@@ -2,7 +2,7 @@ using BehaviourAPI.Core;
 using BehaviourAPI.Core.Actions;
 using BehaviourAPI.StateMachines;
 using BehaviourAPI.UnityToolkit;
-using System;
+using BehaviourAPI.UnityToolkit.GUIDesigner.Runtime;
 using UnityEngine;
 
 public class NormalEnemyAI : BehaviourRunner
@@ -27,25 +27,26 @@ public class NormalEnemyAI : BehaviourRunner
     public float sleepTime = 2.0f;
 
     public FSM NormalEnemyBehaviour = new FSM();
+    [SerializeField] public BSRuntimeDebugger bSRuntimeDebugger;
 
     protected override BehaviourGraph CreateGraph()
     {
         FunctionalAction Patrol_action = new FunctionalAction();
         Patrol_action.onStarted = StartPatrol;
         Patrol_action.onUpdated = UpdatePatrol;
-        State Patrol = NormalEnemyBehaviour.CreateState(Patrol_action);
+        State Patrol = NormalEnemyBehaviour.CreateState("patrol", Patrol_action);
 
         FunctionalAction Chase_action = new FunctionalAction();
         Chase_action.onStarted = StartChase;
         Chase_action.onUpdated = UpdateChase;
-        State Chase = NormalEnemyBehaviour.CreateState(Chase_action);
+        State Chase = NormalEnemyBehaviour.CreateState("chase", Chase_action);
 
         exit = NormalEnemyBehaviour.CreateExitTransition(Chase, Status.None, statusFlags: StatusFlags.None);
 
         FunctionalAction Sleep_action = new FunctionalAction();
 
         Sleep_action.onStarted = StartSleep;
-        State Sleep = NormalEnemyBehaviour.CreateState(Sleep_action);
+        State Sleep = NormalEnemyBehaviour.CreateState("sleep", Sleep_action);
 
         DetectPlayer = NormalEnemyBehaviour.CreateTransition(Patrol, Chase, statusFlags: StatusFlags.None);
 
@@ -56,6 +57,8 @@ public class NormalEnemyAI : BehaviourRunner
         playerDetected = new PushPerception(DetectPlayer);
         playerLost = new PushPerception(LostPatience);
         RestedPush = new PushPerception(Rested);
+
+        bSRuntimeDebugger.RegisterGraph(NormalEnemyBehaviour, "main fsm");
         return NormalEnemyBehaviour;
     }
 }

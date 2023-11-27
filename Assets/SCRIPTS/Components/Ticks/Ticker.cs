@@ -31,7 +31,6 @@ namespace GGG.Components.Ticks
             while (keepTicking)
             {
                 yield return new WaitForSeconds(tickTime);
-                Debug.Log("tick");
                 onTick.Invoke();
             }
         }
