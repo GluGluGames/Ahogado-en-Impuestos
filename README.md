@@ -634,6 +634,14 @@ Sin embargo, Poseidón, el dios del mar, resentido por lo que consideraba un des
 
 A lo largo de los siglos, el desacuerdo sobre la delimitación de los dominios divinos y la cuestión de quién poseía la autoridad suprema sobre el mundo natural condujo a enfrentamientos intermitentes entre Zeus y Poseidón. La competencia por el control sobre los elementos naturales, en particular el cielo y el mar, exacerbó aún más las tensiones y alimentó la enemistad duradera entre los dos dioses poderosos.
 
+### **8.5 - Guión:**
+
+*Cinemática inicial e inicio del juego*
+*Se observa la vieja ciudad del Atlantis en su vieja gloria*
+*Pathing con Poseidón hablando*
+
+Poseidon: Déjame que te enseñe lo que una vez fue. Esta era mi magnífica Atlantis, un reino glorioso que posaba majestuosamente sobre las profundidades de mi reino. Pero el tiempo ha llevado a su decadencia. Has sido seleccionado para una tarea que supera con creces tu comprensión. Escucha atentamente porque no pienso repetirme, tu misión es reconstruir esta ciudad y devolverla a su antigua gloria. Necesito que coseches algas y otros recursos del océano para restaurar la grandeza de mi gran Atlantis. No esperes gratitud ni recompensas. Tu deber es simplemente cumplir mi voluntad. Las riquezas de Atlantis son mías por derecho, y tú eres solo un instrumento para restaurar mi reino a su antigua gloria. No te equivoques, no es un honor servirme; es una obligación.
+
 ## **9 - MÚSICA Y SONIDO** 
 
 ### **9.1 - Música**
