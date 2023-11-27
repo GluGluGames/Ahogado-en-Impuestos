@@ -27,6 +27,7 @@ namespace GGG.Components.Buildings
             public ResourceCost CurrentCost;
             public int Level;
             public Resource FarmResource;
+            public bool IsBoost;
         }
 
         [SerializeField] private Building SeaFarm;
@@ -103,7 +104,8 @@ namespace GGG.Components.Buildings
         private void ResourceSummary(Farm farm, TimeSpan time)
         {
             int generatedTime = time.Minutes >= 180 ? 180 : time.Minutes;
-            int resourcesGenerated = Mathf.RoundToInt(generatedTime * 60 / farm.GetGeneration());
+            int resourcesGenerated = Mathf.RoundToInt(
+                generatedTime * 60 / (farm.GetGeneration() + (farm.IsBoost() ? farm.GetGeneration() * 0.25f : 0)));
             
             _player.AddResource(farm.GetResource().GetKey(), resourcesGenerated);
         }
@@ -171,6 +173,8 @@ namespace GGG.Components.Buildings
                     Farm farm = (Farm)build;
                     if (farm.GetResource()) data.FarmResource = farm.GetResource();
                 }
+                
+                data.IsBoost = build.BuildData().CanBeBoost() && build.IsBoost();
 
                 saveData[i] = data;
                 i++;
@@ -217,6 +221,10 @@ namespace GGG.Components.Buildings
                     Farm farm = (Farm)buildingComponents[i];
                     if(build.FarmResource) farm.Resource(build.FarmResource);
                 }
+
+                if (buildingComponents[i].BuildData().CanBeBoost() && build.IsBoost)
+                    buildingComponents[i].Boost();
+                
                 
                 AddBuilding(buildingComponents[i]);
                 i++;

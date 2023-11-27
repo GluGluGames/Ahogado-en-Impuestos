@@ -41,12 +41,16 @@ namespace GGG.Components.Buildings
         {
             if (_currentLevel == 1) _currentGeneration -= InitialGeneration * 0.25f;
             else _currentGeneration -= ResourcesGeneration[_currentLevel - 2] * 0.25f;
+
+            _boosted = true;
         }
 
         public override void EndBoost()
         {
             if (_currentLevel == 1) _currentGeneration += InitialGeneration * 0.25f;
             else _currentGeneration += ResourcesGeneration[_currentLevel - 2] * 0.25f;
+
+            _boosted = false;
         }
 
         public void Produce()

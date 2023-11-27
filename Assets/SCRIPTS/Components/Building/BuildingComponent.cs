@@ -11,6 +11,7 @@ namespace GGG.Components.Buildings {
         
         protected int _currentLevel = 1;
         private ResourceCost _currentCost;
+        protected bool _boosted;
         private int _id;
         
         public Action<BuildingComponent> OnBuildSelect;
@@ -41,6 +42,8 @@ namespace GGG.Components.Buildings {
         {
             throw new Exception($"Boost not implemented on {name}");
         }
+
+        public virtual void OnBuildDestroy() { }
 
         /// <summary>
         /// Gets the id of the building
@@ -89,6 +92,12 @@ namespace GGG.Components.Buildings {
             _currentLevel++;
             OnLevelUp();
         }
+
+        /// <summary>
+        /// Check if the building is being boosted
+        /// </summary>
+        /// <returns>True if the building is boost. False otherwise</returns>
+        public bool IsBoost() => _boosted;
 
         /// <summary>
         /// Gets the building information

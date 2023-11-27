@@ -379,7 +379,7 @@ namespace GGG.Components.Buildings.Laboratory
 
         private void OnDisable()
         {
-            if (!SceneManagement.InGameScene() || !_wasOpen) return;
+            if (!SceneManagement.InGameScene() || _gameManager.TutorialOpen() || !_wasOpen) return;
             
             SaveResearchProgress();
         }

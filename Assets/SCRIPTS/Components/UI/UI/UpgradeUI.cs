@@ -130,6 +130,7 @@ namespace GGG.Components.UI
             if(!_open || _gameManager.TutorialOpen()) return;
             
             _player.AddResource(_sellResource.GetKey(), Mathf.RoundToInt(_selectedBuilding.CurrentCost().GetCost(0) * 0.5f));
+            _selectedBuilding.OnBuildDestroy();
             BuildingManager.Instance.RemoveBuilding(_selectedBuilding);
             _selectedTile.DestroyBuilding();
             

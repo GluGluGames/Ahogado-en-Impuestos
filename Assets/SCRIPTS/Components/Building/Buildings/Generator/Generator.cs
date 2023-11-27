@@ -13,5 +13,10 @@ namespace GGG.Components.Buildings.Generator
         {
             _ui.Open(_currentLevel);
         }
+
+        public override void OnBuildDestroy()
+        {
+            _ui.OnBuildDestroy(Id());
+        }
     }
 }
