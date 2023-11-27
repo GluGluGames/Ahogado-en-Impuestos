@@ -42,7 +42,6 @@ namespace GGG.Components.UI
         private readonly List<Resource> _shownResource = new(3);
 
         private int _currentIdx;
-        private bool _playerInitialized;
         private bool _dirtyFlag;
 
         private void Start() {
@@ -52,16 +51,11 @@ namespace GGG.Components.UI
             foreach(GameObject go in ResourceContainers)
                 go.SetActive(false);
             
-            _player.OnPlayerInitialized += () =>
-            {
-                StartCoroutine(LoadShownResource());
-                _playerInitialized = true;
-            };
+            StartCoroutine(LoadShownResource());
+            
         }
 
         private void Update() {
-            if (!_playerInitialized) return;
-            
             for (int i = 0; i < _shownResource.Count; i++)
             {
                 if(!_shownResource[i]) continue;
