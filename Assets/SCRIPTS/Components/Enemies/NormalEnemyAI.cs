@@ -5,60 +5,62 @@ using BehaviourAPI.UnityToolkit;
 using BehaviourAPI.UnityToolkit.GUIDesigner.Runtime;
 using UnityEngine;
 
-public class NormalEnemyAI : BehaviourRunner
+namespace GGG.Components.Enemies
 {
-
-    public StateTransition DetectPlayer;
-    public StateTransition LostPatience;
-    public StateTransition Rested;
-    public ExitTransition exit;
-
-    public PushPerception playerDetected;
-    public PushPerception playerLost;
-    public PushPerception RestedPush;
-
-    public System.Action StartPatrol;
-    public System.Func<Status> UpdatePatrol;
-    
-    public System.Action StartChase;
-    public System.Func<Status> UpdateChase;
-    public System.Action StartSleep;
-
-    public float sleepTime = 2.0f;
-
-    public FSM NormalEnemyBehaviour = new FSM();
-    [SerializeField] public BSRuntimeDebugger bSRuntimeDebugger;
-
-    protected override BehaviourGraph CreateGraph()
+    public class NormalEnemyAI : BehaviourRunner
     {
-        FunctionalAction Patrol_action = new FunctionalAction();
-        Patrol_action.onStarted = StartPatrol;
-        Patrol_action.onUpdated = UpdatePatrol;
-        State Patrol = NormalEnemyBehaviour.CreateState("patrol", Patrol_action);
+        public StateTransition DetectPlayer;
+        public StateTransition LostPatience;
+        public StateTransition Rested;
+        public ExitTransition exit;
 
-        FunctionalAction Chase_action = new FunctionalAction();
-        Chase_action.onStarted = StartChase;
-        Chase_action.onUpdated = UpdateChase;
-        State Chase = NormalEnemyBehaviour.CreateState("chase", Chase_action);
+        public PushPerception playerDetected;
+        public PushPerception playerLost;
+        public PushPerception RestedPush;
 
-        exit = NormalEnemyBehaviour.CreateExitTransition(Chase, Status.None, statusFlags: StatusFlags.None);
+        public System.Action StartPatrol;
+        public System.Func<Status> UpdatePatrol;
 
-        FunctionalAction Sleep_action = new FunctionalAction();
+        public System.Action StartChase;
+        public System.Func<Status> UpdateChase;
+        public System.Action StartSleep;
 
-        Sleep_action.onStarted = StartSleep;
-        State Sleep = NormalEnemyBehaviour.CreateState("sleep", Sleep_action);
+        public float sleepTime = 2.0f;
 
-        DetectPlayer = NormalEnemyBehaviour.CreateTransition(Patrol, Chase, statusFlags: StatusFlags.None);
+        public FSM NormalEnemyBehaviour = new FSM();
+        [SerializeField] public BSRuntimeDebugger bSRuntimeDebugger;
 
-        LostPatience = NormalEnemyBehaviour.CreateTransition(Chase, Sleep, statusFlags: StatusFlags.None);
+        protected override BehaviourGraph CreateGraph()
+        {
+            FunctionalAction Patrol_action = new FunctionalAction();
+            Patrol_action.onStarted = StartPatrol;
+            Patrol_action.onUpdated = UpdatePatrol;
+            State Patrol = NormalEnemyBehaviour.CreateState("patrol", Patrol_action);
 
-        Rested = NormalEnemyBehaviour.CreateTransition(Sleep, Patrol, statusFlags: StatusFlags.None);
+            FunctionalAction Chase_action = new FunctionalAction();
+            Chase_action.onStarted = StartChase;
+            Chase_action.onUpdated = UpdateChase;
+            State Chase = NormalEnemyBehaviour.CreateState("chase", Chase_action);
 
-        playerDetected = new PushPerception(DetectPlayer);
-        playerLost = new PushPerception(LostPatience);
-        RestedPush = new PushPerception(Rested);
+            exit = NormalEnemyBehaviour.CreateExitTransition(Chase, Status.None, statusFlags: StatusFlags.None);
 
-        bSRuntimeDebugger.RegisterGraph(NormalEnemyBehaviour, "main fsm");
-        return NormalEnemyBehaviour;
+            FunctionalAction Sleep_action = new FunctionalAction();
+
+            Sleep_action.onStarted = StartSleep;
+            State Sleep = NormalEnemyBehaviour.CreateState("sleep", Sleep_action);
+
+            DetectPlayer = NormalEnemyBehaviour.CreateTransition(Patrol, Chase, statusFlags: StatusFlags.None);
+
+            LostPatience = NormalEnemyBehaviour.CreateTransition(Chase, Sleep, statusFlags: StatusFlags.None);
+
+            Rested = NormalEnemyBehaviour.CreateTransition(Sleep, Patrol, statusFlags: StatusFlags.None);
+
+            playerDetected = new PushPerception(DetectPlayer);
+            playerLost = new PushPerception(LostPatience);
+            RestedPush = new PushPerception(Rested);
+
+            bSRuntimeDebugger.RegisterGraph(NormalEnemyBehaviour, "main fsm");
+            return NormalEnemyBehaviour;
+        }
     }
 }
