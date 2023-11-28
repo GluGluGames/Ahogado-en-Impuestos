@@ -117,8 +117,6 @@ namespace GGG.Components.Buildings.Generator
             
             BuildingComponent building = _generatorTile.neighbours[idx].GetCurrentBuilding();
             if (!building) return;
-
-            building.Boost();
             
             _currentGenerator.AddGeneration(level, 1);
             _currentGenerator.AddBoostIndex(level, idx, 1);
@@ -156,6 +154,8 @@ namespace GGG.Components.Buildings.Generator
 
         private IEnumerator BoostBuilding(int generatorId, BuildingComponent building, int level, int idx)
         {
+            building.Boost();
+            
             while (_generators[generatorId].BoostingTime(level, idx) > 0)
             {
                 _generators[generatorId].AddBoostingTime(level, idx, -Time.deltaTime);
@@ -206,10 +206,8 @@ namespace GGG.Components.Buildings.Generator
                 _generators.Add(generator.Id(), generator);
         }
 
-        public void OnBuildDestroy(int id)
-        {
-            _generators.Remove(id);
-        }
+        public void OnBuildDestroy(int id) => _generators.Remove(id);
+        
 
         private void OnBuildLoads(BuildingComponent[] buildings)
         {
@@ -219,7 +217,7 @@ namespace GGG.Components.Buildings.Generator
 
             foreach (BuildingComponent building in buildings)
             {
-                if (building.BuildData().GetType() != typeof(Generator)) continue;
+                if (building.GetType() != typeof(Generator)) continue;
 
                 build.Add((Generator) building);
             }
@@ -252,11 +250,13 @@ namespace GGG.Components.Buildings.Generator
         private class BoostBuildings
         {
             public int Level;
+            public int Index;
             public int BuildingId;
 
-            public BoostBuildings(int level, int buildingId)
+            public BoostBuildings(int level, int idx, int buildingId)
             {
                 Level = level;
+                Index = idx;
                 BuildingId = buildingId;
             }
         }
@@ -265,11 +265,13 @@ namespace GGG.Components.Buildings.Generator
         private class BoostingTime
         {
             public int Level;
+            public int Index;
             public float Time;
 
-            public BoostingTime(int level, float time)
+            public BoostingTime(int level, int idx, float time)
             {
                 Level = level;
+                Index = idx;
                 Time = time;
             }
         }
@@ -300,10 +302,10 @@ namespace GGG.Components.Buildings.Generator
                             data.Indexes.Add(new BoostIndexes(y, j));
                         
                         if (_generators[id].BoostBuilding(y, j) != -1)
-                            data.Buildings.Add(new BoostBuildings(y, _generators[id].BoostBuilding(y, j)));
+                            data.Buildings.Add(new BoostBuildings(y, j, _generators[id].BoostBuilding(y, j)));
                         
                         if (_generators[id].BoostingTime(y, j) > 0)
-                            data.RemainingTimes.Add(new BoostingTime(y, _generators[id].BoostingTime(y, j)));
+                            data.RemainingTimes.Add(new BoostingTime(y, j, _generators[id].BoostingTime(y, j)));
                     }
 
                 }
@@ -318,7 +320,7 @@ namespace GGG.Components.Buildings.Generator
 
         private IEnumerator LoadGeneratorState(Generator[] generators)
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "generator_boost.json");
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "generators_boost.json");
 #if UNITY_EDITOR
             filePath = "file://" + filePath;
 #endif
@@ -333,20 +335,32 @@ namespace GGG.Components.Buildings.Generator
                 data = File.ReadAllText(filePath);
             }
 
-            if (!string.IsNullOrEmpty(data))
-            {
-                GeneratorData[] generatorData = JsonHelper.FromJson<GeneratorData>(data);
+            if (string.IsNullOrEmpty(data)) yield break;
+            
+            GeneratorData[] generatorData = JsonHelper.FromJson<GeneratorData>(data);
 
-                foreach (GeneratorData generator in generatorData)
+            foreach (GeneratorData generator in generatorData)
+            {
+                foreach (Generator gen in generators)
                 {
-                    foreach (Generator gen in generators)
+                    if (gen.Id() != generator.GeneratorId) continue;
+                        
+                    _generators.Add(generator.GeneratorId, gen);
+
+                    for (int i = 0; i < generator.Buildings.Count; i++)
                     {
-                        if (gen.Id() == generator.GeneratorId)
-                            _generators.Add(generator.GeneratorId, gen);
+                        gen.AddBoostIndex(generator.Indexes[i].Level, generator.Indexes[i].Index, 1);
+                        gen.AddBoostingBuilding(generator.Buildings[i].Level, generator.Buildings[i].Index, generator.Buildings[i].BuildingId);
+                        gen.AddBoostingTime(generator.RemainingTimes[i].Level, generator.RemainingTimes[i].Index, generator.RemainingTimes[i].Time);
+                        gen.AddGeneration(generator.Indexes[i].Level, 1);
+
+                        BuildingComponent build = BuildingManager.Instance.GetBuildings()
+                            .Find(x => x.Id() == generator.Buildings[i].BuildingId);
+
+                        StartCoroutine(BoostBuilding(gen.Id(), build, generator.Buildings[i].Level,
+                            generator.Buildings[i].Index));
                     }
                 }
-                
-                
             }
         }
 
