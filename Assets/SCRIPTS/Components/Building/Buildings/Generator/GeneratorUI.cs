@@ -112,7 +112,7 @@ namespace GGG.Components.Buildings.Generator
 
         private void OnBuildingBoost(int level, int idx)
         {
-            if (_currentGenerator.CurrentGeneration() >= level || _currentGenerator.BoostIndex(idx) >= 1) 
+            if (_currentGenerator.CurrentGeneration(level) >= level || _currentGenerator.BoostIndex(level, idx) >= 1) 
                 return;
             
             BuildingComponent building = _generatorTile.neighbours[idx].GetCurrentBuilding();
@@ -120,10 +120,10 @@ namespace GGG.Components.Buildings.Generator
 
             building.Boost();
             
-            _currentGenerator.AddGeneration(1);
-            _currentGenerator.AddBoostIndex(idx, 1);
-            _currentGenerator.AddBoostingBuilding(idx, building.Id());
-            _currentGenerator.SetBoostingTime(idx, BoostTimes[level - 1]);
+            _currentGenerator.AddGeneration(level, 1);
+            _currentGenerator.AddBoostIndex(level, idx, 1);
+            _currentGenerator.AddBoostingBuilding(level, idx, building.Id());
+            _currentGenerator.SetBoostingTime(level, idx, BoostTimes[level - 1]);
             
             ChangeButtonSprite(level, idx);
             
@@ -132,23 +132,23 @@ namespace GGG.Components.Buildings.Generator
 
         private void ChangeButtonSprite(int level, int idx)
         {
-            Color color = new (1, 1, 1, _currentGenerator.BoostIndex(idx) == 1 ? 1 : 0);
+            Color color = new (1, 1, 1, _currentGenerator.BoostIndex(level, idx) == 1 ? 1 : 0);
             
             switch (level)
             {
                 case 1:
                     BostButtonsLevel1[idx].image.sprite = BoostButtonToggles[level - 1];
-                    BostButtonsLevel1[idx].interactable = _currentGenerator.BoostIndex(idx) != 1;
+                    BostButtonsLevel1[idx].interactable = _currentGenerator.BoostIndex(level, idx) != 1;
                     BostButtonsLevel1[idx].image.color = color;
                     break;
                 case 2:
                     BostButtonsLevel2[idx].image.sprite = BoostButtonToggles[level - 1];
-                    BostButtonsLevel2[idx].interactable = _currentGenerator.BoostIndex(idx) != 1;
+                    BostButtonsLevel2[idx].interactable = _currentGenerator.BoostIndex(level, idx) != 1;
                     BostButtonsLevel2[idx].image.color = color;
                     break;
                 default:
                     BostButtonsLevel3[idx].image.sprite = BoostButtonToggles[level - 1];
-                    BostButtonsLevel3[idx].interactable = _currentGenerator.BoostIndex(idx) != 1;
+                    BostButtonsLevel3[idx].interactable = _currentGenerator.BoostIndex(level, idx) != 1;
                     BostButtonsLevel3[idx].image.color = color;
                     break;
             }
@@ -156,18 +156,18 @@ namespace GGG.Components.Buildings.Generator
 
         private IEnumerator BoostBuilding(int generatorId, BuildingComponent building, int level, int idx)
         {
-            while (_generators[generatorId].BoostingTime(idx) > 0)
+            while (_generators[generatorId].BoostingTime(level, idx) > 0)
             {
-                _generators[generatorId].AddBoostingTime(idx, -Time.deltaTime);
+                _generators[generatorId].AddBoostingTime(level, idx, -Time.deltaTime);
                 yield return null;
             }
             
             building.EndBoost();
             
-            _currentGenerator.AddGeneration(-1);
-            _currentGenerator.AddBoostIndex(idx, -1);
-            _currentGenerator.AddBoostingBuilding(idx, -1);
-            _currentGenerator.SetBoostingTime(idx, 0f);
+            _currentGenerator.AddGeneration(level, -1);
+            _currentGenerator.AddBoostIndex(level, idx, -1);
+            _currentGenerator.AddBoostingBuilding(level, idx, -1);
+            _currentGenerator.SetBoostingTime(level, idx, 0f);
             ChangeButtonSprite(level, idx);
         }
 
@@ -202,7 +202,8 @@ namespace GGG.Components.Buildings.Generator
         private void InitializeGenerator(Generator generator)
         {
             _currentGenerator = generator;
-            _generators.Add(generator.Id(), generator);
+            if(!_generators.ContainsKey(generator.Id())) 
+                _generators.Add(generator.Id(), generator);
         }
 
         public void OnBuildDestroy(int id)
@@ -230,9 +231,9 @@ namespace GGG.Components.Buildings.Generator
         private class GeneratorData
         {
             public int GeneratorId;
-            public BoostIndexes Indexes;
-            public BoostBuildings Buildings;
-            public BoostingTime RemainingTimes;
+            public List<BoostIndexes> Indexes;
+            public List<BoostBuildings> Buildings;
+            public List<BoostingTime> RemainingTimes;
         }
 
         [Serializable]
@@ -287,21 +288,26 @@ namespace GGG.Components.Buildings.Generator
                 
                 GeneratorData data = new()
                 {
-                    GeneratorId = id
+                    GeneratorId = id,
+                    Indexes = new List<BoostIndexes>(),
+                    Buildings = new List<BoostBuildings>(),
+                    RemainingTimes = new List<BoostingTime>()
                 };
 
-                for (int j = 0; j < _generators[id].BoostIndexes().GetLength(1); j++)
-                    if (_generators[id].BoostIndex(j) == 1)
-                        data.Indexes = new BoostIndexes(level, _generators[id].BoostIndex(j));
-                
-                for (int j = 0; j < _generators[id].BoostBuildings().GetLength(1); j++)
-                    if (_generators[id].BoostBuilding(j) != -1)
-                        data.Buildings = new BoostBuildings(level, _generators[id].BoostBuilding(j));
-                
-                for (int j = 0; j < _generators[id].BoostingTimes().GetLength(1); j++)
-                    if(_generators[id].BoostingTime(j) > 0)
-                        data.RemainingTimes = new BoostingTime(level, _generators[id].BoostingTime(j));
-                
+                for (int y = 1; y <= level; y++) {
+                    for (int j = 0; j < _generators[id].BoostIndexes().GetLength(1); j++) {
+                        if (_generators[id].BoostIndex(y, j) == 1)
+                            data.Indexes.Add(new BoostIndexes(y, j));
+                        
+                        if (_generators[id].BoostBuilding(y, j) != -1)
+                            data.Buildings.Add(new BoostBuildings(y, _generators[id].BoostBuilding(y, j)));
+                        
+                        if (_generators[id].BoostingTime(y, j) > 0)
+                            data.RemainingTimes.Add(new BoostingTime(y, _generators[id].BoostingTime(y, j)));
+                    }
+
+                }
+
                 saveData[i] = data;
                 i++;
             }
@@ -335,9 +341,12 @@ namespace GGG.Components.Buildings.Generator
                 {
                     foreach (Generator gen in generators)
                     {
-                        if(gen.Id() == generator.GeneratorId) _generators.Add(generator.GeneratorId, gen);
+                        if (gen.Id() == generator.GeneratorId)
+                            _generators.Add(generator.GeneratorId, gen);
                     }
                 }
+                
+                
             }
         }
 
@@ -348,6 +357,7 @@ namespace GGG.Components.Buildings.Generator
             
             _viewport.SetActive(true);
             _gameManager.OnUIOpen();
+            ActiveLevelPanel(0);
             InitializeGenerator(generator);
             
             OnGeneratorOpen?.Invoke();

@@ -30,17 +30,17 @@ namespace GGG.Components.Buildings {
 
         protected virtual void OnLevelUp()
         {
-            throw new Exception($"OnLevelUp not implemented on {name}");
+            print($"OnLevelUp not implemented on {name}");
         }
 
         public virtual void Boost()
         {
-            throw new Exception($"Boost not implemented on {name}");
+            print($"Boost not implemented on {name}");
         }
 
         public virtual void EndBoost()
         {
-            throw new Exception($"Boost not implemented on {name}");
+            print($"Boost not implemented on {name}");
         }
 
         public virtual void OnBuildDestroy() { }
