@@ -10,6 +10,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
+using UnityEngine.Networking;
 
 namespace GGG.Components.Buildings.Generator
 {
@@ -30,33 +31,17 @@ namespace GGG.Components.Buildings.Generator
         [SerializeField] private Button[] BostButtonsLevel3;
         [SerializeField] private Button[] LevelButtons;
         [SerializeField] private Button CloseButton;
-
-        [Serializable]
-        private class GeneratorData
-        {
-            public int GeneratorId;
-            public BoostIndexes Indexes;
-            public bool WasOpen;
-            public DateTime ExitTime;
-        }
-
-        [Serializable]
-        private class BoostIndexes {
-            public int Level;
-            public int Index;
-        }
         
         public static Action OnGeneratorOpen;
 
         private GameManager _gameManager;
 
-        private readonly Dictionary<int, int> _generators = new ();
+        private readonly Dictionary<int, Generator> _generators = new ();
         private List<HexTile> _tiles;
         private HexTile _generatorTile;
         
         private GameObject _viewport;
         private bool _open;
-        private bool _wasOpen;
         private Generator _currentGenerator;
 
         private void Awake()
@@ -98,7 +83,7 @@ namespace GGG.Components.Buildings.Generator
 
         private void OnDisable()
         {
-            if (!SceneManagement.InGameScene() || _gameManager.OnTutorial() || !_wasOpen) return;
+            if (!SceneManagement.InGameScene() || _gameManager.OnTutorial() || _generators.Count <= 0) return;
             
             SaveGeneratorState();
         }
@@ -135,7 +120,6 @@ namespace GGG.Components.Buildings.Generator
 
             building.Boost();
             
-            
             _currentGenerator.AddGeneration(1);
             _currentGenerator.AddBoostIndex(idx, 1);
             _currentGenerator.AddBoostingBuilding(idx, building.Id());
@@ -143,7 +127,7 @@ namespace GGG.Components.Buildings.Generator
             
             ChangeButtonSprite(level, idx);
             
-            StartCoroutine(BoostBuilding(building, level, idx));
+            StartCoroutine(BoostBuilding(_currentGenerator.Id(), building, level, idx));
         }
 
         private void ChangeButtonSprite(int level, int idx)
@@ -170,11 +154,11 @@ namespace GGG.Components.Buildings.Generator
             }
         }
 
-        private IEnumerator BoostBuilding(BuildingComponent building, int level, int idx)
+        private IEnumerator BoostBuilding(int generatorId, BuildingComponent building, int level, int idx)
         {
-            while (_currentGenerator.BoostingTime(idx) > 0)
+            while (_generators[generatorId].BoostingTime(idx) > 0)
             {
-                _currentGenerator.AddBoostingTime(idx, -Time.deltaTime);
+                _generators[generatorId].AddBoostingTime(idx, -Time.deltaTime);
                 yield return null;
             }
             
@@ -218,7 +202,7 @@ namespace GGG.Components.Buildings.Generator
         private void InitializeGenerator(Generator generator)
         {
             _currentGenerator = generator;
-            _generators.Add(generator.Id(), generator.CurrentLevel());
+            _generators.Add(generator.Id(), generator);
         }
 
         public void OnBuildDestroy(int id)
@@ -241,6 +225,53 @@ namespace GGG.Components.Buildings.Generator
             
             StartCoroutine(LoadGeneratorState(build.ToArray()));
         }
+        
+        [Serializable]
+        private class GeneratorData
+        {
+            public int GeneratorId;
+            public BoostIndexes Indexes;
+            public BoostBuildings Buildings;
+            public BoostingTime RemainingTimes;
+        }
+
+        [Serializable]
+        private class BoostIndexes {
+            public int Level;
+            public int Index;
+
+            public BoostIndexes(int level, int index)
+            {
+                Level = level;
+                Index = index;
+            }
+        }
+
+        [Serializable]
+        private class BoostBuildings
+        {
+            public int Level;
+            public int BuildingId;
+
+            public BoostBuildings(int level, int buildingId)
+            {
+                Level = level;
+                BuildingId = buildingId;
+            }
+        }
+
+        [Serializable]
+        private class BoostingTime
+        {
+            public int Level;
+            public float Time;
+
+            public BoostingTime(int level, float time)
+            {
+                Level = level;
+                Time = time;
+            }
+        }
 
         private void SaveGeneratorState()
         {
@@ -252,13 +283,25 @@ namespace GGG.Components.Buildings.Generator
 
             foreach (int id in _generators.Keys)
             {
+                int level = _generators[id].CurrentLevel();
+                
                 GeneratorData data = new()
                 {
-                    GeneratorId = id,
-                    WasOpen = _wasOpen,
-                    ExitTime = DateTime.Now
+                    GeneratorId = id
                 };
 
+                for (int j = 0; j < _generators[id].BoostIndexes().GetLength(1); j++)
+                    if (_generators[id].BoostIndex(j) == 1)
+                        data.Indexes = new BoostIndexes(level, _generators[id].BoostIndex(j));
+                
+                for (int j = 0; j < _generators[id].BoostBuildings().GetLength(1); j++)
+                    if (_generators[id].BoostBuilding(j) != -1)
+                        data.Buildings = new BoostBuildings(level, _generators[id].BoostBuilding(j));
+                
+                for (int j = 0; j < _generators[id].BoostingTimes().GetLength(1); j++)
+                    if(_generators[id].BoostingTime(j) > 0)
+                        data.RemainingTimes = new BoostingTime(level, _generators[id].BoostingTime(j));
+                
                 saveData[i] = data;
                 i++;
             }
@@ -269,7 +312,33 @@ namespace GGG.Components.Buildings.Generator
 
         private IEnumerator LoadGeneratorState(Generator[] generators)
         {
-            yield return null;
+            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "generator_boost.json");
+#if UNITY_EDITOR
+            filePath = "file://" + filePath;
+#endif
+
+            string data;
+            if (filePath.Contains("://") || filePath.Contains(":///")) {
+                UnityWebRequest www = UnityWebRequest.Get(filePath);
+                yield return www.SendWebRequest();
+                data = www.downloadHandler.text;
+            }
+            else {
+                data = File.ReadAllText(filePath);
+            }
+
+            if (!string.IsNullOrEmpty(data))
+            {
+                GeneratorData[] generatorData = JsonHelper.FromJson<GeneratorData>(data);
+
+                foreach (GeneratorData generator in generatorData)
+                {
+                    foreach (Generator gen in generators)
+                    {
+                        if(gen.Id() == generator.GeneratorId) _generators.Add(generator.GeneratorId, gen);
+                    }
+                }
+            }
         }
 
         public void Open(Generator generator)
@@ -279,7 +348,6 @@ namespace GGG.Components.Buildings.Generator
             
             _viewport.SetActive(true);
             _gameManager.OnUIOpen();
-            _wasOpen = true;
             InitializeGenerator(generator);
             
             OnGeneratorOpen?.Invoke();
