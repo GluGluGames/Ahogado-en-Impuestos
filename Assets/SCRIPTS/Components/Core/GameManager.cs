@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using GGG.Shared;
@@ -10,13 +11,11 @@ namespace GGG.Components.Core
         #region Singleton
 
         public static GameManager Instance;
-
-        private Language _language;
-
+        
         private void Awake() {
             if (Instance == null) Instance = this;
             
-            StartCoroutine(initializeLanguage());
+            StartCoroutine(InitializeLanguage());
         }
 
         #endregion
@@ -25,6 +24,11 @@ namespace GGG.Components.Core
 
         private SceneManagement _sceneManagement;
         private GameState _currentState;
+        private Tutorials _currentTutorial;
+        private Language _language;
+        private bool _tutorialOpen;
+
+        public static Action OnGameStart;
 
         #region Unity Events
 
@@ -33,6 +37,7 @@ namespace GGG.Components.Core
             _sceneManagement = SceneManagement.Instance;
 
             _currentState = DebugMode ? GameState.PLAYING : GameState.MENU;
+            _currentTutorial = Tutorials.None;
             if (!DebugMode) InitializeGame();
         }
 
@@ -46,7 +51,7 @@ namespace GGG.Components.Core
             _sceneManagement.UpdateScenes();
         }
         
-        private IEnumerator initializeLanguage()
+        private IEnumerator InitializeLanguage()
         {
             yield return LocalizationSettings.InitializationOperation;
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[
@@ -54,17 +59,27 @@ namespace GGG.Components.Core
             _language = PlayerPrefs.HasKey("LocalKey") ? (Language)PlayerPrefs.GetInt("LocalKey") : Language.Spanish;
         }
         
+        public void StartGame()
+        {
+            _currentState = GameState.PLAYING;
+            OnGameStart?.Invoke();
+        }
+        
         #endregion
 
         #region Getters & Setters
         public Language GetCurrentLanguage() => _language;
         public void SetLanguage(Language language) => _language = language;
-        public GameState GetGameState() => _currentState;
-        public void SetGameState(GameState state) => _currentState = state;
+        
+        public Tutorials GetCurrentTutorial() => _currentTutorial;
+        public void SetCurrentTutorial(Tutorials tutorial) => _currentTutorial = tutorial;
+        public bool OnTutorial() => _currentTutorial != Tutorials.None;
+        public void SetTutorialOpen(bool open) => _tutorialOpen = open;
+        public bool TutorialOpen() => _tutorialOpen;
+        
         public void OnUIOpen() => _currentState = GameState.ON_UI;
         public void OnUIClose() => _currentState = GameState.PLAYING;
         public bool IsOnUI() => _currentState == GameState.ON_UI;
-        public bool PlayingGame() => _currentState is GameState.PLAYING or GameState.MINIGAME;
 
         #endregion
     }

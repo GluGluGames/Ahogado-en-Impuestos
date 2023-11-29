@@ -1,4 +1,5 @@
 using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
 using GGG.Components.Player;
 using GGG.Components.Core;
 using GGG.Shared;
@@ -30,136 +31,128 @@ namespace GGG.Components.UI
 
         private PlayerManager _player;
         private InputManager _input;
+        private GameManager _gameManager;
         private Resource _sellResource;
-        private GameObject _panel;
+        private GameObject _viewport;
         private BuildButton[] _buttons;
-        private Transform _transform;
         private HexTile _selectedTile;
         private BuildingComponent _selectedBuilding;
 
         private bool _open;
 
+        public Action OnUiOpen;
+        public Action OnSellButtonPress;
+
         private void Start()
         {
             _player = PlayerManager.Instance;
             _input = InputManager.Instance;
-            _sellResource = _player.GetMainResource();
+            _gameManager = GameManager.Instance;
+            _sellResource = _player.GetResource("Seaweed");
 
-            _panel = transform.GetChild(0).gameObject;
-            _panel.SetActive(false);
-            CloseButton.gameObject.SetActive(false);
-            _transform = transform;
-            _transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f - 360);
+            _viewport = transform.GetChild(0).gameObject;
+            _viewport.SetActive(false);
+            _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
 
             _buttons = FindObjectsOfType<BuildButton>(true);
-
-            foreach (BuildButton button in _buttons)
-                button.OnStructureBuild += UpdateBuildings;
-
-            TileManager.OnTilesStateLoaded += UpdateBuildings;
+            foreach (BuildButton button in _buttons) button.OnStructureBuild += UpdateBuildings;
+            TileManager.OnBuildingTileLoaded += UpdateBuildings;
 
             SellButton.onClick.AddListener(OnSellButton);
             UpgradeButton.onClick.AddListener(OnUpgradeButton);
-            CloseButton.onClick.AddListener(() => Close(true));
+            CloseButton.onClick.AddListener(OnCloseButton);
         }
 
         private void Update()
         {
-            if (_open && _input.Escape()) {
-                Close(true);
-                return;
-            }
+            if (!_open || !_input.Escape()) return;
             
-            if (!_selectedBuilding) return;
-            if (!_selectedBuilding.GetBuild().CanUpgraded())
-            {
-                UpgradePanel.gameObject.SetActive(false);
-                return;
-            }
-            
-            UpgradePanel.gameObject.SetActive(true);
-            ResourceCost[] cost = _selectedBuilding.GetBuild().GetUpgradeCost();
-            int currentLevel = _selectedBuilding.GetCurrentLevel() - 1;
-            
-            for (int i = 0; i < cost[currentLevel].GetCostsAmount(); i++) {
-                if (_player.GetResourceCount(cost[currentLevel].GetResource(i).GetKey()) >=
-                    cost[currentLevel].GetCost(i)) continue;
-                
-                UpgradeButton.interactable = false;
-                UpgradeButton.image.color = new Color(0.81f, 0.84f, 0.81f, 0.9f);
-                return;
-            }
-
-            UpgradeButton.interactable = true;
-            UpgradeButton.image.color = new Color(1f, 1f, 1f, 1f);
+            Close(true); 
         }
 
+        private void OpenCheck()
+        {
+            int currentLevel = _selectedBuilding.CurrentLevel();
+            ResourceCost[] cost = _selectedBuilding.BuildData().GetUpgradeCost();
+            bool price = true;
+            
+            SellResource.sprite = _selectedBuilding.BuildData().GetBuildResource(0).GetSprite();
+            SellCost.SetText(Mathf.RoundToInt(_selectedBuilding.CurrentCost().GetCost(0) * 0.5f).ToString());
+            
+            bool activeCondition = _selectedBuilding.BuildData().CanUpgraded() &&
+                             currentLevel < _selectedBuilding.BuildData().GetMaxLevel();
+            
+            UpgradePanel.SetActive(activeCondition);
+
+            if (!activeCondition) return;
+            
+            for (int i = 0; i < cost[currentLevel - 1].GetCostsAmount(); i++)
+            {
+                if (!_selectedBuilding.BuildData().GetUpgradeResource(currentLevel, i)) break;
+                
+                UpgradeCost[i].transform.parent.gameObject.SetActive(true);
+                UpgradeCost[i].text = _selectedBuilding.BuildData().GetUpgradeCost(currentLevel, i).ToString();
+                UpgradeResources[i].sprite = _selectedBuilding.BuildData().GetUpgradeResource(currentLevel, i).GetSprite();
+                
+                if (_player.GetResourceCount(cost[currentLevel - 1].GetResource(i).GetKey()) >= cost[currentLevel - 1].GetCost(i)) continue;
+                
+                price = false;
+            }
+
+            UpgradeButton.interactable = price;
+            UpgradeButton.image.color = price ? Color.white : new Color(0.81f, 0.84f, 0.81f, 0.9f);
+        }
+        
         private void UpdateBuildings(BuildingComponent building, HexTile buildingTile)
         {
-            building.OnBuildInteract += (x, y) => {
-                OnBuildInteract(x, y);
+            building.OnBuildSelect += (x) => {
+                OnBuildInteract(x);
                 _selectedBuilding = building;
                 Open(buildingTile);
             };
         }
 
-        private void UpdateBuildings(BuildingComponent[] buildings) {
-            if (buildings == null) return;
-            
-            foreach (BuildingComponent building in buildings)
-            {
-                building.OnBuildInteract += (x, y) =>
-                {
-                    OnBuildInteract(x, y);
-                    _selectedBuilding = building;
-                    Open(building.GetCurrentTile());
-                };
-            }
-        }
-
-        private void OnBuildInteract(Action action, BuildingComponent build) 
+        private void OnBuildInteract(BuildingComponent build)
         {
-            InteractButton.onClick.AddListener(() => {
-                action.Invoke();
+            InteractButton.onClick.AddListener(() =>
+            {
+                if (!_open || _gameManager.OnTutorial() || _gameManager.TutorialOpen()) return;
+                
+                build.Interact();
                 Close(false);
             });
 
-            if (!build.NeedInteraction()) InteractParent.SetActive(false); //InteractButton.gameObject.SetActive(false);
-            else InteractParent.SetActive(true); //InteractButton.gameObject.SetActive(true); 
+            InteractParent.SetActive(true);
         }
 
         private void OnSellButton()
         {
-            _player.AddResource(_sellResource.GetKey(), Mathf.RoundToInt(_selectedBuilding.GetBuild().GetBuildingCost(0) * 0.5f));
+            if(!_open || _gameManager.TutorialOpen()) return;
+            
+            _player.AddResource(_sellResource.GetKey(), Mathf.RoundToInt(_selectedBuilding.CurrentCost().GetCost(0) * 0.5f));
+            _selectedBuilding.OnBuildDestroy();
+            BuildingManager.Instance.RemoveBuilding(_selectedBuilding);
             _selectedTile.DestroyBuilding();
             
             _selectedBuilding = null;
+            OnSellButtonPress?.Invoke();
             Close(true);
         }
 
         private void OnUpgradeButton()
         {
-            ResourceCost[] cost = _selectedBuilding.GetBuild().GetUpgradeCost();
-            int currentLevel = _selectedBuilding.GetCurrentLevel() - 1;
-
+            if(!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
+            
+            ResourceCost[] cost = _selectedBuilding.BuildData().GetUpgradeCost();
+            int currentLevel = _selectedBuilding.CurrentLevel() - 1;
+            
             for (int i = 0; i < cost[currentLevel].GetCostsAmount(); i++)
-            {
-                if (_player.GetResourceCount(cost[currentLevel].GetResource(i).GetKey()) <
-                    cost[currentLevel].GetCost(i))
-                {
-                    // TODO - Can't upgrade warning
-                    return;
-                }
-            }
-
-            for (int i = 0; i < cost[currentLevel].GetCostsAmount(); i++)
-            {
                 _player.AddResource(cost[currentLevel].GetResource(i).GetKey(), -cost[currentLevel].GetCost(i));
-            }
-            
-            
+
             _selectedBuilding.AddLevel();
-            _selectedBuilding.GetBuild().Spawn(_selectedBuilding.transform.position, _selectedBuilding.transform, _selectedBuilding.GetCurrentLevel(), true);
+            _selectedBuilding.SetCurrentCost(cost[currentLevel]);
+            _selectedBuilding.BuildData().Spawn(_selectedBuilding.transform.position, _selectedBuilding.transform, 
+                _selectedBuilding.CurrentLevel(), true);
             SoundManager.Instance.Play("Build");
             Close(true);
         }
@@ -170,55 +163,39 @@ namespace GGG.Components.UI
             _open = true;
             _selectedTile = tile;
             _selectedBuilding = tile.GetCurrentBuilding();
-            _panel.SetActive(true);
             
-            SellResource.sprite = _selectedBuilding.GetBuild().GetBuildResource(0).GetSprite();
-            SellCost.SetText(Mathf.RoundToInt(_selectedBuilding.GetBuild().GetBuildingCost(0) * 0.5f).ToString());
-
-            int currentLevel = _selectedBuilding.GetCurrentLevel();
+            OpenCheck();
             
-            if (currentLevel < _selectedBuilding.GetBuild().GetMaxLevel())
-            {
-                for (int i = 0; i < UpgradeCost.Length; i++)
-                {
-                    if (!_selectedBuilding.GetBuild().GetUpgradeResource(currentLevel, i))
-                        break;
-                
-                    UpgradeCost[i].transform.parent.gameObject.SetActive(true);
-                
-                    UpgradeCost[i].text = _selectedBuilding.GetBuild().GetUpgradeCost(currentLevel, i).ToString();
-                    UpgradeResources[i].sprite =
-                        _selectedBuilding.GetBuild().GetUpgradeResource(currentLevel, i).GetSprite();
-                }
-            } 
-            else UpgradeButton.gameObject.SetActive(false);
+            OnUiOpen?.Invoke();
+            _gameManager.OnUIOpen();
+            _viewport.SetActive(true);
+            _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InCubic);
+        }
 
-            CloseButton.gameObject.SetActive(true);
-            GameManager.Instance.OnUIOpen();
-            _transform.DOMove(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f), 0.1f).SetEase(Ease.InCubic);
+        private void OnCloseButton()
+        {
+            if(!_open || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
+
+            Close(true);
         }
 
         private void Close(bool resumeGame)
         {
-            if(!_open) return;
-
-            _transform.DOMove(new Vector3(Screen.width * 0.5f, -360), 0.1f).SetEase(Ease.InCubic).onComplete += () => 
+            _viewport.transform.DOMoveX(Screen.width * -0.5f, 0.75f).SetEase(Ease.OutCubic).onComplete += () => 
             {
-                _panel.SetActive(false);
-                CloseButton.gameObject.SetActive(false);
+                _viewport.SetActive(false);
                 InteractButton.onClick.RemoveAllListeners();
                 
                 for (int i = 1; i < UpgradeCost.Length; i++)
-                {
                     UpgradeCost[i].transform.parent.gameObject.SetActive(false);
-                }
+                
+                if(resumeGame) _gameManager.OnUIClose();
+                _open = false;
             };
             
             _selectedTile.DeselectTile();
             _selectedBuilding = null;
             _selectedTile = null;
-            if(resumeGame) GameManager.Instance.OnUIClose();
-            _open = false;
         }
     }
 }

@@ -92,6 +92,8 @@ namespace GGG
                 PlayerPrefs.SetFloat("SoundEffectsVolume", 0);
                 PlayerPrefs.SetFloat("MusicVolume", 0);
             }
+            
+            Play("MainMenu");
         }
 
         public void SetMusicVolume(float volume)

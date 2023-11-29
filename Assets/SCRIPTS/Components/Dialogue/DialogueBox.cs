@@ -50,6 +50,10 @@ namespace GGG.Components.Dialogue
             if (_started) return;
             
             DialogueStart.Invoke();
+            
+            _currentDialogue.GetNextAvatar();
+            _currentDialogue.GetNextName();
+            
             StartCoroutine(TypeText(_currentDialogue.GetNextDialogue()));
             _started = true;
         }

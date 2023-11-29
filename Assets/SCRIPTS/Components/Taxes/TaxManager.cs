@@ -49,7 +49,7 @@ namespace GGG.Components.Taxes
         {
             // TODO - Optional: Make different dialogues and chose one random dialogue.
             _dialogueBox.AddNewDialogue(Dialogue);
-            _intervalDelta = TaxesInterval;
+            _intervalDelta = TaxesInterval * 60;
         }
     }
 }
