@@ -21,7 +21,6 @@ namespace GGG.Components.Debug
         private static DebugCommand SHOW_RESOURCES;
         private static DebugCommand OPEN_SHOP;
         private static DebugCommand OPEN_MUSEUM;
-        private static DebugCommand OPEN_LABORATORY;
         private static DebugCommand TRIGGER_TAXES;
         private static List<object> _commandList;
         
@@ -100,12 +99,6 @@ namespace GGG.Components.Debug
                 FindObjectOfType<MuseumUI>().Open();
             });
 
-            OPEN_LABORATORY = new DebugCommand("open_laboratory", "Opens the laboratory", "open_laboratory", () =>
-            {
-                OnDebugConsole();
-                FindObjectOfType<LaboratoryUI>().Open();
-            });
-
             TRIGGER_TAXES = new DebugCommand("trigger_taxes", "Poseidon will tax you", "trigger_taxes", () =>
             {
                 OnDebugConsole();
@@ -119,7 +112,6 @@ namespace GGG.Components.Debug
                 SHOW_RESOURCES,
                 OPEN_SHOP,
                 OPEN_MUSEUM,
-                OPEN_LABORATORY,
                 TRIGGER_TAXES,
             };
         }
