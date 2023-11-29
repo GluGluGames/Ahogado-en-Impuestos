@@ -1473,6 +1473,7 @@ GameObject:
   - component: {fileID: 4376769538325752267}
   - component: {fileID: 1092394595795503075}
   - component: {fileID: 6860110292742417869}
+  - component: {fileID: 8963546650791535267}
   m_Layer: 11
   m_Name: PlayerModel
   m_TagString: Player
@@ -1665,7 +1666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gotPath: 0
-  _ticker: {fileID: 0}
+  _ticker: {fileID: 8963546650791535267}
 --- !u!114 &1092394595795503075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1720,6 +1721,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8963546650791535267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543234910965191365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec3247242db7fa4da4e3c6a78426d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tickTime: 1
+  keepTicking: 1
 --- !u!1 &7592582952455275165
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,7 +1939,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fcbdb9c5da3b248b7f575e4739eb12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
   FillBar: {fileID: 2969591738415036682}
 --- !u!1 &8705654551362129222
 GameObject:

@@ -42,7 +42,7 @@ public class Timer : MonoBehaviour
     public void Win(bool win)
     {
         Pause();   
-        _timerText.gameObject.SetActive(false);
+        _timerText.gameObject.transform.parent.gameObject.SetActive(false);
         FindObjectOfType<EndExpeditionUI>().OnEndGame(win);
     }
 
