@@ -17,7 +17,6 @@ namespace GGG.Components.Buildings.Generator
     public class GeneratorUI : MonoBehaviour
     {
         [Header("Generator fields")] 
-        [SerializeField] private int[] BoostTimes;
         [SerializeField] private Sprite[] BoostButtonToggles;
         [Space(5), Header("Containers")] 
         [SerializeField] private GameObject[] LevelContainers;
@@ -112,20 +111,31 @@ namespace GGG.Components.Buildings.Generator
 
         private void OnBuildingBoost(int level, int idx)
         {
-            if (_currentGenerator.CurrentGeneration(level) >= level || _currentGenerator.BoostIndex(level, idx) >= 1) 
-                return;
-            
             BuildingComponent building = _generatorTile.neighbours[idx].GetCurrentBuilding();
             if (!building) return;
             
+            if (_currentGenerator.BoostIndex(level, idx) >= 1)
+            {
+                building.EndBoost();
+                
+                _currentGenerator.AddGeneration(level, -1);
+                _currentGenerator.AddBoostIndex(level, idx, -1);
+                _currentGenerator.AddBoostingBuilding(level, idx, -1);
+
+                ChangeButtonSprite(level, idx);
+                
+                return;
+            }
+            
+            if (_currentGenerator.CurrentGeneration(level) >= level) 
+                return;
+            
+            building.Boost();
             _currentGenerator.AddGeneration(level, 1);
             _currentGenerator.AddBoostIndex(level, idx, 1);
             _currentGenerator.AddBoostingBuilding(level, idx, building.Id());
-            _currentGenerator.SetBoostingTime(level, idx, BoostTimes[level - 1]);
             
             ChangeButtonSprite(level, idx);
-            
-            StartCoroutine(BoostBuilding(_currentGenerator.Id(), building, level, idx));
         }
 
         private void ChangeButtonSprite(int level, int idx)
@@ -136,39 +146,17 @@ namespace GGG.Components.Buildings.Generator
             {
                 case 1:
                     BostButtonsLevel1[idx].image.sprite = BoostButtonToggles[level - 1];
-                    BostButtonsLevel1[idx].interactable = _currentGenerator.BoostIndex(level, idx) != 1;
                     BostButtonsLevel1[idx].image.color = color;
                     break;
                 case 2:
                     BostButtonsLevel2[idx].image.sprite = BoostButtonToggles[level - 1];
-                    BostButtonsLevel2[idx].interactable = _currentGenerator.BoostIndex(level, idx) != 1;
                     BostButtonsLevel2[idx].image.color = color;
                     break;
                 default:
                     BostButtonsLevel3[idx].image.sprite = BoostButtonToggles[level - 1];
-                    BostButtonsLevel3[idx].interactable = _currentGenerator.BoostIndex(level, idx) != 1;
                     BostButtonsLevel3[idx].image.color = color;
                     break;
             }
-        }
-
-        private IEnumerator BoostBuilding(int generatorId, BuildingComponent building, int level, int idx)
-        {
-            building.Boost();
-            
-            while (_generators[generatorId].BoostingTime(level, idx) > 0)
-            {
-                _generators[generatorId].AddBoostingTime(level, idx, -Time.deltaTime);
-                yield return null;
-            }
-            
-            building.EndBoost();
-            
-            _currentGenerator.AddGeneration(level, -1);
-            _currentGenerator.AddBoostIndex(level, idx, -1);
-            _currentGenerator.AddBoostingBuilding(level, idx, -1);
-            _currentGenerator.SetBoostingTime(level, idx, 0f);
-            ChangeButtonSprite(level, idx);
         }
 
         private void ChangeBuildText()
@@ -231,7 +219,6 @@ namespace GGG.Components.Buildings.Generator
             public int GeneratorId;
             public List<BoostIndexes> Indexes;
             public List<BoostBuildings> Buildings;
-            public List<BoostingTime> RemainingTimes;
         }
 
         [Serializable]
@@ -261,21 +248,6 @@ namespace GGG.Components.Buildings.Generator
             }
         }
 
-        [Serializable]
-        private class BoostingTime
-        {
-            public int Level;
-            public int Index;
-            public float Time;
-
-            public BoostingTime(int level, int idx, float time)
-            {
-                Level = level;
-                Index = idx;
-                Time = time;
-            }
-        }
-
         public void SaveGeneratorState()
         {
             if (_generators.Count <= 0) return;
@@ -293,7 +265,6 @@ namespace GGG.Components.Buildings.Generator
                     GeneratorId = id,
                     Indexes = new List<BoostIndexes>(),
                     Buildings = new List<BoostBuildings>(),
-                    RemainingTimes = new List<BoostingTime>()
                 };
 
                 for (int y = 1; y <= level; y++) {
@@ -303,9 +274,6 @@ namespace GGG.Components.Buildings.Generator
                         
                         if (_generators[id].BoostBuilding(y, j) != -1)
                             data.Buildings.Add(new BoostBuildings(y, j, _generators[id].BoostBuilding(y, j)));
-                        
-                        if (_generators[id].BoostingTime(y, j) > 0)
-                            data.RemainingTimes.Add(new BoostingTime(y, j, _generators[id].BoostingTime(y, j)));
                     }
 
                 }
@@ -351,14 +319,12 @@ namespace GGG.Components.Buildings.Generator
                     {
                         gen.AddBoostIndex(generator.Indexes[i].Level, generator.Indexes[i].Index, 1);
                         gen.AddBoostingBuilding(generator.Buildings[i].Level, generator.Buildings[i].Index, generator.Buildings[i].BuildingId);
-                        gen.AddBoostingTime(generator.RemainingTimes[i].Level, generator.RemainingTimes[i].Index, generator.RemainingTimes[i].Time);
                         gen.AddGeneration(generator.Indexes[i].Level, 1);
 
                         BuildingComponent build = BuildingManager.Instance.GetBuildings()
                             .Find(x => x.Id() == generator.Buildings[i].BuildingId);
 
-                        StartCoroutine(BoostBuilding(gen.Id(), build, generator.Buildings[i].Level,
-                            generator.Buildings[i].Index));
+                        build.Boost();
                     }
                 }
             }

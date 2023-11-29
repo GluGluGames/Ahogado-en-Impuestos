@@ -6,7 +6,6 @@ namespace GGG.Components.Buildings.Generator
         private int[] _currentGeneration;
         private int[,] _boostIndexes;
         private int[,] _boostBuildings;
-        private float[,] _boostingTimes;
 
         public override void Initialize()
         {
@@ -21,8 +20,7 @@ namespace GGG.Components.Buildings.Generator
                 for (int j = 0; j < _boostBuildings.GetLength(1); j++)
                     _boostBuildings[i, j] = -1;
             }
-
-            _boostingTimes = new float[3, 6];
+            
         }
 
         public override void Interact()
@@ -48,11 +46,5 @@ namespace GGG.Components.Buildings.Generator
         public int BoostBuilding(int level, int idx) => _boostBuildings[level - 1, idx];
 
         public void AddBoostingBuilding(int level, int idx, int id) => _boostBuildings[level - 1, idx] = id;    
-
-        public float BoostingTime(int level, int idx) => _boostingTimes[level - 1, idx];
-
-        public void SetBoostingTime(int level, int idx, float time) => _boostingTimes[level - 1, idx] = time;
-
-        public void AddBoostingTime(int level, int idx, float time) => _boostingTimes[level - 1, idx] += time;
     }
 }

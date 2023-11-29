@@ -78,7 +78,7 @@ namespace GGG.Components.Buildings
 
             if (_farms.Count == 0) yield break;
             
-            TimeSpan time = DateTime.Now - DateTime.Parse(PlayerPrefs.GetString(_EXIT_TIME));
+            TimeSpan time = DateTime.Now.Subtract(DateTime.Parse(PlayerPrefs.GetString("ExitTime")));
 
             if (time.Minutes < 1f) yield break;
 

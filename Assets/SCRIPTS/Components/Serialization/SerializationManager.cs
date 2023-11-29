@@ -44,9 +44,9 @@ namespace GGG.Components.Serialization
             _delta = 0f;
         }
 
-        private void OnApplicationQuit()
+        private void OnDisable()
         {
-            PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToBinary().ToString());
+            PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
             PlayerPrefs.Save();
         }
 

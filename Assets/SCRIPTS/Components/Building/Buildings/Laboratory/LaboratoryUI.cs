@@ -404,7 +404,7 @@ namespace GGG.Components.Buildings.Laboratory
             if (string.IsNullOrEmpty(data)) yield break;
             
             LaboratoryData[] researchProgress = JsonHelper.FromJson<LaboratoryData>(data);
-            TimeSpan time = DateTime.Now.Subtract(DateTime.FromBinary(Convert.ToInt64(PlayerPrefs.GetString("ExitTime"))));
+            TimeSpan time = DateTime.Now.Subtract(DateTime.Parse(PlayerPrefs.GetString("ExitTime")));
             foreach (LaboratoryData laboratoryData in researchProgress)
             {
                 foreach (Laboratory lab in laboratories)
