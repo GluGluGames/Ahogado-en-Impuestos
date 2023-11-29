@@ -82,7 +82,7 @@ namespace GGG.Components.Player
 
         public int GetResourceNumber() => _resourcesDictionary.Count;
 
-        private void SaveResourcesCount()
+        public void SaveResourcesCount()
         {
             ResourceData[] resourceDataList = new ResourceData[_resourcesCount.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");

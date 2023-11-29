@@ -355,7 +355,7 @@ namespace GGG.Components.Buildings.Laboratory
             public float[] RemainingTime = new float[3];
         }
 
-        private void SaveResearchProgress()
+        public void SaveResearchProgress()
         {
             LaboratoryData[] saveData = new LaboratoryData[_laboratories.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "laboratory_progress.json");

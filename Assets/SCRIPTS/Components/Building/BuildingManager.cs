@@ -151,7 +151,7 @@ namespace GGG.Components.Buildings
             return _buildingsCosts[build];
         }
 
-        private void SaveBuildings() {
+        public void SaveBuildings() {
             BuildingComponent[] buildings = GetComponentsInChildren<BuildingComponent>();
             BuildingData[] saveData = new BuildingData[buildings.Length];
             int i = 0;

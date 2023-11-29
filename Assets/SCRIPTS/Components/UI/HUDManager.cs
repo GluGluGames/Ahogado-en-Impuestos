@@ -103,7 +103,7 @@ namespace GGG.Components.UI
             return true;
         }
 
-        private void SaveShownResources()
+        public void SaveShownResources()
         {
             ShownResource[] resourcesData = new ShownResource[_shownResource.Count];
             int i = 0;

@@ -276,7 +276,7 @@ namespace GGG.Components.Buildings.Generator
             }
         }
 
-        private void SaveGeneratorState()
+        public void SaveGeneratorState()
         {
             if (_generators.Count <= 0) return;
             

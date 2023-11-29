@@ -82,7 +82,8 @@ namespace GGG.Components.HexagonalGrid
             foreach (HexTile tileAux in _tiles) tileAux.OnHexSelect -= InitializePath;
             BuildingManager.OnBuildsLoad -= OnBuildsLoad;
             
-            if (!SceneManagement.InGameScene() || GameManager.Instance.GetCurrentTutorial() == Tutorials.BuildTutorial)
+            if (!SceneManagement.InGameScene() || 
+                GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial)
                 return;
             
             SaveTilesState();
@@ -208,7 +209,7 @@ namespace GGG.Components.HexagonalGrid
         
         #region Data persistence
 
-        private void SaveTilesState() {
+        public void SaveTilesState() {
             TileData[] saveData = new TileData[_tiles.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
             int i = 0;
