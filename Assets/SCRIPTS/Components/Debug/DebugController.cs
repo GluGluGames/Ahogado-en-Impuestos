@@ -1,16 +1,14 @@
 using GGG.Classes.Debug;
 using GGG.Components.Core;
+using GGG.Components.Museum;
 using GGG.Components.Player;
-using GGG.Components.Buildings.Museum;
-using GGG.Components.Buildings.Shop;
-using GGG.Components.Buildings.Laboratory;
-using GGG.Components.Buildings.Generator;
-using GGG.Components.Taxes;
+using GGG.Components.Shop;
 using GGG.Input;
 using GGG.Shared;
 
 using UnityEngine;
 using System.Collections.Generic;
+using GGG.Components.Taxes;
 
 namespace GGG.Components.Debug
 {
@@ -98,7 +96,7 @@ namespace GGG.Components.Debug
                 OnDebugConsole();
                 FindObjectOfType<MuseumUI>().Open();
             });
-
+            
             TRIGGER_TAXES = new DebugCommand("trigger_taxes", "Poseidon will tax you", "trigger_taxes", () =>
             {
                 OnDebugConsole();

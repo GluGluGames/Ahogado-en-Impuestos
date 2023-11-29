@@ -1,22 +1,21 @@
 using GGG.Shared;
 using GGG.Components.Core;
 using GGG.Components.Player;
-using GGG.Components.Buildings;
-using GGG.Components.HexagonalGrid;
 
 using TMPro;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using GGG.Components.Neptune;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace GGG.Components.Taxes
 {
     public class TaxUI : MonoBehaviour
     {
         [Header("UI Fields")]
+        [SerializeField] private GameObject Viewport;
         [SerializeField] private Image[] ResourcesSprites;
         [SerializeField] private TMP_Text[] ResourcesAmount;
 
@@ -25,11 +24,9 @@ namespace GGG.Components.Taxes
         [SerializeField] private Button NotPayButton;
 
         private PlayerManager _player;
-        private List<BuildingComponent> _buildings;
         private readonly Dictionary<Resource, int> _taxResources = new();
         private readonly System.Random _random = new();
 
-        private GameObject _viewport;
         private bool _open;
 
         public Action OnOptionSelected;
@@ -41,9 +38,7 @@ namespace GGG.Components.Taxes
             PayButton.onClick.AddListener(PayTaxes);
             NotPayButton.onClick.AddListener(NotPayTaxes);
 
-            _viewport = transform.GetChild(0).gameObject;
-            _viewport.SetActive(false);
-            _viewport.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.5f);
+            transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 1.2f);
         }
 
         public void Open()
@@ -51,21 +46,22 @@ namespace GGG.Components.Taxes
             if (_open) return;
 
             _open = true;
-            _viewport.SetActive(true);
+            Viewport.SetActive(true);
             GenerateTaxes();
-            GameManager.Instance.OnUIOpen();
 
-            _viewport.transform.DOMoveY(Screen.height * 0.5f, 0.75f).SetEase(Ease.InCubic);
+            transform.DOMoveY(Screen.height * 0.5f, 0.75f).SetEase(Ease.OutBounce);
+            GameManager.Instance.OnUIOpen();
         }
 
         private void Close()
         {
             if (!_open) return;
 
-            _viewport.transform.DOMoveY(Screen.height * -0.5f, 0.75f).SetEase(Ease.OutCubic).onComplete += () =>
+            transform.DOMoveY(Screen.height * 1.2f, 0.75f).SetEase(Ease.OutBounce).onComplete +=
+            () =>
             {
                 _open = false;
-                _viewport.SetActive(false);
+                Viewport.SetActive(false);
             };
 
             OnOptionSelected?.Invoke();
@@ -76,8 +72,7 @@ namespace GGG.Components.Taxes
         private void GenerateTaxes()
         {
             // TODO - Algorithm that looks what the player have and generated the resources.
-            _taxResources.Add(_player.GetResource("Seaweed"), _random.Next(50, 100));
-            _buildings = BuildingManager.Instance.GetBuildings();
+            _taxResources.Add(_player.GetMainResource(), _random.Next(50, 100));
 
             bool found = false;
             int i = 0;
@@ -116,9 +111,7 @@ namespace GGG.Components.Taxes
 
         private void NotPayTaxes()
         {
-            if (_buildings.Count > 0)
-                TileManager.Instance.DestroyBuilding(_buildings[Random.Range(0, _buildings.Count)]);
-            
+            NeptuneManager.Instance.DestroyRandomStructure();
             Close();
         }
     }

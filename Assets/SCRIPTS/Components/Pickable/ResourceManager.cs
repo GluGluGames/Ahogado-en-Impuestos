@@ -1,9 +1,7 @@
-using GGG.Components.HexagonalGrid;
-
+using GGG.Shared;
+using GGG.Components.Buildings;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using GGG.Shared;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,11 +16,10 @@ namespace GGG.Components.Resources
         [SerializeField] private List<ResourceComponent> _resourcePrefabs = new List<ResourceComponent>();
         [SerializeField] private int _nResourcesMax;
 
-        public Dictionary<Resource, int> resourcesCollected = new ();
+        public Dictionary<string, int> resourcesCollected = new Dictionary<string, int>();
         public List<ResourceComponent> resourcesOnScene = new List<ResourceComponent>();
 
         private int _nResourcesCollected = 0;
-        private List<HexTile> _tiles;
 
         private void Awake()
         {
@@ -31,15 +28,7 @@ namespace GGG.Components.Resources
 
         private void Start()
         {
-            List<Resource> resources = UnityEngine.Resources.LoadAll<Resource>("SeaResources").Concat(
-                UnityEngine.Resources.LoadAll<Resource>("FishResources")).Concat(
-                UnityEngine.Resources.LoadAll<Resource>("ExpeditionResources")).ToList();
-
-            foreach (Resource resource in resources)
-                resourcesCollected.Add(resource, 0);
-            
-            _tiles = FindObjectsOfType<HexTile>().ToList();
-            for (int i = 0; i < _nResourcesMax; ++i)
+            for(int i = 0; i < _nResourcesMax; ++i)
             {
                 SpawnRandomResource();
             }
@@ -47,26 +36,26 @@ namespace GGG.Components.Resources
 
         private bool SpawnRandomResource()
         {
-            HexTile hex = _tiles[Random.Range(0, _tiles.Count)];
+            HexTile hex = TileManager.instance.GetRandomHex();
             bool spawned = false;
-            
             foreach (ResourceComponent resource in resourcesOnScene)
             {
-                if (resource.currentTile != hex) continue;
-                
-                spawned = SpawnRandomResource();
-                break;
+                if (resource.currentTile == hex)
+                {
+                    spawned = SpawnRandomResource();
+                    break;
+                }
             }
+            if (_resourcePrefabs != null && spawned == false)
+            {
+                int rand = Random.Range(0, _resourcePrefabs.Count);
 
-            if (_resourcePrefabs == null || spawned ) return true;
-            
-            int rand = Random.Range(0, _resourcePrefabs.Count);
+                ResourceComponent newResource = Instantiate(_resourcePrefabs[rand], transform);
+                newResource.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
+                newResource.currentTile = hex;
 
-            ResourceComponent newResource = Instantiate(_resourcePrefabs[rand], transform);
-            newResource.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
-            newResource.currentTile = hex;
-
-            resourcesOnScene.Add(newResource);
+                resourcesOnScene.Add(newResource);
+            }
 
             return true;
         }

@@ -37,13 +37,6 @@ namespace GGG.Components.Core
         [Header("Other")]
         [Tooltip("Amount of movement over time")]
         [SerializeField] private float MovementTime;
-        
-        #if UNITY_ANDROID
-        private LeanDragCamera _dragCamera;
-        private LeanTwistRotateAxis _rotateCamera;
-        private LeanPinchScale _zoomCamera;
-        private bool _cameraToggle;
-        #endif
 
         private InputManager _input;
         private GameManager _gameManager;
@@ -67,24 +60,25 @@ namespace GGG.Components.Core
         private void Start() {
             _input = InputManager.Instance;
             _gameManager = GameManager.Instance;
-            
+            _transform = transform;
+            _mainCamera = Camera.main;
+            _mainCanvas = GameObject.FindGameObjectWithTag("HUD").GetComponent<Canvas>();
+            _graphicRaycaster = _mainCanvas.GetComponent<GraphicRaycaster>();
 
             #if UNITY_ANDROID
-            _dragCamera = GetComponent<LeanDragCamera>();
-            _rotateCamera = GetComponent<LeanTwistRotateAxis>();
-            _zoomCamera = GetComponent<LeanPinchScale>();
-            
             LeanTouch.OnFingerDown += (x) => Holding.IsHolding(true);
             LeanTouch.OnFingerUp += (x) => Holding.IsHolding(false);
             #endif
 
-            Initialize();
+            _cameraTransform = _mainCamera.transform;
+            _newPosition = _transform.position;
+            _newRotation = _transform.rotation;
+            _newZoom = _cameraTransform.localPosition;
         }
 #if !UNITY_ANDROID
         private void Update()
         {
-            if(!_cameraTransform) Initialize();
-            if (_gameManager.IsOnUI() || _gameManager.TutorialOpen()) return;
+            if (!_gameManager.PlayingGame()) return;
             
             StartCoroutine(HandleMouseInput());
             StartCoroutine(HandleLeftMouseInput());
@@ -92,37 +86,16 @@ namespace GGG.Components.Core
 #endif
 
         private void LateUpdate() {
-            if (_gameManager.IsOnUI() || _gameManager.TutorialOpen())
-            {
-                #if UNITY_ANDROID
-                ToggleCamera(false);
-                #endif
-                
-                return;
-            }
+            if (!_gameManager.PlayingGame()) return;
             
 #if UNITY_ANDROID
-            if(!_cameraToggle) ToggleCamera(true);
-            
-            //ClampCamera();
+            ClampCamera();
 #else
             HandleCameraMovement();
             HandleCameraRotation();
             HandleZoom();
 #endif
 
-        }
-
-        private void Initialize()
-        {
-            _transform = transform;
-            _mainCamera = Camera.main;
-            _mainCanvas = GameObject.FindGameObjectWithTag("HUD").GetComponent<Canvas>();
-            _graphicRaycaster = _mainCanvas.GetComponent<GraphicRaycaster>();
-            _cameraTransform = _mainCamera.transform;
-            _newPosition = _transform.position;
-            _newRotation = _transform.rotation;
-            _newZoom = _cameraTransform.localPosition;
         }
 
         /// <summary>
@@ -256,15 +229,6 @@ namespace GGG.Components.Core
         }
 
         #if UNITY_ANDROID
-        private void ToggleCamera(bool state)
-        {
-            _dragCamera.enabled = state;
-            _rotateCamera.enabled = state;
-            _zoomCamera.enabled = state;
-
-            _cameraToggle = state;
-        }
-        
         private void ClampCamera()
         {
             Vector3 newPosition = _transform.position;

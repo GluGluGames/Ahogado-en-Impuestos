@@ -1,4 +1,4 @@
-using GGG.Components.HexagonalGrid;
+using GGG.Components.Buildings;
 using GGG.Components.Ticks;
 using System.Diagnostics;
 

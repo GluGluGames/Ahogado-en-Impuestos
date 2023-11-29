@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Linq;
 using GGG.Components.Core;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 namespace GGG.Components.Player
 {
@@ -19,30 +20,23 @@ namespace GGG.Components.Player
         private void Awake() {
 
             if(_PlayerModel != null)
-                Instantiate(_PlayerModel, transform);
-            
-            if (Instance == null)
-                Instance = this;
-            
-            _resources = Resources.LoadAll<Resource>("SeaResources").
-                Concat(Resources.LoadAll<Resource>("ExpeditionResources")).
-                Concat(Resources.LoadAll<Resource>("FishResources")).ToList();
-            
-            foreach (Resource i in _resources)
-                _resourcesDictionary.Add(i.GetKey(), i);
-            
-            StartCoroutine(LoadResourcesCount());
+            {
+                GameObject.Instantiate(_PlayerModel, transform);
+
+            }
+            if (Instance != null) return;
+
+            Instance = this;
         }
 
         #endregion
-        
+
+        [SerializeField] private List<Resource> Resources;
+        [SerializeField] private Resource TempMainResource;
         [SerializeField] private GameObject _PlayerModel;
 
-        private GameManager _gameManager;
-        
-        private List<Resource> _resources;
         private Dictionary<string, int> _resourcesCount = new();
-        private readonly Dictionary<string, Resource> _resourcesDictionary = new();
+        private Dictionary<string, Resource> _resources = new();
 
         public Action OnPlayerInitialized;
 
@@ -55,22 +49,39 @@ namespace GGG.Components.Player
 
         private void Start()
         {
-            _gameManager = GameManager.Instance;
+            StartCoroutine(LoadResourcesCount());
+            
+            foreach (Resource i in Resources)
+                _resources.Add(i.GetKey(), i);
+
+            if(_resourcesCount.Count <= 0)
+                foreach (string i in _resources.Keys) 
+                    _resourcesCount.Add(i, 0);
         }
 
-        private void OnDisable()
-        {
-            if (!SceneManagement.InGameScene() || 
-                _gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
-            
+        private void OnDisable() {
             SaveResourcesCount();
         }
 
-        public int GetResourceCount(string key) => _resourcesCount[key];
+        private void OnValidate()
+        {
+            Resources = UnityEngine.Resources.LoadAll<Resource>("SeaResources").
+                Concat(UnityEngine.Resources.LoadAll<Resource>("ExpeditionResources")).
+                Concat(UnityEngine.Resources.LoadAll<Resource>("FishResources")).ToList();
+        }
 
-        public List<Resource> GetResources() => _resources;
+        public int GetResourceCount(string key)
+        {
+            int count = 0;
+            _resourcesCount.TryGetValue(key, out count);
+            
+            return count;
+            //return _resourcesCount[key];
+        }
 
-        public Resource GetResource(string resourceKey) => _resourcesDictionary[resourceKey];
+        public List<Resource> GetResources() => Resources;
+
+        public Resource GetResource(string resourceKey) => _resources[resourceKey];
 
         public void AddResource(string resourceKey, int amount) {
             if (!_resourcesCount.ContainsKey(resourceKey))
@@ -80,9 +91,11 @@ namespace GGG.Components.Player
             _resourcesCount[resourceKey] += amount;
         }
 
-        public int GetResourceNumber() => _resourcesDictionary.Count;
+        public int GetResourceNumber() => _resources.Count;
 
-        public void SaveResourcesCount()
+        public Resource GetMainResource() => TempMainResource;
+
+        private void SaveResourcesCount()
         {
             ResourceData[] resourceDataList = new ResourceData[_resourcesCount.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");
@@ -90,12 +103,9 @@ namespace GGG.Components.Player
             
             foreach (var pair in _resourcesCount)
             {
-                ResourceData data = new()
-                {
-                    Name = pair.Key,
-                    Count = pair.Value
-                };
-                
+                ResourceData data = new ResourceData();
+                data.Name = pair.Key;
+                data.Count = pair.Value;
                 resourceDataList[i] = data;
                 i++;
             }
@@ -111,21 +121,22 @@ namespace GGG.Components.Player
             filePath = "file://" + filePath;
 #endif
             string data;
-            
             if (filePath.Contains("://") || filePath.Contains(":///")) {
                 UnityWebRequest www = UnityWebRequest.Get(filePath);
                 yield return www.SendWebRequest();
                 data = www.downloadHandler.text;
             }
-            else data = File.ReadAllText(filePath);
-            
+            else {
+                data = File.ReadAllText(filePath);
+            }
 
-            if (!string.IsNullOrEmpty(data)) {
+            if (data != "") {
                 ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data);
                 _resourcesCount = resources.ToDictionary(item => item.Name, item => item.Count);
             }
-            else 
-                foreach (string i in _resourcesDictionary.Keys) _resourcesCount.Add(i, 0);
+            else {
+                SaveResourcesCount();
+            }
             
             OnPlayerInitialized?.Invoke();
         }

@@ -1,4 +1,4 @@
-using GGG.Components.HexagonalGrid;
+using GGG.Components.Buildings;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,8 +18,6 @@ namespace GGG.Components.Enemies
         public bool movingAllowed = true;
         public int enemyLayer = 0;
         public Action onMove = ()=> { };
-        public GameObject model1;
-        public GameObject model2;
 
         public List<HexTile> currentPath = new List<HexTile>();
 
@@ -60,7 +58,7 @@ namespace GGG.Components.Enemies
                     targetPosition = nextTile.transform.position + new Vector3(0, 1f, 0);
                     MoveTo(targetPosition);
                     gotPath = true;
-                    if(currentPath.Count > 0) currentPath.RemoveAt(0);
+                    currentPath.RemoveAt(0);
                     cubeCoordPos = nextTile.cubeCoordinate;
                 }
             }
@@ -68,21 +66,16 @@ namespace GGG.Components.Enemies
 
         public void HandleVisibility()
         {
-            if (model1 == null || model2 == null) return;
             // This should be better done
             if (nextTile != null && !alwaysVisible)
             {
                 if (nextTile.gameObject.layer == 0 || (currentTile != null && currentTile.gameObject.layer == 0))
                 {
                     gameObject.layer = enemyLayer;
-                    model1.layer = enemyLayer;
-                    model2.layer = enemyLayer;
                 }
                 else
                 {
                     gameObject.layer = 7;
-                    model1.layer = 7;
-                    model2.layer = 7;
                 }
             }
             else if (currentTile != null && !alwaysVisible)
@@ -90,21 +83,15 @@ namespace GGG.Components.Enemies
                 if (currentTile.gameObject.layer == 0)
                 {
                     gameObject.layer = enemyLayer;
-                    model1.layer = enemyLayer;
-                    model2.layer = enemyLayer;
                 }
                 else
                 {
                     gameObject.layer = 7;
-                    model1.layer = 7;
-                    model2.layer = 7;
                 }
             }
             else if (alwaysVisible)
             {
                 gameObject.layer = enemyLayer;
-                model1.layer = enemyLayer;
-                model2.layer = enemyLayer;
             }
         }
 

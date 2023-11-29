@@ -1,5 +1,4 @@
-using GGG.Components.HexagonalGrid;
-
+using GGG.Components.Buildings;
 using UnityEngine;
 
 namespace GGG.Components.Enemies

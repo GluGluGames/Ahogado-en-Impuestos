@@ -1,8 +1,6 @@
-using GGG.Components.HexagonalGrid;
+using GGG.Components.Buildings;
 using GGG.Components.Ticks;
-using GGG.Components.UI;
 using GGG.Shared;
-
 using System;
 using System.Collections;
 using UnityEngine;
@@ -13,15 +11,14 @@ namespace GGG.Components.Resources
     {
         [SerializeField] private Resource _resource;
         [SerializeField] private int _amount;
+        [SerializeField] private Collider colliderResource;
         [SerializeField] private bool _alwaysVisible;
-        [SerializeField] private PickResourceProgressionUI _pickProgressUI;
-        [SerializeField] private int RecollectionTime;
         private bool WaitSecond = true;
 
         private bool _collided = false;
-        private bool _pickingResource;
 
         public HexTile currentTile;
+        public Action onResourceCollideEnter;
         public Action onResourceCollideExit;
 
         #region getters and setters
@@ -44,62 +41,47 @@ namespace GGG.Components.Resources
 
         private void OnTriggerEnter(Collider other)
         {
-            _collided = true;
-            _pickProgressUI.gameObject.SetActive(true);
+            //if(!_collided)
+            //{
+            //    onResourceCollideEnter.Invoke();
+            //    _collided = true;
+            //}
 
-            StartCoroutine(RecollectResource());
-
-            /*
             WaitSecond = true;
-            StartCoroutine(WaitSeconds(0, 3, () =>
+            Coroutine aux = StartCoroutine(WaitSeconds(0, 3, () => { },
+                () =>
                 {
-                    _pickProgressUI.current++;
-                }, () =>
-                {
-                    _pickProgressUI.current = _pickProgressUI.maximum;
+                    Debug.Log("FIN!!!");
                     RecolectResource();
-                    _pickProgressUI.current = 0;
-                    _pickProgressUI.gameObject.SetActive(false);
-                    _resourcePicked = true;
                     DeleteMySelf();
                 }));
-                */
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (!_collided) return;
-            
-            _pickProgressUI.gameObject.SetActive(false);
-            
-            if (_pickingResource)
+            WaitSecond = false;
+            if (_collided)
             {
-                StopCoroutine(RecollectResource());
-                _pickProgressUI.StopPicking();
-                _pickingResource = false;
+                onResourceCollideExit.Invoke();
+                _collided = false;
             }
-            _collided = false;
         }
 
         private void Start()
         {
-            _pickProgressUI = FindObjectOfType<PickResourceProgressionUI>(true);
+            onResourceCollideEnter += RecolectResource;
             onResourceCollideExit += DeleteMySelf;
             TickManager.OnTick += HandleVisibility;
             HandleVisibility();
         }
 
-        private IEnumerator RecollectResource()
+        private void RecolectResource()
         {
-            _pickingResource = true;
-            yield return _pickProgressUI.PickResource(RecollectionTime);
-            
-            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource, out int aux);
-            ResourceManager.Instance.resourcesCollected[_resource] += aux;
-            _resource.DiscoverResource();
-            _pickProgressUI.gameObject.SetActive(false);
-            _pickingResource = false;
-            DeleteMySelf();
+            int aux = 0;
+            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out aux);
+
+            ResourceManager.Instance.resourcesCollected.Remove(_resource.GetName());
+            ResourceManager.Instance.resourcesCollected.Add(_resource.GetName(), _amount + aux);
         }
 
         private void DeleteMySelf()
@@ -113,7 +95,7 @@ namespace GGG.Components.Resources
             ResourceManager.Instance.sumResourceCollected();
             TickManager.OnTick -= HandleVisibility;
 
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
 
         #endregion Methods

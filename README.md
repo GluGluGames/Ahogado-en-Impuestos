@@ -15,11 +15,6 @@
 - 21/10/2023 - Adrián S. - Added 3D Models
 - 21/10/2023 - Adrián A. - Revisión de erratas.
 - 21/10/2023 - Luming - Correcion de Mecanicas en recursos y desarrollar pensamineto computacional
-- 10/11/2023 - Luming - Subir el análisis MDA de nuestro juego
-- 14/11/2023 - Luming - Corregir las mecanicas de construccion y subir FSM de diferentes enemigos
-- 17/11/2023 - Luming - Reescribir el texto de la MDA
-- 22/11/2023 - Luming - Afinar las mecancias de produccion y coste de granja de algas
-- 24/11/2023 - Luming - Introducir explicacion visual del generador de electricidad,tienda y peceera; y añadido tiempo de recogido en Game Design
   
 ## 1 - MÉCANICAS 
 
@@ -63,19 +58,13 @@ Es fundamental comprender que las diferentes profundidades en el juego albergan 
 
 Esta mecánica añade un elemento táctico al juego, donde los jugadores deben sopesar cuidadosamente sus opciones y decidir si enfrentarán a un depredador, huirán o buscarán rutas de escape inteligentes para evitar situaciones peligrosas. La gestión adecuada de los encuentros con depredadores es esencial para una exitosa exploración del mundo submarino.
 
-**Diagrama de enemigos prototipo**
+**Diagrama de enemigos**
 
 ![Enemy Flow chart](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Enemy%20Flow.png)
 
-**IA Enemigos**
+**FSM Enemigo**
 
-![Enemigo Normal ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_NORMAL_ENEMY.png)
-![Enemigo Rabioso ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_BERSERKER_ENEMY.png)
-![Enemigo Mini ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_MINI_ENEMY.png)
-![Chatarreros ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_CHATARRERO_ENEMY.png)
-![Presa ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_PRESA_ENEMY.png)
-![Alarmante ](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/FSM_VIGILANTE_ENEMY.png)
-![Behaviour tree Avisado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/IA/BEHAVIOR_TREE_AVISADO.png)
+![Enemy FSM](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/FSM%20Enemy.png)
 
 ### **1.4 - Recursos** 
 
@@ -87,15 +76,11 @@ Esta mecánica añade un elemento táctico al juego, donde los jugadores deben s
 
 - **Perlas**: Recurso versátil que tiene múltiples usos en el juego. Proporcionan flexibilidad a los jugadores para abordar diferentes aspectos del juego.
 
+- **Madera, Corales y Hierro**: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
+
 - **Conchas**:Recurso de rareza  alta, puede atraer a animales grande para proteccion dentro de la expedicion.
 
 - **Caracolas**: Recursos de finalidad decorativa, puede aumentar el nivel de prestigio de la ciudad.
-
-- --------------------------------------------------------------------------------
-
-Recursos de expedicion:
-
-- **Madera, Corales y Hierro**: Estos materiales son utilizados en la construcción y mejora de edificios dentro de la ciudad. Los corales se utilizan para construcciones iniciales, la madera para reparaciones y el hierro para mejoras.
 
 #### **1.4.2 - Recursos especiales**
 
@@ -107,27 +92,15 @@ Estas zonas desbloqueables brindan a los jugadores la oportunidad de diversifica
 
 ### **1.5 - Edificios** 
 
-
-#### **1.5.0 - Ayuntamiento**
-Primer edificio de construccion donde se permite visualizar los recursos que posee el jugador de manera mas específica.
-| Nivel | Coste de construccion| Coste de mejora | Coste de reparacion|
-| :--: | :--: | :--: | :--: |
-| 1 | 0 algas verdes| x | Imposible de destruir dado que es la base de la ciudad, protegido por poseidon |
-
-
 #### **1.5.1 - Granja de algas**
 
 La granja de algas generara un número de algas por unidad de tiempo. Al subirla de nivel, el número de algas generadas aumentará.
-La primera granja de algas será gratis para el jugador.
-Cada nueva granja de algas aumentará una cantidad que sigue una formula de $cost_{next} = cost_{base} \times (rate_{growth})^{owned}$  
-Significa que cada granja nueva tendra el coste coste base (1000 algas verdes) * (coeficientes de crecimiento)^Granjas obtenidas  
-En este caso haremos que el coeficiente de crecimiento = 1.05, asi para hacer mas asequible al jugador.
 
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Productividad | Justificacion|
 | :--: | :--: | :--: | :--: | :--: | ------------ |
-| 1 | 1k algas verdes + x cantidad| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
-| 2 | x| 5k algas verdes + 400 Hierro + 400 corales | 200 madera |  40 algas/3s | Nivel intermedio, corresponde con productividad medio bajo, incentivar al jugador acceder a expedicion para conseguir el mejor nivel de la construccion |
-| 3 | x| 10k algas verdes + 5k algas rojas + 600 Hierro + 400 corales | 300 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
+| 1 | 2000 algasverdes + 400 corales| x | 100 madera |  20 algas/5s | Nivel bajo, corresponde con baja productividad, incentivar al jugador ir de expedicion |
+| 2 | x| 400 Hierro + 400 corales | 400 madera |  40 algas/3s | Nivel intermedio, corresponde con productividad medio bajo, incentivar al jugador acceder a expedicion para conseguir el mejor nivel de la construccion |
+| 3 | x| 600 Hierro + 400 corales | 800 madera |  100 algas/s | Nivel alto, productividad alta como recompensa para el jugador una vez haya conseguido el nivel maximo del edificio. |
 
 #### **1.5.2 - Tienda de objetos**
 
@@ -138,26 +111,9 @@ La tienda de objetos servirá al jugador para intercambiar un número de materia
 Al subirla de nivel: se ofrecerá un mayor número de intercambios al día y de recursos más valiosos.
 | Nivel | Coste de restauracion| Coste de mejora |Intercambios permitidos| Justificacion|
 | :--: | :--: | :--: | :--: |------------ |
-| 1 | 1k algas verdes| x | 3 | La tienda se sirve como ayuda para el jugador, no queremos que el jugador se relegue solo en los intercambios de elementos
-| 2 | x| 2k algas rojas + 200 hierro | 5 | En esta fase el jugador ya ha avanzado parte del juego, por lo tanto se le permite mas intercambios cada dia
-| 3 | x| 3k algas rojas + 300 hierro  | 10 | Aqui el jugador ya habra avanzado bastante en la construccion de la ciudad por lo tanto se permiten hasta 10 ya que puede hacer falta los recursos en ocaciones, sin abusar del intercambio|
-
-Aquí se lista la tabla de los recursos que se pueden intercambiar; no obstante, los recursos de expedición solo se podrán desbloquear después de encontrarlos dentro de la expedición. Es decir, inicialmente quedarán bloqueados.  
-El propóstio de este edificio es para darle herramienta al jugador en caso de que quede atascado en algún recurso, pero excesivo en otro, entonces se le provee una posibilidad de hacer intercambios para estrategias más eficientes dentro de la ciudad, evitando la salida a expedición que será una aventura desconocida.  
-<<<Además, ya que el juego se consiste en un idle que se gasta y gana constantemente el recurso primario, en este las algas verdes y rojas, entonces se añade uan forma más al jugador para seguir enganchando al jugador, es destacable el precio pueda modificar después de varios testing por parte del jugador.>>>  
-
-| Recurso                      | Intercambio                                                       | Costo (Algas Rojas/Perlas) | Unidad de Intercambio |
-| ---------------------------- | ----------------------------------------------------------------- | -------------------- | ---------------------- |
-| Madera                       | Se vende por stack (20 maderas)                                   | 100 Algas/unidad     | Stack (20 maderas)     |
-|                              | Si stacks requeridos > 10, se puede comprar con perlas            | 1 Perla = 10 Stack    | -                      |
-| Hierro                       | Se vende por stack (10 hierro)                                    | 500 Algas Rojas/unidad | Stack (10 hierro)      |
-|                              | Si stacks requeridos > 2, se puede comprar con perlas             | 1 Perla = 2 Stack     | -                      |
-| Acelerador                   | -                                                                 | 100 Algas/unidad     | -                      |
-|                              |                                      				   | 1 Perla = 10 Aceleradores| -                      |
-| 1 Perla                      |                      | 1000 Algas Rojas (20 intercambios en 2 días)                    | -                      |
-| Algas Verdes                 |                                             | Si cantidad > 1000, se puede intercambiar por 1 Perla/1.25 x Algas Rojas                        |                      |
-| Aceleración Ganancias        |                                          | 2000 Algas Rojas/2 Perlas                    | (Solo aplicable en edificios de la ciudad, no se puede sobreusar) Aumenta el rendimiento 200% |
-
+| 1 | 1000 algas verdes| x | 3 | La tienda se sirve como ayuda para el jugador, no queremos que el jugador se relegue solo en los intercambios de elementos
+| 2 | x| 200 hierro | 5 | En esta fase el jugador ya ha avanzado parte del juego, por lo tanto se le permite mas intercambios cada dia
+| 3 | x| 300 hierro  | 10 | Aqui el jugador ya habra avanzado bastante en la construccion de la ciudad por lo tanto se permiten hasta 10 ya que puede hacer falta los recursos en ocaciones, sin abusar del intercambio|
 
 #### **1.5.3 - Generador de electricidad**
 
@@ -167,15 +123,11 @@ El generador de electricidad requerirá de anguilas eléctricas para construirse
     
 | Nivel | Coste de Construcción | Coste de Mejora | Cargas - Aceleración / Tiempo | Recurso necesario para activar | Justificación |
 | :---: | :-------------------: | :-------------: | :------------------: | :-----------------------------: | :-----------: |
-| 1| 2k algas verdes + 5 anguilas electricas | x | +10% de la productividad actual / 5min| 10 pez | Nivel bajo y de tipo acelerador, se pide cantidad mediano de recurso para activar y aumenta poca cantidad de productividad|
-| 2| x | 10k algas + 200 hierro + 15 anguilas electricas | 2 slots +30% de la productividad actual/10min | 15 pez | Nivel medio, se aumenta la productivad pero tambien el coste por uso. |
-| 3| x | 20k algas + 400 hierro + 25 anguilas electricas | 3 Slots +90% de la productividad actual /15min| 50 pez | Version final de la construccion, mejora significativa pero consumo significativo tambien.|
+| 1| 2000 algas verdes + 5 anguilas electricas | x | +10% de la productividad actual / 5min| 10 pez | Nivel bajo y de tipo acelerador, se pide cantidad mediano de recurso para activar y aumenta poca cantidad de productividad|
+| 2| x | 200 hierro + 15 anguilas electricas | 2 slots +30% de la productividad actual/10min | 15 pez | Nivel medio, se aumenta la productivad pero tambien el coste por uso. |
+| 3| x | 400 hierro + 25 anguilas electricas | 3 Slots +90% de la productividad actual /15min| 50 pez | Version final de la construccion, mejora significativa pero consumo significativo tambien.|
 
  Al subirlo de nivel: en el nivel II habrá dos cargas disponibles y en el nivel III, tres cargas disponibles. El uso de estas cargas es asignado por el jugador.
- Aquí se demuestra de manera visual una comparacion de la productividad de las algas, el ejemplo escogido es la productividad de 3 granjas que estan alrededor de dicho edificio, por lo que los edificios maximos que acepta dicho edificio son 3.  
- ![Tabla Visua](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Comparacion%20De%20productividad.png)
- 
- 
 
 #### **1.5.4 - Paratridente**
 
@@ -187,9 +139,9 @@ En el caso desafortunado de que la furia de Poseidón impacte en un edificio rev
 
 | Nivel | Coste de construccion| Coste de mejora | Coste de reparacion| Numero de protecciones | Tiempo de espera | Justificacion|
 | :--: | :--: | :--: | :--: | :--: |:--:| ------------ |
-| 1| 5k algas verdes + 500 corales| x | 250 madera | 1 | 5min | Sirve como una proteccion basica para el jugador, pero puede ser mejorado en el futuro y aguanta mas iras de poseidon.|
-| 2| x| 5k algas + 500 hierro + 500 corales | 250 madera | 2 | 5min | Se aumenta a 2 veces el numero de protecciones, pero sera necesario cargado por el generador de electricidad.|
-| 3| x| 5k algas + 500 hierro + 500 corales | 250 madera | 3 | 3min | Monumento gigante que para 3 iras de poseidon, version mejorado de tiempo como recompensa para el jugador.|
+| 1| 5000 algas verdes + 500 corales| x | 250 madera | 1 | 5min | Sirve como una proteccion basica para el jugador, pero puede ser mejorado en el futuro y aguanta mas iras de poseidon.|
+| 2| x| 500 hierro + 500 corales | 250 madera | 2 | 5min | Se aumenta a 2 veces el numero de protecciones, pero sera necesario cargado por el generador de electricidad.|
+| 3| x| 500 hierro + 500 corales | 250 madera | 3 | 3min | Monumento gigante que para 3 iras de poseidon, version mejorado de tiempo como recompensa para el jugador.|
 
 #### **1.5.5 - Mejoras de buceo**
 
@@ -200,8 +152,8 @@ Este majestuoso edificio de mejoras de buceo se convierte en un centro neurálgi
 | Nivel | Coste de construccion | Coste de mejora | Coste de reparacion| 
 | :--: | :--: | :--: | :--: |
 |  1 | 2500 algas verdes | x | 100 madera |
-|  2 | x | 5000 algas verdes + 500 hierro | 100 madera |
-|  3 | x | 7500 algas verdes + 750 hierro | 100 madera |
+|  2 | x | 500 hierro | 100 madera |
+|  3 | x | 750 hierro | 100 madera |
 
 | Tipo | Nivel requerido de edificio| Nivel Mejora | Coste de mejora | Efecto| Justificacion| 
 | :---:| :--:|:---:|:---:|:---:|:---:|
@@ -242,15 +194,6 @@ Al hacer clic el museo el jugador podrá ver todos los recursos que ha descubier
   - **Materiales del mar**: como algas y corales.
   - **Materiales de construcción**: recogidos en naufragios durante las expecidiones, como madera y hierro.
   - **Peces**: como anguilas eléctricas.
-
-#### **1.5.8 - Pecera**
-Edificio para el resguardo de criaturas destinadas a diversos usos en distintos edificios. Estas criaturas pueden ser utilizadas para alimentar el generador de electricidad o para embellecer la ciudad mediante la creación de distintas peceras. Cada pecera albergará su propio tipo de peces, evitando así la relación depredador-presa. Esto brinda al jugador la oportunidad de distribuir diversas peceras con el objetivo de construir su propia versión del antiguo Atlantis.
-| Nivel | Coste | Reparación | Almacenamiento |
-|-------|-------|------------|----------------|
-| 1     | 500 algas  | 100 madera        | 10 peces|
-| 2     | x   | 2k algas + 400 hierro + 400 corales       | 20            |
-| 3     | x   | 4k algas + 600 hierro + 600 corales      | 50             |
-
 
 ### Mencion espacial para edificios que esten cercas :
 El juego dispone de zonas que aumenta de diferentes formas a los edificios, es decir, si se consigue una cantidad de edificios del mismo tipo en casillas cercanas, aumentan sus funcionalidades, ya sea la productividad o aceleracion de investigacion, etc... Por lo tanto, si el jugador consigue encontrar esas zonas especiales, puede aprovecharlos y planificar el crecimiento de la ciudad.
@@ -355,54 +298,6 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | **3.2.12 - Mejoras de buceo**   | ![Mejoras de buceo](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Mejoras%20de%20buceo.png)   | Este edificio esta basado en el casco de un buceador antiguo. |
 | **3.2.13 - Poseidón**   | ![Poseidón](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/81293482/dd6f7903-ed9f-44f4-90ed-ea7202adedfd)   | Este es el enemigo principal del juego, Poseidón. Su diseño está basado en juegos que esten basados en el mundo de la mitología griega, como God of War o Hades. <br><br> Se ha elegido un aspecto serio, con el pelo y barba larga porque es el aspecto que suelen tener los dioses en sus representaciones, ya sean en juegos o en la ficción. <br><br> También se le quiere dar la impresión de poderoso, para que tenga sentido que sea el que tenga amenazados a los jugadores durante el gameplay. Tampoco se le quería dar un aspecto muy oscuro porque no es malvado, simplemente está enfadado. |
 
-#### **Iconos del juego**
-| Nombre del Documento | Enlace |
-|-----------------------|--------|
-| Caracola              | ![Caracola](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/Caracola.png) |
-| Perla                 | ![Perla](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/Perla.png) |
-| Viga                  | ![Viga](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/Viga.png) |
-| Acelerador            | ![Acelerador](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/acelerador.png) |
-| AlgaRoja              | ![AlgaRoja](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/algaRoja.png) |
-| AlgaVerde             | ![AlgaVerde](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/algaVerde.png) |
-| AnguilaEléctrica      | ![AnguilaEléctrica](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/anguilaElectrica.png) |
-| Boga                  | ![Boga](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/boga.png) |
-| Concha                | ![Concha](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/concha.png) |
-| CoralNaranja          | ![CoralNaranja](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/coralNaranja.png) |
-| Dorada                | ![Dorada](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/dorada.png) |
-| Lubina                | ![Lubina](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/lubina.png) |
-| Madera                | ![Madera](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/madera.png) |
-| Mapa                  | ![Mapa](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/mapa.png) |
-| Medusa                | ![Medusa](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/medusa.png) |
-| Molyvelifera          | ![Molyvelifera](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/molyvelifera.png) |
-| PezCebra              | ![PezCebra](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/pezCebra.png) |
-| PezDorado             | ![PezDorado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/pezDorado.png) |
-| PezNeon               | ![PezNeon](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/pezNeon.png) |
-| Tablilla              | ![Tablilla](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/tablilla.png) |
-| Tiburon               | ![Tiburon](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/tiburon.png) |
-| TruchaArcoiris        | ![TruchaArcoiris](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/IconosActualizados/truchaArcoriris.png) |
-
-#### **Interaces**
-| Nombre del Mockup     | Imagen |
-|-----------------------|--------|
-| Clean UI              | ![Clean UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/CleanUi_Mockup.png) |
-| Generator UI          | ![Generator UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/GeneratorUi_Mockup.jpg) |
-| Icons UI              | ![Icons UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/IconsUi_Mockup.png) |
-| Inventory             | ![Inventory](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Inventory_Mockup.png) |
-| Laboratory            | ![Laboratory](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Laboratory_Mockup.png) |
-| Main Menu             | ![Main Menu](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/MainMenu_Mockup.png) |
-| Museum                | ![Museum](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Museum_Mockup.png) |
-| Settings              | ![Settings](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Settings_Mockup.png) |
-| Shop                  | ![Shop](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Shop_Mockup.png) |
-| Shop with Items       | ![Shop with Items](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Shop_Mockup_WItems.jpg) |
-| Tutorial              | ![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Tutorial_Mockup.png) |
-| Upgrade UI            | ![Upgrade UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/UpgradeUi_Mockup.png) |
-| Derrota               | ![Derrota UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Derrota/Interfaz%20derrota%20referencia.png)
-| Construccion          | ![Construccion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Construir/Interfaz%20construcci%C3%B3n%20referencia.png)
-| Expedicion            | ![Expedicion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Expedici%C3%B3n/Interfaz%20expedici%C3%B3n%20referencia%20con%20fondo.png)
-| Lateral               | ![Lateral UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Lateral/Interfaz%20lateral%20referencia.png)
-
-
-
 ## **4 - DISEÑO 3D**
 
 | Título | Imagen |
@@ -414,29 +309,6 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | **4.5 - Hexágono** | ![Hexágono](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagon.PNG) |
 | **4.6 - Hexágono no construible** | ![Hexágono no construible](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonNon.PNG) |
 | **4.7 - Hexágono pavimentado** | ![Hexágono pavimentado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/hexagonPavement.PNG) |
-### Edificios actualizados para Beta
-| Nombre del Edificio | Enlace |
-|----------------------|--------|
-| Pecera_Nivel 1           | ![FishFarm_1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/FishFarm_1_Icon.png) |
-| Pecera_Nivel 2           | ![FishFarm_2](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/FishFarm_2_Icon.png) |
-| Pecera_Nivel 3           | ![FishFarm_3](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/FishFarm_3_Icon.png) |
-| Laboratorio           | ![Laboratory](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/Laboratory_Icon.png) |
-| Granja de algas_1       | ![SeaweerdFarm_1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Icons/Building%20icons/SeaweerdFarm_1_Icon.png) |
-
-### Prompts del juego
-| Nombre de la Criatura | Enlace a la Imagen |
-|------------------------|--------------------|
-| Almeja                 | ![Almeja](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Almeja.jpg) |
-| Boga                   | ![Boga](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Boga.jpg) |
-| Dorada                 | ![Dorada](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Dorada.jpg) |
-| Pez Dorado             | ![Pez Dorado](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/GoldFish.jpg) |
-| Mapa                   | ![Mapa](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Mapa.jpg) |
-| Pez Vampiro            | ![Pez Vampiro](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Pez%20vampiro.jpg) |
-| Rape                   | ![Rape](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Criaturas/Rape.jpg) |
-
-
-
-
 
 ## **5 - GAME DESIGN** 
 
@@ -444,12 +316,6 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 
 #### **5.1.1 - Introducción y Configuración del Juego**
 El jugador inicia la partida en una grid de hexágonos, específicamente en la casilla del antiguo ayuntamiento de la ciudad perdida de Atlantis. La tarea del jugador es reconstruir la gloria pasada de esta ciudad sumergida.
-##### Productividad total: 
-El juego es un idle que motiva al jugador a gastar continuamente los recursos generados por los generadores, específicamente las algas rojas y verdes. No obstante, el jugador puede alcanzar una productividad excesiva, y el juego no admite niveles tan elevados de producción. Por lo tanto, vamos a implementar una fórmula. Además, como se mencionó previamente, el costo de las granjas aumentará para establecer una barrera al crecimiento del jugador. Esto se hace con el propósito de evitar un crecimiento demasiado rápido y para proporcionar espacio para la incorporación de nuevos contenidos en el juego, como expediciones.
-
-En el siguiente paso, se introducirá una tabla de costos/producción total para brindar una comprensión más clara de cómo se desarrollará el juego.
-![Tabla Production/Cost](https://github.com/GluGluGames/Ahogado-en-Impuestos/raw/develop/Game%20Design%20Documents/Coste-Produccion%20Granja.png)
-
 
 
 #### **5.1.2 - Tutoriales**
@@ -489,28 +355,6 @@ Los jugadores pueden descubrir y cazar diferentes tipos de peces y recolectar di
 Los niveles en este juego representarán las diferentes zonas de expedición y serán diseñados a mano con distribuciones específicas de niveles de profundidad. Estas distribuciones se han diseñado con el propósito de plantear desafíos y dificultades para el jugador antes de que este adquiera objetos que lo hagan inmune a ciertos peligros.
 
 Sin embargo, es importante destacar que los recursos que no funcionen como desencadenantes clave para avanzar en el juego serán generados aleatoriamente por la zona. Esto permite que el jugador encuentre variedad en cada expedición y promueve la exploración activa para reunir recursos útiles en su búsqueda para reconstruir la ciudad perdida de Atlantis.
-
-Cabe destacar que existe un tiempo de recogida de recursos, ya que cada recurso es diferente y la cantidad que posee la casilla varía. Por lo tanto, se ha establecido un período de recogida distinto para cada casilla, determinado principalmente por el tipo de recurso que contiene y secundariamente por la cantidad de recursos presentes en la casilla.
-
-| Tipo de Recurso | Cantidad | Tiempo de Recogida | Tiempo Adicional si Cantidad Supera X |
-|------------------|----------|---------------------|---------------------------------------|
-| Madera         | 10     | 1 segundo          | cada 10 de madera suma 1 segundo de espera |             |
-| Hierro         | 10      | 2 segundo         | cada 10 de hierro suma 2 segundo de espera            |
-| Algas  (ya sea verde o roja)       | 1000      | 5 segundos          | Cada 1000 algas suma 1 segundo de espera |
-| Perla              | 1     | 30 segundos               | cada perla suma 30 segundos de espera |
-| Coral             | 10     | 1 segundo               | cada 10 coral suma 1 segundos de espera |
-
-
-
-
-| Nombre del Nivel | Imagen |
-|-------------------|--------|
-| Tutorial         | ![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%20tutorial.PNG) |
-| Nivel 1          | ![Nivel 1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%201.PNG) |
-| Nivel 2          | ![Nivel 2](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%202.PNG) |
-| Nivel 3          | ![Nivel 3](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%203.PNG) |
-| Nivel 4          | ![Nivel 4](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%204.PNG) |
-
 
 ### **5.3 - Curva de aprendizaje**
 
@@ -560,7 +404,7 @@ Para prevenir este escenario, se ha implementado un porcentaje de recaudacion qu
 | **7.4.4 - MUSEO**                 | ![Interfaz - Museo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/24477786-f616-44aa-9dd9-9ea358bbb74e)              | Al clicar en el museo puedes ver todos los coleccionables del juego. <br><br> Contiene: <br> - Tres pestañas con los tres tipos de recursos. <br> - Iconos de los recursos que has encontrado. <br> - Iconos en negro de los recursos que no has encontrado. <br> - Iluminado el objeto seleccionado del cual se muestra la descripción. <br> - Cuadro con nombre y descripción del objeto seleccionado. <br> - Botón de salida.                                                                                                                                                                                                                                                                                                                               |
 | **7.4.5 - MEJORAS DE BUCEO**       | ![Interfaz - Mejoras de buceo](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/0ccadc28-d681-43bf-98bf-116e64d41014)     | Se abre al pulsar el edificio de mejoras de buceo. <br><br> Contiene: <br> - Flechas para moverse entre mejoras. <br> - Descripción de la mejora. <br> - Botón para mejorar, con el precio de hacerlo. <br> - Nombre de la mejora. <br> - El borde de la interfaz y de la tarjeta de mejora cambia dependiendo de su nivel, de la forma indicada a la derecha.                                                                                                                                                                                                                                                                                                                       |
 | **7.4.6 - TIENDA DE RECURSOS**     | ![Interfaz - Tienda](https://github.com/GluGluGames/Ahogado-en-Impuestos/assets/112829139/f3a10538-0711-4210-bdf6-cba0a10cb172)              | Tienda de intercambio de objetos. <br><br> Contiene: <br> - Primer objeto y cuantos se dan. <br> - Segundo objeto y cuantos se obtienen. <br> - Flechas para aumentar el ratio de intercambio (5->1 / 10->2) <br> - Scrollbar para ver más intercambios.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| **7.4.7 - INVENTARIO**            | ![Interfaz - Inventario](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Interfaces/Interfaz%20-%20Inventario.jpg) | Menú que se abre al pulsar el engranaje. <br><br> Contiene: <br> - Pestañas para seleccionar entre los distintos tipos de recursos. <br> - Casillas con el icono del recurso y su cantidad. <br> - Botón para salir.                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+| **7.4.7 - INVENTARIO**            | ![Interfaz - Inventario](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/Concepts/Interfaces/Interfaz%20-%20Inventario.jpg) | Menú que se abre al pulsar el engranaje. <br><br> Contiene: <br> - Pestañas para seleccionar entre los distintos tipos de recursos. <br> - Casillas con el icono del recurso y su cantidad. <br> - Botón para salir.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ## **8 - NARRATIVA** 
 
@@ -633,14 +477,6 @@ El conflicto se intensificó por una serie de eventos que se remontan a la Titan
 Sin embargo, Poseidón, el dios del mar, resentido por lo que consideraba un despojo de su dominio marítimo por parte de Zeus, comenzó a desafiar indirectamente la autoridad de su hermano, reclamando territorios más allá de su reino original y tratando de expandir su influencia sobre la tierra y el mar.
 
 A lo largo de los siglos, el desacuerdo sobre la delimitación de los dominios divinos y la cuestión de quién poseía la autoridad suprema sobre el mundo natural condujo a enfrentamientos intermitentes entre Zeus y Poseidón. La competencia por el control sobre los elementos naturales, en particular el cielo y el mar, exacerbó aún más las tensiones y alimentó la enemistad duradera entre los dos dioses poderosos.
-
-### **8.5 - Guión:**
-
-*Cinemática inicial e inicio del juego*
-*Se observa la vieja ciudad del Atlantis en su vieja gloria*
-*Pathing con Poseidón hablando*
-
-Poseidon: Déjame que te enseñe lo que una vez fue. Esta era mi magnífica Atlantis, un reino glorioso que posaba majestuosamente sobre las profundidades de mi reino. Pero el tiempo ha llevado a su decadencia. Has sido seleccionado para una tarea que supera con creces tu comprensión. Escucha atentamente porque no pienso repetirme, tu misión es reconstruir esta ciudad y devolverla a su antigua gloria. Necesito que coseches algas y otros recursos del océano para restaurar la grandeza de mi gran Atlantis. No esperes gratitud ni recompensas. Tu deber es simplemente cumplir mi voluntad. Las riquezas de Atlantis son mías por derecho, y tú eres solo un instrumento para restaurar mi reino a su antigua gloria. No te equivoques, no es un honor servirme; es una obligación.
 
 ## **9 - MÚSICA Y SONIDO** 
 
@@ -876,10 +712,3 @@ La administración eficiente de nuestra estructura de costos garantiza una asign
 - **Paga lo que puedas**: se introducirá una opción de "Paga lo que Puedas" que otorgará a los jugadores la libertad de determinar cuánto desean pagar por los juegos. Esto promoverá la accesibilidad y permitirá a los usuarios contribuir según sus capacidades financieras.
 
 La estrategia de ingresos se fundamenta en la diversificación y la adaptabilidad, lo que nos capacita para generar beneficios mientras mantenemos un firme compromiso con la oferta de aprendizaje y entretenimiento accesible para una amplia audiencia.
-
-## 12. Mechanics,Dynamics,Aesthetics? 
-La estética principal de este juego es el desafío; el jugador debe gestionar recursos tanto dentro como fuera de la ciudad. Se le marca un objetivo de reconstruir la gloria del pasado de Atlantis, la cual tuvo una historia espectacular. Dentro de la ciudad, el jugador se enfrenta a retos de cómo usar los recursos para sacar el máximo beneficio, por lo que el jugador se tiene que planificar cómo organizar entre el ganar y gastar de los recursos. Además, fuera del escenario, el jugador se enfrenta a obstáculos que le impiden recoger recursos, ya sean limitaciones del propio escenario como rocas, remolinos o diferentes tipos de enemigos. El juego no solo contiene desafíos; la fantasía también está involucrada dentro del juego. El jugador actúa como un fantasma resucitado, el cual fue despertado por Poseidón y asignado como encargado de la ciudad. Aparte, el descubrimiento tiene un papel importante dentro del juego; el jugador podrá navegar en diferentes escenarios mediante navegación, así consigue conocer a distintas criaturas, mapas, desbloqueando nuevas funcionalidades de los edificios y equipamientos de buceo. Y como se había dicho antes, el jugador puede conocer diferentes criaturas, por lo que también incluimos coleccionismo dentro del juego, así dando al jugador una iniciativa.
-
-El desafío viene dado por varios elementos claves: administrar los costos de diferentes recursos, el tiempo limitado de exploración y los enemigos que estarán distribuidos dentro del mapa de exploración. El jugador, por una parte, debe ver si la proporción de construir/mejorar está equilibrada, pensar en cómo puede conseguir algas suficientes para cada recolección, así previniendo la destrucción de los edificios, lo cual ralentiza el ritmo de la reconstrucción. No solo eso, el jugador también debe decidir en cuáles edificios invertir para subir el rendimiento, también se destaca que el jugador puede conseguir mejores equipos de buceo si los mejora. Por otro lado, durante la expedición, el jugador será limitado por el tiempo de energía, por lo que dentro del escenario se tiene que plantear la exploración de manera correcta, ya que en cada expedición, la generación de recursos puede estar distribuida de manera distinta (Solo el mapa será creado manualmente, los recursos se regenerarán en distintas posiciones en cada ocasión). Aparte, para darle un desafío más al jugador, este tendrá que usar estrategias para esquivar a los enemigos, ya que una vez cazado, el jugador solo podrá volver con muy pocos recursos a la ciudad, lo que aportará casi nulo a la ciudad.
-
-En el juego, actúan principalmente los recursos, es decir, todos giran en torno al recurso, formando como mecánica principal del juego. Los recursos principales serán las algas, los corales, las perlas, las conchas y las caracolas; todo tipo de construcción o mejora depende de ellos. Los recursos existen para poder usarlos; en este caso, el jugador los usará para construir, destruir, reparar, mejorar edificios dentro de la ciudad. Cada edificio tendrá un costo distinto, algunos serán más complicados para construir pero aportarán un rendimiento mayor a la ciudad; otros actuarán como última medida para salvar la partida, cada uno de ellos tiene distintas funcionalidades para ayudar a la ciudad. En la parte de expedición, el jugador podrá navegar libremente por el escenario; si es cazado, volverá a la ciudad casi sin recursos; habrá variedad de recursos en el escenario, con distintas cantidades, y puede avanzar una pequeña historia que hay dentro del juego. Aparte, el jugador puede descubrir diferentes mapas y diferentes mejoras de edificios, lo que conlleva al descubrimiento.

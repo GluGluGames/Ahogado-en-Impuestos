@@ -5,7 +5,6 @@ namespace GGG.Shared
         MENU,
         PLAYING,
         MINIGAME,
-        ON_UI,
-        ON_TUTORIAL
+        ON_UI
     }
 }
