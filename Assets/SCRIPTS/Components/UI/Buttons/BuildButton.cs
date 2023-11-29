@@ -83,6 +83,7 @@ namespace GGG.Components.UI {
             Padlock.gameObject.SetActive(false);
             StructureSprite.color = new Color(1, 1, 1, 1);
             ResourcesContainers[0].SetActive(true);
+            _maxBuildingsReached = false;
             
             _cost = _buildingManager.GetBuildingCost(BuildingInfo);
             texts[0].text = _cost.GetCost(0).ToString();

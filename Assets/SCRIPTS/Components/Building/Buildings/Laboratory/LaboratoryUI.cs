@@ -93,12 +93,27 @@ namespace GGG.Components.Buildings.Laboratory
             BuildingManager.OnBuildsLoad += OnBuildsLoad;
         }
 
+        private void Update()
+        {
+            if (!_open) return;
+
+            FillBars(_currentLaboratory);
+        }
+
         private void InitializeLaboratories(Laboratory laboratory)
         {
             _currentLaboratory = laboratory;
-            if(!_laboratories.ContainsKey(laboratory.Id()))
+            if (!_laboratories.ContainsKey(laboratory.Id()))
+            {
                 _laboratories.Add(laboratory.Id(), laboratory);
+                return;
+            }
 
+            FillBars(laboratory);
+        }
+
+        private void FillBars(Laboratory laboratory)
+        {
             for (int i = 0; i < ProgressBars.Length; i++)
             {
                 CurrentResources[i].enabled = laboratory.IsBarActive(i);
@@ -119,6 +134,9 @@ namespace GGG.Components.Buildings.Laboratory
                     totalTime = laboratory.ActiveBuilding(i).GetResearchTime();
                 }
 
+                int minutes = Mathf.FloorToInt(laboratory.DeltaTime(i) / 60);
+                int seconds = Mathf.FloorToInt(laboratory.DeltaTime(i) % 60);
+                Counters[i].SetText($"{minutes:00}:{seconds:00}");
                 ProgressBars[i].fillAmount = Mathf.Clamp01(1 - laboratory.DeltaTime(i) / totalTime);
             }
         }
@@ -127,16 +145,16 @@ namespace GGG.Components.Buildings.Laboratory
         {
             if (builds == null) return;
 
-            List<Laboratory> labotories = new();
+            List<Laboratory> laboratories = new();
 
             foreach (BuildingComponent build in builds)
             {
                 if(build.GetType() != typeof(Laboratory)) continue;
                 
-                labotories.Add((Laboratory) build);
+                laboratories.Add((Laboratory) build);
             }
 
-            StartCoroutine(LoadResearchProgress(labotories));
+            StartCoroutine(LoadResearchProgress(laboratories));
         }
 
         private void OpenResourceSelection(int idx)
@@ -180,7 +198,7 @@ namespace GGG.Components.Buildings.Laboratory
                 _currentLaboratory.SetDeltaTime(i, resource.GetResearchTime());
                 _currentLaboratory.ActiveBar(i, true);
                 
-                StartCoroutine(FillProgressBar(_currentLaboratory.Id(), i, resource.GetResearchTime()));
+                StartCoroutine(Research(_currentLaboratory.Id(), i));
                 return;
             }
             
@@ -200,21 +218,15 @@ namespace GGG.Components.Buildings.Laboratory
                 _currentLaboratory.SetDeltaTime(i, building.GetResearchTime());
                 _currentLaboratory.ActiveBar(i, true);
                 
-                StartCoroutine(FillProgressBar(_currentLaboratory.Id(), i, building.GetResearchTime()));
+                StartCoroutine(Research(_currentLaboratory.Id(), i));
                 return;
             }
         }
 
-        private IEnumerator FillProgressBar(int id, int idx, float totalTime)
+        private IEnumerator Research(int id, int idx)
         {
             while (_laboratories[id].DeltaTime(idx) >= 0f)
             {
-                ProgressBars[idx].fillAmount += Time.deltaTime / totalTime;
-                
-                int minutes = Mathf.FloorToInt(_laboratories[id].DeltaTime(idx) / 60);
-                int seconds = Mathf.FloorToInt(_laboratories[id].DeltaTime(idx) % 60);
-                Counters[idx].SetText($"{minutes:00}:{seconds:00}");
-                
                 _laboratories[id].AddDeltaTime(idx, -Time.deltaTime);
                 yield return null;
             }
@@ -231,10 +243,13 @@ namespace GGG.Components.Buildings.Laboratory
                 _laboratories[id].SetActiveBuild(idx, null);
             }
             
-            ProgressBars[idx].fillAmount = 0f;
-            Counters[idx].SetText("--:--");
             _laboratories[id].ActiveBar(idx, false);
             _laboratories[id].SetDeltaTime(idx, 0f);
+
+            if (!_open) yield break;
+            
+            Counters[idx].SetText("--:--");
+            ProgressBars[idx].fillAmount = 0f;
             CurrentResources[idx].enabled = false;
         }
 
@@ -389,7 +404,7 @@ namespace GGG.Components.Buildings.Laboratory
             if (string.IsNullOrEmpty(data)) yield break;
             
             LaboratoryData[] researchProgress = JsonHelper.FromJson<LaboratoryData>(data);
-            TimeSpan time = DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("ExitTime"));
+            TimeSpan time = DateTime.Now.Subtract(DateTime.FromBinary(Convert.ToInt64(PlayerPrefs.GetString("ExitTime"))));
             foreach (LaboratoryData laboratoryData in researchProgress)
             {
                 foreach (Laboratory lab in laboratories)
@@ -408,11 +423,11 @@ namespace GGG.Components.Buildings.Laboratory
                         if (laboratoryData.Resource[i])
                         {
                             lab.SetActiveResource(i, laboratoryData.Resource[i]);
-                            StartCoroutine(FillProgressBar(lab.Id(), i, laboratoryData.Resource[i].GetResearchTime()));
+                            StartCoroutine(Research(lab.Id(), i));
                         } else if (laboratoryData.Building[i])
                         {
                             lab.SetActiveBuild(i, laboratoryData.Building[i]);
-                            StartCoroutine(FillProgressBar(lab.Id(), i, laboratoryData.Building[i].GetResearchTime()));
+                            StartCoroutine(Research(lab.Id(), i));
                         }
                     }
                 }
@@ -453,9 +468,13 @@ namespace GGG.Components.Buildings.Laboratory
                 _open = false;
                 _viewport.SetActive(false);
                 OpenBarContainer();
-                
+
                 for (int i = 0; i < ProgressBars.Length; i++)
+                {
+                    ProgressBars[i].fillAmount = 0f;
+                    Counters[i].SetText("--:--");
                     CurrentResources[i].enabled = false;
+                }
                 
                 _gameManager.OnUIClose();
             };
