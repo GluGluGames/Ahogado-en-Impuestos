@@ -11,21 +11,22 @@ namespace GGG.Components.Enemies
     {
         public HexTile targetTile;
         public bool imChasing = false;
-        public bool imFleeing= false;
+        public bool imFleeing = false;
+        public Ticker ticker;
 
         // This has to be called on the start
         public override void LaunchOnStart()
         {
             movingAllowed = true;
-            TickManager.OnTick += HandleMovement;
-            TickManager.OnTick += HandleVisibility;
+            ticker.onTick += HandleMovement;
+            ticker.onTick += HandleVisibility;
             HandleVisibility();
         }
 
         // This has to be called on the update
         public override void LaunchOnUpdate()
         {
-            if(imChasing && (targetTile != PlayerPosition.CurrentTile || targetTile == null))
+            if (imChasing && (targetTile != PlayerPosition.CurrentTile || targetTile == null))
             {
                 targetTile = PlayerPosition.CurrentTile;
                 AddToTargetTile();
@@ -36,11 +37,26 @@ namespace GGG.Components.Enemies
             }
         }
 
+        public void LaunchOnUpdateBerserker()
+        {
+            if (imChasing)
+            {
+                if(currentPath.Count == 0 || targetTile != currentPath.Last())
+                {
+                    AddToTargetTile();
+                    foreach (HexTile item in currentPath)
+                    {
+                        Debug.Log(item);
+                    }
+                }
+            }
+        }
+
         public override void LaunchOnDisable()
         {
             movingAllowed = false;
-            TickManager.OnTick -= HandleMovement;
-            TickManager.OnTick -= HandleVisibility;
+            ticker.onTick -= HandleMovement;
+            ticker.onTick -= HandleVisibility;
             currentPath = null;
         }
 
@@ -57,7 +73,7 @@ namespace GGG.Components.Enemies
         {
             targetPosition = targetTile.transform.position;
             List<HexTile> addedPath;
-            if (currentPath.Count  > 0)
+            if (currentPath.Count > 0)
             {
                 addedPath = Pathfinder.FindPath(currentPath.Last(), targetTile);
             }
@@ -65,7 +81,7 @@ namespace GGG.Components.Enemies
             {
                 addedPath = Pathfinder.FindPath(currentTile, targetTile);
             }
-            
+
             addedPath.Reverse();
 
             foreach (HexTile tile in addedPath)
@@ -90,14 +106,14 @@ namespace GGG.Components.Enemies
             int aux = Random.Range(0, tile.neighbours.Count);
             HexTile auxTile = tile.neighbours[aux];
 
-            if(Vector3.Distance(auxTile.transform.position, currentTile.transform.position) <= Vector3.Distance(tile.transform.position, currentTile.transform.position))
+            if (Vector3.Distance(auxTile.transform.position, currentTile.transform.position) <= Vector3.Distance(tile.transform.position, currentTile.transform.position))
             {
                 auxTile = chooseNeighbourTileAway(maxDepth, curDepth, tile);
             }
             else
             {
                 curDepth++;
-                if(curDepth < maxDepth)
+                if (curDepth < maxDepth)
                 {
                     auxTile = chooseNeighbourTileAway(maxDepth, curDepth, auxTile);
                 }

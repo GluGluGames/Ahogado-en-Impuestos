@@ -20,7 +20,7 @@ namespace GGG.Components.Expedition
         private void OnTriggerEnter(Collider other)
         {
             //_overlaps++;
-            if (other.transform.gameObject.layer != LayerMask.NameToLayer("Enemy")) return;
+            if (other.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") || other.transform.gameObject.layer != LayerMask.NameToLayer("Berserker")) return;
             Lost();
         }
 
