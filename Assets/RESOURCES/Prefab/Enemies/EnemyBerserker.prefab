@@ -100,7 +100,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 34816
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   SpawnHeight: 0
   hp: 2
   size: 10
-  restTime: 5
+  restTime: 3
   isStoppable: 0
   _alwaysVisible: 0
   currentTile: {fileID: 0}
@@ -157,7 +157,7 @@ MonoBehaviour:
   fov: {fileID: 1222528002071000287}
   ai: {fileID: 2828653105759591961}
   enemyComp: {fileID: 2435296956065132665}
-  stamina: 10
+  maxPatience: 2
   staminaRechargeTime: 10
   visionFrequency: 0.15
 --- !u!114 &2828653105759591961
@@ -187,8 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2194f4586e2603840a841e4e8169b682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 4
-  angle: 127
+  radius: 5
+  angle: 120
   playerRef: {fileID: 0}
   targetMask:
     serializedVersion: 2
