@@ -144,6 +144,8 @@ namespace GGG.Components.UI
 
         private void AddListener(Resource resource, Button button)
         {
+            if (resource.GetKey().Equals("Seaweed")) return;
+            
             if (_hudManager.ResourceBeingShown(resource))
             {
                 if(_hudManager.HideResource(resource))

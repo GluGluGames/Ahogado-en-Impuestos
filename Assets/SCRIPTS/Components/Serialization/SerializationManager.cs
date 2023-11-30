@@ -56,8 +56,6 @@ namespace GGG.Components.Serialization
         {
             PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
             PlayerPrefs.Save();
-            
-            Save();
         }
 
         private void Update()

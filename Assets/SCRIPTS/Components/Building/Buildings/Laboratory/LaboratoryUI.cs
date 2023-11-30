@@ -100,6 +100,11 @@ namespace GGG.Components.Buildings.Laboratory
             FillBars(_currentLaboratory);
         }
 
+        private void OnDisable()
+        {
+            SaveResearchProgress();
+        }
+
         private void InitializeLaboratories(Laboratory laboratory)
         {
             _currentLaboratory = laboratory;

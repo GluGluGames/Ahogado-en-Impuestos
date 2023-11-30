@@ -81,6 +81,8 @@ namespace GGG.Components.HexagonalGrid
         private void OnDisable() {
             foreach (HexTile tileAux in _tiles) tileAux.OnHexSelect -= InitializePath;
             BuildingManager.OnBuildsLoad -= OnBuildsLoad;
+            
+            SaveTilesState();
         }
 
         #endregion

@@ -40,6 +40,7 @@ namespace GGG.Components.UI
         private PlayerManager _player;
         private GameManager _gameManager;
         private readonly List<Resource> _shownResource = new(2);
+        private bool _initialized;
 
         private int _currentIdx;
         private bool _dirtyFlag;
@@ -54,7 +55,7 @@ namespace GGG.Components.UI
 
         private void Update()
         {
-            if (_gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
+            if (!_initialized || _gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
             
             ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
             
@@ -65,14 +66,19 @@ namespace GGG.Components.UI
                 ResourcesText[i + 1].SetText(_player.GetResourceCount(_shownResource[i].GetKey()).ToString());
             }
         }
-        
+
+        private void OnDisable()
+        {
+            SaveShownResources();
+        }
+
         public bool ResourceBeingShown(Resource resource) => _shownResource.Find((x) => x == resource);
 
         public bool ShowResource(Resource resource)
         {
-            if (_shownResource.Count >= 3) return false;
+            if (_shownResource.Count >= 2) return false;
             
-            _shownResource.Insert(_shownResource.Count <= 0 ? 0 : _currentIdx, resource);
+            _shownResource.Insert(_shownResource.Count <= 0 ? 0 : _currentIdx - 1, resource);
             ResourceContainers[_currentIdx].gameObject.SetActive(true);
             
             ResourcesIcons[_currentIdx].sprite = resource.GetSprite();
@@ -87,13 +93,18 @@ namespace GGG.Components.UI
         public bool HideResource(Resource resource)
         {
             if (_shownResource.Count <= 0) return false;
-            int idx = ResourceContainers.FindIndex(x => x.gameObject.activeInHierarchy
-            && x.GetComponentInChildren<Image>().sprite == resource.GetSprite());
+            
+            int idx = ResourcesIcons.FindIndex(x => x.sprite == resource.GetSprite());
+
+            print(resource.GetKey());
+            if (idx == -1) throw new Exception("-1 in idx");
             
             ResourceContainers[idx].gameObject.SetActive(false);
+            ResourcesIcons[idx].sprite = null;
             
             _shownResource.Remove(resource);
-            _currentIdx = _shownResource.Count == 0 ? 0 : ResourceContainers.FindIndex(x => !x.gameObject.activeInHierarchy);
+            _currentIdx = _shownResource.Count == 0 ? 1 : ResourceContainers.FindIndex(x => !x.activeInHierarchy);
+            print(_currentIdx);
 
             return true;
         }
@@ -129,14 +140,13 @@ namespace GGG.Components.UI
 
             if (!File.Exists(filePath))
             {
-                _shownResource.Add(_player.GetResource("Seaweed"));
-                
                 ResourceContainers[0].gameObject.SetActive(true);
                 
-                ResourcesIcons[0].sprite = _shownResource[0].GetSprite();
+                ResourcesIcons[0].sprite = _player.GetResource("Seaweed").GetSprite();
                 ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
-                
-                _currentIdx = _shownResource.Count == 0 ? 0 : ResourcesIcons.FindIndex(x => !x.gameObject.activeInHierarchy);
+
+                _currentIdx = 1;
+                _initialized = true;
                 
                 yield break;
             }
@@ -149,6 +159,11 @@ namespace GGG.Components.UI
             else {
                 data = File.ReadAllText(filePath);
             }
+            
+            ResourceContainers[0].gameObject.SetActive(true);
+                
+            ResourcesIcons[0].sprite = _player.GetResource("Seaweed").GetSprite();
+            ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
             
             ShownResource[] resources = JsonHelper.FromJson<ShownResource>(data);
             
@@ -164,6 +179,7 @@ namespace GGG.Components.UI
             }
             
             _currentIdx = _shownResource.Count == 0 ? 0 : ResourcesIcons.FindIndex(x => !x.gameObject.activeInHierarchy);
+            _initialized = true;
         }
     }
 }

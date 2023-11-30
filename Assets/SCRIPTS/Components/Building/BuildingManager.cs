@@ -75,6 +75,11 @@ namespace GGG.Components.Buildings
             _gameManager = GameManager.Instance;
         }
 
+        private void OnDisable()
+        {
+            SaveBuildings();
+        }
+
         private void OnApplicationQuit()
         {
             PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
@@ -137,7 +142,7 @@ namespace GGG.Components.Buildings
             if (_gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial || 
                 !SceneManagement.InGameScene()) return;
             
-            BuildingComponent[] buildings = GetComponentsInChildren<BuildingComponent>();
+            BuildingComponent[] buildings = gameObject.GetComponentsInChildren<BuildingComponent>();
             BuildingData[] saveData = new BuildingData[buildings.Length];
             int i = 0;
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "buildings_data.json");

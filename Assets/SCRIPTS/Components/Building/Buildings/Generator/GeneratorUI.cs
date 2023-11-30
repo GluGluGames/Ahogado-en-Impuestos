@@ -80,6 +80,11 @@ namespace GGG.Components.Buildings.Generator
             BuildingManager.OnBuildsLoad += OnBuildLoads;
         }
 
+        private void OnDisable()
+        {
+            SaveGeneratorState();
+        }
+
         private void ActiveLevelPanel(int idx)
         {
             for (int i = 0; i < LevelContainers.Length; i++)
