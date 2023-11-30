@@ -357,6 +357,8 @@ namespace GGG.Components.Buildings.Laboratory
 
         public void SaveResearchProgress()
         {
+            if (!SceneManagement.InGameScene() || _gameManager.TutorialOpen() || _laboratories.Count <= 0) return;
+            
             LaboratoryData[] saveData = new LaboratoryData[_laboratories.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "laboratory_progress.json");
             int i = 0;
@@ -432,13 +434,6 @@ namespace GGG.Components.Buildings.Laboratory
                     }
                 }
             }
-        }
-
-        private void OnDisable()
-        {
-            if (!SceneManagement.InGameScene() || _gameManager.TutorialOpen() || _laboratories.Count <= 0) return;
-            
-            SaveResearchProgress();
         }
 
         public void Open(Laboratory laboratory)

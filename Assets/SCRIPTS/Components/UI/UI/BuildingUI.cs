@@ -62,7 +62,7 @@ namespace GGG.Components.UI
                 _viewport.SetActive(true);
             }
             
-            if (!_input.Escape()) return;
+            if (!_input.Escape() || _gameManager.OnTutorial()) return;
             Close();
         }
 

@@ -46,7 +46,7 @@ namespace GGG.Components.UI
         }
 
         private void Update() {
-            if (!_input.Escape()) return;
+            if (!_input.Escape() || _gameManager.OnTutorial()) return;
             
             ToggleMenu();
         }

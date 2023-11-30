@@ -48,26 +48,34 @@ namespace GGG.Components.UI
             _player = PlayerManager.Instance;
             _input = InputManager.Instance;
             _gameManager = GameManager.Instance;
-            _sellResource = _player.GetResource("Seaweed");
-
+            
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
-
-            _buttons = FindObjectsOfType<BuildButton>(true);
-            foreach (BuildButton button in _buttons) button.OnStructureBuild += UpdateBuildings;
-            TileManager.OnBuildingTileLoaded += UpdateBuildings;
-
-            SellButton.onClick.AddListener(OnSellButton);
-            UpgradeButton.onClick.AddListener(OnUpgradeButton);
-            CloseButton.onClick.AddListener(OnCloseButton);
+            
+            Initialize();
         }
 
         private void Update()
         {
-            if (!_open || !_input.Escape()) return;
+            if (!_open || !_input.Escape() || _gameManager.OnTutorial()) return;
             
             Close(true); 
+        }
+
+        private void Initialize()
+        {
+            _buttons = FindObjectsOfType<BuildButton>(true);
+            
+            foreach (BuildButton button in _buttons) 
+                button.OnStructureBuild += UpdateBuildings;
+            
+            TileManager.OnBuildingTileLoaded += UpdateBuildings;
+            _player.OnPlayerInitialized += () => _sellResource = _player.GetResource("Seaweed");
+
+            SellButton.onClick.AddListener(OnSellButton);
+            UpgradeButton.onClick.AddListener(OnUpgradeButton);
+            CloseButton.onClick.AddListener(OnCloseButton);
         }
 
         private void OpenCheck()

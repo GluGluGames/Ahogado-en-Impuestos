@@ -69,7 +69,7 @@ namespace GGG.Components.UI
 
             UpdateResourcesAmount();
             
-            if (!_input.Escape()) return;
+            if (!_input.Escape() || _gameManager.OnTutorial()) return;
 
             Close();
         }

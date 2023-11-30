@@ -69,28 +69,10 @@ namespace GGG.Components.Buildings
                 farm.Produce();
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
             _player = PlayerManager.Instance;
             _gameManager = GameManager.Instance;
-            
-            yield return LoadBuildings();
-
-            if (_farms.Count == 0) yield break;
-            
-            TimeSpan time = DateTime.Now.Subtract(DateTime.Parse(PlayerPrefs.GetString("ExitTime")));
-
-            if (time.Minutes < 1f) yield break;
-
-            foreach (Farm farm in _farms) if (farm.GetResource()) ResourceSummary(farm, time);
-            
-        }
-
-        private void OnDisable()
-        {
-            if (_gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial || !SceneManagement.InGameScene()) return;
-            
-            SaveBuildings();
         }
 
         private void OnApplicationQuit()
@@ -152,6 +134,9 @@ namespace GGG.Components.Buildings
         }
 
         public void SaveBuildings() {
+            if (_gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial || 
+                !SceneManagement.InGameScene()) return;
+            
             BuildingComponent[] buildings = GetComponentsInChildren<BuildingComponent>();
             BuildingData[] saveData = new BuildingData[buildings.Length];
             int i = 0;
@@ -184,25 +169,23 @@ namespace GGG.Components.Buildings
             File.WriteAllText(filePath, jsonData);
         }
 
-        private IEnumerator LoadBuildings()
+        public IEnumerator LoadBuildings()
         {
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "buildings_data.json");
-#if UNITY_EDITOR
-            filePath = "file://" + filePath;
-#endif
             string data;
+
+            if (!File.Exists(filePath))
+            {
+                OnBuildsLoad?.Invoke(null);
+                yield break;
+            }
+            
             if (filePath.Contains("://") || filePath.Contains(":///")) {
                 UnityWebRequest www = UnityWebRequest.Get(filePath);
                 yield return www.SendWebRequest();
                 data = www.downloadHandler.text;
             }
             else data = File.ReadAllText(filePath);
-
-            if (string.IsNullOrEmpty(data))
-            {
-                OnBuildsLoad?.Invoke(null);
-                yield break;
-            }
             
             BuildingData[] buildings = JsonHelper.FromJson<BuildingData>(data);
             BuildingComponent[] buildingComponents = new BuildingComponent[buildings.Length];
@@ -232,6 +215,15 @@ namespace GGG.Components.Buildings
 
             while(_buildings.Find((x) => x.Id() == _currentId)) _currentId++;
             _buildings = buildingComponents.ToList();
+
+            if (_farms.Count == 0)
+            {
+                TimeSpan time = DateTime.Now.Subtract(DateTime.Parse(PlayerPrefs.GetString("ExitTime")));
+
+                if (time.Minutes < 1f)
+                    foreach (Farm farm in _farms) if (farm.GetResource()) ResourceSummary(farm, time);
+            }
+            
             OnBuildsLoad?.Invoke(buildingComponents);
         }
     }

@@ -37,9 +37,17 @@ namespace GGG.Components.Serialization
             _gameManager = GameManager.Instance;
             _sceneManagement = SceneManagement.Instance;
 
-            if(SceneManagement.InGameScene()) Initialize();
+            if (SceneManagement.InGameScene())
+            {
+                Initialize();
+                StartCoroutine(Load());
+            }
             
-            _sceneManagement.OnGameSceneLoaded += Initialize;
+            _sceneManagement.OnGameSceneLoaded += () =>
+            {
+                Initialize();
+                _sceneManagement.AddEnumerators(Load());
+            };
 
             _delta = 0f;
         }
@@ -48,6 +56,8 @@ namespace GGG.Components.Serialization
         {
             PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
             PlayerPrefs.Save();
+            
+            Save();
         }
 
         private void Update()
@@ -74,12 +84,29 @@ namespace GGG.Components.Serialization
             _laboratoryUI = FindObjectOfType<LaboratoryUI>();
         }
 
+        private IEnumerator Load()
+        {
+            yield return null;
+            
+            List<IEnumerator> order = new()
+            {
+                _playerManager.LoadResourcesCount(),
+                _hudManager.LoadShownResource(),
+                _buildingManager.LoadBuildings()
+            };
+
+            foreach (IEnumerator enumerator in order)
+            {
+                yield return enumerator;
+            }
+        }
+
         private void Save()
         {
             _playerManager.SaveResourcesCount();
+            _hudManager.SaveShownResources();
             _tileManager.SaveTilesState();
             _buildingManager.SaveBuildings();
-            _hudManager.SaveShownResources();
             _laboratoryUI.SaveResearchProgress();
             _generatorUI.SaveGeneratorState();
         }
