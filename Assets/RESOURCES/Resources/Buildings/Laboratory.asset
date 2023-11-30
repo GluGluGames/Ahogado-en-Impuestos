@@ -18,15 +18,23 @@ MonoBehaviour:
   SelectedIcon: {fileID: 0}
   ResearchIcon: {fileID: 0}
   Prefab: {fileID: 3729789129001329043, guid: 5129a88a28bc3b048b6ab1509a81b1bd, type: 3}
-  CanBeUpgraded: 0
-  UpgradePrefabs: []
+  CanBeUpgraded: 1
+  UpgradePrefabs:
+  - {fileID: 4737397664650658106, guid: 6881fd472f895e14fa5c639efae5fbcd, type: 3}
+  - {fileID: 5959538063097510572, guid: 58f5308af154efb439d27f41f67a7a53, type: 3}
   Unlocked: 1
   ResearchTime: 0
   InitialCost:
     Costs: c4090000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  UpgradeCost: []
+  UpgradeCost:
+  - Costs: f4010000
+    Resources:
+    - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
+  - Costs: ee020000
+    Resources:
+    - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
   MaxLevel: 1
   MaxBuildingNumber: 10
   CanBoost: 0

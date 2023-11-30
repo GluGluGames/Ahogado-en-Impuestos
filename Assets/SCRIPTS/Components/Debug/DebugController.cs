@@ -90,7 +90,7 @@ namespace GGG.Components.Debug
             OPEN_SHOP = new DebugCommand("open_shop", "Opens the shop", "open_shop", () =>
             {
                 OnDebugConsole();
-                FindObjectOfType<ShopUI>().OpenShop();
+                FindObjectOfType<ShopUI>().OpenShop(3);
             });
 
             OPEN_MUSEUM = new DebugCommand("open_museum", "Opens the museum", "open_museum", () =>

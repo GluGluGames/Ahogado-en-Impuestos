@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7865890702781366767}
   - component: {fileID: 1237551440149686502}
   m_Layer: 0
-  m_Name: Laboratory
+  m_Name: Laboratory_Level_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +97,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 662287ffaa920e246a4659ed4e6cf371, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2859109400176981367, guid: 662287ffaa920e246a4659ed4e6cf371, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2859109400176981367, guid: 662287ffaa920e246a4659ed4e6cf371, type: 3}
       propertyPath: m_Materials.Array.data[0]
