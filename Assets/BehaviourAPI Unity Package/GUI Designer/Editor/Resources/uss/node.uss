@@ -1,0 +1,85 @@
+#node-div {
+    padding: 20px;
+}
+
+#node-border {
+    padding: 2px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#node-status {
+    border-color: rgb(178, 178, 178);
+    border-width: 1px;
+    padding: 2px;
+    border-radius: 8px;
+}
+
+#contents {
+    border-radius: 5px;
+    border-color: rgb(100, 100, 100);
+    border-width: 2px;
+    background-color: rgb(38, 38, 38);
+    width: 200px;
+}
+
+#top {
+    margin: 3px;
+}
+
+.port-container {
+    align-items: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#title {
+    padding: 3px;
+}
+
+#title-label {
+    -unity-text-align: middle-center;
+    font-size: 15px;
+    -unity-font-style: bold;
+}
+
+#node-details {
+    align-items: center;
+}
+
+#node-icon {
+    margin: 2px;
+    background-color: rgb(75, 87, 100);
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    min-height: 15px;
+    min-width: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    display: none;
+}
+
+.node-rect {
+    border-radius: 5px;
+    border-color: rgb(100, 100, 100);
+    border-width: 2px;
+    background-color: rgb(38, 38, 38);
+    width: 200px;
+}
+
+.node-text {
+    font-size: 10px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
