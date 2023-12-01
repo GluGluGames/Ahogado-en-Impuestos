@@ -69,6 +69,7 @@ namespace GGG.Components.UI {
 
         public void CheckUnlockState()
         {
+            StructureName.SetText(BuildingInfo.GetName());
             int cont = _buildingManager.GetBuildCount(BuildingInfo);
             TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>(true);
 

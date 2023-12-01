@@ -8,6 +8,7 @@ using GGG.Input;
 using System;
 using TMPro;
 using DG.Tweening;
+using GGG.Components.Buildings.CityHall;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,8 @@ namespace GGG.Components.UI
 {
     public class UpgradeUI : MonoBehaviour
     {
-        [Header("Sell Fields")]
+        [Header("Sell Fields")] 
+        [SerializeField] private GameObject SellPanel;
         [SerializeField] private Button SellButton;
         [SerializeField] private Image SellResource;
         [SerializeField] private TMP_Text SellCost;
@@ -41,7 +43,7 @@ namespace GGG.Components.UI
         private bool _open;
 
         public Action OnUiOpen;
-        public Action OnSellButtonPress;
+        public Action OnCloseButtonPress;
 
         private void Start()
         {
@@ -84,6 +86,7 @@ namespace GGG.Components.UI
             ResourceCost[] cost = _selectedBuilding.BuildData().GetUpgradeCost();
             bool price = true;
             
+            SellPanel.SetActive(_selectedBuilding.GetType() != typeof(CityHall));
             SellResource.sprite = _selectedBuilding.BuildData().GetBuildResource(0).GetSprite();
             SellCost.SetText(Mathf.RoundToInt(_selectedBuilding.CurrentCost().GetCost(0) * 0.5f).ToString());
             
@@ -143,7 +146,6 @@ namespace GGG.Components.UI
             _selectedTile.DestroyBuilding();
             
             _selectedBuilding = null;
-            OnSellButtonPress?.Invoke();
             Close(true);
         }
 
@@ -182,8 +184,9 @@ namespace GGG.Components.UI
 
         private void OnCloseButton()
         {
-            if(!_open || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
+            if(!_open || _gameManager.TutorialOpen()) return;
 
+            OnCloseButtonPress?.Invoke();
             Close(true);
         }
 

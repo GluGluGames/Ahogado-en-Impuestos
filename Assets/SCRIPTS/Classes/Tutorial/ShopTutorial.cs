@@ -10,7 +10,7 @@ namespace GGG.Classes.Tutorial
         public override IEnumerator StartTutorial(Action OnTutorialStart, Action<bool, bool> OnTutorialEnd, 
             Action<string, Sprite, string> OnUiChange)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
             }
@@ -20,10 +20,7 @@ namespace GGG.Classes.Tutorial
             FinishTutorial();
         }
 
-        protected override void InitializeTutorial()
-        {
-            throw new NotImplementedException();
-        }
+        protected override void InitializeTutorial() { }
 
         protected override void FinishTutorial()
         {

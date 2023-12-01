@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace GGG.Classes.Dialogue
 {
@@ -8,7 +9,7 @@ namespace GGG.Classes.Dialogue
     public class DialogueText
     {
         [Tooltip("Texts of the dialogue")]
-        [SerializeField, TextArea] private List<string> DialogueLines;
+        [SerializeField] private List<LocalizedString> DialogueLines;
         [Tooltip("Characters that will appear on the dialogue")]
         [SerializeField] private List<Sprite> AvatarList;
         [Tooltip("Name of the characters that will appear on the dialogue")]
@@ -23,7 +24,7 @@ namespace GGG.Classes.Dialogue
             if (_currentDialogue >= DialogueLines.Count)
                 throw new Exception("No more dialogue");
 
-            return DialogueLines[_currentDialogue++];
+            return DialogueLines[_currentDialogue++].GetLocalizedString();
         }
 
         public string GetPreviousDialogue()
@@ -31,7 +32,7 @@ namespace GGG.Classes.Dialogue
             if (_currentDialogue - 1 < 0)
                 throw new Exception("No previous dialogue");
 
-            return DialogueLines[_currentDialogue - 1];
+            return DialogueLines[_currentDialogue - 1].GetLocalizedString();
         }
 
         public Sprite GetNextAvatar()

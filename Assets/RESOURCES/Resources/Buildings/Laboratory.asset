@@ -12,8 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
   m_Name: Laboratory
   m_EditorClassIdentifier: 
-  Name: Laboratorio
-  Description: 
+  Name:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 1113869938688
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Description:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 4880258461696
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   Icon: {fileID: 21300000, guid: 1a98bbf24b216ea4da3ad31969c2c608, type: 3}
   SelectedIcon: {fileID: 0}
   ResearchIcon: {fileID: 0}
@@ -40,3 +56,6 @@ MonoBehaviour:
   CanBoost: 0
   SpawnHeight: 0.32
   VisionRange: 2
+  references:
+    version: 2
+    RefIds: []

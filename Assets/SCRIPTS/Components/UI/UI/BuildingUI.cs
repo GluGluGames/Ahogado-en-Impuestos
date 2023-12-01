@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using TMPro;
 
 namespace GGG.Components.UI 
 {
@@ -15,6 +16,7 @@ namespace GGG.Components.UI
     {
         [Header("GameObjects")] 
         [SerializeField] private List<GameObject> Panels;
+        [SerializeField] private TMP_Text PanelsText;
 
         [Space(5), Header("Buttons")] 
         [SerializeField] private Button RightArrow;
@@ -80,6 +82,8 @@ namespace GGG.Components.UI
                 button.Initialize(_buildingManager);
                 button.OnStructureBuild += (x, y) => Close();
             }
+            
+            PanelsText.SetText($"{_currentPanel + 1}/{Panels.Count}");
         }
         
         private void OnArrow(int arrow)
@@ -91,6 +95,7 @@ namespace GGG.Components.UI
             Panels[_currentPanel].SetActive(false);
             Panels[idx].SetActive(true);
             _currentPanel = idx;
+            PanelsText.SetText($"{_currentPanel + 1}/{Panels.Count}");
         }
 
         private void CheckBuildings()

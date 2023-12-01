@@ -12,8 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
   m_Name: Generator
   m_EditorClassIdentifier: 
-  Name: Generador
-  Description: 
+  Name:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 662298587136
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Description:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 828351082496
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   Icon: {fileID: 21300000, guid: 362d913a1d29a214d9785cf18114406a, type: 3}
   SelectedIcon: {fileID: 21300000, guid: fa82c8b866b92144a9830d4200510bed, type: 3}
   ResearchIcon: {fileID: 21300000, guid: ba563f0af3354454c88e298e3c71ccea, type: 3}
@@ -43,3 +59,6 @@ MonoBehaviour:
   CanBoost: 0
   SpawnHeight: 0.32
   VisionRange: 2
+  references:
+    version: 2
+    RefIds: []

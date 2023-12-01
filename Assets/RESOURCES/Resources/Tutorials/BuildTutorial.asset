@@ -15,50 +15,216 @@ MonoBehaviour:
   TutorialKey: BuildTutorial
   Dialogues: []
   Panels:
-  - Title: "Men\xFA de construcci\xF3n"
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 1259361955840
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 21300000, guid: ef63ff3329148564795c6c1dd18f538f, type: 3}
-    Text: "Este es el men\xFA de construcci\xF3n. Desde aqu\xED puedes construir
-      los edificios que se alzar\xE1n en la nueva Atl\xE1ntida."
-  - Title: Edificios
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "Por ahora tienes bloqueados la mayor\xEDa de edificios, salvo uno."
-  - Title: Granja de algas
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 21300000, guid: ef63ff3329148564795c6c1dd18f538f, type: 3}
-    Text: "La granja de algas te ayudar\xE1 a conseguir tus primeros recursos para
-      empezar a reconstruir la Atl\xE1ntida. \xA1Prueba a ponerlo!"
-  - Title: Primer edificio
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "\xA1Enhorabuena! Has construido tu primer edificio. Veamos qu\xE9 puedes
-      hacer con \xE9l. Haz click en el edificio que acabas de construir."
-  - Title: "Men\xFA de mejoras"
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "Este es el men\xFA de mejoras de un edificio. Algunos de los edificios
-      contar\xE1n con un bot\xF3n que te permitir\xE1 interactuar con ellos, abriendo
-      nuevos men\xFAs."
-  - Title: Mejora de edificios
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "Con el bot\xF3n de \"Mejorar\" puedes mejorar un edificio, ya sea para
-      que produzca m\xE1s materiales o para mejorar su interacci\xF3n. Sin embargo,
-      ahora mismo no tienes suficientes materiales para ello."
-  - Title: Venta de edificios
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "Con el bot\xF3n \"Vender\" puedes destruir el edificio, ya sea porque
-      te hayas equivocado o para colocar un edificio nuevo. Esto te devolver\xE1
-      la mitad del coste del edificio. \xA1Vamos, pruebalo!"
-  - Title: 
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "\xA1Bien hecho! Ya solo te queda un paso m\xE1s."
-  - Title: Limpieza de casillas
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "\xBFVes esas casillas que est\xE1n llenas de escombros? Haz click en una
-      de ellas."
-  - Title: "Men\xFA de limpieza"
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "Desde aqu\xED puedes limpiar las casillas que est\xE9n sucias para poder
-      edificar en ellas. Sin embargo, ahora mismo no tienes los materiales suficientes
-      para hacerlo."
-  - Title: Final
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "\xA1Enhorabuena! Ahora ya tienes todo lo que hay que tener para reconstruir
-      la Atl\xE1ntida. \xA1\xC1nimo con ello!"
+    Text:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   TutorialCompleted: 0
+  references:
+    version: 2
+    RefIds: []
