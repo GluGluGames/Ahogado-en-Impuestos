@@ -28,6 +28,7 @@ namespace GGG.Components.Buildings
         
         private readonly Dictionary<int, List<Resource>> _resources = new();
         private readonly List<Button> _buttons = new();
+        private readonly List<Image> _resourcesImages;
         private GameObject _viewport;
 
         private Button _buttonActive;
@@ -60,12 +61,13 @@ namespace GGG.Components.Buildings
             
             List<Button[]> auxButtons = new ();
             foreach (GameObject panel in Panels) auxButtons.Add(panel.GetComponentsInChildren<Button>());
-
+            
             foreach (Button[] buttons in auxButtons)
             {
                 foreach (Button button in buttons)
                 {
                     _buttons.Add(button);
+                    HandleImageTransparency(button, false);
                 }
             }
             
@@ -102,19 +104,33 @@ namespace GGG.Components.Buildings
                     if (_resources[resource][i] != currentResource) continue;
                     
                     _buttons[idx].image.sprite = currentResource.GetSelectedSprite();
+                    HandleImageTransparency(_buttons[idx], true);
                     _buttonActive = _buttons[idx];
                 }
             }
+        }
+
+        private void HandleImageTransparency(Button button, bool visible)
+        {
+            Image auxImage = button.gameObject.transform.parent.GetComponent<Image>();;
+            Color aux = auxImage.color;
+
+            aux.a = visible ? 1 : 0;
+            auxImage.color = aux;
         }
         
         private void SelectResource(int index, Resource resource, Farm farm)
         {
             if (_buttons[index] == _buttonActive) return;
-            
+
             if (_buttonActive)
+            {
                 _buttonActive.image.sprite = _buttonActive.spriteState.disabledSprite;
+                HandleImageTransparency(_buttonActive, false);
+            }
             
             _buttons[index].image.sprite = resource.GetSelectedSprite();
+            HandleImageTransparency(_buttons[index], true);
             _buttonActive = _buttons[index];
 
             SelectedImage.sprite = resource.GetSprite();
