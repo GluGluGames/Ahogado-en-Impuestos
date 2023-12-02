@@ -2,6 +2,7 @@ using GGG.Components.Buildings;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.Player;
 using GGG.Components.Core;
+using GGG.Components.UI.Buttons;
 using GGG.Shared;
 using GGG.Input;
 

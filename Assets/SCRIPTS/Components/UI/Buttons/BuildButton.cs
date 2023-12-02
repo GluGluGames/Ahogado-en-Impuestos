@@ -11,7 +11,7 @@ using System;
 using TMPro;
 using UnityEngine.UI;
 
-namespace GGG.Components.UI {
+namespace GGG.Components.UI.Buttons {
     public class BuildButton : MonoBehaviour, IPointerDownHandler {
         [Header("Information")]
         [SerializeField] private Building BuildingInfo;

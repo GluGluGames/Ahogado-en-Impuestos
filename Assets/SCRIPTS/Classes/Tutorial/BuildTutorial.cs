@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.UI;
+using GGG.Components.UI.Buttons;
 using UnityEngine;
 
 namespace GGG.Classes.Tutorial

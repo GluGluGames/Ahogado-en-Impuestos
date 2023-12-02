@@ -6,14 +6,16 @@ namespace GGG.Components.Buildings.CityHall
 {
     public class CityHall : BuildingComponent
     {
+        private CityHallUi _ui;
+        
         public override void Initialize()
         {
-            throw new System.NotImplementedException();
+            if (!_ui) _ui = FindObjectOfType<CityHallUi>();
         }
 
         public override void Interact()
         {
-            throw new System.NotImplementedException();
+            _ui.Open();
         }
     }
 }

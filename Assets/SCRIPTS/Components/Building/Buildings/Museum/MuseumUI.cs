@@ -3,11 +3,13 @@ using GGG.Shared;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using GGG.Components.UI.Buttons;
 
 namespace GGG.Components.Buildings.Museum
 {
@@ -23,7 +25,6 @@ namespace GGG.Components.Buildings.Museum
         [SerializeField] private TextMeshProUGUI Description;
 
         [Space(5), Header("Buttons")] 
-        [SerializeField] private Button[] ContainerButtons;
         [SerializeField] private Button CloseButton;
         
         [SerializeField] private LocalizedString LockedString;
@@ -39,6 +40,7 @@ namespace GGG.Components.Buildings.Museum
         private readonly Dictionary<int, Resource[]> _resources = new();
         private readonly Dictionary<int, Button[]> _buttons = new();
         private readonly Dictionary<int, bool[]> _buttonActive = new();
+        private List<ContainerButton> _containerButtons;
 
         private GameObject _viewport;
         
@@ -79,20 +81,42 @@ namespace GGG.Components.Buildings.Museum
 
         private void Initialize()
         {
+            _containerButtons = GetComponentsInChildren<ContainerButton>(true).ToList();
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                int idx = i;
+                for (int j = 0; j < _containerButtons.Count - 1; j++)
+                {
+                    _containerButtons[i].OnButtonClick +=
+                        _containerButtons[(idx + 1) % _containerButtons.Count].DeselectButton;
+                    
+                    idx++;
+                }
+            }
+            
             for (int i = 0; i < ResourcesContainers.Length; i++)
             {
                 _buttons.Add(i, ResourcesContainers[i].GetComponentsInChildren<Button>());
                 _buttonActive.Add(i, new bool[_resources[i].Length]);
                 InitArray(_buttonActive[i], _buttons[i]);
-                
                 int index = i;
-                ContainerButtons[i].onClick.AddListener(() => 
-                    HandleToggle(_resources[index], _buttons[index], _buttonActive[index], index));
+                _containerButtons[i].OnButtonClick += () =>
+                    SelectResource(_resources[index], _buttons[index], _buttonActive[index], index, 0);
             }
+
 
             for (int i = 0; i < _resources.Count; i++)
                 if(_resources[i].Length > 0)
                     FillResources(_buttons[i], _resources[i], _buttonActive[i], i);
+        }
+        
+        private void ResetContainers()
+        {
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                _containerButtons[i].Initialize();
+                ResourcesContainers[i].SetActive(i == 0);
+            }
         }
 
         private void FillResources(Button[] buttons, Resource[] resources, bool[] active, int type)
@@ -115,24 +139,6 @@ namespace GGG.Components.Buildings.Museum
                     buttons[i].onClick.AddListener(() => SelectResource(resources, buttons, active, type, index));
                 }
             }
-        }
-
-        private void HandleToggle(Resource[] resources, Button[] buttons, bool[] active, int index)
-        {
-            if (_active == index) return;
-
-            for (int i = 0; i < ContainerButtons.Length; i++)
-            {
-                ContainerButtons[i].image.sprite = i == index
-                    ? ContainerButtons[i].spriteState.selectedSprite
-                    : ContainerButtons[i].spriteState.disabledSprite;
-
-                ResourcesContainers[i].SetActive(i == index);
-            }
-
-            SelectResource(resources, buttons, active, index, 0);
-
-            _active = index;
         }
 
         private void InitArray(bool[] array, Button[] buttons)
@@ -181,9 +187,9 @@ namespace GGG.Components.Buildings.Museum
             _open = true;
             _viewport.SetActive(true);
             
+            ResetContainers();
             CheckResources();
             SelectResource(_resources[0], _buttons[0], _buttonActive[0], 0, 0);
-            ContainerButtons[0].image.sprite = ContainerButtons[0].spriteState.selectedSprite;
             
             OnMuseumOpen?.Invoke();
             _gameManager.OnUIOpen();

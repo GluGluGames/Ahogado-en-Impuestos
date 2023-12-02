@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DG.Tweening;
+using GGG.Components.UI.Buttons;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
@@ -29,7 +30,6 @@ namespace GGG.Components.Buildings.Laboratory
 
         [Space(5), Header("Buttons")] 
         [SerializeField] private Button[] ResearchButtons;
-        [SerializeField] private Button[] TabButtons;
         [SerializeField] private Button BackButton;
         [SerializeField] private Button CloseButton;
         
@@ -41,6 +41,7 @@ namespace GGG.Components.Buildings.Laboratory
         private readonly Dictionary<int, Laboratory> _laboratories = new();
         private readonly Dictionary<int, Resource[]> _resources = new();
         private readonly Dictionary<int, Button[]> _buttons = new();
+        private List<ContainerButton> _containerButtons;
         private Building[] _buildings;
         
         private GameObject _viewport;
@@ -67,10 +68,17 @@ namespace GGG.Components.Buildings.Laboratory
                 ResearchButtons[i].onClick.AddListener(() => OpenResourceSelection(idx));
             }
 
-            for (int i = 0; i < TabButtons.Length; i++)
+            _containerButtons = GetComponentsInChildren<ContainerButton>(true).ToList();
+
+            for (int i = 0; i < _containerButtons.Count; i++)
             {
                 int idx = i;
-                TabButtons[i].onClick.AddListener(() => ChangeTab(idx));
+                for (int j = 0; j < _containerButtons.Count - 1; j++)
+                {
+                    _containerButtons[i].OnButtonClick +=
+                        _containerButtons[(idx + 1) % _containerButtons.Count].DeselectButton;
+                    idx++;
+                }
             }
             
             BackButton.onClick.AddListener(OpenBarContainer);
@@ -103,6 +111,15 @@ namespace GGG.Components.Buildings.Laboratory
         private void OnDisable()
         {
             SaveResearchProgress();
+        }
+        
+        private void ResetContainers()
+        {
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                _containerButtons[i].Initialize();
+                Containers[i].SetActive(i == 0);
+            }
         }
 
         private void InitializeLaboratories(Laboratory laboratory)
@@ -169,18 +186,6 @@ namespace GGG.Components.Buildings.Laboratory
             BarsContainer.SetActive(false);
             ResourcesContainer.SetActive(true);
             CheckResources();
-        }
-
-        private void ChangeTab(int idx)
-        {
-            if (_selected == idx) return;
-            
-            for (int i = 0; i < Containers.Length; i++)
-            {
-                Containers[i].SetActive(idx == i);
-            }
-
-            _selected = idx;
         }
 
         private void OpenBarContainer()
@@ -447,6 +452,7 @@ namespace GGG.Components.Buildings.Laboratory
 
             _open = true;
             _viewport.SetActive(true);
+            ResetContainers();
             InitializeLaboratories(laboratory);
             _gameManager.OnUIOpen();
             OnLaboratoryOpen?.Invoke();
