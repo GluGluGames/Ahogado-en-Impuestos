@@ -37,7 +37,13 @@ namespace GGG.Components.Resources
 
             foreach (Resource resource in resources)
                 resourcesCollected.Add(resource, 0);
-            
+
+            Invoke("SpawnAllResources", Time.deltaTime * 5);
+
+        }
+
+        private void SpawnAllResources()
+        {
             _tiles = FindObjectsOfType<HexTile>().ToList();
             for (int i = 0; i < _nResourcesMax; ++i)
             {
