@@ -89,8 +89,8 @@ namespace GGG.Components.Serialization
             List<IEnumerator> order = new()
             {
                 _playerManager.LoadResourcesCount(),
+                _buildingManager.LoadBuildings(),
                 _hudManager.LoadShownResource(),
-                _buildingManager.LoadBuildings()
             };
 
             foreach (IEnumerator enumerator in order)

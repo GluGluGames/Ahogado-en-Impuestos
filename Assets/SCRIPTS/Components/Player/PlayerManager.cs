@@ -125,6 +125,11 @@ namespace GGG.Components.Player
             
             ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data); 
             _resourcesCount = resources.ToDictionary(item => item.Name, item => item.Count);
+
+            if (_resourcesCount.Count < 0) {
+                foreach (string i in _resourcesDictionary.Keys) 
+                    _resourcesCount.Add(i, 0);
+            }
             
             OnPlayerInitialized?.Invoke();
         }
