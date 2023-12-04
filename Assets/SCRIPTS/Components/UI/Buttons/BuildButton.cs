@@ -11,7 +11,7 @@ using System;
 using TMPro;
 using UnityEngine.UI;
 
-namespace GGG.Components.UI {
+namespace GGG.Components.UI.Buttons {
     public class BuildButton : MonoBehaviour, IPointerDownHandler {
         [Header("Information")]
         [SerializeField] private Building BuildingInfo;
@@ -69,6 +69,7 @@ namespace GGG.Components.UI {
 
         public void CheckUnlockState()
         {
+            StructureName.SetText(BuildingInfo.GetName());
             int cont = _buildingManager.GetBuildCount(BuildingInfo);
             TextMeshProUGUI[] texts = Container.GetComponentsInChildren<TextMeshProUGUI>(true);
 

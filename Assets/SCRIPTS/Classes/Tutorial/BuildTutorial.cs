@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.UI;
+using GGG.Components.UI.Buttons;
 using UnityEngine;
 
 namespace GGG.Classes.Tutorial
@@ -21,7 +22,7 @@ namespace GGG.Classes.Tutorial
         
         private bool _structureBuild;
         private bool _upgradeMenuOpen;
-        private bool _structureSold;
+        private bool _upgradeClose;
         private bool _tileCleanOpen;
 
         private enum Steps
@@ -56,14 +57,10 @@ namespace GGG.Classes.Tutorial
             #endregion
 
             #region Structure Sold Tutorial
-
-            for (int i = 0; i < 2; i++)
-            {
-                yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
-            }
             
+            yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true, false);
-            yield return StructureSoldStep();
+            yield return UpgradeMenuCloseStep();
 
             #endregion
 
@@ -86,7 +83,7 @@ namespace GGG.Classes.Tutorial
         {
             _structureBuild = false;
             _upgradeMenuOpen = false;
-            _structureSold = false;
+            _upgradeClose = false;
             _tileCleanOpen = false;
             
             _buildButtons = FindObjectsOfType<BuildButton>();
@@ -100,7 +97,7 @@ namespace GGG.Classes.Tutorial
                 button.StructureBuild += CheckStructureBuild;
 
             _upgradeUI.OnUiOpen += CheckUpgradeMenuOpen;
-            _upgradeUI.OnSellButtonPress += CheckStructureSold;
+            _upgradeUI.OnCloseButtonPress += CheckUpgradeUiClose;
             _tileCleanUI.OnUiOpen += CheckTileCleanUi;
         }
 
@@ -113,7 +110,7 @@ namespace GGG.Classes.Tutorial
                 button.StructureBuild -= CheckStructureBuild;
             
             _upgradeUI.OnUiOpen -= CheckUpgradeMenuOpen;
-            _upgradeUI.OnSellButtonPress -= CheckStructureSold;
+            _upgradeUI.OnCloseButtonPress -= CheckUpgradeUiClose;
             _tileCleanUI.OnUiOpen -= CheckTileCleanUi;
             _lateralUI.ToggleOpenButton();
         }
@@ -135,9 +132,9 @@ namespace GGG.Classes.Tutorial
             }
         }
         
-        private IEnumerator StructureSoldStep()
+        private IEnumerator UpgradeMenuCloseStep()
         {
-            while (!_structureSold)
+            while (!_upgradeClose)
             {
                 yield return null;
             }
@@ -182,7 +179,7 @@ namespace GGG.Classes.Tutorial
 
         private void CheckUpgradeMenuOpen() => _upgradeMenuOpen = true;
 
-        private void CheckStructureSold() => _structureSold = true;
+        private void CheckUpgradeUiClose() => _upgradeClose = true;
 
         private void CheckTileCleanUi() => _tileCleanOpen = true;
     }

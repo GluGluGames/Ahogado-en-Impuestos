@@ -2,12 +2,14 @@ using GGG.Components.Buildings;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.Player;
 using GGG.Components.Core;
+using GGG.Components.UI.Buttons;
 using GGG.Shared;
 using GGG.Input;
 
 using System;
 using TMPro;
 using DG.Tweening;
+using GGG.Components.Buildings.CityHall;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +17,8 @@ namespace GGG.Components.UI
 {
     public class UpgradeUI : MonoBehaviour
     {
-        [Header("Sell Fields")]
+        [Header("Sell Fields")] 
+        [SerializeField] private GameObject SellPanel;
         [SerializeField] private Button SellButton;
         [SerializeField] private Image SellResource;
         [SerializeField] private TMP_Text SellCost;
@@ -41,33 +44,41 @@ namespace GGG.Components.UI
         private bool _open;
 
         public Action OnUiOpen;
-        public Action OnSellButtonPress;
+        public Action OnCloseButtonPress;
 
         private void Start()
         {
             _player = PlayerManager.Instance;
             _input = InputManager.Instance;
             _gameManager = GameManager.Instance;
-            _sellResource = _player.GetResource("Seaweed");
-
+            
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
-
-            _buttons = FindObjectsOfType<BuildButton>(true);
-            foreach (BuildButton button in _buttons) button.OnStructureBuild += UpdateBuildings;
-            TileManager.OnBuildingTileLoaded += UpdateBuildings;
-
-            SellButton.onClick.AddListener(OnSellButton);
-            UpgradeButton.onClick.AddListener(OnUpgradeButton);
-            CloseButton.onClick.AddListener(OnCloseButton);
+            
+            Initialize();
         }
 
         private void Update()
         {
-            if (!_open || !_input.Escape()) return;
+            if (!_open || !_input.Escape() || _gameManager.OnTutorial()) return;
             
             Close(true); 
+        }
+
+        private void Initialize()
+        {
+            _buttons = FindObjectsOfType<BuildButton>(true);
+            
+            foreach (BuildButton button in _buttons) 
+                button.OnStructureBuild += UpdateBuildings;
+            
+            TileManager.OnBuildingTileLoaded += UpdateBuildings;
+            _player.OnPlayerInitialized += () => _sellResource = _player.GetResource("Seaweed");
+
+            SellButton.onClick.AddListener(OnSellButton);
+            UpgradeButton.onClick.AddListener(OnUpgradeButton);
+            CloseButton.onClick.AddListener(OnCloseButton);
         }
 
         private void OpenCheck()
@@ -76,6 +87,7 @@ namespace GGG.Components.UI
             ResourceCost[] cost = _selectedBuilding.BuildData().GetUpgradeCost();
             bool price = true;
             
+            SellPanel.SetActive(_selectedBuilding.GetType() != typeof(CityHall));
             SellResource.sprite = _selectedBuilding.BuildData().GetBuildResource(0).GetSprite();
             SellCost.SetText(Mathf.RoundToInt(_selectedBuilding.CurrentCost().GetCost(0) * 0.5f).ToString());
             
@@ -135,7 +147,6 @@ namespace GGG.Components.UI
             _selectedTile.DestroyBuilding();
             
             _selectedBuilding = null;
-            OnSellButtonPress?.Invoke();
             Close(true);
         }
 
@@ -174,8 +185,9 @@ namespace GGG.Components.UI
 
         private void OnCloseButton()
         {
-            if(!_open || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
+            if(!_open || _gameManager.TutorialOpen()) return;
 
+            OnCloseButtonPress?.Invoke();
             Close(true);
         }
 

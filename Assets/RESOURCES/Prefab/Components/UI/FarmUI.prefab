@@ -100,7 +100,7 @@ RectTransform:
   - {fileID: 5015402430669475489}
   - {fileID: 2741805885981804295}
   - {fileID: 8457383928478907854}
-  - {fileID: 8415867539623657854}
+  - {fileID: 3093275423988889386}
   - {fileID: 7963943258890950048}
   m_Father: {fileID: 4260981797247500757}
   m_RootOrder: -1
@@ -317,7 +317,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -1.495, y: -836.1}
+  m_AnchoredPosition: {x: -1.495, y: -854}
   m_SizeDelta: {x: 477.01, y: 157.9426}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6881095109599024295
@@ -357,8 +357,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278324241
+  m_fontColor: {r: 0.06666667, g: 0.047058824, b: 0.007843138, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -529,8 +529,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: -1.4937, y: 9.0002}
+  m_SizeDelta: {x: 477.01, y: 452.26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2722545835789340403
 CanvasRenderer:
@@ -560,9 +560,86 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d6154addf88480c4197d5d4d1c6117af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 703d8523a47facc409e28da760dede1e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5219480972432597250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3093275423988889386}
+  - component: {fileID: 799580338873401957}
+  - component: {fileID: 4572823562547982513}
+  m_Layer: 5
+  m_Name: Header
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3093275423988889386
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219480972432597250}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8415867539623657854}
+  m_Father: {fileID: 391871278521888221}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1.4935, y: 325.06}
+  m_SizeDelta: {x: 477.01, y: 179.87}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &799580338873401957
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219480972432597250}
+  m_CullTransparentMesh: 1
+--- !u!114 &4572823562547982513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219480972432597250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2785e001f63522a47ba2b17437355311, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -595,18 +672,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6145298845863588702}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 391871278521888221}
+  m_Father: {fileID: 3093275423988889386}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -1.4936, y: -225.9}
-  m_SizeDelta: {x: 477.01, y: 157.9426}
+  m_AnchoredPosition: {x: 1.7706, y: -89.2409}
+  m_SizeDelta: {x: 425.308, y: 103.4075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4519781513881023005
 CanvasRenderer:
@@ -645,8 +722,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 3702974975
+  m_fontColor: {r: 1, g: 0.9137255, b: 0.7137255, a: 0.8627451}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -663,7 +740,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100.95
+  m_fontSize: 66.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -741,7 +818,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: -100}
+  m_SizeDelta: {x: -200, y: -200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8094623290175234753
 CanvasRenderer:
@@ -961,6 +1038,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1075,6 +1160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button_1
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1189,6 +1278,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button_2
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1303,6 +1396,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button_2
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1417,6 +1514,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button_3
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1531,6 +1632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button_4
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1645,6 +1750,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button_1
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1759,6 +1868,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button_3
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1873,6 +1986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button_5
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1987,6 +2104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2101,6 +2222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button_4
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2215,6 +2340,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Button_5
       objectReference: {fileID: 0}
+    - target: {fileID: 4201524366655339928, guid: 25f6409a94ff607408326187de58e8ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fc002ff98d61194eb5cf0ae56b9b26d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

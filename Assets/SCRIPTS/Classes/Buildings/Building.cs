@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using GGG.Shared;
+using UnityEngine.Localization;
 using UnityEngine.Serialization;
 
 namespace GGG.Classes.Buildings
@@ -9,9 +10,9 @@ namespace GGG.Classes.Buildings
     public class Building : ScriptableObject {
         [Header("Generic fields")]
         [Tooltip("Name of the building")] 
-        [SerializeField] private string Name;
+        [SerializeField] private LocalizedString Name;
         [Tooltip("Description of the building")]
-        [SerializeField] [TextArea] private string Description;
+        [SerializeField] private LocalizedString Description;
         [Tooltip("Icon of the building. Used in the UI")]
         [SerializeField] private Sprite Icon;
         [Tooltip("Icon of the building when is selected.")] 
@@ -49,13 +50,13 @@ namespace GGG.Classes.Buildings
         /// Gets the name of the building
         /// </summary>
         /// <returns>The name of the building</returns>
-        public string GetName() { return Name; }
+        public string GetName() { return Name.GetLocalizedString(); }
 
         /// <summary>
         /// Gets the description of the building
         /// </summary>
         /// <returns>The description of the building</returns>
-        public string GetDescription() { return Description; }
+        public string GetDescription() { return Description.GetLocalizedString(); }
 
         /// <summary>
         /// Gets the sprite of the building

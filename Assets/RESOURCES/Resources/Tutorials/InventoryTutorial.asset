@@ -15,12 +15,45 @@ MonoBehaviour:
   TutorialKey: InventoryTutorial
   Dialogues: []
   Panels:
-  - Title: Inventario
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4477076795392
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "Este es tu inventario. Desde aqu\xED puedes ver todos los recursos que
-      has recolectado."
-  - Title: "Selecci\xF3n de recursos"
+    Text:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4528721260544
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4586204196864
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "Selecciona hasta tres recursos para poder ver su cantidad en la pantalla
-      del juego. Para seleccionarlos, simplemente pulsa en el \xEDcono del recurso."
+    Text:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4672304869376
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   TutorialCompleted: 0
+  references:
+    version: 2
+    RefIds: []

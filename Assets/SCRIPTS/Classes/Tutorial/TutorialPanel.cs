@@ -1,16 +1,17 @@
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace GGG.Classes.Tutorial
 {
     [System.Serializable]
     public class TutorialPanel
     {
-        [SerializeField] private string Title;
+        [SerializeField] private LocalizedString Title;
         [SerializeField] private Sprite Image;
-        [SerializeField, TextArea] private string Text;
+        [SerializeField] private LocalizedString Text;
 
-        public string GetTitle() => Title;
+        public string GetTitle() => Title.GetLocalizedString();
         public Sprite GetImage() => Image;
-        public string GetText() => Text;
+        public string GetText() => Text.GetLocalizedString();
     }
 }

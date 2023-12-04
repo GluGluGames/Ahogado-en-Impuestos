@@ -82,10 +82,6 @@ namespace GGG.Components.HexagonalGrid
             foreach (HexTile tileAux in _tiles) tileAux.OnHexSelect -= InitializePath;
             BuildingManager.OnBuildsLoad -= OnBuildsLoad;
             
-            if (!SceneManagement.InGameScene() || 
-                GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial)
-                return;
-            
             SaveTilesState();
         }
 
@@ -210,6 +206,10 @@ namespace GGG.Components.HexagonalGrid
         #region Data persistence
 
         public void SaveTilesState() {
+            if (!SceneManagement.InGameScene() || 
+                GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial)
+                return;
+            
             TileData[] saveData = new TileData[_tiles.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
             int i = 0;
@@ -233,10 +233,13 @@ namespace GGG.Components.HexagonalGrid
 
         private IEnumerator LoadTilesState(BuildingComponent[] builds) {
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
-#if UNITY_EDITOR
-            filePath = "file://" + filePath;
-#endif
             string data;
+
+            if (!File.Exists(filePath))
+            {
+                yield break;
+            }
+            
             if (filePath.Contains("://") || filePath.Contains(":///")) {
                 UnityWebRequest www = UnityWebRequest.Get(filePath);
                 yield return www.SendWebRequest();
@@ -245,11 +248,8 @@ namespace GGG.Components.HexagonalGrid
             else {
                 data = File.ReadAllText(filePath);
             }
-
-            if (string.IsNullOrEmpty(data)) yield break;
             
             TileData[] tiles = JsonHelper.FromJson<TileData>(data);
-            if(PlayerPrefs.HasKey("TilesClean")) PlayerPrefs.DeleteKey("TilesClean");
             int i = 0, j = 0;
 
             foreach (HexTile tile in _tiles)

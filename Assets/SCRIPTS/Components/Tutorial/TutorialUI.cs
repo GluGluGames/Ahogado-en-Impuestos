@@ -36,18 +36,15 @@ namespace GGG.Components.Tutorial
             }
             else TitleContainer.gameObject.SetActive(false);
             
+            Layouts[0].SetActive(image);
+            Layouts[1].SetActive(!image);
+            
+            TutorialImage.gameObject.SetActive(image);
+            TutorialText[image ? 0 : 1].SetText(!string.IsNullOrEmpty(text) ? text : "");
             
             if (image)
             {
-                TutorialImage.gameObject.SetActive(image);
                 TutorialImage.sprite = image;
-                TutorialText[0].SetText(!string.IsNullOrEmpty(text) ? text : "");
-            }
-            else
-            {
-                Layouts[0].SetActive(false);
-                Layouts[1].SetActive(true);
-                TutorialText[1].SetText(!string.IsNullOrEmpty(text) ? text : "");
             }
         }
 

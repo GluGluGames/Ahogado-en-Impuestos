@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Credits Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Credits
+  m_TableCollectionNameGuidString: c4ca111c54bf9284eaaeb7475e5b7a00
+  m_Entries:
+  - m_Id: 3876745216
+    m_Key: Credits_Program
+    m_Metadata:
+      m_Items: []
+  - m_Id: 267937542144
+    m_Key: Credits_Artists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 525962735616
+    m_Key: Credits_3D
+    m_Metadata:
+      m_Items: []
+  - m_Id: 649728258048
+    m_Key: Credits_Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 897519349760
+    m_Key: Credits_Narrative
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1190965440512
+    m_Key: Credits_ProgramPeople
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1392644354048
+    m_Key: Credits_ArtistsPeople
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1596604968960
+    m_Key: Credits_ModelPeople
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1780843966464
+    m_Key: Credits_MusicPeople
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1957759709184
+    m_Key: Credits_NarrativePeople
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2136260898816
+    m_Key: Credits_Role
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5097196253184
+    m_Key: Credits_Thanks
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 2735891295732236295
+  references:
+    version: 2
+    RefIds:
+    - rid: 2735891295732236295
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1701389949063

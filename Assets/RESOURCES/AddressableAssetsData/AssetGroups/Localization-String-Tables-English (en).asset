@@ -17,11 +17,60 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8baa9ec311979e747bb3e857df7f5fb8
   m_SerializeEntries:
-  - m_GUID: b7ee0a90a9716664fa03b1e8980ec13e
-    m_Address: Example_en
+  - m_GUID: b39e3c455e145e6458e16c3030dccd2c
+    m_Address: Main_Menu_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e54441f27113784a9e60c1c899ba59e
+    m_Address: Settings_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b82661ff772cc944830bef6e5ebd8e1
+    m_Address: UI_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 518e58886985522499d8e57e80070089
+    m_Address: Credits_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a68d3e7d00ba59444be81f1e254d769e
+    m_Address: Buildings_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5703ac8cd1a9f1241a6ab1cd08c2f9bd
+    m_Address: Tutorials_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a9c054aa3c4d5f4ab8b6c0c33fc1883
+    m_Address: Dialogues_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec0f10cc94404b342b64d0f20517842c
+    m_Address: Achievements_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 2ecfeba56e721fa4392c18f016e20142, type: 2}

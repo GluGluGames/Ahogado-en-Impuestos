@@ -15,12 +15,45 @@ MonoBehaviour:
   TutorialKey: 
   Dialogues: []
   Panels:
-  - Title: Museo
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 5074282770432
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "Este es el museo. Aqu\xED podr\xE1s ver todos los materiales que has ido
-      descubriendo a lo largo de la reconstrucci\xF3n."
-  - Title: "Descripci\xF3n"
+    Text:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 5127286190080
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 5177135493120
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "Pulsa en uno de los materiales que has desbloqueado para ver una descripci\xF3n
-      m\xE1s detallada de dicho material."
+    Text:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 5228163395584
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   TutorialCompleted: 0
+  references:
+    version: 2
+    RefIds: []

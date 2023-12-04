@@ -49,6 +49,7 @@ namespace GGG.Components.Core
         [SerializeField] private float CreditsDuration = 60f;
 
         private readonly List<AsyncOperation> _sceneAsyncOperation = new();
+        private IEnumerator _enumeratorOperations;
         private SoundManager _soundManager;
         private GraphicRaycaster _raycaster;
         private float _totalSceneProgress;
@@ -120,6 +121,8 @@ namespace GGG.Components.Core
             
             StartCoroutine(GetSceneLoadProgress());
         }
+
+        public void AddEnumerators(IEnumerator enumerators) => _enumeratorOperations = enumerators;
         
         private IEnumerator GetSceneLoadProgress()
         {
@@ -142,6 +145,9 @@ namespace GGG.Components.Core
                     yield return null;
                 }
             }
+
+            if (_enumeratorOperations != null) 
+                yield return _enumeratorOperations;
             
             LoadingScreenViewport.SetActive(false);
             _sceneAsyncOperation.Clear();

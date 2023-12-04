@@ -39,16 +39,30 @@ namespace GGG.Components.UI
             _input = InputManager.Instance;
             _gameManager = GameManager.Instance;
             
-            _cleanResource = _player.GetResource("Seaweed");
-            
-            CleanButton.onClick.AddListener(CleanTile);
-            CloseButton.onClick.AddListener(OnCloseButton);
-
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
+            
+            Initialize();
+        }
 
-            Container.GetComponentInChildren<Image>().sprite = _cleanResource.GetSprite();
+        private void Update() {
+            if (!_open || !_input.Escape() || _gameManager.OnTutorial()) return;
+
+            Close();
+        }
+
+        private void Initialize()
+        {
+            _player.OnPlayerInitialized += () =>
+            {
+                _cleanResource = _player.GetResource("Seaweed");
+                Container.GetComponentInChildren<Image>().sprite = _cleanResource.GetSprite();
+            };
+            
+            CleanButton.onClick.AddListener(CleanTile);
+            CloseButton.onClick.AddListener(OnCloseButton);
+            
             _costAmountText = Container.GetComponentInChildren<TextMeshProUGUI>();
 
             _tiles = FindObjectsOfType<HexTile>();
@@ -59,12 +73,6 @@ namespace GGG.Components.UI
                 if (_tilesClean > 0)
                     tile.SetClearCost(Mathf.RoundToInt(tile.GetClearCost() + _tilesClean * 25));
             }
-        }
-
-        private void Update() {
-            if (!_open || !_input.Escape()) return;
-
-            Close();
         }
 
         private void CleanTile()

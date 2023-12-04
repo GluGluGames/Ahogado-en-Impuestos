@@ -82,8 +82,6 @@ namespace GGG.Components.Buildings.Generator
 
         private void OnDisable()
         {
-            if (!SceneManagement.InGameScene() || _gameManager.OnTutorial() || _generators.Count <= 0) return;
-            
             SaveGeneratorState();
         }
 
@@ -250,7 +248,7 @@ namespace GGG.Components.Buildings.Generator
 
         public void SaveGeneratorState()
         {
-            if (_generators.Count <= 0) return;
+            if (!SceneManagement.InGameScene() || _gameManager.OnTutorial() || _generators.Count <= 0) return;
             
             GeneratorData[] saveData = new GeneratorData[_generators.Count];
             int i = 0;

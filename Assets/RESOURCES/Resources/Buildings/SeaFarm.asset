@@ -12,8 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
   m_Name: SeaFarm
   m_EditorClassIdentifier: 
-  Name: Granja marina
-  Description: 
+  Name:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 68028624896
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Description:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 5701129891840
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   Icon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
   SelectedIcon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
   ResearchIcon: {fileID: 0}
@@ -41,3 +57,6 @@ MonoBehaviour:
   CanBoost: 1
   SpawnHeight: 0.32
   VisionRange: 2
+  references:
+    version: 2
+    RefIds: []

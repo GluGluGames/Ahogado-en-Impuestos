@@ -6,8 +6,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using GGG.Components.Core;
+using GGG.Components.UI.Buttons;
 using GGG.Input;
 
 namespace GGG.Components.UI
@@ -20,7 +22,6 @@ namespace GGG.Components.UI
         [SerializeField] private GameObject[] ResourceContainers;
 
         [Space(5), Header("Buttons")]
-        [SerializeField] private Button[] ContainerButtons;
         [SerializeField] private Button CloseButton;
 
         #endregion
@@ -29,6 +30,7 @@ namespace GGG.Components.UI
 
         private readonly Dictionary<int, Resource[]> _resources = new();
         private readonly Dictionary<int, Button[]> _buttons = new();
+        private List<ContainerButton> _containerButtons;
 
         private Dictionary<string, TextMeshProUGUI> _resourcesCountText;
 
@@ -38,7 +40,6 @@ namespace GGG.Components.UI
         private GameManager _gameManager; 
             
         private GameObject _viewport;
-        private int _active;
         private bool _open;
 
         #endregion
@@ -69,7 +70,7 @@ namespace GGG.Components.UI
 
             UpdateResourcesAmount();
             
-            if (!_input.Escape()) return;
+            if (!_input.Escape() || _gameManager.OnTutorial()) return;
 
             Close();
         }
@@ -89,23 +90,32 @@ namespace GGG.Components.UI
             while (_resources[0].Length <= 0 || _resources[1].Length <= 0 || _resources[2].Length <= 0)
                 yield return null;
 
+            _containerButtons = GetComponentsInChildren<ContainerButton>(true).ToList();
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                int idx = i;
+                for (int j = 0; j < _containerButtons.Count - 1; j++)
+                {
+                    _containerButtons[i].OnButtonClick +=
+                        _containerButtons[(idx + 1) % _containerButtons.Count].DeselectButton;
+                    idx++;
+                }
+            }
+
             for (int i = 0; i < _resources.Count; i++)
             {
                 _buttons.Add(i, ResourceContainers[i].GetComponentsInChildren<Button>());
                 FillResources(_buttons[i], _resources[i]);
-
-                int index = i;
-                ContainerButtons[i].onClick.AddListener(() => HandleToggle(index));
-                ResetContainers();
             }
+            
+            ResetContainers();
         }
 
         private void ResetContainers()
         {
-            for (int i = 0; i < ContainerButtons.Length; i++)
+            for (int i = 0; i < _containerButtons.Count; i++)
             {
-                ContainerButtons[i].image.sprite = i == 0 ? 
-                   ContainerButtons[i].spriteState.selectedSprite : ContainerButtons[i].spriteState.disabledSprite;
+                _containerButtons[i].Initialize();
                 ResourceContainers[i].SetActive(i == 0);
             }
         }
@@ -144,6 +154,8 @@ namespace GGG.Components.UI
 
         private void AddListener(Resource resource, Button button)
         {
+            if (resource.GetKey().Equals("Seaweed")) return;
+            
             if (_hudManager.ResourceBeingShown(resource))
             {
                 if(_hudManager.HideResource(resource))
@@ -153,22 +165,6 @@ namespace GGG.Components.UI
             
             if(_hudManager.ShowResource(resource))
                 button.image.sprite = resource.GetSelectedSprite();
-        }
-        
-        private void HandleToggle(int index)
-        {
-            if (_active == index) return;
-
-            for (int i = 0; i < ContainerButtons.Length; i++)
-            {
-                ContainerButtons[i].image.sprite = i == index
-                    ? ContainerButtons[i].spriteState.selectedSprite
-                    : ContainerButtons[i].spriteState.disabledSprite;
-
-                ResourceContainers[i].SetActive(i == index);
-            }
-
-            _active = index;
         }
 
         private void HandleSelectedResources()
