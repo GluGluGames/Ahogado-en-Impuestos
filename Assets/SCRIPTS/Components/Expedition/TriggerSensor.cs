@@ -1,3 +1,5 @@
+using DG.DemiEditor;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace GGG.Components.Expedition
@@ -20,7 +22,9 @@ namespace GGG.Components.Expedition
         private void OnTriggerEnter(Collider other)
         {
             //_overlaps++;
-            if (other.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") || other.transform.gameObject.layer != LayerMask.NameToLayer("Berserker")) return;
+            Debug.Log(other.transform.gameObject.layer != LayerMask.NameToLayer("Enemy"));
+            Debug.Log(other.transform.gameObject.layer != LayerMask.NameToLayer("Berserker"));
+            if (other.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") && other.transform.gameObject.layer != LayerMask.NameToLayer("Berserker")) return;
             Lost();
         }
 
