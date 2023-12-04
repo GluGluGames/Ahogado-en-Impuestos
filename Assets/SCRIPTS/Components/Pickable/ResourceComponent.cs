@@ -5,6 +5,7 @@ using GGG.Shared;
 
 using System;
 using System.Collections;
+using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 
 namespace GGG.Components.Resources
@@ -15,14 +16,12 @@ namespace GGG.Components.Resources
         [SerializeField] private int _amount;
         [SerializeField] private bool _alwaysVisible;
         [SerializeField] private PickResourceProgressionUI _pickProgressUI;
-        [SerializeField] private int RecollectionTime;
-        private bool WaitSecond = true;
+        [SerializeField] private int _recollectionTime;
 
         private bool _collided = false;
         private bool _pickingResource;
 
         public HexTile currentTile;
-        public Action onResourceCollideExit;
 
         #region getters and setters
 
@@ -48,22 +47,6 @@ namespace GGG.Components.Resources
             _pickProgressUI.gameObject.SetActive(true);
 
             StartCoroutine(RecollectResource());
-
-            /*
-            WaitSecond = true;
-            StartCoroutine(WaitSeconds(0, 3, () =>
-                {
-                    _pickProgressUI.current++;
-                }, () =>
-                {
-                    _pickProgressUI.current = _pickProgressUI.maximum;
-                    RecolectResource();
-                    _pickProgressUI.current = 0;
-                    _pickProgressUI.gameObject.SetActive(false);
-                    _resourcePicked = true;
-                    DeleteMySelf();
-                }));
-                */
         }
 
         private void OnTriggerExit(Collider other)
@@ -74,7 +57,6 @@ namespace GGG.Components.Resources
             
             if (_pickingResource)
             {
-                StopCoroutine(RecollectResource());
                 _pickProgressUI.StopPicking();
                 _pickingResource = false;
             }
@@ -84,22 +66,33 @@ namespace GGG.Components.Resources
         private void Start()
         {
             _pickProgressUI = FindObjectOfType<PickResourceProgressionUI>(true);
-            onResourceCollideExit += DeleteMySelf;
             TickManager.OnTick += HandleVisibility;
             HandleVisibility();
+        }
+
+        private void Update()
+        {
+            if(_pickProgressUI.endedRecollection && _collided)
+            {
+                _pickProgressUI.endedRecollection = false;
+
+                ResourceManager.Instance.resourcesCollected.TryGetValue(_resource, out int aux);
+                ResourceManager.Instance.resourcesCollected[_resource] += aux;
+                _resource.DiscoverResource();
+                _pickProgressUI.StopPicking();
+                _pickProgressUI.gameObject.SetActive(false);
+                _pickingResource = false;
+                DeleteMySelf();
+            }
         }
 
         private IEnumerator RecollectResource()
         {
             _pickingResource = true;
-            yield return _pickProgressUI.PickResource(RecollectionTime);
-            
-            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource, out int aux);
-            ResourceManager.Instance.resourcesCollected[_resource] += aux;
-            _resource.DiscoverResource();
-            _pickProgressUI.gameObject.SetActive(false);
-            _pickingResource = false;
-            DeleteMySelf();
+            yield return null;
+
+            _pickProgressUI.recollectionTime = _recollectionTime;
+            _pickProgressUI.ableToPick = true;
         }
 
         private void DeleteMySelf()
@@ -130,23 +123,6 @@ namespace GGG.Components.Resources
                 {
                     gameObject.layer = 9;
                 }
-            }
-        }
-
-        private IEnumerator WaitSeconds(int currentSeconds, int maxSeconds, Action onEachSecond, Action onEnd)
-        {
-
-            currentSeconds++;
-            yield return new WaitForSeconds(1);
-            onEachSecond.Invoke();
-            if (!WaitSecond) { yield break; }
-            if (currentSeconds < maxSeconds)
-            {
-                StartCoroutine(WaitSeconds(currentSeconds, maxSeconds, onEachSecond, onEnd));
-            }
-            else
-            {
-                onEnd.Invoke();
             }
         }
     }
