@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 5465214205195245363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4484811739461063419}
   m_Father: {fileID: 0}
@@ -72,6 +72,7 @@ MonoBehaviour:
   _alwaysVisible: 0
   _pickProgressUI: {fileID: 0}
   _recollectionTime: 1
+  _ownModels: []
   currentTile: {fileID: 0}
 --- !u!1001 &4159067652526535952
 PrefabInstance:

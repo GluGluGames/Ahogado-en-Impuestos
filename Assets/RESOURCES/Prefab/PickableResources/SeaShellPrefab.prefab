@@ -18,15 +18,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ffda09a075c5054c9681a673f4a37ee, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.6
+      value: 2.9999998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ffda09a075c5054c9681a673f4a37ee, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.6
+      value: 2.9999998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ffda09a075c5054c9681a673f4a37ee, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.6
+      value: 2.9999998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ffda09a075c5054c9681a673f4a37ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -111,6 +111,16 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8706450259923319992}
   m_SourcePrefab: {fileID: 100100000, guid: 5ffda09a075c5054c9681a673f4a37ee, type: 3}
+--- !u!1 &2654021982514925213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1917017222394267555, guid: 5ffda09a075c5054c9681a673f4a37ee, type: 3}
+  m_PrefabInstance: {fileID: 4733731878954301120}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5019620204671473686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8928142258166665514, guid: 5ffda09a075c5054c9681a673f4a37ee, type: 3}
+  m_PrefabInstance: {fileID: 4733731878954301120}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5580225752345758609 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5ffda09a075c5054c9681a673f4a37ee, type: 3}
@@ -154,4 +164,7 @@ MonoBehaviour:
   _alwaysVisible: 0
   _pickProgressUI: {fileID: 0}
   _recollectionTime: 3
+  _ownModels:
+  - {fileID: 5019620204671473686}
+  - {fileID: 2654021982514925213}
   currentTile: {fileID: 0}

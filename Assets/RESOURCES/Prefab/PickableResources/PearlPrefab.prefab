@@ -110,8 +110,8 @@ Transform:
   m_GameObject: {fileID: 5465214205195245363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 906162199210425264}
   m_Father: {fileID: 0}
@@ -136,7 +136,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-7385869519642399660
 MonoBehaviour:
@@ -155,4 +155,6 @@ MonoBehaviour:
   _alwaysVisible: 0
   _pickProgressUI: {fileID: 0}
   _recollectionTime: 3
+  _ownModels:
+  - {fileID: 1008290128082147775}
   currentTile: {fileID: 0}

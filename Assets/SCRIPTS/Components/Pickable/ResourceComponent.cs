@@ -16,6 +16,7 @@ namespace GGG.Components.Resources
         [SerializeField] private bool _alwaysVisible;
         [SerializeField] private PickResourceProgressionUI _pickProgressUI;
         [SerializeField] private int _recollectionTime;
+        [SerializeField] private GameObject[] _ownModels;
 
         private bool _collided = false;
         private bool _pickingResource;
@@ -117,10 +118,20 @@ namespace GGG.Components.Resources
                 if (currentTile != null && currentTile.gameObject.layer == 7)
                 {
                     gameObject.layer = 7;
+                    foreach (GameObject model in _ownModels)
+                    {
+                        model.layer = 7;
+                    }
+                    
                 }
                 else if (currentTile != null)
                 {
                     gameObject.layer = 9;
+                    foreach (GameObject model in _ownModels)
+                    {
+                        model.layer = 9;
+                    }
+                    
                 }
             }
         }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HUD
   - Highlight
+  - PickUI
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - PostProcessing
   - Hidden
-  - 
+  - NotPostProccesing
   - Resource
   - Tile
   - Target
