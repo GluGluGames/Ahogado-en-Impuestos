@@ -16,7 +16,8 @@ namespace GGG.Components.Buildings.CityHall
 {
     public class CityHallUi : MonoBehaviour
     {
-        [Header("Texts")]
+        [Header("Texts")] 
+        [SerializeField] private TMP_Text PagesText;
         [SerializeField] private TMP_Text TaxesCounter;
         [Space(5), Header("Buttons")]
         [SerializeField] private Button UpArrow;
@@ -52,6 +53,7 @@ namespace GGG.Components.Buildings.CityHall
             }
 
             _achievementContainers = GetComponentsInChildren<AchievementContainer>(true).ToList();
+            PagesText.SetText($"{_currentPage}/{_achievementsManager.GetAchievements().Count / 3}");
 
             UpArrow.onClick.AddListener(() => ChangeAchievements(-1));
             DownArrow.onClick.AddListener(() => ChangeAchievements(1));
@@ -88,6 +90,7 @@ namespace GGG.Components.Buildings.CityHall
             }
 
             _currentPage += direction;
+            PagesText.SetText($"{_currentPage}/{_achievementsManager.GetAchievements().Count / 3}");
         }
 
         private void InitializeTaxCounter()

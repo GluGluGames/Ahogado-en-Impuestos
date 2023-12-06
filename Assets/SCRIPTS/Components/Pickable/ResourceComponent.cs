@@ -77,7 +77,8 @@ namespace GGG.Components.Resources
                 _pickProgressUI.endedRecollection = false;
 
                 ResourceManager.Instance.resourcesCollected.TryGetValue(_resource, out int aux);
-                ResourceManager.Instance.resourcesCollected[_resource] += aux;
+                ResourceManager.Instance.resourcesCollected[_resource] += 
+                    ResourceManager.Instance.GetResourceAmount(_resource);
                 _resource.DiscoverResource();
                 _pickProgressUI.StopPicking();
                 _pickProgressUI.gameObject.SetActive(false);

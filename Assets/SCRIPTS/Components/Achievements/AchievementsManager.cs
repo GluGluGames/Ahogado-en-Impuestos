@@ -46,7 +46,7 @@ namespace GGG.Components.Core
         private void Start()
         {
             _achievementPopup = transform.GetChild(0).gameObject;
-            _achievementPopup.transform.position = new Vector3(Screen.width * 0.05f, Screen.height * 1.25f);
+            _achievementPopup.transform.position = new Vector3(Screen.width * 0.95f, Screen.height * 1.25f);
             _achievementPopup.SetActive(false);
         }
 

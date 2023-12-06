@@ -80,20 +80,19 @@ namespace GGG.Components.Menus
         /// </summary>
         private void StartSounds()
         {
-            AudioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("GeneralVolume"));
-
-            if (SoundManager.Instance.GetMusicActive())
-                AudioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
-            else
-                AudioMixer.SetFloat("Music", -50);
-
-            AudioMixer.SetFloat("SoundEffects", PlayerPrefs.GetFloat("SoundEffectsVolume"));
-
             GeneralSlider.value = PlayerPrefs.GetFloat("GeneralVolume");
             MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
             EffectsSlider.value = PlayerPrefs.GetFloat("SoundEffectsVolume");
 
             UpdateText();
+        }
+
+        private void OnApplicationQuit()
+        {
+            PlayerPrefs.SetFloat("GeneralVolume", GeneralSlider.value);
+            PlayerPrefs.SetFloat("MusicVolume", MusicSlider.value);
+            PlayerPrefs.SetFloat("SoundEffectsVolume", EffectsSlider.value);
+            PlayerPrefs.Save();
         }
 
         /// <summary>
@@ -168,7 +167,7 @@ namespace GGG.Components.Menus
         {
             float aux = GetExponentialValue(volume);
             AudioMixer.SetFloat("Volume", aux);
-            PlayerPrefs.SetFloat("GeneralVolume", aux);
+            PlayerPrefs.SetFloat("GeneralVolume", volume);
             UpdateText();
         }
 
@@ -179,7 +178,7 @@ namespace GGG.Components.Menus
 
             float aux = GetExponentialValue(volume);
             AudioMixer.SetFloat("Music", aux);
-            PlayerPrefs.SetFloat("MusicVolume", aux);
+            PlayerPrefs.SetFloat("MusicVolume", volume);
             UpdateText();
         }
 
@@ -188,7 +187,7 @@ namespace GGG.Components.Menus
         {
             float aux = GetExponentialValue(volume);
             AudioMixer.SetFloat("SoundEffects", aux);
-            PlayerPrefs.SetFloat("SoundEffectsVolume", aux);
+            PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
             UpdateText();
         }
 

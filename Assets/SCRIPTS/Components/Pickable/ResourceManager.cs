@@ -77,6 +77,9 @@ namespace GGG.Components.Resources
             return true;
         }
 
+        public int GetResourceAmount(Resource resource) =>
+            resourcesOnScene.Find(x => x.GetResource() == resource).GetAmount();
+
         public void sumResourceCollected()
         {
             _nResourcesCollected++;
