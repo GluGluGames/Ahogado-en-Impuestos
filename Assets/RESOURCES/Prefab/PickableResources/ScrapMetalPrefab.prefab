@@ -14,15 +14,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1df660eff2341414aadc3981fde10458, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.24
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1df660eff2341414aadc3981fde10458, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.24
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1df660eff2341414aadc3981fde10458, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.24
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1df660eff2341414aadc3981fde10458, type: 3}
       propertyPath: m_LocalPosition.x
@@ -142,4 +142,5 @@ MonoBehaviour:
   _alwaysVisible: 0
   _pickProgressUI: {fileID: 0}
   _recollectionTime: 3
+  _ownModels: []
   currentTile: {fileID: 0}

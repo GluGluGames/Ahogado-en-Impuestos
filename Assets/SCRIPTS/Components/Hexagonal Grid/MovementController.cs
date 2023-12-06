@@ -4,11 +4,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Accessibility;
 
 namespace GGG.Components.HexagonalGrid
 {
     public class MovementController : MonoBehaviour
     {
+        public int visionRange;
         private LineRenderer _lineRenderer;
         public bool gotPath = false;
         private Rigidbody _rigidbody;
@@ -103,7 +105,7 @@ namespace GGG.Components.HexagonalGrid
             Quaternion angle = Quaternion.Euler(0, 0, 0);
             _rigidbody.transform.LookAt(targetPos);
             _rigidbody.transform.position = targetPos;
-            TileManager.Instance.RevealTile(PlayerPosition.NextTile, 3);
+            TileManager.Instance.RevealTile(PlayerPosition.NextTile, visionRange);
         }
     }
 }
