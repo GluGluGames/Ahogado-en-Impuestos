@@ -5,7 +5,6 @@ using GGG.Shared;
 
 using System;
 using System.Collections;
-using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 
 namespace GGG.Components.Resources

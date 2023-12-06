@@ -6,6 +6,8 @@ using DG.Tweening;
 using GGG.Shared;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace GGG.Components.Core
@@ -24,11 +26,11 @@ namespace GGG.Components.Core
         [SerializeField] private List<Achievement> Achievements;
         [SerializeField] private TMP_Text AchievementTitle;
         [SerializeField] private Image AchievementIcon;
+        [SerializeField] private LocalizedString AchievementString;
 
-        private const int _POPUP_TIME = 5;
+        [SerializeField] private int PopupTime = 5;
         
         private GameObject _achievementPopup;
-        private Vector3 _popupInitialPosition;
 
         private void OnValidate()
         {
@@ -46,25 +48,31 @@ namespace GGG.Components.Core
             _achievementPopup = transform.GetChild(0).gameObject;
             _achievementPopup.transform.position = new Vector3(Screen.width * 0.05f, Screen.height * 1.25f);
             _achievementPopup.SetActive(false);
-            _popupInitialPosition = _achievementPopup.transform.position;
         }
 
         public Achievement Achievement(int idx) => Achievements[idx];
+
+        public List<Achievement> GetAchievements() => Achievements;
 
         public IEnumerator UnlockAchievement(string key)
         {
             Achievement achievement = Achievements.Find(x => x.GetKey() == key);
             if (!achievement)
                 throw new Exception("Not achievement found");
+            if (achievement.IsUnlocked()) yield break;
             
             achievement.Unlock();
             
-            AchievementTitle.SetText(achievement.GetName());
+            AchievementTitle.SetText($"{AchievementString.GetLocalizedString()} {achievement.GetName()}");
             AchievementIcon.sprite = achievement.GetSprite();
             
-            _achievementPopup.transform.DOMoveY(Screen.height - 20, 2f).SetEase(Ease.InBounce);
-            yield return new WaitForSeconds(_POPUP_TIME);
-            _achievementPopup.transform.DOMoveY(Screen.height * 1.25f, 2f).SetEase(Ease.OutBounce);
+            _achievementPopup.SetActive(true);
+            _achievementPopup.transform.DOMoveY(Screen.height - 20, 2f).SetEase(Ease.InSine);
+            yield return new WaitForSeconds(PopupTime);
+            _achievementPopup.transform.DOMoveY(Screen.height * 1.25f, 2f).SetEase(Ease.OutSine).onComplete += () =>
+            {
+                _achievementPopup.SetActive(false);
+            };
         }
     }
 }

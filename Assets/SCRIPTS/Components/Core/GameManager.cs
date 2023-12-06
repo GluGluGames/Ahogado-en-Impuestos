@@ -12,10 +12,11 @@ namespace GGG.Components.Core
 
         public static GameManager Instance;
         
-        private void Awake() {
-            if (Instance == null) Instance = this;
+        private void Awake()
+        {
+            if (Instance != null) return;
             
-            StartCoroutine(InitializeLanguage());
+            Instance = this;
         }
 
         #endregion
@@ -38,6 +39,7 @@ namespace GGG.Components.Core
 
             _currentState = DebugMode ? GameState.PLAYING : GameState.MENU;
             _currentTutorial = Tutorials.None;
+            StartCoroutine(InitializeLanguage());
             if (!DebugMode) InitializeGame();
         }
 
@@ -56,6 +58,7 @@ namespace GGG.Components.Core
             yield return LocalizationSettings.InitializationOperation;
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[
                 PlayerPrefs.HasKey("LocalKey") ? PlayerPrefs.GetInt("LocalKey") : 0];
+            
             _language = PlayerPrefs.HasKey("LocalKey") ? (Language)PlayerPrefs.GetInt("LocalKey") : Language.Spanish;
         }
         

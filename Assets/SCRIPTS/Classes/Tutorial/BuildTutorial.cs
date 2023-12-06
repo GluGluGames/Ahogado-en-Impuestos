@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using GGG.Components.Core;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.UI;
 using GGG.Components.UI.Buttons;
@@ -75,6 +76,7 @@ namespace GGG.Classes.Tutorial
             #endregion
             
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true, true, true);
+            yield return AchievementsManager.Instance.UnlockAchievement("01");
             
             FinishTutorial();
         }

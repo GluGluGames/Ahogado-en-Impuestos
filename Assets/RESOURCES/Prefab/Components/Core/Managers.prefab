@@ -208,7 +208,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "T\xEDtulo del logro"
+  m_text: '<color=green>Logro:</color> Bienvenido '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b2182b7207a91f8449e31888b52e78cb, type: 2}
   m_sharedMaterial: {fileID: 3007767219776793576, guid: b2182b7207a91f8449e31888b52e78cb, type: 2}
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.6
+  m_fontSize: 36.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -486,8 +486,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Achievements:
   - {fileID: 11400000, guid: 62481cc5e869cea4889fda8295991fe7, type: 2}
+  - {fileID: 11400000, guid: 512f236ddfac09540b346ae2f8be50db, type: 2}
+  - {fileID: 11400000, guid: 05d2816a5b59ca0468d9f5fa8238c051, type: 2}
+  - {fileID: 11400000, guid: f226e9e4fd1a3b94493eaae2ae7ae954, type: 2}
+  - {fileID: 11400000, guid: f52c06fea200fea408c352bab9754531, type: 2}
+  - {fileID: 11400000, guid: a530ecb1239ad6640939b98129674b29, type: 2}
+  - {fileID: 11400000, guid: 17cb16ad2921e5e4c84791465e362406, type: 2}
+  - {fileID: 11400000, guid: 8b05fe5b799da8341a6368a2a3ecae17, type: 2}
+  - {fileID: 11400000, guid: 2d655c6dde501f244840edffe60b04da, type: 2}
   AchievementTitle: {fileID: 981102869913931631}
   AchievementIcon: {fileID: 8777796335220512528}
+  AchievementString:
+    m_TableReference:
+      m_TableCollectionName: GUID:152b8169ab512de4681ecfb469fbfcd2
+    m_TableEntryReference:
+      m_KeyId: 1473852539564032
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  PopupTime: 5
+  references:
+    version: 2
+    RefIds: []
 --- !u!223 &3775889306040551632
 Canvas:
   m_ObjectHideFlags: 0

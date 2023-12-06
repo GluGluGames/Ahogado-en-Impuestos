@@ -1,11 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using GGG.Components.Core;
+using GGG.Components.Taxes;
 using GGG.Components.UI.Buttons;
 using GGG.Components.UI.Containers;
 using GGG.Shared;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +16,8 @@ namespace GGG.Components.Buildings.CityHall
 {
     public class CityHallUi : MonoBehaviour
     {
-        [Header("Panels")] 
-        [SerializeField] private List<GameObject> AchievementsPanels;
+        [Header("Texts")]
+        [SerializeField] private TMP_Text TaxesCounter;
         [Space(5), Header("Buttons")]
         [SerializeField] private Button UpArrow;
         [SerializeField] private Button DownArrow;
@@ -24,8 +27,9 @@ namespace GGG.Components.Buildings.CityHall
         private AchievementsManager _achievementsManager;
 
         private List<ContainerButton> _containerButtons;
+        private List<AchievementContainer> _achievementContainers;
         private GameObject _viewport;
-        private int _currentPage;
+        private int _currentPage = 1;
         private int _currentAchievement;
         private bool _open;
 
@@ -47,6 +51,8 @@ namespace GGG.Components.Buildings.CityHall
                     _containerButtons[(i + 1) % _containerButtons.Count].DeselectButton;
             }
 
+            _achievementContainers = GetComponentsInChildren<AchievementContainer>(true).ToList();
+
             UpArrow.onClick.AddListener(() => ChangeAchievements(-1));
             DownArrow.onClick.AddListener(() => ChangeAchievements(1));
             CloseButton.onClick.AddListener(OnCloseButton);
@@ -54,36 +60,57 @@ namespace GGG.Components.Buildings.CityHall
 
         private void InitializeAchievements()
         {
-            for (int i = 0; i < AchievementsPanels.Count; i++) 
-                AchievementsPanels[i].SetActive(i == 0);
-
-            _currentAchievement = 0;
-            AchievementContainer[] containers = AchievementsPanels[0].GetComponentsInChildren<AchievementContainer>();
-            
-            foreach (AchievementContainer container in containers)
+            List<Achievement> achievements = _achievementsManager.GetAchievements();
+            _currentAchievement = 1;
+            for (int i = 0; i < _achievementContainers.Count; i++)
             {
-                Achievement achievement = _achievementsManager.Achievement(_currentAchievement++);
-                container.SetAchievement(achievement.GetName(), achievement.GetDescription(), achievement.GetSprite());
+                _achievementContainers[i].SetAchievement(achievements[i].GetName(),
+                    achievements[i].GetDescription(),
+                    achievements[i].GetSprite());
             }
         }
 
         private void ChangeAchievements(int direction)
         {
-            if (_currentPage + direction >= AchievementsPanels.Count || _currentPage + direction <= 0) 
+            List<Achievement> achievements = _achievementsManager.GetAchievements();
+            
+            if ((_currentPage + direction) * 3 > achievements.Count || _currentPage + direction <= 0) 
                 return;
+            
+            int idx = (_currentPage - 1 + direction) * 3;
 
-            AchievementsPanels[_currentPage].SetActive(false);
-            int idx = _currentPage + direction;
-            AchievementsPanels[idx].SetActive(true);
-
-            AchievementContainer[] containers = AchievementsPanels[idx].GetComponentsInChildren<AchievementContainer>();
-
-            foreach (AchievementContainer container in containers)
+            for (int i = 0; i < 3; i++)
             {
-                container.SetAchievement("", "", null);
+                _achievementContainers[i].SetAchievement(achievements[idx].GetName(), 
+                    achievements[idx].GetDescription(), 
+                    achievements[idx].GetSprite());
+                idx++;
             }
 
             _currentPage += direction;
+        }
+
+        private void InitializeTaxCounter()
+        {
+            float timerDelta = TaxManager.GetRemainingTime();
+            int minutes = Mathf.FloorToInt(timerDelta / 60);
+            int seconds = Mathf.FloorToInt(timerDelta % 60);
+            TaxesCounter.SetText($"{minutes:00}:{seconds:00}");     
+        }
+
+        private IEnumerator TaxCounter()
+        {
+            int minutes, seconds;
+            float timerDelta;
+            
+            while (_open)
+            {
+                timerDelta = TaxManager.GetRemainingTime();
+                minutes = Mathf.FloorToInt(timerDelta / 60);
+                seconds = Mathf.FloorToInt(timerDelta % 60);
+                TaxesCounter.SetText($"{minutes:00}:{seconds:00}");
+                yield return null;
+            }
         }
 
         private void OnCloseButton()
@@ -102,17 +129,19 @@ namespace GGG.Components.Buildings.CityHall
                 button.Initialize();
             
             InitializeAchievements();
+            InitializeTaxCounter();
             OnCityHallOpen?.Invoke();
             _gameManager.OnUIOpen();
             _open = true;
+            StartCoroutine(TaxCounter());
             
             _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InCubic);
         }
 
         private void Close()
         {
-            _viewport.SetActive(false);
-
+            StopAllCoroutines();
+            
             _viewport.transform.DOMoveX(Screen.width * -0.5f, 0.75f).SetEase(Ease.OutCubic).onComplete += () =>
             {
                 _viewport.SetActive(false);
