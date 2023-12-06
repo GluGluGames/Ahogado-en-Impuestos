@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 1787294861001411799}
   - component: {fileID: 866293998723155186}
   - component: {fileID: 6775659123123286651}
-  m_Layer: 0
+  - component: {fileID: 1494461656580055884}
+  - component: {fileID: 744387585062052872}
+  m_Layer: 9
   m_Name: RedSeaWeedPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,11 +29,11 @@ Transform:
   m_GameObject: {fileID: 5465214205195245363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.42000008, y: 0.603, z: -1.61}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &866293998723155186
 MeshFilter:
@@ -84,3 +86,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &1494461656580055884
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465214205195245363}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.27225345
+  m_Center: {x: -0.0031539872, y: 0.0028931946, z: 0.009803876}
+--- !u!114 &744387585062052872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465214205195245363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada6a036b663d5149ab6467651279262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resource: {fileID: 11400000, guid: 551c67469e616ea4988e12a0ec294332, type: 2}
+  _amount: 30
+  _alwaysVisible: 0
+  _pickProgressUI: {fileID: 0}
+  _recollectionTime: 3
+  currentTile: {fileID: 0}

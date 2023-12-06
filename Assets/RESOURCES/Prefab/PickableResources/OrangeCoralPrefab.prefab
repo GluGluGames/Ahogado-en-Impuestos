@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 1787294861001411799}
   - component: {fileID: 6302952764203288737}
   - component: {fileID: 8917563614181278075}
-  m_Layer: 0
+  - component: {fileID: 2321353540541553965}
+  - component: {fileID: 8909223002071319630}
+  m_Layer: 9
   m_Name: OrangeCoralPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,12 +28,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5465214205195245363}
   m_LocalRotation: {x: -0.020887999, y: 0.70679826, z: 0.7067982, w: 0.020888045}
-  m_LocalPosition: {x: 0.43450713, y: 0.603, z: -3.84}
-  m_LocalScale: {x: 0.06550055, y: 0.06550055, z: 0.06550055}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 5071, y: 0, z: 0}
+  m_LocalScale: {x: 0.09000001, y: 0.09000001, z: 0.09000001}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 176.614}
 --- !u!33 &6302952764203288737
 MeshFilter:
@@ -84,3 +86,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &2321353540541553965
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465214205195245363}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 100087
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 6.455876
+  m_Center: {x: 0.1162092, y: -0.18161872, z: -0.054591145}
+--- !u!114 &8909223002071319630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465214205195245363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada6a036b663d5149ab6467651279262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resource: {fileID: 11400000, guid: a8559bbb5f45e404eaccd92c5b2f2d19, type: 2}
+  _amount: 30
+  _alwaysVisible: 0
+  _pickProgressUI: {fileID: 0}
+  _recollectionTime: 3
+  currentTile: {fileID: 0}

@@ -11,7 +11,8 @@ namespace GGG.Components.HexagonalGrid
         Standard,
         Water,
         Cliff,
-        Build
+        Build,
+        Mountain
     }
 
     [CreateAssetMenu(menuName = "TileGen/GenerationSettings")]
@@ -21,6 +22,7 @@ namespace GGG.Components.HexagonalGrid
         [SerializeField] private GameObject[] Water;
         [SerializeField] private GameObject[] Cliff;
         [SerializeField] private GameObject Build;
+        [SerializeField] private GameObject Mountain;
 
         public GameObject GetTile(TileType tileType)
         {
@@ -30,6 +32,7 @@ namespace GGG.Components.HexagonalGrid
                 TileType.Water => Water[Random.Range(0, Water.Length)],
                 TileType.Cliff => Cliff[Random.Range(0, Cliff.Length)],
                 TileType.Build => Build,
+                TileType.Mountain => Mountain,
                 _ => null
             };
         }
