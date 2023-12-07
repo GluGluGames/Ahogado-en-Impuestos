@@ -73,9 +73,9 @@ using UnityEngine;
                  Node node = new Node(tile, origin, destination, currentNode.GetCost());
 
                  //If the tile type isn't something we can traverse, then make the cost really high
-                 if (tile.tileType == TileType.Cliff || tile.tileType == TileType.Water)
+                 if (tile.tileType == TileType.Mountain || tile.selectable == false)
                  {
-                     node.baseCost = 10;
+                     node.baseCost = 999999999;
                      // continue
                  }
 

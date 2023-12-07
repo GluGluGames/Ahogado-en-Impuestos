@@ -114,8 +114,8 @@ MonoBehaviour:
   cubeCoordPos: {x: 0, y: 0, z: 0}
   isDirty: 0
   movementController: {fileID: 0}
-  model1: {fileID: 0}
-  model2: {fileID: 0}
+  model1: {fileID: 8664002527387438401}
+  model2: {fileID: 8664002527387438401}
   myLayerInt: 15
 --- !u!114 &2557339169096508649
 MonoBehaviour:
@@ -240,19 +240,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c11d3aaccdc708b4cb9f90b029428e5a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c11d3aaccdc708b4cb9f90b029428e5a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c11d3aaccdc708b4cb9f90b029428e5a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c11d3aaccdc708b4cb9f90b029428e5a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c11d3aaccdc708b4cb9f90b029428e5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -260,7 +260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c11d3aaccdc708b4cb9f90b029428e5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c11d3aaccdc708b4cb9f90b029428e5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

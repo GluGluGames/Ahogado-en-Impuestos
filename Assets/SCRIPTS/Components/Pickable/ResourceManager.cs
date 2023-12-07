@@ -58,7 +58,7 @@ namespace GGG.Components.Resources
             
             foreach (ResourceComponent resource in resourcesOnScene)
             {
-                if (resource.currentTile != hex) continue;
+                if (resource.currentTile != hex && hex.GetTileType() != TileType.Mountain && hex.selectable == true) continue;
                 
                 spawned = SpawnRandomResource();
                 break;

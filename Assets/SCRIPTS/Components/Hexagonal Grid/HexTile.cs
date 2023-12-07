@@ -53,10 +53,6 @@ namespace GGG.Components.HexagonalGrid
             _gameManager = GameManager.Instance;
             _isEmpty = _currentBuilding == null;
             if(tileType.Equals(TileType.Mountain)) selectable = false;
-            else
-            {
-                selectable = true;
-            }
 
             if (_manager)
             {

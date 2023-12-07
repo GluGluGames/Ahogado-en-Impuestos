@@ -17,9 +17,6 @@ namespace GGG.Components.Player
         public static PlayerManager Instance;
 
         private void Awake() {
-
-            if(_PlayerModel != null)
-                Instantiate(_PlayerModel, transform);
             
             if (Instance == null)
                 Instance = this;
@@ -29,8 +26,6 @@ namespace GGG.Components.Player
 
         #endregion
         
-        [SerializeField] private GameObject _PlayerModel;
-
         private GameManager _gameManager;
         
         private List<Resource> _resources;

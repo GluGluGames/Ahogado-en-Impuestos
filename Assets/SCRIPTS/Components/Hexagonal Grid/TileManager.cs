@@ -135,7 +135,7 @@ namespace GGG.Components.HexagonalGrid
         private IEnumerator InitializePlayer()
         {
             HexTile playerSpawnTile = GetRandomHex();
-            while (playerSpawnTile.tileType != TileType.Cliff)
+            while (playerSpawnTile.tileType == TileType.Mountain && playerSpawnTile.selectable == false)
             {
                 playerSpawnTile = GetRandomHex();
             }
