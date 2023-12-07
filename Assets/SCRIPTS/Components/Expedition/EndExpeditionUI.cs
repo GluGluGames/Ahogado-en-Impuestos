@@ -8,7 +8,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using GGG.Shared;
-
+using GGG.Components.Player;
+using System.Linq.Expressions;
 
 namespace GGG.Components.UI
 {
@@ -102,9 +103,9 @@ namespace GGG.Components.UI
             foreach (Resource resource in _resourceManager.resourcesCollected.Keys)
             {
                 if (_resourceManager.resourcesCollected[resource] == 0) continue;
-                
-                _recollectedResources.Add(new RecollectedResource(resource, _resourceManager.resourcesCollected[resource]));
-                
+                int amount = _resourceManager.resourcesCollected[resource];
+                _recollectedResources.Add(new RecollectedResource(resource, amount));
+                PlayerManager.Instance.AddResource(resource.GetKey(), amount);
             }
 
             _pagesNumber = _recollectedResources.Count <= 4 ? 1 : _recollectedResources.Count / 4 + 1;
