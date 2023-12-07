@@ -9,28 +9,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a01c1c55499ca5c46887bb2201c30d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
   m_Name: Shop
   m_EditorClassIdentifier: 
-  Name: Tienda
-  Description: 
+  Name:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 876291977216
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Description:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 1074577698816
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   Icon: {fileID: 21300000, guid: fbe2fc1b065f4424eba33c83bac36312, type: 3}
   SelectedIcon: {fileID: 21300000, guid: ec198516e3cfe724f8842e6c2eae7ef1, type: 3}
   ResearchIcon: {fileID: 21300000, guid: 3bfb7b0aba91a12449d2f69089971a88, type: 3}
   Prefab: {fileID: 2848397803213574801, guid: a01308c2ea2811a48b3c1cf08cc7e93e, type: 3}
-  CanBeUpgraded: 0
-  UpgradePrefabs: []
+  CanBeUpgraded: 1
+  UpgradePrefabs:
+  - {fileID: 6590900781700876988, guid: 1743524c817f06745910c8a4596416d7, type: 3}
+  - {fileID: 6590900781700876988, guid: 1743524c817f06745910c8a4596416d7, type: 3}
   Unlocked: 0
-  ResearchTime: 90
-  BuildCost:
-    Costs: 0a00000005000000
+  ResearchTime: 900
+  InitialCost:
+    Costs: e8030000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-    - {fileID: 11400000, guid: a8559bbb5f45e404eaccd92c5b2f2d19, type: 2}
-  UpgradeCost: []
-  MaxLevel: 1
+  UpgradeCost:
+  - Costs: d0070000c8000000
+    Resources:
+    - {fileID: 11400000, guid: 551c67469e616ea4988e12a0ec294332, type: 2}
+    - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
+  - Costs: b80b00002c010000
+    Resources:
+    - {fileID: 11400000, guid: 551c67469e616ea4988e12a0ec294332, type: 2}
+    - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
+  MaxLevel: 3
   MaxBuildingNumber: 1
-  NeededInteraction: 1
   CanBoost: 0
-  SpawnHeight: 0.36
+  SpawnHeight: 0.32
   VisionRange: 2
+  references:
+    version: 2
+    RefIds: []

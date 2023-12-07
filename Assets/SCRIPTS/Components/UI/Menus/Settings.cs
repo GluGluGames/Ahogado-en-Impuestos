@@ -20,6 +20,8 @@ namespace GGG.Components.Menus
         [Tooltip("Toggle which represents if the sound is active or not")]
         [SerializeField] private Toggle SoundToggle;
 
+        [SerializeField] private int[] Range = { -40, 0 }; // should always be 60 of difference, with the lesser number first
+
         [Space(5)]
         [Header("Sliders")]
         [Tooltip("Slider to change the general volume.")]
@@ -78,20 +80,19 @@ namespace GGG.Components.Menus
         /// </summary>
         private void StartSounds()
         {
-            AudioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("GeneralVolume"));
-
-            if (SoundManager.Instance.GetMusicActive())
-                AudioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
-            else
-                AudioMixer.SetFloat("Music", -50);
-
-            AudioMixer.SetFloat("SoundEffects", PlayerPrefs.GetFloat("SoundEffectsVolume"));
-
             GeneralSlider.value = PlayerPrefs.GetFloat("GeneralVolume");
             MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
             EffectsSlider.value = PlayerPrefs.GetFloat("SoundEffectsVolume");
 
             UpdateText();
+        }
+
+        private void OnApplicationQuit()
+        {
+            PlayerPrefs.SetFloat("GeneralVolume", GeneralSlider.value);
+            PlayerPrefs.SetFloat("MusicVolume", MusicSlider.value);
+            PlayerPrefs.SetFloat("SoundEffectsVolume", EffectsSlider.value);
+            PlayerPrefs.Save();
         }
 
         /// <summary>
@@ -153,10 +154,19 @@ namespace GGG.Components.Menus
             return Mathf.Abs(value - min) / (max - min) * 100;
         }
 
+        private float GetExponentialValue(float volume)
+        {
+            float aux = Mathf.Pow(volume, 2);
+            float resultado = Range[0] + (Range[1] - Range[0]) * aux;
+
+            return resultado;
+        }
+
         /// <param name="volume">New value of the general volume.</param>
         public void SetVolume(float volume)
         {
-            AudioMixer.SetFloat("Volume", volume);
+            float aux = GetExponentialValue(volume);
+            AudioMixer.SetFloat("Volume", aux);
             PlayerPrefs.SetFloat("GeneralVolume", volume);
             UpdateText();
         }
@@ -166,7 +176,8 @@ namespace GGG.Components.Menus
         {
             if (!SoundManager.Instance.GetMusicActive()) return;
 
-            AudioMixer.SetFloat("Music", volume);
+            float aux = GetExponentialValue(volume);
+            AudioMixer.SetFloat("Music", aux);
             PlayerPrefs.SetFloat("MusicVolume", volume);
             UpdateText();
         }
@@ -174,7 +185,8 @@ namespace GGG.Components.Menus
         /// <param name="volume">New value of the sound effects volume.</param>
         public void SetSoundEffectsVolume(float volume)
         {
-            AudioMixer.SetFloat("SoundEffects", volume);
+            float aux = GetExponentialValue(volume);
+            AudioMixer.SetFloat("SoundEffects", aux);
             PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
             UpdateText();
         }

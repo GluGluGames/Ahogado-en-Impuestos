@@ -37,6 +37,13 @@ namespace GGG.Components.Core
         [Header("Other")]
         [Tooltip("Amount of movement over time")]
         [SerializeField] private float MovementTime;
+        
+        #if UNITY_ANDROID
+        private LeanDragCamera _dragCamera;
+        private LeanTwistRotateAxis _rotateCamera;
+        private LeanPinchScale _zoomCamera;
+        private bool _cameraToggle;
+        #endif
 
         private InputManager _input;
         private GameManager _gameManager;
@@ -63,6 +70,10 @@ namespace GGG.Components.Core
             
 
             #if UNITY_ANDROID
+            _dragCamera = GetComponent<LeanDragCamera>();
+            _rotateCamera = GetComponent<LeanTwistRotateAxis>();
+            _zoomCamera = GetComponent<LeanPinchScale>();
+            
             LeanTouch.OnFingerDown += (x) => Holding.IsHolding(true);
             LeanTouch.OnFingerUp += (x) => Holding.IsHolding(false);
             #endif
@@ -76,15 +87,23 @@ namespace GGG.Components.Core
             if (_gameManager.IsOnUI() || _gameManager.TutorialOpen()) return;
             
             StartCoroutine(HandleMouseInput());
-            StartCoroutine(HandleLeftMouseInput());
         }
 #endif
 
         private void LateUpdate() {
-            if (_gameManager.IsOnUI() || _gameManager.TutorialOpen()) return;
+            if (_gameManager.IsOnUI() || _gameManager.TutorialOpen())
+            {
+                #if UNITY_ANDROID
+                ToggleCamera(false);
+                #endif
+                
+                return;
+            }
             
 #if UNITY_ANDROID
-            ClampCamera();
+            if(!_cameraToggle) ToggleCamera(true);
+            
+            //ClampCamera();
 #else
             HandleCameraMovement();
             HandleCameraRotation();
@@ -181,7 +200,7 @@ namespace GGG.Components.Core
                 }
             }
 
-            yield return new WaitForSeconds(0.05f);
+            yield return null;
 
             if (_input.IsHolding()) {
                 _pointerEventData.position = _input.TouchPosition();
@@ -203,39 +222,17 @@ namespace GGG.Components.Core
                 _results.Clear();
             } else Holding.IsHolding(false);
         }
-        
-        private IEnumerator HandleLeftMouseInput() {
-            if (_input.IsSecondaryTouching()) {
-                Plane plane = new Plane(Vector3.up, Vector3.zero);
-                Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
-
-                if (plane.Raycast(ray, out float distance)) {
-                    _dragStartPosition = ray.GetPoint(distance);
-                }
-            }
-
-            yield return new WaitForSeconds(0.05f);
-
-            if (_input.IsSecondaryTouching()) {
-                _pointerEventData.position = _input.TouchPosition();
-                _graphicRaycaster.Raycast(_pointerEventData, _results);
-
-                if (_results.Count == 0) {
-                    Plane plane = new Plane(Vector3.up, Vector3.zero);
-                    Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
-
-                    if (plane.Raycast(ray, out float distance))
-                    {
-                        _dragCurrentPosition = ray.GetPoint(distance);
-                        // _newRotation = Quaternion.Euler(_transform.localEulerAngles + new Vector3(_dragStartPosition.x - _dragCurrentPosition.x, 0, 0));
-                    }
-                }
-
-                _results.Clear();
-            }
-        }
 
         #if UNITY_ANDROID
+        private void ToggleCamera(bool state)
+        {
+            _dragCamera.enabled = state;
+            _rotateCamera.enabled = state;
+            _zoomCamera.enabled = state;
+
+            _cameraToggle = state;
+        }
+        
         private void ClampCamera()
         {
             Vector3 newPosition = _transform.position;

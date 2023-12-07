@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9063926238727765122}
-  - component: {fileID: 6872723039340751361}
+  - component: {fileID: 5844913002981738129}
   m_Layer: 0
   m_Name: SeaweedFarm
   m_TagString: Untagged
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8113010406866780128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6872723039340751361
+--- !u!114 &5844913002981738129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +42,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8113010406866780128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 027ad496a9e9dd34d9b86249ffffec33, type: 3}
+  m_Script: {fileID: 11500000, guid: f69dc0d924ef0db49b61d46cb43bbb79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Build: {fileID: 11400000, guid: 7a9bf9c902c986e4795f7c3e8cc1b7bc, type: 2}
+  BuildingData: {fileID: 11400000, guid: 890c1fbc8230f3042a110cf1bf99b1f2, type: 2}
+  FarmType: 0
+  Resource: {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  InitialGeneration: 6
+  ResourcesGeneration:
+  - 3
+  - 1
 --- !u!1001 &6806442456316961617
 PrefabInstance:
   m_ObjectHideFlags: 0

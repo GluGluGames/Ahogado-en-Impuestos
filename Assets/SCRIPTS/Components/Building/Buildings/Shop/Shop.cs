@@ -1,23 +1,22 @@
-using GGG.Classes.Buildings;
-
-using UnityEngine;
-
-namespace GGG.Components.Shop
+namespace GGG.Components.Buildings.Shop
 {
-    [CreateAssetMenu(fileName = "Shop", menuName = "Game/Buildings/Shop")]
-    public class Shop : Building
+    public class Shop : BuildingComponent
     {
         private ShopUI _shop;
 
-        public override void Interact(int level)
+        public override void Initialize()
         {
-            _shop = FindObjectOfType<ShopUI>();
-
-            _shop.OpenShop();
+            if(!_shop) _shop = FindObjectOfType<ShopUI>();
         }
 
-        public override void Boost(int level) { }
-        
-        public override void EndBoost(int level) { }
+        public override void Interact()
+        {
+            _shop.OpenShop(CurrentLevel());
+        }
+
+        public override void OnBuildDestroy()
+        {
+            _shop.StopAllCoroutines();
+        }
     }
 }

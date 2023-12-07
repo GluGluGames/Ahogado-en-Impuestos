@@ -1,8 +1,9 @@
 using GGG.Components.Core;
 using GGG.Classes.Tutorial;
-using GGG.Components.Laboratory;
-using GGG.Components.Museum;
-using GGG.Components.Shop;
+using GGG.Components.Buildings.Laboratory;
+using GGG.Components.Buildings.Museum;
+using GGG.Components.Buildings.Shop;
+using GGG.Components.Buildings.Generator;
 using GGG.Components.UI;
 using GGG.Shared;
 
@@ -10,7 +11,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
-using GGG.Components.Generator;
 using UnityEngine.UI;
 
 namespace GGG.Components.Tutorial

@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
+  m_Name: CityHall
+  m_EditorClassIdentifier: 
+  Name:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 4922688040960
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Description:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 5041730777088
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Icon: {fileID: 21300000, guid: 468a03442fc76234d94664a355533942, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: 468a03442fc76234d94664a355533942, type: 3}
+  ResearchIcon: {fileID: 21300000, guid: 468a03442fc76234d94664a355533942, type: 3}
+  Prefab: {fileID: 7973220474626286557, guid: ef6044ef9ab2772439200d7343ba80d6, type: 3}
+  CanBeUpgraded: 0
+  UpgradePrefabs: []
+  Unlocked: 1
+  ResearchTime: 0
+  InitialCost:
+    Costs: 00000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  UpgradeCost: []
+  MaxLevel: 1
+  MaxBuildingNumber: 1
+  CanBoost: 0
+  SpawnHeight: 0.32
+  VisionRange: 2
+  references:
+    version: 2
+    RefIds: []

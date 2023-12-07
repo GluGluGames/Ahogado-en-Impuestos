@@ -1,4 +1,4 @@
-using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,7 +60,7 @@ namespace GGG.Components.Enemies
                     targetPosition = nextTile.transform.position + new Vector3(0, 1f, 0);
                     MoveTo(targetPosition);
                     gotPath = true;
-                    currentPath.RemoveAt(0);
+                    if(currentPath.Count > 0) currentPath.RemoveAt(0);
                     cubeCoordPos = nextTile.cubeCoordinate;
                 }
             }

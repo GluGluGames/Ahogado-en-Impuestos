@@ -9,27 +9,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9710e833774f16044bf2c2d31a0f35f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
   m_Name: Laboratory
   m_EditorClassIdentifier: 
-  Name: Laboratorio
-  Description: 
+  Name:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 1113869938688
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Description:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 4880258461696
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   Icon: {fileID: 21300000, guid: 1a98bbf24b216ea4da3ad31969c2c608, type: 3}
-  SelectedIcon: {fileID: 21300000, guid: 1a98bbf24b216ea4da3ad31969c2c608, type: 3}
-  ResearchIcon: {fileID: 21300000, guid: 1a98bbf24b216ea4da3ad31969c2c608, type: 3}
+  SelectedIcon: {fileID: 0}
+  ResearchIcon: {fileID: 0}
   Prefab: {fileID: 3729789129001329043, guid: 5129a88a28bc3b048b6ab1509a81b1bd, type: 3}
-  CanBeUpgraded: 0
-  UpgradePrefabs: []
+  CanBeUpgraded: 1
+  UpgradePrefabs:
+  - {fileID: 4737397664650658106, guid: 6881fd472f895e14fa5c639efae5fbcd, type: 3}
+  - {fileID: 5959538063097510572, guid: 58f5308af154efb439d27f41f67a7a53, type: 3}
   Unlocked: 1
   ResearchTime: 0
-  BuildCost:
-    Costs: 32000000
+  InitialCost:
+    Costs: c4090000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  UpgradeCost: []
+  UpgradeCost:
+  - Costs: f4010000
+    Resources:
+    - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
+  - Costs: ee020000
+    Resources:
+    - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
   MaxLevel: 1
-  MaxBuildingNumber: 1
-  NeededInteraction: 1
+  MaxBuildingNumber: 10
   CanBoost: 0
-  SpawnHeight: 0.36
+  SpawnHeight: 0.32
   VisionRange: 2
+  references:
+    version: 2
+    RefIds: []

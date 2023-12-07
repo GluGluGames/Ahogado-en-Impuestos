@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
+  m_Name: SeaFarm
+  m_EditorClassIdentifier: 
+  Name:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 68028624896
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Description:
+    m_TableReference:
+      m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
+    m_TableEntryReference:
+      m_KeyId: 5701129891840
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Icon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
+  ResearchIcon: {fileID: 0}
+  Prefab: {fileID: 8113010406866780128, guid: 8807a79897f001d4085fe45216d838dd, type: 3}
+  CanBeUpgraded: 1
+  UpgradePrefabs:
+  - {fileID: 8137532259319120740, guid: be2351cfbf228b94287ee58d64b9d47e, type: 3}
+  - {fileID: 5717497606056758923, guid: 573ce7fe8df29ae48b1cbfdf0549683f, type: 3}
+  Unlocked: 1
+  ResearchTime: 0
+  InitialCost:
+    Costs: 32000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  UpgradeCost:
+  - Costs: 32000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+  - Costs: 960000000a000000
+    Resources:
+    - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
+    - {fileID: 11400000, guid: b8e4cd17a2a28e947ae97cdbed7bd413, type: 2}
+  MaxLevel: 3
+  MaxBuildingNumber: -1
+  CanBoost: 1
+  SpawnHeight: 0.32
+  VisionRange: 2
+  references:
+    version: 2
+    RefIds: []

@@ -1,9 +1,10 @@
+using GGG.Classes.Tutorial;
+using GGG.Components.UI;
+using GGG.Components.HexagonalGrid;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using GGG.Classes.Tutorial;
-using GGG.Components.Buildings;
-using GGG.Components.UI;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InitialTutorial", menuName = "Game/Tutorials/InitialTutorial")]
@@ -91,6 +92,7 @@ public class InitialTutorial : TutorialBase
 
     private IEnumerator CameraZoomStep()
     {
+        #if !UNITY_ANDROID
         Vector3 lastCameraPosition = _mainCamera.localPosition;
         float magnitude = 0f;
         
@@ -100,5 +102,16 @@ public class InitialTutorial : TutorialBase
             lastCameraPosition = _mainCamera.localPosition;
             yield return null;
         }
+        #else
+        Vector3 lastCameraPosition = _cameraTransform.transform.localScale;
+        float magnitude = 0f;
+        
+        while (magnitude < 5f)
+        {
+            magnitude += (lastCameraPosition - _cameraTransform.transform.localScale).magnitude;
+            lastCameraPosition = _cameraTransform.transform.localScale;
+            yield return null;
+        }
+        #endif
     }
 }

@@ -1,32 +1,33 @@
 using DG.Tweening;
-using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace GGG.Components.Enemies
 {
     public class EnemiesManager : MonoBehaviour
     {
 
-        public static EnemiesManager instance;
-        public List<Enemy> enemies;
-        private List<HexTile> tiles = new List<HexTile>();
-        [SerializeField] private int _nEnemies = 0;
-        [SerializeField] private Enemy[] enemiesPrefab;
+        [SerializeField] private int _maxEnemies;
 
-        // Start is called before the first frame update
+        [SerializeField] private Enemy[] EnemiesPrefab;
 
-        private IEnumerator Start()
+        private readonly List<Enemy> _enemies = new();
+        private List<HexTile> _tiles;
+        private int _nEnemies;
+
+        private void Start()
         {
-            // This is made so the scene charges first and then the start method is called.
-            yield return new WaitWhile(() => !TileManager.instance.aux);
+            _nEnemies = EnemiesPrefab.Length;
+            _tiles = FindObjectsOfType<HexTile>().ToList();
 
-            // tiles = TileManager.instance.GetComponentsInChildren<HexTile>().ToList();
-
-            for (int i = 0; i < _nEnemies; i++)
+            for (int i = 0; i < _maxEnemies; i++)
             {
                 SpawnEnemy();
             }
@@ -34,28 +35,26 @@ namespace GGG.Components.Enemies
 
         private bool SpawnEnemy()
         {
-            HexTile hex = TileManager.instance.GetRandomHex();
+            HexTile hex = _tiles[Random.Range(0, _tiles.Count)];
             bool spawned = false;
 
-            foreach (Enemy enemy in enemies)
+            foreach (Enemy enemy in _enemies)
             {
-                if (enemy.currentTile == hex)
-                {
-                    spawned = SpawnEnemy();
-                    break;
-                }
-            }
-            if (enemiesPrefab != null && spawned == false)
-            {
-                int enemIndex = Random.Range(0, enemiesPrefab.Length);
-                Enemy newEnem = Instantiate(enemiesPrefab[enemIndex], transform);
-                // newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
-                newEnem.currentTile = hex;
-                newEnem.isDirty = true;
-                enemies.Add(newEnem);
+                if (enemy.currentTile != hex && enemy.currentTile != PlayerPosition.CurrentTile) continue;
+                
+                spawned = SpawnEnemy();
+                break;
             }
 
-
+            if (EnemiesPrefab == null || spawned != false) return true;
+            
+            int enemIndex = Random.Range(0, EnemiesPrefab.Length);
+            Enemy newEnem = Instantiate(EnemiesPrefab[enemIndex], transform);
+            newEnem.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
+            newEnem.currentTile = hex;
+            newEnem.isDirty = true;
+            _enemies.Add(newEnem);
+            
             return true;
         }
     }

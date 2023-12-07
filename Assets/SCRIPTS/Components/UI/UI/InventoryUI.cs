@@ -6,8 +6,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using GGG.Components.Core;
+using GGG.Components.UI.Buttons;
 using GGG.Input;
 
 namespace GGG.Components.UI
@@ -17,78 +19,49 @@ namespace GGG.Components.UI
         #region Public variables
 
         [Space(5), Header("Containers")] 
-        [SerializeField] private GameObject SeaContainer;
-        [SerializeField] private GameObject ExpeditionContainer;
-        [SerializeField] private GameObject FishContainer;
+        [SerializeField] private GameObject[] ResourceContainers;
 
-        [Space(5), Header("Buttons")] 
+        [Space(5), Header("Buttons")]
         [SerializeField] private Button CloseButton;
-        [SerializeField] private Button SeaButton;
-        [SerializeField] private Button ExpeditionButton;
-        [SerializeField] private Button FishButton;
 
         #endregion
 
         #region Private variables
 
-        private Resource[] _seaResources;
-        private Resource[] _expeditionResources;
-        private Resource[] _fishResources;
-
-        private Button[] _seaButtons;
-        private Button[] _expeditionButtons;
-        private Button[] _fishButtons;
+        private readonly Dictionary<int, Resource[]> _resources = new();
+        private readonly Dictionary<int, Button[]> _buttons = new();
+        private List<ContainerButton> _containerButtons;
 
         private Dictionary<string, TextMeshProUGUI> _resourcesCountText;
 
         private PlayerManager _player;
         private InputManager _input;
         private HUDManager _hudManager;
+        private GameManager _gameManager; 
+            
         private GameObject _viewport;
-        private int _active;
         private bool _open;
 
         #endregion
 
         #region Unity functions
 
-        void Awake()
+        private void Awake()
         {
-            CloseButton.onClick.AddListener(CloseInventory);
+            CloseButton.onClick.AddListener(OnCloseButton);
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
             _player = PlayerManager.Instance;
             _input = InputManager.Instance;
             _hudManager = HUDManager.Instance;
+            _gameManager = GameManager.Instance;
+            
             _viewport = transform.GetChild(0).gameObject;
             _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
 
-            _resourcesCountText = new Dictionary<string, TextMeshProUGUI>(_player.GetResourceNumber());
-            
-            _seaResources = Resources.LoadAll<Resource>("SeaResources");
-            _expeditionResources = Resources.LoadAll<Resource>("ExpeditionResources");
-            _fishResources = Resources.LoadAll<Resource>("FishResources");
-
-            while (_seaResources.Length <= 0 || _expeditionResources.Length <= 0 || _fishResources.Length <= 0)
-                yield return null;
-            
-            FillSeaResources();
-            FillExpeditionResources();
-            FillFishResources();
-
-            SeaButton.onClick.AddListener(HandleSeaToggle);
-            ExpeditionButton.onClick.AddListener(HandleExpeditionToggle);
-            FishButton.onClick.AddListener(HandleFishToggle);
-
-            SeaButton.image.sprite = SeaButton.spriteState.selectedSprite;
-            FishButton.image.sprite = FishButton.spriteState.disabledSprite;
-            ExpeditionButton.image.sprite = ExpeditionButton.spriteState.disabledSprite;
-
-            SeaContainer.SetActive(true);
-            ExpeditionContainer.SetActive(false);
-            FishContainer.SetActive(false);
+            StartCoroutine(Initialize());
         }
 
         private void Update()
@@ -97,15 +70,55 @@ namespace GGG.Components.UI
 
             UpdateResourcesAmount();
             
-            if (!_input.Escape()) return;
-            
-            CloseInventory();
+            if (!_input.Escape() || _gameManager.OnTutorial()) return;
+
+            Close();
         }
 
         #endregion
 
         #region Methods
 
+        private IEnumerator Initialize()
+        {
+            _resourcesCountText = new Dictionary<string, TextMeshProUGUI>(_player.GetResourceNumber());
+            
+            _resources.Add(0, Resources.LoadAll<Resource>("SeaResources"));
+            _resources.Add(1, Resources.LoadAll<Resource>("ExpeditionResources"));
+            _resources.Add(2, Resources.LoadAll<Resource>("FishResources"));
+
+            while (_resources[0].Length <= 0 || _resources[1].Length <= 0 || _resources[2].Length <= 0)
+                yield return null;
+
+            _containerButtons = GetComponentsInChildren<ContainerButton>(true).ToList();
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                int idx = i;
+                for (int j = 0; j < _containerButtons.Count - 1; j++)
+                {
+                    _containerButtons[i].OnButtonClick +=
+                        _containerButtons[(idx + 1) % _containerButtons.Count].DeselectButton;
+                    idx++;
+                }
+            }
+
+            for (int i = 0; i < _resources.Count; i++)
+            {
+                _buttons.Add(i, ResourceContainers[i].GetComponentsInChildren<Button>());
+                FillResources(_buttons[i], _resources[i]);
+            }
+            
+            ResetContainers();
+        }
+
+        private void ResetContainers()
+        {
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                _containerButtons[i].Initialize();
+                ResourceContainers[i].SetActive(i == 0);
+            }
+        }
 
         private void UpdateResourcesAmount()
         {
@@ -116,92 +129,33 @@ namespace GGG.Components.UI
                 _resourcesCountText[key].SetText(_player.GetResourceCount(key).ToString());
             }
         }
-
-        private void FillSeaResources()
+        
+        private void FillResources(Button[] buttons, Resource[] resources)
         {
-            _seaButtons = SeaContainer.GetComponentsInChildren<Button>();
-            for (int i = 0; i < _seaButtons.Length; i++)
+            for (int i = 0; i < buttons.Length; i++)
             {
-                if (_seaResources.Length <= i)
-                {
-                    _seaButtons[i].transform.parent.transform.parent.gameObject.SetActive(false);
-                }
+                if (resources.Length <= i) buttons[i].transform.parent.gameObject.SetActive(false);
                 else
                 {
-                    _seaButtons[i].image.sprite = _seaResources[i].GetSprite();
+                    buttons[i].image.sprite = resources[i].GetSprite();
                     SpriteState aux = new()
                     {
-                        highlightedSprite = _seaResources[i].GetSelectedSprite(),
+                        highlightedSprite = resources[i].GetSelectedSprite()
                     };
                     
-                    _seaButtons[i].spriteState = aux;
+                    buttons[i].spriteState = aux;
                     int index = i;
-                    _seaButtons[i].onClick.AddListener(() => 
-                        AddListener(_seaResources[index], _seaButtons[index]));
-
-                    _resourcesCountText[_seaResources[i].GetKey()] =
-                        _seaButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>(true);
-                }
-            }
-        }
-
-        private void FillExpeditionResources()
-        {
-            _expeditionButtons = ExpeditionContainer.GetComponentsInChildren<Button>();
-            for (int i = 0; i < _expeditionButtons.Length; i++)
-            {
-                if (_expeditionResources.Length <= i)
-                {
-                    _expeditionButtons[i].transform.parent.transform.parent.gameObject.SetActive(false);
-                }
-                else
-                {
-                    _expeditionButtons[i].image.sprite = _expeditionResources[i].GetSprite();
-                    SpriteState aux = new()
-                    {
-                        highlightedSprite = _expeditionResources[i].GetSelectedSprite(),
-                    };
-                    _expeditionButtons[i].spriteState = aux;
-                    int index = i;
-                    _expeditionButtons[i].onClick
-                        .AddListener(() => 
-                            AddListener(_expeditionResources[index], _expeditionButtons[index]));
-
-                    _resourcesCountText[_expeditionResources[i].GetKey()] =
-                        _expeditionButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
-                }
-            }
-        }
-
-        private void FillFishResources()
-        {
-            _fishButtons = FishContainer.GetComponentsInChildren<Button>();
-            for (int i = 0; i < _fishButtons.Length; i++)
-            {
-                if (_fishResources.Length <= i)
-                {
-                    _fishButtons[i].transform.parent.transform.parent.gameObject.SetActive(false);
-                }
-                else
-                {
-                    _fishButtons[i].image.sprite = _fishResources[i].GetSprite();
-                    SpriteState aux = new()
-                    {
-                        highlightedSprite = _fishResources[i].GetSelectedSprite(),
-                    };
-                    _fishButtons[i].spriteState = aux;
-                    int index = i;
-                    _fishButtons[i].onClick.AddListener(() => 
-                        AddListener(_fishResources[index], _fishButtons[index]));
-
-                    _resourcesCountText[_fishResources[i].GetKey()] =
-                        _fishButtons[i].transform.GetComponentInChildren<TextMeshProUGUI>();
+                    buttons[i].onClick.AddListener(() => AddListener(resources[index], buttons[index]));
+                    _resourcesCountText[resources[i].GetKey()] =
+                        buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>(true);
                 }
             }
         }
 
         private void AddListener(Resource resource, Button button)
         {
+            if (resource.GetKey().Equals("Seaweed")) return;
+            
             if (_hudManager.ResourceBeingShown(resource))
             {
                 if(_hudManager.HideResource(resource))
@@ -213,60 +167,16 @@ namespace GGG.Components.UI
                 button.image.sprite = resource.GetSelectedSprite();
         }
 
-        private void HandleSeaToggle()
-        {
-            if (_active == 0) return;
-
-            SeaButton.image.sprite = SeaButton.spriteState.selectedSprite;
-            ExpeditionButton.image.sprite = ExpeditionButton.spriteState.disabledSprite;
-            FishButton.image.sprite = FishButton.spriteState.disabledSprite;
-            SeaContainer.SetActive(true);
-            ExpeditionContainer.SetActive(false);
-            FishContainer.SetActive(false);
-
-            _active = 0;
-        }
-
-        private void HandleExpeditionToggle()
-        {
-            if (_active == 1) return;
-
-            ExpeditionButton.image.sprite = ExpeditionButton.spriteState.selectedSprite;
-            SeaButton.image.sprite = SeaButton.spriteState.disabledSprite;
-            FishButton.image.sprite = FishButton.spriteState.disabledSprite;
-            SeaContainer.SetActive(false);
-            ExpeditionContainer.SetActive(true);
-            FishContainer.SetActive(false);
-
-            _active = 1;
-        }
-
-        private void HandleFishToggle()
-        {
-            if (_active == 2) return;
-
-            FishButton.image.sprite = FishButton.spriteState.selectedSprite;
-            ExpeditionButton.image.sprite = ExpeditionButton.spriteState.disabledSprite;
-            SeaButton.image.sprite = SeaButton.spriteState.disabledSprite;
-
-            SeaContainer.SetActive(false);
-            ExpeditionContainer.SetActive(false);
-            FishContainer.SetActive(true);
-
-            _active = 2;
-        }
-
         private void HandleSelectedResources()
         {
-            for(int i = 0; i < _seaResources.Length; i++)
-                _seaButtons[i].image.sprite = _hudManager.ResourceBeingShown(_seaResources[i]) ? 
-                    _seaResources[i].GetSelectedSprite() : _seaResources[i].GetSprite();
-            for(int i = 0; i < _expeditionResources.Length; i++)
-                _expeditionButtons[i].image.sprite = _hudManager.ResourceBeingShown(_expeditionResources[i]) ? 
-                    _expeditionResources[i].GetSelectedSprite() : _expeditionResources[i].GetSprite();
-            for(int i = 0; i < _fishResources.Length; i++)
-                _fishButtons[i].image.sprite = _hudManager.ResourceBeingShown(_fishResources[i]) ? 
-                    _fishResources[i].GetSelectedSprite() : _fishResources[i].GetSprite();
+            for (int i = 0; i < _resources.Count; i++)
+            {
+                for (int j = 0; j < _resources[i].Length; j++)
+                {
+                    _buttons[i][j].image.sprite = _hudManager.ResourceBeingShown(_resources[i][j])
+                        ? _resources[i][j].GetSelectedSprite() : _resources[i][j].GetSprite();
+                }
+            }
         }
 
         public void OpenInventory()
@@ -275,29 +185,32 @@ namespace GGG.Components.UI
 
             _viewport.SetActive(true);
             _open = true;
-            GameManager.Instance.OnUIOpen();
+            _gameManager.OnUIOpen();
             
             HandleSelectedResources();
+            ResetContainers();
             
             foreach (string key in _resourcesCountText.Keys)
-            {
                 _resourcesCountText[key].SetText(_player.GetResourceCount(key).ToString());
-            }
             
             _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.5f).SetEase(Ease.InCubic);
         }
 
-        private void CloseInventory()
+        private void OnCloseButton()
         {
-            if (!_open) return;
+            if (!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
 
+            Close();
+        }
+
+        private void Close()
+        {
             _viewport.transform.DOMoveX(Screen.width * -0.5f, 0.5f).SetEase(Ease.OutCubic).onComplete += () =>
             {
                 _viewport.SetActive(false);
+                _gameManager.OnUIClose();
                 _open = false;
             };
-            
-            GameManager.Instance.OnUIClose();
         }
 
         #endregion

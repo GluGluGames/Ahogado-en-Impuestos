@@ -15,12 +15,45 @@ MonoBehaviour:
   TutorialKey: LaboratoryTutorial
   Dialogues: []
   Panels:
-  - Title: Laboratorio
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4751921147904
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: "Este es el laboratorio. Aqu\xED podr\xE1s desbloquear nuevos recursos
-      para conseguir y nuevos edificios que construir."
-  - Title: Desbloqueo
+    Text:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4824772014080
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4943378542592
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     Image: {fileID: 0}
-    Text: Pulsa el icono encima de una de las barras de progreso y selecciona el
-      recurso o el edificio que quieres desbloquear.
+    Text:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4999800320000
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   TutorialCompleted: 0
+  references:
+    version: 2
+    RefIds: []

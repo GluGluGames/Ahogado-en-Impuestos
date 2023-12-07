@@ -21,6 +21,7 @@ namespace GGG.Components.UI
         private InventoryUI _inventory;
 
         private GameObject _viewport;
+        private Vector3 _initialPosition;
         private bool _open;
 
         private void Start()
@@ -30,13 +31,14 @@ namespace GGG.Components.UI
             _gameManager = GameManager.Instance;
             _inventory = FindObjectOfType<InventoryUI>();
             _viewport = transform.GetChild(0).gameObject;
+            _initialPosition = transform.position;
             
             OpenButton.onClick.AddListener(ToggleMenu);
             InventoryButton.onClick.AddListener(OpenInventory);
             SettingsButton.onClick.AddListener(OpenSettings);
             ExpeditionButton.onClick.AddListener(() =>
             {
-                _sceneManagement.AddSceneToLoad(SceneIndexes.MINIGAME);
+                _sceneManagement.AddSceneToLoad(SceneIndexes.MINIGAME_LEVEL1);
                 _sceneManagement.AddSceneToUnload(SceneIndexes.GAME_SCENE);
                 _sceneManagement.UpdateScenes();
                 _gameManager.OnUIClose();
@@ -44,7 +46,7 @@ namespace GGG.Components.UI
         }
 
         private void Update() {
-            if (!_input.Escape()) return;
+            if (!_input.Escape() || _gameManager.OnTutorial()) return;
             
             ToggleMenu();
         }
@@ -57,19 +59,20 @@ namespace GGG.Components.UI
 
             if (_open)
             {
-                _viewport.transform.DOMoveX(Screen.width * 0.5f, 0.75f).SetEase(Ease.InQuad);
+                _viewport.transform.DOMoveX(Screen.width * 0.4f, 0.75f).SetEase(Ease.InCubic);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
                 _gameManager.OnUIOpen();
             }
             else
             {
-                _viewport.transform.DOMoveX(Screen.width * 0.65f, 0.75f).SetEase(Ease.OutCubic);
+                _viewport.transform.DOMoveX(Screen.width * 0.58f, 0.75f).SetEase(Ease.OutCubic);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                _gameManager.OnUIClose();
             }
         }
 
-        public void ToggleOpenButton() => OpenButton.gameObject.SetActive(!OpenButton.gameObject.activeInHierarchy);
+        public void ToggleOpenButton() => OpenButton.transform.parent.gameObject.SetActive(
+            !OpenButton.transform.parent.gameObject.activeInHierarchy);
 
         private void OpenInventory()
         {

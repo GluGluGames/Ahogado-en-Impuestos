@@ -1,0 +1,271 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Tutorials_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: a7ab3e919c085f546b5dac2b1573b0ca, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 123225665536
+    m_Localized: Bienvenida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 250472460288
+    m_Localized: "\xA1Bienvenid@ a la Atl\xE1ntida! Se te ha asignado la dura tarea
+      de que reconstruyas esta antigua ciudad. Pero primero veremos lo b\xE1sico."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328637509632
+    m_Localized: "Movimiento de la c\xE1mara"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 458430246912
+    m_Localized: "Puedes controlar la c\xE1mara usando las teclas WASD. Tambi\xE9n
+      puedes hacer click con el rat\xF3n y arrastrarlo para mover la c\xE1mara. \xA1Vamos,
+      prueba a ver!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 510749995008
+    m_Localized: "Rotaci\xF3n de la c\xE1mara"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 614189920256
+    m_Localized: "Usa las teclas Q y E para rotar la c\xE1mara."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 686478749696
+    m_Localized: "Zoom de la c\xE1mara"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 745622630400
+    m_Localized: "Utiliza la rueda del rat\xF3n para acercar la c\xE1mara al terreno,
+      o alejarlo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 879970381824
+    m_Localized: "Construcci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 969585881088
+    m_Localized: "Haz click en una de las casillas vac\xEDas para construir tu primer
+      edificio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1259361955840
+    m_Localized: "Men\xFA de construcci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1353184342016
+    m_Localized: "Este es el men\xFA de construcci\xF3n. Desde aqu\xED puedes construir
+      los edificios que se alzar\xE1n en la nueva Atl\xE1ntida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431529746432
+    m_Localized: Edificios
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1513901682688
+    m_Localized: "Por ahora tienes bloqueados la mayor\xEDa de edificios, salvo uno."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1584898666496
+    m_Localized: Ayuntamiento
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1732764659712
+    m_Localized: "Toda ciudad que se precie debe tener un ayuntamiento. \xA1Vamos
+      a construirlo!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2011283222528
+    m_Localized: Primer edificio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103058788352
+    m_Localized: "\xA1Enhorabuena! Has construido tu primer edificio. Veamos qu\xE9
+      puedes hacer con \xE9l. Haz click en el edificio que acabas de construir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250375327744
+    m_Localized: "Men\xFA de mejoras"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2353240633344
+    m_Localized: "Este es el men\xFA de mejoras de un edificio. Algunos de los edificios
+      contar\xE1n con un bot\xF3n que te permitir\xE1 interactuar con ellos, abriendo
+      nuevos men\xFAs."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2633948622848
+    m_Localized: Venta de edificios
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2896080039936
+    m_Localized: "Con el bot\xF3n \"Vender\" puedes destruir el edificio, ya sea
+      porque te hayas equivocado o para colocar un edificio nuevo. Esto te devolver\xE1
+      la mitad del coste del edificio. Por ahora, cierra este men\xFA."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2987398426624
+    m_Localized: Siguiente paso
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3360037171200
+    m_Localized: "\xA1Bien hecho! Ya solo te queda un paso m\xE1s."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3422758793216
+    m_Localized: Limpieza de casillas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3585099329536
+    m_Localized: "Desde aqu\xED puedes limpiar las casillas que est\xE9n sucias para
+      poder edificar en ellas. Sin embargo, ahora mismo no tienes los materiales
+      suficientes para hacerlo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3713369534464
+    m_Localized: Final
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3897440759808
+    m_Localized: "\xA1Enhorabuena! Ahora ya tienes todo lo que hay que tener para
+      reconstruir la Atl\xE1ntida. Nuevos tutoriales se te ir\xE1n presentando en
+      el futuro. \xA1\xC1nimo con ello!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4081658785792
+    m_Localized: Generador de anguilas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4175116267520
+    m_Localized: "Este es el generador de electricidad. Desde aqu\xED podr\xE1s aumentar
+      la producci\xF3n de uno de los edificios que tengas construido."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4278216454144
+    m_Localized: "Aumento de producci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4344096387072
+    m_Localized: "Para aumentar la producci\xF3n, haz click en uno de los \xEDconos
+      y selecciona el edificio que quieres mejorar. Si tienes recursos suficientes,
+      lo har\xE1."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4477076795392
+    m_Localized: Inventario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4528721260544
+    m_Localized: "Este es tu inventario. Desde aqu\xED puedes ver todos los recursos
+      que has recolectado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4586204196864
+    m_Localized: "Selecci\xF3n de recursos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4672304869376
+    m_Localized: "Selecciona hasta tres recursos para poder ver su cantidad en la
+      pantalla del juego. Para seleccionarlos, simplemente pulsa en el \xEDcono del
+      recurso."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4751921147904
+    m_Localized: Laboratorio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4824772014080
+    m_Localized: "Este es el laboratorio. Aqu\xED podr\xE1s desbloquear nuevos recursos
+      para conseguir y nuevos edificios que construir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4943378542592
+    m_Localized: Desbloqueo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4999800320000
+    m_Localized: Pulsa el icono encima de una de las barras de progreso y selecciona
+      el recurso o el edificio que quieres desbloquear.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5074282770432
+    m_Localized: Museo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5127286190080
+    m_Localized: "Este es el museo. Aqu\xED podr\xE1s ver todos los materiales que
+      has ido descubriendo a lo largo de la reconstrucci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5177135493120
+    m_Localized: "Descripci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5228163395584
+    m_Localized: "Pulsa en uno de los materiales que has desbloqueado para ver una
+      descripci\xF3n m\xE1s detallada de dicho material."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5277802983424
+    m_Localized: Tienda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5484133380096
+    m_Localized: "Esta es la tienda. Aqu\xED podr\xE1s intercambiar tus materiales
+      por otros m\xE1s avanzados."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5534062374912
+    m_Localized: Cantidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5581978103808
+    m_Localized: Usando las flechas, puedes aumentar la cantidad que recibes y que
+      das.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5997700739072
+    m_Localized: Intercambios
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6091921584128
+    m_Localized: Los intercambios de la tienda se renuevan cada cierto tiempo. Este
+      se muestra en el contador.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6184661839872
+    m_Localized: Niveles de la tienda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6249535139840
+    m_Localized: "En niveles m\xE1s avanzados de la tienda, la cantidad de intercambios
+      disponibles aumentar\xE1. Para cambiar de intercambios, pulsa las flechas de
+      la derecha."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17871842471936
+    m_Localized: Casillas sucias
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17945322483712
+    m_Localized: "\xBFVes esas casillas con escombros encima? Haz click en una de
+      ellas"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -49,6 +49,7 @@ namespace GGG.Components.Core
         [SerializeField] private float CreditsDuration = 60f;
 
         private readonly List<AsyncOperation> _sceneAsyncOperation = new();
+        private IEnumerator _enumeratorOperations;
         private SoundManager _soundManager;
         private GraphicRaycaster _raycaster;
         private float _totalSceneProgress;
@@ -56,8 +57,6 @@ namespace GGG.Components.Core
 
         public Action OnGameSceneLoaded;
         public Action OnGameSceneUnloaded;
-
-        public Action OnMinigameSceneLoaded;
 
         private void Start()
         {
@@ -81,18 +80,20 @@ namespace GGG.Components.Core
                     _soundManager.Play("AmbientSound");
                 }
             };
-
-            SceneManager.sceneLoaded += (scene, mode) =>
-            {
-                if (scene.buildIndex == (int)SceneIndexes.MINIGAME)
-                    OnMinigameSceneLoaded?.Invoke();
-            };
         }
 
         #region Scene Management
 
-        public SceneIndexes CurrentScene() => (SceneIndexes)SceneManager.GetActiveScene().buildIndex;
+        public static bool InGameScene()
+        {
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                if (SceneManager.GetSceneAt(i) == SceneManager.GetSceneByBuildIndex((int)SceneIndexes.GAME_SCENE))
+                    return true;
+            }
 
+            return false;
+        }
         public void AddSceneToLoad(SceneIndexes scene)
         { 
            _sceneAsyncOperation.Add(SceneManager.LoadSceneAsync((int) scene, LoadSceneMode.Additive));
@@ -120,6 +121,8 @@ namespace GGG.Components.Core
             
             StartCoroutine(GetSceneLoadProgress());
         }
+
+        public void AddEnumerators(IEnumerator enumerators) => _enumeratorOperations = enumerators;
         
         private IEnumerator GetSceneLoadProgress()
         {
@@ -142,6 +145,9 @@ namespace GGG.Components.Core
                     yield return null;
                 }
             }
+
+            if (_enumeratorOperations != null) 
+                yield return _enumeratorOperations;
             
             LoadingScreenViewport.SetActive(false);
             _sceneAsyncOperation.Clear();

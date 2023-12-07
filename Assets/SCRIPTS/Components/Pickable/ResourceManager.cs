@@ -1,7 +1,9 @@
-using GGG.Shared;
-using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
+
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using GGG.Shared;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,21 +18,33 @@ namespace GGG.Components.Resources
         [SerializeField] private List<ResourceComponent> _resourcePrefabs = new List<ResourceComponent>();
         [SerializeField] private int _nResourcesMax;
 
-        public Dictionary<string, int> resourcesCollected = new Dictionary<string, int>();
+        public Dictionary<Resource, int> resourcesCollected = new ();
         public List<ResourceComponent> resourcesOnScene = new List<ResourceComponent>();
 
         private int _nResourcesCollected = 0;
+        private List<HexTile> _tiles;
 
         private void Awake()
         {
             Instance = this;
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
-            // This is made so the scene charges first and then the start method is called.
-            yield return new WaitWhile(() => !TileManager.instance.aux);
+            List<Resource> resources = UnityEngine.Resources.LoadAll<Resource>("SeaResources").Concat(
+                UnityEngine.Resources.LoadAll<Resource>("FishResources")).Concat(
+                UnityEngine.Resources.LoadAll<Resource>("ExpeditionResources")).ToList();
 
+            foreach (Resource resource in resources)
+                resourcesCollected.Add(resource, 0);
+
+            Invoke("SpawnAllResources", Time.deltaTime * 5);
+
+        }
+
+        private void SpawnAllResources()
+        {
+            _tiles = FindObjectsOfType<HexTile>().ToList();
             for (int i = 0; i < _nResourcesMax; ++i)
             {
                 SpawnRandomResource();
@@ -39,29 +53,32 @@ namespace GGG.Components.Resources
 
         private bool SpawnRandomResource()
         {
-            HexTile hex = TileManager.instance.GetRandomHex();
+            HexTile hex = _tiles[Random.Range(0, _tiles.Count)];
             bool spawned = false;
+            
             foreach (ResourceComponent resource in resourcesOnScene)
             {
-                if (resource.currentTile == hex)
-                {
-                    spawned = SpawnRandomResource();
-                    break;
-                }
+                if (resource.currentTile != hex) continue;
+                
+                spawned = SpawnRandomResource();
+                break;
             }
-            if (_resourcePrefabs != null && spawned == false)
-            {
-                int rand = Random.Range(0, _resourcePrefabs.Count);
 
-                ResourceComponent newResource = Instantiate(_resourcePrefabs[rand], transform);
-                // newResource.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
-                newResource.currentTile = hex;
+            if (_resourcePrefabs == null || spawned ) return true;
+            
+            int rand = Random.Range(0, _resourcePrefabs.Count);
 
-                resourcesOnScene.Add(newResource);
-            }
+            ResourceComponent newResource = Instantiate(_resourcePrefabs[rand], transform);
+            newResource.transform.position = new Vector3(hex.transform.position.x, hex.transform.position.y + 1f, hex.transform.position.z);
+            newResource.currentTile = hex;
+
+            resourcesOnScene.Add(newResource);
 
             return true;
         }
+
+        public int GetResourceAmount(Resource resource) =>
+            resourcesOnScene.Find(x => x.GetResource() == resource).GetAmount();
 
         public void sumResourceCollected()
         {

@@ -1,7 +1,8 @@
-using GGG.Components.Buildings;
+using GGG.Components.HexagonalGrid;
 using GGG.Components.Ticks;
 using GGG.Components.UI;
 using GGG.Shared;
+
 using System;
 using System.Collections;
 using UnityEngine;
@@ -14,13 +15,13 @@ namespace GGG.Components.Resources
         [SerializeField] private int _amount;
         [SerializeField] private bool _alwaysVisible;
         [SerializeField] private PickResourceProgressionUI _pickProgressUI;
-        private bool WaitSecond = true;
+        [SerializeField] private int _recollectionTime;
+        [SerializeField] private GameObject[] _ownModels;
 
         private bool _collided = false;
+        private bool _pickingResource;
 
         public HexTile currentTile;
-        public Action onResourceCollideEnter;
-        public Action onResourceCollideExit;
 
         #region getters and setters
 
@@ -44,52 +45,55 @@ namespace GGG.Components.Resources
         {
             _collided = true;
             _pickProgressUI.gameObject.SetActive(true);
-            WaitSecond = true;
-            Coroutine aux = StartCoroutine(
-                WaitSeconds(0, 3, 
-                () => 
-                {
-                    _pickProgressUI.current++;
-                },
-                () =>
-                {
-                    _pickProgressUI.current = _pickProgressUI.maximum;
-                    RecolectResource();
-                    _pickProgressUI.current = 0;
-                    _pickProgressUI.gameObject.SetActive(false);
-                    DeleteMySelf();
-                }));
+
+            StartCoroutine(RecollectResource());
         }
 
         private void OnTriggerExit(Collider other)
         {
-
-            WaitSecond = false;
-            if (_collided)
+            if (!_collided) return;
+            
+            _pickProgressUI.gameObject.SetActive(false);
+            
+            if (_pickingResource)
             {
-                _pickProgressUI.current = 0;
-                _pickProgressUI.gameObject.SetActive(false);
-                onResourceCollideExit.Invoke();
-                _collided = false;
+                _pickProgressUI.StopPicking();
+                _pickingResource = false;
             }
+            _collided = false;
         }
 
         private void Start()
         {
-            _pickProgressUI = GameObject.FindGameObjectWithTag("Player").transform.Find("HeaderBar").Find("ProgressBar").GetComponent<PickResourceProgressionUI>();
-            onResourceCollideEnter += RecolectResource;
-            onResourceCollideExit += DeleteMySelf;
+            _pickProgressUI = FindObjectOfType<PickResourceProgressionUI>(true);
             TickManager.OnTick += HandleVisibility;
             HandleVisibility();
         }
 
-        private void RecolectResource()
+        private void Update()
         {
-            int aux = 0;
-            ResourceManager.Instance.resourcesCollected.TryGetValue(_resource.GetName(), out aux);
+            if(_pickProgressUI.endedRecollection && _collided)
+            {
+                _pickProgressUI.endedRecollection = false;
 
-            ResourceManager.Instance.resourcesCollected.Remove(_resource.GetName());
-            ResourceManager.Instance.resourcesCollected.Add(_resource.GetName(), _amount + aux);
+                ResourceManager.Instance.resourcesCollected.TryGetValue(_resource, out int aux);
+                ResourceManager.Instance.resourcesCollected[_resource] += 
+                    ResourceManager.Instance.GetResourceAmount(_resource);
+                _resource.DiscoverResource();
+                _pickProgressUI.StopPicking();
+                _pickProgressUI.gameObject.SetActive(false);
+                _pickingResource = false;
+                DeleteMySelf();
+            }
+        }
+
+        private IEnumerator RecollectResource()
+        {
+            _pickingResource = true;
+            yield return null;
+
+            _pickProgressUI.recollectionTime = _recollectionTime;
+            _pickProgressUI.ableToPick = true;
         }
 
         private void DeleteMySelf()
@@ -103,7 +107,7 @@ namespace GGG.Components.Resources
             ResourceManager.Instance.sumResourceCollected();
             TickManager.OnTick -= HandleVisibility;
 
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
         #endregion Methods
@@ -115,28 +119,21 @@ namespace GGG.Components.Resources
                 if (currentTile != null && currentTile.gameObject.layer == 7)
                 {
                     gameObject.layer = 7;
+                    foreach (GameObject model in _ownModels)
+                    {
+                        model.layer = 7;
+                    }
+                    
                 }
                 else if (currentTile != null)
                 {
                     gameObject.layer = 9;
+                    foreach (GameObject model in _ownModels)
+                    {
+                        model.layer = 9;
+                    }
+                    
                 }
-            }
-        }
-
-        private IEnumerator WaitSeconds(int currentSeconds, int maxSeconds, Action onEachSecond, Action onEnd)
-        {
-
-            currentSeconds++;
-            yield return new WaitForSeconds(1);
-            onEachSecond.Invoke();
-            if (!WaitSecond) { yield break; }
-            if (currentSeconds < maxSeconds)
-            {
-                StartCoroutine(WaitSeconds(currentSeconds, maxSeconds, onEachSecond, onEnd));
-            }
-            else
-            {
-                onEnd.Invoke();
             }
         }
     }

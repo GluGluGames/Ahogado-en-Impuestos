@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4479111251125874754}
   - component: {fileID: 5176235087721481948}
   - component: {fileID: 3662450730097252867}
-  m_Layer: 16
+  m_Layer: 15
   m_Name: RapeModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,8 @@ GameObject:
   - component: {fileID: 2557339169096508649}
   - component: {fileID: 4416470800238099999}
   - component: {fileID: -7011913412452065925}
-  m_Layer: 16
+  - component: {fileID: 1156658779559380563}
+  m_Layer: 15
   m_Name: EnemyMini
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +198,7 @@ MonoBehaviour:
   movementController: {fileID: 0}
   model1: {fileID: 459230345474244264}
   model2: {fileID: 459230345474244264}
-  myLayerInt: 16
+  myLayerInt: 15
 --- !u!114 &2557339169096508649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +216,7 @@ MonoBehaviour:
   playerRef: {fileID: 7543234910965191365, guid: e53d69bdcc4d9dc449dd986991e2f6ff, type: 3}
   targetMask:
     serializedVersion: 2
-    m_Bits: 35072
+    m_Bits: 100352
   obstructionMask:
     serializedVersion: 2
     m_Bits: 128
@@ -252,3 +253,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   executeOnLoop: 0
   interruptOptions: 0
+--- !u!114 &1156658779559380563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407563467665678216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec3247242db7fa4da4e3c6a78426d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tickTime: 1
+  keepTicking: 1
