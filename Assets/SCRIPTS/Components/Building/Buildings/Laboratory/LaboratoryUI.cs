@@ -134,7 +134,15 @@ namespace GGG.Components.Buildings.Laboratory
             if (!_laboratories.ContainsKey(laboratory.Id()))
             {
                 _laboratories.Add(laboratory.Id(), laboratory);
-                return;
+            }
+
+            for (int i = 0; i < ProgressBarsBackground.Length; i++)
+            {
+                ProgressBarsBackground[i].color = i + 1 <= _currentLaboratory.CurrentLevel()
+                    ? Color.white
+                    : new Color(0.47f, 0.47f, 0.47f);
+
+                ResearchButtons[i].interactable = i + 1 <= _currentLaboratory.CurrentLevel();
             }
 
             FillBars(laboratory);
@@ -219,19 +227,14 @@ namespace GGG.Components.Buildings.Laboratory
         {
             OpenBarContainer();
             
-            for (int i = 0; i < _currentLaboratory.ActiveBars().Length; i++)
-            {
-                if (_currentLaboratory.IsBarActive(i)) continue;
-
-                CurrentResources[i].enabled = true;
-                CurrentResources[i].sprite = building.GetIcon();
-                _currentLaboratory.SetActiveBuild(i, building);
-                _currentLaboratory.SetDeltaTime(i, building.GetResearchTime());
-                _currentLaboratory.ActiveBar(i, true);
+            CurrentResources[_currentBar].enabled = true;
+            CurrentResources[_currentBar].sprite = building.GetIcon();
+            _currentLaboratory.SetActiveBuild(_currentBar, building);
+            _currentLaboratory.SetDeltaTime(_currentBar, building.GetResearchTime());
+            _currentLaboratory.ActiveBar(_currentBar, true);
                 
-                StartCoroutine(Research(_currentLaboratory.Id(), i));
-                return;
-            }
+            StartCoroutine(Research(_currentLaboratory.Id(), _currentBar));
+            return;
         }
 
         private IEnumerator Research(int id, int idx)
