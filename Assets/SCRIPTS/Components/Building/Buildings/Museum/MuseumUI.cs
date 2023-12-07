@@ -9,6 +9,7 @@ using UnityEngine.Localization;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using GGG.Classes.Buildings;
 using GGG.Components.UI.Buttons;
 
 namespace GGG.Components.Buildings.Museum
@@ -19,6 +20,7 @@ namespace GGG.Components.Buildings.Museum
 
         [Space(5), Header("Containers")] 
         [SerializeField] private GameObject[] ResourcesContainers;
+        [SerializeField] private GameObject BuildingsContainer;
 
         [Space(5), Header("Information")] 
         [SerializeField] private TextMeshProUGUI Name;
@@ -40,12 +42,14 @@ namespace GGG.Components.Buildings.Museum
         private readonly Dictionary<int, Resource[]> _resources = new();
         private readonly Dictionary<int, Button[]> _buttons = new();
         private readonly Dictionary<int, bool[]> _buttonActive = new();
+        private Building[] _buildings;
         private List<ContainerButton> _containerButtons;
 
         private GameObject _viewport;
         
         private int _active;
         private readonly int[] _activeResource = { 0, 0, 0 };
+        private int _activeBuilding;
         private bool _open;
         
         #endregion
@@ -57,6 +61,7 @@ namespace GGG.Components.Buildings.Museum
             _resources.Add(0, Resources.LoadAll<Resource>("SeaResources"));
             _resources.Add(1, Resources.LoadAll<Resource>("ExpeditionResources"));
             _resources.Add(2, Resources.LoadAll<Resource>("FishResources"));
+            _buildings = Resources.LoadAll<Building>("Buildings");
 
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
@@ -93,6 +98,8 @@ namespace GGG.Components.Buildings.Museum
                     idx++;
                 }
             }
+
+            int lastIdx = 0;
             
             for (int i = 0; i < ResourcesContainers.Length; i++)
             {
@@ -102,21 +109,32 @@ namespace GGG.Components.Buildings.Museum
                 int index = i;
                 _containerButtons[i].OnButtonClick += () =>
                     SelectResource(_resources[index], _buttons[index], _buttonActive[index], index, 0);
+                lastIdx++;
             }
 
+            _buttons.Add(lastIdx, BuildingsContainer.GetComponentsInChildren<Button>());
+            _buttonActive.Add(lastIdx, new bool[_buildings.Length]);
+            InitArray(_buttonActive[lastIdx], _buttons[lastIdx]);
+            _containerButtons[lastIdx].OnButtonClick += () =>
+                SelectBuilding(_buildings, _buttons[lastIdx], _buttonActive[lastIdx], lastIdx);
 
             for (int i = 0; i < _resources.Count; i++)
                 if(_resources[i].Length > 0)
                     FillResources(_buttons[i], _resources[i], _buttonActive[i], i);
+            
+            FillBuildings(_buttons[lastIdx], _buildings, _buttonActive[lastIdx]);
         }
         
         private void ResetContainers()
         {
-            for (int i = 0; i < _containerButtons.Count; i++)
+            for (int i = 0; i < _containerButtons.Count - 1; i++)
             {
                 _containerButtons[i].Initialize();
                 ResourcesContainers[i].SetActive(i == 0);
             }
+            
+            _containerButtons[^1].Initialize();
+            BuildingsContainer.SetActive(false);
         }
 
         private void FillResources(Button[] buttons, Resource[] resources, bool[] active, int type)
@@ -141,6 +159,28 @@ namespace GGG.Components.Buildings.Museum
             }
         }
 
+        private void FillBuildings(Button[] buttons, Building[] buildings, bool[] active)
+        {
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if(buildings.Length <= i) buttons[i].transform.parent.gameObject.SetActive(false);
+                else
+                {
+                    buttons[i].image.sprite = buildings[i].GetResearchIcon();
+                    SpriteState aux = new()
+                    {
+                        selectedSprite = buildings[i].GetSelectedIcon(),
+                        highlightedSprite = buildings[i].GetSelectedIcon(),
+                        disabledSprite = buildings[i].GetResearchIcon()
+                    };
+
+                    buttons[i].spriteState = aux;
+                    int idx = i;
+                    buttons[i].onClick.AddListener(() => SelectBuilding(buildings, buttons, active, idx));
+                }
+            }
+        }
+
         private void InitArray(bool[] array, Button[] buttons)
         {
             for (int i = 0; i < array.Length; i++)
@@ -151,6 +191,12 @@ namespace GGG.Components.Buildings.Museum
         }
 
         private void UnlockResource(bool[] array, Button[] buttons, int i)
+        {
+            array[i] = true;
+            buttons[i].image.color = Color.white;
+        }
+
+        private void UnlockBuilding(bool[] array, Button[] buttons, int i)
         {
             array[i] = true;
             buttons[i].image.color = Color.white;
@@ -170,6 +216,19 @@ namespace GGG.Components.Buildings.Museum
             _activeResource[type] = i;
         }
 
+        private void SelectBuilding(Building[] buildings, Button[] buttons, bool[] isActive, int i)
+        {
+            if (_activeBuilding == i && _activeBuilding != 0) return;
+
+            buttons[_activeBuilding].image.sprite = buttons[_activeBuilding].spriteState.disabledSprite;
+
+            Name.text = isActive[i] ? buildings[i].GetName() : LockedString.GetLocalizedString();
+            Description.text = isActive[i] ? buildings[i].GetDescription() : LockedString.GetLocalizedString();
+
+            buttons[i].image.sprite = buttons[i].spriteState.selectedSprite;
+            _activeBuilding = i;
+        }
+
         private void CheckResources()
         {
             for (int i = 0; i < _resources.Count; i++)
@@ -178,6 +237,10 @@ namespace GGG.Components.Buildings.Museum
                     if (_resources[i][j].Unlocked())
                         UnlockResource(_buttonActive[i], _buttons[i], j);
             }
+            
+            for (int i = 0; i < _buildings.Length; i++)
+                if(_buildings[i].IsUnlocked())
+                    UnlockBuilding(_buttonActive[3], _buttons[3], i);
         }
 
         public void Open()
