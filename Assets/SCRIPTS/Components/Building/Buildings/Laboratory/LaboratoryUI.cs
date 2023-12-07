@@ -8,18 +8,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DG.Tweening;
+using GGG.Components.Achievements;
 using GGG.Components.UI.Buttons;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace GGG.Components.Buildings.Laboratory
 {
     public class LaboratoryUI : MonoBehaviour
     {
+        [FormerlySerializedAs("ProgressBars")]
         [Header("Images")] 
-        [SerializeField] private Image[] ProgressBars;
+        [SerializeField] private Image[] ProgressBarsFills;
+        [SerializeField] private Image[] ProgressBarsBackground;
         [SerializeField] private Image[] CurrentResources;
         [Space(5), Header("Texts")] 
         [SerializeField] private TMP_Text[] Counters;
@@ -46,6 +50,8 @@ namespace GGG.Components.Buildings.Laboratory
         
         private GameObject _viewport;
         private int _selected;
+        private int _currentBar;
+        private int _researchDone;
         private bool _open;
 
         private Action _onResourceFinish;
@@ -136,7 +142,7 @@ namespace GGG.Components.Buildings.Laboratory
 
         private void FillBars(Laboratory laboratory)
         {
-            for (int i = 0; i < ProgressBars.Length; i++)
+            for (int i = 0; i < ProgressBarsFills.Length; i++)
             {
                 CurrentResources[i].enabled = laboratory.IsBarActive(i);
                 
@@ -159,7 +165,7 @@ namespace GGG.Components.Buildings.Laboratory
                 int minutes = Mathf.FloorToInt(laboratory.DeltaTime(i) / 60);
                 int seconds = Mathf.FloorToInt(laboratory.DeltaTime(i) % 60);
                 Counters[i].SetText($"{minutes:00}:{seconds:00}");
-                ProgressBars[i].fillAmount = Mathf.Clamp01(1 - laboratory.DeltaTime(i) / totalTime);
+                ProgressBarsFills[i].fillAmount = Mathf.Clamp01(1 - laboratory.DeltaTime(i) / totalTime);
             }
         }
 
@@ -185,6 +191,7 @@ namespace GGG.Components.Buildings.Laboratory
             
             BarsContainer.SetActive(false);
             ResourcesContainer.SetActive(true);
+            _currentBar = idx;
             CheckResources();
         }
 
@@ -198,19 +205,13 @@ namespace GGG.Components.Buildings.Laboratory
         {
             OpenBarContainer();
             
-            for (int i = 0; i < _currentLaboratory.ActiveBars().Length; i++)
-            {
-                if (_currentLaboratory.IsBarActive(i)) continue;
-
-                CurrentResources[i].enabled = true;
-                CurrentResources[i].sprite = resource.GetSprite();
-                _currentLaboratory.SetActiveResource(i, resource);
-                _currentLaboratory.SetDeltaTime(i, resource.GetResearchTime());
-                _currentLaboratory.ActiveBar(i, true);
+            CurrentResources[_currentBar].enabled = true;
+            CurrentResources[_currentBar].sprite = resource.GetSprite();
+            _currentLaboratory.SetActiveResource(_currentBar, resource);
+            _currentLaboratory.SetDeltaTime(_currentBar, resource.GetResearchTime());
+            _currentLaboratory.ActiveBar(_currentBar, true);
                 
-                StartCoroutine(Research(_currentLaboratory.Id(), i));
-                return;
-            }
+            StartCoroutine(Research(_currentLaboratory.Id(), _currentBar));
             
         }
 
@@ -255,11 +256,15 @@ namespace GGG.Components.Buildings.Laboratory
             
             _laboratories[id].ActiveBar(idx, false);
             _laboratories[id].SetDeltaTime(idx, 0f);
+            _researchDone++;
 
+            if (_researchDone >= 6)
+                StartCoroutine(AchievementsManager.Instance.UnlockAchievement("05"));
+            
             if (!_open) yield break;
             
             Counters[idx].SetText("--:--");
-            ProgressBars[idx].fillAmount = 0f;
+            ProgressBarsFills[idx].fillAmount = 0f;
             CurrentResources[idx].enabled = false;
         }
 
@@ -425,7 +430,7 @@ namespace GGG.Components.Buildings.Laboratory
                         
                     _laboratories.Add(lab.Id(), lab);
 
-                    for (int i = 0; i < ProgressBars.Length; i++)
+                    for (int i = 0; i < ProgressBarsFills.Length; i++)
                     {
                         if (laboratoryData.RemainingTime[i] <= 0.0f) continue;
                             
@@ -475,9 +480,9 @@ namespace GGG.Components.Buildings.Laboratory
                 _viewport.SetActive(false);
                 OpenBarContainer();
 
-                for (int i = 0; i < ProgressBars.Length; i++)
+                for (int i = 0; i < ProgressBarsFills.Length; i++)
                 {
-                    ProgressBars[i].fillAmount = 0f;
+                    ProgressBarsFills[i].fillAmount = 0f;
                     Counters[i].SetText("--:--");
                     CurrentResources[i].enabled = false;
                 }

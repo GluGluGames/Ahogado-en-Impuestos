@@ -7,10 +7,9 @@ using GGG.Shared;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace GGG.Components.Core
+namespace GGG.Components.Achievements
 {
     public class AchievementsManager : MonoBehaviour
     {
@@ -50,7 +49,7 @@ namespace GGG.Components.Core
             _achievementPopup.SetActive(false);
         }
 
-        public Achievement Achievement(int idx) => Achievements[idx];
+        public Achievement Achievement(string key) => Achievements.Find(x => x.GetKey() == key);
 
         public List<Achievement> GetAchievements() => Achievements;
 

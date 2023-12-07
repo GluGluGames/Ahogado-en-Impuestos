@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using GGG.Components.Core;
+using GGG.Components.Achievements;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.UI;
 using GGG.Components.UI.Buttons;

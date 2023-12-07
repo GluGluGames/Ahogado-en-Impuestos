@@ -41,7 +41,6 @@ namespace GGG.Components.UI
         private GameManager _gameManager;
         private readonly List<Resource> _shownResource = new(2);
         private bool _initialized;
-        private bool _resourcesLoad;
 
         private int _currentIdx;
         private bool _dirtyFlag;
@@ -53,12 +52,20 @@ namespace GGG.Components.UI
             foreach(GameObject go in ResourceContainers)
                 go.SetActive(false);
 
-            _player.OnPlayerInitialized += () => _initialized = true;
+            _player.OnPlayerInitialized += () =>
+            {
+                ResourceContainers[0].gameObject.SetActive(true);
+                
+                ResourcesIcons[0].sprite = _player.GetResource("Seaweed").GetSprite();
+                ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
+                _initialized = true;
+            };
         }
 
         private void Update()
         {
-            if (!_resourcesLoad || _gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
+            if (!_player.GetResource("Seaweed")) return;
+            if (_gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
             
             ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
             
@@ -164,11 +171,6 @@ namespace GGG.Components.UI
             }
 
             yield return new WaitWhile(() => !_initialized);
-
-            ResourceContainers[0].gameObject.SetActive(true);
-                
-            ResourcesIcons[0].sprite = _player.GetResource("Seaweed").GetSprite();
-            ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
             
             ShownResource[] resources = JsonHelper.FromJson<ShownResource>(data);
             
@@ -184,7 +186,6 @@ namespace GGG.Components.UI
             }
             
             _currentIdx = _shownResource.Count == 0 ? 0 : ResourcesIcons.FindIndex(x => !x.gameObject.activeInHierarchy);
-            _resourcesLoad = true;
         }
     }
 }

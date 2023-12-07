@@ -23,6 +23,8 @@ namespace GGG.Components.Player
             
             if (Instance == null)
                 Instance = this;
+            
+            
         }
 
         #endregion
@@ -54,6 +56,9 @@ namespace GGG.Components.Player
             
             foreach (Resource i in _resources)
                 _resourcesDictionary.Add(i.GetKey(), i);
+            
+            foreach (string i in _resourcesDictionary.Keys) 
+                _resourcesCount.Add(i, 0);
         }
 
         private void OnDisable()
@@ -65,8 +70,9 @@ namespace GGG.Components.Player
 
         public List<Resource> GetResources() => _resources;
 
-        public Resource GetResource(string resourceKey) => _resourcesDictionary[resourceKey];
-
+        public Resource GetResource(string resourceKey) => 
+            _resourcesDictionary.TryGetValue(resourceKey, out Resource value) ? value : null;
+        
         public void AddResource(string resourceKey, int amount) {
             if (!_resourcesCount.ContainsKey(resourceKey))
                 throw new KeyNotFoundException("No resource found");
@@ -109,8 +115,8 @@ namespace GGG.Components.Player
 
             if (!File.Exists(filePath))
             {
-                foreach (string i in _resourcesDictionary.Keys) 
-                    _resourcesCount.Add(i, 0);
+                if (_resourcesCount.Count <= 0)
+                    foreach (string i in _resourcesDictionary.Keys) _resourcesCount.Add(i, 0);
                 
                 OnPlayerInitialized?.Invoke();
                 yield break;
@@ -126,7 +132,7 @@ namespace GGG.Components.Player
             ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data); 
             _resourcesCount = resources.ToDictionary(item => item.Name, item => item.Count);
 
-            if (_resourcesCount.Count < 0) {
+            if (_resourcesCount.Count <= 0) {
                 foreach (string i in _resourcesDictionary.Keys) 
                     _resourcesCount.Add(i, 0);
             }

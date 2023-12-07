@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using GGG.Components.Achievements;
 using GGG.Components.Core;
 using GGG.Components.Taxes;
 using GGG.Components.UI.Buttons;
@@ -31,7 +32,6 @@ namespace GGG.Components.Buildings.CityHall
         private List<AchievementContainer> _achievementContainers;
         private GameObject _viewport;
         private int _currentPage = 1;
-        private int _currentAchievement;
         private bool _open;
 
         public static Action OnCityHallOpen;
@@ -52,6 +52,7 @@ namespace GGG.Components.Buildings.CityHall
                     _containerButtons[(i + 1) % _containerButtons.Count].DeselectButton;
             }
 
+            _currentPage = 1;
             _achievementContainers = GetComponentsInChildren<AchievementContainer>(true).ToList();
             PagesText.SetText($"{_currentPage}/{_achievementsManager.GetAchievements().Count / 3}");
 
@@ -63,7 +64,6 @@ namespace GGG.Components.Buildings.CityHall
         private void InitializeAchievements()
         {
             List<Achievement> achievements = _achievementsManager.GetAchievements();
-            _currentAchievement = 1;
             for (int i = 0; i < _achievementContainers.Count; i++)
             {
                 _achievementContainers[i].SetAchievement(achievements[i].GetName(),

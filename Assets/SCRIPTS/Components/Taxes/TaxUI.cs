@@ -8,6 +8,7 @@ using TMPro;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using GGG.Components.Achievements;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -109,6 +110,8 @@ namespace GGG.Components.Taxes
         {
             foreach (Resource resource in _taxResources.Keys)
                 _player.AddResource(resource.GetKey(), -_taxResources[resource]);
+
+            StartCoroutine(AchievementsManager.Instance.UnlockAchievement("07"));
             
             Close();
             // TODO - Maybe trigger a dialogue with Poseidon?
@@ -118,6 +121,8 @@ namespace GGG.Components.Taxes
         {
             if (_buildings.Count > 0)
                 TileManager.Instance.DestroyBuilding(_buildings[Random.Range(0, _buildings.Count)]);
+            
+            StartCoroutine(AchievementsManager.Instance.UnlockAchievement("08"));
             
             Close();
         }

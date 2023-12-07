@@ -87,7 +87,6 @@ namespace GGG.Components.Core
             if (_gameManager.IsOnUI() || _gameManager.TutorialOpen()) return;
             
             StartCoroutine(HandleMouseInput());
-            StartCoroutine(HandleLeftMouseInput());
         }
 #endif
 
@@ -201,7 +200,7 @@ namespace GGG.Components.Core
                 }
             }
 
-            yield return new WaitForSeconds(0.05f);
+            yield return null;
 
             if (_input.IsHolding()) {
                 _pointerEventData.position = _input.TouchPosition();
@@ -222,37 +221,6 @@ namespace GGG.Components.Core
 
                 _results.Clear();
             } else Holding.IsHolding(false);
-        }
-        
-        private IEnumerator HandleLeftMouseInput() {
-            if (_input.IsSecondaryTouching()) {
-                Plane plane = new Plane(Vector3.up, Vector3.zero);
-                Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
-
-                if (plane.Raycast(ray, out float distance)) {
-                    _dragStartPosition = ray.GetPoint(distance);
-                }
-            }
-
-            yield return new WaitForSeconds(0.05f);
-
-            if (_input.IsSecondaryTouching()) {
-                _pointerEventData.position = _input.TouchPosition();
-                _graphicRaycaster.Raycast(_pointerEventData, _results);
-
-                if (_results.Count == 0) {
-                    Plane plane = new Plane(Vector3.up, Vector3.zero);
-                    Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
-
-                    if (plane.Raycast(ray, out float distance))
-                    {
-                        _dragCurrentPosition = ray.GetPoint(distance);
-                        // _newRotation = Quaternion.Euler(_transform.localEulerAngles + new Vector3(_dragStartPosition.x - _dragCurrentPosition.x, 0, 0));
-                    }
-                }
-
-                _results.Clear();
-            }
         }
 
         #if UNITY_ANDROID
