@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Project.Component.UI.Containers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -90,6 +91,7 @@ namespace GGG.Components.Buildings
                 if(_resources[resource].Count <= i) _buttons[idx].transform.parent.gameObject.SetActive(false);
                 else
                 {
+                    Tooltip tooltip = _buttons[idx].transform.parent.GetComponent<Tooltip>();
                     SpriteState aux = new()
                     {
                         selectedSprite = _resources[resource][i].GetSelectedSprite(),
@@ -105,6 +107,7 @@ namespace GGG.Components.Buildings
                     int button = idx;
                     int res = i;
                     _buttons[idx].onClick.AddListener(() => SelectResource(button, _resources[resource][res], farm));
+                    tooltip.SetResourceName(_resources[resource][i].GetName());
 
                     if (_resources[resource][i] != currentResource) continue;
                     

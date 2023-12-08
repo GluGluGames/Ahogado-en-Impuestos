@@ -10,6 +10,7 @@ using System.Linq;
 using DG.Tweening;
 using GGG.Components.Achievements;
 using GGG.Components.UI.Buttons;
+using Project.Component.UI.Containers;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
@@ -98,10 +99,11 @@ namespace GGG.Components.Buildings.Laboratory
             for (int i = 0; i < _resources.Count; i++)
             {
                 _buttons.Add(i, Containers[i].GetComponentsInChildren<Button>());
-                FillResources(_buttons[i], _resources[i]);
+                FillResources(_buttons[i], _resources[i], Containers[i].GetComponentsInChildren<Tooltip>(true));
             }
             
             _buttons.Add(3, Containers[3].GetComponentsInChildren<Button>());
+            
             FillBuildings();
 
             BuildingManager.OnBuildsLoad += OnBuildsLoad;
@@ -276,6 +278,7 @@ namespace GGG.Components.Buildings.Laboratory
 
         private void FillBuildings()
         {
+            Tooltip[] tooltips = Containers[3].GetComponentsInChildren<Tooltip>();
             for (int i = 0; i < _buttons[3].Length; i++)
             {
                 if (_buildings.Length <= i)
@@ -301,11 +304,12 @@ namespace GGG.Components.Buildings.Laboratory
                     
                     Building building = _buildings[i];
                     _buttons[3][i].onClick.AddListener(() => OnBuildingSelected(building));
+                    tooltips[i].SetResourceName(_buildings[i].GetName());
                 }
             }
         }
         
-        private void FillResources(Button[] buttons, Resource[] resources)
+        private void FillResources(Button[] buttons, Resource[] resources, Tooltip[] tooltips)
         {
             for (int i = 0; i < buttons.Length; i++)
             {
@@ -326,6 +330,7 @@ namespace GGG.Components.Buildings.Laboratory
                     buttons[i].interactable = resources[i].CanResearch();
                     
                     Resource resource = resources[i];
+                    tooltips[i].SetResourceName(resource.GetName());
                     buttons[i].onClick.AddListener(() => OnResourceSelected(resource));
                 }
             }

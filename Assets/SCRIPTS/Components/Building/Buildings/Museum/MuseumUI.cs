@@ -11,6 +11,7 @@ using TMPro;
 using DG.Tweening;
 using GGG.Classes.Buildings;
 using GGG.Components.UI.Buttons;
+using Project.Component.UI.Containers;
 
 namespace GGG.Components.Buildings.Museum
 {
@@ -169,6 +170,7 @@ namespace GGG.Components.Buildings.Museum
                     };
                     
                     buttons[i].spriteState = aux;
+                    buttons[i].transform.parent.GetComponent<Tooltip>().SetResourceName(resources[i].GetName());
                     int index = i;
                     buttons[i].onClick.AddListener(() => SelectResource(resources, buttons, active, type, index));
                 }

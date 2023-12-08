@@ -12,6 +12,7 @@ using DG.Tweening;
 using GGG.Components.Core;
 using GGG.Components.UI.Buttons;
 using GGG.Input;
+using Project.Component.UI.Containers;
 
 namespace GGG.Components.UI
 {
@@ -120,7 +121,7 @@ namespace GGG.Components.UI
             for (int i = 0; i < _resources.Count; i++)
             {
                 _buttons.Add(i, ResourceContainers[i].GetComponentsInChildren<Button>());
-                FillResources(_buttons[i], _resources[i]);
+                FillResources(_buttons[i], _resources[i], ResourceContainers[i].GetComponentsInChildren<Tooltip>(true));
             }
             
             ResetContainers();
@@ -145,7 +146,7 @@ namespace GGG.Components.UI
             }
         }
         
-        private void FillResources(Button[] buttons, Resource[] resources)
+        private void FillResources(Button[] buttons, Resource[] resources, Tooltip[] tooltips)
         {
             for (int i = 0; i < buttons.Length; i++)
             {
@@ -163,6 +164,8 @@ namespace GGG.Components.UI
                     buttons[i].onClick.AddListener(() => AddListener(resources[index], buttons[index]));
                     _resourcesCountText[resources[i].GetKey()] =
                         buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>(true);
+                    
+                    tooltips[i].SetResourceName(resources[i].GetName());
                 }
             }
         }
