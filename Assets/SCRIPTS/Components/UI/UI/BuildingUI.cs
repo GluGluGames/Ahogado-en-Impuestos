@@ -124,6 +124,9 @@ namespace GGG.Components.UI
                 _open = true;
             };
             
+            for(int i = 0; i < Panels.Count; i++)
+                Panels[i].SetActive(i == 0);
+            
             _selectedTile = tile;
             _viewport.SetActive(true);
             CheckBuildings();

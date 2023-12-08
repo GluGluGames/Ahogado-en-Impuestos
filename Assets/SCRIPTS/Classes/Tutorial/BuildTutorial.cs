@@ -34,26 +34,31 @@ namespace GGG.Classes.Tutorial
         }
         
         public override IEnumerator StartTutorial(Action OnTutorialStart, Action<bool, bool> OnTutorialEnd, 
-            Action<string, Sprite, string> OnUiChange)
+            Action<string, Sprite, string> OnUiChange, Action<TutorialObjective> OnObjectivesChange)
         {
             InitializeTutorial();
 
             #region Structure Build Tutorial
             
+            ObjectivesPanelOpen(OnObjectivesChange, -1);
             for (int i = 0; i < 2; i++)
             {
                 yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
             }
 
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true, false);
+            ObjectivesPanelOpen(OnObjectivesChange, 0);
             yield return BuildStep();
+            ObjectivesPanelOpen(OnObjectivesChange, -1);
             
             #endregion
 
             #region Upgrade Menu Open
 
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true, true);
+            ObjectivesPanelOpen(OnObjectivesChange, 1);
             yield return UpgradeMenuStep();
+            ObjectivesPanelOpen(OnObjectivesChange, -1);
 
             #endregion
 
@@ -61,7 +66,9 @@ namespace GGG.Classes.Tutorial
             
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true, false);
+            ObjectivesPanelOpen(OnObjectivesChange, 2);
             yield return UpgradeMenuCloseStep();
+            ObjectivesPanelOpen(OnObjectivesChange, -1);
 
             #endregion
 
@@ -69,16 +76,17 @@ namespace GGG.Classes.Tutorial
 
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true, true);
+            ObjectivesPanelOpen(OnObjectivesChange, 3);
             yield return TileCleanStep();
+            ObjectivesPanelOpen(OnObjectivesChange, -1);
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
             _tileCleanUI.Close();
             
             #endregion
             
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true, true, true);
-            yield return AchievementsManager.Instance.UnlockAchievement("01");
-            
             FinishTutorial();
+            yield return AchievementsManager.Instance.UnlockAchievement("01");
         }
 
         protected override void InitializeTutorial()
@@ -169,7 +177,7 @@ namespace GGG.Classes.Tutorial
                     }
                     case Steps.TileCleanStep:
                     {
-                        if (tile.tileType != TileType.Standard) tile.selectable = true;
+                        if (tile.tileType != TileType.Standard && tile.tileType != TileType.Build) tile.selectable = true;
                         else tile.selectable = false;
                         continue;
                     }

@@ -81,7 +81,7 @@ namespace GGG.Components.Tutorial
                 throw new Exception("Enum or key not correct");
             
             _gameManager.SetCurrentTutorial(tutorialState);
-            StartCoroutine(tutorial.StartTutorial(_ui.Open, _ui.Close, _ui.SetTutorialFields));
+            StartCoroutine(tutorial.StartTutorial(_ui.Open, _ui.Close, _ui.SetTutorialFields, _ui.SetObjectives));
         }
     }
 }

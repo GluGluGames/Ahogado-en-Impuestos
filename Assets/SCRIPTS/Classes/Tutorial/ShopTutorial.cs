@@ -8,7 +8,7 @@ namespace GGG.Classes.Tutorial
     public class ShopTutorial : TutorialBase
     {
         public override IEnumerator StartTutorial(Action OnTutorialStart, Action<bool, bool> OnTutorialEnd, 
-            Action<string, Sprite, string> OnUiChange)
+            Action<string, Sprite, string> OnUiChange, Action<TutorialObjective> OnObjectivesChange)
         {
             for (int i = 0; i < 3; i++)
             {
