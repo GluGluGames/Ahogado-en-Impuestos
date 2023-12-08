@@ -37,7 +37,13 @@ namespace GGG.Components.Resources
 
             foreach (Resource resource in resources)
                 resourcesCollected.Add(resource, 0);
-            
+
+            Invoke("SpawnAllResources", Time.deltaTime * 5);
+
+        }
+
+        private void SpawnAllResources()
+        {
             _tiles = FindObjectsOfType<HexTile>().ToList();
             for (int i = 0; i < _nResourcesMax; ++i)
             {
@@ -52,7 +58,7 @@ namespace GGG.Components.Resources
             
             foreach (ResourceComponent resource in resourcesOnScene)
             {
-                if (resource.currentTile != hex) continue;
+                if (resource.currentTile != hex && hex.GetTileType() != TileType.Mountain && hex.selectable == true) continue;
                 
                 spawned = SpawnRandomResource();
                 break;
@@ -70,6 +76,9 @@ namespace GGG.Components.Resources
 
             return true;
         }
+
+        public int GetResourceAmount(Resource resource) =>
+            resourcesOnScene.Find(x => x.GetResource() == resource).GetAmount();
 
         public void sumResourceCollected()
         {

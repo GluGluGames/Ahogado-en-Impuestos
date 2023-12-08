@@ -14,7 +14,7 @@ namespace GGG.Components.Taxes
 
         private DialogueBox _dialogueBox;
         private TaxUI _taxUI;
-        private float _intervalDelta;
+        private static float _intervalDelta;
         private bool _stopInterval;
 
         private void Start()
@@ -44,6 +44,8 @@ namespace GGG.Components.Taxes
             
             TriggerTaxes();
         }
+
+        public static float GetRemainingTime() => _intervalDelta;
 
         public void TriggerTaxes()
         {

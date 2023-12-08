@@ -51,6 +51,7 @@ namespace GGG.Components.UI.Buttons {
             
             if (!BuildingInfo.IsUnlocked()) LockButton();
         }
+        
 
         private void LockButton()
         {

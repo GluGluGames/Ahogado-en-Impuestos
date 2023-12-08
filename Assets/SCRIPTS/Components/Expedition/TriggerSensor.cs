@@ -14,13 +14,9 @@ namespace GGG.Components.Expedition
             }
         }
 
-        // Count how many colliders are overlapping this trigger.
-        // If desired, you can filter here by tag, attached components, etc.
-        // so that only certain collisions count. Physics layers help too.
         private void OnTriggerEnter(Collider other)
         {
-            //_overlaps++;
-            if (other.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") || other.transform.gameObject.layer != LayerMask.NameToLayer("Berserker")) return;
+            if (other.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") && other.transform.gameObject.layer != LayerMask.NameToLayer("Berserker")) return;
             Lost();
         }
 

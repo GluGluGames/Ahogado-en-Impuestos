@@ -51,7 +51,12 @@ namespace GGG.Components.Buildings
         {
             Initialize();
         }
-        
+
+        private void OnDisable()
+        {
+            CloseButton.onClick.RemoveAllListeners();
+        }
+
         private void Initialize()
         {
             _gameManager = GameManager.Instance;

@@ -1562,12 +1562,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d5bb3aad98221a4b8eaeeb38f1e1519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Generator: {fileID: 11400000, guid: e64b7f580ad47a44892207aa58b50c43, type: 2}
-  BoostTimes: 3c000000b40000002c010000
   BoostButtonToggles:
   - {fileID: 21300000, guid: d3ec97505ff040d4598b988deeed0412, type: 3}
   - {fileID: 21300000, guid: ba346a5e59d04ba4d89961f3fc4d37c1, type: 3}
   - {fileID: 21300000, guid: 39c12d86ba53d3049a67f67f6ae7a3d2, type: 3}
+  BoostSound: {fileID: 11400000, guid: 1662c0c13a77e364d87dc0d3ad9d8d75, type: 2}
+  ParticlesPrefab: {fileID: 2240878352855681812, guid: 56eab78df3c1a2a4db777436111ea918, type: 3}
   LevelContainers:
   - {fileID: 7598923018240709075}
   - {fileID: 9222530887080386455}

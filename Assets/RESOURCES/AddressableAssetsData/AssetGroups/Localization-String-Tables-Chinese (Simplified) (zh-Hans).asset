@@ -17,12 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 811e744e5782ca24cae43a1899052939
   m_SerializeEntries:
-  - m_GUID: ddf2e6a50b3fa7443b30131c2a9b07a9
-    m_Address: Resources_zh-Hans
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-zh-Hans
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f292ac702787c04408ad2c8095cd958e
     m_Address: Main_Menu_zh-Hans
     m_ReadOnly: 1
@@ -77,6 +71,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-zh-Hans
     - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ddf2e6a50b3fa7443b30131c2a9b07a9
+    m_Address: Resources_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 2ecfeba56e721fa4392c18f016e20142, type: 2}

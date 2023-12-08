@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using GGG.Shared;
 using GGG.Components.Player;
@@ -73,6 +74,20 @@ namespace GGG.Components.UI
             if (!_input.Escape() || _gameManager.OnTutorial()) return;
 
             Close();
+        }
+
+        private void OnDisable()
+        {
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                int idx = i;
+                for (int j = 0; j < _containerButtons.Count - 1; j++)
+                {
+                    _containerButtons[i].OnButtonClick -=
+                        _containerButtons[(idx + 1) % _containerButtons.Count].DeselectButton;
+                    idx++;
+                }
+            }
         }
 
         #endregion

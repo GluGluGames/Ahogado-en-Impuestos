@@ -8,6 +8,7 @@ using TMPro;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using GGG.Components.Achievements;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -16,6 +17,7 @@ namespace GGG.Components.Taxes
 {
     public class TaxUI : MonoBehaviour
     {
+        [SerializeField] private Sound DestructionSound;
         [Header("UI Fields")]
         [SerializeField] private Image[] ResourcesSprites;
         [SerializeField] private TMP_Text[] ResourcesAmount;
@@ -44,6 +46,12 @@ namespace GGG.Components.Taxes
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             _viewport.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.5f);
+        }
+
+        private void OnDisable()
+        {
+            PayButton.onClick.RemoveAllListeners();
+            NotPayButton.onClick.RemoveAllListeners();
         }
 
         public void Open()
@@ -109,6 +117,8 @@ namespace GGG.Components.Taxes
         {
             foreach (Resource resource in _taxResources.Keys)
                 _player.AddResource(resource.GetKey(), -_taxResources[resource]);
+
+            StartCoroutine(AchievementsManager.Instance.UnlockAchievement("07"));
             
             Close();
             // TODO - Maybe trigger a dialogue with Poseidon?
@@ -118,6 +128,9 @@ namespace GGG.Components.Taxes
         {
             if (_buildings.Count > 0)
                 TileManager.Instance.DestroyBuilding(_buildings[Random.Range(0, _buildings.Count)]);
+            
+            SoundManager.Instance.Play(DestructionSound);
+            StartCoroutine(AchievementsManager.Instance.UnlockAchievement("08"));
             
             Close();
         }

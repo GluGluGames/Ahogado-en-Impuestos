@@ -51,14 +51,20 @@ namespace GGG.Components.UI
 
             Close();
         }
+        
+        private void OnDisable()
+        {
+            _player.OnPlayerInitialized -= OnPlayerInitialized;
+            foreach (HexTile tile in _tiles)
+                tile.OnHexSelect -= Open;
+            
+            CleanButton.onClick.RemoveAllListeners();
+            CloseButton.onClick.RemoveAllListeners();
+        }
 
         private void Initialize()
         {
-            _player.OnPlayerInitialized += () =>
-            {
-                _cleanResource = _player.GetResource("Seaweed");
-                Container.GetComponentInChildren<Image>().sprite = _cleanResource.GetSprite();
-            };
+            _player.OnPlayerInitialized += OnPlayerInitialized;
             
             CleanButton.onClick.AddListener(CleanTile);
             CloseButton.onClick.AddListener(OnCloseButton);
@@ -73,6 +79,12 @@ namespace GGG.Components.UI
                 if (_tilesClean > 0)
                     tile.SetClearCost(Mathf.RoundToInt(tile.GetClearCost() + _tilesClean * 25));
             }
+        }
+
+        private void OnPlayerInitialized()
+        {
+            _cleanResource = _player.GetResource("Seaweed");
+            Container.GetComponentInChildren<Image>().sprite = _cleanResource.GetSprite();
         }
 
         private void CleanTile()

@@ -40,7 +40,7 @@ namespace GGG.Components.Enemies
 
             foreach (Enemy enemy in _enemies)
             {
-                if (enemy.currentTile != hex && enemy.currentTile != PlayerPosition.CurrentTile) continue;
+                if (enemy.currentTile != hex && hex != PlayerPosition.CurrentTile && hex.GetTileType() != TileType.Mountain && hex.selectable == true) continue;
                 
                 spawned = SpawnEnemy();
                 break;

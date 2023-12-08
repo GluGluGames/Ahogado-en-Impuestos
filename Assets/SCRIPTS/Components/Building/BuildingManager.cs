@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using GGG.Components.Achievements;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -35,11 +36,13 @@ namespace GGG.Components.Buildings
 
         private PlayerManager _player;
         private GameManager _gameManager;
+        private AchievementsManager _achievementsManager;
         
         private readonly Dictionary<Building, int> _buildingsCount = new();
         private readonly Dictionary<Building, ResourceCost> _buildingsCosts = new();
         private List<BuildingComponent> _buildings = new();
         private List<Building> _builds;
+        private List<BuildingComponent> _achievementsBuildings = new(3);
 
         
         private readonly List<Farm> _farms = new();
@@ -73,6 +76,7 @@ namespace GGG.Components.Buildings
         {
             _player = PlayerManager.Instance;
             _gameManager = GameManager.Instance;
+            _achievementsManager = AchievementsManager.Instance;
         }
 
         private void OnDisable()
@@ -105,6 +109,9 @@ namespace GGG.Components.Buildings
             build.SetId(_currentId);
             _buildingsCount[building]++;
             _buildings.Add(build);
+            
+            ArchitectAchievement(build);
+            ConstructorAchievement();
 
             do _currentId++; 
             while (_buildings.Find((x) => x.Id() == _currentId));
@@ -113,6 +120,33 @@ namespace GGG.Components.Buildings
             _buildingsCosts[building].SetCost(0, formula);
 
             if (build.GetType() == typeof(Farm)) _farms.Add((Farm) build);
+        }
+
+        private void ArchitectAchievement(BuildingComponent build)
+        {
+            if (_achievementsManager.Achievement("02").IsUnlocked()) return;
+            
+            if(!_achievementsBuildings.Find(x => x.BuildData() == build.BuildData()))
+                _achievementsBuildings.Add(build);
+
+            if (_achievementsBuildings.Count >= 3)
+                StartCoroutine(_achievementsManager.UnlockAchievement("02"));
+        }
+
+        private void ConstructorAchievement()
+        {
+            if (_achievementsManager.Achievement("06").IsUnlocked()) return;
+
+            int aux = 0;
+
+            foreach (int building in _buildingsCount.Values)
+            {
+                aux += building;
+                if (aux < 20) continue;
+                
+                StartCoroutine(_achievementsManager.UnlockAchievement("06"));
+                break;
+            }
         }
 
         public void RemoveBuilding(BuildingComponent build)
@@ -138,16 +172,16 @@ namespace GGG.Components.Buildings
             return _buildingsCosts[build];
         }
 
-        public void SaveBuildings() {
-            if (_gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial || 
-                !SceneManagement.InGameScene()) return;
+        public void SaveBuildings()
+        {
+            if (!SceneManagement.InGameScene() || 
+                _gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial) return;
             
-            BuildingComponent[] buildings = gameObject.GetComponentsInChildren<BuildingComponent>();
-            BuildingData[] saveData = new BuildingData[buildings.Length];
+            BuildingData[] saveData = new BuildingData[_buildings.Count];
             int i = 0;
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "buildings_data.json");
 
-            foreach (BuildingComponent build in buildings)
+            foreach (BuildingComponent build in _buildings)
             {
                 BuildingData data = new()
                 {

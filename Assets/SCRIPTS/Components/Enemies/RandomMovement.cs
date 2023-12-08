@@ -44,10 +44,6 @@ namespace GGG.Components.Enemies
                 if(currentPath.Count == 0 || targetTile != currentPath.Last())
                 {
                     AddToTargetTile();
-                    foreach (HexTile item in currentPath)
-                    {
-                        Debug.Log(item);
-                    }
                 }
             }
         }
@@ -83,6 +79,7 @@ namespace GGG.Components.Enemies
             }
 
             addedPath.Reverse();
+            addedPath.RemoveAt(0); // remove the first tile since it is already on the path
 
             foreach (HexTile tile in addedPath)
             {

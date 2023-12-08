@@ -69,19 +69,28 @@ namespace GGG.Components.UI
             Close();
         }
 
+        private void OnDisable()
+        {
+            LeftArrow.onClick.RemoveAllListeners();
+            RightArrow.onClick.RemoveAllListeners();
+            CloseButton.onClick.RemoveAllListeners();
+            
+            HexTile[] tiles = FindObjectsOfType<HexTile>();
+            foreach (HexTile tile in tiles) tile.OnHexSelect -= Open;
+            
+            _buttons = GetComponentsInChildren<BuildButton>(true);
+            foreach (BuildButton button in _buttons) button.OnStructureBuild -= AuxClose;
+        }
+
         private void Initialize()
         {
             HexTile[] tiles = FindObjectsOfType<HexTile>();
-
-            foreach (HexTile tile in tiles) {
-                tile.OnHexSelect += Open;
-            }
-
+            foreach (HexTile tile in tiles) tile.OnHexSelect += Open;
+            
             _buttons = GetComponentsInChildren<BuildButton>(true);
-
             foreach (BuildButton button in _buttons) {
                 button.Initialize(_buildingManager);
-                button.OnStructureBuild += (x, y) => Close();
+                button.OnStructureBuild += AuxClose;
             }
             
             PanelsText.SetText($"{_currentPanel + 1}/{Panels.Count}");
@@ -121,6 +130,8 @@ namespace GGG.Components.UI
             OnUiOpen?.Invoke();
             _gameManager.OnUIOpen();
         }
+
+        private void AuxClose(BuildingComponent x = null, HexTile y = null) => Close();
         
         private void OnCloseButton() {
             if (!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;

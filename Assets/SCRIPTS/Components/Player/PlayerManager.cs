@@ -17,9 +17,6 @@ namespace GGG.Components.Player
         public static PlayerManager Instance;
 
         private void Awake() {
-
-            if(_PlayerModel != null)
-                Instantiate(_PlayerModel, transform);
             
             if (Instance == null)
                 Instance = this;
@@ -27,13 +24,11 @@ namespace GGG.Components.Player
 
         #endregion
         
-        [SerializeField] private GameObject _PlayerModel;
-
         private GameManager _gameManager;
         
-        private List<Resource> _resources;
-        private Dictionary<string, int> _resourcesCount = new();
-        private readonly Dictionary<string, Resource> _resourcesDictionary = new();
+        private static List<Resource> _resources;
+        private static Dictionary<string, int> _resourcesCount = new();
+        private static readonly Dictionary<string, Resource> _resourcesDictionary = new();
 
         public Action OnPlayerInitialized;
 
@@ -51,9 +46,17 @@ namespace GGG.Components.Player
             _resources = Resources.LoadAll<Resource>("SeaResources").
                 Concat(Resources.LoadAll<Resource>("ExpeditionResources")).
                 Concat(Resources.LoadAll<Resource>("FishResources")).ToList();
+
+            if (_resourcesDictionary.Count <= 0)
+            {
+                foreach (Resource i in _resources)
+                    _resourcesDictionary.Add(i.GetKey(), i);
+            }
+
+            if (_resourcesCount.Count > 0) return;
             
-            foreach (Resource i in _resources)
-                _resourcesDictionary.Add(i.GetKey(), i);
+            foreach (string i in _resourcesDictionary.Keys)
+                _resourcesCount.Add(i, 0);
         }
 
         private void OnDisable()
@@ -65,8 +68,9 @@ namespace GGG.Components.Player
 
         public List<Resource> GetResources() => _resources;
 
-        public Resource GetResource(string resourceKey) => _resourcesDictionary[resourceKey];
-
+        public Resource GetResource(string resourceKey) => 
+            _resourcesDictionary.TryGetValue(resourceKey, out Resource value) ? value : null;
+        
         public void AddResource(string resourceKey, int amount) {
             if (!_resourcesCount.ContainsKey(resourceKey))
                 throw new KeyNotFoundException("No resource found");
@@ -79,9 +83,6 @@ namespace GGG.Components.Player
 
         public void SaveResourcesCount()
         {
-            if (!SceneManagement.InGameScene() || 
-                _gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
-            
             ResourceData[] resourceDataList = new ResourceData[_resourcesCount.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");
             int i = 0;
@@ -109,8 +110,8 @@ namespace GGG.Components.Player
 
             if (!File.Exists(filePath))
             {
-                foreach (string i in _resourcesDictionary.Keys) 
-                    _resourcesCount.Add(i, 0);
+                if (_resourcesCount.Count <= 0)
+                    foreach (string i in _resourcesDictionary.Keys) _resourcesCount.Add(i, 0);
                 
                 OnPlayerInitialized?.Invoke();
                 yield break;
@@ -125,6 +126,11 @@ namespace GGG.Components.Player
             
             ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data); 
             _resourcesCount = resources.ToDictionary(item => item.Name, item => item.Count);
+
+            if (_resourcesCount.Count <= 0) {
+                foreach (string i in _resourcesDictionary.Keys) 
+                    _resourcesCount.Add(i, 0);
+            }
             
             OnPlayerInitialized?.Invoke();
         }

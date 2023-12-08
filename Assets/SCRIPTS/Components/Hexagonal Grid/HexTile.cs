@@ -52,7 +52,7 @@ namespace GGG.Components.HexagonalGrid
             _manager = TileManager.Instance;
             _gameManager = GameManager.Instance;
             _isEmpty = _currentBuilding == null;
-            selectable = true;
+            if(tileType.Equals(TileType.Mountain)) selectable = false;
 
             if (_manager)
             {
@@ -96,7 +96,7 @@ namespace GGG.Components.HexagonalGrid
         #region Getters&Setters
 
         public bool TileEmpty()
-        { return !_currentBuilding; }
+        { return tileType != TileType.Build; }
 
         public BuildingComponent GetCurrentBuilding()
         { return _currentBuilding; }
