@@ -94,6 +94,7 @@ namespace GGG.Components.Serialization
                 _playerManager.LoadResourcesCount(),
                 _buildingManager.LoadBuildings(),
                 _hudManager.LoadShownResource(),
+                _tileManager.LoadTilesState()
             };
 
             foreach (IEnumerator enumerator in order)
@@ -109,7 +110,6 @@ namespace GGG.Components.Serialization
             
             _playerManager.SaveResourcesCount();
             _hudManager.SaveShownResources();
-            _tileManager.SaveTilesState();
             _laboratoryUI.SaveResearchProgress();
             _generatorUI.SaveGeneratorState();
         }

@@ -96,7 +96,7 @@ namespace GGG.Components.HexagonalGrid
         #region Getters&Setters
 
         public bool TileEmpty()
-        { return !_currentBuilding; }
+        { return tileType != TileType.Build; }
 
         public BuildingComponent GetCurrentBuilding()
         { return _currentBuilding; }

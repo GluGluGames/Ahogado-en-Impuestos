@@ -1218,11 +1218,11 @@ PrefabInstance:
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: NormalIcon
       value: 
-      objectReference: {fileID: 21300000, guid: aa6d781cb6fc995418ec32782e001297, type: 3}
+      objectReference: {fileID: 21300000, guid: 032241ce8b915a746b720481e79da138, type: 3}
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: SelectedIcon
       value: 
-      objectReference: {fileID: 21300000, guid: aa6d781cb6fc995418ec32782e001297, type: 3}
+      objectReference: {fileID: 21300000, guid: e7ea93a804a396e48b8c55dfe6793fb7, type: 3}
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: ActivatePanel
       value: 
@@ -1231,10 +1231,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Container_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 7858360039708199120, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -142.8897
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858360039708199120, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -63.4518
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858360039708199120, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 8.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858360039708199120, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 6.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8368574375518966197, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: aa6d781cb6fc995418ec32782e001297, type: 3}
+      objectReference: {fileID: 21300000, guid: 032241ce8b915a746b720481e79da138, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1340,11 +1356,11 @@ PrefabInstance:
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: NormalIcon
       value: 
-      objectReference: {fileID: 21300000, guid: baff9a6be6d940d45a0a689e45c76e3c, type: 3}
+      objectReference: {fileID: 21300000, guid: 24ff94f40e31c3c4083d30151691ad8e, type: 3}
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: SelectedIcon
       value: 
-      objectReference: {fileID: 21300000, guid: baff9a6be6d940d45a0a689e45c76e3c, type: 3}
+      objectReference: {fileID: 21300000, guid: b03f2e41714b34b47a39a6426e36f98b, type: 3}
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: ActivatePanel
       value: 
@@ -1353,10 +1369,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Container_Button_1
       objectReference: {fileID: 0}
+    - target: {fileID: 7858360039708199120, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -180.0938
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858360039708199120, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -78.9407
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858360039708199120, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 10.799988
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858360039708199120, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 10.599998
+      objectReference: {fileID: 0}
     - target: {fileID: 8368574375518966197, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: baff9a6be6d940d45a0a689e45c76e3c, type: 3}
+      objectReference: {fileID: 21300000, guid: 24ff94f40e31c3c4083d30151691ad8e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
