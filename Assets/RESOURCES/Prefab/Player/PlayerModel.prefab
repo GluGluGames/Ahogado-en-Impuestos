@@ -1497,7 +1497,7 @@ Transform:
   - {fileID: 2257976671929653473}
   - {fileID: 4729450176341347954}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1027092197478509945
 Rigidbody:
@@ -1665,6 +1665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa86f211b98b354286195b1cd936db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visionRange: 0
   gotPath: 0
   _ticker: {fileID: 8963546650791535267}
 --- !u!114 &1092394595795503075

@@ -1,4 +1,5 @@
 using GGG.Components.HexagonalGrid;
+using GGG.Components.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace GGG.Components.Enemies
         public EnemyComponent enemyComp;
         [SerializeField] private int maxPatience = 2;
         [SerializeField] private int staminaRechargeTime = 2;
+        [SerializeField] private EnemyStateUI StateUI;
         private int patience = 0;
         private float delta = 0;
         public float visionFrequency;
@@ -32,7 +34,7 @@ namespace GGG.Components.Enemies
                 target = GameObject.FindWithTag("Player").transform;
                 enemyComp.movementController.imChasing = false;
                 fov.imBlinded = false;
-                Debug.Log("patruyo");
+                StateUI.ChangeState(StateIcon.PatrolState);
             };
 
             ai.UpdatePatrol += () =>
@@ -40,7 +42,6 @@ namespace GGG.Components.Enemies
                 if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdate();
                 if (targetOnVision)
                 {
-                    Debug.Log("ey");
                     ai.detectPlayerPush.Fire();
                 }
 
@@ -49,11 +50,11 @@ namespace GGG.Components.Enemies
 
             ai.StartChase += () =>
             {
-                Debug.Log("persigo");
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.imChasing = true;
                 fov.imBlinded = false;
                 enemyComp.movementController.onMove += countPatience;
+                StateUI.ChangeState(StateIcon.ChasingState);
             };
 
             ai.UpdateChase += () =>
@@ -66,14 +67,13 @@ namespace GGG.Components.Enemies
 
             ai.StartBerserker += () =>
             {
-                Debug.Log("berserker");
                 updateTargetTile();
                 enemyComp.movementController.gotPath = false;
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.imChasing = true;
                 berserkerMode = true;
                 fov.imBlinded = false;
-                
+                StateUI.ChangeState(StateIcon.BerserkerState);
             };
 
             ai.UpdateBerserker += () =>
@@ -87,11 +87,13 @@ namespace GGG.Components.Enemies
 
             ai.SleepMethod += () =>
             {
+                
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.movingAllowed = false;
                 enemyComp.movementController.onMove -= countPatience;
                 fov.imBlinded = true;
                 StartCoroutine(OnSleepCoroutine());
+                StateUI.ChangeState(StateIcon.SleepState);
             };
         }
 
@@ -186,13 +188,5 @@ namespace GGG.Components.Enemies
             ai.restedPush.Fire();
         }
 
-        private IEnumerator onStaminaRecharge()
-        {
-            fov.imBlinded = true;
-            enemyComp.movementController.movingAllowed = false;
-            yield return new WaitForSeconds(staminaRechargeTime);
-            fov.imBlinded = false;
-            enemyComp.movementController.movingAllowed = true;
-        }
     }
 }

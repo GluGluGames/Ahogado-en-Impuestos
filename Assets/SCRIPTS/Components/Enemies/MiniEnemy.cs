@@ -1,5 +1,5 @@
 using GGG.Components.HexagonalGrid;
-
+using GGG.Components.UI;
 using System.Collections;
 using UnityEngine;
 
@@ -12,6 +12,7 @@ namespace GGG.Components.Enemies
         public EnemyComponent enemyComp;
         [SerializeField] private int stamina = 2;
         [SerializeField] private int staminaRechargeTime = 2;
+        [SerializeField] private EnemyStateUI StateUI;
         private int tiredness = 0;
 
         private void Awake()
@@ -44,6 +45,7 @@ namespace GGG.Components.Enemies
             {
                 enemyComp.movementController.imChasing = false;
                 fov.imBlinded = false;
+                StateUI.ChangeState(StateIcon.PatrolState);
             };
 
             ai.UpdatePatrol += () =>
@@ -58,6 +60,7 @@ namespace GGG.Components.Enemies
                 enemyComp.movementController.imChasing = true;
                 fov.imBlinded = false;
                 enemyComp.movementController.onMove += countTiredness;
+                StateUI.ChangeState(StateIcon.ChasingState);
             };
 
             ai.UpdateChase += () =>
@@ -74,23 +77,17 @@ namespace GGG.Components.Enemies
                 enemyComp.movementController.movingAllowed = false;
                 fov.canSeePlayer = false;
                 fov.imBlinded = true;
+                StateUI.ChangeState(StateIcon.SleepState);
                 StartCoroutine(OnSleepCoroutine());
             };
 
             ai.FleeMethod += () =>
             {
                 enemyComp.movementController.onMove -= countTiredness;
+                StateUI.ChangeState(StateIcon.FleeState);
                 HexTile destination = enemyComp.movementController.Flee(3);
                 StartCoroutine(checkFleeingStatus(destination));
             };
-        }
-
-        private void Start()
-        {
-        }
-
-        private void Update()
-        {
         }
 
         private void countTiredness()
@@ -126,11 +123,17 @@ namespace GGG.Components.Enemies
 
         private IEnumerator onStaminaRecharge()
         {
+            StateIcon currStateIcon = StateUI.GetCurrentState();
+            StateUI.ChangeState(StateIcon.RestState);
+
             fov.imBlinded = true;
             enemyComp.movementController.movingAllowed = false;
             yield return new WaitForSeconds(staminaRechargeTime);
             fov.imBlinded = false;
             enemyComp.movementController.movingAllowed = true;
+
+            StateUI.ChangeState(currStateIcon);
+
         }
     }
 }
