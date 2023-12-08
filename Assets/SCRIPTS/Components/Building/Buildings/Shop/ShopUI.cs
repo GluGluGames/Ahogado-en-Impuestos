@@ -74,6 +74,13 @@ namespace GGG.Components.Buildings.Shop
             TimeText.SetText($"{minutes:00}:{seconds:00}");
         }
 
+        private void OnDisable()
+        {
+            UpArrow.onClick.RemoveAllListeners();
+            DownArrow.onClick.RemoveAllListeners();
+            CloseButton.onClick.RemoveAllListeners();
+        }
+
         private void GenerateExchanges()
         {
             List<ShopExchange> remainingExchanges = new (Exchanges);

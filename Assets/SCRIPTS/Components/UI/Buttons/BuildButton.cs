@@ -41,9 +41,7 @@ namespace GGG.Components.UI.Buttons {
             _buildingManager = manager;
             HexTile[] tiles = FindObjectsOfType<HexTile>();
 
-            foreach (HexTile tile in tiles) {
-                tile.OnHexSelect += (x) => _selectedHexTile = tile;
-            }
+            foreach (HexTile tile in tiles) tile.OnHexSelect += SelectTile;
             
             _cost = _buildingManager.GetBuildingCost(BuildingInfo);
             StructureSprite.sprite = BuildingInfo.GetIcon();
@@ -51,6 +49,16 @@ namespace GGG.Components.UI.Buttons {
             
             if (!BuildingInfo.IsUnlocked()) LockButton();
         }
+
+        private void OnDisable()
+        {
+            HexTile[] tiles = FindObjectsOfType<HexTile>();
+            
+            foreach (HexTile tile in tiles) tile.OnHexSelect -= SelectTile;
+        }
+
+        private void SelectTile(HexTile tile) => _selectedHexTile = tile;
+        
 
         private void LockButton()
         {

@@ -116,6 +116,9 @@ namespace GGG.Components.Buildings.Laboratory
 
         private void OnDisable()
         {
+            BackButton.onClick.RemoveAllListeners();
+            CloseButton.onClick.RemoveAllListeners();
+            BuildingManager.OnBuildsLoad -= OnBuildsLoad;
             SaveResearchProgress();
         }
         

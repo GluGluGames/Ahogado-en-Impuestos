@@ -51,6 +51,14 @@ namespace GGG.Components.UI
             ToggleMenu();
         }
 
+        private void OnDisable()
+        {
+            OpenButton.onClick.RemoveAllListeners();
+            InventoryButton.onClick.RemoveAllListeners();
+            SettingsButton.onClick.RemoveAllListeners();
+            ExpeditionButton.onClick.RemoveAllListeners();
+        }
+
         private void ToggleMenu()
         {
             if ((GameManager.Instance.IsOnUI() || GameManager.Instance.OnTutorial()) && !_open) return;

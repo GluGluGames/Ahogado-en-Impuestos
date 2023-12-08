@@ -9,6 +9,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using GGG.Shared;
 using TMPro;
 using UnityEngine.Networking;
 
@@ -18,6 +19,7 @@ namespace GGG.Components.Buildings.Generator
     {
         [Header("Generator fields")] 
         [SerializeField] private Sprite[] BoostButtonToggles;
+        [SerializeField] private Sound BoostSound;
         [Space(5), Header("Containers")] 
         [SerializeField] private GameObject[] LevelContainers;
         [Space(5), Header("Text")] 
@@ -82,6 +84,8 @@ namespace GGG.Components.Buildings.Generator
 
         private void OnDisable()
         {
+            CloseButton.onClick.RemoveAllListeners();
+            BuildingManager.OnBuildsLoad -= OnBuildLoads;
             SaveGeneratorState();
         }
 
@@ -127,7 +131,8 @@ namespace GGG.Components.Buildings.Generator
             
             if (_currentGenerator.CurrentGeneration(level) >= level) 
                 return;
-            
+
+            SoundManager.Instance.Play(BoostSound);
             building.Boost();
             _currentGenerator.AddGeneration(level, 1);
             _currentGenerator.AddBoostIndex(level, idx, 1);

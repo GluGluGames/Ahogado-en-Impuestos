@@ -80,6 +80,22 @@ namespace GGG.Components.Buildings.Museum
             CloseButton.onClick.AddListener(OnCloseButton);
         }
 
+        private void OnDisable()
+        {
+            _containerButtons = GetComponentsInChildren<ContainerButton>(true).ToList();
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                int idx = i;
+                for (int j = 0; j < _containerButtons.Count - 1; j++)
+                {
+                    _containerButtons[i].OnButtonClick -=
+                        _containerButtons[(idx + 1) % _containerButtons.Count].DeselectButton;
+                    
+                    idx++;
+                }
+            }
+        }
+
         #endregion
 
         #region Methods

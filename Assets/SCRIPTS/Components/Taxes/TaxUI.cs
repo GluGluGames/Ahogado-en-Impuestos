@@ -47,6 +47,12 @@ namespace GGG.Components.Taxes
             _viewport.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.5f);
         }
 
+        private void OnDisable()
+        {
+            PayButton.onClick.RemoveAllListeners();
+            NotPayButton.onClick.RemoveAllListeners();
+        }
+
         public void Open()
         {
             if (_open) return;

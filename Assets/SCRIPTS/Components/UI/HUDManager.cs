@@ -52,14 +52,7 @@ namespace GGG.Components.UI
             foreach(GameObject go in ResourceContainers)
                 go.SetActive(false);
 
-            _player.OnPlayerInitialized += () =>
-            {
-                ResourceContainers[0].gameObject.SetActive(true);
-                
-                ResourcesIcons[0].sprite = _player.GetResource("Seaweed").GetSprite();
-                ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
-                _initialized = true;
-            };
+            _player.OnPlayerInitialized += OnPlayerInitialize;
         }
 
         private void Update()
@@ -79,7 +72,17 @@ namespace GGG.Components.UI
 
         private void OnDisable()
         {
+            _player.OnPlayerInitialized -= OnPlayerInitialize;
             SaveShownResources();
+        }
+
+        private void OnPlayerInitialize()
+        {
+            ResourceContainers[0].gameObject.SetActive(true);
+                
+            ResourcesIcons[0].sprite = _player.GetResource("Seaweed").GetSprite();
+            ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
+            _initialized = true;
         }
 
         public bool ResourceBeingShown(Resource resource) => _shownResource.Find((x) => x == resource);

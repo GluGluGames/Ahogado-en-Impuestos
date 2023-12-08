@@ -61,6 +61,18 @@ namespace GGG.Components.Buildings.CityHall
             CloseButton.onClick.AddListener(OnCloseButton);
         }
 
+        private void OnDisable()
+        {
+            UpArrow.onClick.RemoveAllListeners();
+            DownArrow.onClick.RemoveAllListeners();
+            CloseButton.onClick.RemoveAllListeners();
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                _containerButtons[i].OnButtonClick -=
+                    _containerButtons[(i + 1) % _containerButtons.Count].DeselectButton;
+            }
+        }
+
         private void InitializeAchievements()
         {
             List<Achievement> achievements = _achievementsManager.GetAchievements();

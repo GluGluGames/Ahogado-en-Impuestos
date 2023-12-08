@@ -18,19 +18,16 @@ namespace GGG.Components.UI
     public class UpgradeUI : MonoBehaviour
     {
         [Header("Sell Fields")] 
-        [SerializeField] private GameObject SellPanel;
         [SerializeField] private Button SellButton;
         [SerializeField] private Image SellResource;
         [SerializeField] private TMP_Text SellCost;
         [Space(5),Header("Upgrade Fields")]
-        [SerializeField] private GameObject UpgradePanel;
         [SerializeField] private Button UpgradeButton;
         [SerializeField] private Image[] UpgradeResources;
         [SerializeField] private TMP_Text[] UpgradeCost;
         [Space(5), Header("Other fields")]
         [SerializeField] private Button InteractButton;
         [SerializeField] private Button CloseButton;
-        [SerializeField] private GameObject InteractParent;
 
         private PlayerManager _player;
         private InputManager _input;
@@ -66,35 +63,67 @@ namespace GGG.Components.UI
             Close(true); 
         }
 
+        private void OnDisable()
+        {
+            _buttons = FindObjectsOfType<BuildButton>(true);
+            
+            foreach (BuildButton button in _buttons) 
+                button.OnStructureBuild -= UpdateBuildings;
+
+            TileManager.OnBuildingTileLoaded -= UpdateBuildings;
+            _player.OnPlayerInitialized -= SetSellResource;
+            
+            SellButton.onClick.RemoveAllListeners();
+            UpgradeButton.onClick.RemoveAllListeners();
+            CloseButton.onClick.RemoveAllListeners();
+        }
+
         private void Initialize()
         {
             _buttons = FindObjectsOfType<BuildButton>(true);
             
             foreach (BuildButton button in _buttons) 
                 button.OnStructureBuild += UpdateBuildings;
+
+            foreach (Image upgrade in UpgradeResources)
+                upgrade.transform.parent.gameObject.SetActive(false);
+            
+            foreach (TMP_Text text in UpgradeCost)
+                text.gameObject.SetActive(false);
+                    
+            SellResource.transform.parent.gameObject.SetActive(false);
             
             TileManager.OnBuildingTileLoaded += UpdateBuildings;
-            _player.OnPlayerInitialized += () => _sellResource = _player.GetResource("Seaweed");
+            _player.OnPlayerInitialized += SetSellResource;
 
             SellButton.onClick.AddListener(OnSellButton);
             UpgradeButton.onClick.AddListener(OnUpgradeButton);
             CloseButton.onClick.AddListener(OnCloseButton);
         }
 
+        private void SetSellResource() => _sellResource = _player.GetResource("Seaweed");
+        
         private void OpenCheck()
         {
             int currentLevel = _selectedBuilding.CurrentLevel();
             ResourceCost[] cost = _selectedBuilding.BuildData().GetUpgradeCost();
             bool price = true;
+            bool sell = _selectedBuilding.GetType() != typeof(CityHall);
+
+            SellButton.interactable = sell;
+            SellButton.image.color = sell ? Color.white : new Color(0.81f, 0.81f, 0.81f);
             
-            SellPanel.SetActive(_selectedBuilding.GetType() != typeof(CityHall));
+            SellResource.gameObject.SetActive(sell);
+            SellCost.gameObject.SetActive(sell);
+            
             SellResource.sprite = _selectedBuilding.BuildData().GetBuildResource(0).GetSprite();
             SellCost.SetText(Mathf.RoundToInt(_selectedBuilding.CurrentCost().GetCost(0) * 0.5f).ToString());
-            
+
             bool activeCondition = _selectedBuilding.BuildData().CanUpgraded() &&
-                             currentLevel < _selectedBuilding.BuildData().GetMaxLevel();
+                                   currentLevel < _selectedBuilding.BuildData().GetMaxLevel();
             
-            UpgradePanel.SetActive(activeCondition);
+            UpgradeButton.interactable = activeCondition;
+            UpgradeButton.image.color = activeCondition ? Color.white : new Color(0.81f, 0.81f, 0.81f);
 
             if (!activeCondition) return;
             
@@ -103,6 +132,7 @@ namespace GGG.Components.UI
                 if (!_selectedBuilding.BuildData().GetUpgradeResource(currentLevel, i)) break;
                 
                 UpgradeCost[i].transform.parent.gameObject.SetActive(true);
+                UpgradeCost[i].gameObject.SetActive(true);
                 UpgradeCost[i].text = _selectedBuilding.BuildData().GetUpgradeCost(currentLevel, i).ToString();
                 UpgradeResources[i].sprite = _selectedBuilding.BuildData().GetUpgradeResource(currentLevel, i).GetSprite();
                 
@@ -112,7 +142,7 @@ namespace GGG.Components.UI
             }
 
             UpgradeButton.interactable = price;
-            UpgradeButton.image.color = price ? Color.white : new Color(0.81f, 0.84f, 0.81f, 0.9f);
+            UpgradeButton.image.color = price ? Color.white : new Color(0.81f, 0.81f, 0.81f, 0.9f);
         }
         
         private void UpdateBuildings(BuildingComponent building, HexTile buildingTile)
@@ -133,8 +163,6 @@ namespace GGG.Components.UI
                 build.Interact();
                 Close(false);
             });
-
-            InteractParent.SetActive(true);
         }
 
         private void OnSellButton()

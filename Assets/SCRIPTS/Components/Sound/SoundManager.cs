@@ -1,5 +1,4 @@
 using UnityEngine;
-using GGG.Classes.Sound;
 using GGG.Shared;
 using UnityEngine.Audio;
 using System;
@@ -135,7 +134,7 @@ namespace GGG
             s.Source.Play();
         }
 
-        public void PlayScriptable(Sound sound)
+        public void Play(Sound sound)
         {
             Play(sound.name);
         }
