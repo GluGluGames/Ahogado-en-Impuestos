@@ -20,17 +20,15 @@ namespace GGG.Components.Player
             
             if (Instance == null)
                 Instance = this;
-            
-            
         }
 
         #endregion
         
         private GameManager _gameManager;
         
-        private List<Resource> _resources;
-        private Dictionary<string, int> _resourcesCount = new();
-        private readonly Dictionary<string, Resource> _resourcesDictionary = new();
+        private static List<Resource> _resources;
+        private static Dictionary<string, int> _resourcesCount = new();
+        private static readonly Dictionary<string, Resource> _resourcesDictionary = new();
 
         public Action OnPlayerInitialized;
 
