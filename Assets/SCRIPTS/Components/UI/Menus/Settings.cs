@@ -59,9 +59,14 @@ namespace GGG.Components.Menus
         private bool _languageActive = false;
 
         #region Unity Methods
-        private void Start()
+
+        private void Awake()
         {
             StartSounds();
+        }
+
+        private void Start()
+        {
             LanguageDropdown.value = GameManager.Instance.GetCurrentLanguage() == Language.Spanish ? 0 : 1;
             
             CloseButton.onClick.AddListener(OnCloseButton);
@@ -83,8 +88,16 @@ namespace GGG.Components.Menus
             GeneralSlider.value = PlayerPrefs.GetFloat("GeneralVolume");
             MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
             EffectsSlider.value = PlayerPrefs.GetFloat("SoundEffectsVolume");
+            
+            SetVolume(GeneralSlider.value);
+            SetMusicVolume(MusicSlider.value);
+            SetSoundEffectsVolume(EffectsSlider.value);
 
             UpdateText();
+            
+            GeneralSlider.onValueChanged.AddListener(SetVolume);
+            MusicSlider.onValueChanged.AddListener(SetMusicVolume);
+            EffectsSlider.onValueChanged.AddListener(SetSoundEffectsVolume);
         }
 
         private void OnApplicationQuit()
@@ -174,8 +187,6 @@ namespace GGG.Components.Menus
         /// <param name="volume">New value of the music volume.</param>
         public void SetMusicVolume(float volume)
         {
-            if (!SoundManager.Instance.GetMusicActive()) return;
-
             float aux = GetExponentialValue(volume);
             AudioMixer.SetFloat("Music", aux);
             PlayerPrefs.SetFloat("MusicVolume", volume);

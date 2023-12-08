@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using System;
+using GGG.Shared;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -16,6 +17,7 @@ namespace GGG.Components.Dialogue
         [Header("Dialogue")]
         [SerializeField] private float TypingSpeed = 0.1f;
         [SerializeField] private TMP_Text DialogueText;
+        [SerializeField] private Sound DialogueSound;
 
         [Space(5)] 
         [Header("Other Fields")] 
@@ -23,6 +25,7 @@ namespace GGG.Components.Dialogue
         [SerializeField] private TMP_Text NameText;
 
         private InputManager _input;
+        private SoundManager _sound;
 
         private const float _DIALOGUE_THRESHOLD = 1f;
         
@@ -37,6 +40,7 @@ namespace GGG.Components.Dialogue
 
         private void Start() {
             _input = InputManager.Instance;
+            _sound = SoundManager.Instance;
             _delta = _DIALOGUE_THRESHOLD;
         }
 
@@ -110,6 +114,7 @@ namespace GGG.Components.Dialogue
             for (int i = 0; i < text.Length; i++) {
                 _currentText.Append(text[i]);
                 DialogueText.SetText(_currentText.ToString());
+                _sound.Play(DialogueSound);
                 yield return new WaitForSeconds(TypingSpeed);
             }
             

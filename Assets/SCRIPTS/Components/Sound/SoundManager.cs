@@ -82,16 +82,6 @@ namespace GGG
         /// </summary>
         private void Start()
         {
-            if (PlayerPrefs.HasKey("GeneralVolume") && PlayerPrefs.HasKey("SoundEffectsVolume") &&
-                PlayerPrefs.HasKey("MusicVolume"))
-                LoadVolume();
-            else
-            {
-                PlayerPrefs.SetFloat("GeneralVolume", 0);
-                PlayerPrefs.SetFloat("SoundEffectsVolume", 0);
-                PlayerPrefs.SetFloat("MusicVolume", 0);
-            }
-            
             Play("MainMenu");
         }
 
@@ -106,17 +96,6 @@ namespace GGG
         public bool GetMusicActive()
         {
             return _isMusicActive;
-        }
-        /// <summary>
-        /// Loads the volume of the mixers.
-        /// </summary>
-        private void LoadVolume()
-        {
-            GeneralMixerGroup.audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("GeneralVolume"));
-            SoundEffectsMixerGroup.audioMixer.SetFloat("SoundEffects", PlayerPrefs.GetFloat("SoundEffectsVolume"));
-
-            if (_isMusicActive) MusicMixerGroup.audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
-            else { MusicMixerGroup.audioMixer.SetFloat("Music", 0); }
         }
 
         /// <summary>

@@ -17,6 +17,7 @@ namespace GGG.Components.Taxes
 {
     public class TaxUI : MonoBehaviour
     {
+        [SerializeField] private Sound DestructionSound;
         [Header("UI Fields")]
         [SerializeField] private Image[] ResourcesSprites;
         [SerializeField] private TMP_Text[] ResourcesAmount;
@@ -128,6 +129,7 @@ namespace GGG.Components.Taxes
             if (_buildings.Count > 0)
                 TileManager.Instance.DestroyBuilding(_buildings[Random.Range(0, _buildings.Count)]);
             
+            SoundManager.Instance.Play(DestructionSound);
             StartCoroutine(AchievementsManager.Instance.UnlockAchievement("08"));
             
             Close();

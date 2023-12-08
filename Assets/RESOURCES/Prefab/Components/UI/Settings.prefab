@@ -1512,6 +1512,7 @@ GameObject:
   - component: {fileID: 6252228717332935634}
   - component: {fileID: 3710765694182625017}
   - component: {fileID: 6890411016528340920}
+  - component: {fileID: 3089262381226229198}
   m_Layer: 0
   m_Name: Credits
   m_TagString: Untagged
@@ -1622,6 +1623,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3089262381226229198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2674852231841037063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa2b876efbe0f540bfaf0f33d2cad4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2829799118454207798
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,19 +2628,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4760085455681366790}
-        m_TargetAssemblyTypeName: GGG.Components.Menus.Settings, Menus
-        m_MethodName: SetVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &4253892507558517512
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,6 +2641,7 @@ GameObject:
   - component: {fileID: 1853011540055759266}
   - component: {fileID: 8096952042225417416}
   - component: {fileID: 3184374176532650550}
+  - component: {fileID: 2746088291948234035}
   m_Layer: 0
   m_Name: GameExit
   m_TagString: Untagged
@@ -2750,6 +2752,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2746088291948234035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4253892507558517512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa2b876efbe0f540bfaf0f33d2cad4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4282760542177784753
 GameObject:
   m_ObjectHideFlags: 0
@@ -4580,6 +4594,7 @@ GameObject:
   - component: {fileID: 1457583734727417678}
   - component: {fileID: 1108449030118787082}
   - component: {fileID: 5223135454241164225}
+  - component: {fileID: 5203986414809104771}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Untagged
@@ -4689,6 +4704,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5203986414809104771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6739763526938451650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa2b876efbe0f540bfaf0f33d2cad4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6999630401307208626
 GameObject:
   m_ObjectHideFlags: 0
@@ -5916,19 +5943,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4760085455681366790}
-        m_TargetAssemblyTypeName: GGG.Components.Menus.Settings, Menus
-        m_MethodName: SetMusicVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8239000122141546967
 GameObject:
   m_ObjectHideFlags: 0
@@ -6095,19 +6110,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4760085455681366790}
-        m_TargetAssemblyTypeName: GGG.Components.Menus.Settings, Menus
-        m_MethodName: SetSoundEffectsVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8609626893465094647
 GameObject:
   m_ObjectHideFlags: 0

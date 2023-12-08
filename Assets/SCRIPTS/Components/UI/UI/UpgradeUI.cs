@@ -21,6 +21,7 @@ namespace GGG.Components.UI
         [SerializeField] private Button SellButton;
         [SerializeField] private Image SellResource;
         [SerializeField] private TMP_Text SellCost;
+        [SerializeField] private Sound SellSound;
         [Space(5),Header("Upgrade Fields")]
         [SerializeField] private Button UpgradeButton;
         [SerializeField] private Image[] UpgradeResources;
@@ -172,6 +173,7 @@ namespace GGG.Components.UI
             _player.AddResource(_sellResource.GetKey(), Mathf.RoundToInt(_selectedBuilding.CurrentCost().GetCost(0) * 0.5f));
             _selectedBuilding.OnBuildDestroy();
             BuildingManager.Instance.RemoveBuilding(_selectedBuilding);
+            SoundManager.Instance.Play(SellSound);
             _selectedTile.DestroyBuilding();
             
             _selectedBuilding = null;

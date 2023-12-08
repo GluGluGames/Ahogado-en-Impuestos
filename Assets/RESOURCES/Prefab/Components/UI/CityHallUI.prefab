@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 213294408155367639}
   - component: {fileID: 6797555506761460580}
   - component: {fileID: 5002483928749942762}
+  - component: {fileID: 3088561019431425968}
   m_Layer: 5
   m_Name: UpArrow
   m_TagString: Untagged
@@ -336,6 +337,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3088561019431425968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766172662722665081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa2b876efbe0f540bfaf0f33d2cad4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3886808014736775491
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +495,7 @@ GameObject:
   - component: {fileID: 1741520036307397112}
   - component: {fileID: 1172918594665648901}
   - component: {fileID: 7571765856745960841}
+  - component: {fileID: 2270436058340923360}
   m_Layer: 5
   m_Name: DownArrow
   m_TagString: Untagged
@@ -591,6 +605,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2270436058340923360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683060440003780667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa2b876efbe0f540bfaf0f33d2cad4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5540214629513751492
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +892,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282404438
+    rgba: 4278456342
   m_fontColor: {r: 0.084905684, g: 0.060921986, b: 0.015619444, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1192,11 +1218,11 @@ PrefabInstance:
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: NormalIcon
       value: 
-      objectReference: {fileID: 21300000, guid: d23a433681cf30e439ceb38bef9e815e, type: 3}
+      objectReference: {fileID: 21300000, guid: aa6d781cb6fc995418ec32782e001297, type: 3}
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: SelectedIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 6a06e466085b0e945bc308efa781877b, type: 3}
+      objectReference: {fileID: 21300000, guid: aa6d781cb6fc995418ec32782e001297, type: 3}
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: ActivatePanel
       value: 
@@ -1205,6 +1231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Container_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 8368574375518966197, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: aa6d781cb6fc995418ec32782e001297, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1310,11 +1340,11 @@ PrefabInstance:
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: NormalIcon
       value: 
-      objectReference: {fileID: 21300000, guid: d23a433681cf30e439ceb38bef9e815e, type: 3}
+      objectReference: {fileID: 21300000, guid: baff9a6be6d940d45a0a689e45c76e3c, type: 3}
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: SelectedIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 6a06e466085b0e945bc308efa781877b, type: 3}
+      objectReference: {fileID: 21300000, guid: baff9a6be6d940d45a0a689e45c76e3c, type: 3}
     - target: {fileID: 3397816187272541084, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
       propertyPath: ActivatePanel
       value: 
@@ -1323,6 +1353,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Container_Button_1
       objectReference: {fileID: 0}
+    - target: {fileID: 8368574375518966197, guid: c3620503b2fd9cc4c88d902fbd62f593, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: baff9a6be6d940d45a0a689e45c76e3c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
