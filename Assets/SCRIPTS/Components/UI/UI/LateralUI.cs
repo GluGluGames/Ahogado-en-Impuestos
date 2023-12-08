@@ -1,11 +1,9 @@
-using System;
 using DG.Tweening;
 using GGG.Components.Core;
 using GGG.Input;
 using UnityEngine;
 using UnityEngine.UI;
 using GGG.Shared;
-using DG.DemiEditor;
 
 namespace GGG.Components.UI
 {
@@ -22,7 +20,6 @@ namespace GGG.Components.UI
         private InventoryUI _inventory;
 
         private GameObject _viewport;
-        private Vector3 _initialPosition;
         private bool _open;
 
         private void Start()
@@ -32,38 +29,11 @@ namespace GGG.Components.UI
             _gameManager = GameManager.Instance;
             _inventory = FindObjectOfType<InventoryUI>();
             _viewport = transform.GetChild(0).gameObject;
-            _initialPosition = transform.position;
             
             OpenButton.onClick.AddListener(ToggleMenu);
             InventoryButton.onClick.AddListener(OpenInventory);
             SettingsButton.onClick.AddListener(OpenSettings);
-            ExpeditionButton.onClick.AddListener(() =>
-            {
-                int randMiniGame = UnityEngine.Random.Range(1, 5);
-                SceneIndexes sceneIndex;
-                switch(randMiniGame)
-                {
-                    case 1:
-                        sceneIndex = SceneIndexes.MINIGAME_LEVEL1;
-                        break;
-                    case 2:
-                        sceneIndex = SceneIndexes.MINIGAME_LEVEL2;
-                        break;
-                    case 3:
-                        sceneIndex = SceneIndexes.MINIGAME_LEVEL3;
-                        break;
-                    case 4:
-                        sceneIndex = SceneIndexes.MINIGAME_LEVEL4;
-                        break;
-                    default:
-                        sceneIndex = SceneIndexes.MINIGAME_LEVEL1;
-                        break;
-                }
-                _sceneManagement.AddSceneToLoad(sceneIndex);
-                _sceneManagement.AddSceneToUnload(SceneIndexes.GAME_SCENE);
-                _sceneManagement.UpdateScenes();
-                _gameManager.OnUIClose();
-            });
+            ExpeditionButton.onClick.AddListener(OnExpeditionButton);
         }
 
         private void Update() {
@@ -78,6 +48,36 @@ namespace GGG.Components.UI
             InventoryButton.onClick.RemoveAllListeners();
             SettingsButton.onClick.RemoveAllListeners();
             ExpeditionButton.onClick.RemoveAllListeners();
+        }
+
+        private void OnExpeditionButton()
+        {
+            int randMiniGame = Random.Range(1, 5);
+            SceneIndexes sceneIndex;
+            
+            switch(randMiniGame)
+            {
+                case 1:
+                    sceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+                    break;
+                case 2:
+                    sceneIndex = SceneIndexes.MINIGAME_LEVEL2;
+                    break;
+                case 3:
+                    sceneIndex = SceneIndexes.MINIGAME_LEVEL3;
+                    break;
+                case 4:
+                    sceneIndex = SceneIndexes.MINIGAME_LEVEL4;
+                    break;
+                default:
+                    sceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+                    break;
+            }
+            
+            _sceneManagement.AddSceneToLoad(sceneIndex);
+            _sceneManagement.AddSceneToUnload(SceneIndexes.GAME_SCENE);
+            _sceneManagement.UpdateScenes();
+            _gameManager.OnUIClose();
         }
 
         private void ToggleMenu()

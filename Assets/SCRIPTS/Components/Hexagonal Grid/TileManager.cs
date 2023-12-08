@@ -81,8 +81,6 @@ namespace GGG.Components.HexagonalGrid
         private void OnDisable() {
             foreach (HexTile tileAux in _tiles) tileAux.OnHexSelect -= InitializePath;
             BuildingManager.OnBuildsLoad -= OnBuildsLoad;
-            
-            SaveTilesState();
         }
 
         #endregion
@@ -206,8 +204,7 @@ namespace GGG.Components.HexagonalGrid
         #region Data persistence
 
         public void SaveTilesState() {
-            if (!SceneManagement.InGameScene() || 
-                GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial)
+            if (GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial)
                 return;
             
             TileData[] saveData = new TileData[_tiles.Count];
