@@ -5,6 +5,7 @@ using GGG.Input;
 using UnityEngine;
 using UnityEngine.UI;
 using GGG.Shared;
+using DG.DemiEditor;
 
 namespace GGG.Components.UI
 {
@@ -38,7 +39,27 @@ namespace GGG.Components.UI
             SettingsButton.onClick.AddListener(OpenSettings);
             ExpeditionButton.onClick.AddListener(() =>
             {
-                _sceneManagement.AddSceneToLoad(SceneIndexes.MINIGAME_LEVEL1);
+                int randMiniGame = UnityEngine.Random.Range(1, 5);
+                SceneIndexes sceneIndex;
+                switch(randMiniGame)
+                {
+                    case 1:
+                        sceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+                        break;
+                    case 2:
+                        sceneIndex = SceneIndexes.MINIGAME_LEVEL2;
+                        break;
+                    case 3:
+                        sceneIndex = SceneIndexes.MINIGAME_LEVEL3;
+                        break;
+                    case 4:
+                        sceneIndex = SceneIndexes.MINIGAME_LEVEL4;
+                        break;
+                    default:
+                        sceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+                        break;
+                }
+                _sceneManagement.AddSceneToLoad(sceneIndex);
                 _sceneManagement.AddSceneToUnload(SceneIndexes.GAME_SCENE);
                 _sceneManagement.UpdateScenes();
                 _gameManager.OnUIClose();

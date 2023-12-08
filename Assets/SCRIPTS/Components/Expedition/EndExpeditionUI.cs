@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using GGG.Shared;
 using GGG.Components.Player;
 using System.Linq.Expressions;
+using UnityEngine.SceneManagement;
 
 namespace GGG.Components.UI
 {
@@ -55,8 +56,28 @@ namespace GGG.Components.UI
             
             Button.onClick.AddListener(() =>
             {
+                Scene currentScene = SceneManager.GetSceneAt(1);
+                SceneIndexes currentSceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+
+                if (currentScene.name == "Minigame_Level1")
+                {
+                    currentSceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+                }
+                else if (currentScene.name == "Minigame_Level2")
+                {
+                    currentSceneIndex = SceneIndexes.MINIGAME_LEVEL2;
+                }
+                else if (currentScene.name == "Minigame_Level3")
+                {
+                    currentSceneIndex = SceneIndexes.MINIGAME_LEVEL3;
+                }
+                else if (currentScene.name == "Minigame_Level4")
+                {
+                    currentSceneIndex = SceneIndexes.MINIGAME_LEVEL4;
+                }
+
                 _sceneManagement.AddSceneToLoad(SceneIndexes.GAME_SCENE);
-                _sceneManagement.AddSceneToUnload(SceneIndexes.MINIGAME_LEVEL1);
+                _sceneManagement.AddSceneToUnload(currentSceneIndex);
                 _sceneManagement.UpdateScenes();
                 GameManager.Instance.OnUIClose();
             });

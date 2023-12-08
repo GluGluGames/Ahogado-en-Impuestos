@@ -72,7 +72,6 @@ namespace GGG.Components.Player
             
 
             _resourcesCount[resourceKey] += amount;
-            Debug.Log(_resourcesCount[resourceKey]);
         }
 
         public int GetResourceNumber() => _resourcesDictionary.Count;
