@@ -65,8 +65,10 @@ namespace GGG.Components.Core
             SceneManager.sceneUnloaded += (scene) =>
             {
                 if (scene.buildIndex == (int)SceneIndexes.GAME_SCENE)
-                    OnGameSceneUnloaded?.Invoke();
-                
+                {
+                    _soundManager.Stop("MainMenu");
+                }
+
             };
 
             SceneManager.sceneLoaded += (scene, mode) =>
@@ -78,6 +80,12 @@ namespace GGG.Components.Core
                     _soundManager.Stop("MainMenu");
                     _soundManager.Play("MainTheme");
                     _soundManager.Play("AmbientSound");
+                }
+
+                if (scene.buildIndex is (int)SceneIndexes.MINIGAME_LEVEL1 or (int)SceneIndexes.MINIGAME_LEVEL2 or
+                    (int)SceneIndexes.MINIGAME_LEVEL3 or (int)SceneIndexes.MINIGAME_LEVEL4)
+                {
+                    // _soundManager.Play("MinigameTheme");
                 }
             };
         }
@@ -101,6 +109,7 @@ namespace GGG.Components.Core
 
         public void AddSceneToUnload(SceneIndexes scene)
         {
+            if(scene == SceneIndexes.GAME_SCENE) OnGameSceneUnloaded?.Invoke();
             _sceneAsyncOperation.Add(SceneManager.UnloadSceneAsync((int) scene));
         }
 

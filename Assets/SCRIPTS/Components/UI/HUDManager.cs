@@ -124,8 +124,6 @@ namespace GGG.Components.UI
 
         public void SaveShownResources()
         {
-            if (!SceneManagement.InGameScene() || _gameManager.OnTutorial()) return;
-            
             ShownResource[] resourcesData = new ShownResource[_shownResource.Count];
             int i = 0;
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "shown_resources.json");

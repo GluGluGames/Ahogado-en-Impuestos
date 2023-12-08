@@ -378,7 +378,7 @@ namespace GGG.Components.Buildings.Laboratory
 
         public void SaveResearchProgress()
         {
-            if (!SceneManagement.InGameScene() || _gameManager.TutorialOpen() || _laboratories.Count <= 0) return;
+            if (_laboratories.Count <= 0) return;
             
             LaboratoryData[] saveData = new LaboratoryData[_laboratories.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "laboratory_progress.json");

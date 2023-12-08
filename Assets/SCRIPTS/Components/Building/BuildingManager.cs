@@ -172,16 +172,16 @@ namespace GGG.Components.Buildings
             return _buildingsCosts[build];
         }
 
-        public void SaveBuildings() {
-            if (_gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial || 
-                !SceneManagement.InGameScene()) return;
+        public void SaveBuildings()
+        {
+            if (!SceneManagement.InGameScene() || 
+                _gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial) return;
             
-            BuildingComponent[] buildings = gameObject.GetComponentsInChildren<BuildingComponent>();
-            BuildingData[] saveData = new BuildingData[buildings.Length];
+            BuildingData[] saveData = new BuildingData[_buildings.Count];
             int i = 0;
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "buildings_data.json");
 
-            foreach (BuildingComponent build in buildings)
+            foreach (BuildingComponent build in _buildings)
             {
                 BuildingData data = new()
                 {

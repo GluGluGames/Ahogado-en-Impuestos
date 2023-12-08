@@ -46,11 +46,16 @@ namespace GGG.Components.Player
             _resources = Resources.LoadAll<Resource>("SeaResources").
                 Concat(Resources.LoadAll<Resource>("ExpeditionResources")).
                 Concat(Resources.LoadAll<Resource>("FishResources")).ToList();
+
+            if (_resourcesDictionary.Count <= 0)
+            {
+                foreach (Resource i in _resources)
+                    _resourcesDictionary.Add(i.GetKey(), i);
+            }
+
+            if (_resourcesCount.Count > 0) return;
             
-            foreach (Resource i in _resources)
-                _resourcesDictionary.Add(i.GetKey(), i);
-            
-            foreach (string i in _resourcesDictionary.Keys) 
+            foreach (string i in _resourcesDictionary.Keys)
                 _resourcesCount.Add(i, 0);
         }
 
@@ -78,9 +83,6 @@ namespace GGG.Components.Player
 
         public void SaveResourcesCount()
         {
-            if (!SceneManagement.InGameScene() || 
-                _gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
-            
             ResourceData[] resourceDataList = new ResourceData[_resourcesCount.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");
             int i = 0;
