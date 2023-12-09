@@ -41,7 +41,6 @@ namespace GGG.Components.UI
         private PlayerManager _player;
         private GameManager _gameManager;
         private readonly List<Resource> _shownResource = new(2);
-        private bool _initialized;
 
         private int _currentIdx;
         private bool _dirtyFlag;
@@ -132,8 +131,6 @@ namespace GGG.Components.UI
             if (!File.Exists(filePath))
             {
                 _currentIdx = 0;
-                _initialized = true;
-                
                 yield break;
             }
             
@@ -145,8 +142,6 @@ namespace GGG.Components.UI
             else {
                 data = File.ReadAllText(filePath);
             }
-
-            yield return new WaitWhile(() => !_initialized);
             
             ShownResource[] resources = JsonHelper.FromJson<ShownResource>(data);
             
