@@ -241,7 +241,14 @@ namespace GGG.Components.Buildings
                 if (buildingComponents[i].GetType() == typeof(Farm))
                 {
                     Farm farm = (Farm)buildingComponents[i];
-                    if(build.FarmResource) farm.Resource(build.FarmResource);
+                    if (build.FarmResource)
+                    {
+                        farm.Resource(build.FarmResource);
+                        GameObject resource = Instantiate(build.FarmResource.GetModel(),
+                            farm.transform.position + new Vector3(0, 2.5f), Quaternion.identity, farm.transform);
+                        resource.transform.localScale = build.FarmResource.GetModelScale();
+                        farm.SetResourceModel(resource);
+                    }
                 }
 
                 if (buildingComponents[i].BuildData().CanBeBoost() && build.IsBoost)

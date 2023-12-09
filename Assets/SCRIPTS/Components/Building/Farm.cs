@@ -1,3 +1,4 @@
+using System;
 using GGG.Components.Player;
 using GGG.Shared;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace GGG.Components.Buildings
         private PlayerManager _playerManager;
         private FarmUI _ui;
         private Resource _generationResource;
+        private GameObject _resourceModel;
         
         private float _currentGeneration;
         private float _cooldownDelta;
@@ -27,6 +29,13 @@ namespace GGG.Components.Buildings
             _currentGeneration = _currentLevel == 1 ? InitialGeneration : ResourcesGeneration[_currentLevel - 2];
         }
 
+        private void Update()
+        {
+            if (!_resourceModel) return;
+            
+            _resourceModel.transform.Rotate(Vector3.up * (Time.deltaTime * 25f));
+        }
+
         public override void Interact()
         {
             _ui.Open(FarmType, _generationResource, this);
@@ -35,6 +44,13 @@ namespace GGG.Components.Buildings
         protected override void OnLevelUp()
         {
             _currentGeneration = ResourcesGeneration[_currentLevel - 2];
+        }
+
+        public override void OnBuildDestroy()
+        {
+            _generationResource = null;
+            _resourceModel = null;
+            _ui.RemoveModel(this);
         }
 
         public override void Boost()
@@ -76,6 +92,9 @@ namespace GGG.Components.Buildings
         /// </summary>
         /// <param name="resource">The resource that is going to generate this farm</param>
         public void Resource(Resource resource) => _generationResource = resource;
+
+        public GameObject ResourceMode() => _resourceModel;
+        public void SetResourceModel(GameObject resource) => _resourceModel = resource;
 
         /// <summary>
         /// Gets the generation based on the level of the building.

@@ -93,8 +93,8 @@ namespace GGG.Components.Serialization
             {
                 _playerManager.LoadResourcesCount(),
                 _buildingManager.LoadBuildings(),
+                _tileManager.LoadTilesState(),
                 _hudManager.LoadShownResource(),
-                _tileManager.LoadTilesState()
             };
 
             foreach (IEnumerator enumerator in order)

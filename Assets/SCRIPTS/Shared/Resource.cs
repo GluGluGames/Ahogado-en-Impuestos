@@ -11,6 +11,8 @@ namespace GGG.Shared
         [SerializeField] private LocalizedString Description;
         [SerializeField] private Sprite Sprite;
         [SerializeField] private Sprite SelectedSprite;
+        [SerializeField] private GameObject Model;
+        [SerializeField] private Vector3 ModelScale;
         [SerializeField] private bool CanBeResearched;
         [SerializeField] private bool IsUnlocked;
         [Tooltip("Time in seconds")]
@@ -19,6 +21,8 @@ namespace GGG.Shared
         public string GetKey() => Key;
         public string GetName() => Name.GetLocalizedString();
         public string GetDescription() => Description.GetLocalizedString();
+        public GameObject GetModel() => Model;
+        public Vector3 GetModelScale() => ModelScale;
         public Sprite GetSprite() => Sprite;
         public Sprite GetSelectedSprite() => SelectedSprite;
         public void DiscoverResource() => CanBeResearched = true;
