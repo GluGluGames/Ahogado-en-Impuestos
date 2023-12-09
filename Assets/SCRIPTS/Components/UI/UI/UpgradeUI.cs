@@ -114,6 +114,7 @@ namespace GGG.Components.UI
             SellButton.interactable = sell;
             SellButton.image.color = sell ? Color.white : new Color(0.81f, 0.81f, 0.81f);
             
+            SellResource.transform.parent.gameObject.SetActive(sell);
             SellResource.gameObject.SetActive(sell);
             SellCost.gameObject.SetActive(sell);
             
