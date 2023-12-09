@@ -19,7 +19,10 @@ namespace GGG.Components.Buildings.CityHall
     {
         [Header("Texts")] 
         [SerializeField] private TMP_Text PagesText;
+        [SerializeField] private TMP_Text TaxesAmount;
         [SerializeField] private TMP_Text TaxesCounter;
+        [Space(5), Header("Buttons")]
+        [SerializeField] private Image TaxResourceImage;
         [Space(5), Header("Buttons")]
         [SerializeField] private Button UpArrow;
         [SerializeField] private Button DownArrow;
