@@ -59,11 +59,6 @@ namespace GGG.Components.Player
                 _resourcesCount.Add(i, 0);
         }
 
-        private void OnDisable()
-        {
-            SaveResourcesCount();
-        }
-
         public int GetResourceCount(string key) => _resourcesCount[key];
 
         public List<Resource> GetResources() => _resources;

@@ -69,11 +69,6 @@ namespace GGG.Components.UI
             }
         }
 
-        private void OnDisable()
-        {
-            SaveShownResources();
-        }
-
         public bool ResourceBeingShown(Resource resource) => _shownResource.Find((x) => x == resource);
 
         public bool ShowResource(Resource resource)
