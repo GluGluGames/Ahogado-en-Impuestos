@@ -225,6 +225,19 @@ Un majestuoso edificio de investigación, cuidadosamente desvelado con la adquis
 |  2 | x | 500 hierro  | 100 madera |
 |  3 | x | 750 hierro | 100 madera |
 
+| Nombre | Tiempo de Investigación |
+|--------|-------------------------|
+| Alga verde| 4 minutos |
+| Alga roja | 4 minutos |
+| Perla | 4 minutos |
+| Madera| 4 minutos |
+| Hierro | 4 minutos |
+| Acelerador | 4 minutos |
+| Coral| 4 minutos |
+| Tablilla | 5 minutos |
+| Mapa | 5 minutos |
+
+
 |Edificio| Nivel requerido del centro| Nivel mejora | Coste| Tiempo |Justificacion|
 | :--: | :--: | :--: | :--: | :--: | :--: |
 |Granja de algas| 1 | 1->2| 2500 algas verdes | 3 min | La mejora incial de la granja tarda 5 minutos debido a que sube poco la productividad.|
