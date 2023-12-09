@@ -19,9 +19,10 @@ namespace GGG.Components.Enemies
         {
             fov.onGainDetection += (trans) =>
             {
-                if (trans.tag == "Player") { 
-                enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
-                ai.playerDetected.Fire();
+                if (trans.tag == "Player")
+                {
+                    enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
+                    ai.playerDetected.Fire();
                 }
             };
 
@@ -40,7 +41,6 @@ namespace GGG.Components.Enemies
 
             ai.UpdatePatrol += () =>
             {
-                
                 if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdate();
                 return BehaviourAPI.Core.Status.Running;
             };
@@ -68,9 +68,8 @@ namespace GGG.Components.Enemies
                 enemyComp.movementController.onMove -= CountTiredness;
                 fov.canSeePlayer = false;
                 fov.imBlinded = true;
-                StartCoroutine(OnSleepCoroutine()); 
+                StartCoroutine(OnSleepCoroutine());
             };
-      
         }
 
         private void CountTiredness()
@@ -78,10 +77,8 @@ namespace GGG.Components.Enemies
             tiredness++;
             if (tiredness == stamina)
             {
-
                 StartCoroutine(onStaminaRecharge());
                 tiredness = 0;
-
             }
         }
 

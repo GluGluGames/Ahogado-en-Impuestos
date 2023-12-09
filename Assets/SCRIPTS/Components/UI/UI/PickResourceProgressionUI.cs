@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,15 +5,13 @@ namespace GGG.Components.UI
 {
     public class PickResourceProgressionUI : MonoBehaviour
     {
-        
         [SerializeField] private Image FillBar;
-        
+
         private Camera _camera;
         public bool ableToPick = false;
         public bool endedRecollection = false;
         public float recollectionTime = 0;
         private float _pickingTimeDone = 0;
-        
 
         private void OnEnable()
         {
@@ -29,12 +25,12 @@ namespace GGG.Components.UI
 
         private void Update()
         {
-            transform.LookAt(transform.position + _camera.transform.rotation * Vector3.back, 
+            transform.LookAt(transform.position + _camera.transform.rotation * Vector3.back,
                 _camera.transform.rotation * Vector3.up);
 
-            if(ableToPick)
+            if (ableToPick)
             {
-                if(FillBar.fillAmount < 1)
+                if (FillBar.fillAmount < 1)
                 {
                     FillBar.fillAmount = _pickingTimeDone / recollectionTime;
                     _pickingTimeDone += Time.deltaTime;

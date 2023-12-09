@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 2828653105759591961}
   - component: {fileID: 1222528002071000287}
   - component: {fileID: 8967022485239898584}
-  - component: {fileID: 8277329004396932116}
   m_Layer: 16
   m_Name: EnemyBerserker
   m_TagString: Untagged
@@ -153,7 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   executeOnLoop: 0
   interruptOptions: 0
-  bSRuntimeDebugger: {fileID: 8277329004396932116}
 --- !u!114 &1222528002071000287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,21 +189,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickTime: 1
   keepTicking: 1
---- !u!114 &8277329004396932116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7510249690366973677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1726e9fdb9ff2d4baa8710d607b31ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _eventHandler:
-    debugStatusChanges: 1
-    identifier: 
 --- !u!1001 &2561337860600323745
 PrefabInstance:
   m_ObjectHideFlags: 0

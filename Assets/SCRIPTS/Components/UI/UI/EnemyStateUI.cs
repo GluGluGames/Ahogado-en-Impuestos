@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 public enum StateIcon
 {
@@ -18,7 +16,7 @@ namespace GGG.Components.UI
 {
     public class EnemyStateUI : MonoBehaviour
     {
-        [SerializeField] List<Image> ImageList = new List<Image>();
+        [SerializeField] private List<Image> ImageList = new List<Image>();
 
         private StateIcon currentState;
 
@@ -40,6 +38,5 @@ namespace GGG.Components.UI
 
             return true;
         }
-
     }
 }

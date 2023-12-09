@@ -65,7 +65,6 @@ namespace GGG.Components.Enemies
 
             ai.UpdateChase += () =>
             {
-                
                 transform.LookAt(new Vector3(PlayerPosition.CurrentTile.transform.position.x, transform.position.y, PlayerPosition.CurrentTile.transform.position.z));
                 if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdate();
                 return BehaviourAPI.Core.Status.Running;
@@ -133,7 +132,6 @@ namespace GGG.Components.Enemies
             enemyComp.movementController.movingAllowed = true;
 
             StateUI.ChangeState(currStateIcon);
-
         }
     }
 }

@@ -2,8 +2,6 @@ using BehaviourAPI.Core;
 using BehaviourAPI.Core.Actions;
 using BehaviourAPI.StateMachines;
 using BehaviourAPI.UnityToolkit;
-using BehaviourAPI.UnityToolkit.GUIDesigner.Runtime;
-using UnityEngine;
 
 namespace GGG.Components.Enemies
 {
@@ -28,7 +26,6 @@ namespace GGG.Components.Enemies
         public float sleepTime = 2.0f;
 
         public FSM NormalEnemyBehaviour = new FSM();
-        [SerializeField] public BSRuntimeDebugger bSRuntimeDebugger;
 
         protected override BehaviourGraph CreateGraph()
         {
@@ -59,7 +56,6 @@ namespace GGG.Components.Enemies
             playerLost = new PushPerception(LostPatience);
             RestedPush = new PushPerception(Rested);
 
-            bSRuntimeDebugger.RegisterGraph(NormalEnemyBehaviour, "main fsm");
             return NormalEnemyBehaviour;
         }
     }
