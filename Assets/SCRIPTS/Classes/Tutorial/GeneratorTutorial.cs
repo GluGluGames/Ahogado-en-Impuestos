@@ -15,15 +15,5 @@ namespace GGG.Classes.Tutorial
             
             FinishTutorial();
         }
-
-        protected override void InitializeTutorial()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void FinishTutorial()
-        {
-            TutorialCompleted = true;
-        }
     }
 }

@@ -12,17 +12,8 @@ namespace GGG.Classes.Tutorial
         {
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true, true, false);
+            
             FinishTutorial();
-        }
-
-        protected override void InitializeTutorial()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void FinishTutorial()
-        {
-            TutorialCompleted = true;
         }
     }
 }

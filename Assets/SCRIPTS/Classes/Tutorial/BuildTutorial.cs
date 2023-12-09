@@ -113,7 +113,7 @@ namespace GGG.Classes.Tutorial
 
         protected override void FinishTutorial()
         {
-            TutorialCompleted = true;
+            base.FinishTutorial();
             
             ChangeTilesState(Steps.Finish);
             foreach (BuildButton button in _buildButtons)

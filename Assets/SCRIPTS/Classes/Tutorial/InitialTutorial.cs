@@ -60,7 +60,7 @@ public class InitialTutorial : TutorialBase
 
     protected override void FinishTutorial()
     {
-        TutorialCompleted = true;
+        base.FinishTutorial();
 
         foreach (HexTile tile in _tiles)
         {

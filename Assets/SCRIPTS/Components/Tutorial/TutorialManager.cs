@@ -4,6 +4,7 @@ using GGG.Components.Buildings.Laboratory;
 using GGG.Components.Buildings.Museum;
 using GGG.Components.Buildings.Shop;
 using GGG.Components.Buildings.Generator;
+using GGG.Components.Buildings.CityHall;
 using GGG.Components.UI;
 using GGG.Shared;
 
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using GGG.Components.Buildings;
 using UnityEngine.UI;
 
 namespace GGG.Components.Tutorial
@@ -55,6 +57,8 @@ namespace GGG.Components.Tutorial
             LaboratoryUI.OnLaboratoryOpen += () => StartTutorial("LaboratoryTutorial", "BuildTutorial");
             MuseumUI.OnMuseumOpen += () => StartTutorial("MuseumTutorial", "BuildTutorial");
             GeneratorUI.OnGeneratorOpen += () => StartTutorial("GeneratorTutorial", "BuildTutorial");
+            CityHallUi.OnCityHallOpen += () => StartTutorial("CityHallTutorial", "BuildTutorial");
+            FarmUI.OnFarmUIOpen += () => StartTutorial("FarmTutorial", "BuildTutorial");
         }
 
         private void StartTutorial(string tutorialKey, string previousTutorialKey)

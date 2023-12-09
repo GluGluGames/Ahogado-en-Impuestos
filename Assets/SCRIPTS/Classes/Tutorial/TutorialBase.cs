@@ -10,11 +10,10 @@ namespace GGG.Classes.Tutorial
 {
     public abstract class TutorialBase : ScriptableObject
     {
-        [SerializeField] private string TutorialKey;
+        [SerializeField] protected string TutorialKey;
         [SerializeField] protected DialogueText[] Dialogues;
         [SerializeField] protected TutorialObjective[] Objectives;
         [SerializeField] protected TutorialPanel[] Panels;
-        [SerializeField] protected bool TutorialCompleted;
 
         protected int _currentPanel;
         protected bool _nextStep;
@@ -56,13 +55,20 @@ namespace GGG.Classes.Tutorial
             OnObjectivesChange?.Invoke(Objectives[idx]);
         }
 
-        public bool Completed() => TutorialCompleted;
+        public bool Completed() => PlayerPrefs.HasKey(TutorialKey) && PlayerPrefs.GetInt(TutorialKey) == 1;
         public string GetKey() => TutorialKey;
 
         public abstract IEnumerator StartTutorial(Action OnTutorialStart, Action<bool, bool> OnTutorialEnd, 
             Action<string, Sprite, string> OnUiChange, Action<TutorialObjective> OnObjectivesChange);
 
-        protected abstract void InitializeTutorial();
-        protected abstract void FinishTutorial();
+        protected virtual void InitializeTutorial()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual void FinishTutorial()
+        {
+            PlayerPrefs.SetInt(TutorialKey, 1);
+        }
     }
 }
