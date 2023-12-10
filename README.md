@@ -527,6 +527,11 @@ Cabe destacar que existe un tiempo de recogida de recursos, ya que cada recurso 
 | Nivel 3          | ![Nivel 3](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%203.PNG) |
 | Nivel 4          | ![Nivel 4](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%204.PNG) |
 
+| Nivel 1  Nuevo   | ![Nivel 1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Nivel%201%20Nuevo.PNG) |
+| Nivel 2  Nuevo   | ![Nivel 2](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Nivel%202%20Nuevo.PNG) |
+| Nivel 3  Nuevo   | ![Nivel 3](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Nivel%203%20Nuevo.PNG) |
+| Nivel 4  Nuevo   | ![Nivel 4](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Nivel%204%20Nuevo.PNG) |
+
 
 ### **5.3 - Curva de aprendizaje**
 
