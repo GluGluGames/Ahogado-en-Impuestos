@@ -54,6 +54,15 @@ namespace GGG.Components.Achievements
 
         public List<Achievement> GetAchievements() => Achievements;
 
+        private IEnumerator ClosePanel()
+        {
+            yield return new WaitForSeconds(PopupTime);
+            _achievementPopup.transform.DOMoveY(Screen.height * 1.25f, 2f).SetEase(Ease.OutSine).onComplete += () =>
+            {
+                _achievementPopup.SetActive(false);
+            };
+        }
+
         public IEnumerator UnlockAchievement(string key)
         {
             Achievement achievement = Achievements.Find(x => x.GetKey() == key);
@@ -68,11 +77,9 @@ namespace GGG.Components.Achievements
             
             SoundManager.Instance.Play(AchievementSound);
             _achievementPopup.SetActive(true);
-            _achievementPopup.transform.DOMoveY(Screen.height - 20, 2f).SetEase(Ease.InSine);
-            yield return new WaitForSeconds(PopupTime);
-            _achievementPopup.transform.DOMoveY(Screen.height * 1.25f, 2f).SetEase(Ease.OutSine).onComplete += () =>
+            _achievementPopup.transform.DOMoveY(Screen.height - 20, 2f).SetEase(Ease.InSine).onComplete += () =>
             {
-                _achievementPopup.SetActive(false);
+                StartCoroutine(ClosePanel());
             };
         }
     }

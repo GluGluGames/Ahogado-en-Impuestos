@@ -92,17 +92,9 @@ namespace GGG.Components.UI
             PlayerPrefs.SetInt("Achievement09", x);
 
             if (PlayerPrefs.GetInt("Achievement09") >= 5)
-            {
-                SceneManagement.Instance.OnMinigameSceneLoaded += OnAchievementUnlock;
-            }
+                StartCoroutine(AchievementsManager.Instance.UnlockAchievement("09"));
             
             _gameManager.OnUIClose();
-        }
-
-        private void OnAchievementUnlock()
-        {
-            StartCoroutine(AchievementsManager.Instance.UnlockAchievement("09"));
-            SceneManagement.Instance.OnMinigameSceneLoaded -= OnAchievementUnlock;
         }
 
         private void ToggleMenu()

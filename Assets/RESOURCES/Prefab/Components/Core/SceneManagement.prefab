@@ -136,6 +136,7 @@ MonoBehaviour:
   SettingsViewport: {fileID: 5475716088639210604}
   CreditsViewport: {fileID: 6919004336502003844}
   CreditsPanel: {fileID: 1010895070892540835}
+  ExpeditionExitButton: {fileID: 8116052074764528198}
   ExitButton: {fileID: 423723182113048645}
   CreditsDuration: 25
 --- !u!223 &1033008191701824540
@@ -731,6 +732,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4916746543122823530, guid: 1a7c50aac76348b49a4cec8a93cc6dc3, type: 3}
   m_PrefabInstance: {fileID: 2737681189050453002}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8116052074764528198 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6150844883062384204, guid: 1a7c50aac76348b49a4cec8a93cc6dc3, type: 3}
+  m_PrefabInstance: {fileID: 2737681189050453002}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8022526991799973897
 PrefabInstance:
   m_ObjectHideFlags: 0
