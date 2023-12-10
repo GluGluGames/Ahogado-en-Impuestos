@@ -45,6 +45,7 @@ namespace GGG.Components.Core
         [Space(5), Header("Credits Screen")] 
         [SerializeField] private GameObject CreditsViewport;
         [SerializeField] private GameObject CreditsPanel;
+        [SerializeField] private Button ExpeditionExitButton;
         [SerializeField] private Button ExitButton;
         [SerializeField] private float CreditsDuration = 60f;
 
@@ -62,6 +63,8 @@ namespace GGG.Components.Core
         private void Start()
         {
             _soundManager = SoundManager.Instance;
+            
+            ExpeditionExitButton.onClick.AddListener(ExitExpedition);
             
             SceneManager.sceneUnloaded += (scene) =>
             {
@@ -186,6 +189,13 @@ namespace GGG.Components.Core
         public void OpenSettings()
         {
             SettingsViewport.SetActive(true);
+            
+            ExpeditionExitButton.gameObject.SetActive(InMiniGameScene());
+            ExpeditionExitButton.interactable = InMiniGameScene();
+            
+            ExitButton.gameObject.SetActive(!InMiniGameScene());
+            ExitButton.interactable = !InMiniGameScene();
+            
             _raycaster.enabled = true;
             _settingsOpen = true;
         }
@@ -195,6 +205,35 @@ namespace GGG.Components.Core
             SettingsViewport.SetActive(false);
             _raycaster.enabled = false;
             _settingsOpen = false;
+        }
+
+        private void ExitExpedition()
+        {
+            Scene currentScene = SceneManager.GetSceneAt(1);
+            SceneIndexes currentSceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+
+            if (currentScene.name == "Minigame_Level1")
+            {
+                currentSceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+            }
+            else if (currentScene.name == "Minigame_Level2")
+            {
+                currentSceneIndex = SceneIndexes.MINIGAME_LEVEL2;
+            }
+            else if (currentScene.name == "Minigame_Level3")
+            {
+                currentSceneIndex = SceneIndexes.MINIGAME_LEVEL3;
+            }
+            else if (currentScene.name == "Minigame_Level4")
+            {
+                currentSceneIndex = SceneIndexes.MINIGAME_LEVEL4;
+            }
+
+            AddSceneToLoad(SceneIndexes.GAME_SCENE);
+            AddSceneToUnload(currentSceneIndex);
+            UpdateScenes();
+            CloseSettings();
+            GameManager.Instance.OnUIClose();
         }
         
         #endregion

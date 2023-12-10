@@ -19,8 +19,14 @@ namespace GGG.Shared
         public string GetDescription() => Description.GetLocalizedString();
         public Sprite GetSprite() => Icon;
         public bool IsHidden() => Hide;
-        public bool IsUnlocked() => Unlocked;
 
-        public void Unlock() => Unlocked = true;
+        public bool IsUnlocked()
+        {
+            if (PlayerPrefs.HasKey(Key)) return PlayerPrefs.GetInt(Key) == 1;
+
+            return Unlocked;
+        }
+
+        public void Unlock() => PlayerPrefs.SetInt(Key, 1);
     }
 }
