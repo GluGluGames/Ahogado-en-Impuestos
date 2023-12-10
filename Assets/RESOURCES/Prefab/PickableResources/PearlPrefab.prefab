@@ -74,6 +74,7 @@ MonoBehaviour:
   _recollectionTime: 3
   _ownModels:
   - {fileID: 1008290128082147775}
+  Type: 0
   currentTile: {fileID: 0}
 --- !u!1001 &8499807610195340121
 PrefabInstance:
@@ -83,6 +84,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1787294861001411799}
     m_Modifications:
+    - target: {fileID: 8159668190764537867, guid: 634bfe962d7dc6847be7adbc408d59e8, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8159668190764537867, guid: 634bfe962d7dc6847be7adbc408d59e8, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f6518f2d6ca43b429ff398828dd8046, type: 2}
     - target: {fileID: 8650090502324253414, guid: 634bfe962d7dc6847be7adbc408d59e8, type: 3}
       propertyPath: m_Name
       value: SphereShell
