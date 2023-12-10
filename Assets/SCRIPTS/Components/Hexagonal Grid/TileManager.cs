@@ -199,7 +199,8 @@ namespace GGG.Components.HexagonalGrid
         #region Data persistence
 
         public void SaveTilesState() {
-            if (GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial)
+            if (!SceneManagement.InGameScene() || 
+                GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial)
                 return;
             
             TileData[] saveData = new TileData[_tiles.Count];

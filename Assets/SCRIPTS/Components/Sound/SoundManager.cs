@@ -75,16 +75,7 @@ namespace GGG
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// It checks if the settings of the mixers have been changed and if so, it assigns it values. 
-        /// If not, it initializes the mixers volume.
-        /// </summary>
-        private void Start()
-        {
-            Play("MainMenu");
-        }
-
+        
         public void SetMusicVolume(float volume)
         {
             MusicMixerGroup.audioMixer.SetFloat("Music", volume);
