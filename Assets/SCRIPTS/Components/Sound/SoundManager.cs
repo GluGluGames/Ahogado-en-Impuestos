@@ -109,6 +109,16 @@ namespace GGG
             Play(sound.name);
         }
 
+        public bool IsPlaying(string clipName)
+        {
+            Sound s = Array.Find(Sounds, x => x.ClipName == clipName);
+            if (!s)
+                throw new Exception("Not sound found");
+
+            return s.Source.isPlaying;
+        }
+        
+
         public void Resume(string clipName)
         {
             Sound s = Array.Find(Sounds, dummySound => dummySound.ClipName == clipName);

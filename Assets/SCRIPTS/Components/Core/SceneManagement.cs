@@ -82,8 +82,8 @@ namespace GGG.Components.Core
                     OnGameSceneLoaded?.Invoke();
                     
                     _soundManager.Stop("MainMenu");
-                    _soundManager.Play("MainTheme");
-                    _soundManager.Play("AmbientSound");
+                    if(!_soundManager.IsPlaying("MainTheme")) _soundManager.Play("MainTheme");
+                    if(!_soundManager.IsPlaying("AmbientSound")) _soundManager.Play("AmbientSound");
                 }
 
                 if (scene.buildIndex is (int)SceneIndexes.MINIGAME_LEVEL1 or (int)SceneIndexes.MINIGAME_LEVEL2 or
