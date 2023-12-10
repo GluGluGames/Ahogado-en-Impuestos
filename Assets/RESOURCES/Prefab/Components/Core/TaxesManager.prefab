@@ -484,6 +484,28 @@ MonoBehaviour:
     - {fileID: 21300000, guid: a8dc4997f81ff8c4884cdda030376542, type: 3}
     CharacterNames:
     - Poseidon
+  NotPayWithoutBuildingsDialogue:
+    DialogueLines:
+    - m_TableReference:
+        m_TableCollectionName: GUID:93d896419facbcd478801da9101bd8ce
+      m_TableEntryReference:
+        m_KeyId: 3492239050436608
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    - m_TableReference:
+        m_TableCollectionName: GUID:93d896419facbcd478801da9101bd8ce
+      m_TableEntryReference:
+        m_KeyId: 3493581181579264
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    AvatarList:
+    - {fileID: 21300000, guid: a8dc4997f81ff8c4884cdda030376542, type: 3}
+    CharacterNames:
+    - Poseidon
   PayButton: {fileID: 3975476232132558435}
   NotPayButton: {fileID: 1006045160523761056}
   references:
