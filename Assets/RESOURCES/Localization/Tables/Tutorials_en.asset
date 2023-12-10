@@ -32,8 +32,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 458430246912
-    m_Localized: You can control the camera using the WASD keys. You can also click
-      and drag the mouse to move the camera. Come on, try it!
+    m_Localized: You can control the camera using the WASD keys or by dragging the
+      mouse. If you are on a mobile, drag your finger across the screen. Come on,
+      tryit!
     m_Metadata:
       m_Items: []
   - m_Id: 510749995008
@@ -41,7 +42,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 614189920256
-    m_Localized: Use the Q and E keys to rotate the camera.
+    m_Localized: Use the Q and E keys to rotate the camera. If you're on mobile,
+      hold down one finger and rotate the other.
     m_Metadata:
       m_Items: []
   - m_Id: 686478749696
@@ -49,8 +51,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 745622630400
-    m_Localized: Use the mouse wheel to move the camera closer to the terrain, or
-      further away from it.
+    m_Localized: "\rUse the mouse wheel to zoom the camera closer to the terrain,
+      or further away from it.\r\nIf you are on a mobile, use two fingers and pinch
+      or spread them."
     m_Metadata:
       m_Items: []
   - m_Id: 879970381824
@@ -66,8 +69,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1353184342016
-    m_Localized: This is the construction menu. From here you can build the buildings
-      that will rise in the new Atlantis.
+    m_Localized: This is the construction menu. From here you can build the structures
+      that will become the new Atlantis.
     m_Metadata:
       m_Items: []
   - m_Id: 1431529746432
@@ -102,18 +105,17 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2353240633344
-    m_Localized: This is the upgrades menu of a building. Some of the buildings will
-      have a button that will allow you to interact with them, opening new menus.
+    m_Localized: This is the upgrade menu of a building. You can interact with some
+      buildings, opening new menus.
     m_Metadata:
       m_Items: []
   - m_Id: 2633948622848
-    m_Localized: Building selling
+    m_Localized: Selling buildings
     m_Metadata:
       m_Items: []
   - m_Id: 2896080039936
-    m_Localized: With the "Sell" button you can destroy the building, either because
-      you made a mistake or to place a new building. This will return you half the
-      cost of the building.
+    m_Localized: With the "Sell" button you can sell the building and recover part
+      of its cost.
     m_Metadata:
       m_Items: []
   - m_Id: 2987398426624
@@ -129,8 +131,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3585099329536
-    m_Localized: From here you can clean dirty squares so you can build on them.
-      However, right now you don't have enough materials to do it.
+    m_Localized: From here you can clean dirty tiles so you can build on them. However,
+      right now you don't have enough materials to do it.
     m_Metadata:
       m_Items: []
   - m_Id: 3713369534464
@@ -139,16 +141,16 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3897440759808
     m_Localized: Congratulations! You now have everything you need to rebuild Atlantis.
-      New tutorials will be coming your way in the future - keep up the good work!
+      New tutorials will be coming your way in the future. Keep up the good work!
     m_Metadata:
       m_Items: []
   - m_Id: 4081658785792
-    m_Localized: Eel Generator
+    m_Localized: Electricity generator
     m_Metadata:
       m_Items: []
   - m_Id: 4175116267520
     m_Localized: This is the electricity generator. From here you can increase the
-      production of one of the buildings you have built.
+      production of one of the buildings you have built around the genarator.
     m_Metadata:
       m_Items: []
   - m_Id: 4278216454144
@@ -254,19 +256,20 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 17945322483712
-    m_Localized: See those tiles with debris on top? Click on one of them
+    m_Localized: See those tiles with debris on top? Click on one of them.
     m_Metadata:
       m_Items: []
   - m_Id: 2804384594554880
-    m_Localized: '- Move the camera using the keys WASD'
+    m_Localized: '- Move the camera using the keys WASD or dragging'
     m_Metadata:
       m_Items: []
   - m_Id: 2804577356378112
-    m_Localized: '- Rotate the camera using the Q and E keys.'
+    m_Localized: '- Rotate the camera using the Q and E keys or sliding'
     m_Metadata:
       m_Items: []
   - m_Id: 2804817715163136
-    m_Localized: '- Zoom in on the camera using the mouse wheel'
+    m_Localized: '- Zoom the camera using the mouse wheel or pinching/spreading your
+      fingers together'
     m_Metadata:
       m_Items: []
   - m_Id: 2805653165993984
@@ -282,7 +285,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2810678160289792
-    m_Localized: '- Closes the upgrade menu'
+    m_Localized: '- Close the upgrade menu'
     m_Metadata:
       m_Items: []
   - m_Id: 2810863980539904
@@ -295,7 +298,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3139166218121216
     m_Localized: This is the town hall. Here you can see the achievements of the
-      game. Try to get them all!
+      game. Got to get them all!
     m_Metadata:
       m_Items: []
   - m_Id: 3139793165905920
@@ -311,8 +314,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3139861117825024
-    m_Localized: By using the other button on the left, you will be able to see the
-      time until Poseidon taxes you, as well as the amount.
+    m_Localized: By using the other button on the left, you will be able to see how
+      much time you have left until Poseidon taxes you, as well as the amount.
     m_Metadata:
       m_Items: []
   - m_Id: 3146040653017088
@@ -338,8 +341,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3146646235017216
-    m_Localized: To know how many resources you are generating, look at the text
-      below.
+    m_Localized: To know how many resources you are generating per second, look at
+      the text below.
     m_Metadata:
       m_Items: []
   - m_Id: 3447811682234368
@@ -392,8 +395,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3454203579232256
-    m_Localized: To move, click on one of the squares. You can only click on those
-      with rocks on top of them. An indicator of your movement will appear.
+    m_Localized: "\rTo move, click on one of the tiles. You cannot move through squares
+      that have rocks on them. An indicator of your movement will appear."
     m_Metadata:
       m_Items: []
   - m_Id: 3454409951571968
