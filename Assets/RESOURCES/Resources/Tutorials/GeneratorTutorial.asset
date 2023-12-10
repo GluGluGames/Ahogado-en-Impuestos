@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TutorialKey: GeneratorTutorial
   Dialogues: []
+  Objectives: []
   Panels:
   - Title:
       m_TableReference:
@@ -24,7 +25,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    Image: {fileID: 0}
+    Image: {fileID: 21300000, guid: 7f4d4d2c13624a44382c0accb12c7024, type: 3}
     Text:
       m_TableReference:
         m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
@@ -38,12 +39,31 @@ MonoBehaviour:
       m_TableReference:
         m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
       m_TableEntryReference:
+        m_KeyId: 3449839175233536
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Image: {fileID: 21300000, guid: b3b46b17d3c5e60459720e09a5b63a87, type: 3}
+    Text:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 3449899585794048
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
         m_KeyId: 4278216454144
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    Image: {fileID: 0}
+    Image: {fileID: 21300000, guid: 139c96833a8d980498f284f9678429cc, type: 3}
     Text:
       m_TableReference:
         m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
@@ -53,7 +73,6 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  TutorialCompleted: 0
   references:
     version: 2
     RefIds: []

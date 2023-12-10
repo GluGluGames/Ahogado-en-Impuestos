@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TutorialKey: ShopTutorial
   Dialogues: []
+  Objectives: []
   Panels:
   - Title:
       m_TableReference:
@@ -43,7 +44,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    Image: {fileID: 0}
+    Image: {fileID: 21300000, guid: 1bca493b0ff8d024086fc3d4e65e1737, type: 3}
     Text:
       m_TableReference:
         m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
@@ -62,7 +63,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    Image: {fileID: 0}
+    Image: {fileID: 21300000, guid: e5aef53fdb20fac41b55071ded26158c, type: 3}
     Text:
       m_TableReference:
         m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
@@ -81,7 +82,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    Image: {fileID: 0}
+    Image: {fileID: 21300000, guid: a77b1b48b56a7a44a9a67d2fd54275ec, type: 3}
     Text:
       m_TableReference:
         m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
@@ -91,7 +92,6 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  TutorialCompleted: 0
   references:
     version: 2
     RefIds: []

@@ -25,10 +25,22 @@ namespace GGG.Shared
         public Vector3 GetModelScale() => ModelScale;
         public Sprite GetSprite() => Sprite;
         public Sprite GetSelectedSprite() => SelectedSprite;
-        public void DiscoverResource() => CanBeResearched = true;
-        public bool Unlocked() => IsUnlocked;
-        public void Unlock() => IsUnlocked = true;
-        public bool CanResearch() => CanBeResearched;
+        public void DiscoverResource() => PlayerPrefs.SetInt($"Research{Key}", 1);
+
+        public bool Unlocked()
+        {
+            if (PlayerPrefs.HasKey(Key)) 
+                return PlayerPrefs.GetInt(Key) == 1;
+
+            return IsUnlocked;
+        }
+        public void Unlock() => PlayerPrefs.SetInt(Key, 1);
+        public bool CanResearch()
+        {
+            if (PlayerPrefs.HasKey($"Research{Key}")) return PlayerPrefs.GetInt($"Research{Key}") == 1;
+
+            return false;
+        }
         public int GetResearchTime() => ResearchTime;
     }
 }

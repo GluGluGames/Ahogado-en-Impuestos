@@ -75,7 +75,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1513901682688
-    m_Localized: For now you have most of the buildings blocked, except one.
+    m_Localized: Many of the buildings are locked right now. To unlock them, you
+      will have to investigate them in the laboratory.
     m_Metadata:
       m_Items: []
   - m_Id: 1584898666496
@@ -112,7 +113,7 @@ MonoBehaviour:
   - m_Id: 2896080039936
     m_Localized: With the "Sell" button you can destroy the building, either because
       you made a mistake or to place a new building. This will return you half the
-      cost of the building. For now, close this menu
+      cost of the building.
     m_Metadata:
       m_Items: []
   - m_Id: 2987398426624
@@ -156,7 +157,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4344096387072
     m_Localized: To increase production, click on one of the icons and select the
-      building you want to upgrade. If you have enough resources, it will do so.
+      building you want to upgrade. You can also stop upgrading by clicking again.
     m_Metadata:
       m_Items: []
   - m_Id: 4477076795392
@@ -183,7 +184,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4824772014080
     m_Localized: This is the laboratory. Here you can unlock new resources to get
-      and new buildings to build.
+      and new buildings to build. Click on one of the three bars to start investigating.
     m_Metadata:
       m_Items: []
   - m_Id: 4943378542592
@@ -191,8 +192,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4999800320000
-    m_Localized: Click on the icon above one of the progress bars and select the
-      resource or building you want to unlock.
+    m_Localized: Select the resource or building you want to unlock.
     m_Metadata:
       m_Items: []
   - m_Id: 5074282770432
@@ -200,8 +200,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5127286190080
-    m_Localized: This is the museum. Here you can see all the materials that you
-      have discovered during the reconstruction.
+    m_Localized: This is the museum. Here you can see all the materials you have
+      discovered. Click on one of the materials you have unlocked.
     m_Metadata:
       m_Items: []
   - m_Id: 5177135493120
@@ -209,8 +209,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5228163395584
-    m_Localized: Click on one of the materials you have unlocked to see a more detailed
-      description of that material.
+    m_Localized: A more detailed description of the material can be found on the
+      left.
     m_Metadata:
       m_Items: []
   - m_Id: 5277802983424
@@ -227,7 +227,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5581978103808
-    m_Localized: Using the arrows, you can increase the amount you receive and give.
+    m_Localized: Using the arrows, you can increase the amount you receive and give
+      and the center button to make the exchange.
     m_Metadata:
       m_Items: []
   - m_Id: 5997700739072
@@ -339,6 +340,69 @@ MonoBehaviour:
   - m_Id: 3146646235017216
     m_Localized: To know how many resources you are generating, look at the text
       below.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3447811682234368
+    m_Localized: Upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3447889725648896
+    m_Localized: Buildings can also be upgraded, unlocking new features or increasing
+      their efficiency.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3448398087876608
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3448438080565248
+    m_Localized: Let's see what else you can do. Close the upgrade menu to continue.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3449839175233536
+    m_Localized: Levels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3449899585794048
+    m_Localized: The generator will be able to boost one more building with each
+      level. That is to say, at level 3 you will be able to upgrade up to 3 buildings,
+      plus those of the previous levels.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453697066692608
+    m_Localized: "Expedici\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453752989347840
+    m_Localized: To rebuild Atlantis you will need new resources. To get them, go
+      on an expedition.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453897315348480
+    m_Localized: Objective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453946401288192
+    m_Localized: In the expedition you will have to get as many resources as possible
+      in a given time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454129872728064
+    m_Localized: Movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454203579232256
+    m_Localized: To move, click on one of the squares. You can only click on those
+      with rocks on top of them. An indicator of your movement will appear.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454409951571968
+    m_Localized: Resources
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454449264783360
+    m_Localized: The resources you can collect will appear with a white border. Stand
+      on them to start collecting them. It will take some time to collect a resource.
     m_Metadata:
       m_Items: []
   references:

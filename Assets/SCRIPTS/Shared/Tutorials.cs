@@ -11,6 +11,7 @@ namespace GGG.Shared
         MuseumTutorial,
         GeneratorTutorial,
         FarmTutorial,
-        CityHallTutorial
+        CityHallTutorial,
+        ExpeditionTutorial
     }
 }

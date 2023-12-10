@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TutorialKey: 
   Dialogues: []
+  Objectives: []
   Panels:
   - Title:
       m_TableReference:
@@ -24,7 +25,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    Image: {fileID: 0}
+    Image: {fileID: 21300000, guid: 13ff9203d90fc254fa88902a4b802142, type: 3}
     Text:
       m_TableReference:
         m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
@@ -43,7 +44,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    Image: {fileID: 0}
+    Image: {fileID: 21300000, guid: 1fbb79a45b14e1545b2c83e348ccf068, type: 3}
     Text:
       m_TableReference:
         m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
@@ -53,7 +54,6 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  TutorialCompleted: 0
   references:
     version: 2
     RefIds: []

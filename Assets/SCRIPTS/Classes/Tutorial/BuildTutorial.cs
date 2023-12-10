@@ -64,7 +64,8 @@ namespace GGG.Classes.Tutorial
 
             #region Structure Sold Tutorial
             
-            yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
+            for (int i = 0; i < 3; i++)
+                yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true, false);
             ObjectivesPanelOpen(OnObjectivesChange, 2);
             yield return UpgradeMenuCloseStep();
