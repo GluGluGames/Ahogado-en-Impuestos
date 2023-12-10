@@ -104,13 +104,11 @@ namespace GGG.Components.UI
                     button.gameObject.SetActive(false);
                     continue;
                 }
-                
 
                 RecollectedResource resource = _recollectedResources[_currentResourceIndex];
                 button.SetResourceAmount(resource.Amount);
                 button.SetIcon(resource.Resource.GetSprite());
                 button.gameObject.SetActive(true);
-                PagesText.SetText($"{_currentPage}/{_pagesNumber}");
                 _currentResourceIndex++;
             }
         }
@@ -128,8 +126,11 @@ namespace GGG.Components.UI
                 _recollectedResources.Add(new RecollectedResource(resource, amount));
                 PlayerManager.Instance.AddResource(resource.GetKey(), amount);
             }
-
-            _pagesNumber = _recollectedResources.Count <= 4 ? 1 : _recollectedResources.Count / 4 + 1;
+            
+            if (_recollectedResources.Count == 0) _pagesNumber = 1;
+            else _pagesNumber = _recollectedResources.Count < 4 ? 1 : Mathf.CeilToInt(_recollectedResources.Count * 0.25f);
+            PagesText.SetText($"{_currentPage}/{_pagesNumber}");
+            
             SetButtons();
         }
     }

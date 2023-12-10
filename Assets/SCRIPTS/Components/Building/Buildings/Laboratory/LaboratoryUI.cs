@@ -416,10 +416,10 @@ namespace GGG.Components.Buildings.Laboratory
         private IEnumerator LoadResearchProgress(List<Laboratory> laboratories)
         {
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "laboratory_progress.json");
-#if UNITY_EDITOR
-            filePath = "file://" + filePath;
-#endif
             string data;
+            
+            if (!File.Exists(filePath)) yield break;
+            
             if (filePath.Contains("://") || filePath.Contains(":///")) {
                 UnityWebRequest www = UnityWebRequest.Get(filePath);
                 yield return www.SendWebRequest();
@@ -428,8 +428,6 @@ namespace GGG.Components.Buildings.Laboratory
             else {
                 data = File.ReadAllText(filePath);
             }
-
-            if (string.IsNullOrEmpty(data)) yield break;
             
             LaboratoryData[] researchProgress = JsonHelper.FromJson<LaboratoryData>(data);
             TimeSpan time = DateTime.Now.Subtract(DateTime.Parse(PlayerPrefs.GetString("ExitTime")));
