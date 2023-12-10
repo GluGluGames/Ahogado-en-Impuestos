@@ -85,7 +85,8 @@ namespace GGG.Components.Buildings.CityHall
             {
                 _achievementContainers[i].SetAchievement(achievements[i].GetName(),
                     achievements[i].GetDescription(),
-                    achievements[i].GetSprite());
+                    achievements[i].GetSprite(),
+                    achievements[i].IsUnlocked());
             }
         }
 
@@ -102,7 +103,8 @@ namespace GGG.Components.Buildings.CityHall
             {
                 _achievementContainers[i].SetAchievement(achievements[idx].GetName(), 
                     achievements[idx].GetDescription(), 
-                    achievements[idx].GetSprite());
+                    achievements[idx].GetSprite(),
+                    achievements[idx].IsUnlocked());
                 idx++;
             }
 
