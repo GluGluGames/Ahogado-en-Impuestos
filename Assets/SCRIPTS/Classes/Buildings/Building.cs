@@ -136,12 +136,17 @@ namespace GGG.Classes.Buildings
         /// Checks if the building is unlocked and can be buy
         /// </summary>
         /// <returns>True if the player can buy the build. False otherwise</returns>
-        public bool IsUnlocked() => Unlocked;
+        public bool IsUnlocked()
+        {
+            if (PlayerPrefs.HasKey(Key)) return PlayerPrefs.GetInt(Key) == 1;
+            
+            return Unlocked;
+        }
 
         /// <summary>
         /// Unlocks the building
         /// </summary>
-        public void Unlock() => Unlocked = true;
+        public void Unlock() => PlayerPrefs.SetInt(Key, 1);
 
         /// <summary>
         /// Gets the time that takes to research the building

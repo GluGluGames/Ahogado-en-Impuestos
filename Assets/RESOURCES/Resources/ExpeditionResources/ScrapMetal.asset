@@ -33,7 +33,9 @@ MonoBehaviour:
     m_LocalVariables: []
   Sprite: {fileID: 21300000, guid: 952cc273af9b1e84baa5222f1e6c97a9, type: 3}
   SelectedSprite: {fileID: 21300000, guid: 616439198e51e9a44a39fae51088f6a0, type: 3}
-  CanBeResearched: 1
+  Model: {fileID: 0}
+  ModelScale: {x: 0, y: 0, z: 0}
+  CanBeResearched: 0
   IsUnlocked: 0
   ResearchTime: 0
   references:
