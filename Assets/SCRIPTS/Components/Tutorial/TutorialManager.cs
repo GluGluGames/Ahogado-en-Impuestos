@@ -39,6 +39,12 @@ namespace GGG.Components.Tutorial
             SceneManagement.Instance.OnGameSceneLoaded += InitializeTutorials;
             _gameManager = GameManager.Instance;
             _ui = GetComponentInChildren<TutorialUI>();
+
+            if (Tutorials.Find(x => x.GetKey() == "InitialTutorial").Completed() &&
+                !Tutorials.Find(x => x.GetKey() == "BuildTutorial").Completed())
+            {
+                PlayerPrefs.SetInt("InitialTutorial", 0);
+            }
             
             _raycaster = GetComponent<GraphicRaycaster>();
             _raycaster.enabled = false;
