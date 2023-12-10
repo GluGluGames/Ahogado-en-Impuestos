@@ -231,7 +231,7 @@ namespace GGG.Components.Buildings
             int i = 0;
                 
             foreach (BuildingData build in buildings) {
-                GameObject go = build.Building.Spawn(build.Position, transform, build.Level, false);
+                 GameObject go = build.Building.Spawn(build.Position, transform, build.Level, false);
                 buildingComponents[i] = go.GetComponent<BuildingComponent>();
                 
                 buildingComponents[i].SetId(build.Id);

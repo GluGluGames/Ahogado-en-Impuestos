@@ -77,7 +77,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1513901682688
-    m_Localized: "Por ahora tienes bloqueados la mayor\xEDa de edificios, salvo uno."
+    m_Localized: "Muchos de los edificios se encuentran bloqueados ahora mismo. Para
+      desbloquearlos, deber\xE1s investigarlos en el laboratorio."
     m_Metadata:
       m_Items: []
   - m_Id: 1584898666496
@@ -115,7 +116,7 @@ MonoBehaviour:
   - m_Id: 2896080039936
     m_Localized: "Con el bot\xF3n \"Vender\" puedes destruir el edificio, ya sea
       porque te hayas equivocado o para colocar un edificio nuevo. Esto te devolver\xE1
-      la mitad del coste del edificio. Por ahora, cierra este men\xFA."
+      la mitad del coste del edificio."
     m_Metadata:
       m_Items: []
   - m_Id: 2987398426624
@@ -161,8 +162,8 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4344096387072
     m_Localized: "Para aumentar la producci\xF3n, haz click en uno de los \xEDconos
-      y selecciona el edificio que quieres mejorar. Si tienes recursos suficientes,
-      lo har\xE1."
+      y selecciona el edificio que quieres mejorar. Tambi\xE9n puedes parar de mejorarlo
+      volviendo a hacer click."
     m_Metadata:
       m_Items: []
   - m_Id: 4477076795392
@@ -190,7 +191,8 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4824772014080
     m_Localized: "Este es el laboratorio. Aqu\xED podr\xE1s desbloquear nuevos recursos
-      para conseguir y nuevos edificios que construir."
+      para conseguir y nuevos edificios que construir. Pulsa en una de las tres barras
+      para empezar a investigar."
     m_Metadata:
       m_Items: []
   - m_Id: 4943378542592
@@ -198,8 +200,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4999800320000
-    m_Localized: Pulsa el icono encima de una de las barras de progreso y selecciona
-      el recurso o el edificio que quieres desbloquear.
+    m_Localized: Selecciona el recurso o el edificio que quieres desbloquear.
     m_Metadata:
       m_Items: []
   - m_Id: 5074282770432
@@ -208,7 +209,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 5127286190080
     m_Localized: "Este es el museo. Aqu\xED podr\xE1s ver todos los materiales que
-      has ido descubriendo a lo largo de la reconstrucci\xF3n."
+      has ido descubriendo. Pulsa en uno de los materiales que has desbloqueado."
     m_Metadata:
       m_Items: []
   - m_Id: 5177135493120
@@ -216,8 +217,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5228163395584
-    m_Localized: "Pulsa en uno de los materiales que has desbloqueado para ver una
-      descripci\xF3n m\xE1s detallada de dicho material."
+    m_Localized: "Podr\xE1s ver a la izquierda una descripci\xF3n m\xE1s detallada
+      de dicho material."
     m_Metadata:
       m_Items: []
   - m_Id: 5277802983424
@@ -234,8 +235,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5581978103808
-    m_Localized: Usando las flechas, puedes aumentar la cantidad que recibes y que
-      das.
+    m_Localized: "Usando las flechas, puedes aumentar la cantidad que recibes y que
+      das y el bot\xF3n del centro para realizar el intercambio."
     m_Metadata:
       m_Items: []
   - m_Id: 5997700739072
@@ -349,6 +350,72 @@ MonoBehaviour:
   - m_Id: 3146646235017216
     m_Localized: "Para saber cu\xE1ntos recursos est\xE1s generando, f\xEDjate en
       el texto de debajo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3447811682234368
+    m_Localized: Mejora
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3447889725648896
+    m_Localized: "Los edificios tambi\xE9n pueden mejorarse, desbloqueando nuevas
+      caracter\xEDsticas o aumentando su eficiencia."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3448398087876608
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3448438080565248
+    m_Localized: "Veamos que m\xE1s puedes hacer. Cierra el men\xFA de mejoras para
+      continuar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3449839175233536
+    m_Localized: Niveles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3449899585794048
+    m_Localized: "El generador podr\xE1 boostear un edificio m\xE1s con cada nivel.
+      Es decir, en el nivel 3 podr\xE1s mejorar hasta 3 edificios, m\xE1s los de
+      los niveles anteriores."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453697066692608
+    m_Localized: "Expedici\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453752989347840
+    m_Localized: "Para reconstruir la Atl\xE1ntida necesitar\xE1s nuevos recursos.
+      Para conseguirlos, vete de expedici\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453897315348480
+    m_Localized: Objetivo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453946401288192
+    m_Localized: "En la expedici\xF3n deberas conseguir el mayor n\xFAmero de recursos
+      posible en un tiempo dado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454129872728064
+    m_Localized: Moviemiento
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454203579232256
+    m_Localized: "Para moverte, pulsa en una de las casillas. \xDAnicamente no puedes
+      pulsar en aquellas que tengan rocas encima. Aparecer\xE1 un indicador de tu
+      movimiento."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454409951571968
+    m_Localized: Recursos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454449264783360
+    m_Localized: "Los recursos que puedes recoger aparecer\xE1n con un borde blanco.
+      Ponte encima de ellos para empezar a recogerlos. Tardar\xE1s un tiempo en recoger
+      un recurso."
     m_Metadata:
       m_Items: []
   references:

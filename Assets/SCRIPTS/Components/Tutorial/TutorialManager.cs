@@ -59,6 +59,7 @@ namespace GGG.Components.Tutorial
             GeneratorUI.OnGeneratorOpen += () => StartTutorial("GeneratorTutorial", "BuildTutorial");
             CityHallUi.OnCityHallOpen += () => StartTutorial("CityHallTutorial", "BuildTutorial");
             FarmUI.OnFarmUIOpen += () => StartTutorial("FarmTutorial", "BuildTutorial");
+            LateralUI.OnLateralUiOpen += () => StartTutorial("ExpeditionTutorial", "BuildTutorial");
         }
 
         private void StartTutorial(string tutorialKey, string previousTutorialKey)

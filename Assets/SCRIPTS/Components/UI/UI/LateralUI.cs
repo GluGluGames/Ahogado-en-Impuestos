@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using GGG.Components.Core;
 using GGG.Input;
@@ -5,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using GGG.Components.Achievements;
 using GGG.Shared;
+using Random = UnityEngine.Random;
 
 namespace GGG.Components.UI
 {
@@ -22,6 +24,8 @@ namespace GGG.Components.UI
 
         private GameObject _viewport;
         private bool _open;
+
+        public static Action OnLateralUiOpen;
 
         private void Start()
         {
@@ -53,6 +57,8 @@ namespace GGG.Components.UI
 
         private void OnExpeditionButton()
         {
+            if (_gameManager.OnTutorial()) return;
+            
             int randMiniGame = Random.Range(1, 5);
             SceneIndexes sceneIndex;
             
@@ -106,6 +112,7 @@ namespace GGG.Components.UI
             {
                 _viewport.transform.DOMoveX(Screen.width * 0.4f, 0.75f).SetEase(Ease.InCubic);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                OnLateralUiOpen?.Invoke();
                 _gameManager.OnUIOpen();
             }
             else
@@ -121,12 +128,16 @@ namespace GGG.Components.UI
 
         private void OpenInventory()
         {
+            if (_gameManager.OnTutorial()) return;
+            
             ToggleMenu();
             _inventory.OpenInventory();
         }
 
         private void OpenSettings()
         {
+            if (_gameManager.OnTutorial()) return;
+            
             _sceneManagement.OpenSettings();
             ToggleMenu();
             _gameManager.OnUIOpen();
