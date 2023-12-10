@@ -15,7 +15,7 @@ namespace GGG.Components.Taxes
         private DialogueBox _dialogueBox;
         private TaxUI _taxUI;
         private static float _intervalDelta;
-        private bool _stopInterval;
+        private static bool _stopInterval;
 
         private void Start()
         {
@@ -41,21 +41,19 @@ namespace GGG.Components.Taxes
 
         public static float GetRemainingTime() => _intervalDelta;
 
-        private void StopInterval() => _stopInterval = false;
-        private void StartInterval() => _stopInterval = true;
+        public static void StopInterval() => _stopInterval = true;
+        public static void StartInterval() => _stopInterval = false;
 
         private void OnOptionSelected()
         {
+            StartInterval();
             _dialogueBox.DialogueStart -= StopInterval;
             _dialogueBox.DialogueEnd -= _taxUI.Open;
-            _taxUI.OnOptionSelected -= StartInterval;
-            _taxUI.OnOptionSelected -= OnOptionSelected;
         }
 
         public void TriggerTaxes()
         {
             _dialogueBox.DialogueStart += StopInterval;
-            _taxUI.OnOptionSelected += StartInterval;
             
             _dialogueBox.DialogueEnd += _taxUI.Open;
             _taxUI.OnOptionSelected += OnOptionSelected;

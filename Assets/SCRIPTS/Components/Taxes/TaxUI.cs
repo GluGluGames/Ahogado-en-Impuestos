@@ -27,6 +27,7 @@ namespace GGG.Components.Taxes
         [SerializeField] private TMP_Text[] ResourcesAmount;
         [SerializeField] private DialogueText PayDialogue;
         [SerializeField] private DialogueText NotPayDialogue;
+        [SerializeField] private DialogueText NotPayWithoutBuildingsDialogue;
 
         [Space(5), Header("Buttons")] 
         [SerializeField] private Button PayButton;
@@ -58,7 +59,7 @@ namespace GGG.Components.Taxes
 
             yield return null;
             
-            GenerateTaxesAmount();
+            _player.OnPlayerInitialized += GenerateTaxesAmount;
         }
 
         private void OnDisable()
@@ -73,7 +74,8 @@ namespace GGG.Components.Taxes
         
         private void GenerateTaxesAmount(){
             _taxResource = _player.GetResource("Seaweed");
-            _taxAmount = _random.Next(50, 100);
+            _taxAmount = _player.GetResourceCount("Seaweed") == 0 ? 50 :
+                Mathf.CeilToInt(_player.GetResourceCount("Seaweed") * Random.Range(1f, 2f));
         }
 
         public void Open()
@@ -112,14 +114,14 @@ namespace GGG.Components.Taxes
             ResourcesAmount[0].gameObject.SetActive(true);
             ResourcesAmount[0].SetText(_taxAmount.ToString());
             
-            PayButton.interactable = _player.GetResourceCount(_taxResource.GetKey()) < _taxAmount;
+            PayButton.interactable = _player.GetResourceCount(_taxResource.GetKey()) >= _taxAmount;
             PayButton.image.color = _player.GetResourceCount(_taxResource.GetKey()) >= _taxAmount ? 
-                new Color(1f, 1f, 1f, 1f) :  new Color(0.81f, 0.84f, 0.81f, 0.9f);
+                new Color(1f, 1f, 1f, 1f) :  new Color(0.60f, 0.60f, 0.60f, 1f);
         }
 
         private void PayTaxes()
         {
-            _player.AddResource(_taxResource.GetKey(), _taxAmount);
+            _player.AddResource(_taxResource.GetKey(), -_taxAmount);
 
             StartCoroutine(AchievementsManager.Instance.UnlockAchievement("07"));
             GenerateTaxesAmount();
@@ -130,27 +132,33 @@ namespace GGG.Components.Taxes
 
         private void DestroyBuilding()
         {
-            int range;
-            
-            do range = Random.Range(0, _buildings.Count);
-            while(_buildings[range].BuildData().GetKey() == "CityHall");
-
-            if (_buildings.Count > 0)
+            if (_buildings.Count > 1)
             {
+                int range;
+                do range = Random.Range(0, _buildings.Count);
+                while (_buildings[range].BuildData().GetKey() == "CityHall");
+                
                 GameObject go = Instantiate(BuildingDestroyParticles, _buildings[range].transform.position, Quaternion.identity);
                 go.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 TileManager.Instance.DestroyBuilding(_buildings[range]);
+                SoundManager.Instance.Play(DestructionSound);
             }
-
-            SoundManager.Instance.Play(DestructionSound);
+            
             StartCoroutine(AchievementsManager.Instance.UnlockAchievement("08"));
             _dialogueBox.DialogueEnd -= DestroyBuilding;
         }
 
         private void NotPayTaxes()
         {
-            _dialogueBox.AddNewDialogue(NotPayDialogue);
-            _dialogueBox.DialogueEnd += DestroyBuilding;
+            if (_buildings.Count > 1)
+            {
+                _dialogueBox.AddNewDialogue(NotPayDialogue);
+                _dialogueBox.DialogueEnd += DestroyBuilding;
+            }
+            else
+            {
+                _dialogueBox.AddNewDialogue(NotPayWithoutBuildingsDialogue);
+            }
             
             GenerateTaxesAmount();
             Close();
