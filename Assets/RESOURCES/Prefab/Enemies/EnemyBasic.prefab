@@ -114,8 +114,8 @@ MonoBehaviour:
   cubeCoordPos: {x: 0, y: 0, z: 0}
   isDirty: 0
   movementController: {fileID: 0}
-  model1: {fileID: 8664002527387438401}
-  model2: {fileID: 8664002527387438401}
+  model1: {fileID: 9183317072859153012}
+  model2: {fileID: 7677875768965705066}
   myLayerInt: 15
 --- !u!114 &2557339169096508649
 MonoBehaviour:
@@ -353,6 +353,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &9183317072859153012 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: c11d3aaccdc708b4cb9f90b029428e5a, type: 3}
+  m_PrefabInstance: {fileID: 8430124652659929104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8715312227832061321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -477,6 +482,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5286245022498165472, guid: c9bf2c8ba1a657945977f48ab4ce5c5e, type: 3}
+      propertyPath: visibilityListy.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286245022498165472, guid: c9bf2c8ba1a657945977f48ab4ce5c5e, type: 3}
+      propertyPath: visibilityListy.Array.data[7]
+      value: 
+      objectReference: {fileID: 4563947619743243223}
+    - target: {fileID: 5286245022498165472, guid: c9bf2c8ba1a657945977f48ab4ce5c5e, type: 3}
+      propertyPath: visibilityListy.Array.data[8]
+      value: 
+      objectReference: {fileID: 8985611410408410226}
     - target: {fileID: 5591497620538670676, guid: c9bf2c8ba1a657945977f48ab4ce5c5e, type: 3}
       propertyPath: m_SizeDelta.x
       value: -1.7898
@@ -642,3 +659,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3df1347cddad9348976751747266053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4563947619743243223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5162642938421134942, guid: c9bf2c8ba1a657945977f48ab4ce5c5e, type: 3}
+  m_PrefabInstance: {fileID: 8715312227832061321}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8985611410408410226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 306332408798204411, guid: c9bf2c8ba1a657945977f48ab4ce5c5e, type: 3}
+  m_PrefabInstance: {fileID: 8715312227832061321}
+  m_PrefabAsset: {fileID: 0}

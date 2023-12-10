@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4159632119728580932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.61, z: 0.42}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9047455529261582219}
@@ -74,6 +74,8 @@ MonoBehaviour:
   _recollectionTime: 3
   _ownModels:
   - {fileID: 8558198781566754097}
+  - {fileID: 8181314492445528580}
+  - {fileID: 7238735144393375002}
   Type: 0
   currentTile: {fileID: 0}
 --- !u!1001 &8792642356101423200
@@ -148,6 +150,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -1253996098385199550, guid: c08811d880d502240b489ef3dd1d8e9a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.784
+      objectReference: {fileID: 0}
+    - target: {fileID: -1253996098385199550, guid: c08811d880d502240b489ef3dd1d8e9a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.27
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c08811d880d502240b489ef3dd1d8e9a, type: 3}
       propertyPath: m_Name
       value: Dorada
@@ -189,7 +199,8 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8821623529969584324, guid: c08811d880d502240b489ef3dd1d8e9a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -7029948723529949830, guid: c08811d880d502240b489ef3dd1d8e9a, type: 3}
@@ -244,6 +255,11 @@ PlayableDirector:
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
+--- !u!1 &8181314492445528580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: c08811d880d502240b489ef3dd1d8e9a, type: 3}
+  m_PrefabInstance: {fileID: 8792642356101423200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8558198781566754097 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c08811d880d502240b489ef3dd1d8e9a, type: 3}

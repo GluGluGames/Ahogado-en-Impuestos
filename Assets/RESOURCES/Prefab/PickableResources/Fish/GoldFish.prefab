@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8229865092733647050}
-  - component: {fileID: 5789423813943708503}
   - component: {fileID: 5922251792868762482}
+  - component: {fileID: 5789423813943708503}
   m_Layer: 0
   m_Name: GoldFish
   m_TagString: Untagged
@@ -34,27 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5789423813943708503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721827515470568750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ada6a036b663d5149ab6467651279262, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _resource: {fileID: 11400000, guid: 54ce8d6ab19d65e468b708af5262eb8f, type: 2}
-  _amount: 0
-  _alwaysVisible: 0
-  _pickProgressUI: {fileID: 0}
-  _recollectionTime: 0
-  _ownModels:
-  - {fileID: 5762742628611318243}
-  Type: 0
-  currentTile: {fileID: 0}
 --- !u!135 &5922251792868762482
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -76,6 +55,29 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5789423813943708503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3721827515470568750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada6a036b663d5149ab6467651279262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resource: {fileID: 11400000, guid: 54ce8d6ab19d65e468b708af5262eb8f, type: 2}
+  _amount: 3
+  _alwaysVisible: 0
+  _pickProgressUI: {fileID: 0}
+  _recollectionTime: 3
+  _ownModels:
+  - {fileID: 5762742628611318243}
+  - {fileID: 5238906543485742806}
+  - {fileID: 6721812467475055048}
+  Type: 0
+  currentTile: {fileID: 0}
 --- !u!1001 &4843680989935688882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -162,6 +164,11 @@ PrefabInstance:
 --- !u!4 &4950176514006104921 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3d71afb9de915a64db13f86d7792d5f7, type: 3}
+  m_PrefabInstance: {fileID: 4843680989935688882}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5238906543485742806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 3d71afb9de915a64db13f86d7792d5f7, type: 3}
   m_PrefabInstance: {fileID: 4843680989935688882}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5762742628611318243 stripped

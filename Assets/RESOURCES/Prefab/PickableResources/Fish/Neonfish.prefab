@@ -74,6 +74,8 @@ MonoBehaviour:
   _recollectionTime: 3
   _ownModels:
   - {fileID: 8680243201545336990}
+  - {fileID: 9168028592885790635}
+  - {fileID: 7694285629401569461}
   Type: 0
   currentTile: {fileID: 0}
 --- !u!1001 &8410194000234333647
@@ -248,5 +250,10 @@ Transform:
 --- !u!1 &8680243201545336990 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0e409f13b5e18174b8ec1b72d73fa0c1, type: 3}
+  m_PrefabInstance: {fileID: 8410194000234333647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9168028592885790635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 0e409f13b5e18174b8ec1b72d73fa0c1, type: 3}
   m_PrefabInstance: {fileID: 8410194000234333647}
   m_PrefabAsset: {fileID: 0}

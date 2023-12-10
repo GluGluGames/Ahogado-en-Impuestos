@@ -116,8 +116,8 @@ MonoBehaviour:
   cubeCoordPos: {x: 0, y: 0, z: 0}
   isDirty: 0
   movementController: {fileID: 0}
-  model1: {fileID: 3407776755188655088}
-  model2: {fileID: 7510249690366973677}
+  model1: {fileID: 4466209460643038171}
+  model2: {fileID: 533650785218032494}
   myLayerInt: 16
 --- !u!114 &6620592015638322092
 MonoBehaviour:
@@ -283,6 +283,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2279415576230761968}
   m_SourcePrefab: {fileID: 100100000, guid: 486b17b92ccf62b489fa6cd159859f69, type: 3}
+--- !u!1 &533650785218032494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2660602332106993103, guid: 486b17b92ccf62b489fa6cd159859f69, type: 3}
+  m_PrefabInstance: {fileID: 2561337860600323745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2594366181010454858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 486b17b92ccf62b489fa6cd159859f69, type: 3}
