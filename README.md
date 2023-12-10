@@ -904,7 +904,7 @@ En el juego, actúan principalmente los recursos, es decir, todos giran en torno
 
 ## **13 - POST-MORTEM**
 
-#### ¿QUÉ HA IDO BIEN?
+#### 13.1 - ¿QUÉ HA IDO BIEN?
 
 - **ARTE**:
 	- Sprites y modelados finales de buena calidad.
@@ -917,7 +917,7 @@ En el juego, actúan principalmente los recursos, es decir, todos giran en torno
    	- Buena coordinación a la hora de trabajar en distintas partes del proyecto sin pisarnos unos a otros.
 
 
-#### ¿QUÉ SE PODRÍA HABER MEJORADO?
+#### 13.2 - ¿QUÉ SE PODRÍA HABER MEJORADO?
 
 - **ORGANIZACIÓN**:
  	- Mala estimación del tiempo que lleva el trabajo.
