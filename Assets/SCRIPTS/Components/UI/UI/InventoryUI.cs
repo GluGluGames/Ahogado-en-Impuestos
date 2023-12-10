@@ -26,6 +26,8 @@ namespace GGG.Components.UI
         [Space(5), Header("Buttons")]
         [SerializeField] private Button CloseButton;
 
+        public static Action OnInventoryOpen;
+
         #endregion
 
         #region Private variables
@@ -207,6 +209,8 @@ namespace GGG.Components.UI
             
             HandleSelectedResources();
             ResetContainers();
+            
+            OnInventoryOpen?.Invoke();
             
             foreach (string key in _resourcesCountText.Keys)
                 _resourcesCountText[key].SetText(_player.GetResourceCount(key).ToString());
