@@ -902,6 +902,8 @@ El desafío viene dado por varios elementos claves: administrar los costos de di
 
 En el juego, actúan principalmente los recursos, es decir, todos giran en torno al recurso, formando como mecánica principal del juego. Los recursos principales serán las algas, los corales, las perlas, las conchas y las caracolas; todo tipo de construcción o mejora depende de ellos. Los recursos existen para poder usarlos; en este caso, el jugador los usará para construir, destruir, reparar, mejorar edificios dentro de la ciudad. Cada edificio tendrá un costo distinto, algunos serán más complicados para construir pero aportarán un rendimiento mayor a la ciudad; otros actuarán como última medida para salvar la partida, cada uno de ellos tiene distintas funcionalidades para ayudar a la ciudad. En la parte de expedición, el jugador podrá navegar libremente por el escenario; si es cazado, volverá a la ciudad casi sin recursos; habrá variedad de recursos en el escenario, con distintas cantidades, y puede avanzar una pequeña historia que hay dentro del juego. Aparte, el jugador puede descubrir diferentes mapas y diferentes mejoras de edificios, lo que conlleva al descubrimiento.
 
+
+
 ## **13 - POST-MORTEM**
 
 #### 13.1 - ¿QUÉ HA IDO BIEN?
@@ -937,4 +939,59 @@ En el juego, actúan principalmente los recursos, es decir, todos giran en torno
 - **REDES Y WEB**: pocas actualizaciones de la red y la web.
 
 - **ARTE**: se han cambiado decisiones de diseño sin avisar.
+
+
+Objetivos
+
+El objetivo de las redes sociales de la empresa es llegar al máximo número de potenciales clientes posible, ya que cuanta más gente vea el juego en las redes más compradores habrá en el momento del lanzamiento. Pero si hubiera que marcar un objetivo contable de seguidores o de alcance en las redes se considera adecuado 100 seguidores en cada red social antes de la salida oficial del juego al mercado.
+
+
+
+## **14 - PLAN DE MARKETING**
+
+
+#### 14.1 - PÚBLICO
+
+Este proyecto tiene varios públicos objetivos, que se abordarán en orden.
+
+Objetivo infantil : La audiencia menor de edad de entre 8 y 14 años aproximadamente tiene un uso limitado de redes sociales por lo que habría que tener más en cuenta los horarios y plataformas de sus tutores. 
+Viendo esta situación los horarios de publicación óptima serían de madrugada (6/7 AM) debido a que antes de entrar al trabajo mirarían las redes sociales un poco y por la noche (10/12 PM) ya que sería el momento libre de los padres en el día. Esto sería de lunes a sábado ya que los domingos se podría colgar por la tarde, cuando no hay trabajo y los padres pueden descansar mirando las redes sociales. La mejor red social para llegar a este cliente sería Facebook, ya que es el más usado en su franja de edad.
+
+Objetivo joven : Este sería el gran grueso de clientes potenciales del juego (18/30 años), por lo que se podría tomar más en cuenta que el anterior conjunto de personas. Los jóvenes pasan mucho rato en las redes sociales por lo que es bastante más sencillo llegar a ellos. Los horarios ideales para colgar contenido difieren un poco respecto al anterior apartado, ya que en su mayoría los jóvenes de este apartado tienden a tener gran parte de la tarde libre y por la mañana empiezan su día más tarde. Por lo que las horas óptimas serían de 8 a 9:30 AM y por la tarde a partir de las 5 PM hasta entrada la noche (12 PM). En sábados y domingos las horas para colgar pueden ser más flexibles, aunque lo idóneo sería por la tarde, cuando más jóvenes están conectados a las redes sociales. Las redes sociales en las que se alcanzaría mayor impacto serían Instagram, X (Twitter), YouTube y TikTok.
+
+Si analizamos ambos grupos nos damos cuenta que el horario en el que más público objetivo se podría alcanzar es de tarde/noche, que es el momento donde se colgarán las publicaciones en nuestras redes.
+
+
+#### 14.2 - CONTENIDO
+
+El contenido que se subirá a nuestras redes sociales irá relacionado con el estado del proyecto y actualizaciones en el desarrollo del juego, además de algún meme ocasional que resulta atractivo sobre todo en los públicos más jóvenes.
+
+Por ahora se han ido publicando imágenes de varios edificios y personajes del juego, así como bocetos e imágenes del estado del juego actual para mantener al público enterado de los avances.
+
+Las plataformas en las que se están haciendo actualizaciones de contenido son X (Twitter) e Instagram, en donde ya se ha alcanzado casi la mitad del objetivo de seguidores y se tiene una base decente de potenciales clientes.
+
+
+#### 14.3 - ANÁLISIS
+
+Se ha hecho un seguimiento de las cuentas de la empresa para conseguir información respecto a los gustos e intereses del público al que nos dirigimos.
+
+La red social con más seguidores actualmente es Instagram, en la que hemos conseguido a lo largo de los dos meses de proyecto 36 seguidores, en contraste con los 13 seguidores que se posee en X (Twitter). El momento en el que más seguidores se han empezado a conseguir ha sido aproximadamente cuando se llevaba un mes de desarrollo y se comenzó a subir contenido de manera más consistente y cuando el juego empezó a estar más desarrollado.
+
+Las publicaciones que más han gustado han sido en los que se presentaron los personajes de Zeus y Poseidón, tanto el X como en Instagram.
+
+Las horas a las que se suele publicar en nuestras redes es  por la tarde (5 PM a 8 PM), que es cuando más potenciales clientes están en las redes y 2/3 veces a la semana, aunque puede aumentar si hay más contenido que colgar.
+
+Podemos concluir que los personajes son más atractivos para los seguidores que las publicaciones con objetos 3D o bocetos, además de que la utilización de # de la industria ayudan a la distribución de las publicaciones por la red.
+
+
+#### 14.4 - PLANIFICACIÓN
+
+Partiendo del análisis del anterior apartado se ha podido sacar un esquema indicativo para la planificación.
+
+La planificación lograda es la siguiente: 
+Dos días a la semana se subirá contenido, a ser posible no dos días seguidos para no dejar el resto de la semana sin contenido ( a menos que no haya nada que subir ).
+La hora de la subida de contenido será entre las 5PM y las 8 PM.
+Uno de los días será el sábado ya que como se ha mencionado en el análisis, es cuando más público objetivo está conectado a las redes.
+
+Ya que se ha subido la mayoría del desarrollo del juego, a partir de ahora el contenido será más relacionado con el juego en sí, como trailer o gameplays e información sobre su salida.
 
