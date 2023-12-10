@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using GGG.Classes.Dialogue;
 using GGG.Components.Core;
@@ -15,14 +16,21 @@ namespace GGG.Components.Dialogue
         private DialogueBox _dialogueBox;
 
         public static Action OnHistoryEnd;
-        
-        private void Start()
+
+        private IEnumerator Start()
         {
-            if (PlayerPrefs.HasKey(_HISTORY_KEY) && PlayerPrefs.GetInt(_HISTORY_KEY) == 1) return;
+            if (PlayerPrefs.HasKey(_HISTORY_KEY) && PlayerPrefs.GetInt(_HISTORY_KEY) == 1) yield break;
+            yield return null;
             
             _dialogueBox = FindObjectOfType<DialogueBox>();
             _dialogueBox.AddNewDialogue(Dialogue);
+
+            _dialogueBox.DialogueStart += StartHistory;
             _dialogueBox.DialogueEnd += EndHistory;
+        }
+
+        private void StartHistory()
+        {
             GameManager.Instance.SetCurrentTutorial(Tutorials.InitialTutorial);
         }
 
@@ -32,6 +40,7 @@ namespace GGG.Components.Dialogue
             PlayerPrefs.SetInt(_HISTORY_KEY, 1);
             OnHistoryEnd?.Invoke();
             _dialogueBox.DialogueEnd -= EndHistory;
+            _dialogueBox.DialogueStart -= StartHistory;
         }
     }
 }

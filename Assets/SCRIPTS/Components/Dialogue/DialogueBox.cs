@@ -54,7 +54,7 @@ namespace GGG.Components.Dialogue
         public void StartDialogue() {
             if (_started) return;
             
-            DialogueStart.Invoke();
+            DialogueStart?.Invoke();
             
             Avatar.sprite = _currentDialogue.GetNextAvatar();
             NameText.SetText(_currentDialogue.GetNextName());
