@@ -104,6 +104,21 @@ namespace GGG.Components.Core
 
             return false;
         }
+        
+        public static bool InMiniGameScene()
+        {
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                if (SceneManager.GetSceneAt(i) == SceneManager.GetSceneByBuildIndex((int)SceneIndexes.MINIGAME_LEVEL1) ||
+                    SceneManager.GetSceneAt(i) == SceneManager.GetSceneByBuildIndex((int)SceneIndexes.MINIGAME_LEVEL2) ||
+                    SceneManager.GetSceneAt(i) == SceneManager.GetSceneByBuildIndex((int)SceneIndexes.MINIGAME_LEVEL3) ||
+                    SceneManager.GetSceneAt(i) == SceneManager.GetSceneByBuildIndex((int)SceneIndexes.MINIGAME_LEVEL4))
+                    return true;
+            }
+
+            return false;
+        }
+        
         public void AddSceneToLoad(SceneIndexes scene)
         { 
            _sceneAsyncOperation.Add(SceneManager.LoadSceneAsync((int) scene, LoadSceneMode.Additive));

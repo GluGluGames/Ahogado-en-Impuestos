@@ -204,6 +204,7 @@ namespace GGG.Components.Buildings
                 i++;
             }
 
+            PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
             string jsonData = JsonHelper.ToJson(saveData, true);
             File.WriteAllText(filePath, jsonData);
         }

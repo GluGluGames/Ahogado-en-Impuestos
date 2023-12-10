@@ -5,6 +5,7 @@ using GGG.Input;
 using UnityEngine;
 using UnityEngine.UI;
 using GGG.Components.Achievements;
+using GGG.Components.HexagonalGrid;
 using GGG.Shared;
 using Random = UnityEngine.Random;
 
@@ -58,6 +59,8 @@ namespace GGG.Components.UI
         private void OnExpeditionButton()
         {
             if (_gameManager.OnTutorial()) return;
+            
+            TileManager.Instance.SaveTilesState();
             
             int randMiniGame = Random.Range(1, 5);
             SceneIndexes sceneIndex;
