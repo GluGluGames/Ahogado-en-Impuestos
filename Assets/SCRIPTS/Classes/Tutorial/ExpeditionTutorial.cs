@@ -12,6 +12,8 @@ namespace GGG.Classes.Tutorial
             for (int i = 0; i < 3; i++)
                 yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true, true, false);
+            
+            FinishTutorial();
         }
     }
 }
