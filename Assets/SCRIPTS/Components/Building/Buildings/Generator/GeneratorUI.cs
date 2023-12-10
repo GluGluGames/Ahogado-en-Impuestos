@@ -299,11 +299,10 @@ namespace GGG.Components.Buildings.Generator
         private IEnumerator LoadGeneratorState(Generator[] generators)
         {
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "generators_boost.json");
-#if UNITY_EDITOR
-            filePath = "file://" + filePath;
-#endif
-
             string data;
+            
+            if (!File.Exists(filePath)) yield break;
+            
             if (filePath.Contains("://") || filePath.Contains(":///")) {
                 UnityWebRequest www = UnityWebRequest.Get(filePath);
                 yield return www.SendWebRequest();
@@ -312,8 +311,6 @@ namespace GGG.Components.Buildings.Generator
             else {
                 data = File.ReadAllText(filePath);
             }
-
-            if (string.IsNullOrEmpty(data)) yield break;
             
             GeneratorData[] generatorData = JsonHelper.FromJson<GeneratorData>(data);
 

@@ -193,6 +193,7 @@ namespace GGG.Components.Buildings.Museum
                     };
 
                     buttons[i].spriteState = aux;
+                    buttons[i].transform.parent.GetComponent<Tooltip>().SetResourceName(buildings[i].GetName());
                     int idx = i;
                     buttons[i].onClick.AddListener(() => SelectBuilding(buildings, buttons, active, idx));
                 }

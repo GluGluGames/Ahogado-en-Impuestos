@@ -199,7 +199,7 @@ namespace GGG.Components.HexagonalGrid
         #region Data persistence
 
         public void SaveTilesState() {
-            if (!SceneManagement.InGameScene() || 
+            if (SceneManagement.InMiniGameScene() || 
                 GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial)
                 return;
             
