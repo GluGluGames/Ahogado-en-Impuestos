@@ -17,6 +17,7 @@ namespace GGG.Components.Resources
         [SerializeField] private PickResourceProgressionUI _pickProgressUI;
         [SerializeField] private int _recollectionTime;
         [SerializeField] private GameObject[] _ownModels;
+        [SerializeField] private ResourceManager.ResourceType Type;
 
         private bool _collided = false;
         private bool _pickingResource;
@@ -80,6 +81,7 @@ namespace GGG.Components.Resources
                 ResourceManager.Instance.resourcesCollected[_resource] += 
                     ResourceManager.Instance.GetResourceAmount(_resource);
                 _resource.DiscoverResource();
+                ResourceManager.Instance.AddAchievementResource(_resource, Type);
                 _pickProgressUI.StopPicking();
                 _pickProgressUI.gameObject.SetActive(false);
                 _pickingResource = false;

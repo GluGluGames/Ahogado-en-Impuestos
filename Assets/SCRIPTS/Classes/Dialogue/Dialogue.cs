@@ -14,6 +14,7 @@ namespace GGG.Classes.Dialogue
         [SerializeField] private List<Sprite> AvatarList;
         [Tooltip("Name of the characters that will appear on the dialogue")]
         [SerializeField] private List<string> CharacterNames;
+        [SerializeField] private Sprite BoxColor;
 
         private int _currentDialogue;
         private int _currentAvatar;
@@ -50,6 +51,8 @@ namespace GGG.Classes.Dialogue
 
             return CharacterNames[_currentName++];
         }
+
+        public Sprite GetBoxColor() => BoxColor;
 
         public bool DialogueEnd() => _currentDialogue >= DialogueLines.Count;
 

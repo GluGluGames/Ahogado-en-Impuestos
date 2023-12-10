@@ -51,6 +51,7 @@ namespace GGG.Components.UI.Buttons {
             
             if (!BuildingInfo.IsUnlocked()) LockButton();
         }
+        
 
         private void LockButton()
         {
@@ -132,7 +133,11 @@ namespace GGG.Components.UI.Buttons {
 
         #region Event Systems Method
 
-        public void OnPointerDown(PointerEventData eventData) {
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (BuildingInfo.CanBeBoost() && GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial)
+                return;
+            
             if (!BuildingInfo.IsUnlocked() || _maxBuildingsReached
                 || !_selectedHexTile.TileEmpty() || GameManager.Instance.TutorialOpen()) return;
             

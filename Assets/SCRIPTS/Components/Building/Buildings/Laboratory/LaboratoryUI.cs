@@ -10,6 +10,7 @@ using System.Linq;
 using DG.Tweening;
 using GGG.Components.Achievements;
 using GGG.Components.UI.Buttons;
+using Project.Component.UI.Containers;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
@@ -98,10 +99,11 @@ namespace GGG.Components.Buildings.Laboratory
             for (int i = 0; i < _resources.Count; i++)
             {
                 _buttons.Add(i, Containers[i].GetComponentsInChildren<Button>());
-                FillResources(_buttons[i], _resources[i]);
+                FillResources(_buttons[i], _resources[i], Containers[i].GetComponentsInChildren<Tooltip>(true));
             }
             
             _buttons.Add(3, Containers[3].GetComponentsInChildren<Button>());
+            
             FillBuildings();
 
             BuildingManager.OnBuildsLoad += OnBuildsLoad;
@@ -116,6 +118,9 @@ namespace GGG.Components.Buildings.Laboratory
 
         private void OnDisable()
         {
+            BackButton.onClick.RemoveAllListeners();
+            CloseButton.onClick.RemoveAllListeners();
+            BuildingManager.OnBuildsLoad -= OnBuildsLoad;
             SaveResearchProgress();
         }
         
@@ -134,7 +139,15 @@ namespace GGG.Components.Buildings.Laboratory
             if (!_laboratories.ContainsKey(laboratory.Id()))
             {
                 _laboratories.Add(laboratory.Id(), laboratory);
-                return;
+            }
+
+            for (int i = 0; i < ProgressBarsBackground.Length; i++)
+            {
+                ProgressBarsBackground[i].color = i + 1 <= _currentLaboratory.CurrentLevel()
+                    ? Color.white
+                    : new Color(0.47f, 0.47f, 0.47f);
+
+                ResearchButtons[i].interactable = i + 1 <= _currentLaboratory.CurrentLevel();
             }
 
             FillBars(laboratory);
@@ -158,7 +171,7 @@ namespace GGG.Components.Buildings.Laboratory
 
                 if (laboratory.ActiveBuilding(i))
                 {
-                    CurrentResources[i].sprite = laboratory.ActiveBuilding(i).GetIcon();
+                    CurrentResources[i].sprite = laboratory.ActiveBuilding(i).GetResearchIcon();
                     totalTime = laboratory.ActiveBuilding(i).GetResearchTime();
                 }
 
@@ -205,6 +218,7 @@ namespace GGG.Components.Buildings.Laboratory
         {
             OpenBarContainer();
             
+            print(_currentBar);
             CurrentResources[_currentBar].enabled = true;
             CurrentResources[_currentBar].sprite = resource.GetSprite();
             _currentLaboratory.SetActiveResource(_currentBar, resource);
@@ -219,19 +233,14 @@ namespace GGG.Components.Buildings.Laboratory
         {
             OpenBarContainer();
             
-            for (int i = 0; i < _currentLaboratory.ActiveBars().Length; i++)
-            {
-                if (_currentLaboratory.IsBarActive(i)) continue;
-
-                CurrentResources[i].enabled = true;
-                CurrentResources[i].sprite = building.GetIcon();
-                _currentLaboratory.SetActiveBuild(i, building);
-                _currentLaboratory.SetDeltaTime(i, building.GetResearchTime());
-                _currentLaboratory.ActiveBar(i, true);
+            print(_currentBar);
+            CurrentResources[_currentBar].enabled = true;
+            CurrentResources[_currentBar].sprite = building.GetResearchIcon();
+            _currentLaboratory.SetActiveBuild(_currentBar, building);
+            _currentLaboratory.SetDeltaTime(_currentBar, building.GetResearchTime());
+            _currentLaboratory.ActiveBar(_currentBar, true);
                 
-                StartCoroutine(Research(_currentLaboratory.Id(), i));
-                return;
-            }
+            StartCoroutine(Research(_currentLaboratory.Id(), _currentBar));
         }
 
         private IEnumerator Research(int id, int idx)
@@ -270,6 +279,7 @@ namespace GGG.Components.Buildings.Laboratory
 
         private void FillBuildings()
         {
+            Tooltip[] tooltips = Containers[3].GetComponentsInChildren<Tooltip>();
             for (int i = 0; i < _buttons[3].Length; i++)
             {
                 if (_buildings.Length <= i)
@@ -295,11 +305,12 @@ namespace GGG.Components.Buildings.Laboratory
                     
                     Building building = _buildings[i];
                     _buttons[3][i].onClick.AddListener(() => OnBuildingSelected(building));
+                    tooltips[i].SetResourceName(_buildings[i].GetName());
                 }
             }
         }
         
-        private void FillResources(Button[] buttons, Resource[] resources)
+        private void FillResources(Button[] buttons, Resource[] resources, Tooltip[] tooltips)
         {
             for (int i = 0; i < buttons.Length; i++)
             {
@@ -320,6 +331,7 @@ namespace GGG.Components.Buildings.Laboratory
                     buttons[i].interactable = resources[i].CanResearch();
                     
                     Resource resource = resources[i];
+                    tooltips[i].SetResourceName(resource.GetName());
                     buttons[i].onClick.AddListener(() => OnResourceSelected(resource));
                 }
             }
@@ -372,7 +384,7 @@ namespace GGG.Components.Buildings.Laboratory
 
         public void SaveResearchProgress()
         {
-            if (!SceneManagement.InGameScene() || _gameManager.TutorialOpen() || _laboratories.Count <= 0) return;
+            if (_laboratories.Count <= 0) return;
             
             LaboratoryData[] saveData = new LaboratoryData[_laboratories.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "laboratory_progress.json");
@@ -405,10 +417,10 @@ namespace GGG.Components.Buildings.Laboratory
         private IEnumerator LoadResearchProgress(List<Laboratory> laboratories)
         {
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "laboratory_progress.json");
-#if UNITY_EDITOR
-            filePath = "file://" + filePath;
-#endif
             string data;
+            
+            if (!File.Exists(filePath)) yield break;
+            
             if (filePath.Contains("://") || filePath.Contains(":///")) {
                 UnityWebRequest www = UnityWebRequest.Get(filePath);
                 yield return www.SendWebRequest();
@@ -417,8 +429,6 @@ namespace GGG.Components.Buildings.Laboratory
             else {
                 data = File.ReadAllText(filePath);
             }
-
-            if (string.IsNullOrEmpty(data)) yield break;
             
             LaboratoryData[] researchProgress = JsonHelper.FromJson<LaboratoryData>(data);
             TimeSpan time = DateTime.Now.Subtract(DateTime.Parse(PlayerPrefs.GetString("ExitTime")));

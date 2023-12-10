@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 4772620304294351251}
   - component: {fileID: 8956546019317920799}
   m_Layer: 5
-  m_Name: ResourceButton_03
+  m_Name: ResourceButton_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1174,7 +1174,7 @@ GameObject:
   - component: {fileID: 2568037328346598907}
   - component: {fileID: 4610755866246729045}
   m_Layer: 5
-  m_Name: ResourceButton_01
+  m_Name: ResourceButton_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1364,11 +1364,11 @@ RectTransform:
   m_Father: {fileID: 2249056494626439017}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -167, y: 0}
   m_SizeDelta: {x: 640, y: 0}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &5017929618129984348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,7 +1384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4063532804071285456
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1869,8 +1869,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 659171548489435454}
   - {fileID: 5143154356995545603}
+  - {fileID: 659171548489435454}
   - {fileID: 129147292054901217}
   - {fileID: 3070531115525667017}
   - {fileID: 7623678034258001627}
@@ -2092,7 +2092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3371440952012428413}
   m_Layer: 5
-  m_Name: Bar_02
+  m_Name: Bar_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2117,11 +2117,11 @@ RectTransform:
   m_Father: {fileID: 2249056494626439017}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 161, y: 0}
   m_SizeDelta: {x: 640, y: 0}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &7260883006723340944
 GameObject:
   m_ObjectHideFlags: 0
@@ -2455,21 +2455,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProgressBarsFills:
-  - {fileID: 2734479659098215174}
-  - {fileID: 2711244982791094019}
   - {fileID: 5512167400017969450}
+  - {fileID: 2711244982791094019}
+  - {fileID: 2734479659098215174}
   ProgressBarsBackground:
   - {fileID: 3241689598270697390}
   - {fileID: 5526397819259814390}
   - {fileID: 5944832819468020834}
   CurrentResources:
-  - {fileID: 6466726187840651509}
-  - {fileID: 6969353011456372928}
   - {fileID: 2209140056623828786}
+  - {fileID: 6969353011456372928}
+  - {fileID: 6466726187840651509}
   Counters:
-  - {fileID: 8695438298042235032}
-  - {fileID: 1491637462987018341}
   - {fileID: 1054391504216952486}
+  - {fileID: 1491637462987018341}
+  - {fileID: 8695438298042235032}
   BarsContainer: {fileID: 2887440398344513762}
   ResourcesContainer: {fileID: 6808946405145259521}
   Containers:
@@ -2478,9 +2478,9 @@ MonoBehaviour:
   - {fileID: 2225316779046738480}
   - {fileID: 276767873697550469}
   ResearchButtons:
-  - {fileID: 2568037328346598907}
-  - {fileID: 3708433327205568937}
   - {fileID: 4772620304294351251}
+  - {fileID: 3708433327205568937}
+  - {fileID: 2568037328346598907}
   BackButton: {fileID: 6447145467427945096}
   CloseButton: {fileID: 1371514334102840061}
 --- !u!1 &8556966922853785305

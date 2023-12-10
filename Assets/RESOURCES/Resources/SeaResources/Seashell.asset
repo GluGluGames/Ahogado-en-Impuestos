@@ -15,27 +15,29 @@ MonoBehaviour:
   Key: Seashell
   Name:
     m_TableReference:
-      m_TableCollectionName: GUID:f0dec55717509d1468c7ef0d543fd9b8
+      m_TableCollectionName: GUID:a21c964c7e81f094398f0fa8dc273f00
     m_TableEntryReference:
-      m_KeyId: 5319177775996928
+      m_KeyId: 4239671025664
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   Description:
     m_TableReference:
-      m_TableCollectionName: GUID:f0dec55717509d1468c7ef0d543fd9b8
+      m_TableCollectionName: GUID:a21c964c7e81f094398f0fa8dc273f00
     m_TableEntryReference:
-      m_KeyId: 5319180707815424
+      m_KeyId: 4473218260992
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   Sprite: {fileID: 21300000, guid: 0637db00d17e0a042a0a19e378965475, type: 3}
   SelectedSprite: {fileID: 21300000, guid: 87482d2a7a778ce4a853862d77a3a059, type: 3}
+  Model: {fileID: 5580225752345758609, guid: cbfc08eb3dc4f3441b4987e28b7345e8, type: 3}
+  ModelScale: {x: 3, y: 3, z: 3}
   CanBeResearched: 0
   IsUnlocked: 0
-  ResearchTime: 0
+  ResearchTime: 240
   references:
     version: 2
     RefIds: []

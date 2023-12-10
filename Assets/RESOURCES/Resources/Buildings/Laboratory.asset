@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
   m_Name: Laboratory
   m_EditorClassIdentifier: 
+  Key: Laboratory
   Name:
     m_TableReference:
       m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
@@ -31,8 +32,8 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   Icon: {fileID: 21300000, guid: 1a98bbf24b216ea4da3ad31969c2c608, type: 3}
-  SelectedIcon: {fileID: 0}
-  ResearchIcon: {fileID: 0}
+  SelectedIcon: {fileID: 21300000, guid: c5c1841afe9c7724d8899cd5c7ef70cd, type: 3}
+  ResearchIcon: {fileID: 21300000, guid: d5d861322631d8a499ca27bfa903d669, type: 3}
   Prefab: {fileID: 3729789129001329043, guid: 5129a88a28bc3b048b6ab1509a81b1bd, type: 3}
   CanBeUpgraded: 1
   UpgradePrefabs:
@@ -51,7 +52,7 @@ MonoBehaviour:
   - Costs: ee020000
     Resources:
     - {fileID: 11400000, guid: e79416ffcca92314ea3a4643e800a200, type: 2}
-  MaxLevel: 1
+  MaxLevel: 3
   MaxBuildingNumber: 10
   CanBoost: 0
   SpawnHeight: 0.32

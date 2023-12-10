@@ -217,6 +217,8 @@ MonoBehaviour:
   RightArrow: {fileID: 1448320632389901197}
   Viewport: {fileID: 3409896286227242712}
   Button: {fileID: 5007468845364414865}
+  VictorySound: {fileID: 11400000, guid: 8640371a55f7de944996e7b973a71ad6, type: 2}
+  DefeatSound: {fileID: 11400000, guid: b50e369c47da84a41847bc14b7f2e610, type: 2}
   references:
     version: 2
     RefIds: []
@@ -975,7 +977,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

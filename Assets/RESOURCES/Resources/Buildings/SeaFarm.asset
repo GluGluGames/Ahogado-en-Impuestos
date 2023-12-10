@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02118c11dbf340243a134b7ce5bd74a6, type: 3}
   m_Name: SeaFarm
   m_EditorClassIdentifier: 
+  Key: Seafarm
   Name:
     m_TableReference:
       m_TableCollectionName: GUID:67f574c870fc5d046bc5c7fb4376edb1
@@ -30,9 +31,9 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  Icon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
-  SelectedIcon: {fileID: 21300000, guid: 651b31b5aa8c1ea408cd4c7b5fa5a365, type: 3}
-  ResearchIcon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: f0ca6c161ccbdc54399160d0cb518351, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: ab2f3e335858c7e4ebabcbf4cf1b2ffd, type: 3}
+  ResearchIcon: {fileID: 21300000, guid: 5bba64ed8c443bc499dc2f9fd14f48a4, type: 3}
   Prefab: {fileID: 8113010406866780128, guid: 8807a79897f001d4085fe45216d838dd, type: 3}
   CanBeUpgraded: 1
   UpgradePrefabs:
@@ -45,10 +46,10 @@ MonoBehaviour:
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
   UpgradeCost:
-  - Costs: 32000000
+  - Costs: e8030000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
-  - Costs: 960000000a000000
+  - Costs: c409000032000000
     Resources:
     - {fileID: 11400000, guid: 8d4fab21c5bc08641b1cb8f847716f00, type: 2}
     - {fileID: 11400000, guid: b8e4cd17a2a28e947ae97cdbed7bd413, type: 2}

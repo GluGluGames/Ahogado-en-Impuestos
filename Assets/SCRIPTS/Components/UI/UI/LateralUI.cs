@@ -4,7 +4,10 @@ using GGG.Components.Core;
 using GGG.Input;
 using UnityEngine;
 using UnityEngine.UI;
+using GGG.Components.Achievements;
+using GGG.Components.HexagonalGrid;
 using GGG.Shared;
+using Random = UnityEngine.Random;
 
 namespace GGG.Components.UI
 {
@@ -21,8 +24,9 @@ namespace GGG.Components.UI
         private InventoryUI _inventory;
 
         private GameObject _viewport;
-        private Vector3 _initialPosition;
         private bool _open;
+
+        public static Action OnLateralUiOpen;
 
         private void Start()
         {
@@ -31,24 +35,66 @@ namespace GGG.Components.UI
             _gameManager = GameManager.Instance;
             _inventory = FindObjectOfType<InventoryUI>();
             _viewport = transform.GetChild(0).gameObject;
-            _initialPosition = transform.position;
             
             OpenButton.onClick.AddListener(ToggleMenu);
             InventoryButton.onClick.AddListener(OpenInventory);
             SettingsButton.onClick.AddListener(OpenSettings);
-            ExpeditionButton.onClick.AddListener(() =>
-            {
-                _sceneManagement.AddSceneToLoad(SceneIndexes.MINIGAME_LEVEL1);
-                _sceneManagement.AddSceneToUnload(SceneIndexes.GAME_SCENE);
-                _sceneManagement.UpdateScenes();
-                _gameManager.OnUIClose();
-            });
+            ExpeditionButton.onClick.AddListener(OnExpeditionButton);
         }
 
         private void Update() {
             if (!_input.Escape() || _gameManager.OnTutorial()) return;
             
             ToggleMenu();
+        }
+
+        private void OnDisable()
+        {
+            OpenButton.onClick.RemoveAllListeners();
+            InventoryButton.onClick.RemoveAllListeners();
+            SettingsButton.onClick.RemoveAllListeners();
+            ExpeditionButton.onClick.RemoveAllListeners();
+        }
+
+        private void OnExpeditionButton()
+        {
+            if (_gameManager.OnTutorial()) return;
+            
+            TileManager.Instance.SaveTilesState();
+            
+            int randMiniGame = Random.Range(1, 5);
+            SceneIndexes sceneIndex;
+            
+            switch(randMiniGame)
+            {
+                case 1:
+                    sceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+                    break;
+                case 2:
+                    sceneIndex = SceneIndexes.MINIGAME_LEVEL2;
+                    break;
+                case 3:
+                    sceneIndex = SceneIndexes.MINIGAME_LEVEL3;
+                    break;
+                case 4:
+                    sceneIndex = SceneIndexes.MINIGAME_LEVEL4;
+                    break;
+                default:
+                    sceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+                    break;
+            }
+            
+            _sceneManagement.AddSceneToLoad(sceneIndex);
+            _sceneManagement.AddSceneToUnload(SceneIndexes.GAME_SCENE);
+            _sceneManagement.UpdateScenes();
+
+            int x = PlayerPrefs.HasKey("Achievement09") ? PlayerPrefs.GetInt("Achievement09") + 1 : 1;
+            PlayerPrefs.SetInt("Achievement09", x);
+
+            if (PlayerPrefs.GetInt("Achievement09") >= 5)
+                StartCoroutine(AchievementsManager.Instance.UnlockAchievement("09"));
+            
+            _gameManager.OnUIClose();
         }
 
         private void ToggleMenu()
@@ -61,6 +107,7 @@ namespace GGG.Components.UI
             {
                 _viewport.transform.DOMoveX(Screen.width * 0.4f, 0.75f).SetEase(Ease.InCubic);
                 OpenButton.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                OnLateralUiOpen?.Invoke();
                 _gameManager.OnUIOpen();
             }
             else
@@ -76,12 +123,16 @@ namespace GGG.Components.UI
 
         private void OpenInventory()
         {
+            if (_gameManager.OnTutorial()) return;
+            
             ToggleMenu();
             _inventory.OpenInventory();
         }
 
         private void OpenSettings()
         {
+            if (_gameManager.OnTutorial()) return;
+            
             _sceneManagement.OpenSettings();
             ToggleMenu();
             _gameManager.OnUIOpen();

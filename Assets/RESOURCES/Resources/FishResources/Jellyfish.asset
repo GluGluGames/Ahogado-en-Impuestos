@@ -15,27 +15,29 @@ MonoBehaviour:
   Key: Jellyfish
   Name:
     m_TableReference:
-      m_TableCollectionName: GUID:f0dec55717509d1468c7ef0d543fd9b8
+      m_TableCollectionName: GUID:a21c964c7e81f094398f0fa8dc273f00
     m_TableEntryReference:
-      m_KeyId: 5318708924112896
+      m_KeyId: 3968295362560
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   Description:
     m_TableReference:
-      m_TableCollectionName: GUID:f0dec55717509d1468c7ef0d543fd9b8
+      m_TableCollectionName: GUID:a21c964c7e81f094398f0fa8dc273f00
     m_TableEntryReference:
-      m_KeyId: 5318815098724352
+      m_KeyId: 4043285323776
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   Sprite: {fileID: 21300000, guid: 8f1b2ca8580da0f46a33b2b5ee4b5ed5, type: 3}
   SelectedSprite: {fileID: 21300000, guid: b85e9e106e38f5b4fb8cb0f90c0033cf, type: 3}
+  Model: {fileID: 0}
+  ModelScale: {x: 0.3, y: 0.3, z: 0.3}
   CanBeResearched: 0
   IsUnlocked: 0
-  ResearchTime: 0
+  ResearchTime: 240
   references:
     version: 2
     RefIds: []

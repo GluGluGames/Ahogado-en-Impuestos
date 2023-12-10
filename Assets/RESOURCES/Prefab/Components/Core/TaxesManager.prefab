@@ -425,6 +425,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: a8dc4997f81ff8c4884cdda030376542, type: 3}
     CharacterNames:
     - Poseidon
+    BoxColor: {fileID: 21300000, guid: 7505b44232515134b99c21624aeb3fde, type: 3}
   references:
     version: 2
     RefIds: []
@@ -440,14 +441,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73ba9f329f329f408b7efb4f81a95af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingDestroyParticles: {fileID: 6436834518224569190, guid: 7e34cf44ab7ae98449f7f3541d87751d, type: 3}
+  DestructionSound: {fileID: 11400000, guid: c43c9986aac74f649808d4852e62d01a, type: 2}
   ResourcesSprites:
   - {fileID: 4768080323969972939}
   - {fileID: 9151369892582229014}
   ResourcesAmount:
   - {fileID: 24805240463659003}
   - {fileID: 8090240070835319724}
+  PayDialogue:
+    DialogueLines:
+    - m_TableReference:
+        m_TableCollectionName: GUID:93d896419facbcd478801da9101bd8ce
+      m_TableEntryReference:
+        m_KeyId: 3188006593916928
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    AvatarList:
+    - {fileID: 21300000, guid: a8dc4997f81ff8c4884cdda030376542, type: 3}
+    CharacterNames:
+    - Poseidon
+    BoxColor: {fileID: 21300000, guid: 7505b44232515134b99c21624aeb3fde, type: 3}
+  NotPayDialogue:
+    DialogueLines:
+    - m_TableReference:
+        m_TableCollectionName: GUID:93d896419facbcd478801da9101bd8ce
+      m_TableEntryReference:
+        m_KeyId: 3188166669529088
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    - m_TableReference:
+        m_TableCollectionName: GUID:93d896419facbcd478801da9101bd8ce
+      m_TableEntryReference:
+        m_KeyId: 3188305861701632
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    AvatarList:
+    - {fileID: 21300000, guid: a8dc4997f81ff8c4884cdda030376542, type: 3}
+    CharacterNames:
+    - Poseidon
+    BoxColor: {fileID: 21300000, guid: 7505b44232515134b99c21624aeb3fde, type: 3}
+  NotPayWithoutBuildingsDialogue:
+    DialogueLines:
+    - m_TableReference:
+        m_TableCollectionName: GUID:93d896419facbcd478801da9101bd8ce
+      m_TableEntryReference:
+        m_KeyId: 3492239050436608
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    - m_TableReference:
+        m_TableCollectionName: GUID:93d896419facbcd478801da9101bd8ce
+      m_TableEntryReference:
+        m_KeyId: 3493581181579264
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    AvatarList:
+    - {fileID: 21300000, guid: a8dc4997f81ff8c4884cdda030376542, type: 3}
+    CharacterNames:
+    - Poseidon
+    BoxColor: {fileID: 21300000, guid: 7505b44232515134b99c21624aeb3fde, type: 3}
   PayButton: {fileID: 3975476232132558435}
   NotPayButton: {fileID: 1006045160523761056}
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &3779384264017814199
 GameObject:
   m_ObjectHideFlags: 0

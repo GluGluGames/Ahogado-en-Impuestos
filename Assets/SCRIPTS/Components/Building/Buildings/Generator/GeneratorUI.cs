@@ -9,6 +9,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using GGG.Shared;
 using TMPro;
 using UnityEngine.Networking;
 
@@ -18,6 +19,8 @@ namespace GGG.Components.Buildings.Generator
     {
         [Header("Generator fields")] 
         [SerializeField] private Sprite[] BoostButtonToggles;
+        [SerializeField] private Sound BoostSound;
+        [SerializeField] private GameObject ParticlesPrefab;
         [Space(5), Header("Containers")] 
         [SerializeField] private GameObject[] LevelContainers;
         [Space(5), Header("Text")] 
@@ -37,6 +40,7 @@ namespace GGG.Components.Buildings.Generator
 
         private readonly Dictionary<int, Generator> _generators = new ();
         private List<HexTile> _tiles;
+        private Dictionary<BuildingComponent, GameObject> _particles = new();
         private HexTile _generatorTile;
         
         private GameObject _viewport;
@@ -82,6 +86,8 @@ namespace GGG.Components.Buildings.Generator
 
         private void OnDisable()
         {
+            CloseButton.onClick.RemoveAllListeners();
+            BuildingManager.OnBuildsLoad -= OnBuildLoads;
             SaveGeneratorState();
         }
 
@@ -114,6 +120,10 @@ namespace GGG.Components.Buildings.Generator
             
             if (_currentGenerator.BoostIndex(level, idx) >= 1)
             {
+                GameObject particles = _particles[building];
+                _particles.Remove(building);
+                
+                Destroy(particles);
                 building.EndBoost();
                 
                 _currentGenerator.AddGeneration(level, -1);
@@ -127,7 +137,9 @@ namespace GGG.Components.Buildings.Generator
             
             if (_currentGenerator.CurrentGeneration(level) >= level) 
                 return;
-            
+
+            SoundManager.Instance.Play(BoostSound);
+            _particles.Add(building, Instantiate(ParticlesPrefab, building.Position(), Quaternion.identity, building.transform));
             building.Boost();
             _currentGenerator.AddGeneration(level, 1);
             _currentGenerator.AddBoostIndex(level, idx, 1);
@@ -248,7 +260,7 @@ namespace GGG.Components.Buildings.Generator
 
         public void SaveGeneratorState()
         {
-            if (!SceneManagement.InGameScene() || _gameManager.OnTutorial() || _generators.Count <= 0) return;
+            if (_generators.Count <= 0) return;
             
             GeneratorData[] saveData = new GeneratorData[_generators.Count];
             int i = 0;
@@ -287,11 +299,10 @@ namespace GGG.Components.Buildings.Generator
         private IEnumerator LoadGeneratorState(Generator[] generators)
         {
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "generators_boost.json");
-#if UNITY_EDITOR
-            filePath = "file://" + filePath;
-#endif
-
             string data;
+            
+            if (!File.Exists(filePath)) yield break;
+            
             if (filePath.Contains("://") || filePath.Contains(":///")) {
                 UnityWebRequest www = UnityWebRequest.Get(filePath);
                 yield return www.SendWebRequest();
@@ -300,8 +311,6 @@ namespace GGG.Components.Buildings.Generator
             else {
                 data = File.ReadAllText(filePath);
             }
-
-            if (string.IsNullOrEmpty(data)) yield break;
             
             GeneratorData[] generatorData = JsonHelper.FromJson<GeneratorData>(data);
 
@@ -322,6 +331,7 @@ namespace GGG.Components.Buildings.Generator
                         BuildingComponent build = BuildingManager.Instance.GetBuildings()
                             .Find(x => x.Id() == generator.Buildings[i].BuildingId);
 
+                        _particles.Add(build, Instantiate(ParticlesPrefab, build.Position(), Quaternion.identity, build.transform));
                         build.Boost();
                     }
                 }

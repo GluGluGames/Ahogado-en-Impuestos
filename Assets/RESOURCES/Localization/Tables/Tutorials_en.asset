@@ -32,8 +32,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 458430246912
-    m_Localized: You can control the camera using the WASD keys. You can also click
-      and drag the mouse to move the camera. Come on, try it!
+    m_Localized: You can control the camera using the WASD keys or by dragging the
+      mouse. If you are on a mobile, drag your finger across the screen. Come on,
+      tryit!
     m_Metadata:
       m_Items: []
   - m_Id: 510749995008
@@ -41,7 +42,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 614189920256
-    m_Localized: Use the Q and E keys to rotate the camera.
+    m_Localized: Use the Q and E keys to rotate the camera. If you're on mobile,
+      hold down one finger and rotate the other.
     m_Metadata:
       m_Items: []
   - m_Id: 686478749696
@@ -49,8 +51,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 745622630400
-    m_Localized: Use the mouse wheel to move the camera closer to the terrain, or
-      further away from it.
+    m_Localized: "\rUse the mouse wheel to zoom the camera closer to the terrain,
+      or further away from it.\r\nIf you are on a mobile, use two fingers and pinch
+      or spread them."
     m_Metadata:
       m_Items: []
   - m_Id: 879970381824
@@ -66,8 +69,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1353184342016
-    m_Localized: This is the construction menu. From here you can build the buildings
-      that will rise in the new Atlantis.
+    m_Localized: This is the construction menu. From here you can build the structures
+      that will become the new Atlantis.
     m_Metadata:
       m_Items: []
   - m_Id: 1431529746432
@@ -75,7 +78,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1513901682688
-    m_Localized: For now you have most of the buildings blocked, except one.
+    m_Localized: Many of the buildings are locked right now. To unlock them, you
+      will have to investigate them in the laboratory.
     m_Metadata:
       m_Items: []
   - m_Id: 1584898666496
@@ -101,18 +105,17 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2353240633344
-    m_Localized: This is the upgrades menu of a building. Some of the buildings will
-      have a button that will allow you to interact with them, opening new menus.
+    m_Localized: This is the upgrade menu of a building. You can interact with some
+      buildings, opening new menus.
     m_Metadata:
       m_Items: []
   - m_Id: 2633948622848
-    m_Localized: Building selling
+    m_Localized: Selling buildings
     m_Metadata:
       m_Items: []
   - m_Id: 2896080039936
-    m_Localized: With the "Sell" button you can destroy the building, either because
-      you made a mistake or to place a new building. This will return you half the
-      cost of the building. For now, close this menu
+    m_Localized: With the "Sell" button you can sell the building and recover part
+      of its cost.
     m_Metadata:
       m_Items: []
   - m_Id: 2987398426624
@@ -128,8 +131,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3585099329536
-    m_Localized: From here you can clean dirty squares so you can build on them.
-      However, right now you don't have enough materials to do it.
+    m_Localized: From here you can clean dirty tiles so you can build on them. However,
+      right now you don't have enough materials to do it.
     m_Metadata:
       m_Items: []
   - m_Id: 3713369534464
@@ -138,16 +141,16 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3897440759808
     m_Localized: Congratulations! You now have everything you need to rebuild Atlantis.
-      New tutorials will be coming your way in the future - keep up the good work!
+      New tutorials will be coming your way in the future. Keep up the good work!
     m_Metadata:
       m_Items: []
   - m_Id: 4081658785792
-    m_Localized: Eel Generator
+    m_Localized: Electricity generator
     m_Metadata:
       m_Items: []
   - m_Id: 4175116267520
     m_Localized: This is the electricity generator. From here you can increase the
-      production of one of the buildings you have built.
+      production of one of the buildings you have built around the genarator.
     m_Metadata:
       m_Items: []
   - m_Id: 4278216454144
@@ -156,7 +159,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4344096387072
     m_Localized: To increase production, click on one of the icons and select the
-      building you want to upgrade. If you have enough resources, it will do so.
+      building you want to upgrade. You can also stop upgrading by clicking again.
     m_Metadata:
       m_Items: []
   - m_Id: 4477076795392
@@ -183,7 +186,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4824772014080
     m_Localized: This is the laboratory. Here you can unlock new resources to get
-      and new buildings to build.
+      and new buildings to build. Click on one of the three bars to start investigating.
     m_Metadata:
       m_Items: []
   - m_Id: 4943378542592
@@ -191,8 +194,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4999800320000
-    m_Localized: Click on the icon above one of the progress bars and select the
-      resource or building you want to unlock.
+    m_Localized: Select the resource or building you want to unlock.
     m_Metadata:
       m_Items: []
   - m_Id: 5074282770432
@@ -200,8 +202,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5127286190080
-    m_Localized: This is the museum. Here you can see all the materials that you
-      have discovered during the reconstruction.
+    m_Localized: This is the museum. Here you can see all the materials you have
+      discovered. Click on one of the materials you have unlocked.
     m_Metadata:
       m_Items: []
   - m_Id: 5177135493120
@@ -209,8 +211,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5228163395584
-    m_Localized: Click on one of the materials you have unlocked to see a more detailed
-      description of that material.
+    m_Localized: A more detailed description of the material can be found on the
+      left.
     m_Metadata:
       m_Items: []
   - m_Id: 5277802983424
@@ -227,7 +229,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5581978103808
-    m_Localized: Using the arrows, you can increase the amount you receive and give.
+    m_Localized: Using the arrows, you can increase the amount you receive and give
+      and the center button to make the exchange.
     m_Metadata:
       m_Items: []
   - m_Id: 5997700739072
@@ -253,7 +256,156 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 17945322483712
-    m_Localized: See those tiles with debris on top? Click on one of them
+    m_Localized: See those tiles with debris on top? Click on one of them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2804384594554880
+    m_Localized: '- Move the camera using the keys WASD or dragging'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2804577356378112
+    m_Localized: '- Rotate the camera using the Q and E keys or sliding'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2804817715163136
+    m_Localized: '- Zoom the camera using the mouse wheel or pinching/spreading your
+      fingers together'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2805653165993984
+    m_Localized: '- Click on one of the empty tiles.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2810183052062720
+    m_Localized: '- Build the City Hall'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2810356100657152
+    m_Localized: '- Click on the building'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2810678160289792
+    m_Localized: '- Close the upgrade menu'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2810863980539904
+    m_Localized: '- Click on one of the tiles with debris in it.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3139055056482304
+    m_Localized: Achievements
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3139166218121216
+    m_Localized: This is the town hall. Here you can see the achievements of the
+      game. Got to get them all!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3139793165905920
+    m_Localized: Taxes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3139910149238784
+    m_Localized: Navigation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3140031821803520
+    m_Localized: Use the arrows on the right to see more achievements.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3139861117825024
+    m_Localized: By using the other button on the left, you will be able to see how
+      much time you have left until Poseidon taxes you, as well as the amount.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3146040653017088
+    m_Localized: Resources
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3146147473551360
+    m_Localized: To rebuild Atlantis, you will need resources. Click on one of the
+      resources to generate it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3146314398461952
+    m_Localized: Resoruces
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3146418077462528
+    m_Localized: You will only be able to generate resources that you have discovered
+      on the expedition.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3146549334011904
+    m_Localized: Resources generation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3146646235017216
+    m_Localized: To know how many resources you are generating per second, look at
+      the text below.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3447811682234368
+    m_Localized: Upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3447889725648896
+    m_Localized: Buildings can also be upgraded, unlocking new features or increasing
+      their efficiency.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3448398087876608
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3448438080565248
+    m_Localized: Let's see what else you can do. Close the upgrade menu to continue.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3449839175233536
+    m_Localized: Levels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3449899585794048
+    m_Localized: The generator will be able to boost one more building with each
+      level. That is to say, at level 3 you will be able to upgrade up to 3 buildings,
+      plus those of the previous levels.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453697066692608
+    m_Localized: "Expedici\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453752989347840
+    m_Localized: To rebuild Atlantis you will need new resources. To get them, go
+      on an expedition.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453897315348480
+    m_Localized: Objective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3453946401288192
+    m_Localized: In the expedition you will have to get as many resources as possible
+      in a given time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454129872728064
+    m_Localized: Movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454203579232256
+    m_Localized: "\rTo move, click on one of the tiles. You cannot move through squares
+      that have rocks on them. An indicator of your movement will appear."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454409951571968
+    m_Localized: Resources
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3454449264783360
+    m_Localized: The resources you can collect will appear with a white border. Stand
+      on them to start collecting them. It will take some time to collect a resource.
     m_Metadata:
       m_Items: []
   references:

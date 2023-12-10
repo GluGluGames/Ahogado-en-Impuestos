@@ -26,6 +26,7 @@ namespace GGG.Components.UI
 
         #endregion
 
+        [SerializeField] private TMP_Text SeaweedText;
         [SerializeField] private List<GameObject> ResourceContainers;
         [SerializeField] private List<TMP_Text> ResourcesText;
         [SerializeField] private List<Image> ResourcesIcons;
@@ -40,7 +41,6 @@ namespace GGG.Components.UI
         private PlayerManager _player;
         private GameManager _gameManager;
         private readonly List<Resource> _shownResource = new(2);
-        private bool _initialized;
 
         private int _currentIdx;
         private bool _dirtyFlag;
@@ -51,15 +51,6 @@ namespace GGG.Components.UI
 
             foreach(GameObject go in ResourceContainers)
                 go.SetActive(false);
-
-            _player.OnPlayerInitialized += () =>
-            {
-                ResourceContainers[0].gameObject.SetActive(true);
-                
-                ResourcesIcons[0].sprite = _player.GetResource("Seaweed").GetSprite();
-                ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
-                _initialized = true;
-            };
         }
 
         private void Update()
@@ -67,19 +58,14 @@ namespace GGG.Components.UI
             if (!_player.GetResource("Seaweed")) return;
             if (_gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
             
-            ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
+            SeaweedText.SetText(_player.GetResourceCount("Seaweed").ToString());
             
             for (int i = 0; i < _shownResource.Count; i++)
             {
                 if(!_shownResource[i]) continue;
                 
-                ResourcesText[i + 1].SetText(_player.GetResourceCount(_shownResource[i].GetKey()).ToString());
+                ResourcesText[i].SetText(_player.GetResourceCount(_shownResource[i].GetKey()).ToString());
             }
-        }
-
-        private void OnDisable()
-        {
-            SaveShownResources();
         }
 
         public bool ResourceBeingShown(Resource resource) => _shownResource.Find((x) => x == resource);
@@ -88,14 +74,14 @@ namespace GGG.Components.UI
         {
             if (_shownResource.Count >= 2) return false;
             
-            _shownResource.Insert(_shownResource.Count <= 0 ? 0 : _currentIdx - 1, resource);
+            _shownResource.Insert(_currentIdx, resource);
             ResourceContainers[_currentIdx].gameObject.SetActive(true);
             
             ResourcesIcons[_currentIdx].sprite = resource.GetSprite();
             ResourcesText[_currentIdx].SetText(_player.GetResourceCount(resource.GetKey()).ToString());
             
             if (_currentIdx + 1 >= ResourceContainers.Count) return true;
-            _currentIdx += ResourceContainers[_currentIdx + 1].gameObject.activeInHierarchy ? 2 : 1;
+            _currentIdx += ResourceContainers[_currentIdx + 1].gameObject.activeInHierarchy ? 0 : 1;
             
             return true;
         }
@@ -105,24 +91,18 @@ namespace GGG.Components.UI
             if (_shownResource.Count <= 0) return false;
             
             int idx = ResourcesIcons.FindIndex(x => x.sprite == resource.GetSprite());
-
-            print(resource.GetKey());
-            if (idx == -1) throw new Exception("-1 in idx");
             
             ResourceContainers[idx].gameObject.SetActive(false);
             ResourcesIcons[idx].sprite = null;
             
             _shownResource.Remove(resource);
-            _currentIdx = _shownResource.Count == 0 ? 1 : ResourceContainers.FindIndex(x => !x.activeInHierarchy);
-            print(_currentIdx);
+            _currentIdx = _shownResource.Count == 0 ? 0 : ResourceContainers.FindIndex(x => !x.activeInHierarchy);
 
             return true;
         }
 
         public void SaveShownResources()
         {
-            if (!SceneManagement.InGameScene() || _gameManager.OnTutorial()) return;
-            
             ShownResource[] resourcesData = new ShownResource[_shownResource.Count];
             int i = 0;
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "shown_resources.json");
@@ -150,14 +130,7 @@ namespace GGG.Components.UI
 
             if (!File.Exists(filePath))
             {
-                ResourceContainers[0].gameObject.SetActive(true);
-                
-                ResourcesIcons[0].sprite = _player.GetResource("Seaweed").GetSprite();
-                ResourcesText[0].SetText(_player.GetResourceCount("Seaweed").ToString());
-
-                _currentIdx = 1;
-                _initialized = true;
-                
+                _currentIdx = 0;
                 yield break;
             }
             
@@ -169,8 +142,6 @@ namespace GGG.Components.UI
             else {
                 data = File.ReadAllText(filePath);
             }
-
-            yield return new WaitWhile(() => !_initialized);
             
             ShownResource[] resources = JsonHelper.FromJson<ShownResource>(data);
             

@@ -4,6 +4,7 @@ using GGG.Components.Buildings.Laboratory;
 using GGG.Components.Buildings.Museum;
 using GGG.Components.Buildings.Shop;
 using GGG.Components.Buildings.Generator;
+using GGG.Components.Buildings.CityHall;
 using GGG.Components.UI;
 using GGG.Shared;
 
@@ -11,6 +12,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using GGG.Components.Buildings;
+using GGG.Components.Dialogue;
 using UnityEngine.UI;
 
 namespace GGG.Components.Tutorial
@@ -37,6 +40,12 @@ namespace GGG.Components.Tutorial
             SceneManagement.Instance.OnGameSceneLoaded += InitializeTutorials;
             _gameManager = GameManager.Instance;
             _ui = GetComponentInChildren<TutorialUI>();
+
+            if (Tutorials.Find(x => x.GetKey() == "InitialTutorial").Completed() &&
+                !Tutorials.Find(x => x.GetKey() == "BuildTutorial").Completed())
+            {
+                PlayerPrefs.SetInt("InitialTutorial", 0);
+            }
             
             _raycaster = GetComponent<GraphicRaycaster>();
             _raycaster.enabled = false;
@@ -49,12 +58,16 @@ namespace GGG.Components.Tutorial
 
         private void InitializeTutorials()
         {
-            StartTutorial("InitialTutorial", null);
+            HistoryManager.OnHistoryEnd += () => StartTutorial("InitialTutorial", null);
             BuildingUI.OnUiOpen += () => StartTutorial("BuildTutorial", "InitialTutorial");
             ShopUI.OnShopOpen += () => StartTutorial("ShopTutorial", "BuildTutorial");
             LaboratoryUI.OnLaboratoryOpen += () => StartTutorial("LaboratoryTutorial", "BuildTutorial");
             MuseumUI.OnMuseumOpen += () => StartTutorial("MuseumTutorial", "BuildTutorial");
             GeneratorUI.OnGeneratorOpen += () => StartTutorial("GeneratorTutorial", "BuildTutorial");
+            CityHallUi.OnCityHallOpen += () => StartTutorial("CityHallTutorial", "BuildTutorial");
+            FarmUI.OnFarmUIOpen += () => StartTutorial("FarmTutorial", "BuildTutorial");
+            LateralUI.OnLateralUiOpen += () => StartTutorial("ExpeditionTutorial", "BuildTutorial");
+            InventoryUI.OnInventoryOpen += () => StartTutorial("InventoryTutorial", "ExpeditionTutorial");
         }
 
         private void StartTutorial(string tutorialKey, string previousTutorialKey)
@@ -81,7 +94,7 @@ namespace GGG.Components.Tutorial
                 throw new Exception("Enum or key not correct");
             
             _gameManager.SetCurrentTutorial(tutorialState);
-            StartCoroutine(tutorial.StartTutorial(_ui.Open, _ui.Close, _ui.SetTutorialFields));
+            StartCoroutine(tutorial.StartTutorial(_ui.Open, _ui.Close, _ui.SetTutorialFields, _ui.SetObjectives));
         }
     }
 }

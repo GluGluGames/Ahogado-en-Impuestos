@@ -9,6 +9,9 @@ namespace GGG.Shared
         InventoryTutorial,
         LaboratoryTutorial,
         MuseumTutorial,
-        GeneratorTutorial
+        GeneratorTutorial,
+        FarmTutorial,
+        CityHallTutorial,
+        ExpeditionTutorial
     }
 }

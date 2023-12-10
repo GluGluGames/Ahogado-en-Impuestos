@@ -15,27 +15,29 @@ MonoBehaviour:
   Key: Redseaweed
   Name:
     m_TableReference:
-      m_TableCollectionName: GUID:f0dec55717509d1468c7ef0d543fd9b8
+      m_TableCollectionName: GUID:a21c964c7e81f094398f0fa8dc273f00
     m_TableEntryReference:
-      m_KeyId: 5330008022573056
+      m_KeyId: 5266956738560
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   Description:
     m_TableReference:
-      m_TableCollectionName: GUID:f0dec55717509d1468c7ef0d543fd9b8
+      m_TableCollectionName: GUID:a21c964c7e81f094398f0fa8dc273f00
     m_TableEntryReference:
-      m_KeyId: 5330094488150016
+      m_KeyId: 5269297160192
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   Sprite: {fileID: 21300000, guid: d23a433681cf30e439ceb38bef9e815e, type: 3}
   SelectedSprite: {fileID: 21300000, guid: 6a06e466085b0e945bc308efa781877b, type: 3}
+  Model: {fileID: 5465214205195245363, guid: cd6b329a1771d5f40a34a5814b63f5f8, type: 3}
+  ModelScale: {x: 2.5, y: 2.5, z: 2.5}
   CanBeResearched: 0
   IsUnlocked: 0
-  ResearchTime: 0
+  ResearchTime: 240
   references:
     version: 2
     RefIds: []

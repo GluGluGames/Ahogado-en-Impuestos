@@ -17,19 +17,24 @@ public class InitialTutorial : TutorialBase
     private HexTile[] _tiles;
     
     public override IEnumerator StartTutorial(Action OnTutorialStart, Action<bool, bool> OnTutorialEnd, 
-        Action<string, Sprite, string> OnUiChange)
+        Action<string, Sprite, string> OnUiChange, Action<TutorialObjective> OnObjectivesChange)
     {
         InitializeTutorial();
+        int i = 0;
         
         yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, false, false);
 
         foreach (IEnumerator step in _tutorialSteps)
         {
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, false, true, true);
+            ObjectivesPanelOpen(OnObjectivesChange, i);
             yield return step;
+            ObjectivesPanelOpen(OnObjectivesChange, -1);
+            i++;
         }
 
         yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true, true, true);
+        ObjectivesPanelOpen(OnObjectivesChange, i);
         
         FinishTutorial();
     }
@@ -55,7 +60,7 @@ public class InitialTutorial : TutorialBase
 
     protected override void FinishTutorial()
     {
-        TutorialCompleted = true;
+        base.FinishTutorial();
 
         foreach (HexTile tile in _tiles)
         {

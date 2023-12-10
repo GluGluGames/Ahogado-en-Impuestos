@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using GGG.Shared;
 using GGG.Components.Player;
@@ -11,6 +12,7 @@ using DG.Tweening;
 using GGG.Components.Core;
 using GGG.Components.UI.Buttons;
 using GGG.Input;
+using Project.Component.UI.Containers;
 
 namespace GGG.Components.UI
 {
@@ -23,6 +25,8 @@ namespace GGG.Components.UI
 
         [Space(5), Header("Buttons")]
         [SerializeField] private Button CloseButton;
+
+        public static Action OnInventoryOpen;
 
         #endregion
 
@@ -75,6 +79,20 @@ namespace GGG.Components.UI
             Close();
         }
 
+        private void OnDisable()
+        {
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                int idx = i;
+                for (int j = 0; j < _containerButtons.Count - 1; j++)
+                {
+                    _containerButtons[i].OnButtonClick -=
+                        _containerButtons[(idx + 1) % _containerButtons.Count].DeselectButton;
+                    idx++;
+                }
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -105,7 +123,7 @@ namespace GGG.Components.UI
             for (int i = 0; i < _resources.Count; i++)
             {
                 _buttons.Add(i, ResourceContainers[i].GetComponentsInChildren<Button>());
-                FillResources(_buttons[i], _resources[i]);
+                FillResources(_buttons[i], _resources[i], ResourceContainers[i].GetComponentsInChildren<Tooltip>(true));
             }
             
             ResetContainers();
@@ -130,7 +148,7 @@ namespace GGG.Components.UI
             }
         }
         
-        private void FillResources(Button[] buttons, Resource[] resources)
+        private void FillResources(Button[] buttons, Resource[] resources, Tooltip[] tooltips)
         {
             for (int i = 0; i < buttons.Length; i++)
             {
@@ -148,6 +166,8 @@ namespace GGG.Components.UI
                     buttons[i].onClick.AddListener(() => AddListener(resources[index], buttons[index]));
                     _resourcesCountText[resources[i].GetKey()] =
                         buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>(true);
+                    
+                    tooltips[i].SetResourceName(resources[i].GetName());
                 }
             }
         }
@@ -189,6 +209,8 @@ namespace GGG.Components.UI
             
             HandleSelectedResources();
             ResetContainers();
+            
+            OnInventoryOpen?.Invoke();
             
             foreach (string key in _resourcesCountText.Keys)
                 _resourcesCountText[key].SetText(_player.GetResourceCount(key).ToString());

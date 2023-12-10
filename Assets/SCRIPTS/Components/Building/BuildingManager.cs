@@ -49,7 +49,7 @@ namespace GGG.Components.Buildings
         private int _currentId = 1;
         
         private const string _EXIT_TIME = "ExitTime";
-        private const float _RATE_GROW = 1.05f;
+        private const float _RATE_GROW = 1.12f;
         
         public static Action<BuildingComponent[]> OnBuildsLoad;
 
@@ -172,16 +172,16 @@ namespace GGG.Components.Buildings
             return _buildingsCosts[build];
         }
 
-        public void SaveBuildings() {
-            if (_gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial || 
-                !SceneManagement.InGameScene()) return;
+        public void SaveBuildings()
+        {
+            if (!SceneManagement.InGameScene() || 
+                _gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial) return;
             
-            BuildingComponent[] buildings = gameObject.GetComponentsInChildren<BuildingComponent>();
-            BuildingData[] saveData = new BuildingData[buildings.Length];
+            BuildingData[] saveData = new BuildingData[_buildings.Count];
             int i = 0;
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "buildings_data.json");
 
-            foreach (BuildingComponent build in buildings)
+            foreach (BuildingComponent build in _buildings)
             {
                 BuildingData data = new()
                 {
@@ -204,6 +204,7 @@ namespace GGG.Components.Buildings
                 i++;
             }
 
+            PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
             string jsonData = JsonHelper.ToJson(saveData, true);
             File.WriteAllText(filePath, jsonData);
         }
@@ -231,7 +232,7 @@ namespace GGG.Components.Buildings
             int i = 0;
                 
             foreach (BuildingData build in buildings) {
-                GameObject go = build.Building.Spawn(build.Position, transform, build.Level, false);
+                 GameObject go = build.Building.Spawn(build.Position, transform, build.Level, false);
                 buildingComponents[i] = go.GetComponent<BuildingComponent>();
                 
                 buildingComponents[i].SetId(build.Id);
@@ -241,7 +242,14 @@ namespace GGG.Components.Buildings
                 if (buildingComponents[i].GetType() == typeof(Farm))
                 {
                     Farm farm = (Farm)buildingComponents[i];
-                    if(build.FarmResource) farm.Resource(build.FarmResource);
+                    if (build.FarmResource)
+                    {
+                        farm.Resource(build.FarmResource);
+                        GameObject resource = Instantiate(build.FarmResource.GetModel(),
+                            farm.transform.position + new Vector3(0, 2.5f), Quaternion.identity, farm.transform);
+                        resource.transform.localScale = build.FarmResource.GetModelScale();
+                        farm.SetResourceModel(resource);
+                    }
                 }
 
                 if (buildingComponents[i].BuildData().CanBeBoost() && build.IsBoost)

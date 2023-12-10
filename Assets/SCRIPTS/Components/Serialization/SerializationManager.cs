@@ -49,6 +49,8 @@ namespace GGG.Components.Serialization
                 _sceneManagement.AddEnumerators(Load());
             };
 
+            _sceneManagement.OnGameSceneUnloaded += Save;
+
             _delta = 0f;
         }
 
@@ -56,6 +58,7 @@ namespace GGG.Components.Serialization
         {
             PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
             PlayerPrefs.Save();
+            Save();
         }
 
         private void Update()
@@ -90,6 +93,7 @@ namespace GGG.Components.Serialization
             {
                 _playerManager.LoadResourcesCount(),
                 _buildingManager.LoadBuildings(),
+                _tileManager.LoadTilesState(),
                 _hudManager.LoadShownResource(),
             };
 
@@ -101,10 +105,11 @@ namespace GGG.Components.Serialization
 
         private void Save()
         {
+            if (!SceneManagement.InGameScene() || 
+                _gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial) return;
+            
             _playerManager.SaveResourcesCount();
             _hudManager.SaveShownResources();
-            _tileManager.SaveTilesState();
-            _buildingManager.SaveBuildings();
             _laboratoryUI.SaveResearchProgress();
             _generatorUI.SaveGeneratorState();
         }

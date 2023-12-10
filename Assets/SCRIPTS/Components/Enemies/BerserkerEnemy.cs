@@ -1,10 +1,8 @@
 using GGG.Components.HexagonalGrid;
+using GGG.Components.UI;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace GGG.Components.Enemies
 {
@@ -15,6 +13,7 @@ namespace GGG.Components.Enemies
         public EnemyComponent enemyComp;
         [SerializeField] private int maxPatience = 2;
         [SerializeField] private int staminaRechargeTime = 2;
+        [SerializeField] private EnemyStateUI StateUI;
         private int patience = 0;
         private float delta = 0;
         public float visionFrequency;
@@ -22,7 +21,6 @@ namespace GGG.Components.Enemies
         private Transform target;
         private bool targetOnVision;
         private bool berserkerMode = false;
-
 
         private void Awake()
         {
@@ -32,7 +30,7 @@ namespace GGG.Components.Enemies
                 target = GameObject.FindWithTag("Player").transform;
                 enemyComp.movementController.imChasing = false;
                 fov.imBlinded = false;
-                Debug.Log("patruyo");
+                StateUI.ChangeState(StateIcon.PatrolState);
             };
 
             ai.UpdatePatrol += () =>
@@ -40,7 +38,6 @@ namespace GGG.Components.Enemies
                 if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdate();
                 if (targetOnVision)
                 {
-                    Debug.Log("ey");
                     ai.detectPlayerPush.Fire();
                 }
 
@@ -49,11 +46,11 @@ namespace GGG.Components.Enemies
 
             ai.StartChase += () =>
             {
-                Debug.Log("persigo");
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.imChasing = true;
                 fov.imBlinded = false;
                 enemyComp.movementController.onMove += countPatience;
+                StateUI.ChangeState(StateIcon.ChasingState);
             };
 
             ai.UpdateChase += () =>
@@ -66,14 +63,13 @@ namespace GGG.Components.Enemies
 
             ai.StartBerserker += () =>
             {
-                Debug.Log("berserker");
                 updateTargetTile();
                 enemyComp.movementController.gotPath = false;
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.imChasing = true;
                 berserkerMode = true;
                 fov.imBlinded = false;
-                
+                StateUI.ChangeState(StateIcon.BerserkerState);
             };
 
             ai.UpdateBerserker += () =>
@@ -92,6 +88,7 @@ namespace GGG.Components.Enemies
                 enemyComp.movementController.onMove -= countPatience;
                 fov.imBlinded = true;
                 StartCoroutine(OnSleepCoroutine());
+                StateUI.ChangeState(StateIcon.SleepState);
             };
         }
 
@@ -115,7 +112,7 @@ namespace GGG.Components.Enemies
         private void checkVision()
         {
             if (target == null) return;
-            if (transformsSeen.Count == 0) targetOnVision = false; 
+            if (transformsSeen.Count == 0) targetOnVision = false;
             chooseTarget();
             foreach (Transform t in transformsSeen)
             {
@@ -133,7 +130,7 @@ namespace GGG.Components.Enemies
         private void chooseTarget()
         {
             if (transformsSeen.Count == 0) return;
-            if(berserkerMode)
+            if (berserkerMode)
             {
                 Transform closestTarget = null;
                 float closestDistance = 999999999999999999;
@@ -147,7 +144,7 @@ namespace GGG.Components.Enemies
                     }
                 }
                 target = closestTarget;
-            } 
+            }
             else
             {
                 target = GameObject.FindWithTag("Player").transform;
@@ -165,7 +162,6 @@ namespace GGG.Components.Enemies
             {
                 enemyComp.movementController.targetTile = target.GetComponent<EnemyComponent>().currentTile;
             }
-            
         }
 
         private void countPatience()
@@ -184,15 +180,6 @@ namespace GGG.Components.Enemies
             yield return new WaitForSeconds(enemyComp.restTime);
             enemyComp.movementController.movingAllowed = true;
             ai.restedPush.Fire();
-        }
-
-        private IEnumerator onStaminaRecharge()
-        {
-            fov.imBlinded = true;
-            enemyComp.movementController.movingAllowed = false;
-            yield return new WaitForSeconds(staminaRechargeTime);
-            fov.imBlinded = false;
-            enemyComp.movementController.movingAllowed = true;
         }
     }
 }

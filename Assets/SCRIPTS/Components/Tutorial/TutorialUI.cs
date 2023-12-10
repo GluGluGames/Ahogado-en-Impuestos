@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using GGG.Classes.Tutorial;
 using GGG.Components.Core;
 using GGG.Shared;
 using TMPro;
@@ -12,10 +13,12 @@ namespace GGG.Components.Tutorial
     {
         [SerializeField] private GameObject Viewport;
         [SerializeField] private GameObject[] Layouts;
+        [SerializeField] private GameObject ObjectivesPanel;
         [Header("Tutorial Fields")]
         [SerializeField] private GameObject TitleContainer;
         [SerializeField] private TMP_Text TitleText;
         [SerializeField] private TMP_Text[] TutorialText;
+        [SerializeField] private TMP_Text[] Objectives;
         [SerializeField] private Image TutorialImage;
         
         private bool _open;
@@ -25,6 +28,9 @@ namespace GGG.Components.Tutorial
         {
             Viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
             Viewport.SetActive(false);
+            ObjectivesPanel.SetActive(false);
+            foreach (TMP_Text objective in Objectives)
+                objective.gameObject.SetActive(false);
         }
 
         public void SetTutorialFields(string title, Sprite image, string text)
@@ -45,6 +51,25 @@ namespace GGG.Components.Tutorial
             if (image)
             {
                 TutorialImage.sprite = image;
+            }
+        }
+
+        public void SetObjectives(TutorialObjective objectives)
+        {
+            if (objectives == null)
+            {
+                ObjectivesPanel.SetActive(false);
+                foreach (TMP_Text objective in Objectives)
+                    objective.gameObject.SetActive(false);
+                
+                return;
+            }
+            
+            ObjectivesPanel.SetActive(true);
+            for (int i = 0; i < objectives.GetObjectives.Length; i++)
+            {
+                Objectives[i].gameObject.SetActive(true);
+                Objectives[i].SetText(objectives.Objective(i).GetLocalizedString());
             }
         }
 

@@ -1,5 +1,4 @@
 using UnityEngine;
-using GGG.Classes.Sound;
 using GGG.Shared;
 using UnityEngine.Audio;
 using System;
@@ -76,26 +75,7 @@ namespace GGG
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// It checks if the settings of the mixers have been changed and if so, it assigns it values. 
-        /// If not, it initializes the mixers volume.
-        /// </summary>
-        private void Start()
-        {
-            if (PlayerPrefs.HasKey("GeneralVolume") && PlayerPrefs.HasKey("SoundEffectsVolume") &&
-                PlayerPrefs.HasKey("MusicVolume"))
-                LoadVolume();
-            else
-            {
-                PlayerPrefs.SetFloat("GeneralVolume", 0);
-                PlayerPrefs.SetFloat("SoundEffectsVolume", 0);
-                PlayerPrefs.SetFloat("MusicVolume", 0);
-            }
-            
-            Play("MainMenu");
-        }
-
+        
         public void SetMusicVolume(float volume)
         {
             MusicMixerGroup.audioMixer.SetFloat("Music", volume);
@@ -107,17 +87,6 @@ namespace GGG
         public bool GetMusicActive()
         {
             return _isMusicActive;
-        }
-        /// <summary>
-        /// Loads the volume of the mixers.
-        /// </summary>
-        private void LoadVolume()
-        {
-            GeneralMixerGroup.audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("GeneralVolume"));
-            SoundEffectsMixerGroup.audioMixer.SetFloat("SoundEffects", PlayerPrefs.GetFloat("SoundEffectsVolume"));
-
-            if (_isMusicActive) MusicMixerGroup.audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
-            else { MusicMixerGroup.audioMixer.SetFloat("Music", 0); }
         }
 
         /// <summary>
@@ -135,10 +104,20 @@ namespace GGG
             s.Source.Play();
         }
 
-        public void PlayScriptable(Sound sound)
+        public void Play(Sound sound)
         {
             Play(sound.name);
         }
+
+        public bool IsPlaying(string clipName)
+        {
+            Sound s = Array.Find(Sounds, x => x.ClipName == clipName);
+            if (!s)
+                throw new Exception("Not sound found");
+
+            return s.Source.isPlaying;
+        }
+        
 
         public void Resume(string clipName)
         {

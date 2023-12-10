@@ -19,7 +19,10 @@ namespace GGG.Components.Buildings.CityHall
     {
         [Header("Texts")] 
         [SerializeField] private TMP_Text PagesText;
+        [SerializeField] private TMP_Text TaxesAmount;
         [SerializeField] private TMP_Text TaxesCounter;
+        [Space(5), Header("Buttons")]
+        [SerializeField] private Image TaxResourceImage;
         [Space(5), Header("Buttons")]
         [SerializeField] private Button UpArrow;
         [SerializeField] private Button DownArrow;
@@ -27,6 +30,7 @@ namespace GGG.Components.Buildings.CityHall
 
         private GameManager _gameManager;
         private AchievementsManager _achievementsManager;
+        private TaxUI _taxUI;
 
         private List<ContainerButton> _containerButtons;
         private List<AchievementContainer> _achievementContainers;
@@ -40,6 +44,7 @@ namespace GGG.Components.Buildings.CityHall
         {
             _gameManager = GameManager.Instance;
             _achievementsManager = AchievementsManager.Instance;
+            _taxUI = FindObjectOfType<TaxUI>();
             
             _viewport = transform.GetChild(0).gameObject;
             _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
@@ -61,6 +66,18 @@ namespace GGG.Components.Buildings.CityHall
             CloseButton.onClick.AddListener(OnCloseButton);
         }
 
+        private void OnDisable()
+        {
+            UpArrow.onClick.RemoveAllListeners();
+            DownArrow.onClick.RemoveAllListeners();
+            CloseButton.onClick.RemoveAllListeners();
+            for (int i = 0; i < _containerButtons.Count; i++)
+            {
+                _containerButtons[i].OnButtonClick -=
+                    _containerButtons[(i + 1) % _containerButtons.Count].DeselectButton;
+            }
+        }
+
         private void InitializeAchievements()
         {
             List<Achievement> achievements = _achievementsManager.GetAchievements();
@@ -68,7 +85,8 @@ namespace GGG.Components.Buildings.CityHall
             {
                 _achievementContainers[i].SetAchievement(achievements[i].GetName(),
                     achievements[i].GetDescription(),
-                    achievements[i].GetSprite());
+                    achievements[i].GetSprite(),
+                    achievements[i].IsUnlocked());
             }
         }
 
@@ -85,7 +103,8 @@ namespace GGG.Components.Buildings.CityHall
             {
                 _achievementContainers[i].SetAchievement(achievements[idx].GetName(), 
                     achievements[idx].GetDescription(), 
-                    achievements[idx].GetSprite());
+                    achievements[idx].GetSprite(),
+                    achievements[idx].IsUnlocked());
                 idx++;
             }
 
@@ -98,7 +117,10 @@ namespace GGG.Components.Buildings.CityHall
             float timerDelta = TaxManager.GetRemainingTime();
             int minutes = Mathf.FloorToInt(timerDelta / 60);
             int seconds = Mathf.FloorToInt(timerDelta % 60);
-            TaxesCounter.SetText($"{minutes:00}:{seconds:00}");     
+            TaxesCounter.SetText($"{minutes:00}:{seconds:00}");
+
+            TaxesAmount.SetText(_taxUI.GetTaxesAmount().ToString());
+            TaxResourceImage.sprite = _taxUI.GetTaxesResource().GetSprite();
         }
 
         private IEnumerator TaxCounter()

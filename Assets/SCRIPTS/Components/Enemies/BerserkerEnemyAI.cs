@@ -2,9 +2,7 @@
 using BehaviourAPI.Core.Actions;
 using BehaviourAPI.StateMachines;
 using BehaviourAPI.UnityToolkit;
-using BehaviourAPI.UnityToolkit.GUIDesigner.Runtime;
 using System;
-using UnityEngine;
 using Action = System.Action;
 
 namespace GGG.Components.Enemies
@@ -32,8 +30,6 @@ namespace GGG.Components.Enemies
         public Action StartBerserker;
         public Func<Status> UpdateBerserker;
         public Action SleepMethod;
-
-        [SerializeField] public BSRuntimeDebugger bSRuntimeDebugger;
 
         protected override BehaviourGraph CreateGraph()
         {
@@ -68,8 +64,6 @@ namespace GGG.Components.Enemies
             killedNonPlayerPush = new PushPerception(killedNonPlayer);
             restedPush = new PushPerception(rested);
             lostVisionPush = new PushPerception(lostVision);
-
-            bSRuntimeDebugger.RegisterGraph(berserkerEnemyBehaviour, "berserker fsm");
 
             return berserkerEnemyBehaviour;
         }

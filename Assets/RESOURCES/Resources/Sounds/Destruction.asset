@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e013ac386615ac4490f783cd90a318b, type: 3}
+  m_Name: Destruction
+  m_EditorClassIdentifier: 
+  ClipName: Destruction
+  AudioType: 1
+  AudioClip: {fileID: 8300000, guid: 60d304ce2bca0534cba3c4b8151e1657, type: 3}
+  IsLoop: 0
+  PlayOnAwake: 0
+  Volume: 0.35
+  Source: {fileID: 0}

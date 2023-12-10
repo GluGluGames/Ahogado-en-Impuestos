@@ -225,6 +225,19 @@ Un majestuoso edificio de investigación, cuidadosamente desvelado con la adquis
 |  2 | x | 500 hierro  | 100 madera |
 |  3 | x | 750 hierro | 100 madera |
 
+| Nombre | Tiempo de Investigación |
+|--------|-------------------------|
+| Alga verde| 4 minutos |
+| Alga roja | 4 minutos |
+| Perla | 4 minutos |
+| Madera| 4 minutos |
+| Hierro | 4 minutos |
+| Acelerador | 4 minutos |
+| Coral| 4 minutos |
+| Tablilla | 5 minutos |
+| Mapa | 5 minutos |
+
+
 |Edificio| Nivel requerido del centro| Nivel mejora | Coste| Tiempo |Justificacion|
 | :--: | :--: | :--: | :--: | :--: | :--: |
 |Granja de algas| 1 | 1->2| 2500 algas verdes | 3 min | La mejora incial de la granja tarda 5 minutos debido a que sube poco la productividad.|
@@ -396,10 +409,13 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | Shop with Items       | ![Shop with Items](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Shop_Mockup_WItems.jpg) |
 | Tutorial              | ![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Tutorial_Mockup.png) |
 | Upgrade UI            | ![Upgrade UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/UpgradeUi_Mockup.png) |
-| Derrota               | ![Derrota UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Derrota/Interfaz%20derrota%20referencia.png)
-| Construccion          | ![Construccion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Construir/Interfaz%20construcci%C3%B3n%20referencia.png)
-| Expedicion            | ![Expedicion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Expedici%C3%B3n/Interfaz%20expedici%C3%B3n%20referencia%20con%20fondo.png)
-| Lateral               | ![Lateral UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Lateral/Interfaz%20lateral%20referencia.png)
+| Victoria              | ![Derrota UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/ExpeditionFinish_Mockup.png)
+| Construccion          | ![Construccion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Building_Mockup.png)
+| Expedicion            | ![Expedicion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Expedition_Mockup_Background.png)
+| Lateral               | ![Lateral UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/LateralUi_Mockup.png)
+| Dialogue              | ![Dialogue](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Dialogue_Zeus_Mockup.png)
+| Farm UI               | ![Farm UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/FarmUi_Mockup.png)
+
 
 
 
@@ -510,6 +526,10 @@ Cabe destacar que existe un tiempo de recogida de recursos, ya que cada recurso 
 | Nivel 2          | ![Nivel 2](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%202.PNG) |
 | Nivel 3          | ![Nivel 3](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%203.PNG) |
 | Nivel 4          | ![Nivel 4](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Game%20Design%20Documents/Render%20Niveles/Nivel%204.PNG) |
+| Nivel 1  Nuevo   | ![Nivel 1](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Nivel%201%20Nuevo.PNG) |
+| Nivel 2  Nuevo   | ![Nivel 2](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Nivel%202%20Nuevo.PNG) |
+| Nivel 3  Nuevo   | ![Nivel 3](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Nivel%203%20Nuevo.PNG) |
+| Nivel 4  Nuevo   | ![Nivel 4](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Game%20Design%20Documents/Nivel%204%20Nuevo.PNG) |
 
 
 ### **5.3 - Curva de aprendizaje**
@@ -641,6 +661,11 @@ A lo largo de los siglos, el desacuerdo sobre la delimitación de los dominios d
 *Pathing con Poseidón hablando*
 
 Poseidon: Déjame que te enseñe lo que una vez fue. Esta era mi magnífica Atlantis, un reino glorioso que posaba majestuosamente sobre las profundidades de mi reino. Pero el tiempo ha llevado a su decadencia. Has sido seleccionado para una tarea que supera con creces tu comprensión. Escucha atentamente porque no pienso repetirme, tu misión es reconstruir esta ciudad y devolverla a su antigua gloria. Necesito que coseches algas y otros recursos del océano para restaurar la grandeza de mi gran Atlantis. No esperes gratitud ni recompensas. Tu deber es simplemente cumplir mi voluntad. Las riquezas de Atlantis son mías por derecho, y tú eres solo un instrumento para restaurar mi reino a su antigua gloria. No te equivoques, no es un honor servirme; es una obligación.
+
+*Diálogo con Zeus*
+*Te giras y Poseidón ha desaparecido, Zeus está observándote*
+
+Zeus: ¡Por fin has despertado! Sé que mi hermano no es alguien agradable, pero no te preocupes, te voy a entregar este documento grabado por aquellos que una vez fueron como tú. Este viejo libro contiene todo tipo de información que debería ayudarte en tu aventura. Desde los recursos que puedes descubrir en tus viajes a las afueras de la ciudad, hasta aquellas criaturas que viven fuera de la ciudad. El mar está lleno de tesoros y peligros, así que te recomiendo tener cuidado al aventurarte fuera de la ciudad.  No lo olvides pequeño, en el fondo del mar estarás solo, la ciudad depende ti y tu propia vida también. Ten cuidado, te estaré observando criatura.
 
 ## **9 - MÚSICA Y SONIDO** 
 
@@ -877,9 +902,103 @@ La administración eficiente de nuestra estructura de costos garantiza una asign
 
 La estrategia de ingresos se fundamenta en la diversificación y la adaptabilidad, lo que nos capacita para generar beneficios mientras mantenemos un firme compromiso con la oferta de aprendizaje y entretenimiento accesible para una amplia audiencia.
 
-## 12. Mechanics,Dynamics,Aesthetics? 
+## 12. Mechanics,Dynamics,Aesthetics
 La estética principal de este juego es el desafío; el jugador debe gestionar recursos tanto dentro como fuera de la ciudad. Se le marca un objetivo de reconstruir la gloria del pasado de Atlantis, la cual tuvo una historia espectacular. Dentro de la ciudad, el jugador se enfrenta a retos de cómo usar los recursos para sacar el máximo beneficio, por lo que el jugador se tiene que planificar cómo organizar entre el ganar y gastar de los recursos. Además, fuera del escenario, el jugador se enfrenta a obstáculos que le impiden recoger recursos, ya sean limitaciones del propio escenario como rocas, remolinos o diferentes tipos de enemigos. El juego no solo contiene desafíos; la fantasía también está involucrada dentro del juego. El jugador actúa como un fantasma resucitado, el cual fue despertado por Poseidón y asignado como encargado de la ciudad. Aparte, el descubrimiento tiene un papel importante dentro del juego; el jugador podrá navegar en diferentes escenarios mediante navegación, así consigue conocer a distintas criaturas, mapas, desbloqueando nuevas funcionalidades de los edificios y equipamientos de buceo. Y como se había dicho antes, el jugador puede conocer diferentes criaturas, por lo que también incluimos coleccionismo dentro del juego, así dando al jugador una iniciativa.
 
 El desafío viene dado por varios elementos claves: administrar los costos de diferentes recursos, el tiempo limitado de exploración y los enemigos que estarán distribuidos dentro del mapa de exploración. El jugador, por una parte, debe ver si la proporción de construir/mejorar está equilibrada, pensar en cómo puede conseguir algas suficientes para cada recolección, así previniendo la destrucción de los edificios, lo cual ralentiza el ritmo de la reconstrucción. No solo eso, el jugador también debe decidir en cuáles edificios invertir para subir el rendimiento, también se destaca que el jugador puede conseguir mejores equipos de buceo si los mejora. Por otro lado, durante la expedición, el jugador será limitado por el tiempo de energía, por lo que dentro del escenario se tiene que plantear la exploración de manera correcta, ya que en cada expedición, la generación de recursos puede estar distribuida de manera distinta (Solo el mapa será creado manualmente, los recursos se regenerarán en distintas posiciones en cada ocasión). Aparte, para darle un desafío más al jugador, este tendrá que usar estrategias para esquivar a los enemigos, ya que una vez cazado, el jugador solo podrá volver con muy pocos recursos a la ciudad, lo que aportará casi nulo a la ciudad.
 
 En el juego, actúan principalmente los recursos, es decir, todos giran en torno al recurso, formando como mecánica principal del juego. Los recursos principales serán las algas, los corales, las perlas, las conchas y las caracolas; todo tipo de construcción o mejora depende de ellos. Los recursos existen para poder usarlos; en este caso, el jugador los usará para construir, destruir, reparar, mejorar edificios dentro de la ciudad. Cada edificio tendrá un costo distinto, algunos serán más complicados para construir pero aportarán un rendimiento mayor a la ciudad; otros actuarán como última medida para salvar la partida, cada uno de ellos tiene distintas funcionalidades para ayudar a la ciudad. En la parte de expedición, el jugador podrá navegar libremente por el escenario; si es cazado, volverá a la ciudad casi sin recursos; habrá variedad de recursos en el escenario, con distintas cantidades, y puede avanzar una pequeña historia que hay dentro del juego. Aparte, el jugador puede descubrir diferentes mapas y diferentes mejoras de edificios, lo que conlleva al descubrimiento.
+
+
+
+## **13 - POST-MORTEM**
+
+#### 13.1 - ¿QUÉ HA IDO BIEN?
+
+- **ARTE**:
+	- Sprites y modelados finales de buena calidad.
+ 	- Diseño cohesivo.
+ 
+- **ORGANIZACIÓN**: los miembros del equipo han realizado las tareas más necesarias. Se ha establecido bien la importancia de las tareas.
+
+- **COMUNICACIÓN**: 
+ 	- Se ha llegado rápido a consensos sobre diseño del juego/arte/modelados.
+   	- Buena coordinación a la hora de trabajar en distintas partes del proyecto sin pisarnos unos a otros.
+
+
+#### 13.2 - ¿QUÉ SE PODRÍA HABER MEJORADO?
+
+- **ORGANIZACIÓN**:
+ 	- Mala estimación del tiempo que lleva el trabajo.
+   	- Definir mejor el diseño antes de programar/finalizar. 
+     	- Dedicar más tiempo al Testing.
+	- Falta de uso de las herramientas de organización definidas.
+	- Falta de iniciativa a la hora de completar tareas de algunos miembros del grupo. 
+       
+- **COMUNICACIÓN**:
+	- Falta de comunicación sobre las cosas que estaban finalizadas y las que faltaban por terminar.
+ 	- Falta de uso de los estándares de comunicación y reportes.
+
+- **PRIORIDADES**: 
+ 	- Se han priorizado hacer cosas nuevas en vez de pulir los problemas que ya había. 
+   	- Para los siguientes proyectos habría que centrarse en finalizar las tareas bien antes de comenzar tareas nuevas.
+     
+- **REDES Y WEB**: pocas actualizaciones de la red y la web.
+
+- **ARTE**: se han cambiado decisiones de diseño sin avisar.
+
+
+Objetivos
+
+El objetivo de las redes sociales de la empresa es llegar al máximo número de potenciales clientes posible, ya que cuanta más gente vea el juego en las redes más compradores habrá en el momento del lanzamiento. Pero si hubiera que marcar un objetivo contable de seguidores o de alcance en las redes se considera adecuado 100 seguidores en cada red social antes de la salida oficial del juego al mercado.
+
+
+
+## **14 - PLAN DE MARKETING**
+
+
+#### 14.1 - PÚBLICO
+
+Este proyecto tiene varios públicos objetivos, que se abordarán en orden.
+
+Objetivo infantil : La audiencia menor de edad de entre 8 y 14 años aproximadamente tiene un uso limitado de redes sociales por lo que habría que tener más en cuenta los horarios y plataformas de sus tutores. 
+Viendo esta situación los horarios de publicación óptima serían de madrugada (6/7 AM) debido a que antes de entrar al trabajo mirarían las redes sociales un poco y por la noche (10/12 PM) ya que sería el momento libre de los padres en el día. Esto sería de lunes a sábado ya que los domingos se podría colgar por la tarde, cuando no hay trabajo y los padres pueden descansar mirando las redes sociales. La mejor red social para llegar a este cliente sería Facebook, ya que es el más usado en su franja de edad.
+
+Objetivo joven : Este sería el gran grueso de clientes potenciales del juego (18/30 años), por lo que se podría tomar más en cuenta que el anterior conjunto de personas. Los jóvenes pasan mucho rato en las redes sociales por lo que es bastante más sencillo llegar a ellos. Los horarios ideales para colgar contenido difieren un poco respecto al anterior apartado, ya que en su mayoría los jóvenes de este apartado tienden a tener gran parte de la tarde libre y por la mañana empiezan su día más tarde. Por lo que las horas óptimas serían de 8 a 9:30 AM y por la tarde a partir de las 5 PM hasta entrada la noche (12 PM). En sábados y domingos las horas para colgar pueden ser más flexibles, aunque lo idóneo sería por la tarde, cuando más jóvenes están conectados a las redes sociales. Las redes sociales en las que se alcanzaría mayor impacto serían Instagram, X (Twitter), YouTube y TikTok.
+
+Si analizamos ambos grupos nos damos cuenta que el horario en el que más público objetivo se podría alcanzar es de tarde/noche, que es el momento donde se colgarán las publicaciones en nuestras redes.
+
+
+#### 14.2 - CONTENIDO
+
+El contenido que se subirá a nuestras redes sociales irá relacionado con el estado del proyecto y actualizaciones en el desarrollo del juego, además de algún meme ocasional que resulta atractivo sobre todo en los públicos más jóvenes.
+
+Por ahora se han ido publicando imágenes de varios edificios y personajes del juego, así como bocetos e imágenes del estado del juego actual para mantener al público enterado de los avances.
+
+Las plataformas en las que se están haciendo actualizaciones de contenido son X (Twitter) e Instagram, en donde ya se ha alcanzado casi la mitad del objetivo de seguidores y se tiene una base decente de potenciales clientes.
+
+
+#### 14.3 - ANÁLISIS
+
+Se ha hecho un seguimiento de las cuentas de la empresa para conseguir información respecto a los gustos e intereses del público al que nos dirigimos.
+
+La red social con más seguidores actualmente es Instagram, en la que hemos conseguido a lo largo de los dos meses de proyecto 36 seguidores, en contraste con los 13 seguidores que se posee en X (Twitter). El momento en el que más seguidores se han empezado a conseguir ha sido aproximadamente cuando se llevaba un mes de desarrollo y se comenzó a subir contenido de manera más consistente y cuando el juego empezó a estar más desarrollado.
+
+Las publicaciones que más han gustado han sido en los que se presentaron los personajes de Zeus y Poseidón, tanto el X como en Instagram.
+
+Las horas a las que se suele publicar en nuestras redes es  por la tarde (5 PM a 8 PM), que es cuando más potenciales clientes están en las redes y 2/3 veces a la semana, aunque puede aumentar si hay más contenido que colgar.
+
+Podemos concluir que los personajes son más atractivos para los seguidores que las publicaciones con objetos 3D o bocetos, además de que la utilización de # de la industria ayudan a la distribución de las publicaciones por la red.
+
+
+#### 14.4 - PLANIFICACIÓN
+
+Partiendo del análisis del anterior apartado se ha podido sacar un esquema indicativo para la planificación.
+
+La planificación lograda es la siguiente: 
+Dos días a la semana se subirá contenido, a ser posible no dos días seguidos para no dejar el resto de la semana sin contenido ( a menos que no haya nada que subir ).
+La hora de la subida de contenido será entre las 5PM y las 8 PM.
+Uno de los días será el sábado ya que como se ha mencionado en el análisis, es cuando más público objetivo está conectado a las redes.
+
+Ya que se ha subido la mayoría del desarrollo del juego, a partir de ahora el contenido será más relacionado con el juego en sí, como trailer o gameplays e información sobre su salida.
+

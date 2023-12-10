@@ -38,10 +38,11 @@ namespace GGG.Components.Core
         [Tooltip("Amount of movement over time")]
         [SerializeField] private float MovementTime;
         
-        #if UNITY_ANDROID
+        
         private LeanDragCamera _dragCamera;
         private LeanTwistRotateAxis _rotateCamera;
         private LeanPinchScale _zoomCamera;
+        #if UNITY_ANDROID
         private bool _cameraToggle;
         #endif
 
@@ -68,11 +69,18 @@ namespace GGG.Components.Core
             _input = InputManager.Instance;
             _gameManager = GameManager.Instance;
             
-
-            #if UNITY_ANDROID
             _dragCamera = GetComponent<LeanDragCamera>();
             _rotateCamera = GetComponent<LeanTwistRotateAxis>();
             _zoomCamera = GetComponent<LeanPinchScale>();
+
+            _dragCamera.enabled = false;
+            _rotateCamera.enabled = false;
+            _zoomCamera.enabled = false;
+            
+            #if UNITY_ANDROID
+            _dragCamera.enabled = true;
+            _rotateCamera.enabled = true;
+            _zoomCamera.enabled = true;
             
             LeanTouch.OnFingerDown += (x) => Holding.IsHolding(true);
             LeanTouch.OnFingerUp += (x) => Holding.IsHolding(false);

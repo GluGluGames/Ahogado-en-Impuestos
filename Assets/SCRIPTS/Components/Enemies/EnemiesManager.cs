@@ -24,6 +24,15 @@ namespace GGG.Components.Enemies
 
         private void Start()
         {
+
+            StartCoroutine(DelayedStart());
+
+        }
+
+        IEnumerator DelayedStart()
+        {
+            yield return new WaitForSeconds(0.4f);
+
             _nEnemies = EnemiesPrefab.Length;
             _tiles = FindObjectsOfType<HexTile>().ToList();
 
@@ -31,6 +40,7 @@ namespace GGG.Components.Enemies
             {
                 SpawnEnemy();
             }
+
         }
 
         private bool SpawnEnemy()
@@ -40,7 +50,7 @@ namespace GGG.Components.Enemies
 
             foreach (Enemy enemy in _enemies)
             {
-                if (enemy.currentTile != hex && enemy.currentTile != PlayerPosition.CurrentTile) continue;
+                if (enemy.currentTile != hex && hex != PlayerPosition.CurrentTile && hex.GetTileType() != TileType.Mountain && hex.selectable == true) continue;
                 
                 spawned = SpawnEnemy();
                 break;

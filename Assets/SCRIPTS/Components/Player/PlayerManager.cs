@@ -17,25 +17,18 @@ namespace GGG.Components.Player
         public static PlayerManager Instance;
 
         private void Awake() {
-
-            if(_PlayerModel != null)
-                Instantiate(_PlayerModel, transform);
             
             if (Instance == null)
                 Instance = this;
-            
-            
         }
 
         #endregion
         
-        [SerializeField] private GameObject _PlayerModel;
-
         private GameManager _gameManager;
         
-        private List<Resource> _resources;
-        private Dictionary<string, int> _resourcesCount = new();
-        private readonly Dictionary<string, Resource> _resourcesDictionary = new();
+        private static List<Resource> _resources;
+        private static Dictionary<string, int> _resourcesCount = new();
+        private static readonly Dictionary<string, Resource> _resourcesDictionary = new();
 
         public Action OnPlayerInitialized;
 
@@ -53,17 +46,17 @@ namespace GGG.Components.Player
             _resources = Resources.LoadAll<Resource>("SeaResources").
                 Concat(Resources.LoadAll<Resource>("ExpeditionResources")).
                 Concat(Resources.LoadAll<Resource>("FishResources")).ToList();
-            
-            foreach (Resource i in _resources)
-                _resourcesDictionary.Add(i.GetKey(), i);
-            
-            foreach (string i in _resourcesDictionary.Keys) 
-                _resourcesCount.Add(i, 0);
-        }
 
-        private void OnDisable()
-        {
-            SaveResourcesCount();
+            if (_resourcesDictionary.Count <= 0)
+            {
+                foreach (Resource i in _resources)
+                    _resourcesDictionary.Add(i.GetKey(), i);
+            }
+
+            if (_resourcesCount.Count > 0) return;
+            
+            foreach (string i in _resourcesDictionary.Keys)
+                _resourcesCount.Add(i, 0);
         }
 
         public int GetResourceCount(string key) => _resourcesCount[key];
@@ -85,9 +78,6 @@ namespace GGG.Components.Player
 
         public void SaveResourcesCount()
         {
-            if (!SceneManagement.InGameScene() || 
-                _gameManager.GetCurrentTutorial() is Tutorials.InitialTutorial or Tutorials.BuildTutorial) return;
-            
             ResourceData[] resourceDataList = new ResourceData[_resourcesCount.Count];
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");
             int i = 0;

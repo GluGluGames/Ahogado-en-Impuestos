@@ -69,19 +69,28 @@ namespace GGG.Components.UI
             Close();
         }
 
+        private void OnDisable()
+        {
+            LeftArrow.onClick.RemoveAllListeners();
+            RightArrow.onClick.RemoveAllListeners();
+            CloseButton.onClick.RemoveAllListeners();
+            
+            HexTile[] tiles = FindObjectsOfType<HexTile>();
+            foreach (HexTile tile in tiles) tile.OnHexSelect -= Open;
+            
+            _buttons = GetComponentsInChildren<BuildButton>(true);
+            foreach (BuildButton button in _buttons) button.OnStructureBuild -= AuxClose;
+        }
+
         private void Initialize()
         {
             HexTile[] tiles = FindObjectsOfType<HexTile>();
-
-            foreach (HexTile tile in tiles) {
-                tile.OnHexSelect += Open;
-            }
-
+            foreach (HexTile tile in tiles) tile.OnHexSelect += Open;
+            
             _buttons = GetComponentsInChildren<BuildButton>(true);
-
             foreach (BuildButton button in _buttons) {
                 button.Initialize(_buildingManager);
-                button.OnStructureBuild += (x, y) => Close();
+                button.OnStructureBuild += AuxClose;
             }
             
             PanelsText.SetText($"{_currentPanel + 1}/{Panels.Count}");
@@ -115,12 +124,17 @@ namespace GGG.Components.UI
                 _open = true;
             };
             
+            for(int i = 0; i < Panels.Count; i++)
+                Panels[i].SetActive(i == 0);
+            
             _selectedTile = tile;
             _viewport.SetActive(true);
             CheckBuildings();
             OnUiOpen?.Invoke();
             _gameManager.OnUIOpen();
         }
+
+        private void AuxClose(BuildingComponent x = null, HexTile y = null) => Close();
         
         private void OnCloseButton() {
             if (!_open || _gameManager.TutorialOpen() || _gameManager.OnTutorial()) return;
@@ -133,6 +147,11 @@ namespace GGG.Components.UI
             _viewport.transform.DOMoveY(Screen.width * -0.5f, 0.75f).SetEase(Ease.OutCubic).onComplete += () => {
                 _viewport.SetActive(false);
                 _open = false;
+                
+                _currentPanel = 0;
+                for(int i = 0; i < Panels.Count; i++) Panels[i].SetActive(i == 0);
+                PanelsText.SetText($"{_currentPanel + 1}/{Panels.Count}");
+                
                 _gameManager.OnUIClose();
             };
             

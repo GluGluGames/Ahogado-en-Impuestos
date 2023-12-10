@@ -8,7 +8,7 @@ namespace GGG.Classes.Tutorial
     public class ShopTutorial : TutorialBase
     {
         public override IEnumerator StartTutorial(Action OnTutorialStart, Action<bool, bool> OnTutorialEnd, 
-            Action<string, Sprite, string> OnUiChange)
+            Action<string, Sprite, string> OnUiChange, Action<TutorialObjective> OnObjectivesChange)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -16,15 +16,8 @@ namespace GGG.Classes.Tutorial
             }
             
             yield return TutorialOpen(OnTutorialStart, OnTutorialEnd, OnUiChange, true, true, false);
-            yield return null;
+            
             FinishTutorial();
-        }
-
-        protected override void InitializeTutorial() { }
-
-        protected override void FinishTutorial()
-        {
-            TutorialCompleted = true;
         }
     }
 }

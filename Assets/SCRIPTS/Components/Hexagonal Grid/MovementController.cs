@@ -104,7 +104,8 @@ namespace GGG.Components.HexagonalGrid
         {
             Quaternion angle = Quaternion.Euler(0, 0, 0);
             _rigidbody.transform.LookAt(targetPos);
-            _rigidbody.transform.position = targetPos;
+            //_rigidbody.transform.position = targetPos;
+            _rigidbody.transform.DOMove(targetPos, 0.75f);
             TileManager.Instance.RevealTile(PlayerPosition.NextTile, visionRange);
         }
     }

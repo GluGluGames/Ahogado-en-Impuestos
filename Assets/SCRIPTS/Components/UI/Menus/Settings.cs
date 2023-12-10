@@ -59,10 +59,11 @@ namespace GGG.Components.Menus
         private bool _languageActive = false;
 
         #region Unity Methods
+
         private void Start()
         {
-            StartSounds();
             LanguageDropdown.value = GameManager.Instance.GetCurrentLanguage() == Language.Spanish ? 0 : 1;
+            StartSounds();
             
             CloseButton.onClick.AddListener(OnCloseButton);
             CreditsButton.onClick.AddListener(OnCreditsButton);
@@ -80,11 +81,19 @@ namespace GGG.Components.Menus
         /// </summary>
         private void StartSounds()
         {
-            GeneralSlider.value = PlayerPrefs.GetFloat("GeneralVolume");
-            MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
-            EffectsSlider.value = PlayerPrefs.GetFloat("SoundEffectsVolume");
+            GeneralSlider.value = PlayerPrefs.GetFloat("GeneralVolume", 1);
+            MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1);
+            EffectsSlider.value = PlayerPrefs.GetFloat("SoundEffectsVolume", 1);
+            
+            SetVolume(GeneralSlider.value);
+            SetMusicVolume(MusicSlider.value);
+            SetSoundEffectsVolume(EffectsSlider.value);
 
             UpdateText();
+            
+            GeneralSlider.onValueChanged.AddListener(SetVolume);
+            MusicSlider.onValueChanged.AddListener(SetMusicVolume);
+            EffectsSlider.onValueChanged.AddListener(SetSoundEffectsVolume);
         }
 
         private void OnApplicationQuit()
@@ -92,7 +101,6 @@ namespace GGG.Components.Menus
             PlayerPrefs.SetFloat("GeneralVolume", GeneralSlider.value);
             PlayerPrefs.SetFloat("MusicVolume", MusicSlider.value);
             PlayerPrefs.SetFloat("SoundEffectsVolume", EffectsSlider.value);
-            PlayerPrefs.Save();
         }
 
         /// <summary>
@@ -154,19 +162,19 @@ namespace GGG.Components.Menus
             return Mathf.Abs(value - min) / (max - min) * 100;
         }
 
-        private float GetExponentialValue(float volume)
-        {
-            float aux = Mathf.Pow(volume, 2);
-            float resultado = Range[0] + (Range[1] - Range[0]) * aux;
-
-            return resultado;
-        }
+        // private float GetExponentialValue(float volume)
+        // {
+        //     float aux = Mathf.Pow(volume, 2);
+        //     float resultado = Range[0] + (Range[1] - Range[0]) * aux;
+        //
+        //     return resultado;
+        // }
 
         /// <param name="volume">New value of the general volume.</param>
         public void SetVolume(float volume)
         {
-            float aux = GetExponentialValue(volume);
-            AudioMixer.SetFloat("Volume", aux);
+            //float aux = GetExponentialValue(volume);
+            AudioMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
             PlayerPrefs.SetFloat("GeneralVolume", volume);
             UpdateText();
         }
@@ -174,10 +182,8 @@ namespace GGG.Components.Menus
         /// <param name="volume">New value of the music volume.</param>
         public void SetMusicVolume(float volume)
         {
-            if (!SoundManager.Instance.GetMusicActive()) return;
-
-            float aux = GetExponentialValue(volume);
-            AudioMixer.SetFloat("Music", aux);
+            //float aux = GetExponentialValue(volume);
+            AudioMixer.SetFloat("Music", Mathf.Log10(volume) * 20);
             PlayerPrefs.SetFloat("MusicVolume", volume);
             UpdateText();
         }
@@ -185,8 +191,8 @@ namespace GGG.Components.Menus
         /// <param name="volume">New value of the sound effects volume.</param>
         public void SetSoundEffectsVolume(float volume)
         {
-            float aux = GetExponentialValue(volume);
-            AudioMixer.SetFloat("SoundEffects", aux);
+            //float aux = GetExponentialValue(volume);
+            AudioMixer.SetFloat("SoundEffects", Mathf.Log10(volume) * 20);
             PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
             UpdateText();
         }

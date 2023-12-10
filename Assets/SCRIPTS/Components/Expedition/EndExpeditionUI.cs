@@ -8,7 +8,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using GGG.Shared;
-
+using GGG.Components.Player;
+using System.Linq.Expressions;
+using UnityEngine.SceneManagement;
 
 namespace GGG.Components.UI
 {
@@ -21,6 +23,8 @@ namespace GGG.Components.UI
         [SerializeField] private Button RightArrow;
         [SerializeField] private GameObject Viewport;
         [SerializeField] private Button Button;
+        [SerializeField] private Sound VictorySound;
+        [SerializeField] private Sound DefeatSound;
 
         private SceneManagement _sceneManagement;
         private ResourceManager _resourceManager;
@@ -54,8 +58,28 @@ namespace GGG.Components.UI
             
             Button.onClick.AddListener(() =>
             {
+                Scene currentScene = SceneManager.GetSceneAt(1);
+                SceneIndexes currentSceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+
+                if (currentScene.name == "Minigame_Level1")
+                {
+                    currentSceneIndex = SceneIndexes.MINIGAME_LEVEL1;
+                }
+                else if (currentScene.name == "Minigame_Level2")
+                {
+                    currentSceneIndex = SceneIndexes.MINIGAME_LEVEL2;
+                }
+                else if (currentScene.name == "Minigame_Level3")
+                {
+                    currentSceneIndex = SceneIndexes.MINIGAME_LEVEL3;
+                }
+                else if (currentScene.name == "Minigame_Level4")
+                {
+                    currentSceneIndex = SceneIndexes.MINIGAME_LEVEL4;
+                }
+
                 _sceneManagement.AddSceneToLoad(SceneIndexes.GAME_SCENE);
-                _sceneManagement.AddSceneToUnload(SceneIndexes.MINIGAME_LEVEL1);
+                _sceneManagement.AddSceneToUnload(currentSceneIndex);
                 _sceneManagement.UpdateScenes();
                 GameManager.Instance.OnUIClose();
             });
@@ -82,13 +106,11 @@ namespace GGG.Components.UI
                     button.gameObject.SetActive(false);
                     continue;
                 }
-                
 
                 RecollectedResource resource = _recollectedResources[_currentResourceIndex];
                 button.SetResourceAmount(resource.Amount);
                 button.SetIcon(resource.Resource.GetSprite());
                 button.gameObject.SetActive(true);
-                PagesText.SetText($"{_currentPage}/{_pagesNumber}");
                 _currentResourceIndex++;
             }
         }
@@ -97,17 +119,21 @@ namespace GGG.Components.UI
         {
             Viewport.gameObject.SetActive(true);
             OutcomeText.text = OutcomeString[isWin ? 0 : 1].GetLocalizedString();
+            SoundManager.Instance.Play(isWin ? VictorySound : DefeatSound);
             GameManager.Instance.OnUIOpen();
 
             foreach (Resource resource in _resourceManager.resourcesCollected.Keys)
             {
                 if (_resourceManager.resourcesCollected[resource] == 0) continue;
-                
-                _recollectedResources.Add(new RecollectedResource(resource, _resourceManager.resourcesCollected[resource]));
-                
+                int amount = _resourceManager.resourcesCollected[resource];
+                _recollectedResources.Add(new RecollectedResource(resource, amount));
+                PlayerManager.Instance.AddResource(resource.GetKey(), amount);
             }
-
-            _pagesNumber = _recollectedResources.Count <= 4 ? 1 : _recollectedResources.Count / 4 + 1;
+            
+            if (_recollectedResources.Count == 0) _pagesNumber = 1;
+            else _pagesNumber = _recollectedResources.Count < 4 ? 1 : Mathf.CeilToInt(_recollectedResources.Count * 0.25f);
+            PagesText.SetText($"{_currentPage}/{_pagesNumber}");
+            
             SetButtons();
         }
     }

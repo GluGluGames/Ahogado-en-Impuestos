@@ -57,7 +57,6 @@ namespace GGG.Components.HexagonalGrid
 
         private void Start()
         {
-            BuildingManager.OnBuildsLoad += OnBuildsLoad;
             _tilesDic = new Dictionary<Vector3Int, HexTile>();
             _tiles = GetComponentsInChildren<HexTile>().ToList();
 
@@ -80,8 +79,6 @@ namespace GGG.Components.HexagonalGrid
 
         private void OnDisable() {
             foreach (HexTile tileAux in _tiles) tileAux.OnHexSelect -= InitializePath;
-            BuildingManager.OnBuildsLoad -= OnBuildsLoad;
-            
             SaveTilesState();
         }
 
@@ -135,7 +132,7 @@ namespace GGG.Components.HexagonalGrid
         private IEnumerator InitializePlayer()
         {
             HexTile playerSpawnTile = GetRandomHex();
-            while (playerSpawnTile.tileType != TileType.Cliff)
+            while (playerSpawnTile.tileType == TileType.Mountain && playerSpawnTile.selectable == false)
             {
                 playerSpawnTile = GetRandomHex();
             }
@@ -156,11 +153,6 @@ namespace GGG.Components.HexagonalGrid
             RevealTile(playerSpawnTile, 2);
         }
 
-        private void OnBuildsLoad(BuildingComponent[] builds)
-        {
-            StartCoroutine(LoadTilesState(builds));
-        }
-
         private void InitializePath(HexTile tile)
         {
             _path = Pathfinder.FindPath(PlayerPosition.CurrentTile, tile);
@@ -172,6 +164,7 @@ namespace GGG.Components.HexagonalGrid
         {
             HexTile buildTile = _tiles.Find((x) => x.GetCurrentBuilding() == build);
             buildTile.DestroyBuilding();
+            BuildingManager.Instance.RemoveBuilding(build);
         }
 
         /// <summary>
@@ -206,7 +199,7 @@ namespace GGG.Components.HexagonalGrid
         #region Data persistence
 
         public void SaveTilesState() {
-            if (!SceneManagement.InGameScene() || 
+            if (SceneManagement.InMiniGameScene() || 
                 GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial)
                 return;
             
@@ -221,7 +214,11 @@ namespace GGG.Components.HexagonalGrid
                     IsEmpty = tile.TileEmpty()
                 };
 
-                if (!tile.TileEmpty()) data.BuildId = tile.GetCurrentBuilding().Id();
+                if (tile.GetTileType() == TileType.Build)
+                {
+                    print(tile.GetCurrentBuilding());
+                    data.BuildId = tile.GetCurrentBuilding().Id();
+                }
 
                 saveData[i] = data;
                 i++;
@@ -231,7 +228,9 @@ namespace GGG.Components.HexagonalGrid
             File.WriteAllText(filePath, jsonData);
         }
 
-        private IEnumerator LoadTilesState(BuildingComponent[] builds) {
+        public IEnumerator LoadTilesState()
+        {
+            List<BuildingComponent> builds = BuildingManager.Instance.GetBuildings();
             string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
             string data;
 
@@ -257,7 +256,7 @@ namespace GGG.Components.HexagonalGrid
                 tile.SetTileType(tiles[i].Type);
                 if (!tiles[i].IsEmpty)
                 {
-                    BuildingComponent build = Array.Find(builds, (x) => x.Id() == tiles[i].BuildId);
+                    BuildingComponent build = builds.Find((x) => x.Id() == tiles[i].BuildId);
                     
                     tile.SetBuilding(build);
                     tile.Reveal(build.VisionRange(), 0);

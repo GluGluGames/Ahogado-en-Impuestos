@@ -73,6 +73,7 @@ MonoBehaviour:
   _pickProgressUI: {fileID: 0}
   _recollectionTime: 1
   _ownModels: []
+  Type: 0
   currentTile: {fileID: 0}
 --- !u!1001 &4159067652526535952
 PrefabInstance:
@@ -142,6 +143,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9d840258f101a324985a170ed7d95b66, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9d840258f101a324985a170ed7d95b66, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f6518f2d6ca43b429ff398828dd8046, type: 2}
     - target: {fileID: 919132149155446097, guid: 9d840258f101a324985a170ed7d95b66, type: 3}
       propertyPath: m_Name
       value: LargeSeaweed
