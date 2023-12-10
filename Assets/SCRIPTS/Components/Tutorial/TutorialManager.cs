@@ -13,6 +13,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using GGG.Components.Buildings;
+using GGG.Components.Dialogue;
 using UnityEngine.UI;
 
 namespace GGG.Components.Tutorial
@@ -57,7 +58,7 @@ namespace GGG.Components.Tutorial
 
         private void InitializeTutorials()
         {
-            StartTutorial("InitialTutorial", null);
+            HistoryManager.OnHistoryEnd += () => StartTutorial("InitialTutorial", null);
             BuildingUI.OnUiOpen += () => StartTutorial("BuildTutorial", "InitialTutorial");
             ShopUI.OnShopOpen += () => StartTutorial("ShopTutorial", "BuildTutorial");
             LaboratoryUI.OnLaboratoryOpen += () => StartTutorial("LaboratoryTutorial", "BuildTutorial");

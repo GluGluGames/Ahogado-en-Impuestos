@@ -18,6 +18,7 @@ namespace GGG.Components.Dialogue
         [SerializeField] private float TypingSpeed = 0.1f;
         [SerializeField] private TMP_Text DialogueText;
         [SerializeField] private Sound DialogueSound;
+        [SerializeField] private Image DialogueColor;
 
         [Space(5)] 
         [Header("Other Fields")] 
@@ -55,8 +56,9 @@ namespace GGG.Components.Dialogue
             
             DialogueStart.Invoke();
             
-            _currentDialogue.GetNextAvatar();
-            _currentDialogue.GetNextName();
+            Avatar.sprite = _currentDialogue.GetNextAvatar();
+            NameText.SetText(_currentDialogue.GetNextName());
+            DialogueColor.sprite = _currentDialogue.GetBoxColor();
             
             StartCoroutine(TypeText(_currentDialogue.GetNextDialogue()));
             _started = true;
