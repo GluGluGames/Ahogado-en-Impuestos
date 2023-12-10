@@ -171,7 +171,7 @@ namespace GGG.Components.Buildings.Laboratory
 
                 if (laboratory.ActiveBuilding(i))
                 {
-                    CurrentResources[i].sprite = laboratory.ActiveBuilding(i).GetIcon();
+                    CurrentResources[i].sprite = laboratory.ActiveBuilding(i).GetResearchIcon();
                     totalTime = laboratory.ActiveBuilding(i).GetResearchTime();
                 }
 
@@ -218,6 +218,7 @@ namespace GGG.Components.Buildings.Laboratory
         {
             OpenBarContainer();
             
+            print(_currentBar);
             CurrentResources[_currentBar].enabled = true;
             CurrentResources[_currentBar].sprite = resource.GetSprite();
             _currentLaboratory.SetActiveResource(_currentBar, resource);
@@ -232,14 +233,14 @@ namespace GGG.Components.Buildings.Laboratory
         {
             OpenBarContainer();
             
+            print(_currentBar);
             CurrentResources[_currentBar].enabled = true;
-            CurrentResources[_currentBar].sprite = building.GetIcon();
+            CurrentResources[_currentBar].sprite = building.GetResearchIcon();
             _currentLaboratory.SetActiveBuild(_currentBar, building);
             _currentLaboratory.SetDeltaTime(_currentBar, building.GetResearchTime());
             _currentLaboratory.ActiveBar(_currentBar, true);
                 
             StartCoroutine(Research(_currentLaboratory.Id(), _currentBar));
-            return;
         }
 
         private IEnumerator Research(int id, int idx)

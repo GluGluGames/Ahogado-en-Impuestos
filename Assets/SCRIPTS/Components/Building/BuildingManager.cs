@@ -49,7 +49,7 @@ namespace GGG.Components.Buildings
         private int _currentId = 1;
         
         private const string _EXIT_TIME = "ExitTime";
-        private const float _RATE_GROW = 1.05f;
+        private const float _RATE_GROW = 1.12f;
         
         public static Action<BuildingComponent[]> OnBuildsLoad;
 
