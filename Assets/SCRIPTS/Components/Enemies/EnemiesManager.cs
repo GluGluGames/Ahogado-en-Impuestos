@@ -24,6 +24,15 @@ namespace GGG.Components.Enemies
 
         private void Start()
         {
+
+            StartCoroutine(DelayedStart());
+
+        }
+
+        IEnumerator DelayedStart()
+        {
+            yield return new WaitForSeconds(0.4f);
+
             _nEnemies = EnemiesPrefab.Length;
             _tiles = FindObjectsOfType<HexTile>().ToList();
 
@@ -31,6 +40,7 @@ namespace GGG.Components.Enemies
             {
                 SpawnEnemy();
             }
+
         }
 
         private bool SpawnEnemy()
