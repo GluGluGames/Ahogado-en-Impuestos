@@ -895,9 +895,46 @@ La administración eficiente de nuestra estructura de costos garantiza una asign
 
 La estrategia de ingresos se fundamenta en la diversificación y la adaptabilidad, lo que nos capacita para generar beneficios mientras mantenemos un firme compromiso con la oferta de aprendizaje y entretenimiento accesible para una amplia audiencia.
 
-## 12. Mechanics,Dynamics,Aesthetics? 
+## 12. Mechanics,Dynamics,Aesthetics
 La estética principal de este juego es el desafío; el jugador debe gestionar recursos tanto dentro como fuera de la ciudad. Se le marca un objetivo de reconstruir la gloria del pasado de Atlantis, la cual tuvo una historia espectacular. Dentro de la ciudad, el jugador se enfrenta a retos de cómo usar los recursos para sacar el máximo beneficio, por lo que el jugador se tiene que planificar cómo organizar entre el ganar y gastar de los recursos. Además, fuera del escenario, el jugador se enfrenta a obstáculos que le impiden recoger recursos, ya sean limitaciones del propio escenario como rocas, remolinos o diferentes tipos de enemigos. El juego no solo contiene desafíos; la fantasía también está involucrada dentro del juego. El jugador actúa como un fantasma resucitado, el cual fue despertado por Poseidón y asignado como encargado de la ciudad. Aparte, el descubrimiento tiene un papel importante dentro del juego; el jugador podrá navegar en diferentes escenarios mediante navegación, así consigue conocer a distintas criaturas, mapas, desbloqueando nuevas funcionalidades de los edificios y equipamientos de buceo. Y como se había dicho antes, el jugador puede conocer diferentes criaturas, por lo que también incluimos coleccionismo dentro del juego, así dando al jugador una iniciativa.
 
 El desafío viene dado por varios elementos claves: administrar los costos de diferentes recursos, el tiempo limitado de exploración y los enemigos que estarán distribuidos dentro del mapa de exploración. El jugador, por una parte, debe ver si la proporción de construir/mejorar está equilibrada, pensar en cómo puede conseguir algas suficientes para cada recolección, así previniendo la destrucción de los edificios, lo cual ralentiza el ritmo de la reconstrucción. No solo eso, el jugador también debe decidir en cuáles edificios invertir para subir el rendimiento, también se destaca que el jugador puede conseguir mejores equipos de buceo si los mejora. Por otro lado, durante la expedición, el jugador será limitado por el tiempo de energía, por lo que dentro del escenario se tiene que plantear la exploración de manera correcta, ya que en cada expedición, la generación de recursos puede estar distribuida de manera distinta (Solo el mapa será creado manualmente, los recursos se regenerarán en distintas posiciones en cada ocasión). Aparte, para darle un desafío más al jugador, este tendrá que usar estrategias para esquivar a los enemigos, ya que una vez cazado, el jugador solo podrá volver con muy pocos recursos a la ciudad, lo que aportará casi nulo a la ciudad.
 
 En el juego, actúan principalmente los recursos, es decir, todos giran en torno al recurso, formando como mecánica principal del juego. Los recursos principales serán las algas, los corales, las perlas, las conchas y las caracolas; todo tipo de construcción o mejora depende de ellos. Los recursos existen para poder usarlos; en este caso, el jugador los usará para construir, destruir, reparar, mejorar edificios dentro de la ciudad. Cada edificio tendrá un costo distinto, algunos serán más complicados para construir pero aportarán un rendimiento mayor a la ciudad; otros actuarán como última medida para salvar la partida, cada uno de ellos tiene distintas funcionalidades para ayudar a la ciudad. En la parte de expedición, el jugador podrá navegar libremente por el escenario; si es cazado, volverá a la ciudad casi sin recursos; habrá variedad de recursos en el escenario, con distintas cantidades, y puede avanzar una pequeña historia que hay dentro del juego. Aparte, el jugador puede descubrir diferentes mapas y diferentes mejoras de edificios, lo que conlleva al descubrimiento.
+
+## **13 - POST-MORTEM**
+
+#### ¿QUÉ HA IDO BIEN?
+
+- **ARTE**:
+	- Sprites y modelados finales de buena calidad.
+ 	- Diseño cohesivo.
+ 
+- **ORGANIZACIÓN**: los miembros del equipo han realizado las tareas más necesarias. Se ha establecido bien la importancia de las tareas.
+
+- **COMUNICACIÓN**: 
+ 	- Se ha llegado rápido a consensos sobre diseño del juego/arte/modelados.
+   	- Buena coordinación a la hora de trabajar en distintas partes del proyecto sin pisarnos unos a otros.
+
+
+#### ¿QUÉ SE PODRÍA HABER MEJORADO?
+
+- **ORGANIZACIÓN**:
+ 	- Mala estimación del tiempo que lleva el trabajo.
+   	- Definir mejor el diseño antes de programar/finalizar. 
+     	- Dedicar más tiempo al Testing.
+	- Falta de uso de las herramientas de organización definidas.
+	- Falta de iniciativa a la hora de completar tareas de algunos miembros del grupo. 
+       
+- **COMUNICACIÓN**:
+	- Falta de comunicación sobre las cosas que estaban finalizadas y las que faltaban por terminar.
+ 	- Falta de uso de los estándares de comunicación y reportes.
+
+- **PRIORIDADES**: 
+ 	- Se han priorizado hacer cosas nuevas en vez de pulir los problemas que ya había. 
+   	- Para los siguientes proyectos habría que centrarse en finalizar las tareas bien antes de comenzar tareas nuevas.
+     
+- **REDES Y WEB**: pocas actualizaciones de la red y la web.
+
+- **ARTE**: se han cambiado decisiones de diseño sin avisar.
+
