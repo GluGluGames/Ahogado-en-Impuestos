@@ -164,6 +164,7 @@ namespace GGG.Components.HexagonalGrid
         {
             HexTile buildTile = _tiles.Find((x) => x.GetCurrentBuilding() == build);
             buildTile.DestroyBuilding();
+            BuildingManager.Instance.RemoveBuilding(build);
         }
 
         /// <summary>

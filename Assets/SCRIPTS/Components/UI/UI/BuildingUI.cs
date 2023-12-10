@@ -147,6 +147,11 @@ namespace GGG.Components.UI
             _viewport.transform.DOMoveY(Screen.width * -0.5f, 0.75f).SetEase(Ease.OutCubic).onComplete += () => {
                 _viewport.SetActive(false);
                 _open = false;
+                
+                _currentPanel = 0;
+                for(int i = 0; i < Panels.Count; i++) Panels[i].SetActive(i == 0);
+                PanelsText.SetText($"{_currentPanel + 1}/{Panels.Count}");
+                
                 _gameManager.OnUIClose();
             };
             

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3131380152678375624}
   - component: {fileID: 4875256654382708114}
   - component: {fileID: 3932062244804531937}
+  - component: {fileID: 1250627352523796804}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -35,9 +36,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00016784668}
-  m_SizeDelta: {x: 277.38, y: -0.0003}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -84.363, y: 0.00012207031}
+  m_SizeDelta: {x: 0, y: -0.0003}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4875256654382708114
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -135,6 +136,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1250627352523796804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205605737958937145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &309987495180790173
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4178070100762308737}
-  - component: {fileID: 9039419858712790706}
+  - component: {fileID: 7973322603938283733}
   m_Layer: 5
   m_Name: ResourcesUI
   m_TagString: Untagged
@@ -248,10 +263,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -30}
-  m_SizeDelta: {x: 807.6332, y: 135.005}
+  m_AnchoredPosition: {x: 27.972229, y: -30}
+  m_SizeDelta: {x: 206.9772, y: 660.1761}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &9039419858712790706
+--- !u!114 &7973322603938283733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,7 +275,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 698878341554807619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -268,9 +283,9 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 0
   m_Spacing: 0
-  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
@@ -364,6 +379,7 @@ GameObject:
   - component: {fileID: 8874151625292317310}
   - component: {fileID: 6821439835762472169}
   - component: {fileID: 3578215812228827127}
+  - component: {fileID: 5496789999548775635}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -388,9 +404,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 277.38, y: 0}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -84.363, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &6821439835762472169
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -488,6 +504,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5496789999548775635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665711277446263600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &2380776702103433974
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +554,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 135.005}
+  m_SizeDelta: {x: 206.98, y: 135.005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2551390434361955043
 GameObject:
@@ -638,7 +668,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 132.5}
+  m_SizeDelta: {x: 206.98, y: 132.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5835278461820566999
 GameObject:
@@ -651,6 +681,7 @@ GameObject:
   - component: {fileID: 1787916365933599175}
   - component: {fileID: 2621728633108816847}
   - component: {fileID: 3275068773520350886}
+  - component: {fileID: 8314748571188930305}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -675,9 +706,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 277.38, y: 0}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -84.36299, y: -0.000030517578}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &2621728633108816847
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -775,6 +806,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8314748571188930305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5835278461820566999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &7427290061181029722
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,5 +856,5 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 135.005}
+  m_SizeDelta: {x: 206.98, y: 135.005}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -7,8 +7,11 @@ using UnityEngine.Serialization;
 namespace GGG.Classes.Buildings
 {
     [CreateAssetMenu(menuName = "Game/Building", fileName = "Building")]
-    public class Building : ScriptableObject {
-        [Header("Generic fields")]
+    public class Building : ScriptableObject
+    {
+        [Header("Generic fields")] 
+        [Tooltip("Key of the building")] 
+        [SerializeField] private string Key;
         [Tooltip("Name of the building")] 
         [SerializeField] private LocalizedString Name;
         [Tooltip("Description of the building")]
@@ -45,6 +48,8 @@ namespace GGG.Classes.Buildings
         [SerializeField] private float SpawnHeight;
         [Tooltip("Determines the vision range of the building")] 
         [SerializeField] private int VisionRange;
+
+        public string GetKey() => Key;
 
         /// <summary>
         /// Gets the name of the building

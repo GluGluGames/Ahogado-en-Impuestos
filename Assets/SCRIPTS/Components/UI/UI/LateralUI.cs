@@ -3,6 +3,7 @@ using GGG.Components.Core;
 using GGG.Input;
 using UnityEngine;
 using UnityEngine.UI;
+using GGG.Components.Achievements;
 using GGG.Shared;
 
 namespace GGG.Components.UI
@@ -77,7 +78,22 @@ namespace GGG.Components.UI
             _sceneManagement.AddSceneToLoad(sceneIndex);
             _sceneManagement.AddSceneToUnload(SceneIndexes.GAME_SCENE);
             _sceneManagement.UpdateScenes();
+
+            int x = PlayerPrefs.HasKey("Achievement09") ? PlayerPrefs.GetInt("Achievement09") + 1 : 1;
+            PlayerPrefs.SetInt("Achievement09", x);
+
+            if (PlayerPrefs.GetInt("Achievement09") >= 5)
+            {
+                SceneManagement.Instance.OnMinigameSceneLoaded += OnAchievementUnlock;
+            }
+            
             _gameManager.OnUIClose();
+        }
+
+        private void OnAchievementUnlock()
+        {
+            StartCoroutine(AchievementsManager.Instance.UnlockAchievement("09"));
+            SceneManagement.Instance.OnMinigameSceneLoaded -= OnAchievementUnlock;
         }
 
         private void ToggleMenu()

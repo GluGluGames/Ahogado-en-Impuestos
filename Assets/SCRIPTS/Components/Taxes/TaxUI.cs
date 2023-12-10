@@ -7,8 +7,11 @@ using GGG.Components.HexagonalGrid;
 using TMPro;
 using DG.Tweening;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using GGG.Classes.Dialogue;
 using GGG.Components.Achievements;
+using GGG.Components.Dialogue;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -17,18 +20,23 @@ namespace GGG.Components.Taxes
 {
     public class TaxUI : MonoBehaviour
     {
+        [SerializeField] private GameObject BuildingDestroyParticles;
         [SerializeField] private Sound DestructionSound;
         [Header("UI Fields")]
         [SerializeField] private Image[] ResourcesSprites;
         [SerializeField] private TMP_Text[] ResourcesAmount;
+        [SerializeField] private DialogueText PayDialogue;
+        [SerializeField] private DialogueText NotPayDialogue;
 
         [Space(5), Header("Buttons")] 
         [SerializeField] private Button PayButton;
         [SerializeField] private Button NotPayButton;
 
         private PlayerManager _player;
+        private DialogueBox _dialogueBox;
         private List<BuildingComponent> _buildings;
-        private readonly Dictionary<Resource, int> _taxResources = new();
+        private Resource _taxResource;
+        private int _taxAmount;
         private readonly System.Random _random = new();
 
         private GameObject _viewport;
@@ -36,22 +44,36 @@ namespace GGG.Components.Taxes
 
         public Action OnOptionSelected;
 
-        private void Start()
+        private IEnumerator Start()
         {
             _player = PlayerManager.Instance;
+            _dialogueBox = FindObjectOfType<DialogueBox>();
             
             PayButton.onClick.AddListener(PayTaxes);
             NotPayButton.onClick.AddListener(NotPayTaxes);
-
+            
             _viewport = transform.GetChild(0).gameObject;
             _viewport.SetActive(false);
             _viewport.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * -0.5f);
+
+            yield return null;
+            
+            GenerateTaxesAmount();
         }
 
         private void OnDisable()
         {
             PayButton.onClick.RemoveAllListeners();
             NotPayButton.onClick.RemoveAllListeners();
+        }
+
+        public Resource GetTaxesResource() => _taxResource;
+
+        public int GetTaxesAmount() => _taxAmount;
+        
+        private void GenerateTaxesAmount(){
+            _taxResource = _player.GetResource("Seaweed");
+            _taxAmount = _random.Next(50, 100);
         }
 
         public void Open()
@@ -77,61 +99,60 @@ namespace GGG.Components.Taxes
             };
 
             OnOptionSelected?.Invoke();
-            _taxResources.Clear();
             GameManager.Instance.OnUIClose();
         }
 
         private void GenerateTaxes()
         {
             // TODO - Algorithm that looks what the player have and generated the resources.
-            _taxResources.Add(_player.GetResource("Seaweed"), _random.Next(50, 100));
             _buildings = BuildingManager.Instance.GetBuildings();
-
-            bool found = false;
-            int i = 0;
-
-            foreach (Resource resource in _taxResources.Keys)
-            {
-                ResourcesSprites[i].gameObject.SetActive(true);
-                ResourcesSprites[i].sprite = resource.GetSprite();
-                ResourcesAmount[i].gameObject.SetActive(true);
-                ResourcesAmount[i].SetText(_taxResources[resource].ToString());
-
-                if (_player.GetResourceCount(resource.GetKey()) < _taxResources[resource])
-                {
-                    PayButton.interactable = false;
-                    PayButton.image.color = new Color(0.81f, 0.84f, 0.81f, 0.9f);
-                    found = true;
-                }
-
-                i++;
-            }
-
-            if (found) return;
             
-            PayButton.interactable = true;
-            PayButton.image.color = new Color(1f, 1f, 1f, 1f);
+            ResourcesSprites[0].gameObject.SetActive(true);
+            ResourcesSprites[0].sprite = _taxResource.GetSprite();
+            ResourcesAmount[0].gameObject.SetActive(true);
+            ResourcesAmount[0].SetText(_taxAmount.ToString());
+            
+            PayButton.interactable = _player.GetResourceCount(_taxResource.GetKey()) < _taxAmount;
+            PayButton.image.color = _player.GetResourceCount(_taxResource.GetKey()) >= _taxAmount ? 
+                new Color(1f, 1f, 1f, 1f) :  new Color(0.81f, 0.84f, 0.81f, 0.9f);
         }
 
         private void PayTaxes()
         {
-            foreach (Resource resource in _taxResources.Keys)
-                _player.AddResource(resource.GetKey(), -_taxResources[resource]);
+            _player.AddResource(_taxResource.GetKey(), _taxAmount);
 
             StartCoroutine(AchievementsManager.Instance.UnlockAchievement("07"));
+            GenerateTaxesAmount();
             
             Close();
-            // TODO - Maybe trigger a dialogue with Poseidon?
+            _dialogueBox.AddNewDialogue(PayDialogue);
+        }
+
+        private void DestroyBuilding()
+        {
+            int range;
+            
+            do range = Random.Range(0, _buildings.Count);
+            while(_buildings[range].BuildData().GetKey() == "CityHall");
+
+            if (_buildings.Count > 0)
+            {
+                GameObject go = Instantiate(BuildingDestroyParticles, _buildings[range].transform.position, Quaternion.identity);
+                go.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                TileManager.Instance.DestroyBuilding(_buildings[range]);
+            }
+
+            SoundManager.Instance.Play(DestructionSound);
+            StartCoroutine(AchievementsManager.Instance.UnlockAchievement("08"));
+            _dialogueBox.DialogueEnd -= DestroyBuilding;
         }
 
         private void NotPayTaxes()
         {
-            if (_buildings.Count > 0)
-                TileManager.Instance.DestroyBuilding(_buildings[Random.Range(0, _buildings.Count)]);
+            _dialogueBox.AddNewDialogue(NotPayDialogue);
+            _dialogueBox.DialogueEnd += DestroyBuilding;
             
-            SoundManager.Instance.Play(DestructionSound);
-            StartCoroutine(AchievementsManager.Instance.UnlockAchievement("08"));
-            
+            GenerateTaxesAmount();
             Close();
         }
     }

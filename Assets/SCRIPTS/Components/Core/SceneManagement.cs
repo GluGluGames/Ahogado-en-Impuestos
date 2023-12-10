@@ -57,6 +57,7 @@ namespace GGG.Components.Core
 
         public Action OnGameSceneLoaded;
         public Action OnGameSceneUnloaded;
+        public Action OnMinigameSceneLoaded;
 
         private void Start()
         {
@@ -85,6 +86,7 @@ namespace GGG.Components.Core
                 if (scene.buildIndex is (int)SceneIndexes.MINIGAME_LEVEL1 or (int)SceneIndexes.MINIGAME_LEVEL2 or
                     (int)SceneIndexes.MINIGAME_LEVEL3 or (int)SceneIndexes.MINIGAME_LEVEL4)
                 {
+                    OnMinigameSceneLoaded?.Invoke();
                     // _soundManager.Play("MinigameTheme");
                 }
             };

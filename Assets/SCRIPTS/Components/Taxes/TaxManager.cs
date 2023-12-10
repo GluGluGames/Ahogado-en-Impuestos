@@ -23,13 +23,7 @@ namespace GGG.Components.Taxes
             if (!_dialogueBox) throw new Exception("No dialogue box found");
 
             _taxUI = GetComponent<TaxUI>();
-
-            _dialogueBox.DialogueStart += () => _stopInterval = true;
-            _taxUI.OnOptionSelected += () => _stopInterval = false;
-            
             _intervalDelta = TaxesInterval * 60;
-            _dialogueBox.DialogueEnd += _taxUI.Open;
-            _taxUI.OnOptionSelected += () => _dialogueBox.DialogueEnd -= _taxUI.Open;
         }
 
         private void Update()
@@ -47,9 +41,25 @@ namespace GGG.Components.Taxes
 
         public static float GetRemainingTime() => _intervalDelta;
 
+        private void StopInterval() => _stopInterval = false;
+        private void StartInterval() => _stopInterval = true;
+
+        private void OnOptionSelected()
+        {
+            _dialogueBox.DialogueStart -= StopInterval;
+            _dialogueBox.DialogueEnd -= _taxUI.Open;
+            _taxUI.OnOptionSelected -= StartInterval;
+            _taxUI.OnOptionSelected -= OnOptionSelected;
+        }
+
         public void TriggerTaxes()
         {
-            // TODO - Optional: Make different dialogues and chose one random dialogue.
+            _dialogueBox.DialogueStart += StopInterval;
+            _taxUI.OnOptionSelected += StartInterval;
+            
+            _dialogueBox.DialogueEnd += _taxUI.Open;
+            _taxUI.OnOptionSelected += OnOptionSelected;
+            
             _dialogueBox.AddNewDialogue(Dialogue);
             _intervalDelta = TaxesInterval * 60;
         }

@@ -3,6 +3,7 @@ using GGG.Components.HexagonalGrid;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GGG.Components.Achievements;
 using GGG.Shared;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -21,8 +22,16 @@ namespace GGG.Components.Resources
         public Dictionary<Resource, int> resourcesCollected = new ();
         public List<ResourceComponent> resourcesOnScene = new List<ResourceComponent>();
 
+        private Dictionary<Resource, ResourceType> _achievementResources = new();
+
         private int _nResourcesCollected = 0;
         private List<HexTile> _tiles;
+        
+        public enum ResourceType
+        {
+            Fish,
+            Other
+        }
 
         private void Awake()
         {
@@ -83,6 +92,32 @@ namespace GGG.Components.Resources
         public void sumResourceCollected()
         {
             _nResourcesCollected++;
+        }
+
+        public void AddAchievementResource(Resource resource, ResourceType type)
+        {
+            if (_achievementResources.ContainsKey(resource)) return;
+            
+            _achievementResources.Add(resource, type);
+
+            int x;
+            if (type == ResourceType.Fish)
+            {
+                x = PlayerPrefs.HasKey("04") ? PlayerPrefs.GetInt("04") + 1 : 1;
+                PlayerPrefs.SetInt("04", x);
+
+                if (PlayerPrefs.GetInt("04") >= 5)
+                    StartCoroutine(AchievementsManager.Instance.UnlockAchievement("04"));
+            }
+            else
+            {
+                x = PlayerPrefs.HasKey("03") ? PlayerPrefs.GetInt("03") + 1 : 1;
+                PlayerPrefs.SetInt("03", x);
+
+                if (PlayerPrefs.GetInt("03") >= 5)
+                    StartCoroutine(AchievementsManager.Instance.UnlockAchievement("03"));
+            }
+            
         }
 
     }
