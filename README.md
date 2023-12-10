@@ -409,10 +409,13 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | Shop with Items       | ![Shop with Items](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Shop_Mockup_WItems.jpg) |
 | Tutorial              | ![Tutorial](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Tutorial_Mockup.png) |
 | Upgrade UI            | ![Upgrade UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/UpgradeUi_Mockup.png) |
-| Derrota               | ![Derrota UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Derrota/Interfaz%20derrota%20referencia.png)
-| Construccion          | ![Construccion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Construir/Interfaz%20construcci%C3%B3n%20referencia.png)
-| Expedicion            | ![Expedicion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Expedici%C3%B3n/Interfaz%20expedici%C3%B3n%20referencia%20con%20fondo.png)
-| Lateral               | ![Lateral UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/main/Assets/RESOURCES/UI/Lateral/Interfaz%20lateral%20referencia.png)
+| Victoria              | ![Derrota UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/ExpeditionFinish_Mockup.png)
+| Construccion          | ![Construccion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Building_Mockup.png)
+| Expedicion            | ![Expedicion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Expedition_Mockup_Background.png)
+| Lateral               | ![Lateral UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/LateralUi_Mockup.png)
+| Dialogue              | ![Dialogue](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Dialogue_Zeus_Mockup.png)
+| Farm UI               | ![Farm UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/FarmUi_Mockup.png)
+
 
 
 
