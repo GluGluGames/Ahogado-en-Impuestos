@@ -23,6 +23,8 @@ namespace GGG.Components.UI
         [SerializeField] private Button RightArrow;
         [SerializeField] private GameObject Viewport;
         [SerializeField] private Button Button;
+        [SerializeField] private Sound VictorySound;
+        [SerializeField] private Sound DefeatSound;
 
         private SceneManagement _sceneManagement;
         private ResourceManager _resourceManager;
@@ -117,6 +119,7 @@ namespace GGG.Components.UI
         {
             Viewport.gameObject.SetActive(true);
             OutcomeText.text = OutcomeString[isWin ? 0 : 1].GetLocalizedString();
+            SoundManager.Instance.Play(isWin ? VictorySound : DefeatSound);
             GameManager.Instance.OnUIOpen();
 
             foreach (Resource resource in _resourceManager.resourcesCollected.Keys)
