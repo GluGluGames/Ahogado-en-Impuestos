@@ -655,6 +655,11 @@ A lo largo de los siglos, el desacuerdo sobre la delimitación de los dominios d
 
 Poseidon: Déjame que te enseñe lo que una vez fue. Esta era mi magnífica Atlantis, un reino glorioso que posaba majestuosamente sobre las profundidades de mi reino. Pero el tiempo ha llevado a su decadencia. Has sido seleccionado para una tarea que supera con creces tu comprensión. Escucha atentamente porque no pienso repetirme, tu misión es reconstruir esta ciudad y devolverla a su antigua gloria. Necesito que coseches algas y otros recursos del océano para restaurar la grandeza de mi gran Atlantis. No esperes gratitud ni recompensas. Tu deber es simplemente cumplir mi voluntad. Las riquezas de Atlantis son mías por derecho, y tú eres solo un instrumento para restaurar mi reino a su antigua gloria. No te equivoques, no es un honor servirme; es una obligación.
 
+*Diálogo con Zeus*
+*Te giras y Poseidón ha desaparecido, Zeus está observándote*
+
+Zeus: ¡Por fin has despertado! Sé que mi hermano no es alguien agradable, pero no te preocupes, te voy a entregar este documento grabado por aquellos que una vez fueron como tú. Este viejo libro contiene todo tipo de información que debería ayudarte en tu aventura. Desde los recursos que puedes descubrir en tus viajes a las afueras de la ciudad, hasta aquellas criaturas que viven fuera de la ciudad. El mar está lleno de tesoros y peligros, así que te recomiendo tener cuidado al aventurarte fuera de la ciudad.  No lo olvides pequeño, en el fondo del mar estarás solo, la ciudad depende ti y tu propia vida también. Ten cuidado, te estaré observando criatura.
+
 ## **9 - MÚSICA Y SONIDO** 
 
 ### **9.1 - Música**
