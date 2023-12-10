@@ -413,8 +413,8 @@ Los controles se dividen en dos subtipos, dependiendo si se usa una pantalla tá
 | Construccion          | ![Construccion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Building_Mockup.png)
 | Expedicion            | ![Expedicion UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Expedition_Mockup_Background.png)
 | Lateral               | ![Lateral UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/LateralUi_Mockup.png)
-| Dialogue              | ![Dialogue](!https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Dialogue_Zeus_Mockup.png)
-| Farm UI               | ![Farm UI](!https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/FarmUi_Mockup.png)
+| Dialogue              | ![Dialogue](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/Dialogue_Zeus_Mockup.png)
+| Farm UI               | ![Farm UI](https://github.com/GluGluGames/Ahogado-en-Impuestos/blob/develop/Assets/RESOURCES/UI/Mockups/FarmUi_Mockup.png)
 
 
 
