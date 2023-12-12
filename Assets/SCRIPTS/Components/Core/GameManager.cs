@@ -49,7 +49,7 @@ namespace GGG.Components.Core
         
         private void InitializeGame() {
             _sceneManagement.UnloadActiveScenes();
-            _sceneManagement.AddSceneToLoad(SceneIndexes.MAIN_MENU);
+            _sceneManagement.AddSceneToLoad(SceneIndexes.LOGIN_SCENE);
             _sceneManagement.UpdateScenes();
         }
         

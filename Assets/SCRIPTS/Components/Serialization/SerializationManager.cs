@@ -10,7 +10,10 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using GGG.Components.UI;
+using UnityEngine.Networking;
+using UnityEngine.Serialization;
 
 namespace GGG.Components.Serialization
 {
@@ -29,8 +32,22 @@ namespace GGG.Components.Serialization
         private LaboratoryUI _laboratoryUI;
 
         private const int _SAVE_TIME = 300;
+
+        private static User _currentUser;
+        
+        private const string _CONTENT_TYPE = "application/json";
+
+        private static string _databaseUser;
+        private static string _password;
+        private static string _postUri;
+        private static string _getUri;
         
         private float _delta;
+        
+        private void Awake()
+        {
+            LoadCredentials();
+        }
 
         private void Start()
         {
@@ -112,6 +129,125 @@ namespace GGG.Components.Serialization
             _hudManager.SaveShownResources();
             _laboratoryUI.SaveResearchProgress();
             _generatorUI.SaveGeneratorState();
+        }
+    
+        [Serializable]
+        private class Credentials
+        {
+            public string username;
+            public string password;
+            public string uri;
+            public string uriGet;
+        }
+        
+        [Serializable]
+        public class User
+        {
+            public int Id;
+            public string Name;
+            public int Age;
+            public int Gender;
+            public string Password;
+        }
+
+        [Serializable]
+        private class UserData
+        {
+            public string result;
+            public List<User> data;
+        }
+        
+        public static string CreateUserJson(string userName, int userAge, int gender, string password)
+        {
+            string json = $@"{{
+                ""username"":""{_databaseUser}"",
+                ""password"":""{_password}"",
+                ""table"":""Users"",
+                ""data"": {{
+                    ""name"": ""{userName}"",
+                    ""age"": ""{userAge}"",
+                    ""gender"": ""{gender}"",
+                    ""password"": ""{password}""
+                }}
+            }}";
+
+            return json;
+        }
+        
+        public static string FindUsersJson(string userName)
+        {
+            string json = $@"{{
+                ""username"":""{_databaseUser}"",
+                ""password"":""{_password}"",
+                ""table"":""Users"",
+                ""filter"":{{""name"":""{userName}""}}
+            }}";
+
+            return json;
+        }
+        
+        public static string FindPasswordsJson(string userName, string password)
+        {
+            string json = $@"{{
+                ""username"":""{_databaseUser}"",
+                ""password"":""{_password}"",
+                ""table"":""Users"",
+                ""filter"":{{""name"":""{userName}"", ""password"":""{password}""}}
+            }}";
+
+            return json;
+        }
+
+        public static User CurrentUser() => _currentUser;
+        public static void SetCurrentUser(User user) => _currentUser = user;
+
+        public static IEnumerator GetUserData(Action<bool, User> response, string data)
+        {
+            using UnityWebRequest www = UnityWebRequest.Post(_getUri, data, _CONTENT_TYPE);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+                throw new Exception("Error at GET request: " + www.error);
+            
+            print($"Get Request Result -> {www.downloadHandler.text}");
+
+            User user = null;
+            bool userFound = JsonUtility.FromJson<UserData>(www.downloadHandler.text).data.Count > 0;
+            if (userFound) user = JsonUtility.FromJson<UserData>(www.downloadHandler.text).data[0];
+            response?.Invoke(userFound, user);
+            
+        }
+
+        public static IEnumerator PostUser(string data)
+        {
+            using UnityWebRequest www = UnityWebRequest.Post(_postUri, data, _CONTENT_TYPE);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+                throw new Exception(www.error);
+
+            print($"POST Successful -> {www.downloadHandler.text}");
+
+        }
+
+        private static void LoadCredentials()
+        {
+            string configPath = "Assets/config.json";
+
+            if (File.Exists(configPath))
+            {
+                string configJson = File.ReadAllText(configPath);
+                Credentials config = JsonUtility.FromJson<Credentials>(configJson);
+
+                _databaseUser = config.username;
+                _password = config.password;
+                _postUri = config.uri;
+                _getUri = config.uriGet;
+            }
+            else
+            {
+                throw new Exception("Config file not found!");
+            }
         }
     }
 }
