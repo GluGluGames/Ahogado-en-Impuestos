@@ -1,0 +1,347 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db249917b7c50574eaa600c74aff1437, type: 3}
+  m_Name: Chatarrero
+  m_EditorClassIdentifier: 
+  data:
+    graphs:
+    - name: ChatarreroFSMStack
+      id: 66a7d79c-37d7-4e1d-b008-cc6305336d2c
+      graph:
+        rid: 4541844225476526085
+      nodes:
+      - name: Patrol
+        id: 4f37c487-b921-42f6-83a1-adadbaa2793f
+        position: {x: 620, y: 445}
+        node:
+          rid: 4541844225476526086
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 98373cc6-5324-47ab-b4a8-7704b5d2317d
+        - 0cb4291c-4f51-4d2e-9e52-482d2263f1fb
+        - 65dbac77-221c-4305-beac-fe5037e5b891
+        childIds:
+        - e0d0b9b2-c28a-4f3f-91b9-7bf081d99a63
+        - 2297de99-f257-4ea5-9f05-fc0a1dd391df
+        - e3e52f23-8169-46e7-b1ee-3a686f1ac887
+      - name: Take
+        id: 3da8b48c-38cb-4950-9253-bc72a51cb269
+        position: {x: 1369, y: 437}
+        node:
+          rid: 4541844225476526087
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - e0d0b9b2-c28a-4f3f-91b9-7bf081d99a63
+        - f675dc65-9c82-43fc-9d16-908ba30216fc
+        childIds:
+        - 98373cc6-5324-47ab-b4a8-7704b5d2317d
+        - 0cb4291c-4f51-4d2e-9e52-482d2263f1fb
+        - de46f9c8-303d-475a-b7d6-5c8663d9daad
+      - name: Steal
+        id: 47b4174c-1792-46a2-9ddb-b0254c868a29
+        position: {x: 1361, y: -173}
+        node:
+          rid: 4541844225476526088
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - e3e52f23-8169-46e7-b1ee-3a686f1ac887
+        childIds:
+        - f675dc65-9c82-43fc-9d16-908ba30216fc
+        - 5a30de07-58d0-4a0e-91f3-8f9a7b91a94a
+        - 65dbac77-221c-4305-beac-fe5037e5b891
+      - name: Sleep
+        id: 6513caa5-5b69-487d-a177-9def472f1131
+        position: {x: 612, y: -181}
+        node:
+          rid: 4541844225476526089
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 5a30de07-58d0-4a0e-91f3-8f9a7b91a94a
+        - 2297de99-f257-4ea5-9f05-fc0a1dd391df
+        - de46f9c8-303d-475a-b7d6-5c8663d9daad
+        childIds:
+        - aa14d411-f90b-4978-b04c-fd07bdc23a6d
+      - name: DetectedBetterResource
+        id: e0d0b9b2-c28a-4f3f-91b9-7bf081d99a63
+        position: {x: 1028, y: 453}
+        node:
+          rid: 4541844225476526090
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 4f37c487-b921-42f6-83a1-adadbaa2793f
+        childIds:
+        - 3da8b48c-38cb-4950-9253-bc72a51cb269
+      - name: ResourceCollected
+        id: 98373cc6-5324-47ab-b4a8-7704b5d2317d
+        position: {x: 1012, y: 713}
+        node:
+          rid: 4541844225476526091
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 3da8b48c-38cb-4950-9253-bc72a51cb269
+        childIds:
+        - 4f37c487-b921-42f6-83a1-adadbaa2793f
+      - name: ResourceNotOnSight
+        id: 0cb4291c-4f51-4d2e-9e52-482d2263f1fb
+        position: {x: 1012, y: 949}
+        node:
+          rid: 4541844225476526092
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 3da8b48c-38cb-4950-9253-bc72a51cb269
+        childIds:
+        - 4f37c487-b921-42f6-83a1-adadbaa2793f
+      - name: DetectedBetterResourceOnMap
+        id: f675dc65-9c82-43fc-9d16-908ba30216fc
+        position: {x: 1402, y: 119}
+        node:
+          rid: 4541844225476526093
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 47b4174c-1792-46a2-9ddb-b0254c868a29
+        childIds:
+        - 3da8b48c-38cb-4950-9253-bc72a51cb269
+      - name: LostStaminaChasing
+        id: 5a30de07-58d0-4a0e-91f3-8f9a7b91a94a
+        position: {x: 1003, y: -176}
+        node:
+          rid: 4541844225476526095
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 47b4174c-1792-46a2-9ddb-b0254c868a29
+        childIds:
+        - 6513caa5-5b69-487d-a177-9def472f1131
+      - name: LostStaminaPatrolling
+        id: 2297de99-f257-4ea5-9f05-fc0a1dd391df
+        position: {x: 606, y: 103}
+        node:
+          rid: 4541844225476526096
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 4f37c487-b921-42f6-83a1-adadbaa2793f
+        childIds:
+        - 6513caa5-5b69-487d-a177-9def472f1131
+      - name: LostStaminaTaking
+        id: de46f9c8-303d-475a-b7d6-5c8663d9daad
+        position: {x: 1678, y: -389}
+        node:
+          rid: 4541844225476526097
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 3da8b48c-38cb-4950-9253-bc72a51cb269
+        childIds:
+        - 6513caa5-5b69-487d-a177-9def472f1131
+      - name: Rested
+        id: aa14d411-f90b-4978-b04c-fd07bdc23a6d
+        position: {x: 201, y: -187}
+        node:
+          rid: 4541844225476526098
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 6513caa5-5b69-487d-a177-9def472f1131
+        childIds: []
+      - name: DetectedBetterResourceOnPlayer
+        id: e3e52f23-8169-46e7-b1ee-3a686f1ac887
+        position: {x: 1075, y: 211}
+        node:
+          rid: 4541844225476526099
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 4f37c487-b921-42f6-83a1-adadbaa2793f
+        childIds:
+        - 47b4174c-1792-46a2-9ddb-b0254c868a29
+      - name: StoleResource
+        id: 65dbac77-221c-4305-beac-fe5037e5b891
+        position: {x: 917, y: 27}
+        node:
+          rid: 4541844225476526100
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 47b4174c-1792-46a2-9ddb-b0254c868a29
+        childIds:
+        - 4f37c487-b921-42f6-83a1-adadbaa2793f
+    pushPerceptions: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4541844225476526085
+      type: {class: StackFSM, ns: BehaviourAPI.StateMachines.StackFSMs, asm: BehaviourAPI.StateMachines}
+    - rid: 4541844225476526086
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+    - rid: 4541844225476526087
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+    - rid: 4541844225476526088
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+    - rid: 4541844225476526089
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+    - rid: 4541844225476526090
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 4541844225476526091
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 4541844225476526092
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 4541844225476526093
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 4541844225476526095
+      type: {class: PushTransition, ns: BehaviourAPI.StateMachines.StackFSMs, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 4541844225476526096
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 4541844225476526097
+      type: {class: PushTransition, ns: BehaviourAPI.StateMachines.StackFSMs, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 4541844225476526098
+      type: {class: PopTransition, ns: BehaviourAPI.StateMachines.StackFSMs, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 4541844225476526099
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 4541844225476526100
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
