@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="gti-main" style="max-height: none; min-height: 70px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; background-color: rgb(53, 53, 53); margin-left: 3px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px; flex-direction: row; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
+        <ui:VisualElement name="gti-icon" style="width: 70px;" />
+        <ui:VisualElement style="width: 100%; justify-content: center; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
+            <ui:Label text="-" display-tooltip-when-elided="true" name="gti-name" style="font-size: 24px; -unity-font-definition: initial; margin-left: 30px; overflow: hidden; -unity-font: resource(&apos;Fonts/Cascadia&apos;);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

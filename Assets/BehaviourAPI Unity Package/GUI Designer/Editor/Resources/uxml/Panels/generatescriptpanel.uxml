@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/BehaviourAPI%20Unity%20Package/GUI%20Designer/Editor/Resources/uss/default.uss?fileID=7433441132597879392&amp;guid=7bfa94199ea81a84faedb051a619dadc&amp;type=3#default" />
+    <ui:VisualElement class="panel">
+        <ui:VisualElement style="height: 100%; width: 70%; min-width: 200px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
+            <ui:VisualElement name="gsp-options">
+                <ui:VisualElement style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; border-top-left-radius: 3px; border-bottom-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; background-color: rgb(51, 48, 48); flex-direction: column; flex-grow: 2;">
+                    <ui:Label text="Options" display-tooltip-when-elided="true" class="text" style="-unity-text-align: upper-center; font-size: 14px;" />
+                    <ui:VisualElement style="margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px; height: 2px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; background-color: rgb(87, 87, 87);" />
+                    <ui:Toggle value="false" name="csw-includenodename-toggle" text="Include node name argument in methods." tooltip="if checked, when a node has a name assigned in the editor, it will be included in the constructor." class="text" style="justify-content: flex-start;" />
+                    <ui:Toggle value="false" name="csw-usevarkeyword-toggle" text="Use &apos;var&apos; keyword in declarations." tooltip="if checked, the variable declarations will use the &apos;var&apos; keyword." class="text" style="justify-content: flex-start;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" mode="VerticalAndHorizontal" style="margin-left: 3px; margin-right: 3px; margin-top: 10px; margin-bottom: 10px; flex-grow: 1; flex-shrink: 10; height: 100%;">
+                <ui:TextField picking-mode="Ignore" readonly="true" name="gsp-text" multiline="true" class="text" style="flex-grow: 1;" />
+            </ui:ScrollView>
+            <ui:VisualElement name="gsp-path" class="text text-mid" style="flex-direction: row; justify-content: space-between;">
+                <ui:TextField picking-mode="Ignore" value="Assets/Scripts/" text="Assets/Scripts/" name="gsp-path-field" max-length="-1" label="path" style="margin-top: 5px; margin-left: 3px; margin-right: 3px; margin-bottom: 5px; width: 90%;" />
+                <ui:Button display-tooltip-when-elided="true" name="gsp-path-btn" style="width: 30px;" />
+            </ui:VisualElement>
+            <ui:TextField picking-mode="Ignore" value="NewBehaviourRunner" text="NewBehaviourRunner" name="gsp-name-field" max-length="-1" label="class name" class="text text-mid" style="margin-top: 5px; margin-left: 0; margin-right: 0; margin-bottom: 5px; padding-left: 3px; padding-right: 3px;" />
+            <ui:TextField picking-mode="Ignore" name="gsp-namespace-field" max-length="-1" label="namespace" mask-character="abcdefg" is-delayed="false" class="text text-mid" style="margin-top: 5px; margin-left: 0; margin-right: 0; margin-bottom: 5px; padding-left: 3px; padding-right: 3px;" />
+            <ui:Button text="Create script" display-tooltip-when-elided="true" name="gsp-create-btn" class="text text-big" style="height: 40px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Button text="Close" display-tooltip-when-elided="true" name="cgp-close-btn" class="text text-big" style="width: 100px; position: absolute; top: 10px; right: 20px;" />
+</ui:UXML>

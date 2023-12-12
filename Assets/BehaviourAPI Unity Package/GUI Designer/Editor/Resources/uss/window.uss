@@ -1,0 +1,52 @@
+#bw-main {
+    flex-direction: row;
+    height: 100%;
+}
+
+#bw-inspector {
+    height: 100%;
+    width: 400px;
+    background-color: rgba(43, 43, 43, 0.94);
+}
+
+#bw-graph-select {
+    height: 30px;
+    -unity-text-align: middle-left;
+    font-size: 16px;
+    width: 350px;
+}
+
+.cover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(32, 32, 32);
+    bottom: 0;
+}
+
+.toolbar {
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.toolbar-section {
+    flex-direction: row;
+    align-items: center;
+}
+
+.toolbar-btn {
+    height: 30px;
+    -unity-text-align: middle-center;
+    font-size: 30px;
+}
+
+.toolbar-squared-btn {
+    width: 30px;
+}
