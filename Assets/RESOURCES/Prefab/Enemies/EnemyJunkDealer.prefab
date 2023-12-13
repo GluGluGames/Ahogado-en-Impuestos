@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2194f4586e2603840a841e4e8169b682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 10
   angle: 360
   playerRef: {fileID: 0}
   targetMask:
@@ -172,7 +172,7 @@ MonoBehaviour:
     m_Bits: 2560
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 99831
+    m_Bits: 128
   imBlinded: 0
   seeing: []
 --- !u!114 &1156658779559380563

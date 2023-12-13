@@ -23,7 +23,6 @@ namespace GGG.Components.Resources
         private bool _pickingResource;
 
         public HexTile currentTile;
-        public int resourceValue;
 
         #region getters and setters
 

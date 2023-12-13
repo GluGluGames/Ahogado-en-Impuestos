@@ -1,7 +1,9 @@
 using GGG.Components.HexagonalGrid;
 using GGG.Components.Resources;
 using GGG.Components.UI;
+using GGG.Shared;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GGG.Components.Enemies
@@ -22,6 +24,10 @@ namespace GGG.Components.Enemies
         private int Tiredness;
         [SerializeField] private int MaxTiredness;
 
+        private bool CountingPatience = false;
+        private bool IgnoringPlayer = true;
+        private bool ChasingPlayer = false;
+
         private void Awake()
         {
             ai.StartPatrol += () =>
@@ -31,44 +37,74 @@ namespace GGG.Components.Enemies
                 enemyComp.movementController.imChasing = false;
                 fov.imBlinded = false;
                 //enemyComp.movementController.onMove += countPatience;
+                CountingPatience = true;
                 //StateUI.ChangeState(StateIcon.PatrolState);
             };
 
             ai.UpdatePatrol += () =>
             {
                 if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdate();
-                checkVision();
                 if (targetOnVision)
                 {
+                    if (target.CompareTag("Player"))
+                    {
+                        // transicion a chase player
+                    }
+                    else
+                    {
+                        IgnoringPlayer = true;
+                        ChasingPlayer = false;
+                        ai.DetectedBetterResourcePush.Fire();
+                        //return BehaviourAPI.Core.Status.Failure;
+                    }
                 }
 
-                if (Tiredness >= MaxTiredness)
-                {
-                    Tiredness = 0;
-                    return BehaviourAPI.Core.Status.Success;
-                }
-                else
-                {
-                    return BehaviourAPI.Core.Status.Running;
-                }
+                    if (Tiredness >= MaxTiredness)
+                    {
+                        Tiredness = 0;
+                        return BehaviourAPI.Core.Status.Success;
+                    }
+                    else
+                    {
+                        return BehaviourAPI.Core.Status.Running;
+                    }
+                
             };
 
-            //ai.StartTaking += () =>
-            //{
-            //    enemyComp.movementController.currentPath.Clear();
-            //    enemyComp.movementController.imChasing = true;
-            //    fov.imBlinded = false;
-            //    enemyComp.movementController.onMove += countPatience;
-            //    StateUI.ChangeState(StateIcon.ChasingState);
-            //};
+            ai.StartTaking += () =>
+            {
+                enemyComp.movementController.currentPath.Clear();
+                //enemyComp.movementController.imChasing = true;
+                fov.imBlinded = false;
+                if (!CountingPatience)
+                {
+                    //enemyComp.movementController.onMove += countPatience;
+                }
 
-            //ai.UpdateTaking += () =>
-            //{
-            //    transform.LookAt(target.transform.position);
-            //    if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdate();
-            //    if (transformsSeen.Count == 0) ai.lostVisionPush.Fire();
-            //    return BehaviourAPI.Core.Status.Running;
-            //};
+                //StateUI.ChangeState(StateIcon.ChasingState);
+            };
+
+            ai.UpdateTaking += () =>
+            {
+                transform.LookAt(target.transform.position);
+                if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdateJunkDealer();
+                //if (transformsSeen.Count == 0) ai.lostVisionPush.Fire();
+
+                updateTargetTile();
+                Debug.Log(target);
+                Debug.Log(enemyComp.movementController.targetTile.name);
+                //if (Tiredness >= MaxTiredness)
+                //{
+                //    Tiredness = 0;
+                //    return BehaviourAPI.Core.Status.Success;
+                //}
+                //else
+                //{
+                //    return BehaviourAPI.Core.Status.Running;
+                //}
+
+                return BehaviourAPI.Core.Status.Running;
+            };
 
             //ai.StartStealing += () =>
             //{
@@ -126,20 +162,22 @@ namespace GGG.Components.Enemies
             {
                 deltaVision = 0;
                 transformsSeen = fov.FieldOfViewCheck();
-                //checkVision();
+                checkVision();
             }
         }
 
         private void checkVision()
         {
-            if (target == null) return;
             if (transformsSeen.Count == 0) targetOnVision = false;
-            chooseTarget();
+            ChooseTarget();
+            if (target == null) return;
+
             foreach (Transform t in transformsSeen)
             {
                 if (t.name == target.name)
                 {
                     targetOnVision = true;
+                    break;
                 }
                 else
                 {
@@ -148,44 +186,78 @@ namespace GGG.Components.Enemies
             }
         }
 
-        private void chooseTarget()
+        private void ChooseTarget()
         {
             if (transformsSeen.Count == 0) return;
-            
+
             Transform bestTarget = null;
             int bestValue = -1;
             foreach (Transform t in transformsSeen)
             {
-                if (transform.gameObject.tag == "Player")
+                if (t.gameObject.tag == "Player" && (!IgnoringPlayer))
                 {
                     // Check if the player has a good enough resource
-                    bestValue = 100;
-                    bestTarget = t;
+
+                    int bestResPlayer = CheckPlayerInventory() != null ? CheckPlayerInventory().GetResourceValue() : -1;
+                    if (bestResPlayer > bestValue)
+                    {
+                        bestValue = bestResPlayer;
+                        bestTarget = t;
+                    }
                 }
-                else
+                else if (IgnoringPlayer || !ChasingPlayer)
                 {
                     //ResourceComponent resComp;
-                    if (t.TryGetComponent<ResourceComponent>(out ResourceComponent resComp) && resComp != null && resComp.resourceValue > bestValue)
+                    if (t.TryGetComponent<ResourceComponent>(out ResourceComponent resComp) && resComp != null && resComp.GetResource().GetResourceValue() > bestValue)
                     {
-                        bestValue = resComp.resourceValue;
+                        bestValue = resComp.GetResource().GetResourceValue();
                         bestTarget = t;
                     }
                 }
             }
-            Debug.Log(target.name);
+
+            enemyComp.movementController.chasingPlayer = bestTarget.CompareTag("Player");
+
             target = bestTarget;
+        }
+
+        private Resource CheckPlayerInventory()
+        {
+            int bestValue = -1;
+            Resource bestComp = null;
+            List<Resource> list = new List<Resource>();
+
+            foreach (var r in ResourceManager.Instance.resourcesCollected.ToList())
+            {
+                if (r.Value > 0)
+                {
+                    list.Add(r.Key);
+                }
+            }
+
+            foreach (Resource res in list)
+            {
+                if (res.GetResourceValue() > bestValue)
+                {
+                    bestValue = res.GetResourceValue();
+                    bestComp = res;
+                }
+            }
+
+            return bestComp;
         }
 
         private void updateTargetTile()
         {
             if (!targetOnVision) { return; }
-            if (target.tag == "Player")
+
+            if (target.CompareTag("Player"))
             {
                 enemyComp.movementController.targetTile = PlayerPosition.CurrentTile;
             }
             else
             {
-                enemyComp.movementController.targetTile = target.GetComponent<EnemyComponent>().currentTile;
+                enemyComp.movementController.targetTile = target.GetComponent<ResourceComponent>().currentTile;
             }
         }
 

@@ -58,15 +58,15 @@ namespace GGG.Components.Enemies
             State Take = ChatarreroFSMStack.CreateState("Take", TakeAction);
 
             FunctionalAction StealAction = new FunctionalAction();
-            TakeAction.onStarted = StartStealing;
-            TakeAction.onUpdated = UpdateStealing;
+            StealAction.onStarted = StartStealing;
+            StealAction.onUpdated = UpdateStealing;
             State Steal = ChatarreroFSMStack.CreateState("Steal", StealAction);
 
             FunctionalAction SleepAction = new FunctionalAction();
             SleepAction.onUpdated = UpdateSleep;
             State Sleep = ChatarreroFSMStack.CreateState("Sleep", SleepAction);
 
-            DetectedBetterResource = ChatarreroFSMStack.CreateTransition(Patrol, Take, statusFlags: StatusFlags.None);
+            DetectedBetterResource = ChatarreroFSMStack.CreateTransition(Patrol, Take, statusFlags: StatusFlags.Failure);
             ResourceCollected = ChatarreroFSMStack.CreateTransition(Take, Patrol, statusFlags: StatusFlags.None);
             ResourceNotOnSight = ChatarreroFSMStack.CreateTransition(Take, Patrol, statusFlags: StatusFlags.None);
             DetectedBetterResourceOnMap = ChatarreroFSMStack.CreateTransition(Steal, Take, statusFlags: StatusFlags.None);

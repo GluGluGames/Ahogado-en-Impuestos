@@ -12,6 +12,7 @@ namespace GGG.Components.Enemies
         public HexTile targetTile;
         public bool imChasing = false;
         public bool imFleeing = false;
+        public bool chasingPlayer = false;
         public Ticker ticker;
 
         // This has to be called on the start
@@ -41,9 +42,28 @@ namespace GGG.Components.Enemies
         {
             if (imChasing)
             {
-                if(currentPath.Count == 0 || targetTile != currentPath.Last())
+                if (currentPath.Count == 0 || targetTile != currentPath.Last())
                 {
                     AddToTargetTile();
+                }
+            }
+        }
+
+        public void LaunchOnUpdateJunkDealer()
+        {
+            if (imChasing)
+            {
+                if (currentPath.Count == 0 || targetTile != currentPath.Last())
+                {
+                    if (chasingPlayer)
+                    {
+                        AddToTargetTile();
+                    }
+                    else
+                    {
+                        currentPath.Clear();
+                        AddToTargetTile();
+                    }
                 }
             }
         }

@@ -17,6 +17,7 @@ namespace GGG.Shared
         [SerializeField] private bool IsUnlocked;
         [Tooltip("Time in seconds")]
         [SerializeField] private int ResearchTime;
+        [SerializeField] private int ResourceValue;
 
         public string GetKey() => Key;
         public string GetName() => Name.GetLocalizedString();
@@ -42,5 +43,6 @@ namespace GGG.Shared
             return false;
         }
         public int GetResearchTime() => ResearchTime;
+        public int GetResourceValue() => ResourceValue;
     }
 }
