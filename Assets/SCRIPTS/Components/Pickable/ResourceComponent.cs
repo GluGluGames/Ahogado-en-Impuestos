@@ -44,6 +44,8 @@ namespace GGG.Components.Resources
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!other.transform.CompareTag("Player")) return;
+
             _collided = true;
             _pickProgressUI.gameObject.SetActive(true);
 

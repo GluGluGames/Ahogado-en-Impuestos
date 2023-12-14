@@ -70,9 +70,9 @@ namespace GGG.Components.Enemies
             ResourceCollected = ChatarreroFSMStack.CreateTransition(Take, Patrol, statusFlags: StatusFlags.None);
             ResourceNotOnSight = ChatarreroFSMStack.CreateTransition(Take, Patrol, statusFlags: StatusFlags.None);
             DetectedBetterResourceOnMap = ChatarreroFSMStack.CreateTransition(Steal, Take, statusFlags: StatusFlags.None);
-            LostStaminaChasing = ChatarreroFSMStack.CreatePushTransition(Steal, Sleep, statusFlags: StatusFlags.None);
+            LostStaminaChasing = ChatarreroFSMStack.CreatePushTransition(Steal, Sleep, statusFlags: StatusFlags.Success);
             LostStaminaPatrolling = ChatarreroFSMStack.CreatePushTransition(Patrol, Sleep, statusFlags: StatusFlags.Success);
-            LostStaminaTaking = ChatarreroFSMStack.CreatePushTransition(Take, Sleep, statusFlags: StatusFlags.None);
+            LostStaminaTaking = ChatarreroFSMStack.CreatePushTransition(Take, Sleep, statusFlags: StatusFlags.Success);
             Rested = ChatarreroFSMStack.CreatePopTransition(Sleep, statusFlags: StatusFlags.Success);
             DetectedBetterResourceOnPlayer = ChatarreroFSMStack.CreateTransition(Patrol, Steal, statusFlags: StatusFlags.None);
             StoleResource = ChatarreroFSMStack.CreateTransition(Steal, Patrol, statusFlags: StatusFlags.None);

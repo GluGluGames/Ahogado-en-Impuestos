@@ -25,8 +25,15 @@ namespace GGG.Components.Enemies
         [SerializeField] private int MaxTiredness;
 
         private bool CountingPatience = false;
-        private bool IgnoringPlayer = true;
+        private bool IgnoringPlayer = false;
         private bool ChasingPlayer = false;
+
+        private Resource CurrentResource;
+        private int ValueCurrentResource = -1;
+
+        private bool TakingResource = false;
+        private float DeltaTakingResource = 0f;
+        private float TimeToTakeResource = 3f;
 
         private void Awake()
         {
@@ -36,8 +43,11 @@ namespace GGG.Components.Enemies
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.imChasing = false;
                 fov.imBlinded = false;
-                //enemyComp.movementController.onMove += countPatience;
+
+                StartCountingPatience();
+
                 CountingPatience = true;
+                targetOnVision = false;
                 //StateUI.ChangeState(StateIcon.PatrolState);
             };
 
@@ -48,37 +58,31 @@ namespace GGG.Components.Enemies
                 {
                     if (target.CompareTag("Player"))
                     {
-                        // transicion a chase player
+                        ai.DetectedBetterResourceOnPlayerPush.Fire();
                     }
                     else
                     {
-                        IgnoringPlayer = true;
-                        ChasingPlayer = false;
                         ai.DetectedBetterResourcePush.Fire();
-                        //return BehaviourAPI.Core.Status.Failure;
                     }
                 }
 
-                    if (Tiredness >= MaxTiredness)
-                    {
-                        Tiredness = 0;
-                        return BehaviourAPI.Core.Status.Success;
-                    }
-                    else
-                    {
-                        return BehaviourAPI.Core.Status.Running;
-                    }
-                
+                return FinishUpdateOnCouningPatience();
             };
 
             ai.StartTaking += () =>
             {
                 enemyComp.movementController.currentPath.Clear();
-                //enemyComp.movementController.imChasing = true;
+                enemyComp.movementController.imChasing = true;
+                IgnoringPlayer = true;
+                ChasingPlayer = false;
                 fov.imBlinded = false;
-                if (!CountingPatience)
+
+                StartCountingPatience();
+
+                if(CurrentResource != null)
                 {
-                    //enemyComp.movementController.onMove += countPatience;
+                    Debug.Log(ValueCurrentResource);
+                    Debug.Log(($"VOY A POR RECURSO, TENGO: {CurrentResource.name}"));
                 }
 
                 //StateUI.ChangeState(StateIcon.ChasingState);
@@ -86,51 +90,47 @@ namespace GGG.Components.Enemies
 
             ai.UpdateTaking += () =>
             {
+                if (target == null)
+                {
+                    Debug.Log("target NULL");
+                    targetOnVision = false;
+                    ai.ResourceNotOnSightPush.Fire();
+                }
+
                 transform.LookAt(target.transform.position);
+                UpdateTargetTile();
                 if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdateJunkDealer();
-                //if (transformsSeen.Count == 0) ai.lostVisionPush.Fire();
 
-                updateTargetTile();
-                Debug.Log(target);
-                Debug.Log(enemyComp.movementController.targetTile.name);
-                //if (Tiredness >= MaxTiredness)
-                //{
-                //    Tiredness = 0;
-                //    return BehaviourAPI.Core.Status.Success;
-                //}
-                //else
-                //{
-                //    return BehaviourAPI.Core.Status.Running;
-                //}
-
-                return BehaviourAPI.Core.Status.Running;
+                return FinishUpdateOnCouningPatience();
             };
 
-            //ai.StartStealing += () =>
-            //{
-            //    updateTargetTile();
-            //    enemyComp.movementController.gotPath = false;
-            //    enemyComp.movementController.currentPath.Clear();
-            //    enemyComp.movementController.imChasing = true;
-            //    berserkerMode = true;
-            //    fov.imBlinded = false;
-            //    StateUI.ChangeState(StateIcon.BerserkerState);
-            //};
+            ai.StartStealing += () =>
+            {
+                UpdateTargetTile();
+                enemyComp.movementController.gotPath = false;
+                enemyComp.movementController.currentPath.Clear();
+                enemyComp.movementController.imChasing = true;
 
-            //ai.UpdateTaking += () =>
-            //{
-            //    transform.LookAt(target.transform.position);
-            //    updateTargetTile();
-            //    if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdateBerserker();
-            //    if (transformsSeen.Count == 0) ai.killedNonPlayerPush.Fire();
-            //    return BehaviourAPI.Core.Status.Running;
-            //};
+                fov.imBlinded = false;
+                //StateUI.ChangeState(StateIcon.BerserkerState);
+            };
+
+            ai.UpdateStealing += () =>
+            {
+                transform.LookAt(target.transform.position);
+                UpdateTargetTile();
+                if (enemyComp.currentTile != null) enemyComp.movementController.LaunchOnUpdateJunkDealer();
+                if (!target.CompareTag("Player"))
+                    ai.DetectedBetterResourceOnMapPush.Fire();
+
+                return FinishUpdateOnCouningPatience();
+            };
 
             ai.UpdateSleep += () =>
             {
                 enemyComp.movementController.currentPath.Clear();
                 enemyComp.movementController.movingAllowed = false;
-                enemyComp.movementController.onMove -= countPatience;
+                StopCountingPatience();
                 fov.imBlinded = true;
                 //StateUI.ChangeState(StateIcon.SleepState);
 
@@ -138,7 +138,6 @@ namespace GGG.Components.Enemies
                 {
                     enemyComp.movementController.movingAllowed = true;
                     deltaSleep = 0f;
-                    Debug.Log("regreso");
                     return BehaviourAPI.Core.Status.Success;
                 }
                 else
@@ -164,17 +163,73 @@ namespace GGG.Components.Enemies
                 transformsSeen = fov.FieldOfViewCheck();
                 checkVision();
             }
+
+            if (TakingResource)
+            {
+                DeltaTakingResource += Time.deltaTime;
+                if (DeltaTakingResource >= TimeToTakeResource)
+                {
+                    DeltaTakingResource = 0;
+                    TakeResourceOnMap();
+                }
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.transform != target) return;
+
+            if (other.transform.CompareTag("Player"))
+            {
+            }
+            else
+            {
+                TakingResource = true;
+            }
+        }
+
+        private BehaviourAPI.Core.Status FinishUpdateOnCouningPatience()
+        {
+            if (Tiredness >= MaxTiredness)
+            {
+                Tiredness = 0;
+                return BehaviourAPI.Core.Status.Success;
+            }
+            else
+            {
+                return BehaviourAPI.Core.Status.Running;
+            }
+        }
+
+        private void StartCountingPatience()
+        {
+            if (CountingPatience) return;
+
+            CountingPatience = true;
+            enemyComp.movementController.onMove += CountPatience;
+        }
+
+        private void StopCountingPatience()
+        {
+            if (!CountingPatience) return;
+
+            CountingPatience = false;
+            enemyComp.movementController.onMove -= CountPatience;
         }
 
         private void checkVision()
         {
             if (transformsSeen.Count == 0) targetOnVision = false;
             ChooseTarget();
-            if (target == null) return;
+            if (target == null)
+            {
+                targetOnVision = false;
+                return;
+            }
 
             foreach (Transform t in transformsSeen)
             {
-                if (t.name == target.name)
+                if (t == target)
                 {
                     targetOnVision = true;
                     break;
@@ -216,9 +271,16 @@ namespace GGG.Components.Enemies
                 }
             }
 
-            enemyComp.movementController.chasingPlayer = bestTarget.CompareTag("Player");
+            if (bestTarget != null)
+            {
+                enemyComp.movementController.chasingPlayer = bestTarget.CompareTag("Player");
+            }
 
-            target = bestTarget;
+            if (bestValue > ValueCurrentResource)
+            {
+                target = bestTarget;
+
+            }
         }
 
         private Resource CheckPlayerInventory()
@@ -247,7 +309,7 @@ namespace GGG.Components.Enemies
             return bestComp;
         }
 
-        private void updateTargetTile()
+        private void UpdateTargetTile()
         {
             if (!targetOnVision) { return; }
 
@@ -261,15 +323,25 @@ namespace GGG.Components.Enemies
             }
         }
 
-        private void countPatience()
+        private void CountPatience()
         {
             Tiredness++;
             Debug.Log(Tiredness);
-            //if (Tiredness >= MaxTiredness)
-            //{
-            //    ai.LostStaminaPatrollingPush.Fire();
-            //    Tiredness = 0;
-            //}
+        }
+
+        private void TakeResourceOnMap()
+        {
+            TakingResource = false;
+
+            // Update UI or smth
+            CurrentResource = target.GetComponent<ResourceComponent>().GetResource();
+            ValueCurrentResource = CurrentResource.GetResourceValue();
+
+            target.gameObject.SetActive(false);
+            target = null;
+
+            targetOnVision = false;
+            ai.ResourceCollectedPush.Fire();
         }
     }
 }
