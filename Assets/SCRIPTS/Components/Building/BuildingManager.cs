@@ -24,10 +24,11 @@ namespace GGG.Components.Buildings
         {
             public int Id;
             public Vector3 Position;
-            public Building Building;
-            public ResourceCost CurrentCost;
+            public string Building;
+            public int[] CurrentCost;
+            public string[] CurrentResourcesCost;
             public int Level;
-            public Resource FarmResource;
+            public string FarmResource;
             public bool IsBoost;
         }
 
@@ -180,19 +181,24 @@ namespace GGG.Components.Buildings
 
             foreach (BuildingComponent build in _buildings)
             {
+                List<string> aux = new();
+                foreach(Resource resource in build.CurrentCost().GetResource())
+                    aux.Add(resource.GetKey());
+                
                 BuildingData data = new()
                 {
                     Id = build.Id(),
                     Position = build.Position(),
-                    Building = build.BuildData(),
+                    Building = build.BuildData().GetKey(),
                     Level = build.CurrentLevel(),
-                    CurrentCost = build.CurrentCost()
+                    CurrentCost = build.CurrentCost().GetCost(),
+                    CurrentResourcesCost = aux.ToArray()
                 };
 
                 if (build.GetType() == typeof(Farm))
                 {
                     Farm farm = (Farm)build;
-                    if (farm.GetResource()) data.FarmResource = farm.GetResource();
+                    if (farm.GetResource()) data.FarmResource = farm.GetResource().GetKey();
                 }
                 
                 data.IsBoost = build.BuildData().CanBeBoost() && build.IsBoost();
@@ -225,30 +231,36 @@ namespace GGG.Components.Buildings
             
             BuildingData[] buildings = JsonHelper.FromJson<BuildingData>(data);
             BuildingComponent[] buildingComponents = new BuildingComponent[buildings.Length];
+            List<Building> buildingsSo = Resources.LoadAll<Building>("Buildings").ToList();
             int i = 0;
                 
-            foreach (BuildingData build in buildings) {
-                 GameObject go = build.Building.Spawn(build.Position, transform, build.Level, false);
+            foreach (BuildingData buildData in buildings)
+            {
+                Building build = buildingsSo.Find(x => x.GetKey() == buildData.Building);
+                 GameObject go = build.Spawn(buildData.Position, transform, buildData.Level, false);
                 buildingComponents[i] = go.GetComponent<BuildingComponent>();
+                List<Resource> aux = new();
+                foreach (string resource in buildData.CurrentResourcesCost)
+                    PlayerManager.Instance.GetResource(resource);
                 
-                buildingComponents[i].SetId(build.Id);
-                buildingComponents[i].SetLevel(build.Level);
-                buildingComponents[i].SetCurrentCost(build.CurrentCost);
+                buildingComponents[i].SetId(buildData.Id);
+                buildingComponents[i].SetLevel(buildData.Level);
+                buildingComponents[i].SetCurrentCost(new ResourceCost(buildData.CurrentCost, aux.ToArray()));
                 
                 if (buildingComponents[i].GetType() == typeof(Farm))
                 {
                     Farm farm = (Farm)buildingComponents[i];
-                    if (build.FarmResource)
+                    if (!string.IsNullOrEmpty(buildData.FarmResource))
                     {
-                        farm.Resource(build.FarmResource);
-                        GameObject resource = Instantiate(build.FarmResource.GetModel(),
+                        farm.Resource(_player.GetResource(buildData.FarmResource));
+                        GameObject resource = Instantiate(farm.GetResource().GetModel(),
                             farm.transform.position + new Vector3(0, 2.5f), Quaternion.identity, farm.transform);
-                        resource.transform.localScale = build.FarmResource.GetModelScale();
+                        resource.transform.localScale = farm.GetResource().GetModelScale();
                         farm.SetResourceModel(resource);
                     }
                 }
 
-                if (buildingComponents[i].BuildData().CanBeBoost() && build.IsBoost)
+                if (buildingComponents[i].BuildData().CanBeBoost() && buildData.IsBoost)
                     buildingComponents[i].Boost();
                 
                 

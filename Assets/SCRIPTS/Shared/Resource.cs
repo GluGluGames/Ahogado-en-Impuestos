@@ -39,7 +39,7 @@ namespace GGG.Shared
         {
             if (PlayerPrefs.HasKey($"Research{Key}")) return PlayerPrefs.GetInt($"Research{Key}") == 1;
 
-            return false;
+            return CanBeResearched;
         }
         public int GetResearchTime() => ResearchTime;
     }

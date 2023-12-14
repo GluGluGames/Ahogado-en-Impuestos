@@ -34,7 +34,7 @@ namespace GGG.Components.UI
         [Serializable]
         private class ShownResource
         {
-            public Resource Resource;
+            public string Resource;
             public int Index;
         }
         
@@ -79,10 +79,10 @@ namespace GGG.Components.UI
             
             ResourcesIcons[_currentIdx].sprite = resource.GetSprite();
             ResourcesText[_currentIdx].SetText(_player.GetResourceCount(resource.GetKey()).ToString());
+            SaveShownResources();
             
             if (_currentIdx + 1 >= ResourceContainers.Count) return true;
             _currentIdx += ResourceContainers[_currentIdx + 1].gameObject.activeInHierarchy ? 0 : 1;
-            SaveShownResources();
             
             return true;
         }
@@ -113,7 +113,7 @@ namespace GGG.Components.UI
             {
                 ShownResource resourceData = new()
                 {
-                    Resource = resource,
+                    Resource = resource.GetKey(),
                     Index = ResourcesIcons.FindIndex(x => x.sprite == resource.GetSprite())
                 };
 
@@ -149,12 +149,13 @@ namespace GGG.Components.UI
             
             foreach (ShownResource resource in resources)
             {
-                _shownResource.Add(resource.Resource);
+                Resource aux = _player.GetResource(resource.Resource);
+                _shownResource.Add(aux);
 
                 ResourceContainers[resource.Index].SetActive(true);
                 
-                ResourcesIcons[resource.Index].sprite = resource.Resource.GetSprite();
-                ResourcesText[resource.Index].SetText(_player.GetResourceCount(resource.Resource.GetKey()).ToString());
+                ResourcesIcons[resource.Index].sprite = aux.GetSprite();
+                ResourcesText[resource.Index].SetText(_player.GetResourceCount(resource.Resource).ToString());
                 _currentIdx = resource.Index;
             }
             

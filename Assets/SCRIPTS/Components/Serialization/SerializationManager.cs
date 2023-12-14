@@ -232,11 +232,11 @@ namespace GGG.Components.Serialization
 
         private static void LoadCredentials()
         {
-            string configPath = "Assets/config.json";
+            TextAsset configData = Resources.Load<TextAsset>("Config/config");
 
-            if (File.Exists(configPath))
+            if (configData)
             {
-                string configJson = File.ReadAllText(configPath);
+                string configJson = configData.text;
                 Credentials config = JsonUtility.FromJson<Credentials>(configJson);
 
                 _databaseUser = config.username;
