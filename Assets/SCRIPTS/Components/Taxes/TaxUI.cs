@@ -128,6 +128,7 @@ namespace GGG.Components.Taxes
             
             Close();
             _dialogueBox.AddNewDialogue(PayDialogue);
+            GameManager.Instance.OnUIOpen();
         }
 
         private void DestroyBuilding()
@@ -158,6 +159,7 @@ namespace GGG.Components.Taxes
             else
             {
                 _dialogueBox.AddNewDialogue(NotPayWithoutBuildingsDialogue);
+                GameManager.Instance.OnUIOpen();
             }
             
             GenerateTaxesAmount();
