@@ -163,6 +163,7 @@ namespace GGG.Components.Buildings
                 _currentFarm.transform));
             _models[_currentFarm].transform.localScale = resource.GetModelScale();
             _currentFarm.SetResourceModel(_models[_currentFarm]);
+            BuildingManager.Instance.SaveBuildings();
         }
         
         public void Open(FarmTypes type, Resource currentResource, Farm farm)

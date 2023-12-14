@@ -82,6 +82,7 @@ namespace GGG.Components.UI
             
             if (_currentIdx + 1 >= ResourceContainers.Count) return true;
             _currentIdx += ResourceContainers[_currentIdx + 1].gameObject.activeInHierarchy ? 0 : 1;
+            SaveShownResources();
             
             return true;
         }
@@ -97,6 +98,7 @@ namespace GGG.Components.UI
             
             _shownResource.Remove(resource);
             _currentIdx = _shownResource.Count == 0 ? 0 : ResourceContainers.FindIndex(x => !x.activeInHierarchy);
+            SaveShownResources();
 
             return true;
         }

@@ -218,7 +218,7 @@ namespace GGG.Components.Serialization
             
         }
 
-        public static IEnumerator PostUser(string data)
+        public static IEnumerator PostData(string data)
         {
             using UnityWebRequest www = UnityWebRequest.Post(_postUri, data, _CONTENT_TYPE);
             yield return www.SendWebRequest();

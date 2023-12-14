@@ -115,6 +115,7 @@ namespace GGG.Components.HexagonalGrid
                 AddTile(TileType.Build);
             }
             _isEmpty = !building;
+            TileManager.Instance.SaveTilesState();
         }
 
         public TileType GetTileType()

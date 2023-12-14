@@ -79,11 +79,6 @@ namespace GGG.Components.Buildings
             _achievementsManager = AchievementsManager.Instance;
         }
 
-        private void OnDisable()
-        {
-            SaveBuildings();
-        }
-
         private void OnApplicationQuit()
         {
             PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
@@ -120,6 +115,7 @@ namespace GGG.Components.Buildings
             _buildingsCosts[building].SetCost(0, formula);
 
             if (build.GetType() == typeof(Farm)) _farms.Add((Farm) build);
+            SaveBuildings();
         }
 
         private void ArchitectAchievement(BuildingComponent build)
@@ -161,6 +157,7 @@ namespace GGG.Components.Buildings
             _buildingsCosts[building].SetCost(0, formula <= 0 ? 0 : formula);
             
             if (build.GetType() == typeof(Farm)) _farms.Remove((Farm) build);
+            SaveBuildings();
         }
 
         public int GetBuildCount(Building build) => _buildingsCount[build];

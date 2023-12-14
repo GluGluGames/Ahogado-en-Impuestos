@@ -1,5 +1,6 @@
 using System;
 using GGG.Classes.Dialogue;
+using GGG.Components.Core;
 using GGG.Components.Dialogue;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace GGG.Components.Taxes
         [SerializeField] private DialogueText Dialogue;
 
         private DialogueBox _dialogueBox;
+        private GameManager _gameManager;
         private TaxUI _taxUI;
         private static float _intervalDelta;
         private static bool _stopInterval;
@@ -20,6 +22,7 @@ namespace GGG.Components.Taxes
         private void Start()
         {
             _dialogueBox = FindObjectOfType<DialogueBox>();
+            _gameManager = GameManager.Instance;
             if (!_dialogueBox) throw new Exception("No dialogue box found");
 
             _taxUI = GetComponent<TaxUI>();
@@ -28,7 +31,7 @@ namespace GGG.Components.Taxes
 
         private void Update()
         {
-            if (_stopInterval) return;
+            if (_stopInterval || _gameManager.OnTutorial()) return;
             
             if (_intervalDelta > 0)
             {

@@ -165,6 +165,7 @@ namespace GGG.Components.HexagonalGrid
             HexTile buildTile = _tiles.Find((x) => x.GetCurrentBuilding() == build);
             buildTile.DestroyBuilding();
             BuildingManager.Instance.RemoveBuilding(build);
+            SaveTilesState();
         }
 
         /// <summary>
@@ -204,7 +205,7 @@ namespace GGG.Components.HexagonalGrid
                 return;
             
             TileData[] saveData = new TileData[_tiles.Count];
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
+            string filePath = Path.Combine(Application.streamingAssetsPath, "tiles_data.json");
             int i = 0;
 
             foreach (HexTile tile in _tiles) {

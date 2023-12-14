@@ -131,6 +131,7 @@ namespace GGG.Components.Buildings.Generator
                 _currentGenerator.AddBoostingBuilding(level, idx, -1);
 
                 ChangeButtonSprite(level, idx);
+                SaveGeneratorState();
                 
                 return;
             }
@@ -146,6 +147,7 @@ namespace GGG.Components.Buildings.Generator
             _currentGenerator.AddBoostingBuilding(level, idx, building.Id());
             
             ChangeButtonSprite(level, idx);
+            SaveGeneratorState();
         }
 
         private void ChangeButtonSprite(int level, int idx)

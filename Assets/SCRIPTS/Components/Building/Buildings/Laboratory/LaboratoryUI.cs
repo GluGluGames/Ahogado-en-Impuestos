@@ -226,6 +226,7 @@ namespace GGG.Components.Buildings.Laboratory
             _currentLaboratory.ActiveBar(_currentBar, true);
                 
             StartCoroutine(Research(_currentLaboratory.Id(), _currentBar));
+            SaveResearchProgress();
             
         }
 
@@ -241,6 +242,7 @@ namespace GGG.Components.Buildings.Laboratory
             _currentLaboratory.ActiveBar(_currentBar, true);
                 
             StartCoroutine(Research(_currentLaboratory.Id(), _currentBar));
+            SaveResearchProgress();
         }
 
         private IEnumerator Research(int id, int idx)
@@ -269,12 +271,13 @@ namespace GGG.Components.Buildings.Laboratory
 
             if (_researchDone >= 6)
                 StartCoroutine(AchievementsManager.Instance.UnlockAchievement("05"));
+            CurrentResources[idx].enabled = false;
+            SaveResearchProgress();
             
             if (!_open) yield break;
             
             Counters[idx].SetText("--:--");
             ProgressBarsFills[idx].fillAmount = 0f;
-            CurrentResources[idx].enabled = false;
         }
 
         private void FillBuildings()

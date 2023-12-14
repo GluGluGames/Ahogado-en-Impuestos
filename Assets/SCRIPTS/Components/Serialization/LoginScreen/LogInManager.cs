@@ -119,7 +119,7 @@ namespace GGG.Components.Serialization.Login
             }
 
             _currentUser.Password = PasswordInput.text;
-            StartCoroutine(SerializationManager.PostUser(SerializationManager.CreateUserJson(_currentUser.Name,
+            StartCoroutine(SerializationManager.PostData(SerializationManager.CreateUserJson(_currentUser.Name,
                 _currentUser.Age, _currentUser.Gender, _currentUser.Password)));
             ConfirmPasswordButton.onClick.RemoveAllListeners();
             
