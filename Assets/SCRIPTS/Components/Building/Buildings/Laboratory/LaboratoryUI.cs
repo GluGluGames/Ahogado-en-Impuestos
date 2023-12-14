@@ -390,7 +390,7 @@ namespace GGG.Components.Buildings.Laboratory
             if (_laboratories.Count <= 0) return;
             
             LaboratoryData[] saveData = new LaboratoryData[_laboratories.Count];
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "laboratory_progress.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "laboratory_progress.json");
             int i = 0;
 
             foreach (Laboratory lab in _laboratories.Values)
@@ -419,7 +419,7 @@ namespace GGG.Components.Buildings.Laboratory
 
         private IEnumerator LoadResearchProgress(List<Laboratory> laboratories)
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "laboratory_progress.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "laboratory_progress.json");
             string data;
             
             if (!File.Exists(filePath)) yield break;

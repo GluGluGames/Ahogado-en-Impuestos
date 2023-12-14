@@ -176,7 +176,7 @@ namespace GGG.Components.Buildings
             
             BuildingData[] saveData = new BuildingData[_buildings.Count];
             int i = 0;
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "buildings_data.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "buildings_data.json");
 
             foreach (BuildingComponent build in _buildings)
             {
@@ -200,15 +200,14 @@ namespace GGG.Components.Buildings
                 saveData[i] = data;
                 i++;
             }
-
-            PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
+            
             string jsonData = JsonHelper.ToJson(saveData, true);
             File.WriteAllText(filePath, jsonData);
         }
 
         public IEnumerator LoadBuildings()
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "buildings_data.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "buildings_data.json");
             string data;
 
             if (!File.Exists(filePath))

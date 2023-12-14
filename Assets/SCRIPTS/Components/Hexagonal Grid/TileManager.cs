@@ -205,7 +205,7 @@ namespace GGG.Components.HexagonalGrid
                 return;
             
             TileData[] saveData = new TileData[_tiles.Count];
-            string filePath = Path.Combine(Application.streamingAssetsPath, "tiles_data.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "tiles_data.json");
             int i = 0;
 
             foreach (HexTile tile in _tiles) {
@@ -232,7 +232,7 @@ namespace GGG.Components.HexagonalGrid
         public IEnumerator LoadTilesState()
         {
             List<BuildingComponent> builds = BuildingManager.Instance.GetBuildings();
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "tiles_data.json");
             string data;
 
             if (!File.Exists(filePath))

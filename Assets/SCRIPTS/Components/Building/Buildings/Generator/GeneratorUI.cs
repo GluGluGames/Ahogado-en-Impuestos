@@ -266,7 +266,7 @@ namespace GGG.Components.Buildings.Generator
             
             GeneratorData[] saveData = new GeneratorData[_generators.Count];
             int i = 0;
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "generators_boost.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "generators_boost.json");
 
             foreach (int id in _generators.Keys)
             {
@@ -300,7 +300,7 @@ namespace GGG.Components.Buildings.Generator
 
         private IEnumerator LoadGeneratorState(Generator[] generators)
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "generators_boost.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "generators_boost.json");
             string data;
             
             if (!File.Exists(filePath)) yield break;

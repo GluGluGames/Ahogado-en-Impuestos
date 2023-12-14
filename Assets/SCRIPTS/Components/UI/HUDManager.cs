@@ -107,7 +107,7 @@ namespace GGG.Components.UI
         {
             ShownResource[] resourcesData = new ShownResource[_shownResource.Count];
             int i = 0;
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "shown_resources.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "shown_resources.json");
 
             foreach (Resource resource in _shownResource)
             {
@@ -127,7 +127,7 @@ namespace GGG.Components.UI
 
         public IEnumerator LoadShownResource()
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "shown_resources.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "shown_resources.json");
             string data;
 
             if (!File.Exists(filePath))
