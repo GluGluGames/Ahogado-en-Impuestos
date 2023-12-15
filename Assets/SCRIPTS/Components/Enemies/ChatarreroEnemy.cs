@@ -48,6 +48,8 @@ namespace GGG.Components.Enemies
 
                 CountingPatience = true;
                 targetOnVision = false;
+                IgnoringPlayer = false;
+                ChasingPlayer = false;
                 //StateUI.ChangeState(StateIcon.PatrolState);
             };
 
@@ -59,10 +61,13 @@ namespace GGG.Components.Enemies
                     if (target.CompareTag("Player"))
                     {
                         ai.DetectedBetterResourceOnPlayerPush.Fire();
+                        return BehaviourAPI.Core.Status.None;
+
                     }
                     else
                     {
                         ai.DetectedBetterResourcePush.Fire();
+                        return BehaviourAPI.Core.Status.None;
                     }
                 }
 
@@ -181,6 +186,7 @@ namespace GGG.Components.Enemies
 
             if (other.transform.CompareTag("Player"))
             {
+                TakeResourceOnPlayer();
             }
             else
             {
@@ -342,6 +348,21 @@ namespace GGG.Components.Enemies
 
             targetOnVision = false;
             ai.ResourceCollectedPush.Fire();
+        }
+
+        private void TakeResourceOnPlayer()
+        {
+            CurrentResource = CheckPlayerInventory();
+            ValueCurrentResource = CurrentResource.GetResourceValue();
+
+            ResourceManager.Instance.resourcesCollected.TryGetValue(CurrentResource, out int quantity);
+
+            ResourceManager.Instance.resourcesCollected[CurrentResource] -= quantity;
+
+            target = null;
+
+            targetOnVision = false;
+            ai.StoleResourcePush.Fire();
         }
     }
 }

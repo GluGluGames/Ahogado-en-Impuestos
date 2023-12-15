@@ -99,7 +99,8 @@ namespace GGG.Components.Enemies
             }
 
             addedPath.Reverse();
-            addedPath.RemoveAt(0); // remove the first tile since it is already on the path
+
+            if (addedPath.Count != 0) { addedPath.RemoveAt(0); } // remove the first tile since it is already on the path
 
             foreach (HexTile tile in addedPath)
             {
