@@ -4,83 +4,102 @@ using GGG.Shared;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization;
 
 namespace GGG.Components.Serialization.Login
 {
     public class LogInManager : MonoBehaviour
     {
-        [Space(5), Header("GENDER PANEL")]
-        [SerializeField] private GameObject GenderPanel;
-        [Space(5), Header("AGE PANEL")] 
-        [SerializeField] private GameObject AgePanel;
-        [SerializeField] private TMP_Text AgeText;
-        [SerializeField] private Button AgeIncreaseButton;
-        [SerializeField] private Button AgeDecreaseButton;
-        [SerializeField] private Button AgeSelectButton;
         [Space(5), Header("USERNAME PANEL")] 
-        [SerializeField] private GameObject UsernamePanel;
+        [SerializeField] private GameObject LoginPanel;
         [SerializeField] private TMP_InputField UserNameInput;
-        [SerializeField] private Button UsernameSelectButton;
-        [Space(5), Header("PASSWORD PANEL")] 
-        [SerializeField] private GameObject PasswordPanel;
-        [SerializeField] private LoginBackButton PasswordBackButton;
         [SerializeField] private TMP_InputField PasswordInput;
-        [SerializeField] private TMP_InputField PasswordConfirmInput;
-        [SerializeField] private Button ConfirmPasswordButton;
+        [SerializeField] private TMP_Text LoginErrorText;
+        [SerializeField] private Button LoginButton;
+        [SerializeField] private Button RegisterButton;
+        [Space(5), Header("REGISTER PANEL")]
+        [SerializeField] private GameObject RegisterPanel;
+        [SerializeField] private LoginBackButton RegisterBackButton;
+        [SerializeField] private TMP_InputField RegisterUsernameInput;
+        [SerializeField] private TMP_InputField RegisterPasswordInput;
+        [SerializeField] private TMP_Text RegisterErrorText;
+        [SerializeField] private Button ConfirmRegisterButton;
+        [Header("AGE")]
+        [SerializeField] private TMP_InputField AgeInput;
+        [Header("GENRE")]
+        [SerializeField] private Button MaleButton;
+        [SerializeField] private Button FemaleButton;
+        [SerializeField] private GameObject MaleSelected;
+        [SerializeField] private GameObject FemaleSelected;
+        [Header("ERRORS")]
+        [SerializeField] private LocalizedString IncorrectPassword;
+        [SerializeField] private LocalizedString MissingData;
+        [SerializeField] private LocalizedString UsernameTaken;
+        [SerializeField] private LocalizedString AgeInvalid;
 
         private SerializationManager.User _currentUser;
-        private int _currentAge = 10;
 
         private void Start()
         {
             _currentUser = new SerializationManager.User();
+            _currentUser.Gender = -1;
             if (!FindObjectOfType<SerializationManager>())
                 throw new Exception("Not Serialization Manager Found");
 
-            UsernamePanel.SetActive(true);
-            GenderPanel.SetActive(false);
-            AgePanel.SetActive(false);
-            PasswordPanel.SetActive(false);
+            LoginPanel.SetActive(true);
+            RegisterPanel.SetActive(false);
 
-            AgeText.SetText(_currentAge.ToString());
+            LoginErrorText.SetText("");
+            RegisterErrorText.SetText("");
 
-            AgeIncreaseButton.onClick.AddListener(OnAgeIncrease);
-            AgeDecreaseButton.onClick.AddListener(OnAgeDecrease);
-            AgeSelectButton.onClick.AddListener(OnAgeSelect);
+            MaleSelected.SetActive(false);
+            FemaleSelected.SetActive(false);
 
-            UsernameSelectButton.onClick.AddListener(OnUsernameSelect);
+            RegisterBackButton.OnButtonClick += Back;
+
+            AgeInput.onValueChanged.AddListener(OnAgeChange);
+
+            LoginButton.onClick.AddListener(OnPasswordConfirm);
+            RegisterButton.onClick.AddListener(OnRegister);
+            ConfirmRegisterButton.onClick.AddListener(OnRegisterValidate);
+            MaleButton.onClick.AddListener(() => OnGenderSelect(true));
+            FemaleButton.onClick.AddListener(() => OnGenderSelect(false));
+        }
+
+        private void OnRegister()
+        {
+            LoginPanel.SetActive(false);
+            UserNameInput.text = "";
+            PasswordInput.text = "";
+            LoginErrorText.SetText("");
+            RegisterUsernameInput.text = "";
+            RegisterPasswordInput.text = "";
+            AgeInput.text = "";
+            RegisterErrorText.SetText("");
+            RegisterPanel.SetActive(true);
         }
 
         public void OnGenderSelect(bool male)
         {
+            MaleSelected.SetActive(male);
+            FemaleSelected.SetActive(!male);
             _currentUser.Gender = male ? 1 : 0;
-            GenderPanel.SetActive(false);
-            AgePanel.SetActive(true);
         }
 
-        private void OnAgeIncrease()
+        private void Back()
         {
-            if (_currentAge + 1 > 99) return;
-
-            _currentAge++;
-            AgeText.SetText(_currentAge.ToString());
+            MaleSelected.SetActive(false);
+            FemaleSelected.SetActive(false);
+            _currentUser.Gender = -1;
+            _currentUser.Name = "";
+            _currentUser.Password = "";
+            _currentUser.Age = -1;
         }
 
-        private void OnAgeDecrease()
-        {
-            if (_currentAge - 1 < 0) return;
+        private void OnAgeChange(string age) {
+            if (string.IsNullOrEmpty(age)) return;
 
-            _currentAge--;
-            AgeText.SetText(_currentAge.ToString());
-        }
-
-        private void OnAgeSelect()
-        {
-            _currentUser.Age = _currentAge;
-            AgePanel.SetActive(false);
-
-            PasswordPanel.SetActive(true);
-            PasswordConfirmInput.gameObject.SetActive(true);
+            _currentUser.Age = int.Parse(age); 
         }
 
         private void LoadMainMenu()
@@ -90,54 +109,66 @@ namespace GGG.Components.Serialization.Login
             SceneManagement.Instance.UpdateScenes();
         }
 
-        private void OnUsernameSelect()
+        private void OnRegisterValidate()
         {
-            if (string.IsNullOrEmpty(UserNameInput.text)) return;
+            if (string.IsNullOrEmpty(RegisterPasswordInput.text) || string.IsNullOrEmpty(RegisterUsernameInput.text)
+                || string.IsNullOrEmpty(AgeInput.text) || _currentUser.Gender == -1)
+            {
+                RegisterErrorText.SetText(MissingData.GetLocalizedString());
+                return;
+            }
 
-            _currentUser.Name = UserNameInput.text;
+            if(int.Parse(AgeInput.text) > 99 || int.Parse(AgeInput.text) <= 0)
+            {
+                RegisterErrorText.SetText(AgeInvalid.GetLocalizedString());
+                return;
+            }
+
+            _currentUser.Name = RegisterUsernameInput.text;
+            _currentUser.Password = RegisterPasswordInput.text;
+
             StartCoroutine(SerializationManager.GetUserData((x, y) =>
             {
-                GenderPanel.SetActive(!x);
-                PasswordPanel.SetActive(x);
-                ConfirmPasswordButton.onClick.AddListener(x ? OnPasswordConfirm : OnPasswordValidate);
-                
-                PasswordBackButton.SetLastPanel(!x ? AgePanel : UsernamePanel);
-                UserNameInput.text = "";
-                UsernamePanel.SetActive(false);
+                if (x)
+                {
+                    RegisterErrorText.SetText(UsernameTaken.GetLocalizedString());
+                    return;
+                }
+
+                _currentUser.Name = RegisterUsernameInput.text;
+                _currentUser.Password = RegisterPasswordInput.text;
+                StartCoroutine(SerializationManager.PostData(SerializationManager.CreateUserJson(_currentUser.Name,
+                    _currentUser.Age, _currentUser.Gender, _currentUser.Password)));
+                ConfirmRegisterButton.onClick.RemoveAllListeners();
+
+                LoadMainMenu();
+
             }, SerializationManager.FindUsersJson(_currentUser.Name)));
 
             
         }
 
-        private void OnPasswordValidate()
+        private void OnPasswordConfirm()
         {
-            if (string.IsNullOrEmpty(PasswordInput.text) || string.IsNullOrEmpty(PasswordConfirmInput.text) ||
-                PasswordInput.text != PasswordConfirmInput.text)
+            if (string.IsNullOrEmpty(PasswordInput.text) || string.IsNullOrEmpty(UserNameInput.text))
             {
-                // TODO - Error message
+                LoginErrorText.SetText(MissingData.GetLocalizedString());
                 return;
             }
 
-            _currentUser.Password = PasswordInput.text;
-            StartCoroutine(SerializationManager.PostData(SerializationManager.CreateUserJson(_currentUser.Name,
-                _currentUser.Age, _currentUser.Gender, _currentUser.Password)));
-            ConfirmPasswordButton.onClick.RemoveAllListeners();
-            
-            LoadMainMenu();
-        }
-
-        private void OnPasswordConfirm()
-        {
-            if (string.IsNullOrEmpty(PasswordInput.text)) return;
+            _currentUser.Name = UserNameInput.text;
             _currentUser.Password = PasswordInput.text;
 
             StartCoroutine(SerializationManager.GetUserData((x, y) =>
                 {
-                    print(x ? "Password correct" : "Password incorrect"); // TODO - Error message
-                    if (!x) return;
+                    if (!x) 
+                    {
+                        LoginErrorText.SetText(IncorrectPassword.GetLocalizedString());
+                        return; 
+                    }
                     
                     SerializationManager.SetCurrentUser(y);
-                    ConfirmPasswordButton.onClick.RemoveAllListeners();
+                    LoginButton.onClick.RemoveAllListeners();
                     LoadMainMenu();
                 },
                 SerializationManager.FindPasswordsJson(_currentUser.Name, _currentUser.Password)));

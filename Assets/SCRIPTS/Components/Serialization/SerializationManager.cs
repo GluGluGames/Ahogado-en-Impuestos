@@ -209,7 +209,7 @@ namespace GGG.Components.Serialization
             if (www.result != UnityWebRequest.Result.Success)
                 throw new Exception("Error at GET request: " + www.error);
             
-            print($"Get Request Result -> {www.downloadHandler.text}");
+            print($"GET Request Successful");
 
             User user = null;
             bool userFound = JsonUtility.FromJson<UserData>(www.downloadHandler.text).data.Count > 0;
@@ -226,13 +226,14 @@ namespace GGG.Components.Serialization
             if (www.result != UnityWebRequest.Result.Success)
                 throw new Exception(www.error);
 
-            print($"POST Successful -> {www.downloadHandler.text}");
-
+            print($"POST Request Successful");
         }
 
         private static void LoadCredentials()
         {
-            TextAsset configData = Resources.Load<TextAsset>("Config/config");
+
+            TextAsset configData = Resources.Load<TextAsset>( Application.isEditor
+                ? "Config/config_editor" : "Config/config");
 
             if (configData)
             {

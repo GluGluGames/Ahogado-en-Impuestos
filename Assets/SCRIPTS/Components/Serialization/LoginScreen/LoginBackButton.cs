@@ -12,6 +12,8 @@ namespace GGG.Components.Serialization.Login
         [SerializeField] private GameObject CurrentPanel;
         [SerializeField] private GameObject LastPanel;
 
+        public Action OnButtonClick;
+
         private void OnValidate()
         {
             BackButton = GetComponent<Button>();
@@ -30,6 +32,8 @@ namespace GGG.Components.Serialization.Login
         {
             CurrentPanel.SetActive(false);
             LastPanel.SetActive(true);
+
+            OnButtonClick?.Invoke();
         }
     }
 }
