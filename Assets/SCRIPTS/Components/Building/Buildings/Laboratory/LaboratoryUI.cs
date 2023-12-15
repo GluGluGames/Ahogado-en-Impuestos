@@ -363,7 +363,7 @@ namespace GGG.Components.Buildings.Laboratory
         {
             button.interactable = resource.CanResearch();
             button.image.color = resource.CanResearch() ? Color.white : Color.black;
-            button.transform.parent.gameObject.SetActive(!resource.Unlocked());
+            button.transform.parent.gameObject.SetActive(!resource.Unlocked() && !resource.BeingResearch());
             if (_currentLaboratory.ActiveResources().Any(r => r == resource))
                 button.transform.parent.gameObject.SetActive(false);
         }
@@ -372,7 +372,7 @@ namespace GGG.Components.Buildings.Laboratory
         {
             button.interactable = !building.IsUnlocked();
             button.image.color = !building.IsUnlocked() ? Color.white : Color.black;
-            button.transform.parent.gameObject.SetActive(!building.IsUnlocked());
+            button.transform.parent.gameObject.SetActive(!building.IsUnlocked() && !building.BeingResearch());
             if (_currentLaboratory.ActiveBuildings().Any(b => b == building))
                 button.transform.parent.gameObject.SetActive(false);
         }

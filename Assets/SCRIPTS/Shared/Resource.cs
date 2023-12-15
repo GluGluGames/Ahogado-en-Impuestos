@@ -18,6 +18,8 @@ namespace GGG.Shared
         [Tooltip("Time in seconds")]
         [SerializeField] private int ResearchTime;
 
+        private bool _beingResearch;
+
         public string GetKey() => Key;
         public string GetName() => Name.GetLocalizedString();
         public string GetDescription() => Description.GetLocalizedString();
@@ -26,6 +28,8 @@ namespace GGG.Shared
         public Sprite GetSprite() => Sprite;
         public Sprite GetSelectedSprite() => SelectedSprite;
         public void DiscoverResource() => PlayerPrefs.SetInt($"Research{Key}", 1);
+        public bool BeingResearch() => _beingResearch;
+        public bool Research() => _beingResearch = true;
 
         public bool Unlocked()
         {
@@ -34,7 +38,11 @@ namespace GGG.Shared
 
             return IsUnlocked;
         }
-        public void Unlock() => PlayerPrefs.SetInt(Key, 1);
+        public void Unlock()
+        {
+            PlayerPrefs.SetInt(Key, 1);
+            _beingResearch = false;
+        }
         public bool CanResearch()
         {
             if (PlayerPrefs.HasKey($"Research{Key}")) return PlayerPrefs.GetInt($"Research{Key}") == 1;

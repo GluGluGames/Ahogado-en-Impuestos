@@ -49,6 +49,8 @@ namespace GGG.Classes.Buildings
         [Tooltip("Determines the vision range of the building")] 
         [SerializeField] private int VisionRange;
 
+        private bool _beingResearch;
+
         public string GetKey() => Key;
 
         /// <summary>
@@ -146,13 +148,21 @@ namespace GGG.Classes.Buildings
         /// <summary>
         /// Unlocks the building
         /// </summary>
-        public void Unlock() => PlayerPrefs.SetInt(Key, 1);
+        public void Unlock()
+        {
+            PlayerPrefs.SetInt(Key, 1);
+            _beingResearch = false;
+        }
 
         /// <summary>
         /// Gets the time that takes to research the building
         /// </summary>
         /// <returns>The time that takes to research the building</returns>
         public int GetResearchTime() => ResearchTime;
+
+        public bool BeingResearch() => _beingResearch;
+
+        public void Research() => _beingResearch = true;
 
         /// <summary>
         /// Gets the cost of the building.
