@@ -259,7 +259,7 @@ namespace GGG.Components.HexagonalGrid
                 {
                     BuildingComponent build = builds.Find((x) => x.Id() == tiles[i].BuildId);
                     
-                    tile.SetBuilding(build);
+                    tile.SetBuilding(build, false);
                     tile.Reveal(build.VisionRange(), 0);
                     OnBuildingTileLoaded?.Invoke(build, tile);
                     j++;

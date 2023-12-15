@@ -122,7 +122,7 @@ namespace GGG.Components.UI.Buttons {
             build.SetCurrentCost(_cost);
             _buildingManager.AddBuilding(build);
             
-            _selectedHexTile.SetBuilding(build);
+            _selectedHexTile.SetBuilding(build, true);
             OnStructureBuild?.Invoke(build, _selectedHexTile);
             StructureBuild?.Invoke();
 

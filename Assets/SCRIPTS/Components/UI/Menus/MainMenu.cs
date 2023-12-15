@@ -18,6 +18,8 @@ namespace GGG.Components.Menus
         private void Start()
         {
             _sceneManagement = SceneManagement.Instance;
+
+            SoundManager.Instance.Play("MainMenu");
             
             PlayButton.onClick.AddListener(OnStartButton);
             SettingsButton.onClick.AddListener(OnSettingsButton);
