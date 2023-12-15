@@ -119,7 +119,9 @@ namespace GGG.Classes.Buildings
             }
 
             Destroy(parent.GetChild(0).gameObject);
-            return Instantiate(UpgradePrefabs[level - 2], new Vector3(position.x, SpawnHeight, position.z), Quaternion.identity, parent);
+            GameObject goUpgrade = Instantiate(UpgradePrefabs[level - 2], new Vector3(position.x, SpawnHeight, position.z), Quaternion.identity, parent);
+            goUpgrade.transform.SetAsFirstSibling();
+            return goUpgrade;
         }
 
         /// <summary>
