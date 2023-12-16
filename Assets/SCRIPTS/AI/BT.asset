@@ -13,8 +13,190 @@ MonoBehaviour:
   m_Name: BT
   m_EditorClassIdentifier: 
   data:
-    graphs: []
+    graphs:
+    - name: newbehaviourgraph
+      id: ba0d490a-b7a9-4d9b-9363-d732a715bb51
+      graph:
+        rid: 4541844315439890434
+      nodes:
+      - name: BasicLoop
+        id: cbd3c277-19f9-42db-83c8-7dd343c0ca5c
+        position: {x: 645, y: 14}
+        node:
+          rid: 4541844315439890450
+        references: []
+        parentIds: []
+        childIds:
+        - 3dc369b5-7184-4fcd-bc12-c21769ed5f11
+      - name: WalkToDestination
+        id: 3831c20f-29ab-4ad0-a128-76fd758237d5
+        position: {x: 866, y: 473}
+        node:
+          rid: 4541844315439890437
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 3dc369b5-7184-4fcd-bc12-c21769ed5f11
+        childIds: []
+      - name: Selector1
+        id: 3dc369b5-7184-4fcd-bc12-c21769ed5f11
+        position: {x: 638, y: 223}
+        node:
+          rid: 4541844315439890440
+        references: []
+        parentIds:
+        - cbd3c277-19f9-42db-83c8-7dd343c0ca5c
+        childIds:
+        - f4dd7c38-1a81-43b6-8723-8c83d31e75b8
+        - 3831c20f-29ab-4ad0-a128-76fd758237d5
+      - name: Sequencer1
+        id: f4dd7c38-1a81-43b6-8723-8c83d31e75b8
+        position: {x: 425, y: 489}
+        node:
+          rid: 4541844315439890441
+        references: []
+        parentIds:
+        - 3dc369b5-7184-4fcd-bc12-c21769ed5f11
+        childIds:
+        - 9bb9b0e4-ef5f-4a67-a906-9bbe9f40ac90
+        - d68ec79a-853a-4b0e-87c5-a0b70b9aa2d6
+      - name: CheckOnDestination
+        id: 9bb9b0e4-ef5f-4a67-a906-9bbe9f40ac90
+        position: {x: 255, y: 706}
+        node:
+          rid: 4541844315439890443
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - f4dd7c38-1a81-43b6-8723-8c83d31e75b8
+        childIds: []
+      - name: Selector2
+        id: d68ec79a-853a-4b0e-87c5-a0b70b9aa2d6
+        position: {x: 596, y: 708}
+        node:
+          rid: 4541844315439890444
+        references: []
+        parentIds:
+        - f4dd7c38-1a81-43b6-8723-8c83d31e75b8
+        childIds:
+        - 2ca2c054-0931-4463-ba3e-71448351b199
+        - eb2c64b1-ea66-48d7-ba4b-4197232131d1
+        - cfbc4e4f-6d77-4195-9da1-161a69e224e5
+      - name: ConditionSeeNode
+        id: 2ca2c054-0931-4463-ba3e-71448351b199
+        position: {x: 460, y: 898}
+        node:
+          rid: 4541844315439890445
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - d68ec79a-853a-4b0e-87c5-a0b70b9aa2d6
+        childIds:
+        - 88142c74-c195-44eb-b07e-31f2e127c8dd
+      - name: ChaseExit
+        id: 88142c74-c195-44eb-b07e-31f2e127c8dd
+        position: {x: 468, y: 1090}
+        node:
+          rid: 4541844315439890446
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 2ca2c054-0931-4463-ba3e-71448351b199
+        childIds: []
+      - name: MoveClose
+        id: 5200937d-3be5-4fc2-8758-f07fa5a97633
+        position: {x: 890, y: 1098}
+        node:
+          rid: 4541844315439890447
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - eb2c64b1-ea66-48d7-ba4b-4197232131d1
+        childIds: []
+      - name: ConditionKeepSearching
+        id: eb2c64b1-ea66-48d7-ba4b-4197232131d1
+        position: {x: 891, y: 897}
+        node:
+          rid: 4541844315439890448
+        references:
+        - fieldName: Perception
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - d68ec79a-853a-4b0e-87c5-a0b70b9aa2d6
+        childIds:
+        - 5200937d-3be5-4fc2-8758-f07fa5a97633
+      - name: PatrolExit
+        id: cfbc4e4f-6d77-4195-9da1-161a69e224e5
+        position: {x: 1161, y: 905}
+        node:
+          rid: 4541844315439890449
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - d68ec79a-853a-4b0e-87c5-a0b70b9aa2d6
+        childIds: []
     pushPerceptions: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4541844315439890434
+      type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+    - rid: 4541844315439890437
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+    - rid: 4541844315439890440
+      type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 4541844315439890441
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 4541844315439890443
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+    - rid: 4541844315439890444
+      type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 4541844315439890445
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+    - rid: 4541844315439890446
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+    - rid: 4541844315439890447
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+    - rid: 4541844315439890448
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+    - rid: 4541844315439890449
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+    - rid: 4541844315439890450
+      type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        Iterations: -1

@@ -1,6 +1,7 @@
 using GGG.Components.HexagonalGrid;
 using GGG.Components.UI;
 using System.Collections;
+using System.Linq.Expressions;
 using UnityEngine;
 
 namespace GGG.Components.Enemies
@@ -10,8 +11,8 @@ namespace GGG.Components.Enemies
         public FieldOfView fov;
         public NormalEnemyAI ai;
         public EnemyComponent enemyComp;
-        [SerializeField] private int stamina = 2;
-        [SerializeField] private int staminaRechargeTime = 2;
+        [SerializeField] private int stamina;
+        [SerializeField] private int staminaRechargeTime;
         [SerializeField] private EnemyStateUI StateUI;
         private int tiredness = 0;
 
@@ -61,6 +62,48 @@ namespace GGG.Components.Enemies
                 return BehaviourAPI.Core.Status.Running;
             };
 
+            ai.UpdateCheckOnDestination += () =>
+            {
+                Debug.Log("check destination");
+                return BehaviourAPI.Core.Status.Failure;
+            };
+
+            ai.UpdateChaseExit += () =>
+            {
+                Debug.Log("exit to chase");
+                return BehaviourAPI.Core.Status.Success;
+            };
+
+            ai.UpdateMoveClose += () =>
+            {
+                Debug.Log("me desplazo cerca");
+                return BehaviourAPI.Core.Status.Success;
+            };
+
+            ai.UpdatePatrolExit += () =>
+            {
+                Debug.Log("Go back to patrol");
+                return BehaviourAPI.Core.Status.Success;
+            };
+
+            ai.UpdateWalkToDestination += () =>
+            {
+                Debug.Log("Walk towards destination");
+                return BehaviourAPI.Core.Status.Success;
+            };
+
+            ai.ConditionSeeNodeCheck += () =>
+            {
+                Debug.Log("CheckSeeEnemy");
+                return true;
+            };
+
+            ai.ConditionKeepSearchingCheck += () =>
+            {
+                Debug.Log("Keep searching");
+                return true;
+            };
+
             ai.StartSleep += () =>
             {
                 StateUI.ChangeState(StateIcon.SleepState);
@@ -106,6 +149,7 @@ namespace GGG.Components.Enemies
         public void GetNotified(HexTile hexToGo)
         {
             Debug.Log("soy notificado");
+            ai.NotifiedPush.Fire();
         }
     }
 }

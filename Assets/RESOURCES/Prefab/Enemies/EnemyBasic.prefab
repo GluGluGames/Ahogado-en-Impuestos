@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 145976714395175787}
   - component: {fileID: 7140456653824878596}
   - component: {fileID: 3532860184323151696}
+  - component: {fileID: 7872754298979862962}
   m_Layer: 15
   m_Name: EnemyBasic
   m_TagString: Untagged
@@ -155,7 +156,7 @@ MonoBehaviour:
   fov: {fileID: 2557339169096508649}
   ai: {fileID: 7140456653824878596}
   enemyComp: {fileID: 3331947095449941960}
-  stamina: 4
+  stamina: 600
   staminaRechargeTime: 2
   StateUI: {fileID: 3580222739004411753}
 --- !u!114 &7140456653824878596
@@ -173,6 +174,7 @@ MonoBehaviour:
   executeOnLoop: 0
   interruptOptions: 0
   sleepTime: 3
+  _bsRunTimeDebugger: {fileID: 7872754298979862962}
 --- !u!114 &3532860184323151696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +189,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickTime: 1
   keepTicking: 1
+--- !u!114 &7872754298979862962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407563467665678216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1726e9fdb9ff2d4baa8710d607b31ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventHandler:
+    debugStatusChanges: 1
+    identifier: 
 --- !u!1001 &8430124652659929104
 PrefabInstance:
   m_ObjectHideFlags: 0
