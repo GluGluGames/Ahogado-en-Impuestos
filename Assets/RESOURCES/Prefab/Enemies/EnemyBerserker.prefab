@@ -135,7 +135,6 @@ MonoBehaviour:
   ai: {fileID: 2828653105759591961}
   enemyComp: {fileID: 2435296956065132665}
   maxPatience: 2
-  staminaRechargeTime: 10
   StateUI: {fileID: 2140328054685889106}
   visionFrequency: 0.15
 --- !u!114 &2828653105759591961
@@ -169,7 +168,7 @@ MonoBehaviour:
   playerRef: {fileID: 0}
   targetMask:
     serializedVersion: 2
-    m_Bits: 34816
+    m_Bits: 182272
   obstructionMask:
     serializedVersion: 2
     m_Bits: 128

@@ -12,7 +12,6 @@ namespace GGG.Components.Enemies
         public BerserkerEnemyAI ai;
         public EnemyComponent enemyComp;
         [SerializeField] private int maxPatience = 2;
-        [SerializeField] private int staminaRechargeTime = 2;
         [SerializeField] private EnemyStateUI StateUI;
         private int patience = 0;
         private float delta = 0;

@@ -21,7 +21,7 @@ MonoBehaviour:
       nodes:
       - name: Patrol
         id: b037865f-7d91-4090-8528-b0d4435e0e67
-        position: {x: 267, y: 544}
+        position: {x: 746, y: 611}
         node:
           rid: 5270361201551867907
         references:
@@ -33,25 +33,10 @@ MonoBehaviour:
         parentIds:
         - 446139fc-f897-4958-a236-f2063d97959e
         childIds:
-        - b33fd4ba-6cc7-47f5-ae07-d58465aef5c7
-      - name: Chase
-        id: e949c48e-5a07-4f94-b903-3d4c2672d564
-        position: {x: 1109, y: 528}
-        node:
-          rid: 5270361201551867908
-        references:
-        - fieldName: Action
-          value:
-            rid: 5270361201551867918
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - b33fd4ba-6cc7-47f5-ae07-d58465aef5c7
-        childIds:
         - 9f3a7f56-a59b-48b6-b3d6-384d8c6c9b3a
-      - name: Berserker
+      - name: Notify
         id: 9765ccc0-1b11-4fa6-8e36-8fbb68185ae9
-        position: {x: 1117, y: 3}
+        position: {x: 1243, y: 96}
         node:
           rid: 5270361201551867909
         references:
@@ -66,7 +51,7 @@ MonoBehaviour:
         - cb18836a-7fcf-469e-9695-f147766c0f73
       - name: Sleep
         id: afd2c517-65be-4928-9597-2de8b19d65f4
-        position: {x: 251, y: 11}
+        position: {x: 348, y: 19}
         node:
           rid: 5270361201551867910
         references:
@@ -79,29 +64,9 @@ MonoBehaviour:
         - cb18836a-7fcf-469e-9695-f147766c0f73
         childIds:
         - 446139fc-f897-4958-a236-f2063d97959e
-      - name: 
-        id: b33fd4ba-6cc7-47f5-ae07-d58465aef5c7
-        position: {x: 664, y: 506}
-        node:
-          rid: 5270361201551867911
-        references:
-        - fieldName: Perception
-          value:
-            rid: -2
-          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        - fieldName: Action
-          value:
-            rid: -2
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - b037865f-7d91-4090-8528-b0d4435e0e67
-        childIds:
-        - e949c48e-5a07-4f94-b903-3d4c2672d564
-      - name: 
+      - name: DetectClosePlayer
         id: 9f3a7f56-a59b-48b6-b3d6-384d8c6c9b3a
-        position: {x: 1125, y: 254}
+        position: {x: 1188, y: 420}
         node:
           rid: 5270361201551867913
         references:
@@ -116,12 +81,12 @@ MonoBehaviour:
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds:
-        - e949c48e-5a07-4f94-b903-3d4c2672d564
+        - b037865f-7d91-4090-8528-b0d4435e0e67
         childIds:
         - 9765ccc0-1b11-4fa6-8e36-8fbb68185ae9
-      - name: 
+      - name: NotifyEmited
         id: cb18836a-7fcf-469e-9695-f147766c0f73
-        position: {x: 680, y: 19}
+        position: {x: 758, y: -239}
         node:
           rid: 5270361201551867914
         references:
@@ -139,9 +104,9 @@ MonoBehaviour:
         - 9765ccc0-1b11-4fa6-8e36-8fbb68185ae9
         childIds:
         - afd2c517-65be-4928-9597-2de8b19d65f4
-      - name: 
+      - name: Rested
         id: 446139fc-f897-4958-a236-f2063d97959e
-        position: {x: 226, y: 269}
+        position: {x: 225, y: 435}
         node:
           rid: 5270361201551867915
         references:
@@ -169,16 +134,10 @@ MonoBehaviour:
       type: {class: FSM, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
     - rid: 5270361201551867907
       type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-    - rid: 5270361201551867908
-      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
     - rid: 5270361201551867909
       type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
     - rid: 5270361201551867910
       type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-    - rid: 5270361201551867911
-      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data:
-        StatusFlags: 0
     - rid: 5270361201551867913
       type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
       data:
@@ -192,24 +151,6 @@ MonoBehaviour:
       data:
         StatusFlags: 0
     - rid: 5270361201551867917
-      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        start:
-          componentName: 
-          methodName: 
-        update:
-          componentName: 
-          methodName: 
-        stop:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
-    - rid: 5270361201551867918
       type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         start:

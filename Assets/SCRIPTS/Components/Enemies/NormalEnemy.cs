@@ -102,5 +102,10 @@ namespace GGG.Components.Enemies
 
             StateUI.ChangeState(currStateIcon);
         }
+
+        public void GetNotified(HexTile hexToGo)
+        {
+            Debug.Log("soy notificado");
+        }
     }
 }
