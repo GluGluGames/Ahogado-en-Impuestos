@@ -44,6 +44,7 @@ namespace GGG.Components.Buildings
         protected override void OnLevelUp()
         {
             _currentGeneration = ResourcesGeneration[_currentLevel - 2];
+            if (_boosted) Boost();
         }
 
         public override void OnBuildDestroy()
