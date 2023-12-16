@@ -139,7 +139,11 @@ namespace GGG.Components.Serialization.Login
                 _currentUser.Password = RegisterPasswordInput.text;
                 StartCoroutine(SerializationManager.PostData(SerializationManager.CreateUserJson(_currentUser.Name,
                     _currentUser.Age, _currentUser.Gender, _currentUser.Password)));
-                ConfirmRegisterButton.onClick.RemoveAllListeners();
+
+                SerializationManager.CityStats newCityStats = new SerializationManager.CityStats { Name = _currentUser.Name };
+                SerializationManager.ExpeditionStats newExpeditionStats = new SerializationManager.ExpeditionStats { Name = _currentUser.Name };
+                StartCoroutine(SerializationManager.PostData(SerializationManager.CreateCityStatsJson(newCityStats)));
+                StartCoroutine(SerializationManager.PostData(SerializationManager.CreateExpeditionJson(newExpeditionStats)));
 
                 LoadMainMenu();
 
@@ -159,16 +163,33 @@ namespace GGG.Components.Serialization.Login
             _currentUser.Name = UserNameInput.text;
             _currentUser.Password = PasswordInput.text;
 
-            StartCoroutine(SerializationManager.GetUserData((x, y) =>
+            StartCoroutine(SerializationManager.GetUserData((found, user) =>
                 {
-                    if (!x) 
+                    if (!found) 
                     {
                         LoginErrorText.SetText(IncorrectPassword.GetLocalizedString());
                         return; 
                     }
-                    
-                    SerializationManager.SetCurrentUser(y);
-                    LoginButton.onClick.RemoveAllListeners();
+
+                    SerializationManager.SetCurrentUser(user);
+
+                    StartCoroutine(SerializationManager.GetCityUserStats((found, stats) =>
+                    {
+                        if (!found)
+                            throw new Exception("Stats not found");
+
+                        SerializationManager.SetCurrentCityStats(stats);
+                        
+                    }, SerializationManager.FindCityStatsJson(_currentUser.Name)));
+
+                    StartCoroutine(SerializationManager.GetExpeditionUserStats((found, stats) =>
+                    {
+                        if (!found)
+                            throw new Exception("Stats not found");
+
+                        SerializationManager.SetCurrentExpeditionStats(stats);
+                    }, SerializationManager.FindExpeditionStatsJson(_currentUser.Name)));
+
                     LoadMainMenu();
                 },
                 SerializationManager.FindPasswordsJson(_currentUser.Name, _currentUser.Password)));

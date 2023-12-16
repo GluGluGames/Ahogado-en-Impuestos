@@ -34,6 +34,8 @@ namespace GGG.Components.Serialization
         private const int _SAVE_TIME = 300;
 
         private static User _currentUser;
+        private static CityStats _currentUserCityStats;
+        private static ExpeditionStats _currentUserExpeditionStats;
         
         private const string _CONTENT_TYPE = "application/json";
 
@@ -41,6 +43,7 @@ namespace GGG.Components.Serialization
         private static string _password;
         private static string _postUri;
         private static string _getUri;
+        private static string _deleteUri;
         
         private float _delta;
         
@@ -138,6 +141,7 @@ namespace GGG.Components.Serialization
             public string password;
             public string uri;
             public string uriGet;
+            public string uriDelete;
         }
         
         [Serializable]
@@ -151,10 +155,45 @@ namespace GGG.Components.Serialization
         }
 
         [Serializable]
+        public class Stats
+        {
+            public string Name;
+        }
+
+        [Serializable]
+        public class CityStats : Stats
+        {
+            public int PayedTaxes = 0;
+            public int UnpayedTaxes = 0;
+            public int SeaFarms = 0;
+            public int FishFarms = 0;
+            public int Laboratories = 0;
+            public int Generators = 0;
+            public int UnlockedBuildings = 0;
+            public int UnlockedResources = 0;
+            public int ShopExchanges = 0;
+        }
+
+        [Serializable]
+        public class ExpeditionStats : Stats
+        {
+            public int TimesDetected = 0;
+            public int Deads = 0;
+            public int ExploredTiles = 0;
+        }
+
+        [Serializable]
         private class UserData
         {
             public string result;
             public List<User> data;
+        }
+
+        [Serializable]
+        private class StatsData
+        {
+            public string result;
+            public List<Stats> data;
         }
         
         public static string CreateUserJson(string userName, int userAge, int gender, string password)
@@ -168,6 +207,46 @@ namespace GGG.Components.Serialization
                     ""age"": ""{userAge}"",
                     ""gender"": ""{gender}"",
                     ""password"": ""{password}""
+                }}
+            }}";
+
+            return json;
+        }
+
+        public static string CreateCityStatsJson(CityStats stats)
+        {
+            string json = $@"{{
+                ""username"":""{_databaseUser}"",
+                ""password"":""{_password}"",
+                ""table"":""UsersCityStats"",
+                ""data"": {{
+                    ""name"": ""{stats.Name}"",
+                    ""payedTaxes"": ""{stats.PayedTaxes}"",
+                    ""unpayedTaxes"": ""{stats.UnpayedTaxes}"",
+                    ""seaFarms"": ""{stats.SeaFarms}"",
+                    ""fishFarms"": ""{stats.Name}"",
+                    ""laboratories"": ""{stats.PayedTaxes}"",
+                    ""generators"": ""{stats.UnpayedTaxes}"",
+                    ""unlockedBuildings"": ""{stats.UnlockedBuildings}"",
+                    ""unlockedResources"": ""{stats.UnlockedResources}"",
+                    ""shopExchanges"": ""{stats.ShopExchanges}""
+                }}
+            }}";
+
+            return json;
+        }
+
+        public static string CreateExpeditionJson(ExpeditionStats stats)
+        {
+            string json = $@"{{
+                ""username"":""{_databaseUser}"",
+                ""password"":""{_password}"",
+                ""table"":""Users"",
+                ""data"": {{
+                    ""name"": ""{stats.Name}"",
+                    ""timesDetected"": ""{stats.TimesDetected}"",
+                    ""deads"": ""{stats.Deads}"",
+                    ""exploredTiles"": ""{stats.ExploredTiles}""
                 }}
             }}";
 
@@ -198,8 +277,36 @@ namespace GGG.Components.Serialization
             return json;
         }
 
+        public static string FindCityStatsJson(string userName)
+        {
+            string json = $@"{{
+                ""username"":""{_databaseUser}"",
+                ""password"":""{_password}"",
+                ""table"":""UsersCityStats"",
+                ""filter"":{{""name"":""{userName}""}}
+            }}";
+
+            return json;
+        }
+
+        public static string FindExpeditionStatsJson(string userName)
+        {
+            string json = $@"{{
+                ""username"":""{_databaseUser}"",
+                ""password"":""{_password}"",
+                ""table"":""UserExpeditionStats"",
+                ""filter"":{{""name"":""{userName}""}}
+            }}";
+
+            return json;
+        }
+
         public static User CurrentUser() => _currentUser;
+        public static CityStats GetCityStats() => _currentUserCityStats;
+        public static ExpeditionStats GetExpeditionStats() => _currentUserExpeditionStats;
         public static void SetCurrentUser(User user) => _currentUser = user;
+        public static void SetCurrentExpeditionStats(ExpeditionStats stats) => _currentUserExpeditionStats = stats;
+        public static void SetCurrentCityStats(CityStats stats) => _currentUserCityStats = stats;
 
         public static IEnumerator GetUserData(Action<bool, User> response, string data)
         {
@@ -218,6 +325,34 @@ namespace GGG.Components.Serialization
             
         }
 
+        public static IEnumerator GetCityUserStats(Action<bool, CityStats> response, string data)
+        {
+            using UnityWebRequest www = UnityWebRequest.Post(_getUri, data, _CONTENT_TYPE);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+                throw new Exception("Error at GET request: " + www.error);
+
+            CityStats stats = null;
+            bool statsFound = JsonUtility.FromJson<StatsData>(www.downloadHandler.text).data.Count > 0;
+            if (statsFound) stats = (CityStats) JsonUtility.FromJson<StatsData>(www.downloadHandler.text).data[0];
+            response?.Invoke(statsFound, stats);
+        }
+
+        public static IEnumerator GetExpeditionUserStats(Action<bool, ExpeditionStats> response, string data)
+        {
+            using UnityWebRequest www = UnityWebRequest.Post(_getUri, data, _CONTENT_TYPE);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+                throw new Exception("Error at GET request: " + www.error);
+
+            ExpeditionStats stats = null;
+            bool statsFound = JsonUtility.FromJson<StatsData>(www.downloadHandler.text).data.Count > 0;
+            if (statsFound) stats = (ExpeditionStats)JsonUtility.FromJson<StatsData>(www.downloadHandler.text).data[0];
+            response?.Invoke(statsFound, stats);
+        }
+
         public static IEnumerator PostData(string data)
         {
             using UnityWebRequest www = UnityWebRequest.Post(_postUri, data, _CONTENT_TYPE);
@@ -227,6 +362,17 @@ namespace GGG.Components.Serialization
                 throw new Exception(www.error);
 
             print($"POST Request Successful");
+        }
+
+        public static IEnumerator UpdateData(string data)
+        {
+            using UnityWebRequest www = UnityWebRequest.Post(_deleteUri, data, _CONTENT_TYPE);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+                throw new Exception(www.error);
+
+            print("DELETE Request Successful");
         }
 
         private static void LoadCredentials()
@@ -244,6 +390,7 @@ namespace GGG.Components.Serialization
                 _password = config.password;
                 _postUri = config.uri;
                 _getUri = config.uriGet;
+                _deleteUri = config.uriDelete;
             }
             else
             {
