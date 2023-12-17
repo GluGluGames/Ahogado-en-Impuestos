@@ -335,7 +335,7 @@ Transform:
   m_Children:
   - {fileID: 6813830519478212054}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!114 &2411754244141642639
 MonoBehaviour:
@@ -353,9 +353,7 @@ MonoBehaviour:
   MinBounds: {x: -16, y: -13}
   MaxBounds: {x: 14, y: 16}
   RotationSpeed: 50
-  ZoomAmount: {x: 0, y: -1, z: 1}
-  ZoomLimitsY: {x: 8, y: 50}
-  ZoomLimitsZ: {x: -50, y: -8}
+  ZoomLimits: {x: 0.35, y: 1.7}
   MovementTime: 5
 --- !u!114 &7874826810178936260
 MonoBehaviour:
