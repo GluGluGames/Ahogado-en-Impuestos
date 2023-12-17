@@ -14,9 +14,12 @@ namespace GGG.Components.Enemies
         public bool imFleeing = false;
         public Ticker ticker;
 
+        private TileManager _tileManager;
+
         // This has to be called on the start
         public override void LaunchOnStart()
         {
+            _tileManager = TileManager.Instance;
             movingAllowed = true;
             ticker.onTick += HandleMovement;
             ticker.onTick += HandleVisibility;
@@ -58,7 +61,12 @@ namespace GGG.Components.Enemies
 
         private void GoToRandomTile()
         {
-            HexTile destination = TileManager.Instance.GetRandomHex();
+            if(_tileManager == null)
+            {
+                _tileManager = TileManager.Instance;
+                return;
+            }
+            HexTile destination = _tileManager.GetRandomHex();
             targetPosition = destination.transform.position;
             currentPath = Pathfinder.FindPath(currentTile, destination);
             currentPath.Reverse();

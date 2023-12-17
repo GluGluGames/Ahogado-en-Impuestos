@@ -179,19 +179,27 @@ namespace GGG.Components.Serialization.Login
 
                     StartCoroutine(SerializationManager.GetRequest<SerializationManager.CityStats>((found, stats) =>
                     {
+                        SerializationManager.CityStats newCityStats = null;
                         if (!found)
-                            throw new Exception("Stats not found");
+                        {
+                            newCityStats = new SerializationManager.CityStats { Name = _currentUser.Name };
+                            StartCoroutine(SerializationManager.PostData(SerializationManager.CreateCityStatsJson(newCityStats)));
+                        }
 
-                        SerializationManager.SetCurrentCityStats(stats);
+                        SerializationManager.SetCurrentCityStats(found ? stats : newCityStats);
                         
                     }, SerializationManager.FindCityStatsJson(_currentUser.Name)));
 
                     StartCoroutine(SerializationManager.GetRequest<SerializationManager.ExpeditionStats>((found, stats) =>
                     {
+                        SerializationManager.ExpeditionStats newExpeditionStats = null;
                         if (!found)
-                            throw new Exception("Stats not found");
+                        {
+                            newExpeditionStats = new SerializationManager.ExpeditionStats { Name = _currentUser.Name };
+                            StartCoroutine(SerializationManager.PostData(SerializationManager.CreateExpeditionJson(newExpeditionStats)));
+                        }
 
-                        SerializationManager.SetCurrentExpeditionStats(stats);
+                        SerializationManager.SetCurrentExpeditionStats(found ? stats : newExpeditionStats);
                     }, SerializationManager.FindExpeditionStatsJson(_currentUser.Name)));
 
                     LoadMainMenu();

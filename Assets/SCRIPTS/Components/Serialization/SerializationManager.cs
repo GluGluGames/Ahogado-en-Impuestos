@@ -5,6 +5,8 @@ using GGG.Components.Core;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.Player;
 using GGG.Components.Buildings.Shop;
+using GGG.Components.Expedition;
+using GGG.Components.Pickables;
 using GGG.Components.Taxes;
 using GGG.Shared;
 
@@ -73,6 +75,9 @@ namespace GGG.Components.Serialization
 
             _sceneManagement.OnGameSceneUnloaded += Save;
 
+            _sceneManagement.OnMinigameSceneLoaded += HandleExpeditionStats;
+            _sceneManagement.OnMinigameSceneUnloaded += OnExpeditionUnload;
+
             _delta = 0f;
         }
 
@@ -114,6 +119,18 @@ namespace GGG.Components.Serialization
             TaxUI.OnTaxesPay += AddPayTaxes;
             TaxUI.OnTaxesNotPay += AddNotPayTaxes;
             ShopUI.OnExchange += AddExchange;
+        }
+
+        private void HandleExpeditionStats()
+        {
+            TriggerSensor.OnDead += AddDead;
+            ResourceComponent.OnResourcePicked += AddResourcesTaken;
+        }
+
+        private void OnExpeditionUnload()
+        {
+            TriggerSensor.OnDead -= AddDead;
+            ResourceComponent.OnResourcePicked -= AddResourcesTaken;
         }
 
         private void OnBuildingAdd(string key, int amount) => StartCoroutine(AddBuildingStat(key, amount));
@@ -178,10 +195,28 @@ namespace GGG.Components.Serialization
             StartCoroutine(UpdateCityStats());
         }
 
+        private void AddDead()
+        {
+            _currentUserExpeditionStats.Deads++;
+            StartCoroutine(UpdateExpeditionStats());
+        }
+
+        private void AddResourcesTaken()
+        {
+            _currentUserExpeditionStats.ResourcesTaken++;
+            StartCoroutine(UpdateExpeditionStats());
+        }
+
         private IEnumerator UpdateCityStats()
         {
             yield return DeleteData(FindCityStatsJson(_currentUserCityStats.Name));
             yield return PostData(CreateCityStatsJson(_currentUserCityStats));
+        }
+
+        private IEnumerator UpdateExpeditionStats()
+        {
+            yield return DeleteData(FindExpeditionStatsJson(_currentUserCityStats.Name));
+            yield return PostData(CreateExpeditionJson(_currentUserExpeditionStats));
         }
 
         private IEnumerator Load()
@@ -257,9 +292,8 @@ namespace GGG.Components.Serialization
         [Serializable]
         public class ExpeditionStats : Stats
         {
-            public int TimesDetected = 0;
             public int Deads = 0;
-            public int ExploredTiles = 0;
+            public int ResourcesTaken = 0;
         }
 
         [Serializable]
@@ -318,9 +352,8 @@ namespace GGG.Components.Serialization
                 ""table"":""UsersExpeditionStats"",
                 ""data"": {{
                     ""name"": ""{stats.Name}"",
-                    ""timesDetected"": ""{stats.TimesDetected}"",
                     ""deads"": ""{stats.Deads}"",
-                    ""exploredTiles"": ""{stats.ExploredTiles}""
+                    ""resourcesTaken"": ""{stats.ResourcesTaken}""
                 }}
             }}";
 

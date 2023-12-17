@@ -23,8 +23,11 @@ namespace GGG.Components.HexagonalGrid
             
             private void Awake()
             {
-                if(!Instance)
-                    Instance = this;
+                
+                Instance = this;
+
+                SceneManagement.Instance.OnMinigameSceneLoaded += () => Instance = this;
+                SceneManagement.Instance.OnGameSceneLoaded += () => Instance = this;
             }
 
         #endregion

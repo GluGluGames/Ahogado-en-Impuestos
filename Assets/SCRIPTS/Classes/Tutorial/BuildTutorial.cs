@@ -4,6 +4,7 @@ using GGG.Components.Achievements;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.UI;
 using GGG.Components.UI.Buttons;
+using GGG.Components.Buildings;
 using UnityEngine;
 
 namespace GGG.Classes.Tutorial
@@ -124,6 +125,8 @@ namespace GGG.Classes.Tutorial
             _upgradeUI.OnCloseButtonPress -= CheckUpgradeUiClose;
             _tileCleanUI.OnUiOpen -= CheckTileCleanUi;
             _lateralUI.ToggleOpenButton();
+            BuildingManager.Instance.SaveBuildings();
+            TileManager.Instance.SaveTilesState();
         }
 
         private IEnumerator BuildStep() {

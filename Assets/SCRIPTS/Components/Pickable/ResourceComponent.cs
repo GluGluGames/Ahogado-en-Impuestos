@@ -7,7 +7,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace GGG.Components.Resources
+namespace GGG.Components.Pickables
 {
     public class ResourceComponent : MonoBehaviour
     {
@@ -23,6 +23,8 @@ namespace GGG.Components.Resources
         private bool _pickingResource;
 
         public HexTile currentTile;
+
+        public static Action OnResourcePicked;
 
         #region getters and setters
 
@@ -82,6 +84,7 @@ namespace GGG.Components.Resources
                     ResourceManager.Instance.GetResourceAmount(_resource);
                 _resource.DiscoverResource();
                 ResourceManager.Instance.AddAchievementResource(_resource, Type);
+                OnResourcePicked?.Invoke();
                 _pickProgressUI.StopPicking();
                 _pickProgressUI.gameObject.SetActive(false);
                 _pickingResource = false;

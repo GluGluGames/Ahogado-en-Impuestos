@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GGG.Components.Core;
-using GGG.Components.Resources;
+using GGG.Components.Pickables;
 using GGG.Components.UI.Buttons;
 using UnityEngine.Localization;
 using TMPro;
