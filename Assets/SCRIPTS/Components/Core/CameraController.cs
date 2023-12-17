@@ -68,10 +68,6 @@ namespace GGG.Components.Core
             _dragCamera = GetComponent<LeanDragCamera>();
             _rotateCamera = GetComponent<LeanTwistRotateAxis>();
             _zoomCamera = GetComponent<LeanPinchScale>();
-
-            _dragCamera.enabled = false;
-            _rotateCamera.enabled = false;
-            _zoomCamera.enabled = false;
             
             #if UNITY_ANDROID
             _dragCamera.enabled = true;
@@ -107,7 +103,7 @@ namespace GGG.Components.Core
 #if UNITY_ANDROID
             if(!_cameraToggle) ToggleCamera(true);
             
-            //ClampCamera();
+            ClampCamera();
 #else
             HandleCameraMovement();
             HandleCameraRotation();
