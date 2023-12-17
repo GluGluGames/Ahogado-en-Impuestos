@@ -35,6 +35,7 @@ namespace GGG.Components.Serialization
         private LaboratoryUI _laboratoryUI;
 
         private const int _SAVE_TIME = 300;
+        private const int _TIME_SAVE_TIME = 5;
 
         private static User _currentUser;
         private static CityStats _currentUserCityStats;
@@ -49,7 +50,9 @@ namespace GGG.Components.Serialization
         private static string _deleteUri;
         
         private float _delta;
+        private float _deltaTime;
         private bool _auxCorrutine;
+        private bool _initialized;
         
         private void Awake()
         {
@@ -90,6 +93,16 @@ namespace GGG.Components.Serialization
 
         private void Update()
         {
+            if (!_initialized || !_gameManager.Playing()) return;
+
+            if (_deltaTime >= _TIME_SAVE_TIME)
+            {
+                AddPlayedTime();
+                _deltaTime = 0;
+            }
+
+            _deltaTime += Time.deltaTime;
+
             if (!SceneManagement.InGameScene() || 
                 _gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial) return;
 
@@ -119,6 +132,8 @@ namespace GGG.Components.Serialization
             TaxUI.OnTaxesPay += AddPayTaxes;
             TaxUI.OnTaxesNotPay += AddNotPayTaxes;
             ShopUI.OnExchange += AddExchange;
+
+            _initialized = true;
         }
 
         private void HandleExpeditionStats()
@@ -207,6 +222,12 @@ namespace GGG.Components.Serialization
             StartCoroutine(UpdateExpeditionStats());
         }
 
+        private void AddPlayedTime()
+        {
+            _currentUserCityStats.PlayedTime += _TIME_SAVE_TIME;
+            StartCoroutine(UpdateCityStats());
+        }
+
         private IEnumerator UpdateCityStats()
         {
             yield return DeleteData(FindCityStatsJson(_currentUserCityStats.Name));
@@ -217,6 +238,14 @@ namespace GGG.Components.Serialization
         {
             yield return DeleteData(FindExpeditionStatsJson(_currentUserCityStats.Name));
             yield return PostData(CreateExpeditionJson(_currentUserExpeditionStats));
+        }
+
+        public IEnumerator ResetStats()
+        {
+            _currentUserExpeditionStats = new ExpeditionStats { Name = _currentUserExpeditionStats.Name };
+            _currentUserCityStats = new CityStats { Name = _currentUserCityStats.Name };
+            yield return UpdateExpeditionStats();
+            yield return UpdateCityStats();
         }
 
         private IEnumerator Load()
@@ -286,7 +315,7 @@ namespace GGG.Components.Serialization
             public int UnlockedBuildings = 0;
             public int UnlockedResources = 0;
             public int ShopExchanges = 0;
-            public string PlayedTime = "0";
+            public int PlayedTime = 0;
         }
 
         [Serializable]

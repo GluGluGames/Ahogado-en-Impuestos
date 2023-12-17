@@ -1,10 +1,10 @@
 using GGG.Shared;
 using GGG.Components.Core;
 
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using GGG.Components.Serialization;
 
 namespace GGG.Components.Menus
 {
@@ -61,6 +61,7 @@ namespace GGG.Components.Menus
             }
 
             PlayerPrefs.DeleteAll();
+            StartCoroutine(FindObjectOfType<SerializationManager>().ResetStats());
         }
 
         private void OnExitButton()
