@@ -3,6 +3,7 @@ namespace GGG.Shared
     public enum SceneIndexes
     {
         SHARED,
+        LOGIN_SCENE,
         MAIN_MENU,
         GAME_SCENE,
         MINIGAME_LEVEL1,

@@ -72,6 +72,7 @@ namespace GGG.Components.Player
             
 
             _resourcesCount[resourceKey] += amount;
+            SaveResourcesCount();
         }
 
         public int GetResourceNumber() => _resourcesDictionary.Count;
@@ -79,7 +80,7 @@ namespace GGG.Components.Player
         public void SaveResourcesCount()
         {
             ResourceData[] resourceDataList = new ResourceData[_resourcesCount.Count];
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "resources_data.json");
             int i = 0;
             
             foreach (var pair in _resourcesCount)
@@ -100,7 +101,7 @@ namespace GGG.Components.Player
 
         public IEnumerator LoadResourcesCount()
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "resources_data.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "resources_data.json");
             string data;
 
             if (!File.Exists(filePath))

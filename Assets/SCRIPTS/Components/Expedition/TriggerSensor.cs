@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GGG.Components.Expedition
@@ -5,6 +6,8 @@ namespace GGG.Components.Expedition
     public class TriggerSensor : MonoBehaviour
     {
         private int _overlaps;
+
+        public static Action OnDead;
 
         public bool isOverlapping
         {
@@ -17,6 +20,7 @@ namespace GGG.Components.Expedition
         private void OnTriggerEnter(Collider other)
         {
             if (other.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") && other.transform.gameObject.layer != LayerMask.NameToLayer("Berserker")) return;
+            OnDead?.Invoke();
             Lost();
         }
 

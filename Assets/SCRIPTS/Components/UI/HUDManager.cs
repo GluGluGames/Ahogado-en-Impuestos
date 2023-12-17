@@ -34,7 +34,7 @@ namespace GGG.Components.UI
         [Serializable]
         private class ShownResource
         {
-            public Resource Resource;
+            public string Resource;
             public int Index;
         }
         
@@ -79,6 +79,7 @@ namespace GGG.Components.UI
             
             ResourcesIcons[_currentIdx].sprite = resource.GetSprite();
             ResourcesText[_currentIdx].SetText(_player.GetResourceCount(resource.GetKey()).ToString());
+            SaveShownResources();
             
             if (_currentIdx + 1 >= ResourceContainers.Count) return true;
             _currentIdx += ResourceContainers[_currentIdx + 1].gameObject.activeInHierarchy ? 0 : 1;
@@ -97,6 +98,7 @@ namespace GGG.Components.UI
             
             _shownResource.Remove(resource);
             _currentIdx = _shownResource.Count == 0 ? 0 : ResourceContainers.FindIndex(x => !x.activeInHierarchy);
+            SaveShownResources();
 
             return true;
         }
@@ -105,13 +107,13 @@ namespace GGG.Components.UI
         {
             ShownResource[] resourcesData = new ShownResource[_shownResource.Count];
             int i = 0;
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "shown_resources.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "shown_resources.json");
 
             foreach (Resource resource in _shownResource)
             {
                 ShownResource resourceData = new()
                 {
-                    Resource = resource,
+                    Resource = resource.GetKey(),
                     Index = ResourcesIcons.FindIndex(x => x.sprite == resource.GetSprite())
                 };
 
@@ -125,7 +127,7 @@ namespace GGG.Components.UI
 
         public IEnumerator LoadShownResource()
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "shown_resources.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "shown_resources.json");
             string data;
 
             if (!File.Exists(filePath))
@@ -147,12 +149,13 @@ namespace GGG.Components.UI
             
             foreach (ShownResource resource in resources)
             {
-                _shownResource.Add(resource.Resource);
+                Resource aux = _player.GetResource(resource.Resource);
+                _shownResource.Add(aux);
 
                 ResourceContainers[resource.Index].SetActive(true);
                 
-                ResourcesIcons[resource.Index].sprite = resource.Resource.GetSprite();
-                ResourcesText[resource.Index].SetText(_player.GetResourceCount(resource.Resource.GetKey()).ToString());
+                ResourcesIcons[resource.Index].sprite = aux.GetSprite();
+                ResourcesText[resource.Index].SetText(_player.GetResourceCount(resource.Resource).ToString());
                 _currentIdx = resource.Index;
             }
             

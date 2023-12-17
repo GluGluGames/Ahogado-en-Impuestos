@@ -8,7 +8,7 @@ using GGG.Shared;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace GGG.Components.Resources
+namespace GGG.Components.Pickables
 {
     public class ResourceManager : MonoBehaviour
     {

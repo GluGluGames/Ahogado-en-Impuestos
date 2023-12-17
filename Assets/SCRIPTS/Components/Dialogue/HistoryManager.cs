@@ -19,7 +19,11 @@ namespace GGG.Components.Dialogue
 
         private IEnumerator Start()
         {
-            if (PlayerPrefs.HasKey(_HISTORY_KEY) && PlayerPrefs.GetInt(_HISTORY_KEY) == 1) yield break;
+            if (PlayerPrefs.HasKey(_HISTORY_KEY) && PlayerPrefs.GetInt(_HISTORY_KEY) == 1)
+            {
+                OnHistoryEnd.Invoke();
+                yield break;
+            }
             yield return null;
             
             _dialogueBox = FindObjectOfType<DialogueBox>();

@@ -23,8 +23,11 @@ namespace GGG.Components.HexagonalGrid
             
             private void Awake()
             {
-                if(!Instance)
-                    Instance = this;
+                
+                Instance = this;
+
+                SceneManagement.Instance.OnMinigameSceneLoaded += () => Instance = this;
+                SceneManagement.Instance.OnGameSceneLoaded += () => Instance = this;
             }
 
         #endregion
@@ -165,6 +168,7 @@ namespace GGG.Components.HexagonalGrid
             HexTile buildTile = _tiles.Find((x) => x.GetCurrentBuilding() == build);
             buildTile.DestroyBuilding();
             BuildingManager.Instance.RemoveBuilding(build);
+            SaveTilesState();
         }
 
         /// <summary>
@@ -204,7 +208,7 @@ namespace GGG.Components.HexagonalGrid
                 return;
             
             TileData[] saveData = new TileData[_tiles.Count];
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "tiles_data.json");
             int i = 0;
 
             foreach (HexTile tile in _tiles) {
@@ -214,12 +218,8 @@ namespace GGG.Components.HexagonalGrid
                     IsEmpty = tile.TileEmpty()
                 };
 
-                if (tile.GetTileType() == TileType.Build)
-                {
-                    print(tile.GetCurrentBuilding());
-                    data.BuildId = tile.GetCurrentBuilding().Id();
-                }
-
+                if (tile.GetTileType() == TileType.Build) data.BuildId = tile.GetCurrentBuilding().Id();
+                
                 saveData[i] = data;
                 i++;
             }
@@ -231,7 +231,7 @@ namespace GGG.Components.HexagonalGrid
         public IEnumerator LoadTilesState()
         {
             List<BuildingComponent> builds = BuildingManager.Instance.GetBuildings();
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "tiles_data.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "tiles_data.json");
             string data;
 
             if (!File.Exists(filePath))
@@ -258,7 +258,7 @@ namespace GGG.Components.HexagonalGrid
                 {
                     BuildingComponent build = builds.Find((x) => x.Id() == tiles[i].BuildId);
                     
-                    tile.SetBuilding(build);
+                    tile.SetBuilding(build, false);
                     tile.Reveal(build.VisionRange(), 0);
                     OnBuildingTileLoaded?.Invoke(build, tile);
                     j++;

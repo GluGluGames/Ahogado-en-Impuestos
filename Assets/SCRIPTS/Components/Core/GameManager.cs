@@ -49,7 +49,7 @@ namespace GGG.Components.Core
         
         private void InitializeGame() {
             _sceneManagement.UnloadActiveScenes();
-            _sceneManagement.AddSceneToLoad(SceneIndexes.MAIN_MENU);
+            _sceneManagement.AddSceneToLoad(SceneIndexes.LOGIN_SCENE);
             _sceneManagement.UpdateScenes();
         }
         
@@ -83,6 +83,7 @@ namespace GGG.Components.Core
         public void OnUIOpen() => _currentState = GameState.ON_UI;
         public void OnUIClose() => _currentState = GameState.PLAYING;
         public bool IsOnUI() => _currentState == GameState.ON_UI;
+        public bool Playing() => _currentState == GameState.PLAYING;
 
         #endregion
     }

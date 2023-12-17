@@ -87,7 +87,7 @@ public class InitialTutorial : TutorialBase
         Quaternion lastCameraRotation = _cameraTransform.transform.rotation;
         float magnitude = 0f;
         
-        while (magnitude < 25f)
+        while (magnitude < 50f)
         {
             magnitude += Quaternion.Angle(lastCameraRotation, _cameraTransform.transform.rotation);
             lastCameraRotation = _cameraTransform.transform.rotation;
@@ -98,13 +98,13 @@ public class InitialTutorial : TutorialBase
     private IEnumerator CameraZoomStep()
     {
         #if !UNITY_ANDROID
-        Vector3 lastCameraPosition = _mainCamera.localPosition;
+        Vector3 lastCameraZoom = _cameraTransform.transform.localScale;
         float magnitude = 0f;
         
-        while (magnitude < 20f)
+        while (magnitude < 5f)
         {
-            magnitude += (lastCameraPosition - _mainCamera.localPosition).magnitude;
-            lastCameraPosition = _mainCamera.localPosition;
+            magnitude += (lastCameraZoom - _cameraTransform.transform.localScale).magnitude;
+            lastCameraZoom = _cameraTransform.transform.localScale;
             yield return null;
         }
         #else

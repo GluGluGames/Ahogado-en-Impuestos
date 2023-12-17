@@ -126,12 +126,18 @@ namespace GGG.Components.UI
             
             UpgradeButton.interactable = activeCondition;
             UpgradeButton.image.color = activeCondition ? Color.white : new Color(0.81f, 0.81f, 0.81f);
+            foreach (TMP_Text upgradeCost in UpgradeCost)
+                upgradeCost.transform.parent.gameObject.SetActive(activeCondition);
 
             if (!activeCondition) return;
             
-            for (int i = 0; i < cost[currentLevel - 1].GetCostsAmount(); i++)
+            for (int i = 0; i < UpgradeCost.Length; i++)
             {
-                if (!_selectedBuilding.BuildData().GetUpgradeResource(currentLevel, i)) break;
+                if (!_selectedBuilding.BuildData().GetUpgradeResource(currentLevel, i))
+                {
+                    UpgradeCost[i].transform.parent.gameObject.SetActive(false);
+                    break;
+                }
                 
                 UpgradeCost[i].transform.parent.gameObject.SetActive(true);
                 UpgradeCost[i].gameObject.SetActive(true);
@@ -195,6 +201,7 @@ namespace GGG.Components.UI
             _selectedBuilding.SetCurrentCost(cost[currentLevel]);
             _selectedBuilding.BuildData().Spawn(_selectedBuilding.transform.position, _selectedBuilding.transform, 
                 _selectedBuilding.CurrentLevel(), true);
+            BuildingManager.Instance.SaveBuildings();
             SoundManager.Instance.Play("Build");
             Close(true);
         }

@@ -23,12 +23,8 @@ namespace GGG.Components.Core
         [SerializeField] private float RotationSpeed;
         [Space(5)]
         [Header("Zoom")]
-        [Tooltip("Amount of zoom in the XYZ axis")]
-        [SerializeField] private Vector3 ZoomAmount;
         [Tooltip("Limit of zoom in the Y axis")]
-        [SerializeField] private Vector2 ZoomLimitsY;
-        [Tooltip("Limit of zoom in the Z axis")]
-        [SerializeField] private Vector2 ZoomLimitsZ;
+        [SerializeField] private Vector2 ZoomLimits;
         #if UNITY_ANDROID
         [Tooltip("Limit of zoom in the Y axis when using touch screen")]
         [SerializeField] private Vector2 ZoomLimitsTouch;
@@ -72,10 +68,6 @@ namespace GGG.Components.Core
             _dragCamera = GetComponent<LeanDragCamera>();
             _rotateCamera = GetComponent<LeanTwistRotateAxis>();
             _zoomCamera = GetComponent<LeanPinchScale>();
-
-            _dragCamera.enabled = false;
-            _rotateCamera.enabled = false;
-            _zoomCamera.enabled = false;
             
             #if UNITY_ANDROID
             _dragCamera.enabled = true;
@@ -111,7 +103,7 @@ namespace GGG.Components.Core
 #if UNITY_ANDROID
             if(!_cameraToggle) ToggleCamera(true);
             
-            //ClampCamera();
+            ClampCamera();
 #else
             HandleCameraMovement();
             HandleCameraRotation();
@@ -129,7 +121,7 @@ namespace GGG.Components.Core
             _cameraTransform = _mainCamera.transform;
             _newPosition = _transform.position;
             _newRotation = _transform.rotation;
-            _newZoom = _cameraTransform.localPosition;
+            _newZoom = _transform.localScale;
         }
 
         /// <summary>
@@ -173,15 +165,14 @@ namespace GGG.Components.Core
         private void HandleZoom()
         {
             if(_input.CameraZoom() > 0f) {
-                _newZoom += ZoomAmount;
+                _newZoom -= new Vector3(0, Time.deltaTime * MovementTime, Time.deltaTime * MovementTime);
             }
             if(_input.CameraZoom() < 0f) {
-                _newZoom -= ZoomAmount;
+                _newZoom += new Vector3(0, Time.deltaTime * MovementTime, Time.deltaTime * MovementTime);;
             }
-
+            
             ClampZoom();
-
-            _cameraTransform.localPosition = Vector3.Lerp(_cameraTransform.localPosition, _newZoom, Time.deltaTime * MovementTime);
+            _transform.localScale = _newZoom;
         }
 
         /// <summary>
@@ -189,10 +180,12 @@ namespace GGG.Components.Core
         /// </summary>
         private void ClampZoom()
         {
-            if(_newZoom.y < ZoomLimitsY.x) _newZoom.y = ZoomLimitsY.x;
-            if(_newZoom.y > ZoomLimitsY.y) _newZoom.y = ZoomLimitsY.y;
-            if(_newZoom.z < ZoomLimitsZ.x) _newZoom.z = ZoomLimitsZ.x;
-            if(_newZoom.z > ZoomLimitsZ.y) _newZoom.z = ZoomLimitsZ.y;
+            _newZoom.x = 1;
+            if (_newZoom.y < ZoomLimits.x) _newZoom.y = ZoomLimits.x;
+            if (_newZoom.y > ZoomLimits.y) _newZoom.y = ZoomLimits.y;
+            
+            if (_newZoom.z < ZoomLimits.x) _newZoom.z = ZoomLimits.x;
+            if (_newZoom.z > ZoomLimits.y) _newZoom.z = ZoomLimits.y;
         }
 
         /// <summary>

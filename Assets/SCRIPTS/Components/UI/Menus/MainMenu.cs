@@ -1,9 +1,10 @@
 using GGG.Shared;
 using GGG.Components.Core;
 
-using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using GGG.Components.Serialization;
 
 namespace GGG.Components.Menus
 {
@@ -18,6 +19,8 @@ namespace GGG.Components.Menus
         private void Start()
         {
             _sceneManagement = SceneManagement.Instance;
+
+            SoundManager.Instance.Play("MainMenu");
             
             PlayButton.onClick.AddListener(OnStartButton);
             SettingsButton.onClick.AddListener(OnSettingsButton);
@@ -41,6 +44,24 @@ namespace GGG.Components.Menus
         private void OnCreditsButton()
         {
             _sceneManagement.OpenCredits();
+        }
+
+        public void OnDataDeleteConfirmButton()
+        {
+            foreach (var directory in Directory.GetDirectories(Application.persistentDataPath))
+            {
+                DirectoryInfo data_dir = new DirectoryInfo(directory);
+                data_dir.Delete(true);
+            }
+
+            foreach (var file in Directory.GetFiles(Application.persistentDataPath))
+            {
+                FileInfo file_info = new FileInfo(file);
+                file_info.Delete();
+            }
+
+            PlayerPrefs.DeleteAll();
+            StartCoroutine(FindObjectOfType<SerializationManager>().ResetStats());
         }
 
         private void OnExitButton()

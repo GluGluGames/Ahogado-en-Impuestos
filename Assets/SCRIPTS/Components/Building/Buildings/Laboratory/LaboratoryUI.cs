@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using DG.Tweening;
 using GGG.Components.Achievements;
+using GGG.Components.Player;
 using GGG.Components.UI.Buttons;
 using Project.Component.UI.Containers;
 using UnityEngine;
@@ -55,7 +56,9 @@ namespace GGG.Components.Buildings.Laboratory
         private int _researchDone;
         private bool _open;
 
-        private Action _onResourceFinish;
+        public Action OnResourceResearch;
+        public Action OnBuildResearch;
+        
 
         private void Awake()
         {
@@ -226,6 +229,7 @@ namespace GGG.Components.Buildings.Laboratory
             _currentLaboratory.ActiveBar(_currentBar, true);
                 
             StartCoroutine(Research(_currentLaboratory.Id(), _currentBar));
+            SaveResearchProgress();
             
         }
 
@@ -241,6 +245,7 @@ namespace GGG.Components.Buildings.Laboratory
             _currentLaboratory.ActiveBar(_currentBar, true);
                 
             StartCoroutine(Research(_currentLaboratory.Id(), _currentBar));
+            SaveResearchProgress();
         }
 
         private IEnumerator Research(int id, int idx)
@@ -255,12 +260,14 @@ namespace GGG.Components.Buildings.Laboratory
             {
                 _laboratories[id].ActiveResource(idx).Unlock();
                 _laboratories[id].SetActiveResource(idx, null);
+                OnResourceResearch?.Invoke();
             }
 
             if (_laboratories[id].ActiveBuilding(idx))
             {
                 _laboratories[id].ActiveBuilding(idx).Unlock();
                 _laboratories[id].SetActiveBuild(idx, null);
+                OnBuildResearch?.Invoke();
             }
             
             _laboratories[id].ActiveBar(idx, false);
@@ -269,12 +276,13 @@ namespace GGG.Components.Buildings.Laboratory
 
             if (_researchDone >= 6)
                 StartCoroutine(AchievementsManager.Instance.UnlockAchievement("05"));
+            CurrentResources[idx].enabled = false;
+            SaveResearchProgress();
             
             if (!_open) yield break;
             
             Counters[idx].SetText("--:--");
             ProgressBarsFills[idx].fillAmount = 0f;
-            CurrentResources[idx].enabled = false;
         }
 
         private void FillBuildings()
@@ -359,7 +367,7 @@ namespace GGG.Components.Buildings.Laboratory
         {
             button.interactable = resource.CanResearch();
             button.image.color = resource.CanResearch() ? Color.white : Color.black;
-            button.transform.parent.gameObject.SetActive(!resource.Unlocked());
+            button.transform.parent.gameObject.SetActive(!resource.Unlocked() && !resource.BeingResearch());
             if (_currentLaboratory.ActiveResources().Any(r => r == resource))
                 button.transform.parent.gameObject.SetActive(false);
         }
@@ -368,7 +376,7 @@ namespace GGG.Components.Buildings.Laboratory
         {
             button.interactable = !building.IsUnlocked();
             button.image.color = !building.IsUnlocked() ? Color.white : Color.black;
-            button.transform.parent.gameObject.SetActive(!building.IsUnlocked());
+            button.transform.parent.gameObject.SetActive(!building.IsUnlocked() && !building.BeingResearch());
             if (_currentLaboratory.ActiveBuildings().Any(b => b == building))
                 button.transform.parent.gameObject.SetActive(false);
         }
@@ -377,8 +385,8 @@ namespace GGG.Components.Buildings.Laboratory
         private class LaboratoryData
         {
             public int LaboratoryId;
-            public Resource[] Resource = new Resource[3];
-            public Building[] Building = new Building[3];
+            public string[] Resource = new string[3];
+            public string[] Building = new string[3];
             public float[] RemainingTime = new float[3];
         }
 
@@ -387,7 +395,7 @@ namespace GGG.Components.Buildings.Laboratory
             if (_laboratories.Count <= 0) return;
             
             LaboratoryData[] saveData = new LaboratoryData[_laboratories.Count];
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "laboratory_progress.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "laboratory_progress.json");
             int i = 0;
 
             foreach (Laboratory lab in _laboratories.Values)
@@ -399,10 +407,10 @@ namespace GGG.Components.Buildings.Laboratory
                     if (!lab.IsBarActive(j)) continue;
                     
                     if (lab.ActiveResource(j))
-                        data.Resource[j] = lab.ActiveResource(j);
+                        data.Resource[j] = lab.ActiveResource(j).GetKey();
 
                     if (lab.ActiveBuilding(j))
-                        data.Building[j] = lab.ActiveBuilding(j);
+                        data.Building[j] = lab.ActiveBuilding(j).GetKey();
                     
                     data.RemainingTime[j] = lab.DeltaTime(j);
                 }
@@ -416,7 +424,7 @@ namespace GGG.Components.Buildings.Laboratory
 
         private IEnumerator LoadResearchProgress(List<Laboratory> laboratories)
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath + "/", "laboratory_progress.json");
+            string filePath = Path.Combine(Application.persistentDataPath, "laboratory_progress.json");
             string data;
             
             if (!File.Exists(filePath)) yield break;
@@ -447,13 +455,13 @@ namespace GGG.Components.Buildings.Laboratory
                         lab.SetDeltaTime(i, laboratoryData.RemainingTime[i] - time.Seconds);
                         lab.ActiveBar(i, true);
                         
-                        if (laboratoryData.Resource[i])
+                        if (!string.IsNullOrEmpty(laboratoryData.Resource[i]))
                         {
-                            lab.SetActiveResource(i, laboratoryData.Resource[i]);
+                            lab.SetActiveResource(i, PlayerManager.Instance.GetResource(laboratoryData.Resource[i]));
                             StartCoroutine(Research(lab.Id(), i));
-                        } else if (laboratoryData.Building[i])
+                        } else if (!string.IsNullOrEmpty(laboratoryData.Building[i]))
                         {
-                            lab.SetActiveBuild(i, laboratoryData.Building[i]);
+                            lab.SetActiveBuild(i, Array.Find(_buildings, x => x.GetKey() == laboratoryData.Building[i]));
                             StartCoroutine(Research(lab.Id(), i));
                         }
                     }

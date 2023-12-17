@@ -119,10 +119,10 @@ namespace GGG.Components.UI.Buttons {
             }
 
             BuildingComponent build = auxGo.GetComponent<BuildingComponent>();
-            _buildingManager.AddBuilding(build);
             build.SetCurrentCost(_cost);
+            _buildingManager.AddBuilding(build);
             
-            _selectedHexTile.SetBuilding(build);
+            _selectedHexTile.SetBuilding(build, true);
             OnStructureBuild?.Invoke(build, _selectedHexTile);
             StructureBuild?.Invoke();
 

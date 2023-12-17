@@ -93,6 +93,7 @@ namespace GGG.Components.UI
             _player.AddResource(_cleanResource.GetKey(), -_selectedTile.GetClearCost());
             foreach (HexTile tile in _tiles)
                 tile.SetClearCost(Mathf.RoundToInt(tile.GetClearCost() + 25));
+            TileManager.Instance.SaveTilesState();
             PlayerPrefs.SetInt("TilesClean", _tilesClean++);
             PlayerPrefs.Save();
             
