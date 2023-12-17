@@ -48,6 +48,7 @@ namespace GGG.Components.Buildings.Shop
         private float _delta;
 
         public static Action OnShopOpen;
+        public static Action OnExchange;
 
         private void Start()
         {
@@ -179,6 +180,7 @@ namespace GGG.Components.Buildings.Shop
             
             _player.AddResource(_levelExchanges[idx][i].GetGivenResource().GetKey(), -_levelExchanges[idx][i].GetGivenAmount());
             _player.AddResource(_levelExchanges[idx][i].GetReceiveResource().GetKey(), _levelExchanges[idx][i].GetReceiveAmount());
+            OnExchange?.Invoke();
         }
 
         private IEnumerator ChangeExchanges()

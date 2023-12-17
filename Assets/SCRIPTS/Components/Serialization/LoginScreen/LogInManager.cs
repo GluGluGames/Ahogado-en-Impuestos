@@ -127,9 +127,9 @@ namespace GGG.Components.Serialization.Login
             _currentUser.Name = RegisterUsernameInput.text;
             _currentUser.Password = RegisterPasswordInput.text;
 
-            StartCoroutine(SerializationManager.GetUserData((x, y) =>
+            StartCoroutine(SerializationManager.GetRequest<SerializationManager.User>((found, user) =>
             {
-                if (x)
+                if (found)
                 {
                     RegisterErrorText.SetText(UsernameTaken.GetLocalizedString());
                     return;
@@ -139,11 +139,15 @@ namespace GGG.Components.Serialization.Login
                 _currentUser.Password = RegisterPasswordInput.text;
                 StartCoroutine(SerializationManager.PostData(SerializationManager.CreateUserJson(_currentUser.Name,
                     _currentUser.Age, _currentUser.Gender, _currentUser.Password)));
+                SerializationManager.SetCurrentUser(_currentUser);
 
                 SerializationManager.CityStats newCityStats = new SerializationManager.CityStats { Name = _currentUser.Name };
                 SerializationManager.ExpeditionStats newExpeditionStats = new SerializationManager.ExpeditionStats { Name = _currentUser.Name };
                 StartCoroutine(SerializationManager.PostData(SerializationManager.CreateCityStatsJson(newCityStats)));
                 StartCoroutine(SerializationManager.PostData(SerializationManager.CreateExpeditionJson(newExpeditionStats)));
+
+                SerializationManager.SetCurrentCityStats(newCityStats);
+                SerializationManager.SetCurrentExpeditionStats(newExpeditionStats);
 
                 LoadMainMenu();
 
@@ -163,7 +167,7 @@ namespace GGG.Components.Serialization.Login
             _currentUser.Name = UserNameInput.text;
             _currentUser.Password = PasswordInput.text;
 
-            StartCoroutine(SerializationManager.GetUserData((found, user) =>
+            StartCoroutine(SerializationManager.GetRequest<SerializationManager.User>((found, user) =>
                 {
                     if (!found) 
                     {
@@ -173,7 +177,7 @@ namespace GGG.Components.Serialization.Login
 
                     SerializationManager.SetCurrentUser(user);
 
-                    StartCoroutine(SerializationManager.GetCityUserStats((found, stats) =>
+                    StartCoroutine(SerializationManager.GetRequest<SerializationManager.CityStats>((found, stats) =>
                     {
                         if (!found)
                             throw new Exception("Stats not found");
@@ -182,7 +186,7 @@ namespace GGG.Components.Serialization.Login
                         
                     }, SerializationManager.FindCityStatsJson(_currentUser.Name)));
 
-                    StartCoroutine(SerializationManager.GetExpeditionUserStats((found, stats) =>
+                    StartCoroutine(SerializationManager.GetRequest<SerializationManager.ExpeditionStats>((found, stats) =>
                     {
                         if (!found)
                             throw new Exception("Stats not found");

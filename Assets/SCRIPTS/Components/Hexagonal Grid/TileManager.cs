@@ -215,12 +215,8 @@ namespace GGG.Components.HexagonalGrid
                     IsEmpty = tile.TileEmpty()
                 };
 
-                if (tile.GetTileType() == TileType.Build)
-                {
-                    print(tile.GetCurrentBuilding());
-                    data.BuildId = tile.GetCurrentBuilding().Id();
-                }
-
+                if (tile.GetTileType() == TileType.Build) data.BuildId = tile.GetCurrentBuilding().Id();
+                
                 saveData[i] = data;
                 i++;
             }

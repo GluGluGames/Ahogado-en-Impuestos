@@ -53,6 +53,7 @@ namespace GGG.Components.Buildings
         private const float _RATE_GROW = 1.2f;
         
         public static Action<BuildingComponent[]> OnBuildsLoad;
+        public Action<string, int> OnBuildAdd;
 
         private void Awake()
         {
@@ -116,6 +117,7 @@ namespace GGG.Components.Buildings
             _buildingsCosts[building].SetCost(0, formula);
 
             if (build.GetType() == typeof(Farm)) _farms.Add((Farm) build);
+            OnBuildAdd?.Invoke(build.BuildData().GetKey(), _buildingsCount[building]);
             SaveBuildings();
         }
 

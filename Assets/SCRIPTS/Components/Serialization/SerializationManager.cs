@@ -4,16 +4,17 @@ using GGG.Components.Buildings.Laboratory;
 using GGG.Components.Core;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.Player;
+using GGG.Components.Buildings.Shop;
+using GGG.Components.Taxes;
 using GGG.Shared;
 
 using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using GGG.Components.UI;
 using UnityEngine.Networking;
-using UnityEngine.Serialization;
+using Newtonsoft.Json;
 
 namespace GGG.Components.Serialization
 {
@@ -46,6 +47,7 @@ namespace GGG.Components.Serialization
         private static string _deleteUri;
         
         private float _delta;
+        private bool _auxCorrutine;
         
         private void Awake()
         {
@@ -89,6 +91,8 @@ namespace GGG.Components.Serialization
             if (_delta >= _SAVE_TIME)
             {
                 Save();
+                _buildingManager.SaveBuildings();
+                _tileManager.SaveTilesState();
                 _delta = 0;
             }
 
@@ -103,6 +107,81 @@ namespace GGG.Components.Serialization
             _tileManager = TileManager.Instance;
             _generatorUI = FindObjectOfType<GeneratorUI>();
             _laboratoryUI = FindObjectOfType<LaboratoryUI>();
+
+            _buildingManager.OnBuildAdd += OnBuildingAdd;
+            _laboratoryUI.OnResourceResearch += AddResourceUnlock;
+            _laboratoryUI.OnBuildResearch += AddBuildingUnlock;
+            TaxUI.OnTaxesPay += AddPayTaxes;
+            TaxUI.OnTaxesNotPay += AddNotPayTaxes;
+            ShopUI.OnExchange += AddExchange;
+        }
+
+        private void OnBuildingAdd(string key, int amount) => StartCoroutine(AddBuildingStat(key, amount));
+
+
+        private IEnumerator AddBuildingStat(string key, int amount)
+        {
+
+            switch (key)
+            {
+                case "Fishfarm":
+                    _currentUserCityStats.FishFarms = amount;
+                    break;
+                case "Seafarm":
+                    _currentUserCityStats.SeaFarms = amount;
+                    break;
+                case "Laboratory":
+                    _currentUserCityStats.Laboratories = amount;
+                    break;
+                case "Generator":
+                    _currentUserCityStats.Generators = amount;
+                    break;
+                default:
+                    yield break;
+            }
+
+            if(_auxCorrutine) yield return new WaitWhile(() => _auxCorrutine);
+            _auxCorrutine = true;
+            yield return DeleteData(FindCityStatsJson(_currentUserCityStats.Name));
+            yield return PostData(CreateCityStatsJson(_currentUserCityStats));
+            _auxCorrutine = false;
+        }
+
+        private void AddResourceUnlock()
+        {
+            _currentUserCityStats.UnlockedResources++;
+            StartCoroutine(UpdateCityStats());
+        }
+
+        private void AddBuildingUnlock()
+        {
+            _currentUserCityStats.UnlockedBuildings++;
+            StartCoroutine(UpdateCityStats());
+        }
+
+        private void AddPayTaxes()
+        {
+            _currentUserCityStats.UnlockedBuildings++;
+            StartCoroutine(UpdateCityStats());
+
+        }
+
+        private void AddNotPayTaxes()
+        {
+            _currentUserCityStats.UnlockedBuildings++;
+            StartCoroutine(UpdateCityStats());
+        }
+
+        private void AddExchange()
+        {
+            _currentUserCityStats.ShopExchanges++;
+            StartCoroutine(UpdateCityStats());
+        }
+
+        private IEnumerator UpdateCityStats()
+        {
+            yield return DeleteData(FindCityStatsJson(_currentUserCityStats.Name));
+            yield return PostData(CreateCityStatsJson(_currentUserCityStats));
         }
 
         private IEnumerator Load()
@@ -172,6 +251,7 @@ namespace GGG.Components.Serialization
             public int UnlockedBuildings = 0;
             public int UnlockedResources = 0;
             public int ShopExchanges = 0;
+            public string PlayedTime = "0";
         }
 
         [Serializable]
@@ -183,19 +263,12 @@ namespace GGG.Components.Serialization
         }
 
         [Serializable]
-        private class UserData
+        private class JsonData<T>
         {
             public string result;
-            public List<User> data;
+            public List<T> data;
         }
 
-        [Serializable]
-        private class StatsData
-        {
-            public string result;
-            public List<Stats> data;
-        }
-        
         public static string CreateUserJson(string userName, int userAge, int gender, string password)
         {
             string json = $@"{{
@@ -224,12 +297,13 @@ namespace GGG.Components.Serialization
                     ""payedTaxes"": ""{stats.PayedTaxes}"",
                     ""unpayedTaxes"": ""{stats.UnpayedTaxes}"",
                     ""seaFarms"": ""{stats.SeaFarms}"",
-                    ""fishFarms"": ""{stats.Name}"",
-                    ""laboratories"": ""{stats.PayedTaxes}"",
-                    ""generators"": ""{stats.UnpayedTaxes}"",
+                    ""fishFarms"": ""{stats.FishFarms}"",
+                    ""laboratories"": ""{stats.Laboratories}"",
+                    ""generators"": ""{stats.Generators}"",
                     ""unlockedBuildings"": ""{stats.UnlockedBuildings}"",
                     ""unlockedResources"": ""{stats.UnlockedResources}"",
-                    ""shopExchanges"": ""{stats.ShopExchanges}""
+                    ""shopExchanges"": ""{stats.ShopExchanges}"",
+                    ""time"": ""{stats.PlayedTime}""
                 }}
             }}";
 
@@ -241,7 +315,7 @@ namespace GGG.Components.Serialization
             string json = $@"{{
                 ""username"":""{_databaseUser}"",
                 ""password"":""{_password}"",
-                ""table"":""Users"",
+                ""table"":""UsersExpeditionStats"",
                 ""data"": {{
                     ""name"": ""{stats.Name}"",
                     ""timesDetected"": ""{stats.TimesDetected}"",
@@ -294,7 +368,7 @@ namespace GGG.Components.Serialization
             string json = $@"{{
                 ""username"":""{_databaseUser}"",
                 ""password"":""{_password}"",
-                ""table"":""UserExpeditionStats"",
+                ""table"":""UsersExpeditionStats"",
                 ""filter"":{{""name"":""{userName}""}}
             }}";
 
@@ -308,49 +382,23 @@ namespace GGG.Components.Serialization
         public static void SetCurrentExpeditionStats(ExpeditionStats stats) => _currentUserExpeditionStats = stats;
         public static void SetCurrentCityStats(CityStats stats) => _currentUserCityStats = stats;
 
-        public static IEnumerator GetUserData(Action<bool, User> response, string data)
+        public static IEnumerator GetRequest<T>(Action<bool, T> response, string data)
         {
             using UnityWebRequest www = UnityWebRequest.Post(_getUri, data, _CONTENT_TYPE);
             yield return www.SendWebRequest();
 
             if (www.result != UnityWebRequest.Result.Success)
                 throw new Exception("Error at GET request: " + www.error);
-            
+
             print($"GET Request Successful");
 
-            User user = null;
-            bool userFound = JsonUtility.FromJson<UserData>(www.downloadHandler.text).data.Count > 0;
-            if (userFound) user = JsonUtility.FromJson<UserData>(www.downloadHandler.text).data[0];
-            response?.Invoke(userFound, user);
-            
-        }
+            T result = default;
+            JsonData<T> json = JsonConvert.DeserializeObject<JsonData<T>>(www.downloadHandler.text);
 
-        public static IEnumerator GetCityUserStats(Action<bool, CityStats> response, string data)
-        {
-            using UnityWebRequest www = UnityWebRequest.Post(_getUri, data, _CONTENT_TYPE);
-            yield return www.SendWebRequest();
+            bool statsFound = json.data.Count > 0;
+            if (statsFound) result = json.data[0];
 
-            if (www.result != UnityWebRequest.Result.Success)
-                throw new Exception("Error at GET request: " + www.error);
-
-            CityStats stats = null;
-            bool statsFound = JsonUtility.FromJson<StatsData>(www.downloadHandler.text).data.Count > 0;
-            if (statsFound) stats = (CityStats) JsonUtility.FromJson<StatsData>(www.downloadHandler.text).data[0];
-            response?.Invoke(statsFound, stats);
-        }
-
-        public static IEnumerator GetExpeditionUserStats(Action<bool, ExpeditionStats> response, string data)
-        {
-            using UnityWebRequest www = UnityWebRequest.Post(_getUri, data, _CONTENT_TYPE);
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-                throw new Exception("Error at GET request: " + www.error);
-
-            ExpeditionStats stats = null;
-            bool statsFound = JsonUtility.FromJson<StatsData>(www.downloadHandler.text).data.Count > 0;
-            if (statsFound) stats = (ExpeditionStats)JsonUtility.FromJson<StatsData>(www.downloadHandler.text).data[0];
-            response?.Invoke(statsFound, stats);
+            response?.Invoke(statsFound, result);
         }
 
         public static IEnumerator PostData(string data)
@@ -364,7 +412,7 @@ namespace GGG.Components.Serialization
             print($"POST Request Successful");
         }
 
-        public static IEnumerator UpdateData(string data)
+        public static IEnumerator DeleteData(string data)
         {
             using UnityWebRequest www = UnityWebRequest.Post(_deleteUri, data, _CONTENT_TYPE);
             yield return www.SendWebRequest();

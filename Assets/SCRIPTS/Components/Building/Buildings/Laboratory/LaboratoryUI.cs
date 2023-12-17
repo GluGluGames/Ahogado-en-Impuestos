@@ -56,7 +56,9 @@ namespace GGG.Components.Buildings.Laboratory
         private int _researchDone;
         private bool _open;
 
-        private Action _onResourceFinish;
+        public Action OnResourceResearch;
+        public Action OnBuildResearch;
+        
 
         private void Awake()
         {
@@ -258,12 +260,14 @@ namespace GGG.Components.Buildings.Laboratory
             {
                 _laboratories[id].ActiveResource(idx).Unlock();
                 _laboratories[id].SetActiveResource(idx, null);
+                OnResourceResearch?.Invoke();
             }
 
             if (_laboratories[id].ActiveBuilding(idx))
             {
                 _laboratories[id].ActiveBuilding(idx).Unlock();
                 _laboratories[id].SetActiveBuild(idx, null);
+                OnBuildResearch?.Invoke();
             }
             
             _laboratories[id].ActiveBar(idx, false);

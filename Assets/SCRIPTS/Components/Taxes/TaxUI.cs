@@ -44,6 +44,8 @@ namespace GGG.Components.Taxes
         private bool _open;
 
         public Action OnOptionSelected;
+        public static Action OnTaxesPay;
+        public static Action OnTaxesNotPay;
 
         private IEnumerator Start()
         {
@@ -125,6 +127,7 @@ namespace GGG.Components.Taxes
 
             StartCoroutine(AchievementsManager.Instance.UnlockAchievement("07"));
             GenerateTaxesAmount();
+            OnTaxesPay?.Invoke();
             
             Close();
             _dialogueBox.AddNewDialogue(PayDialogue);
@@ -161,7 +164,8 @@ namespace GGG.Components.Taxes
                 _dialogueBox.AddNewDialogue(NotPayWithoutBuildingsDialogue);
                 GameManager.Instance.OnUIOpen();
             }
-            
+
+            OnTaxesNotPay?.Invoke();
             GenerateTaxesAmount();
             Close();
         }
