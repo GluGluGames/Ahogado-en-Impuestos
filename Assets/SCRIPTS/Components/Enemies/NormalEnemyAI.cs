@@ -15,17 +15,10 @@ namespace GGG.Components.Enemies
         public StateTransition DetectPlayer;
         public StateTransition LostPatience;
         public StateTransition Rested;
-        public StateTransition Notified;
-        public StateTransition EnemyFoundWhileBT;
-        public StateTransition EnemyNotFoundWhileBT;
-
 
         public PushPerception playerDetected;
         public PushPerception playerLost;
         public PushPerception RestedPush;
-        public PushPerception NotifiedPush;
-        public PushPerception EnemyFoundWhileBTPush;
-        public PushPerception EnemyNotFoundWhileBTPush;
 
         public System.Action StartPatrol;
         public System.Func<Status> UpdatePatrol;
@@ -38,9 +31,16 @@ namespace GGG.Components.Enemies
 
         public FSM NormalEnemyBehaviour = new FSM();
 
-
-
         #region BT
+
+        public StateTransition Notified;
+        public StateTransition EnemyFoundWhileBT;
+        public StateTransition EnemyNotFoundWhileBT;
+
+        public PushPerception EnemyFoundWhileBTPush;
+        public PushPerception EnemyNotFoundWhileBTPush;
+        public PushPerception NotifiedPush;
+
         public Action StartCheckOnDestination;
         public Func<Status> UpdateCheckOnDestination;
 
@@ -61,8 +61,7 @@ namespace GGG.Components.Enemies
 
         public BSRuntimeDebugger _bsRunTimeDebugger;
 
-
-        #endregion
+        #endregion BT
 
         protected override BehaviourGraph CreateGraph()
         {
@@ -87,12 +86,12 @@ namespace GGG.Components.Enemies
 
             Rested = NormalEnemyBehaviour.CreateTransition(Sleep, Patrol, statusFlags: StatusFlags.None);
 
-
             playerDetected = new PushPerception(DetectPlayer);
             playerLost = new PushPerception(LostPatience);
             RestedPush = new PushPerception(Rested);
 
             #region BT
+
             BehaviourTree subBehaviourTree = new BehaviourTree();
 
             FunctionalAction CheckOnDestinationAction = new FunctionalAction();
@@ -139,10 +138,11 @@ namespace GGG.Components.Enemies
             BasicLoop.Iterations = -1;
 
             subBehaviourTree.SetRootNode(BasicLoop);
-            #endregion
+
+            #endregion BT
 
             SubsystemAction notifiedAction = new SubsystemAction(subBehaviourTree);
-            State NotifiedState= NormalEnemyBehaviour.CreateState("BT", notifiedAction);
+            State NotifiedState = NormalEnemyBehaviour.CreateState("BT", notifiedAction);
 
             Notified = NormalEnemyBehaviour.CreateTransition(Patrol, NotifiedState, statusFlags: StatusFlags.Success);
             NotifiedPush = new PushPerception(Notified);

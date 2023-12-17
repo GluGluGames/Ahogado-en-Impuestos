@@ -1,3 +1,4 @@
+using GGG.Components.HexagonalGrid;
 using GGG.Components.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -72,17 +73,17 @@ namespace GGG.Components.Enemies
         private void EnemiesToNotify()
         {
             EnemiesOnRange = enemiesOnRangeFOV.FieldOfViewCheck();
-
+            HexTile hexTileNotified = enemyComp.movementController.ChooseNeighbourTileAway((int)fov.radius, 0, enemyComp.movementController.GetCurrentTile());
             foreach (Transform t in EnemiesOnRange)
             {
                 if (t.TryGetComponent(out NormalEnemy normalEnemy))
                 {
-                    normalEnemy.GetNotified(enemyComp.movementController.GetCurrentTile());
+                    normalEnemy.GetNotified(hexTileNotified);
                 }
                 else
                 {
                     t.TryGetComponent(out MiniEnemy miniEnemy);
-                    miniEnemy.GetNotified(enemyComp.movementController.GetCurrentTile());
+                    miniEnemy.GetNotified(hexTileNotified);
                 }
             }
         }

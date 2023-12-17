@@ -112,28 +112,28 @@ namespace GGG.Components.Enemies
 
         public HexTile Flee(int maxDepth)
         {
-            HexTile destination = chooseNeighbourTileAway(maxDepth, 0, currentTile);
+            HexTile destination = ChooseNeighbourTileAway(maxDepth, 0, currentTile);
             currentPath = Pathfinder.FindPath(currentTile, destination);
             currentPath.Reverse();
             if (currentPath != null) { gotPath = true; }
             return destination;
         }
 
-        private HexTile chooseNeighbourTileAway(int maxDepth, int curDepth, HexTile tile)
+        public HexTile ChooseNeighbourTileAway(int maxDepth, int curDepth, HexTile tile)
         {
             int aux = Random.Range(0, tile.neighbours.Count);
             HexTile auxTile = tile.neighbours[aux];
 
             if (Vector3.Distance(auxTile.transform.position, currentTile.transform.position) <= Vector3.Distance(tile.transform.position, currentTile.transform.position))
             {
-                auxTile = chooseNeighbourTileAway(maxDepth, curDepth, tile);
+                auxTile = ChooseNeighbourTileAway(maxDepth, curDepth, tile);
             }
             else
             {
                 curDepth++;
                 if (curDepth < maxDepth)
                 {
-                    auxTile = chooseNeighbourTileAway(maxDepth, curDepth, auxTile);
+                    auxTile = ChooseNeighbourTileAway(maxDepth, curDepth, auxTile);
                 }
             }
             return auxTile;

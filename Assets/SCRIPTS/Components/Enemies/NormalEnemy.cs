@@ -111,7 +111,7 @@ namespace GGG.Components.Enemies
             {
                 Debug.Log("exit to chase");
                 ai.EnemyFoundWhileBTPush.Fire();
-                return BehaviourAPI.Core.Status.Success;
+                return BehaviourAPI.Core.Status.None;
             };
 
             ai.UpdateMoveClose += () =>
@@ -141,7 +141,7 @@ namespace GGG.Components.Enemies
             {
                 Debug.Log("Go back to patrol");
                 ai.EnemyNotFoundWhileBTPush.Fire();
-                return BehaviourAPI.Core.Status.Success;
+                return BehaviourAPI.Core.Status.None;
             };
 
             ai.UpdateWalkToDestination += () =>
