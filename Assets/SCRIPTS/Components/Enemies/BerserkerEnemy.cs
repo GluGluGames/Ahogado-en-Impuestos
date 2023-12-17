@@ -168,7 +168,7 @@ namespace GGG.Components.Enemies
             patience++;
             if (patience == maxPatience)
             {
-                //StartCoroutine(onStaminaRecharge());
+                //StartCoroutine(OnStaminaRecharge());
                 ai.lostPatiencePush.Fire();
                 patience = 0;
             }

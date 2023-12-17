@@ -16,13 +16,16 @@ namespace GGG.Components.Enemies
         public StateTransition LostPatience;
         public StateTransition Rested;
         public StateTransition Notified;
+        public StateTransition EnemyFoundWhileBT;
+        public StateTransition EnemyNotFoundWhileBT;
 
-        public ExitTransition exit;
 
         public PushPerception playerDetected;
         public PushPerception playerLost;
         public PushPerception RestedPush;
         public PushPerception NotifiedPush;
+        public PushPerception EnemyFoundWhileBTPush;
+        public PushPerception EnemyNotFoundWhileBTPush;
 
         public System.Action StartPatrol;
         public System.Func<Status> UpdatePatrol;
@@ -53,7 +56,7 @@ namespace GGG.Components.Enemies
         public Action StartWalkToDestination;
         public Func<Status> UpdateWalkToDestination;
 
-        public Func<bool> ConditionSeeNodeCheck;
+        public Func<bool> ConditionSeePlayerCheck;
         public Func<bool> ConditionKeepSearchingCheck;
 
         public BSRuntimeDebugger _bsRunTimeDebugger;
@@ -72,8 +75,6 @@ namespace GGG.Components.Enemies
             Chase_action.onStarted = StartChase;
             Chase_action.onUpdated = UpdateChase;
             State Chase = NormalEnemyBehaviour.CreateState("chase", Chase_action);
-
-            exit = NormalEnemyBehaviour.CreateExitTransition(Chase, Status.None, statusFlags: StatusFlags.None);
 
             FunctionalAction Sleep_action = new FunctionalAction();
 
@@ -105,7 +106,7 @@ namespace GGG.Components.Enemies
             LeafNode ChaseExit = subBehaviourTree.CreateLeafNode(ChaseExitAction);
 
             ConditionNode ConditionSeeNode = subBehaviourTree.CreateDecorator<ConditionNode>(ChaseExit);
-            ConditionSeeNode.Perception = new ConditionPerception(ConditionSeeNodeCheck);
+            ConditionSeeNode.Perception = new ConditionPerception(ConditionSeePlayerCheck);
 
             FunctionalAction MoveCloseAction = new FunctionalAction();
             MoveCloseAction.onStarted = StartMoveClose;
@@ -143,8 +144,14 @@ namespace GGG.Components.Enemies
             SubsystemAction notifiedAction = new SubsystemAction(subBehaviourTree);
             State NotifiedState= NormalEnemyBehaviour.CreateState("BT", notifiedAction);
 
-            Notified = NormalEnemyBehaviour.CreateTransition(Patrol, NotifiedState, statusFlags: StatusFlags.None);
+            Notified = NormalEnemyBehaviour.CreateTransition(Patrol, NotifiedState, statusFlags: StatusFlags.Success);
             NotifiedPush = new PushPerception(Notified);
+
+            EnemyFoundWhileBT = NormalEnemyBehaviour.CreateTransition(NotifiedState, Chase, statusFlags: StatusFlags.None);
+            EnemyNotFoundWhileBT = NormalEnemyBehaviour.CreateTransition(NotifiedState, Patrol, statusFlags: StatusFlags.None);
+
+            EnemyFoundWhileBTPush = new PushPerception(EnemyFoundWhileBT);
+            EnemyNotFoundWhileBTPush = new PushPerception(EnemyNotFoundWhileBT);
 
             _bsRunTimeDebugger.RegisterGraph(NormalEnemyBehaviour, "DETECTADO BT");
 
