@@ -1,8 +1,6 @@
 using GGG.Components.HexagonalGrid;
 using GGG.Components.UI;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 
 namespace GGG.Components.Enemies
@@ -18,13 +16,14 @@ namespace GGG.Components.Enemies
         private List<Transform> EnemiesOnRange;
 
         private float CurrentTimeSleeping = 0f;
+
         private void Awake()
         {
             ai.StartPatrol += () =>
             {
                 Debug.Log("Patrullo");
                 fov.imBlinded = false;
-                //StateUI.ChangeState(StateIcon.PatrolState);
+                StateUI.ChangeState(StateIcon.PatrolState);
             };
 
             ai.UpdatePatrol += () =>
@@ -32,7 +31,6 @@ namespace GGG.Components.Enemies
                 if (fov.FieldOfViewCheck().Count == 0) return BehaviourAPI.Core.Status.Running;
 
                 enemyComp.currentTile = enemyComp.movementController.GetCurrentTile();
-                Debug.Log("VEO PLAYER");
                 EnemiesToNotify();
 
                 return BehaviourAPI.Core.Status.Success;
@@ -40,7 +38,7 @@ namespace GGG.Components.Enemies
 
             ai.StartNotify += () =>
             {
-                Debug.Log("Notifico");
+
             };
 
             ai.UpdateNotify += () =>
@@ -51,23 +49,21 @@ namespace GGG.Components.Enemies
 
             ai.StartSleep += () =>
             {
-                Debug.Log("duermo");
-                //StateUI.ChangeState(StateIcon.SleepState);
+                StateUI.ChangeState(StateIcon.WarningState);
             };
 
             ai.UpdateSleep += () =>
             {
-                if(CurrentTimeSleeping >= enemyComp.restTime) 
+                if (CurrentTimeSleeping >= enemyComp.restTime)
                 {
                     CurrentTimeSleeping = 0f;
                     return BehaviourAPI.Core.Status.Success;
                 }
-                
+
                 CurrentTimeSleeping += Time.deltaTime;
 
                 return BehaviourAPI.Core.Status.Running;
             };
-
         }
 
         private void EnemiesToNotify()

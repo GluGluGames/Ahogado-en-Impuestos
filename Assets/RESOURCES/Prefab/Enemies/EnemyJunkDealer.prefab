@@ -115,9 +115,9 @@ MonoBehaviour:
   cubeCoordPos: {x: 0, y: 0, z: 0}
   isDirty: 0
   movementController: {fileID: 0}
-  model1: {fileID: 0}
-  model2: {fileID: 0}
-  myLayerInt: 15
+  model1: {fileID: 1621794912889225202}
+  model2: {fileID: 6519492152924909185}
+  myLayerInt: 14
 --- !u!114 &8027027143482638467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,8 +134,8 @@ MonoBehaviour:
   ai: {fileID: 7556770411741076793}
   enemyComp: {fileID: 3331947095449941960}
   staminaRechargeTime: 2
-  StateUI: {fileID: 0}
-  visionFrequency: 0
+  StateUI: {fileID: 3259373680921100974}
+  visionFrequency: 0.1
   MaxTiredness: 6
 --- !u!114 &7556770411741076793
 MonoBehaviour:
@@ -164,8 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2194f4586e2603840a841e4e8169b682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
-  angle: 360
+  radius: 6
+  angle: 100
   playerRef: {fileID: 0}
   targetMask:
     serializedVersion: 2
@@ -238,19 +238,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -258,7 +258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -307,6 +307,10 @@ PrefabInstance:
     - target: {fileID: 7036213049465896255, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8417361359673230750, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
       propertyPath: m_Materials.Array.size
@@ -386,6 +390,11 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1621794912889225202 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
+  m_PrefabInstance: {fileID: 2093512390838455702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1911530720597338749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 494650d0cf6166d498159e35123d49ec, type: 3}
@@ -550,3 +559,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9163506941226278382, guid: c9bf2c8ba1a657945977f48ab4ce5c5e, type: 3}
   m_PrefabInstance: {fileID: 7234783002048417870}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3259373680921100974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5286245022498165472, guid: c9bf2c8ba1a657945977f48ab4ce5c5e, type: 3}
+  m_PrefabInstance: {fileID: 7234783002048417870}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3df1347cddad9348976751747266053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

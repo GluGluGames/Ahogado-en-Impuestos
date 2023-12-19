@@ -108,6 +108,14 @@ namespace GGG.Components.Enemies
             }
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") 
+                || other.transform.gameObject.layer != LayerMask.NameToLayer("Berserker") 
+                || other.transform.gameObject.layer != LayerMask.NameToLayer("JunkDealer") 
+                || other.transform.gameObject.layer != LayerMask.NameToLayer("EnemySentinel")) return;
+        }
+
         private void checkVision()
         {
             if (target == null) return;

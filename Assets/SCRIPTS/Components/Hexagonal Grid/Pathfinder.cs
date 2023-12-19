@@ -35,17 +35,6 @@ namespace GGG.Components.HexagonalGrid
             return path;
         }
 
-        public static HexTile GetWalkableRandomNeighbour(HexTile origin)
-        {
-            int rand = UnityEngine.Random.Range(0, origin.neighbours.Count());
-            HexTile tile = origin.neighbours[rand];
-            if (tile.tileType == TileType.Mountain)
-            {
-                tile = GetWalkableRandomNeighbour(origin);
-            }
-            return tile;
-        }
-
         private static bool EvaluateNextNode(Dictionary<HexTile, Node> nodesNotEvaluated,
             Dictionary<HexTile, Node> nodesAlreadyEvaluated, HexTile origin, HexTile destination,
             out List<HexTile> path)
@@ -139,6 +128,17 @@ namespace GGG.Components.HexagonalGrid
             }
 
             return selectedNode;
+        }
+
+        public static HexTile GetWalkableRandomNeighbour(HexTile origin)
+        {
+            int rand = UnityEngine.Random.Range(0, origin.neighbours.Count());
+            HexTile tile = origin.neighbours[rand];
+            if (tile.tileType == TileType.Mountain)
+            {
+                tile = GetWalkableRandomNeighbour(origin);
+            }
+            return tile;
         }
     }
 }

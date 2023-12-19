@@ -119,7 +119,6 @@ namespace GGG.Components.Enemies
 
             ai.UpdateCheckOnDestination += () =>
             {
-                Debug.Log("check destination");
                 if (enemyComp.movementController.GetCurrentTile() == NotifiedHex || NotifiedHexPath.Count == 0)
                 {
                     return BehaviourAPI.Core.Status.Success;
@@ -132,14 +131,12 @@ namespace GGG.Components.Enemies
 
             ai.UpdateChaseExit += () =>
             {
-                Debug.Log("exit to chase");
                 ai.EnemyFoundWhileBTPush.Fire();
                 return BehaviourAPI.Core.Status.Success;
             };
 
             ai.UpdateMoveClose += () =>
             {
-                Debug.Log("me desplazo cerca");
 
                 if (SearchDelta >= enemyComp.movementController.ticker.tickTime)
                 {
@@ -156,20 +153,19 @@ namespace GGG.Components.Enemies
                 }
 
                 SearchDelta += Time.deltaTime;
+                StateUI.ChangeState(StateIcon.MovingCloseState);
 
                 return BehaviourAPI.Core.Status.Success;
             };
 
             ai.UpdatePatrolExit += () =>
             {
-                Debug.Log("Go back to patrol");
                 ai.EnemyNotFoundWhileBTPush.Fire();
                 return BehaviourAPI.Core.Status.Success;
             };
 
             ai.UpdateWalkToDestination += () =>
             {
-                Debug.Log("Walk towards destination");
                 if (NotifiedHexPath.Count == 0) return BehaviourAPI.Core.Status.Success;
 
                 if (WalkDelta >= enemyComp.movementController.ticker.tickTime)
@@ -185,18 +181,17 @@ namespace GGG.Components.Enemies
                 }
 
                 WalkDelta += Time.deltaTime;
+                StateUI.ChangeState(StateIcon.MovingAtHexState);
                 return BehaviourAPI.Core.Status.Failure;
             };
 
             ai.ConditionSeePlayerCheck += () =>
             {
-                Debug.Log("CheckSeeEnemy");
                 return SeePlayer;
             };
 
             ai.ConditionKeepSearchingCheck += () =>
             {
-                Debug.Log("Keep searching");
                 return SearchPatience > 0;
             };
 
@@ -249,7 +244,6 @@ namespace GGG.Components.Enemies
 
         public void GetNotified(HexTile hexToGo)
         {
-            Debug.Log("soy notificado");
             if (OnBT && !CanEnterBT) return;
 
             Notified = true;

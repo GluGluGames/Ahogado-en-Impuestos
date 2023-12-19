@@ -50,7 +50,7 @@ namespace GGG.Components.Enemies
                 targetOnVision = false;
                 IgnoringPlayer = false;
                 ChasingPlayer = false;
-                //StateUI.ChangeState(StateIcon.PatrolState);
+                StateUI.ChangeState(StateIcon.PatrolState);
             };
 
             ai.UpdatePatrol += () =>
@@ -84,13 +84,7 @@ namespace GGG.Components.Enemies
 
                 StartCountingPatience();
 
-                if(CurrentResource != null)
-                {
-                    Debug.Log(ValueCurrentResource);
-                    Debug.Log(($"VOY A POR RECURSO, TENGO: {CurrentResource.name}"));
-                }
-
-                //StateUI.ChangeState(StateIcon.ChasingState);
+                StateUI.ChangeState(StateIcon.PickingResourceState);
             };
 
             ai.UpdateTaking += () =>
@@ -117,7 +111,7 @@ namespace GGG.Components.Enemies
                 enemyComp.movementController.imChasing = true;
 
                 fov.imBlinded = false;
-                //StateUI.ChangeState(StateIcon.BerserkerState);
+                StateUI.ChangeState(StateIcon.ChasingToStealState);
             };
 
             ai.UpdateStealing += () =>
@@ -137,7 +131,7 @@ namespace GGG.Components.Enemies
                 enemyComp.movementController.movingAllowed = false;
                 StopCountingPatience();
                 fov.imBlinded = true;
-                //StateUI.ChangeState(StateIcon.SleepState);
+                StateUI.ChangeState(StateIcon.SleepState);
 
                 if (deltaSleep >= staminaRechargeTime)
                 {
@@ -268,7 +262,6 @@ namespace GGG.Components.Enemies
                 }
                 else if (IgnoringPlayer || !ChasingPlayer)
                 {
-                    //ResourceComponent resComp;
                     if (t.TryGetComponent<ResourceComponent>(out ResourceComponent resComp) && resComp != null && resComp.GetResource().GetResourceValue() > bestValue)
                     {
                         bestValue = resComp.GetResource().GetResourceValue();
@@ -353,7 +346,8 @@ namespace GGG.Components.Enemies
         private void TakeResourceOnPlayer()
         {
             CurrentResource = CheckPlayerInventory();
-            ValueCurrentResource = CurrentResource.GetResourceValue();
+            if (CurrentResource != null)
+                ValueCurrentResource = CurrentResource.GetResourceValue();
 
             ResourceManager.Instance.resourcesCollected.TryGetValue(CurrentResource, out int quantity);
 

@@ -59,8 +59,6 @@ namespace GGG.Components.Enemies
         public Func<bool> ConditionSeePlayerCheck;
         public Func<bool> ConditionKeepSearchingCheck;
 
-        public BSRuntimeDebugger _bsRunTimeDebugger;
-
         #endregion BT
 
         protected override BehaviourGraph CreateGraph()
@@ -152,8 +150,6 @@ namespace GGG.Components.Enemies
 
             EnemyFoundWhileBTPush = new PushPerception(EnemyFoundWhileBT);
             EnemyNotFoundWhileBTPush = new PushPerception(EnemyNotFoundWhileBT);
-
-            _bsRunTimeDebugger.RegisterGraph(NormalEnemyBehaviour, "DETECTADO BT");
 
             return NormalEnemyBehaviour;
         }

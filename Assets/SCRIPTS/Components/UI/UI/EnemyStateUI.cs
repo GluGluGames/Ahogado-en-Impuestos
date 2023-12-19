@@ -9,7 +9,12 @@ public enum StateIcon
     BerserkerState,
     FleeState,
     SleepState,
-    RestState
+    RestState,
+    ChasingToStealState,
+    MovingAtHexState,
+    MovingCloseState, 
+    PickingResourceState,
+    WarningState
 }
 
 namespace GGG.Components.UI
