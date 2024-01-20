@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using GGG.Components.Scenes;
 using GGG.Shared;
 using UnityEngine.Localization.Settings;
 
@@ -40,18 +41,12 @@ namespace GGG.Components.Core
             _currentState = DebugMode ? GameState.PLAYING : GameState.MENU;
             _currentTutorial = Tutorials.None;
             StartCoroutine(InitializeLanguage());
-            if (!DebugMode) InitializeGame();
+            if (!DebugMode) _sceneManagement.LoadScene(SceneIndexes.MAIN_MENU);
         }
 
         #endregion
 
         #region Functions
-        
-        private void InitializeGame() {
-            _sceneManagement.UnloadActiveScenes();
-            _sceneManagement.AddSceneToLoad(SceneIndexes.LOGIN_SCENE);
-            _sceneManagement.UpdateScenes();
-        }
         
         private IEnumerator InitializeLanguage()
         {

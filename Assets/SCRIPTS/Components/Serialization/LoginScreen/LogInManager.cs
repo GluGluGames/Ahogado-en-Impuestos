@@ -37,12 +37,13 @@ namespace GGG.Components.Serialization.Login
         [SerializeField] private LocalizedString UsernameTaken;
         [SerializeField] private LocalizedString AgeInvalid;
 
-        private SerializationManager.User _currentUser;
+        // private SerializationManager.User _currentUser;
 
+        /*
         private void Start()
         {
-            _currentUser = new SerializationManager.User();
-            _currentUser.Gender = -1;
+            // _currentUser = new SerializationManager.User();
+            //_currentUser.Gender = -1;
             if (!FindObjectOfType<SerializationManager>())
                 throw new Exception("Not Serialization Manager Found");
 
@@ -105,7 +106,7 @@ namespace GGG.Components.Serialization.Login
         private void LoadMainMenu()
         {
             SceneManagement.Instance.AddSceneToLoad(SceneIndexes.MAIN_MENU);
-            SceneManagement.Instance.AddSceneToUnload(SceneIndexes.LOGIN_SCENE);
+            SceneManagement.Instance.AddSceneToUnload(SceneIndexes.MAIN_MENU);
             SceneManagement.Instance.UpdateScenes();
         }
 
@@ -206,7 +207,7 @@ namespace GGG.Components.Serialization.Login
                 },
                 SerializationManager.FindPasswordsJson(_currentUser.Name, _currentUser.Password)));
             
-            
         }
+        */
     }
 }

@@ -14,6 +14,7 @@ using System.Linq;
 using System;
 using GGG.Components.Buildings;
 using GGG.Components.Dialogue;
+using GGG.Components.Scenes;
 using UnityEngine.UI;
 
 namespace GGG.Components.Tutorial

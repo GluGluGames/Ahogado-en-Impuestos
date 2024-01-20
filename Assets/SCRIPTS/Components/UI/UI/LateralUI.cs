@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using GGG.Components.Achievements;
 using GGG.Components.HexagonalGrid;
+using GGG.Components.Scenes;
 using GGG.Shared;
 using Random = UnityEngine.Random;
 
@@ -84,10 +85,8 @@ namespace GGG.Components.UI
                     break;
             }
             
-            _sceneManagement.AddSceneToLoad(sceneIndex);
-            _sceneManagement.AddSceneToUnload(SceneIndexes.GAME_SCENE);
-            _sceneManagement.UpdateScenes();
-
+            _sceneManagement.LoadScene(sceneIndex, SceneIndexes.GAME_SCENE);
+            
             int x = PlayerPrefs.HasKey("Achievement09") ? PlayerPrefs.GetInt("Achievement09") + 1 : 1;
             PlayerPrefs.SetInt("Achievement09", x);
 
@@ -133,7 +132,7 @@ namespace GGG.Components.UI
         {
             if (_gameManager.OnTutorial()) return;
             
-            _sceneManagement.OpenSettings();
+            // _sceneManagement.OpenSettings();
             ToggleMenu();
             _gameManager.OnUIOpen();
         }

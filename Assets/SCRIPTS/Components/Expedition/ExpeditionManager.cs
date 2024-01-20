@@ -1,5 +1,6 @@
 using System;
 using GGG.Components.Core;
+using GGG.Components.Scenes;
 using GGG.Input;
 using UnityEngine;
 
@@ -18,6 +19,6 @@ public class ExpeditionManager : MonoBehaviour
     {
         if (!_input.Escape()) return;
         
-        _sceneManagement.OpenSettings();
+        // _sceneManagement.OpenSettings();
     }
 }

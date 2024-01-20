@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using GGG.Shared;
 using GGG.Components.Player;
-using System.Linq.Expressions;
+using GGG.Components.Scenes;
 using UnityEngine.SceneManagement;
 
 namespace GGG.Components.UI
@@ -78,9 +78,7 @@ namespace GGG.Components.UI
                     currentSceneIndex = SceneIndexes.MINIGAME_LEVEL4;
                 }
 
-                _sceneManagement.AddSceneToLoad(SceneIndexes.GAME_SCENE);
-                _sceneManagement.AddSceneToUnload(currentSceneIndex);
-                _sceneManagement.UpdateScenes();
+                _sceneManagement.LoadScene(SceneIndexes.MAIN_MENU, currentSceneIndex);
                 GameManager.Instance.OnUIClose();
             });
             

@@ -4,19 +4,15 @@ using GGG.Components.Buildings.Laboratory;
 using GGG.Components.Core;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.Player;
-using GGG.Components.Buildings.Shop;
-using GGG.Components.Expedition;
-using GGG.Components.Pickables;
-using GGG.Components.Taxes;
 using GGG.Shared;
 
 using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using GGG.Components.Scenes;
 using GGG.Components.UI;
-using UnityEngine.Networking;
-using Newtonsoft.Json;
 
 namespace GGG.Components.Serialization
 {
@@ -37,27 +33,22 @@ namespace GGG.Components.Serialization
         private const int _SAVE_TIME = 300;
         private const int _TIME_SAVE_TIME = 5;
 
-        private static User _currentUser;
-        private static CityStats _currentUserCityStats;
-        private static ExpeditionStats _currentUserExpeditionStats;
+        // private static User _currentUser;
+        // private static CityStats _currentUserCityStats;
+        // private static ExpeditionStats _currentUserExpeditionStats;
         
-        private const string _CONTENT_TYPE = "application/json";
+        // private const string _CONTENT_TYPE = "application/json";
 
-        private static string _databaseUser;
-        private static string _password;
-        private static string _postUri;
-        private static string _getUri;
-        private static string _deleteUri;
+        // private static string _databaseUser;
+        // private static string _password;
+        // private static string _postUri;
+        // private static string _getUri;
+        // private static string _deleteUri;
         
         private float _delta;
         private float _deltaTime;
-        private bool _auxCorrutine;
+        // private bool _auxCorrutine;
         private bool _initialized;
-        
-        private void Awake()
-        {
-            LoadCredentials();
-        }
 
         private void Start()
         {
@@ -78,15 +69,15 @@ namespace GGG.Components.Serialization
 
             _sceneManagement.OnGameSceneUnloaded += Save;
 
-            _sceneManagement.OnMinigameSceneLoaded += HandleExpeditionStats;
-            _sceneManagement.OnMinigameSceneUnloaded += OnExpeditionUnload;
+            // _sceneManagement.OnMinigameSceneLoaded += HandleExpeditionStats;
+            // _sceneManagement.OnMinigameSceneUnloaded += OnExpeditionUnload;
 
             _delta = 0f;
         }
 
         private void OnDisable()
         {
-            PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString());
+            PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString(CultureInfo.InvariantCulture));
             PlayerPrefs.Save();
             Save();
         }
@@ -97,7 +88,7 @@ namespace GGG.Components.Serialization
 
             if (_deltaTime >= _TIME_SAVE_TIME)
             {
-                AddPlayedTime();
+                // AddPlayedTime();
                 _deltaTime = 0;
             }
 
@@ -126,16 +117,19 @@ namespace GGG.Components.Serialization
             _generatorUI = FindObjectOfType<GeneratorUI>();
             _laboratoryUI = FindObjectOfType<LaboratoryUI>();
 
+            /*
             _buildingManager.OnBuildAdd += OnBuildingAdd;
             _laboratoryUI.OnResourceResearch += AddResourceUnlock;
             _laboratoryUI.OnBuildResearch += AddBuildingUnlock;
             TaxUI.OnTaxesPay += AddPayTaxes;
             TaxUI.OnTaxesNotPay += AddNotPayTaxes;
             ShopUI.OnExchange += AddExchange;
+            */
 
             _initialized = true;
         }
 
+        /*
         private void HandleExpeditionStats()
         {
             TriggerSensor.OnDead += AddDead;
@@ -247,6 +241,7 @@ namespace GGG.Components.Serialization
             yield return UpdateExpeditionStats();
             yield return UpdateCityStats();
         }
+        */
 
         private IEnumerator Load()
         {
@@ -277,6 +272,7 @@ namespace GGG.Components.Serialization
             _generatorUI.SaveGeneratorState();
         }
     
+        /*
         [Serializable]
         private class Credentials
         {
@@ -485,6 +481,7 @@ namespace GGG.Components.Serialization
             print("DELETE Request Successful");
         }
 
+        /*
         private static void LoadCredentials()
         {
 
@@ -507,5 +504,6 @@ namespace GGG.Components.Serialization
                 throw new Exception("Config file not found!");
             }
         }
+        */
     }
 }
