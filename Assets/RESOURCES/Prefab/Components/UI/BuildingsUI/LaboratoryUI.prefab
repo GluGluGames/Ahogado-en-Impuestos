@@ -1384,7 +1384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4063532804071285456
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2406,6 +2406,7 @@ GameObject:
   - component: {fileID: 1451358670189750855}
   - component: {fileID: 4150289532486865245}
   - component: {fileID: 3158042555493865365}
+  - component: {fileID: 6961439510778539020}
   m_Layer: 5
   m_Name: LaboratoryUI
   m_TagString: Untagged
@@ -2483,6 +2484,69 @@ MonoBehaviour:
   - {fileID: 2568037328346598907}
   BackButton: {fileID: 6447145467427945096}
   CloseButton: {fileID: 1371514334102840061}
+--- !u!114 &6961439510778539020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196909627396249169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b38ab1958566d4497ad9324dd9152b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: 5
+  Panels:
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4751921147904
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Image: {fileID: 21300000, guid: fb094f8207a08b249b7779bf7e859b16, type: 3}
+    Text:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4824772014080
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Objectives:
+      Objectives: []
+    Close: 0
+    Finish: 0
+  - Title:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4943378542592
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Image: {fileID: 21300000, guid: 517da3b2c6cb47545bca62a3f588500f, type: 3}
+    Text:
+      m_TableReference:
+        m_TableCollectionName: GUID:a7ab3e919c085f546b5dac2b1573b0ca
+      m_TableEntryReference:
+        m_KeyId: 4999800320000
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Objectives:
+      Objectives: []
+    Close: 1
+    Finish: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &8556966922853785305
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,7 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
-using GGG.Classes.Tutorial;
 using GGG.Components.Core;
-using GGG.Shared;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,97 +9,74 @@ namespace GGG.Components.Tutorial
 {
     public class TutorialUI : MonoBehaviour
     {
-        [SerializeField] private GameObject Viewport;
-        [SerializeField] private GameObject[] Layouts;
-        [SerializeField] private GameObject ObjectivesPanel;
-        [Header("Tutorial Fields")]
-        [SerializeField] private GameObject TitleContainer;
-        [SerializeField] private TMP_Text TitleText;
-        [SerializeField] private TMP_Text[] TutorialText;
-        [SerializeField] private TMP_Text[] Objectives;
-        [SerializeField] private Image TutorialImage;
-        
+        private GameManager _gameManager;
+        private List<TutorialLayout> _layouts;
+        private TutorialTitle _title;
+        private GameObject _viewport;
+        private GraphicRaycaster _graphicRaycaster;
+
         private bool _open;
-        public Action OnContinueButton;
+
+        private void Awake()
+        {
+            _layouts = GetComponentsInChildren<TutorialLayout>(true).ToList();
+            _layouts.ForEach(x => x.gameObject.SetActive(false));
+            _title = GetComponentInChildren<TutorialTitle>();
+
+            _graphicRaycaster = GetComponent<GraphicRaycaster>();
+            _graphicRaycaster.enabled = false;
+            
+            _viewport = transform.GetChild(0).gameObject;
+            _viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
+            _viewport.SetActive(false);
+        }
 
         private void Start()
         {
-            Viewport.transform.position = new Vector3(Screen.width * -0.5f, Screen.height * 0.5f);
-            Viewport.SetActive(false);
-            ObjectivesPanel.SetActive(false);
-            foreach (TMP_Text objective in Objectives)
-                objective.gameObject.SetActive(false);
+            _gameManager = GameManager.Instance;
         }
 
-        public void SetTutorialFields(string title, Sprite image, string text)
+        public bool Closed() => !_open;
+
+        public void FillUi(TutorialPanel tutorial)
         {
-            if (!string.IsNullOrEmpty(title))
+            _title.SetTitle(tutorial.GetTitle());
+
+            Sprite image = tutorial.GetImage();
+            foreach (TutorialLayout layout in _layouts)
             {
-                TitleContainer.gameObject.SetActive(true);
-                TitleText.SetText(title);
-            }
-            else TitleContainer.gameObject.SetActive(false);
-            
-            Layouts[0].SetActive(image);
-            Layouts[1].SetActive(!image);
-            
-            TutorialImage.gameObject.SetActive(image);
-            TutorialText[image ? 0 : 1].SetText(!string.IsNullOrEmpty(text) ? text : "");
-            
-            if (image)
-            {
-                TutorialImage.sprite = image;
+                layout.SetImage(image);
+                layout.SetActive(image);
+                layout.SetText(tutorial.GetText());
             }
         }
-
-        public void SetObjectives(TutorialObjective objectives)
-        {
-            if (objectives == null)
-            {
-                ObjectivesPanel.SetActive(false);
-                foreach (TMP_Text objective in Objectives)
-                    objective.gameObject.SetActive(false);
-                
-                return;
-            }
-            
-            ObjectivesPanel.SetActive(true);
-            for (int i = 0; i < objectives.GetObjectives.Length; i++)
-            {
-                Objectives[i].gameObject.SetActive(true);
-                Objectives[i].SetText(objectives.Objective(i).GetLocalizedString());
-            }
-        }
-
-        public void OnContinue() => OnContinueButton.Invoke();
 
         public void Open()
         {
             if (_open) return;
-
             _open = true;
-            Viewport.SetActive(true);
-            GameManager.Instance.OnUIOpen();
-            GameManager.Instance.SetTutorialOpen(true);
             
-            Viewport.transform.DOMoveX(Screen.width * 0.5f, 1f).SetEase(Ease.InQuad);
+            _viewport.SetActive(true);
+            _viewport.transform.DOMoveX(Screen.width * 0.5f, 1f).SetEase(Ease.InQuad);
+            _graphicRaycaster.enabled = true;
+            
+            _gameManager.SetTutorialOpen(true);
+            _gameManager.OnUIOpen();
         }
 
-        public void Close(bool tutorialEnd, bool closeUi)
+        public void Close()
         {
             if (!_open) return;
+            _graphicRaycaster.enabled = false;
 
-            Viewport.transform.DOMoveX(Screen.width * -0.5f, 1f).SetEase(Ease.OutQuad).onComplete += () =>
+            _viewport.transform.DOMoveX(Screen.width * -0.5f, 1f).SetEase(Ease.InQuad).onComplete += () =>
             {
+                _viewport.SetActive(false);
                 _open = false;
-                Viewport.SetActive(false);
-
-                if (tutorialEnd) GameManager.Instance.SetCurrentTutorial(Tutorials.None);
-                if (closeUi) GameManager.Instance.OnUIClose();
-                GameManager.Instance.SetTutorialOpen(false);
+                
+                _gameManager.OnUIClose();
+                _gameManager.SetTutorialOpen(false);
             };
-            
-            
         }
     }
 }
