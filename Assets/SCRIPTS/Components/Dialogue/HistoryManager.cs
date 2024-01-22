@@ -10,21 +10,31 @@ namespace GGG.Components.Dialogue
 {
     public class HistoryManager : MonoBehaviour
     {
+        public static HistoryManager Instance;
+
+        private void Awake()
+        {
+            if (Instance != null) return;
+
+            Instance = this;
+        }
+
         [SerializeField] private DialogueText Dialogue;
 
         private const string _HISTORY_KEY = "History";
         private DialogueBox _dialogueBox;
 
-        public static Action OnHistoryEnd;
+        public Action OnHistoryEnd;
 
         private IEnumerator Start()
         {
+            yield return null;
+            
             if (PlayerPrefs.HasKey(_HISTORY_KEY) && PlayerPrefs.GetInt(_HISTORY_KEY) == 1)
             {
-                OnHistoryEnd.Invoke();
+                OnHistoryEnd?.Invoke();
                 yield break;
             }
-            yield return null;
             
             _dialogueBox = FindObjectOfType<DialogueBox>();
             _dialogueBox.AddNewDialogue(Dialogue);
@@ -40,7 +50,6 @@ namespace GGG.Components.Dialogue
 
         private void EndHistory()
         {
-            GameManager.Instance.SetCurrentTutorial(Tutorials.None);
             PlayerPrefs.SetInt(_HISTORY_KEY, 1);
             OnHistoryEnd?.Invoke();
             _dialogueBox.DialogueEnd -= EndHistory;

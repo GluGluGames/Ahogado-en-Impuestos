@@ -32,6 +32,7 @@ namespace GGG.Components.UI
         private TextMeshProUGUI _costAmountText;
 
         public Action OnUiOpen;
+        public Action OnUiClose;
 
         private void Start()
         {
@@ -133,13 +134,14 @@ namespace GGG.Components.UI
                 _open = false;
             };
 
+            OnUiClose?.Invoke();
             _selectedTile.DeselectTile();
             _selectedTile = null;
         }
 
         private void OnCloseButton()
         {
-            if (!_open || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
+            if (!_open || _gameManager.TutorialOpen()) return;
 
             Close();
         }
