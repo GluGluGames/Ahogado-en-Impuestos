@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using GGG.Components.Achievements;
+using GGG.Components.Buildings;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.UI;
 using GGG.Components.UI.Buttons;
@@ -123,6 +124,9 @@ namespace GGG.Components.Tutorial.Tutorials
             _tileCleanUI.OnUiClose -= OnTileCleanClose;
 
             StartCoroutine(_achievements.UnlockAchievement("01"));
+            
+            TileManager.Instance.SaveTilesState();
+            BuildingManager.Instance.SaveBuildings();
             base.FinishTutorial();
         }
     }
