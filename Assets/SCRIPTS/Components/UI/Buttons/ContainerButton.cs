@@ -7,6 +7,7 @@ namespace GGG.Components.UI.Buttons
 {
     public class ContainerButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [SerializeField] private int Index;
         [Header("Images")] [SerializeField] private Image Icon;
         [SerializeField] private Sprite NormalIcon;
         [SerializeField] private Sprite SelectedIcon;
@@ -17,11 +18,22 @@ namespace GGG.Components.UI.Buttons
         private bool _selected;
 
         public Action OnButtonClick;
+        public Action<ContainerButton> OnSelect;
+
+        public int GetIndex() => Index;
 
         public void Initialize()
         {
             _selected = ActivatePanel.activeInHierarchy;
             Icon.sprite = _selected ? SelectedIcon : NormalIcon;
+        }
+
+        public void SelectButton()
+        {
+            ActivatePanel.SetActive(true);
+
+            Icon.sprite = SelectedIcon;
+            _selected = true;
         }
 
         public void DeselectButton()
@@ -35,11 +47,10 @@ namespace GGG.Components.UI.Buttons
         public void OnPointerClick(PointerEventData eventData)
         {
             if (_selected) return;
-            ActivatePanel.SetActive(true);
-
-            Icon.sprite = SelectedIcon;
-            _selected = true;
+            SelectButton();
+            
             OnButtonClick?.Invoke();
+            OnSelect?.Invoke(this);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
