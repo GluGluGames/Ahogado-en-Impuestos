@@ -11,12 +11,12 @@ namespace GGG.Components.Buildings.Shop
 
         public override void Interact()
         {
-            _shop.OpenShop(CurrentLevel());
+            _shop.Open();
         }
 
         public override void OnBuildDestroy()
         {
-            _shop.StopAllCoroutines();
+            FindObjectOfType<ShopTimer>().StopAllCoroutines();
         }
     }
 }

@@ -77,7 +77,7 @@ namespace GGG.Components.Serialization
 
         private void OnDisable()
         {
-            PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString(CultureInfo.InvariantCulture));
+            PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString("hh:mm:ss"));
             PlayerPrefs.Save();
             Save();
         }
