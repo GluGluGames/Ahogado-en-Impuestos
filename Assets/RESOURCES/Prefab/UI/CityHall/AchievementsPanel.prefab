@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4660527243297198457}
   - component: {fileID: 2434395152708378948}
+  - component: {fileID: 6998091884928781751}
   m_Layer: 5
   m_Name: AchievementsPanel
   m_TagString: Untagged
@@ -66,6 +67,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &6998091884928781751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5563602341200569139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c16fe6e397bbc4292ca6baf1cf2776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &923330993293463336
 PrefabInstance:
   m_ObjectHideFlags: 0

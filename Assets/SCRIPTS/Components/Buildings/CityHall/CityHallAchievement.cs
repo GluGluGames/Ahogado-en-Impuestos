@@ -2,9 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GGG.Components.UI.Containers
+namespace GGG.Components.Buildings.CityHall
 {
-    public class AchievementContainer : MonoBehaviour
+    public class CityHallAchievement : MonoBehaviour
     {
         [SerializeField] private TMP_Text AchievementTitle;
         [SerializeField] private TMP_Text AchievementDescription;
@@ -25,6 +25,5 @@ namespace GGG.Components.UI.Containers
 
             AchievementTitle.color = unlock ? new Color(0, 0.28f, 0.06f) : new Color(0.3f, 0.02f, 0f);
         }
-
     }
 }
