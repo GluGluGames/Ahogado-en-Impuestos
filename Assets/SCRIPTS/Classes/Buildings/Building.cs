@@ -49,7 +49,7 @@ namespace GGG.Classes.Buildings
         [Tooltip("Determines the vision range of the building")] 
         [SerializeField] private int VisionRange;
 
-        private bool _beingResearch;
+        [SerializeField] bool _beingResearch;
 
         public string GetKey() => Key;
 

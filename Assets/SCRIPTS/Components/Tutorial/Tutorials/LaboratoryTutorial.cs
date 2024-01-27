@@ -1,3 +1,4 @@
+using GGG.Components.Buildings.Laboratory;
 using GGG.Components.Buildings.Museum;
 using UnityEngine;
 
@@ -7,13 +8,15 @@ namespace GGG.Components.Tutorial.Tutorials
     {
         protected override void TutorialCondition()
         {
-            MuseumUI.OnMuseumOpen += StartTutorialNoEnum;
+            LaboratoryUI.OnLaboratoryOpen += Aux;
         }
 
         protected override void FinishTutorial()
         {
-            MuseumUI.OnMuseumOpen -= StartTutorialNoEnum;
+            LaboratoryUI.OnLaboratoryOpen -= Aux;
             base.FinishTutorial();
         }
+
+        private void Aux(Laboratory aux) => StartTutorialNoEnum();
     }
 }

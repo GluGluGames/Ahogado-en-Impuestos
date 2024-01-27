@@ -268,7 +268,6 @@ namespace GGG.Components.Serialization
             
             _playerManager.SaveResourcesCount();
             _hudManager.SaveShownResources();
-            _laboratoryUI.SaveResearchProgress();
             _generatorUI.SaveGeneratorState();
         }
     
