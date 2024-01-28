@@ -56,6 +56,7 @@ namespace GGG.Components.Buildings
 
         public override void Boost()
         {
+            base.Boost();
             if (_currentLevel == 1) _currentGeneration -= InitialGeneration * 0.25f;
             else _currentGeneration -= ResourcesGeneration[_currentLevel - 2] * 0.25f;
 
@@ -64,6 +65,7 @@ namespace GGG.Components.Buildings
 
         public override void EndBoost()
         {
+            base.EndBoost();
             if (_currentLevel == 1) _currentGeneration += InitialGeneration * 0.25f;
             else _currentGeneration += ResourcesGeneration[_currentLevel - 2] * 0.25f;
 

@@ -3,16 +3,20 @@ using GGG.Shared;
 
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GGG.Components.Buildings {
     public abstract class BuildingComponent : MonoBehaviour {
         [Tooltip("Type of building")]
         [SerializeField] protected Building BuildingData;
+        [SerializeField] private GameObject BoostParticles;
+        [SerializeField] private Sound BoostSound;
         
-        protected int _currentLevel = 1;
         private ResourceCost _currentCost;
-        protected bool _boosted;
+        private GameObject _particles;
+        protected int _currentLevel = 1;
         private int _id;
+        protected bool _boosted;
         
         public Action<BuildingComponent> OnBuildSelect;
 
@@ -35,12 +39,13 @@ namespace GGG.Components.Buildings {
 
         public virtual void Boost()
         {
-            print($"Boost not implemented on {name}");
+            SoundManager.Instance.Play(BoostSound);
+            _particles = Instantiate(BoostParticles, transform.position, Quaternion.identity, transform);
         }
 
         public virtual void EndBoost()
         {
-            print($"Boost not implemented on {name}");
+            Destroy(_particles);
         }
 
         public virtual void OnBuildDestroy() { }

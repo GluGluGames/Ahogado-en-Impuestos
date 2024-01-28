@@ -7,13 +7,15 @@ namespace GGG.Components.Tutorial.Tutorials
     {
         protected override void TutorialCondition()
         {
-            GeneratorUI.OnGeneratorOpen += StartTutorialNoEnum;
+            GeneratorUI.OnGeneratorOpen += Aux;
         }
 
         protected override void FinishTutorial()
         {
-            GeneratorUI.OnGeneratorOpen -= StartTutorialNoEnum;
+            GeneratorUI.OnGeneratorOpen -= Aux;
             base.FinishTutorial();
         }
+
+        private void Aux(Generator generator) => StartTutorialNoEnum();
     }
 }

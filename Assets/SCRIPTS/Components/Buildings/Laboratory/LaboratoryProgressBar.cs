@@ -75,7 +75,8 @@ namespace GGG.Components.Buildings.Laboratory
                 gameObject.SetActive(false);
                 return;
             }
-
+            
+            gameObject.SetActive(true);
             if (!_laboratory.IsBarActive(Index)) return;
             
             _delta = _laboratory.DeltaTime(Index);
