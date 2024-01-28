@@ -31,14 +31,16 @@ namespace GGG.Components.Buildings
 
         private void Update()
         {
-            if (!_resourceModel) return;
+            if (_generationResource) Produce();
+            
+            if (!ResourceModel()) return;
             
             _resourceModel.transform.Rotate(Vector3.up * (Time.deltaTime * 25f));
         }
 
         public override void Interact()
         {
-            _ui.Open(FarmType, _generationResource, this);
+            _ui.Open(this);
         }
 
         protected override void OnLevelUp()
@@ -51,7 +53,6 @@ namespace GGG.Components.Buildings
         {
             _generationResource = null;
             _resourceModel = null;
-            _ui.RemoveModel(this);
         }
 
         public override void Boost()
@@ -72,7 +73,7 @@ namespace GGG.Components.Buildings
             _boosted = false;
         }
 
-        public void Produce()
+        private void Produce()
         {
             if(!_generationResource) return;
             
@@ -83,28 +84,20 @@ namespace GGG.Components.Buildings
             _playerManager.AddResource(_generationResource.GetKey(), 1);
             _cooldownDelta = _currentGeneration;
         }
-
-        /// <summary>
-        /// Gets the resource that the farm is generating
-        /// </summary>
-        /// <returns>The resource that the farm is generating</returns>
+        
         public Resource GetResource() => _generationResource;
-
-        /// <summary>
-        /// Sets the resource to be generated
-        /// </summary>
-        /// <param name="resource">The resource that is going to generate this farm</param>
         public void Resource(Resource resource) => _generationResource = resource;
+        public GameObject ResourceModel() => _resourceModel;
+        public void SetResourceModel(Resource resource)
+        {
+            if (_resourceModel) Destroy(_resourceModel);
 
-        public GameObject ResourceMode() => _resourceModel;
-        public void SetResourceModel(GameObject resource) => _resourceModel = resource;
-
-        /// <summary>
-        /// Gets the generation based on the level of the building.
-        /// </summary>
-        /// <param name="level">Level of the building</param>
-        /// <returns>The time (in seconds) between the generation of 1 resource</returns>
+            _resourceModel =
+                Instantiate(resource.GetModel(), transform.position + Vector3.up * 3, Quaternion.identity, transform);
+            _resourceModel.transform.localScale = resource.GetModelScale();
+        }
         public float GetGeneration() => _currentGeneration;
+        public FarmTypes Type() => FarmType;
 
     }
 }

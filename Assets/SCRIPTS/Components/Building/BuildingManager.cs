@@ -47,7 +47,6 @@ namespace GGG.Components.Buildings
         private List<BuildingComponent> _achievementsBuildings = new(3);
 
         
-        private readonly List<Farm> _farms = new();
         private int _currentId = 1;
         
         private const string _EXIT_TIME = "ExitTime";
@@ -68,13 +67,6 @@ namespace GGG.Components.Buildings
             }
         }
 
-        private void Update() {
-            if (_farms.Count == 0 || _gameManager.GetCurrentTutorial() == Tutorials.BuildTutorial) return;
-
-            foreach (Farm farm in _farms) 
-                farm.Produce();
-        }
-
         private void Start()
         {
             _player = PlayerManager.Instance;
@@ -89,15 +81,6 @@ namespace GGG.Components.Buildings
         }
 
         public List<BuildingComponent> GetBuildings() => _buildings;
-
-        private void ResourceSummary(Farm farm, TimeSpan time)
-        {
-            int generatedTime = time.Minutes >= 180 ? 180 : time.Minutes;
-            int resourcesGenerated = Mathf.RoundToInt(
-                generatedTime * 60 / (farm.GetGeneration() + (farm.IsBoost() ? farm.GetGeneration() * 0.25f : 0)));
-            
-            _player.AddResource(farm.GetResource().GetKey(), resourcesGenerated);
-        }
 
         public void AddBuilding(BuildingComponent build)
         {
@@ -116,8 +99,7 @@ namespace GGG.Components.Buildings
             
             int formula = Mathf.RoundToInt(building.GetBuildingCost().GetCost(0) * Mathf.Pow(_RATE_GROW, _buildingsCount[building]));
             _buildingsCosts[building].SetCost(0, formula);
-
-            if (build.GetType() == typeof(Farm)) _farms.Add((Farm) build);
+            
             OnBuildAdd?.Invoke(build.BuildData().GetKey(), _buildingsCount[building]);
             SaveBuildings();
         }
@@ -160,7 +142,6 @@ namespace GGG.Components.Buildings
             int formula = Mathf.RoundToInt(building.GetBuildingCost().GetCost(0) * Mathf.Pow(_RATE_GROW, _buildingsCount[building]));
             _buildingsCosts[building].SetCost(0, formula <= 0 ? 0 : formula);
             
-            if (build.GetType() == typeof(Farm)) _farms.Remove((Farm) build);
             SaveBuildings();
         }
 
@@ -197,12 +178,6 @@ namespace GGG.Components.Buildings
                     CurrentCost = build.CurrentCost().GetCost(),
                     CurrentResourcesCost = aux.ToArray()
                 };
-
-                if (build.GetType() == typeof(Farm))
-                {
-                    Farm farm = (Farm)build;
-                    if (farm.GetResource()) data.FarmResource = farm.GetResource().GetKey();
-                }
                 
                 data.IsBoost = build.BuildData().CanBeBoost() && build.IsBoost();
 
@@ -249,19 +224,6 @@ namespace GGG.Components.Buildings
                 buildingComponents[i].SetId(buildData.Id);
                 buildingComponents[i].SetLevel(buildData.Level);
                 buildingComponents[i].SetCurrentCost(new ResourceCost(buildData.CurrentCost, aux.ToArray()));
-                
-                if (buildingComponents[i].GetType() == typeof(Farm))
-                {
-                    Farm farm = (Farm)buildingComponents[i];
-                    if (!string.IsNullOrEmpty(buildData.FarmResource))
-                    {
-                        farm.Resource(_player.GetResource(buildData.FarmResource));
-                        GameObject resource = Instantiate(farm.GetResource().GetModel(),
-                            farm.transform.position + new Vector3(0, 2.5f), Quaternion.identity, farm.transform);
-                        resource.transform.localScale = farm.GetResource().GetModelScale();
-                        farm.SetResourceModel(resource);
-                    }
-                }
 
                 if (buildingComponents[i].BuildData().CanBeBoost() && buildData.IsBoost)
                     buildingComponents[i].Boost();
@@ -273,14 +235,6 @@ namespace GGG.Components.Buildings
 
             while(_buildings.Find((x) => x.Id() == _currentId)) _currentId++;
             _buildings = buildingComponents.ToList();
-
-            if (_farms.Count == 0)
-            {
-                TimeSpan time = DateTime.Now.Subtract(DateTime.Parse(PlayerPrefs.GetString("ExitTime")));
-
-                if (time.Minutes < 1f)
-                    foreach (Farm farm in _farms) if (farm.GetResource()) ResourceSummary(farm, time);
-            }
             
             OnBuildsLoad?.Invoke(buildingComponents);
         }

@@ -7,13 +7,15 @@ namespace GGG.Components.Tutorial.Tutorials
     {
         protected override void TutorialCondition()
         {
-            FarmUI.OnFarmUIOpen += StartTutorialNoEnum;
+            FarmUI.OnFarmUIOpen += Aux;
         }
 
         protected override void FinishTutorial()
         {
-            FarmUI.OnFarmUIOpen -= StartTutorialNoEnum;
+            FarmUI.OnFarmUIOpen -= Aux;
             base.FinishTutorial();
         }
+
+        private void Aux(Farm farm) => StartTutorialNoEnum();
     }
 }
