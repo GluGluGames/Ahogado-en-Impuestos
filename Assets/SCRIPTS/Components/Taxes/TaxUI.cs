@@ -61,7 +61,8 @@ namespace GGG.Components.Taxes
 
             yield return null;
             
-            _player.OnPlayerInitialized += GenerateTaxesAmount;
+            // TODO
+            // _player.OnPlayerInitialized += GenerateTaxesAmount;
         }
 
         private void OnDisable()

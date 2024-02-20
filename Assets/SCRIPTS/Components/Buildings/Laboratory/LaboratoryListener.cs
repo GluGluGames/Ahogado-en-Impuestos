@@ -99,6 +99,8 @@ namespace GGG.Components.Buildings.Laboratory
             OnBuildingResearch?.Invoke(building, _researchIndex);
         }
 
+        public void Research(int bar) => StartCoroutine(StartBar(bar));
+
         private IEnumerator StartBar(int idx)
         {
             float delta = _selectedLaboratory.DeltaTime(idx);

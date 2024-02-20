@@ -30,13 +30,6 @@ namespace GGG.Components.UI
         [SerializeField] private List<GameObject> ResourceContainers;
         [SerializeField] private List<TMP_Text> ResourcesText;
         [SerializeField] private List<Image> ResourcesIcons;
-
-        [Serializable]
-        private class ShownResource
-        {
-            public string Resource;
-            public int Index;
-        }
         
         private PlayerManager _player;
         private GameManager _gameManager;
@@ -68,6 +61,15 @@ namespace GGG.Components.UI
             }
         }
 
+        public List<Resource> ShownResources() => _shownResource;
+        public int GetIndex(Resource resource) => ResourcesIcons.FindIndex(x => x.sprite == resource.GetSprite());
+        public void SetCurrentIndex(int idx) => _currentIdx = idx;
+        public List<Image> GetResourceIcons() => ResourcesIcons;
+        public void AddShownResource(Resource resource) => _shownResource.Add(resource);
+        public void ShowResource(int idx) => ResourceContainers[idx].SetActive(true);
+        public void SetResourceIcon(int idx, Sprite sprite) => ResourcesIcons[idx].sprite = sprite;
+        public void SetResourceText(int idx, string text) => ResourcesText[idx].SetText(text);
+
         public bool ResourceBeingShown(Resource resource) => _shownResource.Find((x) => x == resource);
 
         public bool ShowResource(Resource resource)
@@ -79,7 +81,6 @@ namespace GGG.Components.UI
             
             ResourcesIcons[_currentIdx].sprite = resource.GetSprite();
             ResourcesText[_currentIdx].SetText(_player.GetResourceCount(resource.GetKey()).ToString());
-            SaveShownResources();
             
             if (_currentIdx + 1 >= ResourceContainers.Count) return true;
             _currentIdx += ResourceContainers[_currentIdx + 1].gameObject.activeInHierarchy ? 0 : 1;
@@ -98,68 +99,8 @@ namespace GGG.Components.UI
             
             _shownResource.Remove(resource);
             _currentIdx = _shownResource.Count == 0 ? 0 : ResourceContainers.FindIndex(x => !x.activeInHierarchy);
-            SaveShownResources();
 
             return true;
-        }
-
-        public void SaveShownResources()
-        {
-            ShownResource[] resourcesData = new ShownResource[_shownResource.Count];
-            int i = 0;
-            string filePath = Path.Combine(Application.persistentDataPath, "shown_resources.json");
-
-            foreach (Resource resource in _shownResource)
-            {
-                ShownResource resourceData = new()
-                {
-                    Resource = resource.GetKey(),
-                    Index = ResourcesIcons.FindIndex(x => x.sprite == resource.GetSprite())
-                };
-
-                resourcesData[i] = resourceData;
-                i++;
-            }
-
-            string jsonData = JsonHelper.ToJson(resourcesData);
-            File.WriteAllText(filePath, jsonData);
-        }
-
-        public IEnumerator LoadShownResource()
-        {
-            string filePath = Path.Combine(Application.persistentDataPath, "shown_resources.json");
-            string data;
-
-            if (!File.Exists(filePath))
-            {
-                _currentIdx = 0;
-                yield break;
-            }
-            
-            if (filePath.Contains("://") || filePath.Contains(":///")) {
-                UnityWebRequest www = UnityWebRequest.Get(filePath);
-                yield return www.SendWebRequest();
-                data = www.downloadHandler.text;
-            }
-            else {
-                data = File.ReadAllText(filePath);
-            }
-            
-            ShownResource[] resources = JsonHelper.FromJson<ShownResource>(data);
-            
-            foreach (ShownResource resource in resources)
-            {
-                Resource aux = _player.GetResource(resource.Resource);
-                _shownResource.Add(aux);
-
-                ResourceContainers[resource.Index].SetActive(true);
-                
-                ResourcesIcons[resource.Index].sprite = aux.GetSprite();
-                ResourcesText[resource.Index].SetText(_player.GetResourceCount(resource.Resource).ToString());
-                _currentIdx = resource.Index;
-            }
-            
-            _currentIdx = _shownResource.Count == 0 ? 0 : ResourcesIcons.FindIndex(x => !x.gameObject.activeInHierarchy);
         }
     }
 }

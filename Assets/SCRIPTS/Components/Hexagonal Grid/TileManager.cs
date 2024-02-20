@@ -1,17 +1,11 @@
-using GGG.Shared;
 using GGG.Components.Buildings;
-using GGG.Components.Core;
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using GGG.Classes.Buildings;
 using GGG.Components.Scenes;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace GGG.Components.HexagonalGrid
@@ -40,15 +34,6 @@ namespace GGG.Components.HexagonalGrid
         private Dictionary<Vector3Int, HexTile> _tilesDic;
         private HexTile _selectedTile;
         private List<HexTile> _tiles;
-
-        [Serializable]
-        private class TileData {
-            public TileType Type;
-            public bool IsEmpty;
-            public int BuildId;
-        }
-
-        public static Action<BuildingComponent, HexTile> OnBuildingTileLoaded;
 
         #region Player Info
         
@@ -83,7 +68,6 @@ namespace GGG.Components.HexagonalGrid
 
         private void OnDisable() {
             foreach (HexTile tileAux in _tiles) tileAux.OnHexSelect -= InitializePath;
-            SaveTilesState();
         }
 
         #endregion
@@ -169,7 +153,6 @@ namespace GGG.Components.HexagonalGrid
             HexTile buildTile = _tiles.Find((x) => x.GetCurrentBuilding() == build);
             buildTile.DestroyBuilding();
             BuildingManager.Instance.RemoveBuilding(build);
-            SaveTilesState();
         }
 
         /// <summary>
@@ -199,76 +182,6 @@ namespace GGG.Components.HexagonalGrid
             if(FowActive) tile.Reveal(depth, 0);
         }
 
-        #endregion
-        
-        #region Data persistence
-
-        public void SaveTilesState() {
-            if (SceneManagement.InMiniGameScene() || 
-                GameManager.Instance.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial)
-                return;
-            
-            TileData[] saveData = new TileData[_tiles.Count];
-            string filePath = Path.Combine(Application.persistentDataPath, "tiles_data.json");
-            int i = 0;
-
-            foreach (HexTile tile in _tiles) {
-                TileData data = new()
-                {
-                    Type = tile.GetTileType(),
-                    IsEmpty = tile.TileEmpty()
-                };
-
-                if (tile.GetTileType() == TileType.Build) data.BuildId = tile.GetCurrentBuilding().Id();
-                
-                saveData[i] = data;
-                i++;
-            }
-
-            string jsonData = JsonHelper.ToJson(saveData, true);
-            File.WriteAllText(filePath, jsonData);
-        }
-
-        public IEnumerator LoadTilesState()
-        {
-            List<BuildingComponent> builds = BuildingManager.Instance.GetBuildings();
-            string filePath = Path.Combine(Application.persistentDataPath, "tiles_data.json");
-            string data;
-
-            if (!File.Exists(filePath))
-            {
-                yield break;
-            }
-            
-            if (filePath.Contains("://") || filePath.Contains(":///")) {
-                UnityWebRequest www = UnityWebRequest.Get(filePath);
-                yield return www.SendWebRequest();
-                data = www.downloadHandler.text;
-            }
-            else {
-                data = File.ReadAllText(filePath);
-            }
-            
-            TileData[] tiles = JsonHelper.FromJson<TileData>(data);
-            int i = 0, j = 0;
-
-            foreach (HexTile tile in _tiles)
-            {
-                tile.SetTileType(tiles[i].Type);
-                if (!tiles[i].IsEmpty)
-                {
-                    BuildingComponent build = builds.Find((x) => x.Id() == tiles[i].BuildId);
-                    
-                    tile.SetBuilding(build, false);
-                    tile.Reveal(build.VisionRange(), 0);
-                    OnBuildingTileLoaded?.Invoke(build, tile);
-                    j++;
-                }
-
-                i++;
-            }
-        }
-        
         #endregion
     }
 }

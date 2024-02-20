@@ -55,7 +55,8 @@ namespace GGG.Components.UI
         
         private void OnDisable()
         {
-            _player.OnPlayerInitialized -= OnPlayerInitialized;
+            // TODO
+            // _player.OnPlayerInitialized -= OnPlayerInitialized;
             foreach (HexTile tile in _tiles)
                 tile.OnHexSelect -= Open;
             
@@ -65,7 +66,8 @@ namespace GGG.Components.UI
 
         private void Initialize()
         {
-            _player.OnPlayerInitialized += OnPlayerInitialized;
+            // TODO
+            // _player.OnPlayerInitialized += OnPlayerInitialized;
             
             CleanButton.onClick.AddListener(CleanTile);
             CloseButton.onClick.AddListener(OnCloseButton);
@@ -94,7 +96,6 @@ namespace GGG.Components.UI
             _player.AddResource(_cleanResource.GetKey(), -_selectedTile.GetClearCost());
             foreach (HexTile tile in _tiles)
                 tile.SetClearCost(Mathf.RoundToInt(tile.GetClearCost() + 25));
-            TileManager.Instance.SaveTilesState();
             PlayerPrefs.SetInt("TilesClean", _tilesClean++);
             PlayerPrefs.Save();
             

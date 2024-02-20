@@ -71,8 +71,9 @@ namespace GGG.Components.UI
             foreach (BuildButton button in _buttons) 
                 button.OnStructureBuild -= UpdateBuildings;
 
-            TileManager.OnBuildingTileLoaded -= UpdateBuildings;
-            _player.OnPlayerInitialized -= SetSellResource;
+            //TODO
+            //TileManager.OnBuildingTileLoaded -= UpdateBuildings;
+            // _player.OnPlayerInitialized -= SetSellResource;
             
             SellButton.onClick.RemoveAllListeners();
             UpgradeButton.onClick.RemoveAllListeners();
@@ -94,8 +95,9 @@ namespace GGG.Components.UI
                     
             SellResource.transform.parent.gameObject.SetActive(false);
             
-            TileManager.OnBuildingTileLoaded += UpdateBuildings;
-            _player.OnPlayerInitialized += SetSellResource;
+            //TODO
+            //TileManager.OnBuildingTileLoaded += UpdateBuildings;
+            // _player.OnPlayerInitialized += SetSellResource;
 
             SellButton.onClick.AddListener(OnSellButton);
             UpgradeButton.onClick.AddListener(OnUpgradeButton);
@@ -201,7 +203,8 @@ namespace GGG.Components.UI
             _selectedBuilding.SetCurrentCost(cost[currentLevel]);
             _selectedBuilding.BuildData().Spawn(_selectedBuilding.transform.position, _selectedBuilding.transform, 
                 _selectedBuilding.CurrentLevel(), true);
-            BuildingManager.Instance.SaveBuildings();
+            //TODO
+            // BuildingManager.Instance.SaveBuildings();
             SoundManager.Instance.Play("Build");
             Close(true);
         }

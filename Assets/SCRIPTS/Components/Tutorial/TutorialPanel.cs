@@ -11,6 +11,7 @@ namespace GGG.Components.Tutorial
         [SerializeField] private LocalizedString Text;
         [SerializeField] private TutorialObjective Objectives;
         [SerializeField] private bool Close;
+        [SerializeField] private bool ResumeGame;
         [SerializeField] private bool Finish;
 
         public string GetTitle() => Title.GetLocalizedString();
@@ -18,5 +19,6 @@ namespace GGG.Components.Tutorial
         public string GetText() => Text.GetLocalizedString();
         public TutorialObjective GetObjectives() => Objectives;
         public bool NeedsStep() => Close && !Finish;
+        public bool ResumesGame() => ResumeGame;
     }
 }

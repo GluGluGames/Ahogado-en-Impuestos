@@ -104,7 +104,7 @@ namespace GGG.Components.HexagonalGrid
         public Vector3 SpawnPosition()
         { return transform.position + new Vector3(0, 1f); }
 
-        public void SetBuilding(BuildingComponent building, bool save)
+        public void SetBuilding(BuildingComponent building)
         {
             _currentBuilding = building;
             if(building)
@@ -115,7 +115,6 @@ namespace GGG.Components.HexagonalGrid
                 AddTile(TileType.Build);
             }
             _isEmpty = !building;
-            if(save) TileManager.Instance.SaveTilesState();
         }
 
         public TileType GetTileType()

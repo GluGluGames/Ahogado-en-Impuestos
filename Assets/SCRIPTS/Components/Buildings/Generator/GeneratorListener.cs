@@ -10,7 +10,6 @@ namespace GGG.Components.Buildings.Generator
     {
         private List<GeneratorBoostText> _texts;
         private List<GeneratorBoostButton> _buttons;
-        private static Generator _currentGenerator;
         private HexTile _tile;
 
         private void Awake()
@@ -33,7 +32,6 @@ namespace GGG.Components.Buildings.Generator
 
         private void OnOpen(Generator generator)
         {
-            _currentGenerator = generator;
             _tile = TileManager.Instance.GetHexTiles()
                 .Find(x => x.GetCurrentBuilding() && x.GetCurrentBuilding().Equals(generator));
             
@@ -42,7 +40,6 @@ namespace GGG.Components.Buildings.Generator
 
         private void OnClose()
         {
-            _currentGenerator = null;
             _tile = null;
         }
 

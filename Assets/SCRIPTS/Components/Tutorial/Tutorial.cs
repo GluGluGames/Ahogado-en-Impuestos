@@ -70,7 +70,7 @@ namespace GGG.Components.Tutorial
 
         private void OnStep(TutorialPanel panel)
         {
-            _ui.Close();
+            _ui.Close(panel.ResumesGame());
             _objectives.SetObjectives(panel.GetObjectives());
             _objectives.Show();
         }
@@ -98,7 +98,7 @@ namespace GGG.Components.Tutorial
         protected virtual void FinishTutorial()
         {
             _continue.OnContinue -= NextStep;
-            _ui.Close();
+            _ui.Close(true);
             PlayerPrefs.SetInt(Key.ToString(), 1);
             _gameManager.SetCurrentTutorial(Tutorials.None);
         }

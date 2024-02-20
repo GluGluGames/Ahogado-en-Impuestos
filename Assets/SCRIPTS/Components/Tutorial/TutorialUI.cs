@@ -64,7 +64,7 @@ namespace GGG.Components.Tutorial
             _gameManager.OnUIOpen();
         }
 
-        public void Close()
+        public void Close(bool resume)
         {
             if (!_open) return;
             _graphicRaycaster.enabled = false;
@@ -74,7 +74,7 @@ namespace GGG.Components.Tutorial
                 _viewport.SetActive(false);
                 _open = false;
                 
-                _gameManager.OnUIClose();
+                if (resume) _gameManager.OnUIClose();
                 _gameManager.SetTutorialOpen(false);
             };
         }

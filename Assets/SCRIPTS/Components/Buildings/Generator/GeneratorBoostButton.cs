@@ -1,5 +1,6 @@
 using System;
 using GGG.Classes.Buildings;
+using GGG.Components.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ namespace GGG.Components.Buildings.Generator
     public class GeneratorBoostButton : MonoBehaviour
     {
         [SerializeField, Range(1, 3)] private int Level;
+        [SerializeField] private int Index;
         [SerializeField] private Sprite ActiveSprite;
 
         private Image _icon;
@@ -17,6 +19,8 @@ namespace GGG.Components.Buildings.Generator
         private Generator _generator;
 
         private bool _shown;
+
+        public Action OnBoost;
 
         private void Awake()
         {
@@ -69,13 +73,16 @@ namespace GGG.Components.Buildings.Generator
 
         public void OnBuildingBoost()
         {
-            if (!_building) return;
+            if (!_building || GameManager.Instance.TutorialOpen()) return;
             
             if (_building.IsBoost())
             {
                 _building.EndBoost();
                 _generator.AddGeneration(Level, -1);
+                _generator.SetIndex(Level, Index, 0);
+                _generator.SetBoostBuilding(Level, Index, -1);
                 Hide();
+                OnBoost?.Invoke();
                 return;
             }
 
@@ -83,7 +90,10 @@ namespace GGG.Components.Buildings.Generator
             
             _building.Boost();
             _generator.AddGeneration(Level, 1);
+            _generator.SetIndex(Level, Index, 1);
+            _generator.SetBoostBuilding(Level, Index, _building.Id());
             Show();
+            OnBoost?.Invoke();
         }
 
         private void Hide()

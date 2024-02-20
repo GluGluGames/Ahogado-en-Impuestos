@@ -61,7 +61,7 @@ namespace GGG.Components.UI
         {
             if (_gameManager.OnTutorial()) return;
             
-            TileManager.Instance.SaveTilesState();
+            // TileManager.Instance.SaveTilesState();
             
             int randMiniGame = Random.Range(1, 5);
             SceneIndexes sceneIndex;

@@ -1,13 +1,9 @@
-using System;
-using System.Collections;
 using GGG.Shared;
 
-using System.Collections.Generic;
-using System.IO;
+using System;
 using UnityEngine;
 using System.Linq;
-using GGG.Components.Core;
-using UnityEngine.Networking;
+using System.Collections.Generic;
 
 namespace GGG.Components.Player
 {
@@ -24,25 +20,12 @@ namespace GGG.Components.Player
 
         #endregion
         
-        private GameManager _gameManager;
-        
         private static List<Resource> _resources;
         private static Dictionary<string, int> _resourcesCount = new();
         private static readonly Dictionary<string, Resource> _resourcesDictionary = new();
 
-        public Action OnPlayerInitialized;
-
-        [Serializable]
-        public class ResourceData
-        {
-            public string Name;
-            public int Count;
-        }
-
         private void Start()
         {
-            _gameManager = GameManager.Instance;
-            
             _resources = Resources.LoadAll<Resource>("SeaResources").
                 Concat(Resources.LoadAll<Resource>("ExpeditionResources")).
                 Concat(Resources.LoadAll<Resource>("FishResources")).ToList();
@@ -55,11 +38,18 @@ namespace GGG.Components.Player
 
             if (_resourcesCount.Count > 0) return;
             
-            foreach (string i in _resourcesDictionary.Keys)
-                _resourcesCount.Add(i, 0);
+            HandleResourceDictionary();
         }
 
         public int GetResourceCount(string key) => _resourcesCount[key];
+        public Dictionary<string, int> ResourcesCount() => _resourcesCount;
+        public void SetResourcesCount(Dictionary<string, int> x) => _resourcesCount = x;
+
+        public void HandleResourceDictionary()
+        {
+            foreach (string i in _resourcesDictionary.Keys)
+                _resourcesCount.Add(i, 0);
+        }
 
         public List<Resource> GetResources() => _resources;
 
@@ -70,65 +60,9 @@ namespace GGG.Components.Player
             if (!_resourcesCount.ContainsKey(resourceKey))
                 throw new KeyNotFoundException("No resource found");
             
-
             _resourcesCount[resourceKey] += amount;
-            SaveResourcesCount();
         }
 
         public int GetResourceNumber() => _resourcesDictionary.Count;
-
-        public void SaveResourcesCount()
-        {
-            ResourceData[] resourceDataList = new ResourceData[_resourcesCount.Count];
-            string filePath = Path.Combine(Application.persistentDataPath, "resources_data.json");
-            int i = 0;
-            
-            foreach (var pair in _resourcesCount)
-            {
-                ResourceData data = new()
-                {
-                    Name = pair.Key,
-                    Count = pair.Value
-                };
-                
-                resourceDataList[i] = data;
-                i++;
-            }
-            
-            string jsonData = JsonHelper.ToJson(resourceDataList, true);
-            File.WriteAllText(filePath, jsonData);
-        }
-
-        public IEnumerator LoadResourcesCount()
-        {
-            string filePath = Path.Combine(Application.persistentDataPath, "resources_data.json");
-            string data;
-
-            if (!File.Exists(filePath))
-            {
-                if (_resourcesCount.Count <= 0)
-                    foreach (string i in _resourcesDictionary.Keys) _resourcesCount.Add(i, 0);
-                
-                OnPlayerInitialized?.Invoke();
-                yield break;
-            }
-            
-            if (filePath.Contains("://") || filePath.Contains(":///")) {
-                UnityWebRequest www = UnityWebRequest.Get(filePath);
-                yield return www.SendWebRequest();
-                data = www.downloadHandler.text;
-            }
-            else data = File.ReadAllText(filePath);
-            
-            ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data); 
-            _resourcesCount = resources.ToDictionary(item => item.Name, item => item.Count);
-
-            if (_resourcesCount.Count <= 0) {
-                foreach (string i in _resourcesDictionary.Keys) 
-                    _resourcesCount.Add(i, 0);
-            }
-            
-            OnPlayerInitialized?.Invoke();
-        }
     }
 }
