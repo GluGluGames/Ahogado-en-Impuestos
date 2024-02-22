@@ -2,7 +2,7 @@ using GGG.Components.Buildings;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.Player;
 using GGG.Components.Core;
-using GGG.Components.UI.Buttons;
+using GGG.Components.UI;
 using GGG.Shared;
 using GGG.Input;
 
@@ -35,7 +35,7 @@ namespace GGG.Components.UI
         private GameManager _gameManager;
         private Resource _sellResource;
         private GameObject _viewport;
-        private BuildButton[] _buttons;
+        // private BuildButton[] _buttons;
         private HexTile _selectedTile;
         private BuildingComponent _selectedBuilding;
 
@@ -66,10 +66,10 @@ namespace GGG.Components.UI
 
         private void OnDisable()
         {
-            _buttons = FindObjectsOfType<BuildButton>(true);
+            // _buttons = FindObjectsOfType<BuildButton>(true);
             
-            foreach (BuildButton button in _buttons) 
-                button.OnStructureBuild -= UpdateBuildings;
+            //foreach (BuildButton button in _buttons) 
+                //button.OnStructureBuild -= UpdateBuildings;
 
             //TODO
             //TileManager.OnBuildingTileLoaded -= UpdateBuildings;
@@ -82,10 +82,10 @@ namespace GGG.Components.UI
 
         private void Initialize()
         {
-            _buttons = FindObjectsOfType<BuildButton>(true);
+            // _buttons = FindObjectsOfType<BuildButton>(true);
             
-            foreach (BuildButton button in _buttons) 
-                button.OnStructureBuild += UpdateBuildings;
+            // foreach (BuildButton button in _buttons) 
+                // button.OnStructureBuild += UpdateBuildings;
 
             foreach (Image upgrade in UpgradeResources)
                 upgrade.transform.parent.gameObject.SetActive(false);

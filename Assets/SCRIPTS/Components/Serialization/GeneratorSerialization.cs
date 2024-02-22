@@ -147,7 +147,7 @@ namespace GGG.Components.Serialization
                 {
                     if (gen.Id() != generator.GeneratorId) continue;
 
-                    for (int i = 0; i < generators.Count; i++)
+                    for (int i = 0; i < generator.BoostedBuildings.Count; i++)
                     {
                         gen.SetIndex(generator.BoostIndex[i].Level, generator.BoostIndex[i].Index, 1);
                         gen.SetBoostBuilding(generator.BoostedBuildings[i].Level, generator.BoostedBuildings[i].Index, generator.BoostedBuildings[i].BuildingId);

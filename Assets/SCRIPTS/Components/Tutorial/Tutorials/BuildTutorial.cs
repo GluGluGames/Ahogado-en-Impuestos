@@ -7,7 +7,7 @@ using GGG.Components.Serialization;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.UI.TileClean;
 using GGG.Components.UI;
-using GGG.Components.UI.Buttons;
+using GGG.Components.UI.Buildings;
 using UnityEngine;
 
 namespace GGG.Components.Tutorial.Tutorials
@@ -36,7 +36,7 @@ namespace GGG.Components.Tutorial.Tutorials
         
         protected override void TutorialCondition()
         {
-            BuildingUI.OnUiOpen += StartTutorialNoEnum;
+            BuildingUI.OnUiOpen += (x) => StartTutorialNoEnum();
         }
 
         protected override void InitializeTutorial()
@@ -114,7 +114,7 @@ namespace GGG.Components.Tutorial.Tutorials
 
         protected override void FinishTutorial()
         {
-            BuildingUI.OnUiOpen -= StartTutorialNoEnum;
+            BuildingUI.OnUiOpen -= (x) => StartTutorialNoEnum();
             _lateralUI.ToggleOpenButton();
             ChangeTileState(TileStates.Finish);
             
