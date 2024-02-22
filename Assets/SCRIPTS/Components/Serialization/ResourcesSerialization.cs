@@ -19,7 +19,7 @@ namespace GGG.Components.Serialization
             public int Count;
         }
         
-        public void SaveResourcesCount()
+        public IEnumerator SaveResourcesCount()
         {
             Dictionary<string, int> resources = PlayerManager.Instance.ResourcesCount();
             ResourceData[] resourceDataList = new ResourceData[resources.Count];
@@ -40,6 +40,7 @@ namespace GGG.Components.Serialization
             
             string jsonData = SerializationManager.EncryptDecrypt(JsonHelper.ToJson(resourceDataList));
             File.WriteAllText(filePath, jsonData);
+            yield return null;
         }
 
         public IEnumerator LoadResourcesCount()
@@ -60,7 +61,7 @@ namespace GGG.Components.Serialization
                 yield return www.SendWebRequest();
                 data = www.downloadHandler.text;
             }
-            else data = File.ReadAllText(filePath);
+            else data = SerializationManager.EncryptDecrypt(File.ReadAllText(filePath));
 
             ResourceData[] resources = JsonHelper.FromJson<ResourceData>(data);
             PlayerManager.Instance.SetResourcesCount(resources.ToDictionary(item => item.Name, item => item.Count));

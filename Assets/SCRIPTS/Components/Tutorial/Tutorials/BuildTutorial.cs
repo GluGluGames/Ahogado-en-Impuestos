@@ -5,6 +5,7 @@ using System.Linq;
 using GGG.Components.Achievements;
 using GGG.Components.Serialization;
 using GGG.Components.HexagonalGrid;
+using GGG.Components.UI.TileClean;
 using GGG.Components.UI;
 using GGG.Components.UI.Buttons;
 using UnityEngine;
@@ -108,7 +109,7 @@ namespace GGG.Components.Tutorial.Tutorials
         private void OnStructureBuild() => _structureBuild = true;
         private void OnUpgradeOpen() => _upgradeOpen = true;
         private void OnUpgradeClose() => _upgradeClose = true;
-        private void OnTileCleanOpen() => _tileCleanOpen = true;
+        private void OnTileCleanOpen(HexTile tile) => _tileCleanOpen = true;
         private void OnTileCleanClose() => _tileCleanClose = true;
 
         protected override void FinishTutorial()
@@ -125,7 +126,7 @@ namespace GGG.Components.Tutorial.Tutorials
 
             StartCoroutine(_achievements.UnlockAchievement("01"));
 
-            SerializationManager.Instance.Save();
+            StartCoroutine(SerializationManager.Instance.Save());
             base.FinishTutorial();
         }
     }

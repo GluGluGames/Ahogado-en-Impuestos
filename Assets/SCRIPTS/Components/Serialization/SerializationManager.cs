@@ -63,7 +63,7 @@ namespace GGG.Components.Serialization
                 _sceneManagement.AddEnumerators(Load());
             };
 
-            _sceneManagement.OnGameSceneUnloaded += Save;
+            _sceneManagement.OnGameSceneUnloaded += SaveNoEnum;
 
             _delta = 0f;
         }
@@ -72,7 +72,6 @@ namespace GGG.Components.Serialization
         {
             PlayerPrefs.SetString(_EXIT_TIME, DateTime.Now.ToString("hh:mm:ss"));
             PlayerPrefs.Save();
-            Save();
         }
 
         private void Update()
@@ -119,8 +118,8 @@ namespace GGG.Components.Serialization
             
             List<IEnumerator> order = new()
             {
-                _tiles.LoadTilesState(),
                 _building.LoadBuildings(),
+                _tiles.LoadTilesState(),
                 _resources.LoadResourcesCount(),
                 _hud.LoadShownResource(),
                 _laboratory.LoadResearchProgress(),
@@ -133,17 +132,18 @@ namespace GGG.Components.Serialization
             }
         }
 
-        public void Save()
+        private void SaveNoEnum() => StartCoroutine(Save());
+
+        public IEnumerator Save()
         {
-            if (!SceneManagement.InGameScene() || 
-                _gameManager.GetCurrentTutorial() is Tutorials.BuildTutorial or Tutorials.InitialTutorial) return;
+            if (!SceneManagement.InGameScene()) yield break;
             
-            _tiles.SaveTilesState();
-            _building.SaveBuildings();
-            _resources.SaveResourcesCount();
-            _hud.SaveShownResources();
-            _laboratory.SaveResearchProgress();
-            _generator.SaveGeneratorState();
+            yield return _building.SaveBuildings();
+            yield return _tiles.SaveTilesState();
+            yield return _resources.SaveResourcesCount();
+            yield return _hud.SaveShownResources();
+            yield return _laboratory.SaveResearchProgress();
+            yield return _generator.SaveGeneratorState();
         }
     }
 }

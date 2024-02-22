@@ -35,13 +35,13 @@ namespace GGG.Components.Serialization
         private void Deinitialize()
         {
             FindObjectsOfType<GeneratorBoostButton>(true).ToList().ForEach(
-                x => x.OnBoost -= SaveGeneratorState);
+                x => x.OnBoost -= SaveNoEnum);
         }
 
         private void Initialize()
         {
             FindObjectsOfType<GeneratorBoostButton>(true).ToList().ForEach(
-                x => x.OnBoost += SaveGeneratorState);
+                x => x.OnBoost += SaveNoEnum);
         }
 
         [Serializable]
@@ -79,10 +79,12 @@ namespace GGG.Components.Serialization
             }
         }
 
-        public void SaveGeneratorState()
+        private void SaveNoEnum() => StartCoroutine(SaveGeneratorState());
+
+        public IEnumerator SaveGeneratorState()
         {
             List<Generator> generators = FindObjectsOfType<Generator>().ToList();
-            if (generators.Count <= 0) return;
+            if (generators.Count <= 0) yield break;
 
             GeneratorData[] saveData = new GeneratorData[generators.Count];
             int i = 0;
@@ -116,6 +118,7 @@ namespace GGG.Components.Serialization
 
             string jsonData = SerializationManager.EncryptDecrypt(JsonHelper.ToJson(saveData));
             File.WriteAllText(filePath, jsonData);
+            yield return null;
         }
         
         public IEnumerator LoadGeneratorState()

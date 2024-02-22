@@ -23,10 +23,10 @@ namespace GGG.Components.Serialization
             public float[] RemainingTime = new float[3];
         }
 
-        public void SaveResearchProgress()
+        public IEnumerator SaveResearchProgress()
         {
             List<Laboratory> laboratories = FindObjectsOfType<Laboratory>().ToList();
-            if (laboratories.Count <= 0) return;
+            if (laboratories.Count <= 0) yield break;
             
             LaboratoryData[] saveData = new LaboratoryData[laboratories.Count];
             string filePath = Path.Combine(Application.persistentDataPath, "laboratory_progress.json");
@@ -55,6 +55,7 @@ namespace GGG.Components.Serialization
 
             string jsonData = SerializationManager.EncryptDecrypt(JsonHelper.ToJson(saveData, true));
             File.WriteAllText(filePath, jsonData);
+            yield return null;
         }
 
         public IEnumerator LoadResearchProgress()

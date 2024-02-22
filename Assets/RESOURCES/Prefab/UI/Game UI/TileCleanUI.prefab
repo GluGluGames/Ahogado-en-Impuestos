@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 4990085641696029280}
   - component: {fileID: 5273766139091554472}
   - component: {fileID: 3853154497910432111}
+  - component: {fileID: 7721882264745118442}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -373,7 +374,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4990085641696029280}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7721882264745118442}
+        m_TargetAssemblyTypeName: GGG.Components.UI.TileClean.TileCleanCloseButton,
+          GGG.Components.UI.TileClean
+        m_MethodName: OnClose
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3853154497910432111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,6 +400,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41db14fe962bb0746a6d014aeb6451e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7721882264745118442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674033324109353403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82286515bc356bd488bfa3b46328a2c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4525764437771465386
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2747037611694776352}
   - component: {fileID: 2411275488621348926}
+  - component: {fileID: 6739973178327153483}
   m_Layer: 5
   m_Name: CleanPricePanel
   m_TagString: Untagged
@@ -433,6 +460,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4525764437771465386}
   m_CullTransparentMesh: 1
+--- !u!114 &6739973178327153483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4525764437771465386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e834d34bb5c61c4fbf9be195140bc1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5389655774016603767
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +483,7 @@ GameObject:
   - component: {fileID: 6726717270529089278}
   - component: {fileID: 127049801499799137}
   - component: {fileID: 2653377266831562728}
+  - component: {fileID: 4059983690715025764}
   m_Layer: 5
   m_Name: TileCleanUI
   m_TagString: Untagged
@@ -492,9 +532,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f889608457b222a4090a590a1cb4aa1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CleanButton: {fileID: 6612347723547609996}
-  CloseButton: {fileID: 5273766139091554472}
-  Container: {fileID: 4525764437771465386}
+--- !u!114 &4059983690715025764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389655774016603767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23fd49cf9993a2b4881a8cb6a5b8c219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6083427654039063616
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4936297039395072433
 RectTransform:
   m_ObjectHideFlags: 0
@@ -722,6 +771,7 @@ GameObject:
   - component: {fileID: 7518774299831105496}
   - component: {fileID: 6612347723547609996}
   - component: {fileID: 8405298114688441449}
+  - component: {fileID: 524059953773630407}
   m_Layer: 5
   m_Name: CleanButton
   m_TagString: Untagged
@@ -831,7 +881,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7518774299831105496}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 524059953773630407}
+        m_TargetAssemblyTypeName: GGG.Components.UI.TileClean.TileCleanButton, GGG.Components.UI.TileClean
+        m_MethodName: OnTileClean
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8405298114688441449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,5 +904,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41db14fe962bb0746a6d014aeb6451e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &524059953773630407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7745482685061799964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3e2ba9fbcf6d84399f744bafa17352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
