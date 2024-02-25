@@ -19,7 +19,7 @@ namespace GGG.Components.Serialization
             public int Index;
         }
         
-        public IEnumerator SaveShownResources()
+        public void SaveShownResources()
         {
             List<Resource> shownResource = HUDManager.Instance.ShownResources();
             ShownResource[] resourcesData = new ShownResource[shownResource.Count];
@@ -40,7 +40,6 @@ namespace GGG.Components.Serialization
 
             string jsonData = SerializationManager.EncryptDecrypt(JsonHelper.ToJson(resourcesData));
             File.WriteAllText(filePath, jsonData);
-            yield return null;
         }
 
         public IEnumerator LoadShownResource()

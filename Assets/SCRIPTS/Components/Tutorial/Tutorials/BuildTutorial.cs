@@ -8,6 +8,7 @@ using GGG.Components.HexagonalGrid;
 using GGG.Components.UI.TileClean;
 using GGG.Components.UI;
 using GGG.Components.UI.Buildings;
+using GGG.Components.UI.Upgrade;
 using UnityEngine;
 
 namespace GGG.Components.Tutorial.Tutorials
@@ -53,7 +54,7 @@ namespace GGG.Components.Tutorial.Tutorials
             
             _buildButtons.ForEach(x => x.StructureBuild += OnStructureBuild);
             _upgradeUI.OnUiOpen += OnUpgradeOpen;
-            _upgradeUI.OnCloseButtonPress += OnUpgradeClose;
+            _upgradeUI.OnUIClose += OnUpgradeClose;
             _tileCleanUI.OnUiOpen += OnTileCleanOpen;
             _tileCleanUI.OnUiClose += OnTileCleanClose;
 
@@ -107,7 +108,7 @@ namespace GGG.Components.Tutorial.Tutorials
         }
 
         private void OnStructureBuild() => _structureBuild = true;
-        private void OnUpgradeOpen() => _upgradeOpen = true;
+        private void OnUpgradeOpen(HexTile tile) => _upgradeOpen = true;
         private void OnUpgradeClose() => _upgradeClose = true;
         private void OnTileCleanOpen(HexTile tile) => _tileCleanOpen = true;
         private void OnTileCleanClose() => _tileCleanClose = true;
@@ -120,13 +121,13 @@ namespace GGG.Components.Tutorial.Tutorials
             
             _buildButtons.ForEach(x => x.StructureBuild -= OnStructureBuild);
             _upgradeUI.OnUiOpen -= OnUpgradeOpen;
-            _upgradeUI.OnCloseButtonPress -= OnUpgradeClose;
+            _upgradeUI.OnUIClose -= OnUpgradeClose;
             _tileCleanUI.OnUiOpen -= OnTileCleanOpen;
             _tileCleanUI.OnUiClose -= OnTileCleanClose;
 
             StartCoroutine(_achievements.UnlockAchievement("01"));
 
-            StartCoroutine(SerializationManager.Instance.Save());
+            SerializationManager.Instance.Save();
             base.FinishTutorial();
         }
     }

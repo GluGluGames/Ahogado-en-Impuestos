@@ -4,11 +4,8 @@ using GGG.Components.Core;
 using GGG.Input;
 
 using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
 using System;
-using System.Collections.Generic;
-using TMPro;
 
 namespace GGG.Components.UI.Buildings
 {
@@ -17,12 +14,10 @@ namespace GGG.Components.UI.Buildings
         private BuildingCloseButton _closeButton;
         
         private InputManager _input;
-        private BuildingManager _buildingManager;
         private GameManager _gameManager;
         
         private GameObject _viewport;
         private BuildButton[] _buttons;
-        private HexTile _selectedTile;
         
         private bool _open;
         private int _currentPanel;
@@ -43,7 +38,6 @@ namespace GGG.Components.UI.Buildings
         private void Start() {
             _input = InputManager.Instance;
             _gameManager = GameManager.Instance;
-            _buildingManager = BuildingManager.Instance;
         }
         
         private void OnEnable()
@@ -75,7 +69,6 @@ namespace GGG.Components.UI.Buildings
         private void Open(HexTile tile) {
             if (_open || tile.GetTileType() != TileType.Standard || !tile.TileEmpty()) return; 
             _open = true;
-            _selectedTile = tile;
             
             _viewport.SetActive(true);
             _viewport.transform.DOMoveY(0, 0.75f).SetEase(Ease.InCubic);
@@ -98,11 +91,9 @@ namespace GGG.Components.UI.Buildings
                 _open = false;
                 
                 _gameManager.OnUIClose();
-                OnUiClose?.Invoke();
             };
             
-            _selectedTile.DeselectTile();
-            _selectedTile = null;
+            OnUiClose?.Invoke();
         }
     }
 }

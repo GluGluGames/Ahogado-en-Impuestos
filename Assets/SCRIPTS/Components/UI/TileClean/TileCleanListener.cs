@@ -40,6 +40,7 @@ namespace GGG.Components.UI.TileClean
 
         private void Deinitialize()
         {
+            _tile.DeselectTile();
             _tile = null;
             _button.Deinitialize();
         }

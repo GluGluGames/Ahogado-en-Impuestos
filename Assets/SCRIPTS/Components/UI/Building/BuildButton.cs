@@ -9,8 +9,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 using GGG.Components.Serialization;
-using TMPro;
-using UnityEngine.UI;
 
 namespace GGG.Components.UI.Buildings {
     public class BuildButton : MonoBehaviour, IPointerDownHandler {
@@ -58,7 +56,7 @@ namespace GGG.Components.UI.Buildings {
             StructureBuild?.Invoke();
             
             tile.Reveal(build.VisionRange(), 0);
-            StartCoroutine(SerializationManager.Instance.Save());
+            SerializationManager.Instance.Save();
         }
 
         #region Event Systems Method

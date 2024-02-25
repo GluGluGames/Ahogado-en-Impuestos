@@ -1,11 +1,5 @@
-using GGG.Components.Buildings.Generator;
-using GGG.Components.Buildings.Laboratory;
-using GGG.Components.HexagonalGrid;
-using GGG.Components.Buildings;
 using GGG.Components.Scenes;
-using GGG.Components.Player;
 using GGG.Components.Core;
-using GGG.Components.UI;
 using GGG.Shared;
 
 using UnityEngine;
@@ -39,7 +33,6 @@ namespace GGG.Components.Serialization
         private TilesSerialization _tiles;
 
         private const int _SAVE_TIME = 300;
-        private const int _TIME_SAVE_TIME = 5;
         private const string _KEY = "7924629";
         
         private float _delta;
@@ -63,7 +56,7 @@ namespace GGG.Components.Serialization
                 _sceneManagement.AddEnumerators(Load());
             };
 
-            _sceneManagement.OnGameSceneUnloaded += SaveNoEnum;
+            _sceneManagement.OnGameSceneUnloaded += Save;
 
             _delta = 0f;
         }
@@ -132,18 +125,16 @@ namespace GGG.Components.Serialization
             }
         }
 
-        private void SaveNoEnum() => StartCoroutine(Save());
-
-        public IEnumerator Save()
+        public void Save()
         {
-            if (!SceneManagement.InGameScene()) yield break;
+            if (!SceneManagement.InGameScene()) return;
             
-            yield return _building.SaveBuildings();
-            yield return _tiles.SaveTilesState();
-            yield return _resources.SaveResourcesCount();
-            yield return _hud.SaveShownResources();
-            yield return _laboratory.SaveResearchProgress();
-            yield return _generator.SaveGeneratorState();
+            _building.SaveBuildings();
+            _tiles.SaveTilesState();
+            _resources.SaveResourcesCount();
+            _hud.SaveShownResources();
+            _laboratory.SaveResearchProgress();
+            _generator.SaveGeneratorState();
         }
     }
 }

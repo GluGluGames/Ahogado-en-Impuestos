@@ -28,9 +28,9 @@ namespace GGG.Components.Serialization
             public bool IsBoost;
         }
         
-        public IEnumerator SaveBuildings()
+        public void SaveBuildings()
         {
-            if (!SceneManagement.InGameScene()) yield return null;
+            if (!SceneManagement.InGameScene()) return;
 
             List<BuildingComponent> buildings = BuildingManager.Instance.GetBuildings();
             BuildingData[] saveData = new BuildingData[buildings.Count];
@@ -61,13 +61,10 @@ namespace GGG.Components.Serialization
             
             string jsonData = SerializationManager.EncryptDecrypt(JsonHelper.ToJson(saveData));
             File.WriteAllText(filePath, jsonData);
-            yield return null;
         }
 
         public IEnumerator LoadBuildings()
         {
-            yield return null;
-            
             string filePath = Path.Combine(Application.persistentDataPath, "buildings_data.json");
             string data;
 

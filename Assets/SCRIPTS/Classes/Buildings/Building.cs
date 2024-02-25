@@ -218,6 +218,8 @@ namespace GGG.Classes.Buildings
         /// <exception cref="Exception">If the index is incorrect</exception>
         public Resource GetUpgradeResource(int level, int index)
         {
+            if (UpgradeCost.Length <= 0) return null;
+            
             if (index > 3)
                 throw new Exception($"No building cost with {index} index");
 

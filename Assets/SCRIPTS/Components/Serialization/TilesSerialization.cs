@@ -21,9 +21,9 @@ namespace GGG.Components.Serialization
         
         public static Action<BuildingComponent, HexTile> OnBuildingTileLoaded;
         
-        public IEnumerator SaveTilesState() 
+        public void SaveTilesState() 
         {
-            if (SceneManagement.InMiniGameScene()) yield break;
+            if (SceneManagement.InMiniGameScene()) return;
 
             List<HexTile> tiles = TileManager.Instance.GetHexTiles();
             TileData[] saveData = new TileData[tiles.Count];
@@ -45,7 +45,6 @@ namespace GGG.Components.Serialization
 
             string jsonData = SerializationManager.EncryptDecrypt(JsonHelper.ToJson(saveData, true));
             File.WriteAllText(filePath, jsonData);
-            yield return null;
         }
 
         public IEnumerator LoadTilesState()
