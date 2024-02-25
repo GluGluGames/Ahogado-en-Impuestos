@@ -5,7 +5,7 @@ using GGG.Input;
 using UnityEngine;
 using UnityEngine.UI;
 using GGG.Components.Achievements;
-using GGG.Components.HexagonalGrid;
+using GGG.Components.UI.Inventory;
 using GGG.Components.Scenes;
 using GGG.Shared;
 using Random = UnityEngine.Random;
@@ -125,7 +125,7 @@ namespace GGG.Components.UI
             if (_gameManager.OnTutorial()) return;
             
             ToggleMenu();
-            _inventory.OpenInventory();
+            _inventory.Open();
         }
 
         private void OpenSettings()

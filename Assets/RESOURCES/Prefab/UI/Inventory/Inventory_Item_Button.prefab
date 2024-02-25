@@ -88,6 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1122352793414563334}
   - component: {fileID: 4351387098577599627}
+  - component: {fileID: 1082851410559335326}
   - component: {fileID: 7529365347722092825}
   m_Layer: 5
   m_Name: Text (TMP)
@@ -124,6 +125,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3799902698526257629}
   m_CullTransparentMesh: 1
+--- !u!114 &1082851410559335326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3799902698526257629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642b8be19f00027429e77b2ed59a535c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7529365347722092825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +184,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.3
+  m_fontSize: 63.4
   m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -227,6 +240,7 @@ GameObject:
   - component: {fileID: 137914811337907801}
   - component: {fileID: 7106000402179221626}
   - component: {fileID: 9135814453144656387}
+  - component: {fileID: 6436399931326074140}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -312,7 +326,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -336,7 +350,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 969288919886695092}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6436399931326074140}
+        m_TargetAssemblyTypeName: GGG.Components.UI.Inventory.InventoryButton, Project.Components.UI.Inventory
+        m_MethodName: OnResourceSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7106000402179221626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +389,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TooltipContainer: {fileID: 6374389911213408373}
   ResourceText: {fileID: 8391984668283118541}
+--- !u!114 &6436399931326074140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254195273926072394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4bdb5e4bf9eab843bd990bfa835c484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 969288919886695092}
 --- !u!1 &8247147576665852693
 GameObject:
   m_ObjectHideFlags: 0

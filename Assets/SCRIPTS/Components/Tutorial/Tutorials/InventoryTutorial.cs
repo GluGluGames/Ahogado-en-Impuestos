@@ -1,5 +1,4 @@
-using GGG.Components.UI;
-using UnityEngine;
+using GGG.Components.UI.Inventory;
 
 namespace GGG.Components.Tutorial.Tutorials
 {
