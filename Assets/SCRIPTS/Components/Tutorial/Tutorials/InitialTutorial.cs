@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GGG.Components.Dialogue;
 using GGG.Components.HexagonalGrid;
-using GGG.Components.UI;
+using GGG.Components.UI.Lateral;
 using UnityEngine;
 
 namespace GGG.Components.Tutorial.Tutorials

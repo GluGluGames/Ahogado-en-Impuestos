@@ -1,4 +1,4 @@
-using GGG.Components.UI;
+using GGG.Components.UI.Lateral;
 using UnityEngine;
 
 namespace GGG.Components.Tutorial.Tutorials

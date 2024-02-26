@@ -7,8 +7,8 @@ using GGG.Components.Serialization;
 using GGG.Components.HexagonalGrid;
 using GGG.Components.UI.TileClean;
 using GGG.Components.UI;
+using GGG.Components.UI.Lateral;
 using GGG.Components.UI.Buildings;
-using GGG.Components.UI.Upgrade;
 using UnityEngine;
 
 namespace GGG.Components.Tutorial.Tutorials
