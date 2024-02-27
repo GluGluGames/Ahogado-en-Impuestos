@@ -48,6 +48,7 @@ namespace GGG.Components.UI.Buildings
 
         private void Deinitialize()
         {
+            _selectedTile.DeselectTile();
             _selectedTile = null;
         }
 

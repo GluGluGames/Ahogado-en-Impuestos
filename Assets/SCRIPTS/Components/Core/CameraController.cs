@@ -60,6 +60,8 @@ namespace GGG.Components.Core
         // Mouse
         private Vector3 _dragStartPosition;
         private Vector3 _dragCurrentPosition;
+        private bool _mouseDown;
+        private float _deltaMouse;
 
         private void Start() {
             _input = InputManager.Instance;
@@ -86,7 +88,9 @@ namespace GGG.Components.Core
             if(!_cameraTransform) Initialize();
             if (_gameManager.IsOnUI() || _gameManager.TutorialOpen()) return;
             
-            StartCoroutine(HandleMouseInput());
+            HandleMouseDown();
+            HandleMouse();
+            HandleMouseUp();
         }
 #endif
 
@@ -191,37 +195,55 @@ namespace GGG.Components.Core
         /// <summary>
         /// Handles the movement with the mouse
         /// </summary>
-        private IEnumerator HandleMouseInput() {
-            if (_input.IsTouching()) {
+        private void HandleMouseDown()
+        {
+            if (!_input.IsTouching()) return;
+            
+            Plane plane = new Plane(Vector3.up, Vector3.zero);
+            Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
+
+            if (plane.Raycast(ray, out float distance)) {
+                _dragStartPosition = ray.GetPoint(distance);
+            }
+            
+            _mouseDown = true;
+        }
+
+        private void HandleMouse()
+        {
+            if (!_input.IsHolding() || !_mouseDown) return;
+
+            _deltaMouse += Time.deltaTime;
+            if (_deltaMouse < 0.1f) return;
+            
+            _pointerEventData.position = _input.TouchPosition();
+            _graphicRaycaster.Raycast(_pointerEventData, _results);
+
+            if (_results.Count == 0)
+            {
                 Plane plane = new Plane(Vector3.up, Vector3.zero);
                 Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
 
-                if (plane.Raycast(ray, out float distance)) {
-                    _dragStartPosition = ray.GetPoint(distance);
+                if (plane.Raycast(ray, out float distance))
+                {
+                    _dragCurrentPosition = ray.GetPoint(distance);
+                    _newPosition = _transform.position + (_dragStartPosition - _dragCurrentPosition);
+                    _newPosition.x = Mathf.Clamp(_newPosition.x, MinBounds.x, MaxBounds.x);
+                    _newPosition.z = Mathf.Clamp(_newPosition.z, MinBounds.y, MaxBounds.y);
+                    Holding.IsHolding(true);
                 }
             }
 
-            yield return null;
+            _results.Clear();
+        }
 
-            if (_input.IsHolding()) {
-                _pointerEventData.position = _input.TouchPosition();
-                _graphicRaycaster.Raycast(_pointerEventData, _results);
-
-                if (_results.Count == 0) {
-                    Plane plane = new Plane(Vector3.up, Vector3.zero);
-                    Ray ray = _mainCamera.ScreenPointToRay(_input.TouchPosition());
-
-                    if (plane.Raycast(ray, out float distance)) {
-                        _dragCurrentPosition = ray.GetPoint(distance);
-                        _newPosition = _transform.position + (_dragStartPosition - _dragCurrentPosition);
-                        _newPosition.x = Mathf.Clamp(_newPosition.x, MinBounds.x, MaxBounds.x);
-                        _newPosition.z = Mathf.Clamp(_newPosition.z, MinBounds.y, MaxBounds.y);
-                        Holding.IsHolding(true);
-                    }
-                }
-
-                _results.Clear();
-            } else Holding.IsHolding(false);
+        private void HandleMouseUp()
+        {
+            if (_input.IsHolding() || _deltaMouse <= 0) return;
+            
+            if(_deltaMouse < 0.1f) Holding.IsHolding(false);
+            _deltaMouse = 0;
+            _mouseDown = false;
         }
 
         #if UNITY_ANDROID

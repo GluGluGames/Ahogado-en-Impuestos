@@ -203,7 +203,7 @@ namespace GGG.Components.HexagonalGrid
 
         private IEnumerator TouchWait()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.11f);
             if (Holding.IsHolding()) yield break;
 
             if (_currentBuilding)

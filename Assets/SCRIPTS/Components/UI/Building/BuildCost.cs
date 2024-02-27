@@ -33,6 +33,7 @@ namespace GGG.Components.UI.Buildings
                     continue;
                 }
 
+                transform.GetChild(i).gameObject.SetActive(true);
                 _costTexts[i].SetText(BuildingManager.Instance.GetBuildingCost(_button.Building()).GetCost(i).ToString());
                 _costImages[i].sprite = _button.Building().GetBuildingCost().GetResource(i).GetSprite();
             }
